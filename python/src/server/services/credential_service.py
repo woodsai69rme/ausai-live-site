@@ -153,7 +153,11 @@ class CredentialService:
 
         except Exception as e:
             logger.error(f"Error loading credentials: {e}")
-            raise
+            # Continue with empty cache for offline mode
+            logger.warning("Running in offline mode - using environment variables only")
+            self._cache = {}
+            self._cache_initialized = True
+            return {}
 
     async def get_credential(self, key: str, default: Any = None, decrypt: bool = True) -> Any:
         """Get a credential value by key."""

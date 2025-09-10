@@ -190,13 +190,20 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_KEY=your-service-key-here
 ```
 
+Required for AI operations:
+
+```bash
+OPENROUTER_API_KEY=your-openrouter-key  # ONLY AI provider - routes all models
+```
+
 Optional:
 
 ```bash
-OPENAI_API_KEY=your-openai-key        # Can be set via UI
 LOGFIRE_TOKEN=your-logfire-token      # For observability
 LOG_LEVEL=INFO                         # DEBUG, INFO, WARNING, ERROR
 ```
+
+**⚠️ IMPORTANT: Use ONLY OpenRouter for all AI requests. Do not set direct provider keys like OPENAI_API_KEY, ANTHROPIC_API_KEY, etc.**
 
 ## File Organization
 

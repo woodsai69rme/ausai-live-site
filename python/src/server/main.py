@@ -27,6 +27,12 @@ from .api_routes.knowledge_api import router as knowledge_router
 from .api_routes.mcp_api import router as mcp_router
 from .api_routes.projects_api import router as projects_router
 
+# Phase 2-4: Real Money Implementation Routes
+from .api_routes.payment_routes import router as payment_router
+from .api_routes.trading_routes import router as trading_router  
+from .api_routes.live_trading_routes import router as live_trading_router
+from .api_routes.ai_trading_routes import router as ai_trading_router
+
 # Import Socket.IO handlers to ensure they're registered
 from .api_routes import socketio_handlers  # This registers all Socket.IO event handlers
 
@@ -172,13 +178,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Configure CORS
+# SECURITY: Configure CORS with restricted origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for testing WebSocket issue
+    allow_origins=[
+        "http://localhost:3737",    # Frontend development
+        "http://localhost:3000",    # Alt frontend port
+        "https://yourdomain.com",   # Production domain
+        "https://archon.yourdomain.com"  # Production subdomain
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],  # Specific methods only
+    allow_headers=["Authorization", "Content-Type", "X-API-Key"],  # Specific headers
 )
 
 
@@ -207,6 +218,12 @@ app.include_router(knowledge_router)
 app.include_router(projects_router)
 app.include_router(tests_router)
 app.include_router(agent_chat_router)
+
+# Phase 2-4: Real Money Implementation API Routes
+app.include_router(payment_router)      # Phase 2: Real payment processing
+app.include_router(trading_router)      # Phase 3: Live market data feeds
+app.include_router(live_trading_router) # Phase 4: Live order execution
+app.include_router(ai_trading_router)   # Phase 4: AI trading automation
 app.include_router(internal_router)
 app.include_router(coverage_router)
 app.include_router(bug_report_router)

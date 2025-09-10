@@ -22,7 +22,7 @@ from ..utils import get_supabase_client
 from ..services.storage import DocumentStorageService
 from ..services.search.rag_service import RAGService
 from ..services.knowledge import KnowledgeItemService, DatabaseMetricsService
-from ..services.crawling import CrawlOrchestrationService
+from ..services.crawling import CrawlOrchestrationService, EnhancedCrawlOrchestrationService
 from ..services.crawler_manager import get_crawler
 
 # Import unified logging
@@ -316,8 +316,8 @@ async def refresh_knowledge_item(source_id: str):
                 status_code=500, detail={"error": f"Failed to initialize crawler: {str(e)}"}
             )
 
-        # Use the same crawl orchestration as regular crawl
-        crawl_service = CrawlOrchestrationService(
+        # Use the enhanced crawl orchestration with AgentQL integration
+        crawl_service = EnhancedCrawlOrchestrationService(
             crawler=crawler, supabase_client=get_supabase_client()
         )
         crawl_service.set_progress_id(progress_id)
@@ -444,7 +444,7 @@ async def _perform_crawl_with_progress(progress_id: str, request: KnowledgeItemR
                 return
 
             supabase_client = get_supabase_client()
-            orchestration_service = CrawlOrchestrationService(crawler, supabase_client)
+            orchestration_service = EnhancedCrawlOrchestrationService(crawler, supabase_client)
             orchestration_service.set_progress_id(progress_id)
 
             # Store the current task in active_crawl_tasks for cancellation support

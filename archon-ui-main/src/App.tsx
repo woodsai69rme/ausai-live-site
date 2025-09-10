@@ -47,8 +47,9 @@ const AppContent = () => {
     // Stop any existing monitoring before starting new one to prevent multiple intervals
     serverHealthService.stopMonitoring();
 
+    // Skip health monitoring in offline mode - commented out to prevent backend dependency
     // Start health monitoring
-    serverHealthService.startMonitoring({
+    /* serverHealthService.startMonitoring({
       onDisconnected: () => {
         if (!disconnectScreenDismissed) {
           setDisconnectScreenActive(true);
@@ -60,7 +61,7 @@ const AppContent = () => {
         // Refresh the page to ensure all data is fresh
         window.location.reload();
       }
-    });
+    }); */
 
     return () => {
       serverHealthService.stopMonitoring();

@@ -1,5 +1,215 @@
-__pycache__
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vite
+
+# Ultimate Project Management System - Additional Ignores
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Environments
 .env
-.serena
-.claude/settings.local.json
-PRPs/local
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated dashboards
+MASTER_DASHBOARD.html
+ULTIMATE_PROJECT_MANAGEMENT_DASHBOARD.html
+SYSTEM_STATUS_DASHBOARD.html
+*_dashboard_*.html
+
+# Generated reports
+*_report_*.json
+*_analysis_*.json
+SYSTEM_STATUS_LIVE.json
+master_dashboard_data.json
+
+# Backup directories
+backups/
+archived_projects/
+dashboard_backups/
+consolidated_dashboards/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Secrets and sensitive data
+secrets/
+.secrets
+api_keys.txt
+credentials.json
+
+# Large data files
+data/
+datasets/
+models/
+*.pkl
+*.pickle
+
+# Claude Code personal files
+.claude/
+.claude.json*
+%USERPROFILE%/
+
+# Personal directories
+AppData/
+Desktop/
+Documents/
+Downloads/
+Music/
+Pictures/
+Videos/
+OneDrive/
+"Saved Games/"
+Contacts/
+Favorites/
+Links/
+Searches/
+"New folder/"
+"VirtualBox VMs/"
+
+# System/Config directories
+.android/
+.aws/
+.azure/
+.docker/
+.ssh/
+.kube/
+.config/
+.cache/
+.vs/
+.vscode/
+.idea/
+
+# Development tools
+.bun/
+.npm/
+.yarn/
+.pnpm/
+node_modules/
+.next/
+.nuxt/
+.expo/
+.vercel/
+
+# AI/ML tools
+.ollama/
+.lmstudio/
+.cursor/
+.continue/
+.windsurf/
+.void-editor/
+.codeium/
+.codetogether/
+.codex/
+
+# Temp/Cache files
+ntuser.dat*
+*.LOG1
+*.LOG2
+*.blf
+*.regtrans-ms
+*.ini
+cookies.txt
+pc.txt
+
+# Generated files
+*_DASHBOARD.html
+*_SUCCESS_*.html
+*_REPORT_*.json
+*_SYSTEM_*.py
+*_EMPIRE_*.py
+*_ULTIMATE_*.py
+*_COMPREHENSIVE_*.py
+*_FINAL_*.py
+*_LAUNCH_*.py
+*_DEPLOY*.py
+*_AUDIT*.py
+*_TEST*.py
+
+# Virtual environments and node_modules
+*/.venv/
+*/venv/
+*/env/
+*/node_modules/
+*/dist/
+*/build/
+*/__pycache__/
+
+# Exclude most directories but keep core project structure  
+*/
+!archon-ui-main/
+!python/
+!docs/
+!original_archon/
+!archon-ui-main/**
+!python/**
+archon-ui-main/dist/
+archon-ui-main/node_modules/
+python/.venv/
+python/__pycache__/

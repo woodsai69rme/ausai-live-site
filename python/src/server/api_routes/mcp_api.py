@@ -15,6 +15,7 @@ from datetime import datetime
 from typing import Any
 
 import docker
+import httpx
 from docker.errors import APIError, NotFound
 from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
@@ -839,3 +840,299 @@ async def mcp_health():
         safe_set_attribute(span, "status", "healthy")
 
         return result
+
+
+# MCP Tool Testing Endpoints
+@router.get("/tools/list")
+async def list_mcp_tools():
+    """List available MCP tools using proper MCP protocol."""
+    with safe_span("api_list_mcp_tools") as span:
+        safe_set_attribute(span, "endpoint", "/api/mcp/tools/list")
+        
+        try:
+            # Check if MCP server is running
+            server_status = mcp_manager.get_status()
+            is_running = server_status.get("status") == "running"
+            
+            if not is_running:
+                api_logger.warning("MCP server not running when listing tools")
+                return {
+                    "success": False,
+                    "message": "MCP server is not running",
+                    "tools": [],
+                    "count": 0
+                }
+            
+            # Create HTTP client to communicate with MCP server using MCP protocol
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                # MCP server is running on port 8051 with SSE transport
+                mcp_url = "http://localhost:8051/mcp"
+                
+                # Use proper MCP protocol message format for listing tools
+                mcp_message = {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/list"
+                }
+                
+                api_logger.info("Listing MCP tools using protocol message")
+                
+                response = await client.post(mcp_url, json=mcp_message, headers={"Content-Type": "application/json"})
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    api_logger.info("MCP tools list successful")
+                    
+                    # Extract tools from MCP response
+                    tools = []
+                    if "result" in result and "tools" in result["result"]:
+                        tools = result["result"]["tools"]
+                    
+                    return {
+                        "success": True,
+                        "message": "Tools listed successfully",
+                        "tools": tools,
+                        "count": len(tools)
+                    }
+                else:
+                    error_detail = response.text
+                    api_logger.error(f"MCP tools list failed: HTTP {response.status_code}")
+                    return {
+                        "success": False,
+                        "message": f"Failed to list tools: HTTP {response.status_code}",
+                        "error": error_detail,
+                        "tools": [],
+                        "count": 0
+                    }
+                    
+        except httpx.TimeoutException:
+            api_logger.error("Timeout listing MCP tools")
+            return {
+                "success": False,
+                "message": "Timeout listing tools",
+                "tools": [],
+                "count": 0
+            }
+        except Exception as e:
+            api_logger.error(f"Failed to list MCP tools: {str(e)}")
+            safe_set_attribute(span, "error", str(e))
+            return {
+                "success": False,
+                "message": f"Failed to list tools: {str(e)}",
+                "tools": [],
+                "count": 0
+            }
+
+
+@router.post("/tools/{tool_name}/test")
+async def test_mcp_tool(tool_name: str, tool_data: dict[str, Any] = None):
+    """Test a specific MCP tool by calling it directly via HTTP."""
+    with safe_span("api_test_mcp_tool") as span:
+        safe_set_attribute(span, "tool_name", tool_name)
+        safe_set_attribute(span, "endpoint", f"/api/mcp/tools/{tool_name}/test")
+        
+        try:
+            # Check if MCP server is running
+            server_status = mcp_manager.get_status()
+            is_running = server_status.get("status") == "running"
+            
+            if not is_running:
+                api_logger.warning(f"MCP server not running when testing tool: {tool_name}")
+                return {
+                    "success": False,
+                    "message": "MCP server is not running",
+                    "tool": tool_name,
+                    "result": None
+                }
+            
+            # Create HTTP client to communicate with MCP server using MCP protocol
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                # MCP server is running on port 8051 with SSE transport
+                mcp_url = "http://localhost:8051/mcp"
+                
+                # Use proper MCP protocol message format
+                mcp_message = {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                        "name": tool_name,
+                        "arguments": tool_data or {}
+                    }
+                }
+                
+                api_logger.info(f"Testing MCP tool: {tool_name} with protocol message")
+                
+                response = await client.post(mcp_url, json=mcp_message, headers={"Content-Type": "application/json"})
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    api_logger.info(f"MCP tool {tool_name} test successful")
+                    
+                    # Extract the actual result from MCP response
+                    if "result" in result:
+                        tool_result = result["result"]
+                        if isinstance(tool_result, dict) and "content" in tool_result:
+                            # Handle MCP tool response format
+                            content = tool_result["content"]
+                            if isinstance(content, list) and len(content) > 0:
+                                actual_result = content[0].get("text", str(content[0]))
+                            else:
+                                actual_result = content
+                        else:
+                            actual_result = tool_result
+                    else:
+                        actual_result = result
+                    
+                    return {
+                        "success": True,
+                        "message": f"Tool {tool_name} executed successfully",
+                        "tool": tool_name,
+                        "result": actual_result
+                    }
+                else:
+                    error_detail = response.text
+                    api_logger.error(f"MCP tool {tool_name} test failed: HTTP {response.status_code}")
+                    return {
+                        "success": False,
+                        "message": f"Tool {tool_name} failed: HTTP {response.status_code}",
+                        "tool": tool_name,
+                        "error": error_detail,
+                        "result": None
+                    }
+                    
+        except httpx.TimeoutException:
+            api_logger.error(f"Timeout testing MCP tool: {tool_name}")
+            return {
+                "success": False,
+                "message": f"Timeout testing tool {tool_name}",
+                "tool": tool_name,
+                "result": None
+            }
+        except Exception as e:
+            api_logger.error(f"Failed to test MCP tool {tool_name}: {str(e)}")
+            safe_set_attribute(span, "error", str(e))
+            return {
+                "success": False,
+                "message": f"Failed to test tool {tool_name}: {str(e)}",
+                "tool": tool_name,
+                "result": None
+            }
+
+
+@router.post("/tools/archon/rag_query")
+async def test_archon_rag_query(query: str, source: str = None, match_count: int = 5):
+    """Test the archon:perform_rag_query tool functionality by calling it directly."""
+    with safe_span("api_test_archon_rag_query") as span:
+        safe_set_attribute(span, "query", query)
+        safe_set_attribute(span, "source", source or "all")
+        safe_set_attribute(span, "match_count", match_count)
+        
+        try:
+            # Call the API service directly (same as the MCP tool does)
+            from urllib.parse import urljoin
+            from src.server.config.service_discovery import get_api_url
+            
+            # Call the API service directly (same as the MCP tool does)
+            api_url = get_api_url()
+            timeout = httpx.Timeout(30.0, connect=5.0)
+
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                request_data = {"query": query, "match_count": match_count}
+                if source:
+                    request_data["source"] = source
+
+                response = await client.post(urljoin(api_url, "/api/rag/query"), json=request_data)
+
+                if response.status_code == 200:
+                    result = response.json()
+                    api_logger.info("Direct RAG query successful")
+                    return {
+                        "success": True,
+                        "message": "RAG query executed successfully",
+                        "tool": "perform_rag_query",
+                        "result": {
+                            "results": result.get("results", []),
+                            "reranked": result.get("reranked", False),
+                        }
+                    }
+                else:
+                    error_detail = response.text
+                    api_logger.error(f"Direct RAG query failed: HTTP {response.status_code}")
+                    return {
+                        "success": False,
+                        "message": f"RAG query failed: HTTP {response.status_code}",
+                        "tool": "perform_rag_query",
+                        "error": error_detail,
+                        "result": None
+                    }
+                    
+        except Exception as e:
+            api_logger.error(f"Failed direct RAG query: {str(e)}")
+            safe_set_attribute(span, "error", str(e))
+            return {
+                "success": False,
+                "message": f"Failed RAG query: {str(e)}",
+                "tool": "perform_rag_query",
+                "result": None
+            }
+
+
+@router.post("/tools/archon/code_examples") 
+async def test_archon_code_examples(query: str, source_id: str = None, match_count: int = 5):
+    """Test the archon:search_code_examples tool functionality by calling it directly."""
+    with safe_span("api_test_archon_code_examples") as span:
+        safe_set_attribute(span, "query", query)
+        safe_set_attribute(span, "source_id", source_id or "all")
+        safe_set_attribute(span, "match_count", match_count)
+        
+        try:
+            # Call the API service directly (same as the MCP tool does)
+            from urllib.parse import urljoin
+            from src.server.config.service_discovery import get_api_url
+            
+            api_url = get_api_url()
+            timeout = httpx.Timeout(30.0, connect=5.0)
+
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                request_data = {"query": query, "match_count": match_count}
+                if source_id:
+                    request_data["source"] = source_id
+
+                # Call the dedicated code examples endpoint
+                response = await client.post(
+                    urljoin(api_url, "/api/rag/code-examples"), json=request_data
+                )
+
+                if response.status_code == 200:
+                    result = response.json()
+                    api_logger.info("Direct code examples query successful")
+                    return {
+                        "success": True,
+                        "message": "Code examples search executed successfully",
+                        "tool": "search_code_examples",
+                        "result": {
+                            "results": result.get("results", []),
+                            "reranked": result.get("reranked", False),
+                        }
+                    }
+                else:
+                    error_detail = response.text
+                    api_logger.error(f"Direct code examples query failed: HTTP {response.status_code}")
+                    return {
+                        "success": False,
+                        "message": f"Code examples search failed: HTTP {response.status_code}",
+                        "tool": "search_code_examples", 
+                        "error": error_detail,
+                        "result": None
+                    }
+                    
+        except Exception as e:
+            api_logger.error(f"Failed direct code examples query: {str(e)}")
+            safe_set_attribute(span, "error", str(e))
+            return {
+                "success": False,
+                "message": f"Failed code examples search: {str(e)}",
+                "tool": "search_code_examples",
+                "result": None
+            }

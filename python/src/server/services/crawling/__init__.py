@@ -12,6 +12,12 @@ from .crawling_service import (
     register_orchestration,
     unregister_orchestration
 )
+from .enhanced_crawling_service import (
+    EnhancedCrawlingService,
+    EnhancedCrawlOrchestrationService
+)
+from .agentql_service import AgentQLService
+from .agentql_orchestrator import AgentQLOrchestrator
 from .code_extraction_service import CodeExtractionService
 from .document_storage_operations import DocumentStorageOperations
 from .progress_mapper import ProgressMapper
@@ -21,6 +27,7 @@ from .strategies.batch import BatchCrawlStrategy
 from .strategies.recursive import RecursiveCrawlStrategy
 from .strategies.single_page import SinglePageCrawlStrategy
 from .strategies.sitemap import SitemapCrawlStrategy
+from .strategies.agentql_enhanced import AgentQLEnhancedStrategy
 
 # Export helpers
 from .helpers.url_handler import URLHandler
@@ -29,6 +36,10 @@ from .helpers.site_config import SiteConfig
 __all__ = [
     "CrawlingService",
     "CrawlOrchestrationService",
+    "EnhancedCrawlingService",
+    "EnhancedCrawlOrchestrationService",
+    "AgentQLService",
+    "AgentQLOrchestrator",
     "CodeExtractionService",
     "DocumentStorageOperations",
     "ProgressMapper",
@@ -36,6 +47,7 @@ __all__ = [
     "RecursiveCrawlStrategy",
     "SinglePageCrawlStrategy",
     "SitemapCrawlStrategy",
+    "AgentQLEnhancedStrategy",
     "URLHandler",
     "SiteConfig",
     "get_active_orchestration",

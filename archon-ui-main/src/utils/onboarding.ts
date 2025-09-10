@@ -43,7 +43,7 @@ export function isLmConfigured(
     if (!cred) return false;
     return !!(
       (cred.value && cred.value !== 'null' && cred.value !== null && cred.value.trim() !== '') || 
-      (cred.is_encrypted && cred.encrypted_value && cred.encrypted_value !== 'null' && cred.encrypted_value !== null)
+      (cred.is_encrypted === true)
     );
   };
 
