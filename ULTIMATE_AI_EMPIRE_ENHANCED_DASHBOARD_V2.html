@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTIMATE AI EMPIRE - ENHANCED DASHBOARD V2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f9fafb;
+            --gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), #1e1b4b);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 15px;
+            border: 1px solid #374151;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--primary);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 20px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--primary);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            min-width: 400px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .modal-close:hover {
+            color: var(--danger);
+        }
+
+        .modal-body {
+            color: var(--light);
+        }
+
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 300px;
+            max-width: 400px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateX(500px);
+            transition: transform 0.3s ease;
+            z-index: 10000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: var(--success);
+            color: white;
+        }
+
+        .notification.error {
+            background: var(--danger);
+            color: white;
+        }
+
+        .notification.warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .notification.info {
+            background: var(--primary);
+            color: white;
+        }
+
+        .notification-close {
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #374151;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Chart Containers */
+        .charts-section {
+            margin-bottom: 30px;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #374151;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .connection-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-connected {
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .status-disconnected {
+            background: var(--danger);
+            box-shadow: 0 0 10px var(--danger);
+        }
+
+        .status-connecting {
+            background: var(--warning);
+            box-shadow: 0 0 10px var(--warning);
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                min-width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Loading System Data...</h3>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                Modal content goes here
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-rocket"></i> ULTIMATE AI EMPIRE - ENHANCED V2</h1>
+            <div class="subtitle">Real-Time Dashboard with Live Data & WebSocket Integration</div>
+            <div class="stat-value" style="color: var(--success); font-size: 2.5rem;" id="lastUpdated">Initializing...</div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="total-agents">0</div>
+                <div class="stat-label">Total Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="active-agents">0</div>
+                <div class="stat-label">Active Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="success-rate">0%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="free-models">0</div>
+                <div class="stat-label">Free AI Models</div>
+            </div>
+        </div>
+
+        <!-- Performance Charts -->
+        <section class="charts-section">
+            <h2 style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-chart-line"></i> Performance Analytics</h2>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3 class="chart-title">Response Time Trend</h3>
+                    <div class="chart-container">
+                        <canvas id="responseTimeChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3 class="chart-title">Agent Activity</h3>
+                    <div class="chart-container">
+                        <canvas id="agentActivityChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3 class="chart-title">System Health</h3>
+                    <div class="chart-container">
+                        <canvas id="systemHealthChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3 class="chart-title">API Requests</h3>
+                    <div class="chart-container">
+                        <canvas id="apiRequestsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="action-btn" onclick="refreshData()">
+                <i class="fas fa-sync"></i> Refresh Data
+            </button>
+            <button class="action-btn" onclick="showSystemHealth()">
+                <i class="fas fa-heartbeat"></i> System Health
+            </button>
+            <button class="action-btn" onclick="showModelsList()">
+                <i class="fas fa-robot"></i> AI Models
+            </button>
+            <button class="action-btn" onclick="toggleWebSocket()">
+                <i class="fas fa-plug"></i> Toggle WebSocket
+            </button>
+        </div>
+    </div>
+
+    <!-- Connection Status -->
+    <div class="connection-status" id="connectionStatus">
+        <span class="status-indicator status-connecting"></span>
+        <span id="statusText">Connecting...</span>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:8181';
+        const WS_URL = 'http://localhost:8181';
+
+        // State
+        let systemData = null;
+        let socket = null;
+        let charts = {};
+        let refreshInterval = null;
+        let useWebSocket = true;
+        let historyData = {
+            responseTime: [],
+            agentActivity: [],
+            apiRequests: [],
+            timestamps: []
+        };
+
+        // Initialize dashboard
+        async function initDashboard() {
+            showLoading();
+            console.log('🚀 ULTIMATE AI EMPIRE DASHBOARD V2 INITIALIZING...');
+
+            // Initialize charts
+            initCharts();
+
+            // Fetch initial data
+            await fetchSystemStats();
+
+            // Start WebSocket connection
+            if (useWebSocket) {
+                connectWebSocket();
+            } else {
+                startPolling();
+            }
+
+            hideLoading();
+            showNotification('Dashboard initialized successfully!', 'success');
+            console.log('✅ Dashboard initialized with live data!');
+        }
+
+        // WebSocket Connection
+        function connectWebSocket() {
+            try {
+                socket = io(WS_URL);
+
+                socket.on('connect', () => {
+                    console.log('🔌 WebSocket connected');
+                    updateConnectionStatus('connected');
+                    showNotification('WebSocket connected', 'success');
+                });
+
+                socket.on('disconnect', () => {
+                    console.log('🔌 WebSocket disconnected');
+                    updateConnectionStatus('disconnected');
+                    showNotification('WebSocket disconnected', 'warning');
+                });
+
+                socket.on('stats_update', (data) => {
+                    console.log('📊 Stats update received via WebSocket', data);
+                    systemData = data;
+                    updateDashboard(data);
+                });
+
+                socket.on('error', (error) => {
+                    console.error('❌ WebSocket error:', error);
+                    showNotification('WebSocket error: ' + error, 'error');
+                });
+            } catch (error) {
+                console.error('❌ Failed to connect WebSocket:', error);
+                showNotification('WebSocket unavailable, using polling', 'warning');
+                startPolling();
+            }
+        }
+
+        function disconnectWebSocket() {
+            if (socket) {
+                socket.disconnect();
+                socket = null;
+            }
+        }
+
+        function toggleWebSocket() {
+            useWebSocket = !useWebSocket;
+
+            if (useWebSocket) {
+                stopPolling();
+                connectWebSocket();
+                showNotification('Switched to WebSocket mode', 'info');
+            } else {
+                disconnectWebSocket();
+                startPolling();
+                showNotification('Switched to polling mode', 'info');
+            }
+        }
+
+        // Polling fallback
+        function startPolling() {
+            if (!refreshInterval) {
+                refreshInterval = setInterval(fetchSystemStats, 30000);
+                console.log('🔄 Polling mode enabled (30s interval)');
+                updateConnectionStatus('connected');
+            }
+        }
+
+        function stopPolling() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            }
+        }
+
+        // Fetch system statistics
+        async function fetchSystemStats() {
+            try {
+                updateConnectionStatus('connecting');
+
+                const response = await fetch(`${API_BASE_URL}/api/dashboard/stats`);
+                const result = await response.json();
+
+                if (result.success) {
+                    systemData = result.data;
+                    updateDashboard(systemData);
+                    updateConnectionStatus('connected');
+                    console.log('✅ System stats updated:', systemData);
+                } else {
+                    console.error('❌ Failed to fetch stats:', result.error);
+                    updateConnectionStatus('disconnected');
+                    showNotification('Failed to fetch stats', 'error');
+                }
+            } catch (error) {
+                console.error('❌ Error fetching system stats:', error);
+                updateConnectionStatus('disconnected');
+                showNotification('Error fetching system data', 'error');
+            }
+        }
+
+        // Update dashboard with live data
+        function updateDashboard(data) {
+            if (!data) return;
+
+            // Update stats
+            const agents = data.agents || {};
+            updateElement('total-agents', agents.total || 0);
+            updateElement('active-agents', agents.active || 0);
+            updateElement('success-rate', `${((agents.success_rate || 0) * 100).toFixed(1)}%`);
+
+            const models = data.models || {};
+            updateElement('free-models', models.openrouter_free || 0);
+
+            // Update timestamp
+            const timestamp = new Date(data.timestamp || Date.now()).toLocaleString();
+            updateElement('lastUpdated', `Last updated: ${timestamp}`);
+
+            // Update history for charts
+            updateHistory(data);
+
+            // Update charts
+            updateCharts();
+        }
+
+        // Update history data
+        function updateHistory(data) {
+            const perf = data.performance || {};
+            const now = new Date().toLocaleTimeString();
+
+            historyData.timestamps.push(now);
+            historyData.responseTime.push(perf.avg_response_time_ms || 150);
+            historyData.agentActivity.push((data.agents?.active || 0));
+            historyData.apiRequests.push(perf.requests_today || 0);
+
+            // Keep last 20 data points
+            if (historyData.timestamps.length > 20) {
+                historyData.timestamps.shift();
+                historyData.responseTime.shift();
+                historyData.agentActivity.shift();
+                historyData.apiRequests.shift();
+            }
+        }
+
+        // Initialize Charts
+        function initCharts() {
+            // Response Time Chart
+            const ctx1 = document.getElementById('responseTimeChart').getContext('2d');
+            charts.responseTime = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: historyData.timestamps,
+                    datasets: [{
+                        label: 'Response Time (ms)',
+                        data: historyData.responseTime,
+                        borderColor: '#6366f1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#f9fafb' } }
+                    },
+                    scales: {
+                        y: { ticks: { color: '#f9fafb' }, grid: { color: '#374151' } },
+                        x: { ticks: { color: '#f9fafb' }, grid: { color: '#374151' } }
+                    }
+                }
+            });
+
+            // Agent Activity Chart
+            const ctx2 = document.getElementById('agentActivityChart').getContext('2d');
+            charts.agentActivity = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: historyData.timestamps,
+                    datasets: [{
+                        label: 'Active Agents',
+                        data: historyData.agentActivity,
+                        backgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#f9fafb' } }
+                    },
+                    scales: {
+                        y: { ticks: { color: '#f9fafb' }, grid: { color: '#374151' } },
+                        x: { ticks: { color: '#f9fafb' }, grid: { color: '#374151' } }
+                    }
+                }
+            });
+
+            // System Health Chart (Doughnut)
+            const ctx3 = document.getElementById('systemHealthChart').getContext('2d');
+            charts.systemHealth = new Chart(ctx3, {
+                type: 'doughnut',
+                data: {
+                    labels: ['MCP Server', 'Backend API', 'Frontend'],
+                    datasets: [{
+                        data: [1, 1, 1],
+                        backgroundColor: ['#10b981', '#6366f1', '#8b5cf6']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#f9fafb' } }
+                    }
+                }
+            });
+
+            // API Requests Chart
+            const ctx4 = document.getElementById('apiRequestsChart').getContext('2d');
+            charts.apiRequests = new Chart(ctx4, {
+                type: 'line',
+                data: {
+                    labels: historyData.timestamps,
+                    datasets: [{
+                        label: 'API Requests',
+                        data: historyData.apiRequests,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#f9fafb' } }
+                    },
+                    scales: {
+                        y: { ticks: { color: '#f9fafb' }, grid: { color: '#374151' } },
+                        x: { ticks: { color: '#f9fafb' }, grid: { color: '#374151' } }
+                    }
+                }
+            });
+        }
+
+        // Update Charts
+        function updateCharts() {
+            if (charts.responseTime) {
+                charts.responseTime.data.labels = historyData.timestamps;
+                charts.responseTime.data.datasets[0].data = historyData.responseTime;
+                charts.responseTime.update();
+            }
+
+            if (charts.agentActivity) {
+                charts.agentActivity.data.labels = historyData.timestamps;
+                charts.agentActivity.data.datasets[0].data = historyData.agentActivity;
+                charts.agentActivity.update();
+            }
+
+            if (charts.apiRequests) {
+                charts.apiRequests.data.labels = historyData.timestamps;
+                charts.apiRequests.data.datasets[0].data = historyData.apiRequests;
+                charts.apiRequests.update();
+            }
+        }
+
+        // UI Helper Functions
+        function updateElement(id, value) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = value;
+            }
+        }
+
+        function updateConnectionStatus(status) {
+            const indicator = document.querySelector('.status-indicator');
+            const statusText = document.getElementById('statusText');
+
+            indicator.className = 'status-indicator';
+
+            switch(status) {
+                case 'connected':
+                    indicator.classList.add('status-connected');
+                    statusText.textContent = 'Connected';
+                    break;
+                case 'disconnected':
+                    indicator.classList.add('status-disconnected');
+                    statusText.textContent = 'Disconnected';
+                    break;
+                case 'connecting':
+                    indicator.classList.add('status-connecting');
+                    statusText.textContent = 'Connecting...';
+                    break;
+            }
+        }
+
+        // Loading Overlay
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+
+        // Modal Functions
+        function openModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
+                <strong>${type.toUpperCase()}</strong><br>
+                ${message}
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        // Action Functions
+        async function refreshData() {
+            showLoading();
+            showNotification('Refreshing system data...', 'info');
+            await fetchSystemStats();
+            hideLoading();
+            showNotification('Data refreshed successfully!', 'success');
+        }
+
+        async function showSystemHealth() {
+            try {
+                showLoading();
+                const response = await fetch(`${API_BASE_URL}/api/dashboard/system/health`);
+                const result = await response.json();
+                hideLoading();
+
+                if (result.success) {
+                    const health = result.data;
+                    const content = `
+                        <h4>Overall Status: <span style="color: var(--success);">${health.overall_status}</span></h4>
+                        <p>Services Operational: ${health.services_operational}/${health.services_total}</p>
+                        <p>Critical Issues: ${health.critical_issues}</p>
+                        <p>Warnings: ${health.warnings}</p>
+                    `;
+                    openModal('System Health', content);
+                } else {
+                    showNotification('Failed to fetch system health', 'error');
+                }
+            } catch (error) {
+                hideLoading();
+                showNotification('Error fetching system health', 'error');
+            }
+        }
+
+        async function showModelsList() {
+            try {
+                showLoading();
+                const response = await fetch(`${API_BASE_URL}/api/dashboard/models/available`);
+                const result = await response.json();
+                hideLoading();
+
+                if (result.success && result.data) {
+                    const models = result.data.slice(0, 10);
+                    const content = `
+                        <h4>Top 10 Free AI Models:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            ${models.map(m => `<li style="padding: 8px 0; border-bottom: 1px solid var(--gray);">
+                                <strong>${m.name || 'Unknown Model'}</strong><br>
+                                <small style="color: var(--gray);">${m.id || ''}</small>
+                            </li>`).join('')}
+                        </ul>
+                    `;
+                    openModal('Available AI Models', content);
+                } else {
+                    showNotification('Failed to fetch models list', 'error');
+                }
+            } catch (error) {
+                hideLoading();
+                showNotification('Error fetching models list', 'error');
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', initDashboard);
+
+        // Cleanup on unload
+        window.addEventListener('beforeunload', () => {
+            stopPolling();
+            disconnectWebSocket();
+        });
+    </script>
+</body>
+</html>

@@ -79,12 +79,24 @@ MASTER_DASHBOARD.html
 ULTIMATE_PROJECT_MANAGEMENT_DASHBOARD.html
 SYSTEM_STATUS_DASHBOARD.html
 *_dashboard_*.html
+*.html.backup*
+*_DASHBOARD.html
+ULTIMATE_AI_EMPIRE_COMPLETE_DASHBOARD.html
+# Keep only the enhanced V2 dashboard for reference
 
 # Generated reports
 *_report_*.json
 *_analysis_*.json
 SYSTEM_STATUS_LIVE.json
 master_dashboard_data.json
+*_REPORT.md
+*_STATUS.md
+*_COMPLETE.md
+*_SUCCESS.md
+*_AUDIT*.md
+*_SUMMARY.md
+system_audit.json
+*.backup_*
 
 # Backup directories
 backups/
@@ -178,7 +190,11 @@ ntuser.dat*
 cookies.txt
 pc.txt
 
-# Generated files
+# Archive directories (organized files)
+archive/
+archive/**/*
+
+# Generated files (patterns that get archived)
 *_DASHBOARD.html
 *_SUCCESS_*.html
 *_REPORT_*.json
@@ -191,6 +207,34 @@ pc.txt
 *_DEPLOY*.py
 *_AUDIT*.py
 *_TEST*.py
+*EMERGENCY*.py
+*REVENUE*.py
+*MASTER*.py
+*CRYPTO*.py
+*TRADING*.py
+*-system*.py
+*_GENERATOR*.py
+*automation*.py
+*empire*.py
+*revenue*.py
+*emergency*.py
+*unlimited*.py
+*ultimate*.py
+*master*.py
+*crypto*.py
+*trading*.py
+
+# Generated markdown files
+*PLAN*.md
+*GUIDE*.md
+*DOCUMENTATION*.md
+*IMPLEMENTATION*.md
+*DEPLOYMENT*.md
+*SUMMARY*.md
+
+# Cleanup scripts (keep the one we just created as reference)
+cleanup_*.py
+!cleanup_workspace.py
 
 # Virtual environments and node_modules
 */.venv/

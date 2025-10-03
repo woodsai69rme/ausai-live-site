@@ -35,9 +35,10 @@ from mcp.server.fastmcp import Context, FastMCP
 # Add the project root to Python path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-# Load environment variables from the project root .env file
-project_root = Path(__file__).resolve().parent.parent
-dotenv_path = project_root / ".env"
+# Load environment variables from the python/.env file
+# __file__ is python/src/mcp/mcp_server.py, so parent.parent.parent gets us to python/
+python_dir = Path(__file__).resolve().parent.parent.parent
+dotenv_path = python_dir / ".env"
 load_dotenv(dotenv_path, override=True)
 
 # Configure logging FIRST before any imports that might use it
@@ -138,7 +139,7 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
 
     # Quick check without lock
     if _initialization_complete and _shared_context:
-        logger.info("♻️ Reusing existing context for new SSE connection")
+        logger.info("Reusing existing context for new SSE connection")
         yield _shared_context
         return
 
@@ -146,22 +147,22 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
     with _initialization_lock:
         # Double-check pattern
         if _initialization_complete and _shared_context:
-            logger.info("♻️ Reusing existing context for new SSE connection")
+            logger.info("Reusing existing context for new SSE connection")
             yield _shared_context
             return
 
-        logger.info("🚀 Starting MCP server...")
+        logger.info("Starting MCP server...")
 
         try:
             # Initialize session manager
             logger.info("🔐 Initializing session manager...")
             session_manager = get_session_manager()
-            logger.info("✓ Session manager initialized")
+            logger.info("Session manager initialized")
 
             # Initialize service client for HTTP calls
             logger.info("🌐 Initializing service client...")
             service_client = get_mcp_service_client()
-            logger.info("✓ Service client initialized")
+            logger.info("Service client initialized")
 
             # Create context
             context = ArchonContext(service_client=service_client)
@@ -169,7 +170,7 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
             # Perform initial health check
             await perform_health_checks(context)
 
-            logger.info("✓ MCP server ready")
+            logger.info("MCP server ready")
 
             # Store context globally
             _shared_context = context
@@ -178,7 +179,7 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
             yield context
 
         except Exception as e:
-            logger.error(f"💥 Critical error in lifespan setup: {e}")
+            logger.error(f"Critical error in lifespan setup: {e}")
             logger.error(traceback.format_exc())
             raise
         finally:
@@ -189,18 +190,15 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
 
 # Initialize the main FastMCP server with fixed configuration
 try:
-    logger.info("🏗️ MCP SERVER INITIALIZATION:")
+    logger.info("MCP SERVER INITIALIZATION:")
     logger.info("   Server Name: archon-mcp-server")
     logger.info("   Description: MCP server using HTTP calls")
 
     mcp = FastMCP(
         "archon-mcp-server",
-        description="MCP server for Archon - uses HTTP calls to other services",
         lifespan=lifespan,
-        host=server_host,
-        port=server_port,
     )
-    logger.info("✓ FastMCP server instance created successfully")
+    logger.info("FastMCP server instance created successfully")
 
 except Exception as e:
     logger.error(f"✗ Failed to create FastMCP server: {e}")
@@ -298,7 +296,7 @@ async def session_info(ctx: Context) -> str:
 # Import and register modules
 def register_modules():
     """Register all MCP tool modules."""
-    logger.info("🔧 Registering MCP tool modules...")
+    logger.info("Registering MCP tool modules...")
 
     modules_registered = 0
 
@@ -308,7 +306,7 @@ def register_modules():
 
         register_rag_tools(mcp)
         modules_registered += 1
-        logger.info("✓ RAG module registered (HTTP-based)")
+        logger.info("RAG module registered (HTTP-based)")
     except ImportError as e:
         logger.warning(f"⚠ RAG module not available: {e}")
     except Exception as e:
@@ -323,7 +321,7 @@ def register_modules():
 
             register_project_tools(mcp)
             modules_registered += 1
-            logger.info("✓ Project module registered (HTTP-based)")
+            logger.info("Project module registered (HTTP-based)")
         except ImportError as e:
             logger.warning(f"⚠ Project module not available: {e}")
         except Exception as e:
@@ -332,10 +330,61 @@ def register_modules():
     else:
         logger.info("⚠ Project module skipped - Projects are disabled")
 
-    logger.info(f"📦 Total modules registered: {modules_registered}")
+    # Import and register Serena integration module
+    serena_enabled = os.getenv("SERENA_ENABLED", "true").lower() == "true"
+    if serena_enabled:
+        try:
+            from src.mcp.modules.serena_integration_module import register_serena_tools
+
+            register_serena_tools(mcp)
+            modules_registered += 1
+            logger.info("Serena integration module registered (semantic code operations)")
+        except ImportError as e:
+            logger.warning(f"⚠ Serena integration module not available: {e}")
+        except Exception as e:
+            logger.error(f"✗ Error registering Serena integration module: {e}")
+            logger.error(traceback.format_exc())
+    else:
+        logger.info("⚠ Serena integration module skipped - Serena is disabled")
+
+    # Import and register Claude Context integration module
+    claude_context_enabled = os.getenv("CLAUDE_CONTEXT_ENABLED", "true").lower() == "true"
+    if claude_context_enabled:
+        try:
+            from src.mcp.modules.claude_context_module import register_claude_context_tools
+
+            register_claude_context_tools(mcp)
+            modules_registered += 1
+            logger.info("Claude Context integration module registered (semantic codebase search)")
+        except ImportError as e:
+            logger.warning(f"⚠ Claude Context integration module not available: {e}")
+        except Exception as e:
+            logger.error(f"✗ Error registering Claude Context integration module: {e}")
+            logger.error(traceback.format_exc())
+    else:
+        logger.info("⚠ Claude Context integration module skipped - Claude Context is disabled")
+
+    # Import and register Spec-Driven Development module
+    spec_driven_enabled = os.getenv("SPEC_DRIVEN_DEVELOPMENT_ENABLED", "true").lower() == "true"
+    if spec_driven_enabled:
+        try:
+            from src.mcp.modules.spec_driven_development_module import register_spec_driven_development_tools
+
+            register_spec_driven_development_tools(mcp)
+            modules_registered += 1
+            logger.info("Spec-Driven Development module registered (AI-powered specification management)")
+        except ImportError as e:
+            logger.warning(f"⚠ Spec-Driven Development module not available: {e}")
+        except Exception as e:
+            logger.error(f"✗ Error registering Spec-Driven Development module: {e}")
+            logger.error(traceback.format_exc())
+    else:
+        logger.info("⚠ Spec-Driven Development module skipped - Feature is disabled")
+
+    logger.info(f"Total modules registered: {modules_registered}")
 
     if modules_registered == 0:
-        logger.error("💥 No modules were successfully registered!")
+        logger.error("No modules were successfully registered!")
         raise RuntimeError("No MCP modules available")
 
 
@@ -343,7 +392,7 @@ def register_modules():
 try:
     register_modules()
 except Exception as e:
-    logger.error(f"💥 Critical error during module registration: {e}")
+    logger.error(f"Critical error during module registration: {e}")
     logger.error(traceback.format_exc())
     raise
 
@@ -354,18 +403,19 @@ def main():
         # Initialize Logfire first
         setup_logfire(service_name="archon-mcp-server")
 
-        logger.info("🚀 Starting Archon MCP Server")
+        logger.info("Starting Archon MCP Server")
         logger.info("   Mode: HTTP Transport")
         logger.info(f"   URL: http://{server_host}:{server_port}/mcp")
 
-        mcp_logger.info("🔥 Logfire initialized for MCP server")
-        mcp_logger.info(f"🌟 Starting MCP server - host={server_host}, port={server_port}")
+        mcp_logger.info("Logfire initialized for MCP server")
+        mcp_logger.info(f"Starting MCP server - host={server_host}, port={server_port}")
 
-        mcp.run(transport="http", path="/mcp")
+        # Run the MCP server with SSE transport for HTTP-like access
+        mcp.run(transport="sse")
 
     except Exception as e:
-        mcp_logger.error(f"💥 Fatal error in main - error={str(e)}, error_type={type(e).__name__}")
-        logger.error(f"💥 Fatal error in main: {e}")
+        mcp_logger.error(f"Fatal error in main - error={str(e)}, error_type={type(e).__name__}")
+        logger.error(f"Fatal error in main: {e}")
         logger.error(traceback.format_exc())
         raise
 
@@ -376,6 +426,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         logger.info("👋 MCP server stopped by user")
     except Exception as e:
-        logger.error(f"💥 Unhandled exception: {e}")
+        logger.error(f"Unhandled exception: {e}")
         logger.error(traceback.format_exc())
         sys.exit(1)
