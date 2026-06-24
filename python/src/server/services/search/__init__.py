@@ -12,6 +12,7 @@ from .base_search_strategy import BaseSearchStrategy
 from .hybrid_search_strategy import HybridSearchStrategy
 from .rag_service import RAGService
 from .reranking_strategy import RerankingStrategy
+from .enhanced_rag_strategies import QueryTransformer, MultiScaleChunker, ParentDocumentRetriever
 
 __all__ = [
     # Main service classes
@@ -21,4 +22,8 @@ __all__ = [
     "HybridSearchStrategy",
     "RerankingStrategy",
     "AgenticRAGStrategy",
+    # Enhanced strategies
+    "QueryTransformer",
+    "MultiScaleChunker",
+    "ParentDocumentRetriever",
 ]

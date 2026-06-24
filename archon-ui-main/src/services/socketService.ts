@@ -1,6 +1,6 @@
 /**
  * Document Synchronization Service for Real-time Collaboration
- * 
+ *
  * Features:
  * - Real-time document synchronization using Socket.IO
  * - Batched updates with 500ms window for performance
@@ -10,7 +10,6 @@
  * - Document versioning and change tracking
  */
 
-import { Socket } from 'socket.io-client';
 import { WebSocketService, WebSocketState } from './socketIOService';
 
 // Document change types
@@ -79,9 +78,8 @@ export interface ConflictContext {
  */
 export class DocumentSyncService {
   private webSocketService: WebSocketService;
-  // private socket: Socket | null = null; // Not used directly, using webSocketService
   private projectId: string = '';
-  
+
   // Batching system
   private batchQueue: Map<string, DocumentChange[]> = new Map();
   private batchTimers: Map<string, NodeJS.Timeout> = new Map();
@@ -90,12 +88,11 @@ export class DocumentSyncService {
     maxBatchSize: 10,
     flushOnDisconnect: true
   };
-  
+
   // Document state tracking
   private documentStates: Map<string, DocumentState> = new Map();
   private pendingChanges: Map<string, DocumentChange[]> = new Map();
-  // private conflictQueue: ConflictContext[] = []; // Reserved for future use
-  
+
   // Event handlers
   private eventHandlers: Map<string, ((event: DocumentSyncEvent) => void)[]> = new Map();
   private conflictHandlers: ((context: ConflictContext) => Promise<DocumentChange>)[] = [];
@@ -104,12 +101,14 @@ export class DocumentSyncService {
   private conflictStrategy: ConflictResolutionStrategy = 'last-write-wins';
   private enableOptimisticUpdates: boolean = true;
   private enableVersioning: boolean = true;
+  private userId: string = 'anonymous';
 
   constructor(config?: {
     batchConfig?: Partial<BatchConfig>;
     conflictStrategy?: ConflictResolutionStrategy;
     enableOptimisticUpdates?: boolean;
     enableVersioning?: boolean;
+    userId?: string;
   }) {
     this.webSocketService = new WebSocketService({
       enableAutoReconnect: true,
@@ -130,6 +129,9 @@ export class DocumentSyncService {
     }
     if (config?.enableVersioning !== undefined) {
       this.enableVersioning = config.enableVersioning;
+    }
+    if (config?.userId !== undefined) {
+      this.userId = config.userId;
     }
 
     this.setupWebSocketHandlers();
@@ -629,10 +631,30 @@ export class DocumentSyncService {
   }
 
   /**
-   * Merge changes using simple operational transformation
+   * Merge changes using operational transformation
+   * For text content, apply operational transformation to resolve conflicts
    */
   private async mergeChanges(localChange: DocumentChange, remoteChange: DocumentChange): Promise<DocumentChange> {
-    // Simple merge strategy - combine non-conflicting fields
+    // For content changes, apply operational transformation
+    if (localChange.changeType === 'content' && remoteChange.changeType === 'content') {
+      const transformedLocal = await this.transformContent(localChange, remoteChange);
+      const transformedRemote = await this.transformContent(remoteChange, localChange);
+      
+      // Combine the transformed changes
+      const combinedData = {
+        ...transformedLocal.data,
+        ...transformedRemote.data
+      };
+
+      return {
+        ...localChange,
+        data: combinedData,
+        timestamp: Math.max(localChange.timestamp, remoteChange.timestamp),
+        version: Math.max(localChange.version, remoteChange.version) + 1
+      };
+    }
+
+    // For non-content changes, use simple merge
     const mergedData = {
       ...localChange.data,
       ...remoteChange.data
@@ -644,6 +666,54 @@ export class DocumentSyncService {
       timestamp: Math.max(localChange.timestamp, remoteChange.timestamp),
       version: Math.max(localChange.version, remoteChange.version) + 1
     };
+  }
+
+  /**
+   * Transform content using operational transformation principles
+   * This is a simplified implementation - in practice, you'd use a library like ShareJS or Yjs
+   */
+  private async transformContent(change: DocumentChange, otherChange: DocumentChange): Promise<DocumentChange> {
+    // For now, we'll implement a basic OT that handles concurrent text edits
+    // In a real implementation, you'd use operational transformation libraries
+    
+    // If changes are to different fields or non-text content, no transformation needed
+    if (change.data?.text === undefined || otherChange.data?.text === undefined) {
+      return change;
+    }
+
+    // Simple OT: if both changes insert text at the same position, 
+    // the second change's position needs to be adjusted
+    if (change.data.position !== undefined && otherChange.data.position !== undefined) {
+      const pos1 = change.data.position;
+      const pos2 = otherChange.data.position;
+      const text1 = change.data.text || '';
+      const text2 = otherChange.data.text || '';
+
+      // If inserting at the same position, adjust the second position
+      if (pos1 === pos2) {
+        // Second insertion happens after the first
+        return {
+          ...change,
+          data: {
+            ...change.data,
+            position: pos1 + text2.length
+          }
+        };
+      } 
+      // If first insertion is before second, adjust second position
+      else if (pos1 < pos2) {
+        return {
+          ...change,
+          data: {
+            ...change.data,
+            position: pos2 + text1.length
+          }
+        };
+      }
+      // If first insertion is after second, no adjustment needed for first
+    }
+
+    return change;
   }
 
   /**
@@ -659,8 +729,11 @@ export class DocumentSyncService {
   }
 
   private getCurrentUserId(): string {
-    // TODO: Get from auth context
-    return 'current_user_id';
+    // TODO: wire to auth context once Supabase user session is available.
+    // Returning a placeholder prevents every remote update from being
+    // ignored as "our own change" -- the placeholder still distinguishes
+    // self from anonymous remote authors in a dev environment.
+    return this.userId || 'current_user_id';
   }
 
   private createChangeFromState(state: DocumentState): DocumentChange {
@@ -789,22 +862,22 @@ export class DocumentSyncService {
   async disconnect(): Promise<void> {
     // Flush all pending changes before disconnecting
     await this.flushAllBatches();
-    
+
     // Clear all timers
     for (const timer of this.batchTimers.values()) {
       clearTimeout(timer);
     }
     this.batchTimers.clear();
-    
+
     // Disconnect WebSocket
     this.webSocketService.disconnect();
-    
+
     // Clear state
     this.documentStates.clear();
     this.batchQueue.clear();
     this.pendingChanges.clear();
     this.eventHandlers.clear();
-    this.conflictQueue = [];
+    this.conflictHandlers.length = 0;
   }
 }
 

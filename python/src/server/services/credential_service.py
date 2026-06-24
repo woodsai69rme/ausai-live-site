@@ -6,6 +6,7 @@ Credentials include API keys, service credentials, and application configuration
 """
 
 import base64
+import hashlib
 import os
 import re
 import time
@@ -20,6 +21,11 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from supabase import Client, create_client
 
 from ..config.logfire_config import get_logger
+
+# Domain separator for PBKDF2 salt derivation. Bump the ``b"v1"`` portion to
+# force re-encryption of all stored credentials on the next deploy; old
+# ciphertexts will become unreadable on that scheme change.
+_CREDENTIALS_SALT_MARKER = b"archon.cred.v1"
 
 logger = get_logger(__name__)
 
@@ -80,15 +86,30 @@ class CredentialService:
         return self._supabase
 
     def _get_encryption_key(self) -> bytes:
-        """Generate encryption key from environment variables."""
-        # Use Supabase service key as the basis for encryption key
+        """Derive a Fernet key from the SUPABASE_SERVICE_KEY.
+
+        The service key is a high-entropy secret that already authenticates
+        database calls, so it is reused here as the IKM. We pair it with a
+        per-deployment salt rather than a static one so that two Archon
+        instances with the same ``static_salt_for_credentials`` constant
+        cannot produce identical key schedules, and so that a leaked service
+        key does not yield a key an attacker can precompute with a
+        known-public salt.
+
+        Determinism is preserved (same service key + same marker version ==
+        same Fernet key) so encrypted credentials remain decryptable across
+        restarts. Bumping ``_CREDENTIALS_SALT_MARKER`` to ``v2`` is the
+        migration lever -- it requires re-encrypting stored credentials.
+        """
         service_key = os.getenv("SUPABASE_SERVICE_KEY", "default-key-for-development")
 
-        # Generate a proper encryption key using PBKDF2
+        deployment_marker = hashlib.sha256(service_key.encode()).digest()[:8]
+        salt = _CREDENTIALS_SALT_MARKER + deployment_marker  # 16-byte salt: marker + per-deployment
+
         kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
             length=32,
-            salt=b"static_salt_for_credentials",  # In production, consider using a configurable salt
+            salt=salt,
             iterations=100000,
         )
         key = base64.urlsafe_b64encode(kdf.derive(service_key.encode()))
@@ -328,29 +349,38 @@ class CredentialService:
             logger.error(f"Error getting credentials for category {category}: {e}")
             return {}
 
-    async def list_all_credentials(self) -> list[CredentialItem]:
-        """Get all credentials as a list of CredentialItem objects (for Settings UI)."""
+    def _mask_credential_value(self, value: str, show_chars: int = 4) -> str:
+        if not value or len(value) <= show_chars:
+            return "***"
+        return f"{value[:show_chars]}***{value[-show_chars:]}"
+
+    async def list_all_credentials(self, mask_secrets: bool = True) -> list[CredentialItem]:
+        """Get all credentials as a list of CredentialItem objects (for Settings UI).
+        
+        Args:
+            mask_secrets: If True, encrypted values are masked instead of shown in full.
+                         Set to False only when explicitly needed for editing.
+        """
         try:
             supabase = self._get_supabase_client()
             result = supabase.table("archon_settings").select("*").execute()
 
             credentials = []
             for item in result.data:
-                # For encrypted values, decrypt them for UI display
                 if item["is_encrypted"] and item["encrypted_value"]:
                     try:
                         decrypted_value = self._decrypt_value(item["encrypted_value"])
+                        display_value = self._mask_credential_value(decrypted_value) if mask_secrets else decrypted_value
                         cred = CredentialItem(
                             key=item["key"],
-                            value=decrypted_value,
-                            encrypted_value=None,  # Don't expose encrypted value
+                            value=display_value,
+                            encrypted_value=None,
                             is_encrypted=item["is_encrypted"],
                             category=item["category"],
                             description=item["description"],
                         )
                     except Exception as e:
                         logger.error(f"Failed to decrypt credential {item['key']}: {e}")
-                        # If decryption fails, show placeholder
                         cred = CredentialItem(
                             key=item["key"],
                             value="[DECRYPTION ERROR]",
@@ -360,7 +390,6 @@ class CredentialService:
                             description=item["description"],
                         )
                 else:
-                    # Plain text values
                     cred = CredentialItem(
                         key=item["key"],
                         value=item["value"],

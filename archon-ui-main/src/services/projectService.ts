@@ -27,6 +27,18 @@ import { dbTaskToUITask, uiStatusToDBStatus } from '../types/project';
 // API configuration - use relative URL to go through Vite proxy
 const API_BASE_URL = '/api';
 
+// Current user management - set by auth system when implemented
+let currentUserId: string = 'anonymous';
+
+// Get/set current user ID for authentication
+export function getCurrentUserId(): string {
+  return currentUserId;
+}
+
+export function setCurrentUserId(userId: string): void {
+  currentUserId = userId;
+}
+
 // WebSocket connection for real-time updates
 let websocketConnection: WebSocket | null = null;
 const projectUpdateSubscriptions: Map<string, (event: ProjectManagementEvent) => void> = new Map();
@@ -716,7 +728,7 @@ export const projectService = {
     const event: ProjectManagementEvent = {
       type,
       projectId,
-      userId: 'current-user', // TODO: Get from auth context
+      userId: getCurrentUserId(),
       timestamp: new Date().toISOString(),
       data
     };

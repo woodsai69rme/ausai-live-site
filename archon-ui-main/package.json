@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npx vite",
+    "dev": "npx vite --port 3737",
     "build": "npx vite build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "preview": "npx vite preview",
@@ -17,7 +17,7 @@
     "test:coverage:force": "vitest run --coverage --passWithNoTests || true",
     "seed:projects": "node --loader ts-node/esm ../scripts/seed-project-data.ts"
   },
-  "dependencies": {
+"dependencies": {
     "@milkdown/crepe": "^7.15.5",
     "@milkdown/kit": "^7.5.0",
     "@milkdown/plugin-history": "^7.5.0",
@@ -25,6 +25,7 @@
     "@xyflow/react": "^12.3.0",
     "clsx": "latest",
     "date-fns": "^4.1.0",
+    "dompurify": "^3.2.4",
     "fractional-indexing": "^3.2.0",
     "framer-motion": "^11.18.2",
     "lucide-react": "^0.441.0",
@@ -42,6 +43,7 @@
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.5.2",
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^20.19.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",

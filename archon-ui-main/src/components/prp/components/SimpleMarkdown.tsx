@@ -1,4 +1,5 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 import { formatValue } from '../utils/formatters';
 
 interface SimpleMarkdownProps {
@@ -6,12 +7,18 @@ interface SimpleMarkdownProps {
   className?: string;
 }
 
+const sanitizeText = (text: string): string => {
+  return DOMPurify.sanitize(text, { 
+    ALLOWED_TAGS: [],
+    ALLOWED_ATTR: []
+  });
+};
+
 /**
  * Simple markdown renderer that handles basic formatting without external dependencies
  */
 export const SimpleMarkdown: React.FC<SimpleMarkdownProps> = ({ content, className = '' }) => {
   try {
-    // Process image placeholders first
     const processedContent = formatValue(content);
   
   // Split content into lines for processing
@@ -37,23 +44,22 @@ export const SimpleMarkdown: React.FC<SimpleMarkdownProps> = ({ content, classNa
     }
   };
   
-  const processInlineMarkdown = (text: string): React.ReactNode => {
-    const processed = text;
+const processInlineMarkdown = (text: string): React.ReactNode => {
+    const sanitizedText = sanitizeText(text);
+    const processed = sanitizedText;
     const elements: React.ReactNode[] = [];
     let lastIndex = 0;
     
-    // Process **bold** text
     const boldRegex = /\*\*(.*?)\*\*/g;
     let match;
     while ((match = boldRegex.exec(processed)) !== null) {
       if (match.index > lastIndex) {
-        elements.push(processed.slice(lastIndex, match.index));
+        elements.push(sanitizeText(processed.slice(lastIndex, match.index)));
       }
-      elements.push(<strong key={match.index} className="font-semibold">{match[1]}</strong>);
+      elements.push(<strong key={match.index} className="font-semibold">{sanitizeText(match[1])}</strong>);
       lastIndex = match.index + match[0].length;
     }
     
-    // Process *italic* text
     const italicRegex = /\*(.*?)\*/g;
     const remainingText = processed.slice(lastIndex);
     lastIndex = 0;
@@ -61,9 +67,9 @@ export const SimpleMarkdown: React.FC<SimpleMarkdownProps> = ({ content, classNa
     
     while ((match = italicRegex.exec(remainingText)) !== null) {
       if (match.index > lastIndex) {
-        italicElements.push(remainingText.slice(lastIndex, match.index));
+        italicElements.push(sanitizeText(remainingText.slice(lastIndex, match.index)));
       }
-      italicElements.push(<em key={match.index} className="italic">{match[1]}</em>);
+      italicElements.push(<em key={match.index} className="italic">{sanitizeText(match[1])}</em>);
       lastIndex = match.index + match[0].length;
     }
     

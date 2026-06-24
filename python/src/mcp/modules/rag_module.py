@@ -13,6 +13,7 @@ service modules directly, enabling true microservices architecture.
 import json
 import logging
 import os
+from typing import Optional
 from urllib.parse import urljoin
 
 import httpx
@@ -76,7 +77,7 @@ def register_rag_tools(mcp: FastMCP):
 
     @mcp.tool()
     async def perform_rag_query(
-        ctx: Context, query: str, source: str = None, match_count: int = 5
+        ctx: Context, query: str, source: Optional[str] = None, match_count: int = 5
     ) -> str:
         """
         Perform a RAG (Retrieval Augmented Generation) query on stored content.
@@ -132,7 +133,7 @@ def register_rag_tools(mcp: FastMCP):
 
     @mcp.tool()
     async def search_code_examples(
-        ctx: Context, query: str, source_id: str = None, match_count: int = 5
+        ctx: Context, query: str, source_id: Optional[str] = None, match_count: int = 5
     ) -> str:
         """
         Search for code examples relevant to the query.

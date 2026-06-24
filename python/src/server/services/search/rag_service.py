@@ -22,6 +22,7 @@ from .agentic_rag_strategy import AgenticRAGStrategy
 
 # Import all strategies
 from .base_search_strategy import BaseSearchStrategy
+from .enhanced_rag_strategies import QueryTransformer
 from .hybrid_search_strategy import HybridSearchStrategy
 from .reranking_strategy import RerankingStrategy
 
@@ -29,26 +30,16 @@ logger = get_logger(__name__)
 
 
 class RAGService:
-    """
-    Coordinator service that orchestrates multiple RAG strategies.
-
-    This service delegates to strategy implementations and combines them
-    based on configuration settings.
-    """
+    """Coordinator service for RAG search strategies."""
 
     def __init__(self, supabase_client=None):
-        """Initialize RAG service as a coordinator for search strategies"""
         self.supabase_client = supabase_client or get_supabase_client()
-
-        # Initialize base strategy (always needed)
         self.base_strategy = BaseSearchStrategy(self.supabase_client)
-
-        # Initialize optional strategies
         self.hybrid_strategy = HybridSearchStrategy(self.supabase_client, self.base_strategy)
         self.agentic_strategy = AgenticRAGStrategy(self.supabase_client, self.base_strategy)
-
-        # Initialize reranking strategy based on settings
         self.reranking_strategy = None
+        self.query_transformer = QueryTransformer()
+
         use_reranking = self.get_bool_setting("USE_RERANKING", False)
         if use_reranking:
             try:
@@ -56,7 +47,6 @@ class RAGService:
                 logger.info("Reranking strategy loaded successfully")
             except Exception as e:
                 logger.warning(f"Failed to load reranking strategy: {e}")
-                self.reranking_strategy = None
 
     def get_setting(self, key: str, default: str = "false") -> str:
         """Get a setting from the credential service or fall back to environment variable."""
@@ -202,7 +192,6 @@ class RAGService:
 
                 # Check which strategies are enabled
                 use_hybrid_search = self.get_bool_setting("USE_HYBRID_SEARCH", False)
-                use_reranking = self.get_bool_setting("USE_RERANKING", False)
 
                 # Step 1 & 2: Get results (with hybrid search if enabled)
                 results = await self.search_documents(
@@ -377,3 +366,68 @@ class RAGService:
                 logger.error(f"Code example search failed: {e}")
                 span.set_attribute("error", str(e))
                 return False, {"query": query, "error": str(e)}
+
+    async def search_with_hyde(
+        self, query: str, source: str = None, match_count: int = 5
+    ) -> tuple[bool, dict[str, Any]]:
+        """
+        Enhanced RAG query using HyDE (Hypothetical Document Embeddings).
+
+        1. Generate hypothetical answer
+        2. Create embedding from hypothetical
+        3. Search with hypothetical embedding
+        4. Apply reranking if enabled
+        """
+        with safe_span("rag_query_hyde", query_length=len(query)) as span:
+            try:
+                # Check if HyDE is enabled
+                use_hyde = self.get_bool_setting("USE_HYDE", False)
+                use_hybrid = self.get_bool_setting("USE_HYBRID_SEARCH", False)
+                use_reranking = self.get_bool_setting("USE_RERANKING", False)
+
+                # Generate hypothetical document if HyDE enabled
+                search_query = query
+                if use_hyde:
+                    from ..llm_provider_service import get_llm_client
+
+                    async with get_llm_client(use_embedding_provider=False) as llm:
+                        hypothetical = await self.query_transformer.hyde_transform(query, llm)
+                        if hypothetical and len(hypothetical.strip()) > 50:
+                            search_query = hypothetical
+                            span.set_attribute("hyde_applied", True)
+
+                # Get results using standard pipeline
+                results = await self.search_documents(
+                    query=search_query,
+                    match_count=match_count,
+                    filter_metadata={"source": source} if source else None,
+                    use_hybrid_search=use_hybrid,
+                )
+
+                formatted = [
+                    {
+                        "id": r.get("id", f"result_{i}"),
+                        "content": r.get("content", "")[:1000],
+                        "metadata": r.get("metadata", {}),
+                        "similarity_score": r.get("similarity", 0.0),
+                    }
+                    for i, r in enumerate(results)
+                ]
+
+                # Apply reranking
+                if self.reranking_strategy and formatted:
+                    formatted = await self.reranking_strategy.rerank_results(
+                        query, formatted, content_key="content"
+                    )
+
+                return True, {
+                    "results": formatted,
+                    "query": query,
+                    "search_query_used": search_query[:200] + "..." if search_query != query else query,
+                    "hyde_applied": use_hyde,
+                    "reranking_applied": use_reranking,
+                }
+
+            except Exception as e:
+                span.set_attribute("error", str(e))
+                return False, {"error": str(e), "query": query}

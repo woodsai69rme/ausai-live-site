@@ -62,11 +62,22 @@ master.key
 .keys.json
 .github_token
 
+# Voice assistant configs (may contain API keys)
+voice_assistant_config.json
+voice_ai_output.txt
+
+# AI influencer configs (may contain API keys)
+ai_influencer_config.json
+
 # Database
 *.db
 *.db-journal
 *.sqlite
 .sqlite3
+ai_hub.db
+data.db
+forum.db
+immediate_money.db
 
 # Logs
 logs
@@ -168,6 +179,21 @@ config.json
 config.local.json
 config/
 configs/
+github_config.json
+skills-lock.json
+ux_enhancements.json
+maintenance_schedule.json
+community_support.json
+feature_flags.json
+revenue_stats.json
+growth_preparation.json
+
+# Generated data files at root
+analytics_data.json
+transcripts_batch_1.json
+full_scan_output.json
+repo_audit_report.json
+security_scan_results.json
 
 # Local configuration
 .local
@@ -279,6 +305,185 @@ coverage/
 $RECYCLE.BIN/
 pagefile.sys
 hiberfil.sys
+
+# Windows Registry/User Profile files
+NTUSER.DAT*
+ntuser.dat*
+ntuser.ini*
+*.TM.blf
+*.TMContainer*
+*.regtrans-ms
+
+# System artifacts (root-level)
+$null
+nul
+
+# Application databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Monitoring/error logs at root
+monitor.err
+monitor.out
+api.err
+api.out
+frontend.log
+
+# Factory logs at root
+factory_production.log
+
+# Port audit logs
+port_audit.log
+
+# Self-healing logs
+SELF_HEALING.log
+
+# Test logs at root
+test_log.txt
+test_log2.txt
+test_log3.txt
+test_output.txt
+test_output_simple.txt
+
+# AI config files with potential secrets
+.ai_env
+.ctsystem
+.claude.json
+.claude.json.backup
+MASTER_CONFIG.env
+vault.key
+api_key_vault.json
+
+# Downloaded installers at root
+mb-installer.exe
+
+# ZIP archives at root
+backseptgem.zip
+BOOKMARK_MANAGER_PRO_COMPLETE.zip
+
+# Misc root artifacts
+conflicts.txt
+devid
+.coverage
+.lmstudio-home-pointer
+
+# ============================================================
+# Per-user IDE/AI-tooling dot-directories at the workspace root
+# (these hold tool-internal state and MUST NOT be committed)
+# ============================================================
+.agent/
+.agents/
+.ai_completion/
+.aider-desk/
+.aider/
+.aitk/
+.antigravity-ide/
+.antigravity/
+.azad/
+.bitcoinlib/
+.bowtie/
+.bun/
+.cagent/
+.charm_crush_enhanced/
+.chocolatey/
+.clara/
+.claude-code-router/
+.claude-flow/
+.claude-plugin/
+.claude/
+.cline/
+.codeartsdoer/
+.codebuddy/
+.codemaker/
+.codestudio/
+.codetogether/
+.codex/
+.commandcode/
+.conda/
+.config/
+.continue/
+.cursor/
+.deepsource/
+.devcontainer/
+.dyad/
+.flox/
+.gemini-cli/
+.gemini/
+.gh-code/
+.gitconfig-extra/
+.gitkraken/
+.glacier-cli/
+.glow/
+.gpt4all/
+.gradle/
+.hack/
+.helix/
+.hermes/
+.husky/
+.jetbrains/
+.julius/
+.jupyter/
+.kilocode/
+.kilocli/
+.kiro/
+.lmstudio/
+.local-shellx/
+.magic/
+.marsx/
+.mcp-cli/
+.mcp_config/
+.minimax-ide/
+.minimax/
+.mockflow/
+.morph/
+.n8n/
+.nextflow/
+.notdiamond/
+.notes/
+.octocoder/
+.ollama/
+.openai-coder/
+.openclients/
+.opencode/
+.opencoder/
+.openrouter-cli/
+.oxcoder/
+.pi-mono/
+.pieces/
+.qwen-code/
+.qutebrowser/
+.rerun/
+.roo/
+.scrollx/
+.sculptor/
+.shellmate/
+.skill-ui/
+.solidlts/
+.soch/
+.solidity/
+.super_agent/
+.symbiote/
+.symphony/
+.tactical/
+.tambo/
+.tea/
+.tensordock/
+.tortoise/
+.trae/
+.warp/
+.windsurf/
+.worktrees/
+.zed/
+.zere/
+.zerepy/
+.zsh-history/
+.deepseek/
+.morph-bench/
+.morph-edit/
+.morph-studio/
+.morph-vfx/
+.dynamicstudios/
 
 # Linux
 .cache/

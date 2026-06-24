@@ -11,9 +11,11 @@ export default defineConfig({
     setupFiles: './test/setup.ts',
     include: [
       'test/components.test.tsx',
-      'test/pages.test.tsx', 
+      'test/pages.test.tsx',
       'test/user_flows.test.tsx',
-      'test/errors.test.tsx'
+      'test/errors.test.tsx',
+      'test/services/**/*.test.ts',
+      'test/components/**/*.test.{ts,tsx}',
     ],
     exclude: ['node_modules', 'dist', '.git', '.cache', 'test.backup', '*.backup/**', 'test-backups'],
     reporters: ['dot', 'json'],

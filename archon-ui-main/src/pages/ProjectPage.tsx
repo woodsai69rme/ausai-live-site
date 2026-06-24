@@ -151,21 +151,25 @@ export function ProjectPage({
     loadProjectsData();
   }, []); // Only run once on mount
 
-  // Set up Socket.IO for real-time project list updates (after initial load)
+// Set up Socket.IO for real-time project list updates (after initial load)
   useEffect(() => {
-    console.log('📡 Setting up Socket.IO for project list updates');
+    let isMounted = true;
+    let cleanupFn: (() => void) | null = null;
     
     const connectWebSocket = async () => {
       try {
         await projectListSocketIO.connect('/');
+        if (!isMounted) {
+          projectListSocketIO.disconnect();
+          return;
+        }
         projectListSocketIO.send({ type: 'subscribe_projects' });
         
         const handleProjectUpdate = (message: any) => {
-          console.log('📨 Received project list update via Socket.IO');
+          if (!isMounted) return;
           if (message.data && message.data.projects) {
             const projectsData = message.data.projects;
             
-            // Sort projects - pinned first, then alphabetically
             const sortedProjects = [...projectsData].sort((a, b) => {
               if (a.pinned && !b.pinned) return -1;
               if (!a.pinned && b.pinned) return 1;
@@ -173,12 +177,10 @@ export function ProjectPage({
             });
             
             setProjects(prev => {
-              // Keep temp projects and merge with real projects
               const tempProjects = prev.filter(p => p.id.startsWith('temp-'));
               return [...tempProjects, ...sortedProjects];
             });
             
-            // Refresh task counts
             const projectIds = sortedProjects.map(p => p.id);
             loadTaskCountsForAllProjects(projectIds);
           }
@@ -186,7 +188,7 @@ export function ProjectPage({
         
         projectListSocketIO.addMessageHandler('projects_update', handleProjectUpdate);
         
-        return () => {
+        cleanupFn = () => {
           projectListSocketIO.removeMessageHandler('projects_update', handleProjectUpdate);
         };
       } catch (error) {
@@ -194,14 +196,14 @@ export function ProjectPage({
       }
     };
     
-    const cleanup = connectWebSocket();
+    connectWebSocket();
     
     return () => {
-      console.log('🧹 Disconnecting project list Socket.IO');
+      isMounted = false;
+      if (cleanupFn) cleanupFn();
       projectListSocketIO.disconnect();
-      cleanup.then(cleanupFn => cleanupFn && cleanupFn());
     };
-  }, []); // Only run once on mount
+  }, []);
 
   // Load task counts for all projects
   const loadTaskCountsForAllProjects = useCallback(async (projectIds: string[]) => {
@@ -228,12 +230,12 @@ export function ProjectPage({
     }
   }, []);
 
-  // Load tasks when project is selected
+// Load tasks when project is selected
   useEffect(() => {
-    if (selectedProject) {
+    if (selectedProject?.id) {
       loadTasksForProject(selectedProject.id);
     }
-  }, [selectedProject]);
+  }, [selectedProject?.id]);
 
   // Removed localStorage persistence for selected project
   // We always want to load the pinned project on page refresh

@@ -36,6 +36,9 @@ from ..services.projects.versioning_service import VersioningService
 # Import Socket.IO broadcast functions from socketio_handlers
 from .socketio_handlers import broadcast_project_update
 
+# Import cost optimization service
+from ..services.cost_optimization_service import get_cost_optimization_service
+
 router = APIRouter(prefix="/api", tags=["projects"])
 
 
@@ -1107,4 +1110,58 @@ async def restore_project_version(
         logfire.error(
             f"Failed to restore version | error={str(e)} | project_id={project_id} | field_name={field_name} | version_number={version_number}"
         )
+        raise HTTPException(status_code=500, detail={"error": str(e)})
+
+
+# ==================== COST OPTIMIZATION ENDPOINTS ====================
+
+
+@router.get("/projects/{project_id}/cost-analysis")
+async def analyze_project_costs(project_id: str, days: int = 30):
+    """
+    Perform cost analysis for a project using connected cloud providers.
+    Returns cost breakdown, recommendations, and potential savings.
+    """
+    try:
+        logfire.info(f"Cost analysis requested | project_id={project_id} | days={days}")
+
+        cost_service = await get_cost_optimization_service()
+        results = await cost_service.analyze_project_costs(project_id, days)
+
+        if "error" in results:
+            raise HTTPException(status_code=400, detail=results["error"])
+
+        logfire.info(
+            f"Cost analysis completed | project_id={project_id} | total_cost={results.get('summary', {}).get('total_monthly_cost', 0)}"
+        )
+
+        return results
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logfire.error(f"Failed to analyze costs | error={str(e)} | project_id={project_id}")
+        raise HTTPException(status_code=500, detail={"error": str(e)})
+
+
+@router.get("/projects/{project_id}/cost-analysis/history")
+async def get_cost_analysis_history(project_id: str, limit: int = 5):
+    """
+    Retrieve historical cost analyses for a project.
+    """
+    try:
+        logfire.info(f"Cost analysis history requested | project_id={project_id} | limit={limit}")
+
+        cost_service = await get_cost_optimization_service()
+        results = await cost_service.get_cost_analysis_history(project_id, limit)
+
+        if "error" in results:
+            raise HTTPException(status_code=400, detail=results["error"])
+
+        return results
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logfire.error(f"Failed to get cost analysis history | error={str(e)} | project_id={project_id}")
         raise HTTPException(status_code=500, detail={"error": str(e)})

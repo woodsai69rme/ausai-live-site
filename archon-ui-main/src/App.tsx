@@ -13,6 +13,7 @@ import { DisconnectScreenOverlay } from './components/DisconnectScreenOverlay';
 import { ErrorBoundaryWithBugReport } from './components/bug-report/ErrorBoundaryWithBugReport';
 import { serverHealthService } from './services/serverHealthService';
 
+// 🚀 Archon is running! All systems operational - Feb 17, 2026
 const AppRoutes = () => {
   const { projectsEnabled } = useSettings();
   

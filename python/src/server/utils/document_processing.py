@@ -3,30 +3,32 @@ Document Processing Utilities
 
 This module provides utilities for extracting text from various document formats
 including PDF, Word documents, and plain text files.
+
+Enhanced with Docling support for better table/figure extraction.
 """
 
 import io
 
-# Removed direct logging import - using unified config
+try:
+    from docling.document_converter import DocumentConverter
+    DOCKING_AVAILABLE = True
+except ImportError:
+    DOCKING_AVAILABLE = False
 
-# Import document processing libraries with availability checks
 try:
     import PyPDF2
-
     PYPDF2_AVAILABLE = True
 except ImportError:
     PYPDF2_AVAILABLE = False
 
 try:
     import pdfplumber
-
     PDFPLUMBER_AVAILABLE = True
 except ImportError:
     PDFPLUMBER_AVAILABLE = False
 
 try:
     from docx import Document as DocxDocument
-
     DOCX_AVAILABLE = True
 except ImportError:
     DOCX_AVAILABLE = False
@@ -37,21 +39,7 @@ logger = get_logger(__name__)
 
 
 def extract_text_from_document(file_content: bytes, filename: str, content_type: str) -> str:
-    """
-    Extract text from various document formats.
-
-    Args:
-        file_content: Raw file bytes
-        filename: Name of the file
-        content_type: MIME type of the file
-
-    Returns:
-        Extracted text content
-
-    Raises:
-        ValueError: If the file format is not supported
-        Exception: If extraction fails
-    """
+    """Extract text from various document formats."""
     try:
         # PDF files
         if content_type == "application/pdf" or filename.lower().endswith(".pdf"):
@@ -64,12 +52,9 @@ def extract_text_from_document(file_content: bytes, filename: str, content_type:
         ] or filename.lower().endswith((".docx", ".doc")):
             return extract_text_from_docx(file_content)
 
-        # Text files (markdown, txt, etc.)
+        # Text files
         elif content_type.startswith("text/") or filename.lower().endswith((
-            ".txt",
-            ".md",
-            ".markdown",
-            ".rst",
+            ".txt", ".md", ".markdown", ".rst",
         )):
             return file_content.decode("utf-8", errors="ignore")
 
@@ -83,83 +68,99 @@ def extract_text_from_document(file_content: bytes, filename: str, content_type:
             content_type=content_type,
             error=str(e),
         )
-        raise Exception(f"Failed to extract text from {filename}: {str(e)}")
+        raise Exception(f"Failed to extract text from {filename}: {str(e)}") from e
 
 
 def extract_text_from_pdf(file_content: bytes) -> str:
     """
-    Extract text from PDF using both PyPDF2 and pdfplumber for best results.
+    Extract text from PDF using Docling (preferred) or fallback to PyPDF2/pdfplumber.
 
-    Args:
-        file_content: Raw PDF bytes
-
-    Returns:
-        Extracted text content
+    Docling provides:
+    - Better table extraction with structure preserved
+    - Figure detection
+    - Layout-aware parsing
+    - 30x faster than OCR-based methods
     """
-    if not PDFPLUMBER_AVAILABLE and not PYPDF2_AVAILABLE:
-        raise Exception(
-            "No PDF processing libraries available. Please install pdfplumber and PyPDF2."
-        )
+    # Try Docling first (best quality)
+    if DOCKING_AVAILABLE:
+        try:
+            converter = DocumentConverter()
+            result = converter.convert_stream(io.BytesIO(file_content))
 
-    text_content = []
+            # Export to markdown (preserves structure better)
+            markdown_content = result.document.export_to_markdown()
 
-    # First try with pdfplumber (better for complex layouts)
+            if markdown_content and len(markdown_content.strip()) > 100:
+                logger.debug("Docling extracted PDF content successfully")
+                return markdown_content
+
+            logger.warning("Docling extracted minimal content, falling back")
+        except Exception as e:
+            logger.warning(f"Docling extraction failed: {e}, falling back")
+
+    # Fallback to pdfplumber (good for complex layouts)
     if PDFPLUMBER_AVAILABLE:
         try:
             with pdfplumber.open(io.BytesIO(file_content)) as pdf:
+                text_parts = []
                 for page_num, page in enumerate(pdf.pages):
-                    try:
-                        page_text = page.extract_text()
-                        if page_text:
-                            text_content.append(f"--- Page {page_num + 1} ---\n{page_text}")
-                    except Exception as e:
-                        logfire.warning(f"pdfplumber failed on page {page_num + 1}: {e}")
-                        continue
-
-            # If pdfplumber got good results, use them
-            if text_content and len("\n".join(text_content).strip()) > 100:
-                return "\n\n".join(text_content)
-
-        except Exception as e:
-            logfire.warning(f"pdfplumber extraction failed: {e}, trying PyPDF2")
-
-    # Fallback to PyPDF2
-    if PYPDF2_AVAILABLE:
-        try:
-            text_content = []
-            pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_content))
-
-            for page_num, page in enumerate(pdf_reader.pages):
-                try:
                     page_text = page.extract_text()
                     if page_text:
-                        text_content.append(f"--- Page {page_num + 1} ---\n{page_text}")
-                except Exception as e:
-                    logfire.warning(f"PyPDF2 failed on page {page_num + 1}: {e}")
-                    continue
-
-            if text_content:
-                return "\n\n".join(text_content)
-            else:
-                raise Exception("No text could be extracted from PDF")
-
+                        text_parts.append(f"--- Page {page_num + 1} ---\n{page_text}")
+                return "\n\n".join(text_parts)
         except Exception as e:
-            raise Exception(f"PyPDF2 failed to extract text: {str(e)}")
+            logger.warning(f"pdfplumber extraction failed: {e}")
 
-    # If we get here, no libraries worked
-    raise Exception("Failed to extract text from PDF - no working PDF libraries available")
+    # Final fallback to PyPDF2 (basic but reliable)
+    if PYPDF2_AVAILABLE:
+        try:
+            pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_content))
+            text_parts = []
+            for page_num, page in enumerate(pdf_reader.pages):
+                page_text = page.extract_text()
+                if page_text:
+                    text_parts.append(f"--- Page {page_num + 1} ---\n{page_text}")
+            return "\n\n".join(text_parts)
+        except Exception as e:
+            raise Exception(f"PyPDF2 failed to extract text: {str(e)}") from e
+
+    raise Exception(
+        "No PDF processing libraries available. Install: pip install docling pdfplumber PyPDF2"
+    )
+
+
+def extract_document_structure(file_content: bytes, filename: str) -> dict:
+    """
+    Extract structured information using Docling.
+
+    Returns tables, figures, and structured text content.
+    """
+    if not DOCKING_AVAILABLE:
+        return {"text": extract_text_from_pdf(file_content), "tables": [], "figures": []}
+
+    try:
+        converter = DocumentConverter()
+        result = converter.convert_stream(io.BytesIO(file_content))
+
+        return {
+            "text": result.document.export_to_text(),
+            "markdown": result.document.export_to_markdown(),
+            "json": result.document.export_to_dict(),
+            "tables": [tbl.export_to_dataframe().to_dict() for tbl in result.document.tables],
+            "figures": [fig.image_base64 for fig in result.document.figures],
+        }
+    except Exception as e:
+        logger.error(f"Structured extraction failed: {e}")
+        return {
+            "text": extract_text_from_pdf(file_content),
+            "tables": [],
+            "figures": [],
+            "error": str(e)
+        }
 
 
 def extract_text_from_docx(file_content: bytes) -> str:
-    """
-    Extract text from Word documents (.docx).
-
-    Args:
-        file_content: Raw DOCX bytes
-
-    Returns:
-        Extracted text content
-    """
+    """Extract text from Word documents (.docx)."""
     if not DOCX_AVAILABLE:
         raise Exception("python-docx library not available. Please install python-docx.")
 
@@ -171,13 +172,9 @@ def extract_text_from_docx(file_content: bytes) -> str:
             if paragraph.text.strip():
                 text_content.append(paragraph.text)
 
-        # Also extract text from tables
         for table in doc.tables:
             for row in table.rows:
-                row_text = []
-                for cell in row.cells:
-                    if cell.text.strip():
-                        row_text.append(cell.text.strip())
+                row_text = [cell.text.strip() for cell in row.cells if cell.text.strip()]
                 if row_text:
                     text_content.append(" | ".join(row_text))
 
@@ -187,4 +184,4 @@ def extract_text_from_docx(file_content: bytes) -> str:
         return "\n\n".join(text_content)
 
     except Exception as e:
-        raise Exception(f"Failed to extract text from Word document: {str(e)}")
+        raise Exception(f"Failed to extract text from Word document: {str(e)}") from e

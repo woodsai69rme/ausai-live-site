@@ -6,6 +6,7 @@ All events are handled in projects_api.py using @sio.event decorators.
 """
 
 import logging
+import os
 
 import socketio
 from fastapi import FastAPI
@@ -14,16 +15,37 @@ from .config.logfire_config import safe_logfire_info
 
 logger = logging.getLogger(__name__)
 
-# Create Socket.IO server with FastAPI integration
+
+def _get_cors_origins() -> list[str]:
+    origins = []
+    development_origins = [
+        "http://localhost:3737",
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:3737",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+    ]
+    production_origins = os.getenv("SOCKETIO_CORS_ORIGINS", "")
+    if production_origins:
+        origins.extend([origin.strip() for origin in production_origins.split(",") if origin.strip()])
+    if os.getenv("ARCHON_ENV") != "production":
+        origins.extend(development_origins)
+    if not origins:
+        origins = development_origins
+    return origins
+
+
+_socketio_cors_origins = _get_cors_origins()
+
 sio = socketio.AsyncServer(
     async_mode="asgi",
-    cors_allowed_origins="*",  # TODO: Configure for production with specific origins
-    logger=False,  # Disable verbose Socket.IO logging
-    engineio_logger=False,  # Disable verbose Engine.IO logging
-    # Performance settings for long-running operations
-    max_http_buffer_size=1000000,  # 1MB
-    ping_timeout=300,  # 5 minutes - increased for background tasks
-    ping_interval=60,  # 1 minute - check connection every minute
+    cors_allowed_origins=_socketio_cors_origins,
+    logger=False,
+    engineio_logger=False,
+    max_http_buffer_size=1000000,
+    ping_timeout=300,
+    ping_interval=60,
 )
 
 # Global Socket.IO instance for use across modules
@@ -48,9 +70,8 @@ def create_socketio_app(app: FastAPI) -> socketio.ASGIApp:
     Returns:
         Socket.IO ASGI app that wraps the FastAPI app
     """
-    # Log Socket.IO server creation
     safe_logfire_info(
-        "Creating Socket.IO server", cors_origins="*", ping_timeout=300, ping_interval=60
+        "Creating Socket.IO server", cors_origins=_socketio_cors_origins, ping_timeout=300, ping_interval=60
     )
 
     # Note: Socket.IO event handlers are registered in socketio_handlers.py

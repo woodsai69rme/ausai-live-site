@@ -23,7 +23,7 @@ import time
 import traceback
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -89,8 +89,8 @@ class ArchonContext:
     """
 
     service_client: Any
-    health_status: dict = None
-    startup_time: float = None
+    health_status: dict = field(default_factory=dict)
+    startup_time: float = field(default_factory=time.time)
 
     def __post_init__(self):
         if self.health_status is None:
@@ -300,7 +300,7 @@ def register_modules():
 
     modules_registered = 0
 
-    # Import and register RAG module (HTTP-based version)
+     # Import and register RAG module (HTTP-based version)
     try:
         from src.mcp.modules.rag_module import register_rag_tools
 
@@ -329,57 +329,6 @@ def register_modules():
             logger.error(traceback.format_exc())
     else:
         logger.info("⚠ Project module skipped - Projects are disabled")
-
-    # Import and register Serena integration module
-    serena_enabled = os.getenv("SERENA_ENABLED", "true").lower() == "true"
-    if serena_enabled:
-        try:
-            from src.mcp.modules.serena_integration_module import register_serena_tools
-
-            register_serena_tools(mcp)
-            modules_registered += 1
-            logger.info("Serena integration module registered (semantic code operations)")
-        except ImportError as e:
-            logger.warning(f"⚠ Serena integration module not available: {e}")
-        except Exception as e:
-            logger.error(f"✗ Error registering Serena integration module: {e}")
-            logger.error(traceback.format_exc())
-    else:
-        logger.info("⚠ Serena integration module skipped - Serena is disabled")
-
-    # Import and register Claude Context integration module
-    claude_context_enabled = os.getenv("CLAUDE_CONTEXT_ENABLED", "true").lower() == "true"
-    if claude_context_enabled:
-        try:
-            from src.mcp.modules.claude_context_module import register_claude_context_tools
-
-            register_claude_context_tools(mcp)
-            modules_registered += 1
-            logger.info("Claude Context integration module registered (semantic codebase search)")
-        except ImportError as e:
-            logger.warning(f"⚠ Claude Context integration module not available: {e}")
-        except Exception as e:
-            logger.error(f"✗ Error registering Claude Context integration module: {e}")
-            logger.error(traceback.format_exc())
-    else:
-        logger.info("⚠ Claude Context integration module skipped - Claude Context is disabled")
-
-    # Import and register Spec-Driven Development module
-    spec_driven_enabled = os.getenv("SPEC_DRIVEN_DEVELOPMENT_ENABLED", "true").lower() == "true"
-    if spec_driven_enabled:
-        try:
-            from src.mcp.modules.spec_driven_development_module import register_spec_driven_development_tools
-
-            register_spec_driven_development_tools(mcp)
-            modules_registered += 1
-            logger.info("Spec-Driven Development module registered (AI-powered specification management)")
-        except ImportError as e:
-            logger.warning(f"⚠ Spec-Driven Development module not available: {e}")
-        except Exception as e:
-            logger.error(f"✗ Error registering Spec-Driven Development module: {e}")
-            logger.error(traceback.format_exc())
-    else:
-        logger.info("⚠ Spec-Driven Development module skipped - Feature is disabled")
 
     logger.info(f"Total modules registered: {modules_registered}")
 

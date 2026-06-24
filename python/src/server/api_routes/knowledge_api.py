@@ -14,27 +14,23 @@ import json
 import time
 import uuid
 from datetime import datetime
+from typing import Literal
 
-from fastapi import APIRouter, File, Form, HTTPException, UploadFile
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, UploadFile
+from pydantic import BaseModel, Field, field_validator
 
 from ..utils import get_supabase_client
 from ..services.storage import DocumentStorageService
 from ..services.search.rag_service import RAGService
 from ..services.knowledge import KnowledgeItemService, DatabaseMetricsService
-from ..services.crawling import CrawlOrchestrationService, EnhancedCrawlOrchestrationService
+from ..services.crawling import CrawlOrchestrationService
+try:
+    from ..services.crawling import EnhancedCrawlOrchestrationService
+except ImportError:
+    EnhancedCrawlOrchestrationService = None
 from ..services.crawler_manager import get_crawler
-
-# Import unified logging
 from ..config.logfire_config import get_logger, safe_logfire_error, safe_logfire_info
-from ..services.crawler_manager import get_crawler
-from ..services.search.rag_service import RAGService
-from ..services.storage import DocumentStorageService
-from ..utils import get_supabase_client
 from ..utils.document_processing import extract_text_from_document
-
-# Get logger for this module
-logger = get_logger(__name__)
 from ..socketio_app import get_socketio_instance
 from .socketio_handlers import (
     complete_crawl_progress,
@@ -43,55 +39,63 @@ from .socketio_handlers import (
     update_crawl_progress,
 )
 
-# Create router
-router = APIRouter(prefix="/api", tags=["knowledge"])
+logger = get_logger(__name__)
 
-# Get Socket.IO instance
+from ..middleware.auth_middleware import authenticate_api_key
+from ..middleware.rate_limiter import rate_limiter
+
+router = APIRouter(prefix="/api", tags=["knowledge"], dependencies=[Depends(authenticate_api_key)])
+
 sio = get_socketio_instance()
 
-# Create a semaphore to limit concurrent crawls
-# This prevents the server from becoming unresponsive during heavy crawling
-CONCURRENT_CRAWL_LIMIT = 3  # Allow max 3 concurrent crawls
+CONCURRENT_CRAWL_LIMIT = 3
 crawl_semaphore = asyncio.Semaphore(CONCURRENT_CRAWL_LIMIT)
 
-# Track active async crawl tasks for cancellation support
 active_crawl_tasks: dict[str, asyncio.Task] = {}
 
+VALID_KNOWLEDGE_TYPES = Literal["technical", "general", "documentation", "tutorial", "reference", "api"]
 
-# Request Models
+
 class KnowledgeItemRequest(BaseModel):
-    url: str
-    knowledge_type: str = "technical"
-    tags: list[str] = []
-    update_frequency: int = 7
-    max_depth: int = 2  # Maximum crawl depth (1-5)
-    extract_code_examples: bool = True  # Whether to extract code examples
+    url: str = Field(..., min_length=1, max_length=2048)
+    knowledge_type: VALID_KNOWLEDGE_TYPES = "technical"
+    tags: list[str] = Field(default_factory=list, max_length=10)
+    update_frequency: int = Field(default=7, ge=1, le=365)
+    max_depth: int = Field(default=2, ge=1, le=5)
+    extract_code_examples: bool = True
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "url": "https://example.com",
-                "knowledge_type": "technical",
-                "tags": ["documentation"],
-                "update_frequency": 7,
-                "max_depth": 2,
-                "extract_code_examples": True,
-            }
-        }
+    @field_validator('url')
+    @classmethod
+    def validate_url(cls, v: str) -> str:
+        if not v.startswith(('http://', 'https://')):
+            raise ValueError('URL must start with http:// or https://')
+        return v.strip()
+
+    @field_validator('tags')
+    @classmethod
+    def validate_tags(cls, v: list[str]) -> list[str]:
+        return [tag.strip()[:50] for tag in v if tag.strip()]
 
 
 class CrawlRequest(BaseModel):
-    url: str
-    knowledge_type: str = "general"
-    tags: list[str] = []
-    update_frequency: int = 7
-    max_depth: int = 2  # Maximum crawl depth (1-5)
+    url: str = Field(..., min_length=1, max_length=2048)
+    knowledge_type: VALID_KNOWLEDGE_TYPES = "general"
+    tags: list[str] = Field(default_factory=list, max_length=10)
+    update_frequency: int = Field(default=7, ge=1, le=365)
+    max_depth: int = Field(default=2, ge=1, le=5)
+
+    @field_validator('url')
+    @classmethod
+    def validate_url(cls, v: str) -> str:
+        if not v.startswith(('http://', 'https://')):
+            raise ValueError('URL must start with http:// or https://')
+        return v.strip()
 
 
 class RagQueryRequest(BaseModel):
-    query: str
-    source: str | None = None
-    match_count: int = 5
+    query: str = Field(..., min_length=1, max_length=10000)
+    source: str | None = Field(default=None, max_length=500)
+    match_count: int = Field(default=5, ge=1, le=100)
 
 
 @router.get("/test-socket-progress/{progress_id}")
@@ -317,9 +321,12 @@ async def refresh_knowledge_item(source_id: str):
             )
 
         # Use the enhanced crawl orchestration with AgentQL integration
-        crawl_service = EnhancedCrawlOrchestrationService(
-            crawler=crawler, supabase_client=get_supabase_client()
-        )
+        if EnhancedCrawlOrchestrationService:
+            crawl_service = EnhancedCrawlOrchestrationService(
+                crawler=crawler, supabase_client=get_supabase_client()
+            )
+        else:
+            crawl_service = CrawlOrchestrationService(crawler=crawler)
         crawl_service.set_progress_id(progress_id)
 
         # Start the crawl task with proper request format
@@ -367,7 +374,7 @@ async def refresh_knowledge_item(source_id: str):
         raise HTTPException(status_code=500, detail={"error": str(e)})
 
 
-@router.post("/knowledge-items/crawl")
+@router.post("/knowledge-items/crawl", dependencies=[Depends(rate_limiter)])
 async def crawl_knowledge_item(request: KnowledgeItemRequest):
     """Crawl a URL and add it to the knowledge base with progress tracking."""
     # Validate URL
@@ -444,7 +451,10 @@ async def _perform_crawl_with_progress(progress_id: str, request: KnowledgeItemR
                 return
 
             supabase_client = get_supabase_client()
-            orchestration_service = EnhancedCrawlOrchestrationService(crawler, supabase_client)
+            if EnhancedCrawlOrchestrationService:
+                orchestration_service = EnhancedCrawlOrchestrationService(crawler, supabase_client)
+            else:
+                orchestration_service = CrawlOrchestrationService(crawler)
             orchestration_service.set_progress_id(progress_id)
 
             # Store the current task in active_crawl_tasks for cancellation support
@@ -505,7 +515,7 @@ async def _perform_crawl_with_progress(progress_id: str, request: KnowledgeItemR
                 )
 
 
-@router.post("/documents/upload")
+@router.post("/documents/upload", dependencies=[Depends(rate_limiter)])
 async def upload_document(
     file: UploadFile = File(...),
     tags: str | None = Form(None),

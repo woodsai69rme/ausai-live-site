@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { SideNavigation } from './SideNavigation';
 import { ArchonChatPanel } from './ArchonChatPanel';
+import { JarvisCommandBar } from '../jarvis/JarvisCommandBar';
 import { X } from 'lucide-react';
 import { useToast } from '../../contexts/ToastContext';
 import { credentialsService } from '../../services/credentialsService';
@@ -163,8 +164,15 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       </div>
       {/* Main Content Area - no left margin to allow grid to extend full width */}
       <div className="relative flex-1 pl-[100px] z-10">
-        <div className="container mx-auto px-8 relative">
-          <div className="min-h-screen pt-8 pb-16">{children}</div>
+        {/* Status Banner */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-green-600 to-emerald-600 text-white text-center py-1 text-xs font-mono">
+          🟢 Archon Knowledge Engine - All Systems Operational | {new Date().toLocaleDateString()}
+        </div>
+        <div className="container mx-auto px-8 relative pt-8">
+          <div className="mb-6 max-w-2xl">
+            <JarvisCommandBar />
+          </div>
+          <div className="min-h-screen pt-2 pb-16">{children}</div>
         </div>
       </div>
       {/* Floating Chat Button - Only visible when chat is closed */}

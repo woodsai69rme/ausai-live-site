@@ -287,3 +287,80 @@ When connected to Cursor/Windsurf:
 
 ADDITIONAL CONTEXT FOR SPECIFICALLY HOW TO USE ARCHON ITSELF:
 @CLAUDE-ARCHON.md
+
+## Local ComfyUI Music Video Studio
+
+The local ComfyUI media studio is installed under:
+
+```text
+C:\Users\karma\ComfyUI
+```
+
+### Launcher
+
+```text
+C:\Users\karma\ComfyUI\launch_music_video_studio.bat
+```
+
+21-option menu covering: ComfyUI launch (3 modes), audio (transcribe, BPM analysis, batch), video (analyze, batch), creative (brainstorm, wizard), tools (config, models, check, remote, update), local AI assistant (chat, converse, browse, review, more).
+
+### music_video_studio.py subcommands
+
+| Command | Purpose |
+|---|---|
+| `transcribe` | Whisper MP3→lyrics TXT+SRT |
+| `batch-transcribe` | All audio in input/audios |
+| `analyze-audio` | BPM, beats, onset, spectral (librosa) |
+| `analyze-video` | Frame extraction + BLIP captioning |
+| `batch-analyze` | All videos in input/reference_videos |
+| `brainstorm` | Full concept via OpenRouter (uses BPM if mp3 given) |
+| `wizard` | Interactive guided workflow |
+| `config --show` / `--set key=val` | Persisted defaults |
+| `check` | GPU, CUDA, nodes, VRAM budget estimator |
+| `list-free-models` | OpenRouter free model IDs |
+
+### local_ai_assistant.py subcommands
+
+| Command | Purpose |
+|---|---|
+| `chat` | Single question to Ollama |
+| `converse` | Multi-turn with `/save` history |
+| `browse` | Headless Chromium + page analysis |
+| `summarize` | File summarization |
+| `explain-error` | Error explanation with optional file context |
+| `plan` | Implementation plan generation |
+| `review` | Python code review (CRITICAL/MAJOR/MINOR) |
+| `check` | List installed Ollama models |
+
+### Workflow templates
+
+```text
+C:\Users\karma\ComfyUI\workflow_templates\workflow_recipes.md
+```
+
+7 proven ComfyUI workflows for RTX 4060 8GB with VRAM budgets.
+
+### Docs
+
+- Music Video Studio: `docs/music_video_studio.md`
+- Local AI Assistant: `docs/local_ai_assistant.md`
+- Workflow Recipes: `workflow_templates/workflow_recipes.md`
+
+### Key files
+
+| File | Purpose |
+|---|---|
+| `config/music_video_studio_config.json` | Persisted defaults |
+| `config/openrouter_free_models.txt` | Free model IDs |
+| `tools/configure_remote_stay_connected.bat` | Power/sleep tweaks |
+| `tools/update_comfyui_tools.bat` | Git pull all custom nodes |
+| `tools/check_gpu_stack.bat` | Quick GPU verification |
+| `launch_comfyui_menu.bat` | Alternate ComfyUI-only launcher |
+
+OpenRouter is the approved AI provider for brainstorming, lyric/concept planning, and reference-video prompt extraction. Use free OpenRouter models.
+Local Ollama is available for coding/debugging/browser assistance.
+
+### Full Reference
+- `C:\Users\karma\ComfyUI\README.md` — complete system guide
+- `C:\Users\karma\ComfyUI\AGENTS.md` — session memory / quick-reference
+

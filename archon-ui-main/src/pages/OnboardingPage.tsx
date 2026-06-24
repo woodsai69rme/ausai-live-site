@@ -21,7 +21,7 @@ export const OnboardingPage = () => {
 
   const handleComplete = () => {
     // Mark onboarding as dismissed and navigate to home
-    localStorage.setItem('onboardingDismissed', 'true');
+    sessionStorage.setItem('onboardingDismissed', 'true');
     navigate('/');
   };
 

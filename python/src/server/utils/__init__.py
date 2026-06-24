@@ -19,6 +19,14 @@ import asyncio
 import os
 from typing import Optional
 
+# Import document processing functions
+from .document_processing import (
+    extract_text_from_document,
+    extract_text_from_pdf,
+    extract_text_from_docx,
+    extract_document_structure,
+)
+
 from ..services.client_manager import get_supabase_client
 from ..services.embeddings import (
     create_embedding,
@@ -96,8 +104,11 @@ __all__ = [
     "generate_contextual_embeddings_batch",
     "process_chunk_with_context",
     "process_chunk_with_context_async",
-    # Note: Document storage and search functions not exported from utils
-    # to avoid circular dependencies. Import directly from services modules.
+    # Document processing
+    "extract_text_from_document",
+    "extract_text_from_pdf",
+    "extract_text_from_docx",
+    "extract_document_structure",
     # Source management functions
     "extract_source_summary",
     "generate_source_title_and_metadata",
