@@ -12,6 +12,13 @@ Closed architecture (do not extend without editing this header):
 
 - WELL_KNOWN_NOISE_DIRS  frozenset -- names we know from experience are per-user
   IDE / AI-tooling state and therefore should NEVER be committed.
+- INTENTIONAL_OVERMATCH  frozenset -- a 6-name overlap with
+  `WELL_KNOWN_NOISE_DIRS` whose entries are deliberately ABSENT from the
+  `.gitignore` noise block because those names are also common nested-project
+  subdirs (`.venv/`, `.vs/`, `.crawl4ai/`, `.keras/`, `.matplotlib/`,
+  `.profiles/`). `sync_warning` subtracts this set from `only_in_python` so
+  the intentional design does not look like drift on every dry-run. See
+  `DOTDIR_CATALOG_RUN.md \u00a74.1` for the rationale.
 - CLOSED_POSSIBLY_LEGIT  frozenset -- names that look like dot-dirs but are
   legitimate project artefacts (`.git/`, `.github/`, `.vscode/`, ...). These
   MUST NOT be auto-ignored even when they match the dotdir walker.
@@ -46,6 +53,7 @@ rather than silently incorrect.
 from __future__ import annotations
 
 import argparse
+import re
 import json
 import os
 import sys
@@ -55,6 +63,20 @@ from typing import Final
 
 
 # ----- closed sets (do not add new entries without editing the header) -----
+
+INTENTIONAL_OVERMATCH: Final[frozenset[str]] = frozenset({
+    # Kept here so the catalog classifies them as `well_known_noise`, but
+    # deliberately REMOVED from the `.gitignore` noise block because they
+    # are common nested-project subdirs (`<project>/.venv`, `<project>/.vs`,
+    # etc.). Auto-ignoring them at the root would silently hide legitimate
+    # project content; see DOTDIR_CATALOG_RUN.md § Design decisions.
+    ".venv",
+    ".vs",
+    ".crawl4ai",
+    ".keras",
+    ".matplotlib",
+    ".profiles",
+})
 
 WELL_KNOWN_NOISE_DIRS: Final[frozenset[str]] = frozenset({
     ".agent", ".agents", ".ai_completion",
@@ -95,6 +117,33 @@ WELL_KNOWN_NOISE_DIRS: Final[frozenset[str]] = frozenset({
     ".zsh-history", ".deepseek",
     ".morph-bench", ".morph-edit", ".morph-studio",
     ".morph-vfx", ".dynamicstudios",
+    # --- promoted from initial --run catalog dump (this turn) ---
+    ".VirtualBox",
+    ".abacusai", ".abacusai-chromium-profile",
+    ".ai-dev-orchestrator", ".ai-dev-tools",
+    ".antigravity_cockpit",
+    ".aws", ".azure", ".cache",
+    ".chatgpt-copilot", ".convex", ".crawl4ai", ".crush",
+    ".deepagent-chromium-profile", ".degit", ".dev-isolation",
+    ".docker", ".dotnet", ".electron-gyp", ".expo",
+    ".factory", ".flow-nexus", ".forge",
+    ".genspark-tool-cli", ".gk", ".gsutil",
+    ".icube-remote-ssh", ".keras", ".kilo", ".kode",
+    ".kube", ".lingma", ".local", ".local-operator",
+    ".matplotlib", ".mem0", ".monica-code", ".ms-ad",
+    ".mutagen", ".notes-cli", ".npm", ".onthereg",
+    ".openclaw", ".openhands", ".openjfx", ".openrouter",
+    ".pi", ".pinokio", ".pm2", ".pnpm-store",
+    ".pochi", ".preferences", ".profiles", ".pyenv",
+    ".pytest_cache", ".qoder", ".qodo", ".qwen",
+    ".redhat", ".reposort", ".rustup",
+    ".search_index", ".serena", ".ssh", ".streamlit",
+    ".templateengine", ".trae-aicc",
+    ".ultimate_ai_system", ".unified-ai",
+    ".universal-transfer-hub", ".venv", ".vercel",
+    ".verdent", ".vibe", ".vibe-log",
+    ".voice_orchestrator", ".void-editor",
+    ".vs", ".wdm", ".zen-mcp", ".zencoder",
 })
 
 
@@ -181,14 +230,21 @@ def classify(name: str, on_disk: bool) -> str:
 
 def parse_gitignore_noise_block(
     gitignore_path: Path,
-) -> tuple[frozenset[str], bool]:
+) -> tuple[frozenset[str], bool, bool]:
     """Read .gitignore and extract leading-dot directories inside the
     per-user IDE/tooling block (the section heading we mark with
     `NOISE_BLOCK_HEADING`).
 
-    Returns `(frozenset_of_names, found_block)`. `found_block=False` means the
-    marker heading was not located; callers should treat that as a failed sync
-    check rather than as zero drift.
+    Returns `(frozenset_of_names, found_block, found_close_fence)`:
+
+    - `found_block`       — True iff the marker heading was located. A False
+      here means the marker was renamed or removed; callers should treat that
+      as "sync check did not run" rather than as zero drift.
+    - `found_close_fence` — True iff a pure-divider close fence
+      (matching the regex `^#\\s*=+\\s*$`) was reached during forward scan.
+      A False here (paired with `found_block=True`) means the open fence was
+      found but no close fence was reached before end-of-file; the parser
+      may have silently absorbed unrelated `.X/` lines.
 
     Names that appear elsewhere in `.gitignore` (e.g. `.idea/`, `.vscode/`)
     fall outside this scope; the caller subtracts `CLOSED_POSSIBLY_LEGIT`
@@ -197,10 +253,11 @@ def parse_gitignore_noise_block(
     Read-only: opens `.gitignore` in `'r'` mode only. Never writes.
     """
     if not gitignore_path.exists():
-        return frozenset(), False
+        return frozenset(), False, False
     names: set[str] = set()
     found_block = False
     in_target_block = False
+    found_close_fence = False
     with open(gitignore_path, "r", encoding="utf-8") as fp:
         for raw_line in fp:
             line = raw_line.strip()
@@ -208,18 +265,20 @@ def parse_gitignore_noise_block(
                 in_target_block = True
                 found_block = True
                 continue
-            # Paired close fence: a `# ===...===` line that follows the heading
-            # closes the noise block. We require the line to start AND end with
-            # `===` so unrelated future sub-sections with hash-prefix headings
-            # do not accidentally close the block early.
-            if in_target_block and line.startswith("# ===") and line.endswith("==="):
+            # Paired close fence: a pure-divider line (#, whitespace, = run)
+            # closes the noise block. We allow trailing/leading whitespace
+            # around the run but otherwise require only `#` + `=` content, so
+            # unrelated future sub-sections with hash-prefix headings like
+            # `# === foo ===` cannot accidentally close the block early.
+            if in_target_block and re.match(r"^#\s*=+\s*$", line):
                 in_target_block = False
+                found_close_fence = True
                 continue
             if not in_target_block:
                 continue
             if line.startswith(".") and line.endswith("/"):
                 names.add(line[:-1])
-    return frozenset(names), found_block
+    return frozenset(names), found_block, found_close_fence
 
 
 def sync_warning(gitignore_path: Path) -> list[str]:
@@ -237,9 +296,9 @@ def sync_warning(gitignore_path: Path) -> list[str]:
       run. Without this, a renamed/missing marker would look like a clean sync.
     - Diff mismatch: WARN listing each side.
 
-    Empty list strictly means "block found and in sync".
+    Empty list strictly means "block found, fence reached, and in sync".
     """
-    on_disk, found_block = parse_gitignore_noise_block(gitignore_path)
+    on_disk, found_block, fence_reached = parse_gitignore_noise_block(gitignore_path)
     warnings: list[str] = []
     if not found_block:
         warnings.append(
@@ -248,7 +307,20 @@ def sync_warning(gitignore_path: Path) -> list[str]:
             f"also produces no warning; check manually."
         )
         return warnings
-    only_in_python = WELL_KNOWN_NOISE_DIRS - on_disk
+    if not fence_reached:
+        warnings.append(
+            "WARN: noise-block in .gitignore was never closed by its paired "
+            "close fence (the parser is reading every subsequent .X/ entry "
+            "outside the block). Add a closing line of `# ===...===` style "
+            "after the last promoted name so the block is finite."
+        )
+        # Diff against an unbounded scan is meaningless -- the operator must
+        # fix the close fence first, then re-run for a meaningful diff.
+        return warnings
+    # Subtract INTENTIONAL_OVERMATCH so the deliberate-diff WARN does not fire
+    # for those six names on every dry-run; see DOTDIR_CATALOG_RUN.md § Design
+    # decisions.
+    only_in_python = WELL_KNOWN_NOISE_DIRS - INTENTIONAL_OVERMATCH - on_disk
     only_in_gitignore = on_disk - WELL_KNOWN_NOISE_DIRS - CLOSED_POSSIBLY_LEGIT
     if only_in_python:
         warnings.append(

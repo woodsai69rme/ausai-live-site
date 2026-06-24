@@ -70,7 +70,60 @@ The verdicts emitted per-row on the happy path are exactly the first three.
 
 ---
 
-## 4. I/O contract
+## 4. Implementation notes
+
+These two design decisions are recorded here so a future maintainer can see
+WHY the implementation deliberately deviates from the naive defaults.
+
+### 4.1 The 6-name intentional over-match silence
+
+After the initial 81-name sweep, **6 entries** were promoted into
+`WELL_KNOWN_NOISE_DIRS` and housed in a dedicated `INTENTIONAL_OVERMATCH`
+frozenset, deliberately kept OUT of `.gitignore`'s per-user IDE/tooling
+block because they could (in principle) over-match nested project subdirs
+of the same name at the root of a workspace whose project IS the root:
+
+- `.venv`
+- `.vs`
+- `.crawl4ai`
+- `.keras`
+- `.matplotlib`
+- `.profiles`
+
+Specifically, `.gitignore` patterns declared at a project root match every
+file at-or-below that root — so a `.venv/` pattern at `/c/Users/karma/.gitignore`
+would silently hide any `/c/Users/karma/<some-project>/.venv/` directory for
+**all** subprojects, including legitimate per-project virtualenvs and cloned
+Python sources.
+
+`sync_warning` subtracts `INTENTIONAL_OVERMATCH` from its `only_in_python`
+diff so those six names do NOT look like drift; the set is then consumed by
+`parse_gitignore_noise_block` purely through the `.gitignore` block's actual
+contents. Each subproject can opt-back-in by adding the same pattern to its
+OWN `.gitignore`; the catalog will then classify it as `well_known_noise` on
+the next run.
+
+### 4.2 Close-fence parser assumption
+
+`parse_gitignore_noise_block` is bracketed by:
+
+- **ENTER** on any `#` comment line containing `NOISE_BLOCK_HEADING` (currently
+  `"Per-user IDE/AI-tooling"`).
+- **EXIT** on a pure-divider line matching the regex `^#\s*=+\s*$` — i.e. ONLY
+  `#`, whitespace, and one or more `=` runs. No embedded content allowed.
+
+If the noise block is opened but the close fence is missing before end-of-file,
+the parser would otherwise silently scan the entire rest of the file. To
+prevent that, `parse_gitignore_noise_block` returns a 3-tuple
+`(names, found_block, found_close_fence)` and `sync_warning` emits a WARN if
+`found_block=True and found_close_fence=False`. The fix: add a closing fence
+(e.g. `# ============================================================`)
+immediately AFTER the last noise name. The drift is recoverable without
+losing data: add the fence and re-run.
+
+---
+
+## 5. I/O contract
 
 ### `--dry-run` (default)
 
