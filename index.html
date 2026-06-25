@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AusAI Tech — AI Automation for Australian Business</title>
+  <meta name="description" content="AusAI Tech helps Australian businesses automate workflows, build AI-powered media, and secure their digital operations. Based in Australia, serving globally." />
+  <meta name="generator" content="AusAI Tech" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-card-hover: #1a1a28;
+      --border: #1e1e2e;
+      --border-glow: #3b82f620;
+      --text: #e4e4e7;
+      --text-dim: #71717a;
+      --text-bright: #fafafa;
+      --accent: #3b82f6;
+      --accent-glow: #3b82f640;
+      --accent-2: #06b6d4;
+      --green: #22c55e;
+      --green-dim: #22c55e20;
+      --purple: #a855f7;
+      --orange: #f97316;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --max-w: 1200px;
+      --font: 'Inter', -apple-system, system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-2); }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--bg)ee;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--text-bright); }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim); font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-bright); }
+    .nav-cta {
+      background: var(--accent); color: #fff !important;
+      padding: 10px 24px; border-radius: 8px; font-weight: 600;
+      font-size: 0.9rem; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: #2563eb; transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow); }
+    .mobile-menu { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 60%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.1); }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-dim); border: 1px solid var(--green);
+      padding: 6px 16px; border-radius: 100px; font-size: 0.8rem;
+      color: var(--green); font-weight: 600; margin-bottom: 24px;
+    }
+    .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800;
+      line-height: 1.1; color: var(--text-bright); margin-bottom: 20px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p { font-size: 1.2rem; color: var(--text-dim); max-width: 600px; margin: 0 auto 40px; }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #fff; padding: 14px 32px;
+      border-radius: 10px; font-weight: 600; font-size: 1rem;
+      border: none; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); color: #fff; }
+    .btn-secondary {
+      background: var(--bg-card); color: var(--text); padding: 14px 32px;
+      border-radius: 10px; font-weight: 600; font-size: 1rem;
+      border: 1px solid var(--border); cursor: pointer; transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--accent); color: var(--text-bright); }
+
+    /* ===== STATS BAR ===== */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border); margin: 0 auto 80px;
+      border-radius: var(--radius-lg); overflow: hidden;
+      max-width: var(--max-w);
+    }
+    .stat {
+      background: var(--bg-card); padding: 32px 24px; text-align: center;
+    }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--accent); font-family: var(--mono); }
+    .stat-label { font-size: 0.85rem; color: var(--text-dim); margin-top: 4px; }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 80px 0; }
+    .section-label {
+      font-size: 0.8rem; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+      font-family: var(--mono);
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+      color: var(--text-bright); margin-bottom: 16px;
+    }
+    .section-subtitle { font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin-bottom: 48px; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header .section-subtitle { margin: 16px auto 0; }
+
+    /* ===== SERVICES ===== */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+    .service-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 36px;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .service-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px #00000040; }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 20px;
+    }
+    .service-icon.blue { background: #3b82f620; }
+    .service-icon.cyan { background: #06b6d420; }
+    .service-icon.purple { background: #a855f720; }
+    .service-icon.green { background: #22c55e20; }
+    .service-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--text-bright); margin-bottom: 12px; }
+    .service-card p { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 20px; }
+    .service-price { font-family: var(--mono); font-weight: 600; color: var(--green); font-size: 0.9rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag {
+      background: var(--bg); border: 1px solid var(--border); padding: 4px 12px;
+      border-radius: 6px; font-size: 0.75rem; color: var(--text-dim);
+    }
+
+    /* ===== PORTFOLIO ===== */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .portfolio-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      transition: all 0.3s;
+    }
+    .portfolio-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .portfolio-thumb {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; position: relative; overflow: hidden;
+    }
+    .portfolio-thumb.music { background: linear-gradient(135deg, #1e1b4b, #312e81); }
+    .portfolio-thumb.workflow { background: linear-gradient(135deg, #0c4a6e, #164e63); }
+    .portfolio-thumb.security { background: linear-gradient(135deg, #14532d, #064e3b); }
+    .portfolio-thumb.ai { background: linear-gradient(135deg, #4c1d95, #5b21b6); }
+    .portfolio-body { padding: 24px; }
+    .portfolio-body h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+    .portfolio-body p { font-size: 0.9rem; color: var(--text-dim); }
+    .portfolio-meta { display: flex; gap: 16px; margin-top: 12px; }
+    .portfolio-meta span { font-size: 0.8rem; color: var(--text-dim); font-family: var(--mono); }
+
+    /* ===== PRICING ===== */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; align-items: start; }
+    .pricing-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 40px 32px;
+      transition: all 0.3s; position: relative;
+    }
+    .pricing-card.featured { border-color: var(--accent); }
+    .pricing-card.featured::after {
+      content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%;
+      transform: translateX(-50%); background: var(--accent); color: #fff;
+      padding: 4px 16px; border-radius: 6px; font-size: 0.7rem;
+      font-weight: 700; letter-spacing: 1px;
+    }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px #00000040; }
+    .pricing-name { font-size: 1rem; font-weight: 600; color: var(--text-dim); margin-bottom: 8px; }
+    .pricing-price { font-size: 2.5rem; font-weight: 800; color: var(--text-bright); margin-bottom: 4px; }
+    .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--text-dim); }
+    .pricing-desc { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 24px; }
+    .pricing-features { list-style: none; margin-bottom: 32px; }
+    .pricing-features li {
+      padding: 8px 0; font-size: 0.9rem; color: var(--text);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+    .pricing-btn {
+      display: block; width: 100%; text-align: center; padding: 14px;
+      border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text); cursor: pointer; transition: all 0.2s;
+    }
+    .pricing-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .pricing-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .pricing-btn.primary:hover { background: #2563eb; }
+
+    /* ===== PROCESS ===== */
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .process-step { text-align: center; padding: 32px 20px; }
+    .process-number {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--accent); color: #fff; display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;
+      font-family: var(--mono);
+    }
+    .process-step h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+    .process-step p { font-size: 0.9rem; color: var(--text-dim); }
+
+    /* ===== TESTIMONIALS ===== */
+
+
+    /* ===== TECH STACK ===== */
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    .tech-badge {
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 12px 20px; border-radius: 10px; font-size: 0.85rem;
+      color: var(--text); font-weight: 500; display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+    }
+    .tech-badge:hover { border-color: var(--accent); color: var(--text-bright); }
+    .tech-badge span { font-size: 1.1rem; }
+
+    /* ===== CTA ===== */
+    .cta {
+      text-align: center; padding: 100px 24px;
+      background: linear-gradient(180deg, var(--bg) 0%, #0d1117 100%);
+      position: relative;
+    }
+    .cta::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--text-bright); margin-bottom: 16px; }
+    .cta p { font-size: 1.15rem; color: var(--text-dim); max-width: 500px; margin: 0 auto 36px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg-card); border-top: 1px solid var(--border);
+      padding: 48px 0; text-align: center;
+    }
+    footer .container { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { color: var(--text-dim); font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--text-bright); }
+    .footer-copy { font-size: 0.8rem; color: var(--text-dim); }
+
+    /* ===== MOBILE ===== */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.show {
+        display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--bg); border-bottom: 1px solid var(--border); padding: 16px 24px;
+        gap: 16px; z-index: 100;
+      }
+      .mobile-menu { display: block; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding: 100px 24px 60px; }
+      .hero h1 { font-size: 2.2rem; }
+      section { padding: 60px 0; }
+    }
+    @media (max-width: 480px) {
+      .stats { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip to content for accessibility -->
+<a href="#services" class="sr-only">Skip to main content</a>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+  <div class="container">
+    <div class="logo">Aus<span>AI</span>.tech</div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Call →</a></li>
+    </ul>
+    <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">● Available for new projects</div>
+    <h1>AI Automation<br /><span class="gradient">for Australian Business</span></h1>
+    <p>We build custom AI workflows, generate stunning AI media, and secure your digital operations — so you can focus on what matters.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book Free Consultation →</a>
+      <a href="#portfolio" class="btn-secondary">See Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div class="container">
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">50+</div>
+      <div class="stat-label">AI Workflows Built</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">99.9%</div>
+      <div class="stat-label">Uptime on Automations</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">10x</div>
+      <div class="stat-label">Faster Than Manual</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">24h</div>
+      <div class="stat-label">Average Response Time</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Services</div>
+      <h2 class="section-title">What We Build</h2>
+      <p class="section-subtitle">End-to-end AI solutions tailored to your business. From automation to creative media to security.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon blue">⚡</div>
+        <h3>Workflow Automation</h3>
+        <p>Custom n8n and AI-powered workflows that eliminate repetitive tasks. Connect your tools, automate your operations, save 10+ hours per week.</p>
+        <div class="service-price">From A$1,500 per workflow</div>
+        <div class="service-tags">
+          <span class="tag">n8n</span>
+          <span class="tag">OpenRouter</span>
+          <span class="tag">API Integration</span>
+          <span class="tag">Scheduled Tasks</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon cyan">🎬</div>
+        <h3>AI Music Videos</h3>
+        <p>Professional AI-generated music videos using ComfyUI, Wan 2.1, and ACE-Step. You provide the MP3 + lyrics, we deliver stunning visuals.</p>
+        <div class="service-price">From A$150 per video</div>
+        <div class="service-tags">
+          <span class="tag">ComfyUI</span>
+          <span class="tag">Wan 2.1</span>
+          <span class="tag">ACE-Step</span>
+          <span class="tag">RTX 4060</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon purple">🤖</div>
+        <h3>Local AI Setup</h3>
+        <p>Deploy Ollama, LM Studio, or custom AI models on your hardware. Private, fast, no API costs. Full setup, training, and documentation.</p>
+        <div class="service-price">From A$3,000 per deployment</div>
+        <div class="service-tags">
+          <span class="tag">Ollama</span>
+          <span class="tag">LM Studio</span>
+          <span class="tag">RAG Pipeline</span>
+          <span class="tag">Private AI</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon green">🛡️</div>
+        <h3>AI Security Audit</h3>
+        <p>Comprehensive security review of your AI systems. Prompt injection testing, data leakage assessment, API key exposure, and remediation plan.</p>
+        <div class="service-price">From A$1,500 per audit</div>
+        <div class="service-tags">
+          <span class="tag">Prompt Injection</span>
+          <span class="tag">Data Leakage</span>
+          <span class="tag">API Security</span>
+          <span class="tag">Compliance</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon blue">🎨</div>
+        <h3>ComfyUI Workflows</h3>
+        <p>Custom ComfyUI workflows for AI art, video, and media production. From concept to production-ready pipeline with VRAM optimisation.</p>
+        <div class="service-price">From A$200 per workflow</div>
+        <div class="service-tags">
+          <span class="tag">ComfyUI</span>
+          <span class="tag">SDXL</span>
+          <span class="tag">FLUX</span>
+          <span class="tag">Custom Nodes</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon purple">📊</div>
+        <h3>AI Consulting</h3>
+        <p>Strategic guidance on which AI tools to adopt, how to integrate them, and how to avoid common pitfalls. 1-hour sessions or retainer.</p>
+        <div class="service-price">From A$200 per session</div>
+        <div class="service-tags">
+          <span class="tag">Strategy</span>
+          <span class="tag">Tool Selection</span>
+          <span class="tag">ROI Analysis</span>
+          <span class="tag">Training</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio" style="background: #0d0d14;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Portfolio</div>
+      <h2 class="section-title">Recent Work</h2>
+      <p class="section-subtitle">Real projects, real results. Here's what we've built.</p>
+    </div>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb music">🎵</div>
+        <div class="portfolio-body">
+          <h3>AI Music Video — "Midnight Signal"</h3>
+          <p>Full 2:30 music video generated with ComfyUI + Wan 2.1. Character-consistent, scene-matched to beat drops.</p>
+          <div class="portfolio-meta">
+            <span>ComfyUI</span>
+            <span>Wan 2.1</span>
+            <span>2:30</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb workflow">⚡</div>
+        <div class="portfolio-body">
+          <h3>Automated Lead Qualifier</h3>
+          <p>n8n workflow that captures web form submissions, scores leads with AI, and routes hot leads to CRM — zero manual work.</p>
+          <div class="portfolio-meta">
+            <span>n8n</span>
+            <span>OpenRouter</span>
+            <span>CRM API</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb security">🛡️</div>
+        <div class="portfolio-body">
+          <h3>AI Security Audit — FinTech Startup</h3>
+          <p>Full security review of production AI chatbot. Found 3 critical prompt injection vectors, 2 data leakage paths.</p>
+          <div class="portfolio-meta">
+            <span>Prompt Injection</span>
+            <span>Audit Report</span>
+            <span>72h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb ai">🤖</div>
+        <div class="portfolio-body">
+          <h3>Local AI Knowledge Base</h3>
+          <p>Private RAG pipeline for a legal firm. 10,000+ documents searchable via local Ollama — zero cloud dependency.</p>
+          <div class="portfolio-meta">
+            <span>Ollama</span>
+            <span>RAG</span>
+            <span>pgvector</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Pricing</div>
+      <h2 class="section-title">Transparent Pricing</h2>
+      <p class="section-subtitle">No hidden fees. No lock-in contracts. Pay per project or retain us monthly.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price">A$150 <span>one-off</span></div>
+        <div class="pricing-desc">Perfect for trying AI for the first time.</div>
+        <ul class="pricing-features">
+          <li>1 AI Music Video (up to 1 min)</li>
+          <li>72-hour delivery</li>
+          <li>1 revision included</li>
+          <li>720p output</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">Get Started</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-name">Professional</div>
+        <div class="pricing-price">A$1,500 <span>per project</span></div>
+        <div class="pricing-desc">Full AI solution for growing businesses.</div>
+        <ul class="pricing-features">
+          <li>Custom n8n workflow OR 1 security audit</li>
+          <li>Up to 5 integrations</li>
+          <li>Full documentation</li>
+          <li>30-day support</li>
+          <li>1080p output (if video)</li>
+        </ul>
+        <a href="#contact" class="pricing-btn primary">Book Consultation</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-price">A$3,000+ <span>per deployment</span></div>
+        <div class="pricing-desc">Full-stack AI infrastructure for serious operations.</div>
+        <ul class="pricing-features">
+          <li>Local AI deployment (Ollama/LM Studio)</li>
+          <li>Custom RAG pipeline</li>
+          <li>Full security audit + remediation</li>
+          <li>90-day support</li>
+          <li>Training sessions included</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">Contact Us</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="process" style="background: #0d0d14;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Process</div>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">From first contact to delivery — fast, transparent, no surprises.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-number">1</div>
+        <h3>Discovery Call</h3>
+        <p>15-minute free call to understand your needs, goals, and current setup. No sales pitch.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">2</div>
+        <h3>Proposal</h3>
+        <p>Detailed proposal with scope, timeline, and fixed price. You approve before we start.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">3</div>
+        <h3>Build & Deliver</h3>
+        <p>We build your solution with regular updates. You see progress, not surprises.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">4</div>
+        <h3>Support</h3>
+        <p>Post-delivery support period. We don't disappear after payment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECH STACK ===== -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Tech Stack</div>
+      <h2 class="section-title">Tools We Use</h2>
+      <p class="section-subtitle">Battle-tested technologies, not hype. Every tool is proven in production.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-badge"><span>🐍</span> Python</div>
+      <div class="tech-badge"><span>🟢</span> Node.js</div>
+      <div class="tech-badge"><span>⚡</span> n8n</div>
+      <div class="tech-badge"><span>🦙</span> Ollama</div>
+      <div class="tech-badge"><span>🎨</span> ComfyUI</div>
+      <div class="tech-badge"><span>🤖</span> OpenRouter</div>
+      <div class="tech-badge"><span>🗄️</span> Supabase</div>
+      <div class="tech-badge"><span>🐳</span> Docker</div>
+      <div class="tech-badge"><span>⚛️</span> React</div>
+      <div class="tech-badge"><span>🔷</span> TypeScript</div>
+      <div class="tech-badge"><span>🚀</span> Vite</div>
+      <div class="tech-badge"><span>📊</span> pgvector</div>
+      <div class="tech-badge"><span>🔒</span> FastAPI</div>
+      <div class="tech-badge"><span>🧠</span> LangChain</div>
+      <div class="tech-badge"><span>🎬</span> Wan 2.1</div>
+      <div class="tech-badge"><span>🎵</span> ACE-Step</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="contact">
+  <div class="cta-content">
+    <div class="section-label">// Get Started</div>
+    <h2>Ready to Automate<br />Your Business with AI?</h2>
+    <p>Book a free 15-minute discovery call. No sales pitch — just honest advice about what AI can do for you.</p>
+    <!-- Calendly embed point: replace # with your Calendly link -->
+    <div class="hero-actions">
+      <a href="https://calendly.com/ausaitech" class="btn-primary" target="_blank" rel="noopener">Book Free Call →</a>
+      <a href="mailto:hello@ausaitech.com" class="btn-secondary">Email Us</a>
+    </div>
+    <p style="margin-top: 24px; font-size: 0.85rem; color: var(--text-dim);">
+      Or reach us at <a href="mailto:hello@ausaitech.com">hello@ausaitech.com</a>
+    </p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="logo" style="font-size: 1.1rem;">Aus<span>AI</span>.tech</div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 AusAI Tech Pty Ltd. All rights reserved. Based in Australia.</p>
+  </div>
+</footer>
+
+</body>
+</html>
