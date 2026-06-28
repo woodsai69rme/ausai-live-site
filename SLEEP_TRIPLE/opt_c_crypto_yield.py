@@ -302,17 +302,42 @@ def append_audit(row: dict) -> None:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
 
-def append_ledger_event(ts: str, amount_aud: float, note: str, dry_run: bool) -> bool:
-    """Append a 'signal_emitted' row via the existing PowerShell helper."""
+def append_ledger_event(ts: str, amount_usd: float, source: str, meta_obj: dict,
+                        dry_run: bool, id_suffix: str = "") -> bool:
+    """Append a 'signal_emitted' row via the existing PowerShell helper.
+
+    Forwards the schema-correct parameter names (-Event, -Source, -Id,
+    -AmountUsd, -MetaJson, -LedgerPath) so the PS1's refusal matrix is
+    satisfied. Builds safe_id by stripping ':' and '.' from the ISO ts so
+    the id contains only [a-zA-Z0-9._-]. Forwards -LedgerPath to the
+    project-local path so the row lands alongside audit logs (portable
+    across clones; dashboard server prefers local over global).
+    """
     script = Path(r"C:\Users\karma\Append-RevenueEvent.ps1")
     if not script.exists():
+        print(f"[opt_c] PS1 helper missing: {script}", file=sys.stderr)
         return False
-    args = ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
-            "-File", str(script),
-            "-Event", "signal_emitted", "-AmountAud", f"{amount_aud:.2f}", "-Note", note]
+
+    safe_id = ts.replace(":", "-").replace(".", "-") + (f"-{id_suffix}" if id_suffix else "")
+    ledger_path = ROOT / "REVENUE_LEDGER.jsonl"
+    meta_json_str = json.dumps(meta_obj)
+
+    args = [
+        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
+        "-File", str(script),
+        "-Event", "signal_emitted",
+        "-Source", source,
+        "-Id", safe_id,
+        "-AmountUsd", f"{amount_usd:.2f}",
+        "-MetaJson", meta_json_str,
+        "-LedgerPath", str(ledger_path),
+    ]
     if dry_run:
         args.append("-DryRun")
+
     r = subprocess.run(args, capture_output=True, text=True)
+    if r.returncode != 0:
+        print(f"[opt_c] Ledger append refused (exit {r.returncode}): {r.stderr.strip()}", file=sys.stderr)
     return r.returncode == 0
 
 
@@ -373,7 +398,27 @@ def main() -> int:
         best = actionable[0]
         signal_note = (f"crypto spread {best['pair']} on {best['exchange']} "
                        f"({best['spread_bps']} bps, {best['data_source']})")
-        emit_ok = append_ledger_event(now_iso, 0.0, signal_note, dry_run)
+
+        meta_obj = {
+            "pair": best["pair"],
+            "exchange": best["exchange"],
+            "spread_bps": best["spread_bps"],
+            "data_source": best["data_source"],
+            "note": signal_note,
+        }
+        # Derive id_suffix from signal identity so 2 actionable spreads within
+        # the same second don't collide on --Id. (Collision would dup the id in
+        # Append-RevenueAggregator.ps1's per-group id list; a downstream
+        # idempotency check that assumes id-uniqueness would undercount.)
+        id_suffix = f"{best['pair'].replace('/', '-')}-{best['exchange']}-{best['spread_bps']}b"
+        emit_ok = append_ledger_event(
+            ts=now_iso,
+            amount_usd=0.0,
+            source="pipeline:opt_c_crypto_yield",
+            meta_obj=meta_obj,
+            dry_run=dry_run,
+            id_suffix=id_suffix,
+        )
         append_audit({"ts": now_iso, "module": "opt_c", "status": "ok",
                       "task": "arbitrage", "actionable_pairs": len(actionable),
                       "ledger_written": emit_ok, "dry_run": dry_run,
