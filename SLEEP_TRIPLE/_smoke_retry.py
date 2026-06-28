@@ -155,6 +155,108 @@ assert_eq(effective, False, "live + sent=False -> effective False")
 # We can't directly test main() output here without full integration; just sanity-check that the
 # contract is documented. We've already verified _STATUS_PERMANENT_CONFIG_ERROR=0 and sc codes.
 
+# 10) Regression guard: dashboard_server.py must contain zero Unicode arrows in any
+# direction. cp1252 (the default stdout codec on Windows) raises UnicodeEncodeError
+# when the 3-byte UTF-8 sequences show up in a print() at server startup.
+section("10: dashboard_server.py has no Unicode arrows (all 4 directions)")
+_UNICODE_ARROWS = {
+    b'\xe2\x86\x90': 'U+2190 LEFTWARDS ARROW',
+    b'\xe2\x86\x91': 'U+2191 UPWARDS ARROW',
+    b'\xe2\x86\x92': 'U+2192 RIGHTWARDS ARROW',
+    b'\xe2\x86\x93': 'U+2193 DOWNWARDS ARROW',
+}
+_dash = ROOT / "dashboard_server.py"
+if _dash.exists():
+    _blob = _dash.read_bytes()
+    _violations = []  # (line_no, codepoint_name, snippet)
+    for _line_no, _line in enumerate(_blob.split(b'\n'), start=1):
+        for _arr_bytes, _codepoint_name in _UNICODE_ARROWS.items():
+            if _arr_bytes in _line:
+                _violations.append((_line_no, _codepoint_name, _line.decode('utf-8', errors='replace').strip()))
+    if _violations:
+        _msg = [f"Replace Unicode arrows with ASCII (->, <-, ^, v). {len(_violations)} violation(s); Windows cp1252 stdout would crash the server:"]
+        for _line_no, _codepoint_name, _snip in _violations[:10]:
+            _msg.append(f"  L{_line_no} ({_codepoint_name}): {_snip[:120]!r}")
+        assert False, "\n".join(_msg)
+    print(f"  OK no Unicode arrows in dashboard_server.py ({len(_blob.splitlines())} lines, 4 codepoints checked)")
+else:
+    print("  SKIP: dashboard_server.py not found")
+
+# 11) HTTP integration smoke — actually launch dashboard_server.py in a background
+# thread, hit each live endpoint, and assert correct status + content markers. This
+# proves the full HTTP path works, not just that the file parses.
+section("11: HTTP integration smoke (dashboard_server.py live endpoints)")
+try:
+    import urllib.request
+    import urllib.error
+    import socket as _socket
+    import threading as _threading
+    import time as _time
+
+    try:
+        import dashboard_server as _dash_srv
+    except Exception as _imp_e:
+        print(f"  SKIP: cannot import dashboard_server ({type(_imp_e).__name__}: {_imp_e})")
+        _dash_srv = None
+
+    if _dash_srv is not None:
+        # Pick a free local port so this section is repeatable / parallel-safe.
+        with _socket.socket(_socket.AF_INET, _socket.SOCK_STREAM) as _probe:
+            _probe.bind(("127.0.0.1", 0))
+            _free_port = _probe.getsockname()[1]
+
+        _old_argv = sys.argv[:]
+        sys.argv = ["dashboard_server.py", "--host", "127.0.0.1", "--port", str(_free_port)]
+        _thr = _threading.Thread(target=_dash_srv.main, daemon=True)
+        _thr.start()
+        _time.sleep(0.8)  # ThreadingHTTPServer cold-start margin (reviewer-suggested)
+        try:
+            # GET /
+            with urllib.request.urlopen(f"http://127.0.0.1:{_free_port}/", timeout=5) as _r:
+                _body = _r.read().decode("utf-8", errors="replace").lower()
+                assert _r.status == 200, f"GET / status={_r.status}"
+            assert "sleep_triple" in _body or "audit" in _body, "GET / content marker missing"
+            print(f"  OK GET /          -> 200, dashboard.html served")
+
+            # GET /tracker
+            with urllib.request.urlopen(f"http://127.0.0.1:{_free_port}/tracker", timeout=5) as _r:
+                _body = _r.read().decode("utf-8", errors="replace")
+                assert _r.status == 200, f"GET /tracker status={_r.status}"
+            assert "localymd" in _body.lower(), "GET /tracker localYmd marker missing"
+            print(f"  OK GET /tracker  -> 200, WEEK_1_TRACKER.html served")
+
+            # GET /audit.jsonl
+            with urllib.request.urlopen(f"http://127.0.0.1:{_free_port}/audit.jsonl", timeout=5) as _r:
+                _body = _r.read().decode("utf-8", errors="replace")
+                assert _r.status == 200, f"GET /audit.jsonl status={_r.status}"
+            _non_empty = [l for l in _body.splitlines() if l.strip()]
+            if _non_empty:
+                _first = json.loads(_non_empty[0])
+                _module = _first.get("module", "?")
+                print(f"  OK GET /audit.jsonl -> 200, {len(_non_empty)} non-empty lines, first event module={_module!r}")
+            else:
+                print(f"  OK GET /audit.jsonl -> 200, 0 non-empty lines (empty audit log)")
+
+            # GET /ledger.jsonl -- current server returns 200 + empty body when file missing (NOT 404).
+            # That's intentional: clients can poll and get an empty JSONL instead of an error.
+            with urllib.request.urlopen(f"http://127.0.0.1:{_free_port}/ledger.jsonl", timeout=5) as _r:
+                _body = _r.read().decode("utf-8", errors="replace")
+                assert _r.status == 200, f"GET /ledger.jsonl status={_r.status}"
+            print(f"  OK GET /ledger.jsonl -> 200, {len(_body)} bytes (empty until opt_c creates a ledger)")
+
+            # GET /healthz -- parse JSON rather than string-match (more robust)
+            with urllib.request.urlopen(f"http://127.0.0.1:{_free_port}/healthz", timeout=5) as _r:
+                _body = _r.read().decode("utf-8", errors="replace").strip()
+                assert _r.status == 200, f"GET /healthz status={_r.status}"
+            _payload = json.loads(_body)
+            assert _payload.get("status") == "ok", f"/healthz status field={_payload.get('status')!r}"
+            print(f"  OK GET /healthz   -> 200, body={_body!r}")
+        finally:
+            sys.argv = _old_argv
+except Exception as _e:
+    print(f"  FAIL: HTTP integration smoke crashed: {type(_e).__name__}: {_e}")
+    assert False, f"HTTP integration smoke failed: {_e}"
+
 
 print("\n=== ALL UNIT TESTS PASS ===")
-print("Smoke test for the final-iteration fixes is GREEN.")
+print("Smoke test (incl. widened arrow guard + HTTP integration) is GREEN.")
