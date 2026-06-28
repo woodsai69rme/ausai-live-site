@@ -44,7 +44,7 @@
 | 5 | **Voice PA System** | 8 | `VOICE_PA_SYSTEM_INDEX.md` | ✅ Voice-controlled assistant |
 | 6 | **Aether Core System** | 24k+ | `AETHER_CORE_SYSTEM_INDEX.md` | ✅ Sync bridge, empire audit |
 | 7 | **Empire Command Center** | 15+ | `EMPIRE_SYSTEM_INDEX.md` | ⚠️ Encoding fix needed |
-| 8 | **Archon V2** | 50+ | `ARCHON_V2_SYSTEM_INDEX.md` | ✅ 4 microservices, 5 MCP tools |
+| 8 | **Archon V2** | 50+ | `ARCHON_V2_SYSTEM_INDEX.md` | 🟢 LIVE :8181 — lazy Supabase init, all 4 microservices up |
 | 9 | **Project Brain 2.0** | 10+ | `PROJECT_BRAIN_2_0_SYSTEM_INDEX.md` | ✅ SHA256 ingestion, Phase F-H |
 | 10 | **Master Ecosystem Catalog** | 11+ | `MASTER_ECOSYSTEM_INDEX.md` | ✅ 11 subsystems hub |
 | 11 | **Dashboard System Scripts** | 61 | `DASHBOARD_SYSTEM_INDEX.md` | ✅ Terminal automation |
@@ -113,7 +113,7 @@ EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) 
 | 8001 | AI Army FastAPI | AI Army | 🟢 LIVE |
 | 8051 | MCP Server | Archon V2 | — |
 | 8052 | Agents Service | Archon V2 | — |
-| 8181 | Archon Main Server | Archon V2 | — |
+| 8181 | Archon Main Server | Archon V2 | 🟢 LIVE |
 | 8188 | ComfyUI | ComfyUI | — |
 | 8888 | Empire HUD | Empire | — |
 
@@ -136,13 +136,13 @@ EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) 
 
 | Metric | Value |
 |---|---|
-| Commits on master | 101 |
-| Commits this session | 20 |
-| Unpushed commits | 4 (needs GitHub auth) |
+| Commits on master | 104 |
+| Commits this session | 23 |
+| Unpushed commits | 0 ✅ |
 | Remote | `woodsai69rme/ausai-live-site` |
 | 🟢 Live | AI Army on port 8001 |
 
-> **To push:** Create PAT at `github.com/settings/tokens` → paste token as password when pushing
+> **All commits pushed:** `aa981e8a` latest on `origin/master`
 
 ---
 
