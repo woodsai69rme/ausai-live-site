@@ -1,11 +1,58 @@
-# 📋 CHANGELOG — AusAI Tech Project
+# 📋 CHANGELOG — Complete Workspace History
 
-**Project:** Solo-consultancy go-live documentation pack  
-**Goal:** A$5k in 30 days → A$10k/mo in 90 days  
-**Timeline:** 2026-06-27 to 2026-06-28  
-**Final state:** 64 new files + 8 enhanced across 14 rounds. Complete.
+**Project:** AusAI Tech + Full Workspace Documentation
+**Goal:** Document all systems, organize workspace, activate services
+**Timeline:** 2026-06-27 to 2026-06-28
+**Final state:** 17 systems documented, 19 indexes, 420 files organized, 18 commits.
 
 ---
+
+## Session 2026-06-28 — Workspace Documentation & Organization
+
+### Documentation (19 system indexes)
+- `VOICE_PA_SYSTEM_INDEX.md` — AI Voice Personal Assistant (8 files)
+- `AETHER_CORE_SYSTEM_INDEX.md` — Aether Core sync bridge (24K+ files)
+- `AGENT_REGISTRY_SYSTEM_INDEX.md` — 2,793 agents, 16 domains (13 files)
+- `AI_ARMY_SYSTEM_INDEX.md` — Foot Clan agent fleet (16 files, port 8001)
+- `EMPIRE_SYSTEM_INDEX.md` — Empire Command Center (15+ files, 3 ports)
+- `ARCHON_V2_SYSTEM_INDEX.md` — Archon V2 knowledge platform (4 microservices)
+- `PROJECT_BRAIN_2_0_SYSTEM_INDEX.md` — Knowledge ingestion (Phase F-H)
+- `YOUTUBE_TOOLS_SYSTEM_INDEX.md` — Transcript harvester (5 files)
+- `N8N_AUTOMATION_SYSTEM_INDEX.md` — n8n stack (Docker, 91 templates)
+- `AI_TOOLS_INVENTORY_INDEX.md` — 5 AI platforms, 4 runtimes
+- `ComfyUI/COMFYUI_SYSTEM_INDEX.md` — Music Video Studio (77K+ files)
+- `ComfyUI/COMFYUI_QUICK_START.md` — 5-minute quick start
+- `MASTER_ECOSYSTEM_INDEX.md` — 11 subsystems hub catalog
+- `DASHBOARD_SYSTEM_INDEX.md` — 61 terminal automation scripts
+- `BOOKMARK_MANAGER_PRO_INDEX.md` — 7,685 bookmarks, 17 categories
+- `AI_INFLUENCER_INDEX.md` — Autonomous content engine pipeline
+- `WORKSPACE_INDEX.md` — Master index covering all 17 systems
+- `GRAND_SUMMARY.md` — One-page condensed workspace reference
+- `WORKSPACE_ORGANIZATION_PLAN.md` — 6-batch non-destructive organization
+
+### Organization (6 batches, ~420 files)
+- Batch 1: MCP, Week, Setup, OPENCODE docs → 61 files
+- Batch 2: COMPLETE, ULTIMATE, QWEN, ALL_OPTIONS docs → 187 files
+- Batch 3: Python + PowerShell scripts → 44 files
+- Batch 4: HTML dashboards, Empire, Golden Rules → 48 files
+- Batch 5: Remaining docs (AUSAI, GITHUB, LINKEDIN) → 45 files
+- Batch 6: Remaining scripts + data → 38 files
+
+### Bug Fixes
+- `AI_ARMY/agents/recon_agent.py` — None guard in `_scan_directory` to prevent `rstrip()` crash on dispatch
+
+### Services Status
+- 🟢 AI Army — LIVE on port 8001 (recon-001 + revenue-001)
+- 🟢 Ollama — LIVE on port 11434 (gemma4:26b, phi4-mini, deepseek-r1:8b)
+- 🟢 ComfyUI — LIVE on port 8188
+- 🔴 n8n — Not started (Docker available, needs `docker compose up -d`)
+- ⚠️ Empire — Interactive CLI, needs `PYTHONIOENCODING=utf-8` for emoji printing
+
+### Commits: 18
+
+---
+
+## AusAI Tech Project (Rounds 1-14)
 
 ## Round 14 — Consolidation + Quick Start (2026-06-28)
 - Merged `GUEST_POST_TEMPLATES.md` + `PODCAST_GUEST_PITCH.md` → `CONTENT_DISTRIBUTION_PLAYBOOK.md`
