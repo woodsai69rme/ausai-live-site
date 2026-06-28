@@ -2,6 +2,14 @@
 
 Runs as a real Python file (not inline -c) so bash escape mangling
 doesn't break it. Exits 0 on PASS, non-zero on FAIL.
+
+13 sections (R5):
+  1-9:  existing unit tests for opt_d_alerts internals (sentinal, clamping,
+        retry, send_alert, dry-run, unknown-channel, retry-count, effective)
+  10:   regression guard for Unicode arrows in dashboard_server.py
+  11:   HTTP integration smoke (live endpoints)
+  12:   opt_c + opt_d --dry-run do not write REVENUE_LEDGER.jsonl
+  13:   DOCUMENTATION.md section 9 commit table in sync with git history
 """
 import json
 import os
@@ -53,7 +61,7 @@ assert_eq(_safe_float(0.0, 99.0), 0.0, "0.0 stays 0.0")
 assert_eq(_safe_float(-1.0, 99.0), 0.0, "negative -> clamped to 0.0")
 assert_eq(_safe_float(2.5, 99.0), 2.5, "positive float")
 
-# 4) Retr y decision
+# 4) Retry decision
 section("4: _is_retryable decision table")
 assert_eq(_is_retryable(False, 401, "http=401"), False, "401 -> not retry")
 assert_eq(_is_retryable(False, 403, "http=403"), False, "403 -> not retry")
@@ -289,5 +297,21 @@ print(f"  OK opt_c returncode={_oc.returncode}, opt_d returncode={_od.returncode
       f"ledger rows stayed at {_count_before}")
 
 
+# 13) Doc drift guard: DOCUMENTATION.md section 9 commit table must match
+# `git log --pretty=format:%h` over `SLEEP_TRIPLE/*` and `Append-Revenue*`.
+# Catches dormant staleness before it becomes dormant trust. Uses bare
+# `assert` for consistency with Sections 4, 10, 11 (Python exits rc=1
+# naturally on AssertionError, matching the surrounding style).
+section("13: DOCUMENTATION.md section 9 commit table in sync with git history")
+import _doc_drift_check as _ddc
+_ddc_main_rc = _ddc.main()
+assert _ddc_main_rc == 0, (
+    f"_doc_drift_check.main() returned {_ddc_main_rc}; "
+    f"section 9 in DOCUMENTATION.md is out of sync with git history. "
+    f"Re-read DOCS_INDEX.md cold-start map and commit the section 9 update.")
+_top = _ddc._git_log_sleep_commits()[0] if _ddc._git_log_sleep_commits() else "unknown"
+print(f"  OK _doc_drift_check.main() returns 0 (top={_top} matches git HEAD)")
+
+
 print("\n=== ALL UNIT TESTS PASS ===")
-print("Smoke test (incl. Section 10 widened arrow guard + Section 11 HTTP + Section 12 dry-run parity) is GREEN.")
+print("Smoke test (13 sections: R3 widening + R4 trailing-newline + R5 doc drift guard) is GREEN.")

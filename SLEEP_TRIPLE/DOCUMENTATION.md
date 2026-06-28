@@ -369,12 +369,15 @@ If Section X breaks, see the corresponding entry below for the exact assertion.
 
 | Hash | Message |
 |---|---|
+| `127872f4` | feat(SLEEP_TRIPLE): cold-start DOCS_INDEX.md + Section 13 doc drift guard |
+| `c1132ec4` | docs(SLEEP_TRIPLE): capture 7 incremental commits since 7605fe4e |
 | `2d474862` | SLEEP_TRIPLE: tidy `_ledger_writer` imports + add Section 12 dry-run guard |
 | `b6e5e923` | SLEEP_TRIPLE: drop dead subprocess imports + restore aggregator trailing newline |
 | `21ae88c3` | SLEEP_TRIPLE: extract ledger helper + Append-RevenueAggregator BOM fix + weekly rollup scheduling |
 | `8ee74b6c` | SLEEP_TRIPLE: SO_REUSEADDR on dashboard + opt_d_alerts ledger wiring |
 | `15f8a515` | SLEEP_TRIPLE: opt_c ledger schema fix + Append-RevenueEvent UTF-8 BOM fix |
 | `2f080f16` | SLEEP_TRIPLE: LEDGER per-request resolvers + Section 10 widen + HTTP smoke polish |
+| `bda69fdf` | feat(opt_d): per-channel retry with sentinel, wrapper batters, _smoke_retry.py |
 | `7605fe4e` | docs(SLEEP_TRIPLE): comprehensive system reference covering all 4 options + scheduler + helpers |
 | `216ffba8` | feat(opt_d): multi-channel fanout + morning-digest auto-fire + live-send helper |
 | `6a312cbd` | fix(opt_d): dry-run semantics + config tier thresholds + rate-limit debounce + Discord dedupe |
@@ -384,7 +387,7 @@ If Section X breaks, see the corresponding entry below for the exact assertion.
 | `45034915` | chore: untrack SLEEP_TRIPLE/__pycache__/ bytecode; gitignore it |
 | `975a71fc` | feat: SLEEP_TRIPLE — three Aud-earning sleep systems (Option A/B/C) |
 
-⚠ **Push status:** all 14 commits are local-only. `git push origin master` returns rc=128 (no PAT on this shell). The commits will not be on `origin/master` until a credential is supplied.
+⚠ **Push status:** all 17 commits are local-only. `git push origin master` returns rc=128 (no PAT on this shell). The commits will not be on `origin/master` until a credential is supplied.
 
 ---
 
