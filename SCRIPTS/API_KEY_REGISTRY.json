@@ -1,0 +1,124 @@
+{
+  "$schema": "https://codebuff.local/schemas/api-key-registry/v1",
+  "version": "1.0",
+  "generated_at": "2026-06-17T00:00:00Z",
+  "purpose": "Catalogued locations and masked references for every API key on the system. NEVER embeds plaintext secrets. Append-only.",
+  "golden_rules": {
+    "rule_1_nothing_obsolete": "Backup .env files remain. No file deleted, ever.",
+    "rule_5_backups_critical": "Originals + .bak + .backup files stay where they are.",
+    "rule_7_enhancement_not_reduction": "This registry only ADDS locations; it never erases.",
+    "rule_8_personal_files_sacred": "Documents, Downloads, Pictures, Videos, Music, Desktop, OneDrive listings below are LOCATION pointers only. They are never read, opened, or modified."
+  },
+  "registered_keys": [
+    {
+      "id": "openrouter_main",
+      "tool": "OpenRouter (OpenAI / Claude / Anthropic / Mistral / DeepSeek / etc.)",
+      "location_hint": "$OPENROUTER_API_KEY env var (resolved at runtime)",
+      "provider": "openrouter",
+      "rotation_status": "managed_by_OPT-7.1",
+      "backups_present": true,
+      "comment": "OpenRouter is the only AI provider (per project CLAUDE.md). Single source of truth for AI models."
+    },
+    {
+      "id": "anthropic_env_fallback",
+      "tool": "Legacy Anthropic-compatible envs (if any)",
+      "location_hint": "ANTHROPIC_API_KEY env var (resolved at runtime; check .env files for presence)",
+      "provider": "anthropic",
+      "rotation_status": "managed_by_OPT-7.1_if_present",
+      "backups_present": true,
+      "comment": "Per project CLAUDE.md: do NOT set direct provider keys. Use OpenRouter only."
+    },
+    {
+      "id": "system_openrouter_backups",
+      "tool": "OpenRouter API key backups",
+      "location_hint": "Multiple `.env.openrouter.backup*` files in $HOME and $HOME/.qwen (catalogue-only, not opened)",
+      "provider": "openrouter",
+      "rotation_status": "candidate_for_OPT-7.1_consolidation",
+      "backups_present": true,
+      "comment": "All backups PRESERVED (Rule #5). OPT-7.1 will add an encrypted-vault WRAPPER for read-only use; originals untouched."
+    },
+    {
+      "id": "claude_session_token",
+      "tool": "Claude session tokens",
+      "location_hint": "$HOME/.claude/claude.json + .claude_optimized.json (catalogue-only, never opened here)",
+      "provider": "anthropic",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "Plain-text session tokens live in Claude's config. OPT-7.1 plan: move to Windows Credential Manager via wrapper, leaving the originals untouched."
+    },
+    {
+      "id": "qwen_oauth",
+      "tool": "Qwen OAuth credentials",
+      "location_hint": "$HOME/.qwen/ (catalogue-only, never opened)",
+      "provider": "alibaba_qwen",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "Rule #5: existing .qwen backups preserved. OPT-7.1 may add an audit trail."
+    },
+    {
+      "id": "codex_auth",
+      "tool": "Codex CLI authentication",
+      "location_hint": "$HOME/.codex/auth.json (catalogue-only, never opened)",
+      "provider": "openai",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "OPT-7.1 plan: read-then-route via Windows Credential Manager; the JSON file remains untouched."
+    },
+    {
+      "id": "opencode_keys",
+      "tool": "OpenCode session / API keys",
+      "location_hint": "$HOME/.opencode/ (catalogue-only, never opened)",
+      "provider": "various",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "OPT-7.1 plan: add a read wrapper; original file remains."
+    },
+    {
+      "id": "kilo_keys",
+      "tool": "Kilo session / API keys",
+      "location_hint": "$HOME/.kilo/ (catalogue-only, never opened)",
+      "provider": "various",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "OPT-7.1 plan: read wrapper only; original untouched."
+    },
+    {
+      "id": "continue_keys",
+      "tool": "Continue multi-model API keys",
+      "location_hint": "$HOME/.continue/ (catalogue-only, never opened)",
+      "provider": "various",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "Multiple model keys may be present (Anthropic, OpenAI, etc.) — all remain in the original file."
+    },
+    {
+      "id": "antigravity_keys",
+      "tool": "Antigravity IDE keys",
+      "location_hint": "$HOME/.antigravity-ide/ + .antigravity/ (catalogue-only, never opened)",
+      "provider": "various",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "OPT-7.1 plan: register without opening."
+    },
+    {
+      "id": "openclaw_keys",
+      "tool": "OpenClaw credentials",
+      "location_hint": "$HOME/.openclaw/openclaw.json + .bak (catalogue-only, never opened)",
+      "provider": "various",
+      "rotation_status": "managed_at_provider",
+      "backups_present": true,
+      "comment": "Originals + backups both preserved (Rule #5)."
+    }
+  ],
+  "personal_folder_reminder": {
+    "excluded_paths": ["Documents", "Downloads", "Pictures", "Videos", "Music", "Desktop", "OneDrive", "Downloads/ARCHIVE_OLD"],
+    "rule": "Rule #8 — never read, never modify. This registry lists tool dot-folders only."
+  },
+  "next_actions_additive_only": [
+    "Build $HOME/WRAPPER_KEY_VAULT.ps1 — reads through existing dot-folder files; never modifies them.",
+    "Build $HOME/API_USAGE_AUDIT.log — append-only usage log per key.",
+    "Build $HOME/API_KEY_ROTATIONS.md — append-only rotation history.",
+    "Do not delete any registered backup. Rule #5 stands."
+  ],
+  "compliance_footer": "ADDITIVE ONLY. No file in any dot-folder, or any backup, has been modified."
+}

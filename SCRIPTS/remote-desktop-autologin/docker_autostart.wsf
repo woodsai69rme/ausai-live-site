@@ -1,0 +1,2 @@
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run "powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File ""C:\Users\karma\SCRIPTS\remote-desktop-autologin\docker_autostart.ps1""", 0, False

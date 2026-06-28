@@ -1,0 +1,445 @@
+# 🏰 THE MASTER EMPIRE PROJECT CATALOG (2026)
+
+This document is the absolute index of every repository and application in the Zero-Human Empire.
+
+## 📁 ACTIVE PROJECTS
+| Project Name | Path | Documentation Status |
+|---|---|---|
+| **AI_Applications_Suite** | `C:\Users\karma\ACTIVE_PROJECTS\AI_Applications_Suite` | ✅ 30-PAGE DOCS GENERATED |
+| **Auto-GPT** | `C:\Users\karma\ACTIVE_PROJECTS\Auto-GPT` | ✅ 30-PAGE DOCS GENERATED |
+| **CL4R1T4S** | `C:\Users\karma\ACTIVE_PROJECTS\CL4R1T4S` | ✅ 30-PAGE DOCS GENERATED |
+| **ClaraVerse** | `C:\Users\karma\ACTIVE_PROJECTS\ClaraVerse` | ✅ 30-PAGE DOCS GENERATED |
+| **Claude-Code-Usage-Monitor** | `C:\Users\karma\ACTIVE_PROJECTS\Claude-Code-Usage-Monitor` | ✅ 30-PAGE DOCS GENERATED |
+| **InstantCoder** | `C:\Users\karma\ACTIVE_PROJECTS\InstantCoder` | ✅ 30-PAGE DOCS GENERATED |
+| **OpenHands** | `C:\Users\karma\ACTIVE_PROJECTS\OpenHands` | ✅ 30-PAGE DOCS GENERATED |
+| **Perplexica** | `C:\Users\karma\ACTIVE_PROJECTS\Perplexica` | ✅ 30-PAGE DOCS GENERATED |
+| **QWEN_CODE_SETUP_DOCUMENTATION** | `C:\Users\karma\ACTIVE_PROJECTS\QWEN_CODE_SETUP_DOCUMENTATION` | ✅ 30-PAGE DOCS GENERATED |
+| **SuperClaude** | `C:\Users\karma\ACTIVE_PROJECTS\SuperClaude` | ✅ 30-PAGE DOCS GENERATED |
+| **Superalgos** | `C:\Users\karma\ACTIVE_PROJECTS\Superalgos` | ✅ 30-PAGE DOCS GENERATED |
+| **UniversalDashboard** | `C:\Users\karma\ACTIVE_PROJECTS\UniversalDashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **Youtube-playlist-to-formatted-text** | `C:\Users\karma\ACTIVE_PROJECTS\Youtube-playlist-to-formatted-text` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-tools-suite** | `C:\Users\karma\ACTIVE_PROJECTS\ai-tools-suite` | ✅ 30-PAGE DOCS GENERATED |
+| **aussie-metal-mayhem-motors** | `C:\Users\karma\ACTIVE_PROJECTS\aussie-metal-mayhem-motors` | ✅ 30-PAGE DOCS GENERATED |
+| **auto-synth-ops** | `C:\Users\karma\ACTIVE_PROJECTS\auto-synth-ops` | ✅ 30-PAGE DOCS GENERATED |
+| **bolt.diy** | `C:\Users\karma\ACTIVE_PROJECTS\bolt.diy` | ✅ 30-PAGE DOCS GENERATED |
+| **bolt2** | `C:\Users\karma\ACTIVE_PROJECTS\bolt2` | ✅ 30-PAGE DOCS GENERATED |
+| **bot-bloom-capital** | `C:\Users\karma\ACTIVE_PROJECTS\bot-bloom-capital` | ✅ 30-PAGE DOCS GENERATED |
+| **butxtqwn** | `C:\Users\karma\ACTIVE_PROJECTS\butxtqwn` | ✅ 30-PAGE DOCS GENERATED |
+| **ccxt** | `C:\Users\karma\ACTIVE_PROJECTS\ccxt` | ✅ 30-PAGE DOCS GENERATED |
+| **charm-clone-assemble-verse** | `C:\Users\karma\ACTIVE_PROJECTS\charm-clone-assemble-verse` | ✅ 30-PAGE DOCS GENERATED |
+| **chat-spark-organizer** | `C:\Users\karma\ACTIVE_PROJECTS\chat-spark-organizer` | ✅ 30-PAGE DOCS GENERATED |
+| **chef** | `C:\Users\karma\ACTIVE_PROJECTS\chef` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-code-by-agents** | `C:\Users\karma\ACTIVE_PROJECTS\claude-code-by-agents` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-code-integration** | `C:\Users\karma\ACTIVE_PROJECTS\claude-code-integration` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-code-repos** | `C:\Users\karma\ACTIVE_PROJECTS\claude-code-repos` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-code-sub-agents** | `C:\Users\karma\ACTIVE_PROJECTS\claude-code-sub-agents` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-code-subagents** | `C:\Users\karma\ACTIVE_PROJECTS\claude-code-subagents` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-conductor** | `C:\Users\karma\ACTIVE_PROJECTS\claude-conductor` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-flow** | `C:\Users\karma\ACTIVE_PROJECTS\claude-flow` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-flow-app** | `C:\Users\karma\ACTIVE_PROJECTS\claude-flow-app` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-task-master** | `C:\Users\karma\ACTIVE_PROJECTS\claude-task-master` | ✅ 30-PAGE DOCS GENERATED |
+| **claudepro-directory** | `C:\Users\karma\ACTIVE_PROJECTS\claudepro-directory` | ✅ 30-PAGE DOCS GENERATED |
+| **claudia** | `C:\Users\karma\ACTIVE_PROJECTS\claudia` | ✅ 30-PAGE DOCS GENERATED |
+| **codebuff** | `C:\Users\karma\ACTIVE_PROJECTS\codebuff` | ✅ 30-PAGE DOCS GENERATED |
+| **cognitive-prism-analyzer** | `C:\Users\karma\ACTIVE_PROJECTS\cognitive-prism-analyzer` | ✅ 30-PAGE DOCS GENERATED |
+| **commands** | `C:\Users\karma\ACTIVE_PROJECTS\commands` | ✅ 30-PAGE DOCS GENERATED |
+| **convex-tutorial** | `C:\Users\karma\ACTIVE_PROJECTS\convex-tutorial` | ✅ 30-PAGE DOCS GENERATED |
+| **create-volo-app** | `C:\Users\karma\ACTIVE_PROJECTS\create-volo-app` | ✅ 30-PAGE DOCS GENERATED |
+| **crystal** | `C:\Users\karma\ACTIVE_PROJECTS\crystal` | ✅ 30-PAGE DOCS GENERATED |
+| **deepwiki-open** | `C:\Users\karma\ACTIVE_PROJECTS\deepwiki-open` | ✅ 30-PAGE DOCS GENERATED |
+| **dev-forge-omni** | `C:\Users\karma\ACTIVE_PROJECTS\dev-forge-omni` | ✅ 30-PAGE DOCS GENERATED |
+| **dylan** | `C:\Users\karma\ACTIVE_PROJECTS\dylan` | ✅ 30-PAGE DOCS GENERATED |
+| **emergency-dashboard-services** | `C:\Users\karma\ACTIVE_PROJECTS\emergency-dashboard-services` | ✅ 30-PAGE DOCS GENERATED |
+| **engine-craft-games** | `C:\Users\karma\ACTIVE_PROJECTS\engine-craft-games` | ✅ 30-PAGE DOCS GENERATED |
+| **fastapi** | `C:\Users\karma\ACTIVE_PROJECTS\fastapi` | ✅ 30-PAGE DOCS GENERATED |
+| **favorite-flow-dashboard** | `C:\Users\karma\ACTIVE_PROJECTS\favorite-flow-dashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **fireplexity** | `C:\Users\karma\ACTIVE_PROJECTS\fireplexity` | ✅ 30-PAGE DOCS GENERATED |
+| **gamedevforusers** | `C:\Users\karma\ACTIVE_PROJECTS\gamedevforusers` | ✅ 30-PAGE DOCS GENERATED |
+| **gemcopilot-media-scribe** | `C:\Users\karma\ACTIVE_PROJECTS\gemcopilot-media-scribe` | ✅ 30-PAGE DOCS GENERATED |
+| **gemini-interpreter** | `C:\Users\karma\ACTIVE_PROJECTS\gemini-interpreter` | ✅ 30-PAGE DOCS GENERATED |
+| **hexstrike-ai** | `C:\Users\karma\ACTIVE_PROJECTS\hexstrike-ai` | ✅ 30-PAGE DOCS GENERATED |
+| **idea-fusion-alchemy** | `C:\Users\karma\ACTIVE_PROJECTS\idea-fusion-alchemy` | ✅ 30-PAGE DOCS GENERATED |
+| **instant-code-smith** | `C:\Users\karma\ACTIVE_PROJECTS\instant-code-smith` | ✅ 30-PAGE DOCS GENERATED |
+| **keno-oracle-elite-picks** | `C:\Users\karma\ACTIVE_PROJECTS\keno-oracle-elite-picks` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-custom-gpt** | `C:\Users\karma\ACTIVE_PROJECTS\lovable-custom-gpt` | ✅ 30-PAGE DOCS GENERATED |
+| **mcp-crawl4ai-rag** | `C:\Users\karma\ACTIVE_PROJECTS\mcp-crawl4ai-rag` | ✅ 30-PAGE DOCS GENERATED |
+| **mcp-ecosystem-platform** | `C:\Users\karma\ACTIVE_PROJECTS\mcp-ecosystem-platform` | ✅ 30-PAGE DOCS GENERATED |
+| **mcp-zero** | `C:\Users\karma\ACTIVE_PROJECTS\mcp-zero` | ✅ 30-PAGE DOCS GENERATED |
+| **mimic-youware-clone** | `C:\Users\karma\ACTIVE_PROJECTS\mimic-youware-clone` | ✅ 30-PAGE DOCS GENERATED |
+| **mise** | `C:\Users\karma\ACTIVE_PROJECTS\mise` | ✅ 30-PAGE DOCS GENERATED |
+| **n8n** | `C:\Users\karma\ACTIVE_PROJECTS\n8n` | ✅ 30-PAGE DOCS GENERATED |
+| **n8n-mcp** | `C:\Users\karma\ACTIVE_PROJECTS\n8n-mcp` | ✅ 30-PAGE DOCS GENERATED |
+| **n8n-workflows** | `C:\Users\karma\ACTIVE_PROJECTS\n8n-workflows` | ✅ 30-PAGE DOCS GENERATED |
+| **n8n_agent** | `C:\Users\karma\ACTIVE_PROJECTS\n8n_agent` | ✅ 30-PAGE DOCS GENERATED |
+| **nebula-weave** | `C:\Users\karma\ACTIVE_PROJECTS\nebula-weave` | ✅ 30-PAGE DOCS GENERATED |
+| **newbeg** | `C:\Users\karma\ACTIVE_PROJECTS\newbeg` | ✅ 30-PAGE DOCS GENERATED |
+| **newbqwen** | `C:\Users\karma\ACTIVE_PROJECTS\newbqwen` | ✅ 30-PAGE DOCS GENERATED |
+| **octofriend** | `C:\Users\karma\ACTIVE_PROJECTS\octofriend` | ✅ 30-PAGE DOCS GENERATED |
+| **open-swe** | `C:\Users\karma\ACTIVE_PROJECTS\open-swe` | ✅ 30-PAGE DOCS GENERATED |
+| **opstart-glimpse-demo** | `C:\Users\karma\ACTIVE_PROJECTS\opstart-glimpse-demo` | ✅ 30-PAGE DOCS GENERATED |
+| **pentest-copilot** | `C:\Users\karma\ACTIVE_PROJECTS\pentest-copilot` | ✅ 30-PAGE DOCS GENERATED |
+| **pipedream** | `C:\Users\karma\ACTIVE_PROJECTS\pipedream` | ✅ 30-PAGE DOCS GENERATED |
+| **plandex** | `C:\Users\karma\ACTIVE_PROJECTS\plandex` | ✅ 30-PAGE DOCS GENERATED |
+| **poke-monopoly-ai-hub** | `C:\Users\karma\ACTIVE_PROJECTS\poke-monopoly-ai-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **project-heartbeat-dashboard** | `C:\Users\karma\ACTIVE_PROJECTS\project-heartbeat-dashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **quivr** | `C:\Users\karma\ACTIVE_PROJECTS\quivr` | ✅ 30-PAGE DOCS GENERATED |
+| **reddix** | `C:\Users\karma\ACTIVE_PROJECTS\reddix` | ✅ 30-PAGE DOCS GENERATED |
+| **serena** | `C:\Users\karma\ACTIVE_PROJECTS\serena` | ✅ 30-PAGE DOCS GENERATED |
+| **spec-kit** | `C:\Users\karma\ACTIVE_PROJECTS\spec-kit` | ✅ 30-PAGE DOCS GENERATED |
+| **super-coach-pro** | `C:\Users\karma\ACTIVE_PROJECTS\super-coach-pro` | ✅ 30-PAGE DOCS GENERATED |
+| **super-woods-fire-forge** | `C:\Users\karma\ACTIVE_PROJECTS\super-woods-fire-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **superclaudezz** | `C:\Users\karma\ACTIVE_PROJECTS\superclaudezz` | ✅ 30-PAGE DOCS GENERATED |
+| **synapse-ai-curator** | `C:\Users\karma\ACTIVE_PROJECTS\synapse-ai-curator` | ✅ 30-PAGE DOCS GENERATED |
+| **system-prompts-and-models-of-ai-tools** | `C:\Users\karma\ACTIVE_PROJECTS\system-prompts-and-models-of-ai-tools` | ✅ 30-PAGE DOCS GENERATED |
+| **tab-flow-scheduler** | `C:\Users\karma\ACTIVE_PROJECTS\tab-flow-scheduler` | ✅ 30-PAGE DOCS GENERATED |
+| **tell-me-that-clone** | `C:\Users\karma\ACTIVE_PROJECTS\tell-me-that-clone` | ✅ 30-PAGE DOCS GENERATED |
+| **temp_moon_dev_agents** | `C:\Users\karma\ACTIVE_PROJECTS\temp_moon_dev_agents` | ✅ 30-PAGE DOCS GENERATED |
+| **tempo-tab-master** | `C:\Users\karma\ACTIVE_PROJECTS\tempo-tab-master` | ✅ 30-PAGE DOCS GENERATED |
+| **the-startup** | `C:\Users\karma\ACTIVE_PROJECTS\the-startup` | ✅ 30-PAGE DOCS GENERATED |
+| **traffic-circle-social-boost** | `C:\Users\karma\ACTIVE_PROJECTS\traffic-circle-social-boost` | ✅ 30-PAGE DOCS GENERATED |
+| **traffic-roundabout-boost** | `C:\Users\karma\ACTIVE_PROJECTS\traffic-roundabout-boost` | ✅ 30-PAGE DOCS GENERATED |
+| **truth-scribe-api** | `C:\Users\karma\ACTIVE_PROJECTS\truth-scribe-api` | ✅ 30-PAGE DOCS GENERATED |
+| **woods** | `C:\Users\karma\ACTIVE_PROJECTS\woods` | ✅ 30-PAGE DOCS GENERATED |
+| **woodsandroidv2** | `C:\Users\karma\ACTIVE_PROJECTS\woodsandroidv2` | ✅ 30-PAGE DOCS GENERATED |
+| **youtube-enhancement-tools** | `C:\Users\karma\ACTIVE_PROJECTS\youtube-enhancement-tools` | ✅ 30-PAGE DOCS GENERATED |
+| **zen-mcp-server** | `C:\Users\karma\ACTIVE_PROJECTS\zen-mcp-server` | ✅ 30-PAGE DOCS GENERATED |
+
+## 📁 REVENUE GENERATORS
+| Project Name | Path | Documentation Status |
+|---|---|---|
+| **.github** | `C:\Users\karma\REVENUE_GENERATORS\.github` | ✅ 30-PAGE DOCS GENERATED |
+| **AI-Development-Hub** | `C:\Users\karma\REVENUE_GENERATORS\AI-Development-Hub` | ✅ 30-PAGE DOCS GENERATED |
+| **AI_Army_Foot_Clan** | `C:\Users\karma\REVENUE_GENERATORS\AI_Army_Foot_Clan` | ✅ 30-PAGE DOCS GENERATED |
+| **Archon** | `C:\Users\karma\REVENUE_GENERATORS\Archon` | ✅ 30-PAGE DOCS GENERATED |
+| **LegalBot-MVP** | `C:\Users\karma\REVENUE_GENERATORS\LegalBot-MVP` | ✅ 30-PAGE DOCS GENERATED |
+| **UltimatePhoneTools_Portable** | `C:\Users\karma\REVENUE_GENERATORS\UltimatePhoneTools_Portable` | ✅ 30-PAGE DOCS GENERATED |
+| **UltimatePhoneTools_v2.0_Windows_20250925** | `C:\Users\karma\REVENUE_GENERATORS\UltimatePhoneTools_v2.0_Windows_20250925` | ✅ 30-PAGE DOCS GENERATED |
+| **__pycache__** | `C:\Users\karma\REVENUE_GENERATORS\__pycache__` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-crypto-automation-spec** | `C:\Users\karma\REVENUE_GENERATORS\ai-crypto-automation-spec` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-crypto-platform** | `C:\Users\karma\REVENUE_GENERATORS\ai-crypto-platform` | ✅ 30-PAGE DOCS GENERATED |
+| **ai_development_suite** | `C:\Users\karma\REVENUE_GENERATORS\ai_development_suite` | ✅ 30-PAGE DOCS GENERATED |
+| **beacon-clone-trader-dash** | `C:\Users\karma\REVENUE_GENERATORS\beacon-clone-trader-dash` | ✅ 30-PAGE DOCS GENERATED |
+| **billion_dollar_projects** | `C:\Users\karma\REVENUE_GENERATORS\billion_dollar_projects` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-beacon-trader-hub** | `C:\Users\karma\REVENUE_GENERATORS\crypto-beacon-trader-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-cosmos-nexus** | `C:\Users\karma\REVENUE_GENERATORS\crypto-cosmos-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-dream-trade-sim** | `C:\Users\karma\REVENUE_GENERATORS\crypto-dream-trade-sim` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-dream-trade-sim-11** | `C:\Users\karma\REVENUE_GENERATORS\crypto-dream-trade-sim-11` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-forge-master** | `C:\Users\karma\REVENUE_GENERATORS\crypto-forge-master` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-fusion-genesis** | `C:\Users\karma\REVENUE_GENERATORS\crypto-fusion-genesis` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-nexus-fusion-07** | `C:\Users\karma\REVENUE_GENERATORS\crypto-nexus-fusion-07` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-woods-alpha** | `C:\Users\karma\REVENUE_GENERATORS\crypto-woods-alpha` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto_command_center** | `C:\Users\karma\REVENUE_GENERATORS\crypto_command_center` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto_trading_platform** | `C:\Users\karma\REVENUE_GENERATORS\crypto_trading_platform` | ✅ 30-PAGE DOCS GENERATED |
+| **cryptoai-trade-forge** | `C:\Users\karma\REVENUE_GENERATORS\cryptoai-trade-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **cryptonaut-ai-terminal** | `C:\Users\karma\REVENUE_GENERATORS\cryptonaut-ai-terminal` | ✅ 30-PAGE DOCS GENERATED |
+| **cryptonaut-ai-terminal-1** | `C:\Users\karma\REVENUE_GENERATORS\cryptonaut-ai-terminal-1` | ✅ 30-PAGE DOCS GENERATED |
+| **dashboard_factory** | `C:\Users\karma\REVENUE_GENERATORS\dashboard_factory` | ✅ 30-PAGE DOCS GENERATED |
+| **dreamcrypto** | `C:\Users\karma\REVENUE_GENERATORS\dreamcrypto` | ✅ 30-PAGE DOCS GENERATED |
+| **production-money-maker-suite** | `C:\Users\karma\REVENUE_GENERATORS\production-money-maker-suite` | ✅ 30-PAGE DOCS GENERATED |
+| **revenue_streams** | `C:\Users\karma\REVENUE_GENERATORS\revenue_streams` | ✅ 30-PAGE DOCS GENERATED |
+| **saas_platforms** | `C:\Users\karma\REVENUE_GENERATORS\saas_platforms` | ✅ 30-PAGE DOCS GENERATED |
+| **self-hosted-ai-starter-kit** | `C:\Users\karma\REVENUE_GENERATORS\self-hosted-ai-starter-kit` | ✅ 30-PAGE DOCS GENERATED |
+| **trading-insight-sphere** | `C:\Users\karma\REVENUE_GENERATORS\trading-insight-sphere` | ✅ 30-PAGE DOCS GENERATED |
+| **trading-strategy-nexus** | `C:\Users\karma\REVENUE_GENERATORS\trading-strategy-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **ultimate-ai-empire-dashboard** | `C:\Users\karma\REVENUE_GENERATORS\ultimate-ai-empire-dashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **ultimate-ai-money-machine** | `C:\Users\karma\REVENUE_GENERATORS\ultimate-ai-money-machine` | ✅ 30-PAGE DOCS GENERATED |
+| **ultimate-crypto-platform** | `C:\Users\karma\REVENUE_GENERATORS\ultimate-crypto-platform` | ✅ 30-PAGE DOCS GENERATED |
+| **ultimate-crypto-trading-platform** | `C:\Users\karma\REVENUE_GENERATORS\ultimate-crypto-trading-platform` | ✅ 30-PAGE DOCS GENERATED |
+| **ultimate-ecosystem** | `C:\Users\karma\REVENUE_GENERATORS\ultimate-ecosystem` | ✅ 30-PAGE DOCS GENERATED |
+| **ultimate_crypto_trading_platform** | `C:\Users\karma\REVENUE_GENERATORS\ultimate_crypto_trading_platform` | ✅ 30-PAGE DOCS GENERATED |
+| **woods-android-recovery-kit** | `C:\Users\karma\REVENUE_GENERATORS\woods-android-recovery-kit` | ✅ 30-PAGE DOCS GENERATED |
+
+## 📁 COMPLETED PROJECTS
+| Project Name | Path | Documentation Status |
+|---|---|---|
+| **SYSTEM_BACKUP_20250809_201538** | `C:\Users\karma\COMPLETED_PROJECTS\SYSTEM_BACKUP_20250809_201538` | ✅ 30-PAGE DOCS GENERATED |
+| **SYSTEM_BACKUP_20250809_210344** | `C:\Users\karma\COMPLETED_PROJECTS\SYSTEM_BACKUP_20250809_210344` | ✅ 30-PAGE DOCS GENERATED |
+| **archive** | `C:\Users\karma\COMPLETED_PROJECTS\archive` | ✅ 30-PAGE DOCS GENERATED |
+| **archived_projects** | `C:\Users\karma\COMPLETED_PROJECTS\archived_projects` | ✅ 30-PAGE DOCS GENERATED |
+| **complete_fix_backups** | `C:\Users\karma\COMPLETED_PROJECTS\complete_fix_backups` | ✅ 30-PAGE DOCS GENERATED |
+| **dashboard_backups** | `C:\Users\karma\COMPLETED_PROJECTS\dashboard_backups` | ✅ 30-PAGE DOCS GENERATED |
+| **mobile_backup** | `C:\Users\karma\COMPLETED_PROJECTS\mobile_backup` | ✅ 30-PAGE DOCS GENERATED |
+| **mobile_backup_20250921_051932** | `C:\Users\karma\COMPLETED_PROJECTS\mobile_backup_20250921_051932` | ✅ 30-PAGE DOCS GENERATED |
+| **mobile_backups** | `C:\Users\karma\COMPLETED_PROJECTS\mobile_backups` | ✅ 30-PAGE DOCS GENERATED |
+
+## 📁 GITHUBREPO
+| Project Name | Path | Documentation Status |
+|---|---|---|
+| **Archon** | `C:\Users\karma\X\githubrepo\Archon` | ✅ 30-PAGE DOCS GENERATED |
+| **Awesome-Code-LLM** | `C:\Users\karma\X\githubrepo\Awesome-Code-LLM` | ✅ 30-PAGE DOCS GENERATED |
+| **ClaraVerse** | `C:\Users\karma\X\githubrepo\ClaraVerse` | ✅ 30-PAGE DOCS GENERATED |
+| **Hackrf** | `C:\Users\karma\X\githubrepo\Hackrf` | ⚠️ PENDING |
+| **InstantCoder** | `C:\Users\karma\X\githubrepo\InstantCoder` | ✅ 30-PAGE DOCS GENERATED |
+| **Qwen** | `C:\Users\karma\X\githubrepo\Qwen` | ✅ 30-PAGE DOCS GENERATED |
+| **SuperClaude** | `C:\Users\karma\X\githubrepo\SuperClaude` | ✅ 30-PAGE DOCS GENERATED |
+| **Youtube-playlist-to-formatted-text** | `C:\Users\karma\X\githubrepo\Youtube-playlist-to-formatted-text` | ✅ 30-PAGE DOCS GENERATED |
+| **adk-rag-agent** | `C:\Users\karma\X\githubrepo\adk-rag-agent` | ✅ 30-PAGE DOCS GENERATED |
+| **aether-flow-orchestrator** | `C:\Users\karma\X\githubrepo\aether-flow-orchestrator` | ✅ 30-PAGE DOCS GENERATED |
+| **agentive-ai-discovery-board** | `C:\Users\karma\X\githubrepo\agentive-ai-discovery-board` | ✅ 30-PAGE DOCS GENERATED |
+| **ai** | `C:\Users\karma\X\githubrepo\ai` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-command-center-nexus** | `C:\Users\karma\X\githubrepo\ai-command-center-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-crypto-ecosystem-complete** | `C:\Users\karma\X\githubrepo\ai-crypto-ecosystem-complete` | ⚠️ PENDING |
+| **ai-crypto-trading--monitoring** | `C:\Users\karma\X\githubrepo\ai-crypto-trading--monitoring` | ⚠️ PENDING |
+| **ai-crypto-trading-ecosystem-complete** | `C:\Users\karma\X\githubrepo\ai-crypto-trading-ecosystem-complete` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-deals-nexus** | `C:\Users\karma\X\githubrepo\ai-deals-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-deals-oasis** | `C:\Users\karma\X\githubrepo\ai-deals-oasis` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-keykeeper** | `C:\Users\karma\X\githubrepo\ai-keykeeper` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-nexus-toolkit** | `C:\Users\karma\X\githubrepo\ai-nexus-toolkit` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-ops-nexus-hub** | `C:\Users\karma\X\githubrepo\ai-ops-nexus-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-trial-tracker-pro** | `C:\Users\karma\X\githubrepo\ai-trial-tracker-pro` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-usage-navigator** | `C:\Users\karma\X\githubrepo\ai-usage-navigator` | ✅ 30-PAGE DOCS GENERATED |
+| **ai-wisdom-vault** | `C:\Users\karma\X\githubrepo\ai-wisdom-vault` | ✅ 30-PAGE DOCS GENERATED |
+| **aiittoolsbolt** | `C:\Users\karma\X\githubrepo\aiittoolsbolt` | ✅ 30-PAGE DOCS GENERATED |
+| **aiusemaxbolt** | `C:\Users\karma\X\githubrepo\aiusemaxbolt` | ✅ 30-PAGE DOCS GENERATED |
+| **aiworkspace** | `C:\Users\karma\X\githubrepo\aiworkspace` | ✅ 30-PAGE DOCS GENERATED |
+| **alpha-ai-crypto-trader** | `C:\Users\karma\X\githubrepo\alpha-ai-crypto-trader` | ✅ 30-PAGE DOCS GENERATED |
+| **alpha-ai-trade-hub** | `C:\Users\karma\X\githubrepo\alpha-ai-trade-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **antique-vista-verify** | `C:\Users\karma\X\githubrepo\antique-vista-verify` | ✅ 30-PAGE DOCS GENERATED |
+| **api** | `C:\Users\karma\X\githubrepo\api` | ✅ 30-PAGE DOCS GENERATED |
+| **api-idea-genesis** | `C:\Users\karma\X\githubrepo\api-idea-genesis` | ✅ 30-PAGE DOCS GENERATED |
+| **art-echo-creator** | `C:\Users\karma\X\githubrepo\art-echo-creator` | ✅ 30-PAGE DOCS GENERATED |
+| **artspark-nft-haven** | `C:\Users\karma\X\githubrepo\artspark-nft-haven` | ✅ 30-PAGE DOCS GENERATED |
+| **aussie-metal-mayhem-motors** | `C:\Users\karma\X\githubrepo\aussie-metal-mayhem-motors` | ✅ 30-PAGE DOCS GENERATED |
+| **auto-synth-ops** | `C:\Users\karma\X\githubrepo\auto-synth-ops` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-ai-sdks** | `C:\Users\karma\X\githubrepo\awesome-ai-sdks` | ⚠️ PENDING |
+| **awesome-claude-agents** | `C:\Users\karma\X\githubrepo\awesome-claude-agents` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-claude-code** | `C:\Users\karma\X\githubrepo\awesome-claude-code` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-claude-code-subagents** | `C:\Users\karma\X\githubrepo\awesome-claude-code-subagents` | ⚠️ PENDING |
+| **awesome-cli** | `C:\Users\karma\X\githubrepo\awesome-cli` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-cli-apps** | `C:\Users\karma\X\githubrepo\awesome-cli-apps` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-coins** | `C:\Users\karma\X\githubrepo\awesome-coins` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-devtools** | `C:\Users\karma\X\githubrepo\awesome-devtools` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-mcp-servers** | `C:\Users\karma\X\githubrepo\awesome-mcp-servers` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-n8n** | `C:\Users\karma\X\githubrepo\awesome-n8n` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-n8n-templates** | `C:\Users\karma\X\githubrepo\awesome-n8n-templates` | ⚠️ PENDING |
+| **awesome-nocode-lowcode** | `C:\Users\karma\X\githubrepo\awesome-nocode-lowcode` | ✅ 30-PAGE DOCS GENERATED |
+| **awesome-selfhosted** | `C:\Users\karma\X\githubrepo\awesome-selfhosted` | ✅ 30-PAGE DOCS GENERATED |
+| **beacon-clone-trader-dash** | `C:\Users\karma\X\githubrepo\beacon-clone-trader-dash` | ✅ 30-PAGE DOCS GENERATED |
+| **bolt.diy** | `C:\Users\karma\X\githubrepo\bolt.diy` | ✅ 30-PAGE DOCS GENERATED |
+| **bolt2** | `C:\Users\karma\X\githubrepo\bolt2` | ✅ 30-PAGE DOCS GENERATED |
+| **boltcrypto** | `C:\Users\karma\X\githubrepo\boltcrypto` | ✅ 30-PAGE DOCS GENERATED |
+| **bolthypercoding** | `C:\Users\karma\X\githubrepo\bolthypercoding` | ⚠️ PENDING |
+| **boltnew** | `C:\Users\karma\X\githubrepo\boltnew` | ✅ 30-PAGE DOCS GENERATED |
+| **bookmark-buddy-sort** | `C:\Users\karma\X\githubrepo\bookmark-buddy-sort` | ✅ 30-PAGE DOCS GENERATED |
+| **bot-bloom-capital** | `C:\Users\karma\X\githubrepo\bot-bloom-capital` | ✅ 30-PAGE DOCS GENERATED |
+| **branch-buddy-deploy** | `C:\Users\karma\X\githubrepo\branch-buddy-deploy` | ✅ 30-PAGE DOCS GENERATED |
+| **c-2693** | `C:\Users\karma\X\githubrepo\c-2693` | ✅ 30-PAGE DOCS GENERATED |
+| **c-3685** | `C:\Users\karma\X\githubrepo\c-3685` | ✅ 30-PAGE DOCS GENERATED |
+| **c-442780** | `C:\Users\karma\X\githubrepo\c-442780` | ✅ 30-PAGE DOCS GENERATED |
+| **c-692182** | `C:\Users\karma\X\githubrepo\c-692182` | ✅ 30-PAGE DOCS GENERATED |
+| **c-8316** | `C:\Users\karma\X\githubrepo\c-8316` | ✅ 30-PAGE DOCS GENERATED |
+| **c-855294** | `C:\Users\karma\X\githubrepo\c-855294` | ✅ 30-PAGE DOCS GENERATED |
+| **canvas-royale-market** | `C:\Users\karma\X\githubrepo\canvas-royale-market` | ✅ 30-PAGE DOCS GENERATED |
+| **ccxt** | `C:\Users\karma\X\githubrepo\ccxt` | ⚠️ PENDING |
+| **charm-clone-assemble-verse** | `C:\Users\karma\X\githubrepo\charm-clone-assemble-verse` | ✅ 30-PAGE DOCS GENERATED |
+| **chat-spark-organizer** | `C:\Users\karma\X\githubrepo\chat-spark-organizer` | ✅ 30-PAGE DOCS GENERATED |
+| **chatgpt-file-organizer** | `C:\Users\karma\X\githubrepo\chatgpt-file-organizer` | ⚠️ PENDING |
+| **chatter-connect-analyze-now** | `C:\Users\karma\X\githubrepo\chatter-connect-analyze-now` | ✅ 30-PAGE DOCS GENERATED |
+| **cherry-studio** | `C:\Users\karma\X\githubrepo\cherry-studio` | ✅ 30-PAGE DOCS GENERATED |
+| **chrome-and-country-kings** | `C:\Users\karma\X\githubrepo\chrome-and-country-kings` | ✅ 30-PAGE DOCS GENERATED |
+| **claraverse-evolve-ai-nexus** | `C:\Users\karma\X\githubrepo\claraverse-evolve-ai-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-code-complete-backup** | `C:\Users\karma\X\githubrepo\claude-code-complete-backup` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-code-subagents** | `C:\Users\karma\X\githubrepo\claude-code-subagents` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-conductor** | `C:\Users\karma\X\githubrepo\claude-conductor` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-task-master** | `C:\Users\karma\X\githubrepo\claude-task-master` | ✅ 30-PAGE DOCS GENERATED |
+| **claude-web-clone-magic** | `C:\Users\karma\X\githubrepo\claude-web-clone-magic` | ✅ 30-PAGE DOCS GENERATED |
+| **claudia** | `C:\Users\karma\X\githubrepo\claudia` | ✅ 30-PAGE DOCS GENERATED |
+| **code-archaeologist-ai-explorer** | `C:\Users\karma\X\githubrepo\code-archaeologist-ai-explorer` | ✅ 30-PAGE DOCS GENERATED |
+| **code-archaeologist-ai-forge** | `C:\Users\karma\X\githubrepo\code-archaeologist-ai-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **code-flow-oracle** | `C:\Users\karma\X\githubrepo\code-flow-oracle` | ✅ 30-PAGE DOCS GENERATED |
+| **codesnipstripper** | `C:\Users\karma\X\githubrepo\codesnipstripper` | ⚠️ PENDING |
+| **cognitive-prism-analyzer** | `C:\Users\karma\X\githubrepo\cognitive-prism-analyzer` | ✅ 30-PAGE DOCS GENERATED |
+| **cogno-control-center** | `C:\Users\karma\X\githubrepo\cogno-control-center` | ✅ 30-PAGE DOCS GENERATED |
+| **coin-alchemy-ai** | `C:\Users\karma\X\githubrepo\coin-alchemy-ai` | ✅ 30-PAGE DOCS GENERATED |
+| **context-engineering-intro** | `C:\Users\karma\X\githubrepo\context-engineering-intro` | ✅ 30-PAGE DOCS GENERATED |
+| **context7** | `C:\Users\karma\X\githubrepo\context7` | ✅ 30-PAGE DOCS GENERATED |
+| **cplatform** | `C:\Users\karma\X\githubrepo\cplatform` | ✅ 30-PAGE DOCS GENERATED |
+| **create-volo-app** | `C:\Users\karma\X\githubrepo\create-volo-app` | ✅ 30-PAGE DOCS GENERATED |
+| **crush** | `C:\Users\karma\X\githubrepo\crush` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-ai-hivemind** | `C:\Users\karma\X\githubrepo\crypto-ai-hivemind` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-ai-horizon-dashboard** | `C:\Users\karma\X\githubrepo\crypto-ai-horizon-dashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-ai-nexus-dashboard** | `C:\Users\karma\X\githubrepo\crypto-ai-nexus-dashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-ai-research--trading-hub** | `C:\Users\karma\X\githubrepo\crypto-ai-research--trading-hub` | ⚠️ PENDING |
+| **crypto-ai-research--trading-hub-1** | `C:\Users\karma\X\githubrepo\crypto-ai-research--trading-hub-1` | ⚠️ PENDING |
+| **crypto-ai-tradeflow-nexus** | `C:\Users\karma\X\githubrepo\crypto-ai-tradeflow-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-ai-trading-platform** | `C:\Users\karma\X\githubrepo\crypto-ai-trading-platform` | ⚠️ PENDING |
+| **crypto-all-in-one** | `C:\Users\karma\X\githubrepo\crypto-all-in-one` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-automa-pilot** | `C:\Users\karma\X\githubrepo\crypto-automa-pilot` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-beacon-fusion-hub** | `C:\Users\karma\X\githubrepo\crypto-beacon-fusion-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-beacon-trader-hub** | `C:\Users\karma\X\githubrepo\crypto-beacon-trader-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-beacon-trader-hub-11** | `C:\Users\karma\X\githubrepo\crypto-beacon-trader-hub-11` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-cosmos-nexus** | `C:\Users\karma\X\githubrepo\crypto-cosmos-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-dream-trade-sim** | `C:\Users\karma\X\githubrepo\crypto-dream-trade-sim` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-dream-trade-sim-11** | `C:\Users\karma\X\githubrepo\crypto-dream-trade-sim-11` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-dream-trade-sim-18** | `C:\Users\karma\X\githubrepo\crypto-dream-trade-sim-18` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-dream-voyage-sim** | `C:\Users\karma\X\githubrepo\crypto-dream-voyage-sim` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-finder--miner** | `C:\Users\karma\X\githubrepo\crypto-finder--miner` | ⚠️ PENDING |
+| **crypto-flow-nexus-ai** | `C:\Users\karma\X\githubrepo\crypto-flow-nexus-ai` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-forge-master** | `C:\Users\karma\X\githubrepo\crypto-forge-master` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-fusion-genesis** | `C:\Users\karma\X\githubrepo\crypto-fusion-genesis` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-fusion-nexus-flow** | `C:\Users\karma\X\githubrepo\crypto-fusion-nexus-flow` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-fusion-quest** | `C:\Users\karma\X\githubrepo\crypto-fusion-quest` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-lovable-trader** | `C:\Users\karma\X\githubrepo\crypto-lovable-trader` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-nexus-automator** | `C:\Users\karma\X\githubrepo\crypto-nexus-automator` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-nexus-fusion** | `C:\Users\karma\X\githubrepo\crypto-nexus-fusion` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-nexus-fusion-07** | `C:\Users\karma\X\githubrepo\crypto-nexus-fusion-07` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-sim-alpha** | `C:\Users\karma\X\githubrepo\crypto-sim-alpha` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-vision-suite** | `C:\Users\karma\X\githubrepo\crypto-vision-suite` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-woods-alpha** | `C:\Users\karma\X\githubrepo\crypto-woods-alpha` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-woods-trader-sim** | `C:\Users\karma\X\githubrepo\crypto-woods-trader-sim` | ✅ 30-PAGE DOCS GENERATED |
+| **crypto-woods-ulitmate-26** | `C:\Users\karma\X\githubrepo\crypto-woods-ulitmate-26` | ✅ 30-PAGE DOCS GENERATED |
+| **cryptoai-trade-commander** | `C:\Users\karma\X\githubrepo\cryptoai-trade-commander` | ✅ 30-PAGE DOCS GENERATED |
+| **cryptoai-trade-forge** | `C:\Users\karma\X\githubrepo\cryptoai-trade-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **cryptoai-tradeflow-nexus** | `C:\Users\karma\X\githubrepo\cryptoai-tradeflow-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **cryptonaut-ai-terminal** | `C:\Users\karma\X\githubrepo\cryptonaut-ai-terminal` | ✅ 30-PAGE DOCS GENERATED |
+| **deepwiki-open** | `C:\Users\karma\X\githubrepo\deepwiki-open` | ✅ 30-PAGE DOCS GENERATED |
+| **design-source-hub** | `C:\Users\karma\X\githubrepo\design-source-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **dev-forge-omni** | `C:\Users\karma\X\githubrepo\dev-forge-omni` | ✅ 30-PAGE DOCS GENERATED |
+| **dev-plan-nexus** | `C:\Users\karma\X\githubrepo\dev-plan-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **digest-email-forge** | `C:\Users\karma\X\githubrepo\digest-email-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **digital-trading-flow** | `C:\Users\karma\X\githubrepo\digital-trading-flow` | ✅ 30-PAGE DOCS GENERATED |
+| **directorybolt** | `C:\Users\karma\X\githubrepo\directorybolt` | ✅ 30-PAGE DOCS GENERATED |
+| **docu-prime** | `C:\Users\karma\X\githubrepo\docu-prime` | ✅ 30-PAGE DOCS GENERATED |
+| **dream-trade-adventures-club** | `C:\Users\karma\X\githubrepo\dream-trade-adventures-club` | ✅ 30-PAGE DOCS GENERATED |
+| **dream-trade-forge** | `C:\Users\karma\X\githubrepo\dream-trade-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **echo-chamber-of-wisdom** | `C:\Users\karma\X\githubrepo\echo-chamber-of-wisdom` | ✅ 30-PAGE DOCS GENERATED |
+| **engine-craft-games** | `C:\Users\karma\X\githubrepo\engine-craft-games` | ✅ 30-PAGE DOCS GENERATED |
+| **ethosai-moral-compass-agent** | `C:\Users\karma\X\githubrepo\ethosai-moral-compass-agent` | ✅ 30-PAGE DOCS GENERATED |
+| **evermind-enterprise-ai** | `C:\Users\karma\X\githubrepo\evermind-enterprise-ai` | ✅ 30-PAGE DOCS GENERATED |
+| **favorite-flow-dashboard** | `C:\Users\karma\X\githubrepo\favorite-flow-dashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **firefox-fav-flow** | `C:\Users\karma\X\githubrepo\firefox-fav-flow` | ✅ 30-PAGE DOCS GENERATED |
+| **freebie-ai-optimiser** | `C:\Users\karma\X\githubrepo\freebie-ai-optimiser` | ✅ 30-PAGE DOCS GENERATED |
+| **freecrypto** | `C:\Users\karma\X\githubrepo\freecrypto` | ✅ 30-PAGE DOCS GENERATED |
+| **fusion-trading-vision** | `C:\Users\karma\X\githubrepo\fusion-trading-vision` | ✅ 30-PAGE DOCS GENERATED |
+| **fusion-trading-vision-38** | `C:\Users\karma\X\githubrepo\fusion-trading-vision-38` | ✅ 30-PAGE DOCS GENERATED |
+| **fusion-trading-vision-42** | `C:\Users\karma\X\githubrepo\fusion-trading-vision-42` | ✅ 30-PAGE DOCS GENERATED |
+| **g-8461** | `C:\Users\karma\X\githubrepo\g-8461` | ✅ 30-PAGE DOCS GENERATED |
+| **gamedevforusers** | `C:\Users\karma\X\githubrepo\gamedevforusers` | ✅ 30-PAGE DOCS GENERATED |
+| **gemcopilot-media-scribe** | `C:\Users\karma\X\githubrepo\gemcopilot-media-scribe` | ✅ 30-PAGE DOCS GENERATED |
+| **gemini-cli** | `C:\Users\karma\X\githubrepo\gemini-cli` | ✅ 30-PAGE DOCS GENERATED |
+| **hackrfv0** | `C:\Users\karma\X\githubrepo\hackrfv0` | ✅ 30-PAGE DOCS GENERATED |
+| **idea-ace-showdown-wins** | `C:\Users\karma\X\githubrepo\idea-ace-showdown-wins` | ✅ 30-PAGE DOCS GENERATED |
+| **idea-fusion-alchemy** | `C:\Users\karma\X\githubrepo\idea-fusion-alchemy` | ✅ 30-PAGE DOCS GENERATED |
+| **inferno-project-pulse-forge** | `C:\Users\karma\X\githubrepo\inferno-project-pulse-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **insight-engine-buddy** | `C:\Users\karma\X\githubrepo\insight-engine-buddy` | ✅ 30-PAGE DOCS GENERATED |
+| **instant-code-smith** | `C:\Users\karma\X\githubrepo\instant-code-smith` | ✅ 30-PAGE DOCS GENERATED |
+| **intel-agent-grid** | `C:\Users\karma\X\githubrepo\intel-agent-grid` | ⚠️ PENDING |
+| **keno-ai-fortune** | `C:\Users\karma\X\githubrepo\keno-ai-fortune` | ✅ 30-PAGE DOCS GENERATED |
+| **keno-oracle-elite-picks** | `C:\Users\karma\X\githubrepo\keno-oracle-elite-picks` | ✅ 30-PAGE DOCS GENERATED |
+| **link-locker-organizer** | `C:\Users\karma\X\githubrepo\link-locker-organizer` | ✅ 30-PAGE DOCS GENERATED |
+| **local-ai-alchemy-lab** | `C:\Users\karma\X\githubrepo\local-ai-alchemy-lab` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-complex-ideas** | `C:\Users\karma\X\githubrepo\lovable-complex-ideas` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-custom-gpt** | `C:\Users\karma\X\githubrepo\lovable-custom-gpt` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-evolved-fusion-core** | `C:\Users\karma\X\githubrepo\lovable-evolved-fusion-core` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-fusion-spark** | `C:\Users\karma\X\githubrepo\lovable-fusion-spark` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-idea-nexus** | `C:\Users\karma\X\githubrepo\lovable-idea-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-project-merger** | `C:\Users\karma\X\githubrepo\lovable-project-merger` | ✅ 30-PAGE DOCS GENERATED |
+| **lovable-task-board-magic** | `C:\Users\karma\X\githubrepo\lovable-task-board-magic` | ✅ 30-PAGE DOCS GENERATED |
+| **love-bolt-clone-magic** | `C:\Users\karma\X\githubrepo\love-bolt-clone-magic` | ✅ 30-PAGE DOCS GENERATED |
+| **love-db-quest** | `C:\Users\karma\X\githubrepo\love-db-quest` | ⚠️ PENDING |
+| **lovebolt-zero-clone** | `C:\Users\karma\X\githubrepo\lovebolt-zero-clone` | ✅ 30-PAGE DOCS GENERATED |
+| **lovely-web-clone** | `C:\Users\karma\X\githubrepo\lovely-web-clone` | ✅ 30-PAGE DOCS GENERATED |
+| **lovestruck-crypto-nexus** | `C:\Users\karma\X\githubrepo\lovestruck-crypto-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **loving-bolt-vortex-clone** | `C:\Users\karma\X\githubrepo\loving-bolt-vortex-clone` | ✅ 30-PAGE DOCS GENERATED |
+| **marvel-ai-trading-hub** | `C:\Users\karma\X\githubrepo\marvel-ai-trading-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **marvel-ai-trading-hub-53** | `C:\Users\karma\X\githubrepo\marvel-ai-trading-hub-53` | ✅ 30-PAGE DOCS GENERATED |
+| **marvelaitradebolt** | `C:\Users\karma\X\githubrepo\marvelaitradebolt` | ✅ 30-PAGE DOCS GENERATED |
+| **marvelpokemoncards** | `C:\Users\karma\X\githubrepo\marvelpokemoncards` | ✅ 30-PAGE DOCS GENERATED |
+| **mcp-crawl4ai-rag** | `C:\Users\karma\X\githubrepo\mcp-crawl4ai-rag` | ✅ 30-PAGE DOCS GENERATED |
+| **mimic-youware-clone** | `C:\Users\karma\X\githubrepo\mimic-youware-clone` | ✅ 30-PAGE DOCS GENERATED |
+| **moneymaker-ai-quest** | `C:\Users\karma\X\githubrepo\moneymaker-ai-quest` | ✅ 30-PAGE DOCS GENERATED |
+| **n8n** | `C:\Users\karma\X\githubrepo\n8n` | ✅ 30-PAGE DOCS GENERATED |
+| **n8n-workflows** | `C:\Users\karma\X\githubrepo\n8n-workflows` | ✅ 30-PAGE DOCS GENERATED |
+| **nebula-weave** | `C:\Users\karma\X\githubrepo\nebula-weave` | ✅ 30-PAGE DOCS GENERATED |
+| **newcrypto** | `C:\Users\karma\X\githubrepo\newcrypto` | ✅ 30-PAGE DOCS GENERATED |
+| **nifty-quest-ai** | `C:\Users\karma\X\githubrepo\nifty-quest-ai` | ✅ 30-PAGE DOCS GENERATED |
+| **note-scribe-echo** | `C:\Users\karma\X\githubrepo\note-scribe-echo` | ✅ 30-PAGE DOCS GENERATED |
+| **omnara** | `C:\Users\karma\X\githubrepo\omnara` | ✅ 30-PAGE DOCS GENERATED |
+| **omni-ai-enterprise-bot** | `C:\Users\karma\X\githubrepo\omni-ai-enterprise-bot` | ✅ 30-PAGE DOCS GENERATED |
+| **onthereg-vscode-extension** | `C:\Users\karma\X\githubrepo\onthereg-vscode-extension` | ✅ 30-PAGE DOCS GENERATED |
+| **open-lovable** | `C:\Users\karma\X\githubrepo\open-lovable` | ✅ 30-PAGE DOCS GENERATED |
+| **openrouter-ai-ecosystem** | `C:\Users\karma\X\githubrepo\openrouter-ai-ecosystem` | ✅ 30-PAGE DOCS GENERATED |
+| **opstart-glimpse-demo** | `C:\Users\karma\X\githubrepo\opstart-glimpse-demo` | ✅ 30-PAGE DOCS GENERATED |
+| **phantom-profit-platform** | `C:\Users\karma\X\githubrepo\phantom-profit-platform` | ✅ 30-PAGE DOCS GENERATED |
+| **pipedream** | `C:\Users\karma\X\githubrepo\pipedream` | ✅ 30-PAGE DOCS GENERATED |
+| **plandex** | `C:\Users\karma\X\githubrepo\plandex` | ✅ 30-PAGE DOCS GENERATED |
+| **plant-path-eye-diagnose** | `C:\Users\karma\X\githubrepo\plant-path-eye-diagnose` | ✅ 30-PAGE DOCS GENERATED |
+| **poke-monopoly-ai-hub** | `C:\Users\karma\X\githubrepo\poke-monopoly-ai-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **pretty-charts-ui** | `C:\Users\karma\X\githubrepo\pretty-charts-ui` | ✅ 30-PAGE DOCS GENERATED |
+| **profile-detective-seeker** | `C:\Users\karma\X\githubrepo\profile-detective-seeker` | ✅ 30-PAGE DOCS GENERATED |
+| **project-brain-forge** | `C:\Users\karma\X\githubrepo\project-brain-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **project-brain-hub** | `C:\Users\karma\X\githubrepo\project-brain-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **project-heartbeat-dashboard** | `C:\Users\karma\X\githubrepo\project-heartbeat-dashboard` | ✅ 30-PAGE DOCS GENERATED |
+| **project-nexus-insight** | `C:\Users\karma\X\githubrepo\project-nexus-insight` | ✅ 30-PAGE DOCS GENERATED |
+| **project-pal-dashboard-hub** | `C:\Users\karma\X\githubrepo\project-pal-dashboard-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **projectmanagementbolt** | `C:\Users\karma\X\githubrepo\projectmanagementbolt` | ✅ 30-PAGE DOCS GENERATED |
+| **prompt-bloom-harvest** | `C:\Users\karma\X\githubrepo\prompt-bloom-harvest` | ✅ 30-PAGE DOCS GENERATED |
+| **prompt-galaxy-weaver** | `C:\Users\karma\X\githubrepo\prompt-galaxy-weaver` | ✅ 30-PAGE DOCS GENERATED |
+| **prompt-hologram-forge** | `C:\Users\karma\X\githubrepo\prompt-hologram-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **prompt-pulse-ai-hub** | `C:\Users\karma\X\githubrepo\prompt-pulse-ai-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **prompt-the-future** | `C:\Users\karma\X\githubrepo\prompt-the-future` | ✅ 30-PAGE DOCS GENERATED |
+| **public** | `C:\Users\karma\X\githubrepo\public` | ✅ 30-PAGE DOCS GENERATED |
+| **quadro-view-nexus** | `C:\Users\karma\X\githubrepo\quadro-view-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **quant-alpha-nexus** | `C:\Users\karma\X\githubrepo\quant-alpha-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **reason-detective-bot** | `C:\Users\karma\X\githubrepo\reason-detective-bot` | ✅ 30-PAGE DOCS GENERATED |
+| **replit-ready** | `C:\Users\karma\X\githubrepo\replit-ready` | ✅ 30-PAGE DOCS GENERATED |
+| **repo-valuation-hub** | `C:\Users\karma\X\githubrepo\repo-valuation-hub` | ✅ 30-PAGE DOCS GENERATED |
+| **repo-wizard-forge** | `C:\Users\karma\X\githubrepo\repo-wizard-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **rhythm-project-board** | `C:\Users\karma\X\githubrepo\rhythm-project-board` | ✅ 30-PAGE DOCS GENERATED |
+| **rhythm-project-board-58a6bd4e** | `C:\Users\karma\X\githubrepo\rhythm-project-board-58a6bd4e` | ✅ 30-PAGE DOCS GENERATED |
+| **rhythm-project-board-7d6938c2** | `C:\Users\karma\X\githubrepo\rhythm-project-board-7d6938c2` | ✅ 30-PAGE DOCS GENERATED |
+| **rhythm-project-board-ecebaf09** | `C:\Users\karma\X\githubrepo\rhythm-project-board-ecebaf09` | ✅ 30-PAGE DOCS GENERATED |
+| **rhythm-project-board-f87816a1** | `C:\Users\karma\X\githubrepo\rhythm-project-board-f87816a1` | ✅ 30-PAGE DOCS GENERATED |
+| **roundaboutbolt** | `C:\Users\karma\X\githubrepo\roundaboutbolt` | ✅ 30-PAGE DOCS GENERATED |
+| **rubber-duck-debugger** | `C:\Users\karma\X\githubrepo\rubber-duck-debugger` | ⚠️ PENDING |
+| **scrape-smart-guide** | `C:\Users\karma\X\githubrepo\scrape-smart-guide` | ✅ 30-PAGE DOCS GENERATED |
+| **scripts** | `C:\Users\karma\X\githubrepo\scripts` | ✅ 30-PAGE DOCS GENERATED |
+| **smart-ai-buddy** | `C:\Users\karma\X\githubrepo\smart-ai-buddy` | ✅ 30-PAGE DOCS GENERATED |
+| **solana-trading-bot-v2** | `C:\Users\karma\X\githubrepo\solana-trading-bot-v2` | ✅ 30-PAGE DOCS GENERATED |
+| **soulgpt-emotional-echo** | `C:\Users\karma\X\githubrepo\soulgpt-emotional-echo` | ✅ 30-PAGE DOCS GENERATED |
+| **spare-change-futures** | `C:\Users\karma\X\githubrepo\spare-change-futures` | ✅ 30-PAGE DOCS GENERATED |
+| **src** | `C:\Users\karma\X\githubrepo\src` | ✅ 30-PAGE DOCS GENERATED |
+| **starforge-galaxy-clone** | `C:\Users\karma\X\githubrepo\starforge-galaxy-clone` | ⚠️ PENDING |
+| **stellar-web-showcase-32** | `C:\Users\karma\X\githubrepo\stellar-web-showcase-32` | ✅ 30-PAGE DOCS GENERATED |
+| **strategy-flow-station** | `C:\Users\karma\X\githubrepo\strategy-flow-station` | ✅ 30-PAGE DOCS GENERATED |
+| **super-coach-pro** | `C:\Users\karma\X\githubrepo\super-coach-pro` | ✅ 30-PAGE DOCS GENERATED |
+| **super-woods-coach-ai** | `C:\Users\karma\X\githubrepo\super-woods-coach-ai` | ✅ 30-PAGE DOCS GENERATED |
+| **super-woods-fire-forge** | `C:\Users\karma\X\githubrepo\super-woods-fire-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **superclaudezz** | `C:\Users\karma\X\githubrepo\superclaudezz` | ✅ 30-PAGE DOCS GENERATED |
+| **synapse-ai-curator** | `C:\Users\karma\X\githubrepo\synapse-ai-curator` | ✅ 30-PAGE DOCS GENERATED |
+| **synapse-spark-project** | `C:\Users\karma\X\githubrepo\synapse-spark-project` | ✅ 30-PAGE DOCS GENERATED |
+| **system-prompts-and-models-of-ai-tools** | `C:\Users\karma\X\githubrepo\system-prompts-and-models-of-ai-tools` | ✅ 30-PAGE DOCS GENERATED |
+| **tab-flow-scheduler** | `C:\Users\karma\X\githubrepo\tab-flow-scheduler` | ✅ 30-PAGE DOCS GENERATED |
+| **tab-time-pilot-pro** | `C:\Users\karma\X\githubrepo\tab-time-pilot-pro` | ✅ 30-PAGE DOCS GENERATED |
+| **tell-me-that-clone** | `C:\Users\karma\X\githubrepo\tell-me-that-clone` | ✅ 30-PAGE DOCS GENERATED |
+| **tempo-tab-master** | `C:\Users\karma\X\githubrepo\tempo-tab-master` | ✅ 30-PAGE DOCS GENERATED |
+| **trading-fusion-vision** | `C:\Users\karma\X\githubrepo\trading-fusion-vision` | ✅ 30-PAGE DOCS GENERATED |
+| **trading-insight-sphere** | `C:\Users\karma\X\githubrepo\trading-insight-sphere` | ✅ 30-PAGE DOCS GENERATED |
+| **trading-strategy-nexus** | `C:\Users\karma\X\githubrepo\trading-strategy-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **trading-vision-forge** | `C:\Users\karma\X\githubrepo\trading-vision-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **traffic-circle-social-boost** | `C:\Users\karma\X\githubrepo\traffic-circle-social-boost` | ✅ 30-PAGE DOCS GENERATED |
+| **traffic-roundabout-boost** | `C:\Users\karma\X\githubrepo\traffic-roundabout-boost` | ✅ 30-PAGE DOCS GENERATED |
+| **truth-scribe-api** | `C:\Users\karma\X\githubrepo\truth-scribe-api` | ✅ 30-PAGE DOCS GENERATED |
+| **ui-source-gatherer** | `C:\Users\karma\X\githubrepo\ui-source-gatherer` | ✅ 30-PAGE DOCS GENERATED |
+| **ultimate-hacking-platform** | `C:\Users\karma\X\githubrepo\ultimate-hacking-platform` | ⚠️ PENDING |
+| **ultimatettoolsnautobolt** | `C:\Users\karma\X\githubrepo\ultimatettoolsnautobolt` | ✅ 30-PAGE DOCS GENERATED |
+| **universal-mobile-unlock-suite** | `C:\Users\karma\X\githubrepo\universal-mobile-unlock-suite` | ⚠️ PENDING |
+| **v0-ai-agent-army-refactor** | `C:\Users\karma\X\githubrepo\v0-ai-agent-army-refactor` | ✅ 30-PAGE DOCS GENERATED |
+| **v0-ai-development-control** | `C:\Users\karma\X\githubrepo\v0-ai-development-control` | ⚠️ PENDING |
+| **v0-crypto-nft-ai-ecosystem** | `C:\Users\karma\X\githubrepo\v0-crypto-nft-ai-ecosystem` | ⚠️ PENDING |
+| **v0-modern-cryptocurrency-platform** | `C:\Users\karma\X\githubrepo\v0-modern-cryptocurrency-platform` | ✅ 30-PAGE DOCS GENERATED |
+| **v0-ultimate-crypto-platform** | `C:\Users\karma\X\githubrepo\v0-ultimate-crypto-platform` | ⚠️ PENDING |
+| **v0-untitled-project** | `C:\Users\karma\X\githubrepo\v0-untitled-project` | ✅ 30-PAGE DOCS GENERATED |
+| **web-analyst-mirror** | `C:\Users\karma\X\githubrepo\web-analyst-mirror` | ✅ 30-PAGE DOCS GENERATED |
+| **web-quadrant-viewer** | `C:\Users\karma\X\githubrepo\web-quadrant-viewer` | ✅ 30-PAGE DOCS GENERATED |
+| **webscrapebolt** | `C:\Users\karma\X\githubrepo\webscrapebolt` | ✅ 30-PAGE DOCS GENERATED |
+| **webscraperbolt** | `C:\Users\karma\X\githubrepo\webscraperbolt` | ✅ 30-PAGE DOCS GENERATED |
+| **woods-android-recovery-kit** | `C:\Users\karma\X\githubrepo\woods-android-recovery-kit` | ✅ 30-PAGE DOCS GENERATED |
+| **woodsandroidv2** | `C:\Users\karma\X\githubrepo\woodsandroidv2` | ✅ 30-PAGE DOCS GENERATED |
+| **woodsempirebolt** | `C:\Users\karma\X\githubrepo\woodsempirebolt` | ✅ 30-PAGE DOCS GENERATED |
+| **woodsworking** | `C:\Users\karma\X\githubrepo\woodsworking` | ✅ 30-PAGE DOCS GENERATED |
+| **zeroone-autonomy-forge** | `C:\Users\karma\X\githubrepo\zeroone-autonomy-forge` | ✅ 30-PAGE DOCS GENERATED |
+| **zeroone-private-nexus** | `C:\Users\karma\X\githubrepo\zeroone-private-nexus` | ✅ 30-PAGE DOCS GENERATED |
+| **zeroone-toolkit** | `C:\Users\karma\X\githubrepo\zeroone-toolkit` | ✅ 30-PAGE DOCS GENERATED |
+| **zeroonebolt** | `C:\Users\karma\X\githubrepo\zeroonebolt` | ✅ 30-PAGE DOCS GENERATED |
+
