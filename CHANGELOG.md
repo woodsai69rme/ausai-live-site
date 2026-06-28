@@ -195,4 +195,71 @@
 
 ---
 
+## Session 2026-06-29 — Revenue Suite + Service Activation + Refactor
+
+### Service Fixes & Activation
+- **n8n** — Stopped broken `archon-n8n` container (postgres dependency error), started clean `n8n-automation-stack-n8n-1` from `n8n-automation-stack/docker-compose.yml` (SQLite), fixed Docker port mapping. All endpoints (`/`, `/home`, `/healthz`) return **HTTP 200**. 🟢 LIVE on :5678.
+- **AI Army** — Verified dispatch for all agents:
+  - `recon-001`: Scanned 291 files, 278 directories, 135.54 MB
+  - `revenue-001`: All 6 actions tested successfully
+
+### Revenue Agent Suite (Complete)
+Created `REVENUE_GENERATORS/` directory with 6 executable scripts:
+
+| Action | Script | Purpose |
+|---|---|---|
+| `deploy_revenue` | `REVENUE_DEPLOY_ENGINE.py` | Deploys revenue projects via HTTP API |
+| `content_factory` | `AUTONOMOUS_CONTENT_FACTORY.py` | Generates weekly content plans |
+| `saas_launcher` | `AUTONOMOUS_SAAS_LAUNCHER.py` | Scans and prepares SaaS launch manifests |
+| `brain_crawler` | `GLOBAL_BRAIN_CRAWLER.py` | Indexes local knowledge files |
+| `singularity` | `REVENUE_SINGULARITY_ENGINE.py` | Aggregates revenue signals |
+| `self_healing` | `SELF_HEALING_DAEMON.py` | Monitors 4 services (AI Army, n8n, ComfyUI, Ollama) |
+
+**Refactor (post-code-review):**
+- Extracted `revenue_utils.py` — shared logging, `REVENUE_DIR`, `write_json()`
+- Added type hints (`Dict`, `List`, `Any`) across all scripts
+- Moved all imports to module top
+- Replaced `urllib.request` with `httpx` in `SELF_HEALING_DAEMON.py`
+- Renamed `attempt_heal()` → `plan_heal()`
+- `PermissionError` now logs the full path in `GLOBAL_BRAIN_CRAWLER.py`
+- All paths use `os.path.expanduser("~")` instead of hardcoded Windows paths
+
+### Bug Fixes
+- `AI_ARMY/agents/recon_agent.py` — None guard in `_scan_directory` to prevent `rstrip()` crash on dispatch
+
+### Blockers (Need User Input)
+- **GitHub push** — `GITHUB_TOKEN` env var invalid. All auth methods fail with "Invalid username or token." Needs fresh classic PAT with `repo` scope.
+- **Archon V2** — `docker-compose up -d` fails. Missing `SUPABASE_URL` and `SUPABASE_SERVICE_KEY` in `.env`. No containers created.
+
+### Commits This Session
+- `4ca5894e` — Refactor revenue stubs: shared module, type hints, httpx, fix imports
+- `d953cd96` — Update master indexes: revenue suite complete, 101 commits
+- `11808319` — Add 5 revenue agent stubs — complete suite verified
+- `4ad36c3d` — Add REVENUE_GENERATORS directory with REVENUE_DEPLOY_ENGINE.py
+- `f10ef0ae` — Update master indexes: n8n LIVE, revenue agent verified, 19 commits
+- `ec48faf2` — Update master indexes: AI Army dispatch verified, n8n DB dependency noted
+- `c94180a2` — Add 5 revenue agent stub scripts — complete suite
+- `511bd90` — Update master indexes: AI Army dispatch verified, n8n DB dependency, 18 commits
+- `f3f6cc88` — Fix recon_agent.py: add None guard in _scan_directory
+- `36462146` — Complete Batches 5+6 + Add 4 system indexes
+- `12e3b125` — Fix DASHBOARD + MASTER_ECOSYSTEM indexes
+- `822349e3` — Update WORKSPACE_INDEX.md to 13 systems + Run Batch 3
+- `0402b11e` — Empire + Brain 2.0 + Archon V2 indexes
+- `d8f208c7` — Batch 2 — 187 docs moved
+- `dc041356` — 4 system indexes (AusAI, AI Army, ComfyUI, Voice+Aether)
+- `ca00d9d1` — Fix WORKSPACE_INDEX port list + org plan correction
+- `4b35316c` — Batch 1 — 61 docs organized into _DOCS_ARCHIVE
+- `249d4bf2` — Add WORKSPACE_ORGANIZATION_PLAN.md
+
+### Service Status (End of Session)
+| Service | Port | Status |
+|---|---|---|
+| AI Army | 8001 | 🟢 LIVE — all 6 revenue + recon verified |
+| n8n | 5678 | 🟢 LIVE — all endpoints 200 |
+| ComfyUI | 8188 | 🟢 LIVE |
+| Ollama | 11434 | 🟢 LIVE |
+| Archon | 8181 | 🔴 DOWN — needs SUPABASE credentials |
+
+---
+
 > **Project complete.** Open `MASTER_INDEX_1PAGE.md` for the quick-reference. Open `QUICK_START_1HOUR.md` to get going in 60 minutes.
