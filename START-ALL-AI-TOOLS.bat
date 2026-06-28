@@ -33,11 +33,14 @@ echo 13. Launch God-Mode Dashboard (Port 3142)
 echo 14. List all models
 echo 15. List all skills
 echo 16. Open documentation
+echo  h. Help / tips
 echo  0. Exit
 echo.
 
-set /p choice="Enter choice (0-16): "
+set /p choice="Enter choice (0-16, h): "
 if "%choice%"=="" goto menu
+if "%choice%"=="h" goto help
+if "%choice%"=="H" goto help
 
 if "%choice%"=="1" goto kilo
 if "%choice%"=="2" goto openclaw
@@ -190,7 +193,7 @@ if exist "C:\Users\karma\paperclip-agent" (
   cd /d C:\Users\karma\paperclip-agent
   set Path=C:\Users\karma\.local\bin;%Path%
   uv run python main.py
-  cd C:\Users\karma
+  cd /d C:\Users\karma
 ) else (
   echo ==============================================
   echo Paperclip agent NOT yet cloned.
@@ -222,5 +225,24 @@ goto menu
 echo.
 echo Opening documentation...
 start notepad C:\Users\karma\ALL-TOOLS-CONFIGURED.md
+goto menu
+
+:help
+echo.
+echo === QUICK TIPS ===
+echo 1-3  : Coding tools (Kilo, OpenClaw, OpenCode)
+echo 4-5  : Local chat models (Ollama)
+echo 6    : Hermes chat agent (OpenRouter free tier)
+echo 7    : Agent Zero dynamic framework
+echo 8-10 : Oracle/Jarvis/Paperclip (need clone first)
+echo 11-12: Creative tools (Tadpole, ComfyUI)
+echo 13   : Web dashboard on port 3142
+echo 14-15: List models / skills
+echo 16   : Open this documentation
+echo h     : Show this help
+echo 0     : Exit
+echo.
+echo Press Enter to return to menu...
+pause >nul
 goto menu
 

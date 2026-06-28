@@ -344,6 +344,9 @@ Current verified free models (from `ComfyUI/config/openrouter_free_models.txt`):
 | `nex-agi/nex-n2-pro:free` | — | Pro variant |
 | `meta-llama/llama-3.2-3b-instruct:free` | 3B | Ultra-fast edge |
 | `liquid/lfm-2.5-1.2b-instruct:free` | 1.2B | Minimal latency |
+| `deepseek/deepseek-r1:free` | — | Reasoning |
+| `deepseek/deepseek-chat:free` | — | General chat |
+| `shuttleai/shuttle-3:free` | — | General |
 
 **Free tier limits:** 20 req/min, 200 req/day.
 
