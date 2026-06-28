@@ -418,7 +418,12 @@ devid
 .helix/
 .hermes/
 .husky/
-.jarvis/
+# .jarvis/ - allow config, ignore runtime data
+.jarvis/*
+!.jarvis/jarvis.config.json
+!.jarvis/logs/
+.jarvis/logs/*
+!.jarvis/logs/.gitkeep
 .jetbrains/
 .julius/
 .jupyter/
@@ -441,14 +446,24 @@ devid
 .notes/
 .octocoder/
 .ollama/
-.oracle/
+# .oracle/ - allow config, ignore runtime data
+.oracle/*
+!.oracle/oracle.config.json
+!.oracle/logs/
+.oracle/logs/*
+!.oracle/logs/.gitkeep
 .openai-coder/
 .openclients/
 .opencode/
 .opencoder/
 .openrouter-cli/
 .oxcoder/
-.paperclip/
+# .paperclip/ - allow config, ignore runtime data
+.paperclip/*
+!.paperclip/paperclip.config.json
+!.paperclip/logs/
+.paperclip/logs/*
+!.paperclip/logs/.gitkeep
 .pi-mono/
 .pieces/
 .qwen-code/
