@@ -27,7 +27,7 @@
 | File | Size | Lines | Purpose |
 |---|---|---|---|
 | `FOOTCLAN_SQUAD_DESIGN.md` | 7.7 KB | 142 | Dispatch planner: closed scoring algorithm, CLI surface, acceptance tests |
-| `FOOTCLAN_SQUAD.md` | 5.9 KB | — | Operational notes: dry-run default, personal-folder guard, append-only discipline |
+| `FOOTCLAN_SQUAD.md` | 5.7 KB | — | Operational notes: dry-run default, personal-folder guard, append-only discipline |
 | `FOOTCLAN_EXECUTOR.md` | 5.9 KB | 128 | Executor docs: closed status enum (5 values), refusal matrix, append discipline |
 | `FOOTCLAN_EXECUTOR.py` | 8.1 KB | — | Python dispatcher/executor: reads registry, scores agents, writes dispatch log |
 | `FOOTCLAN_TO_REVENUE.md` | 6.8 KB | 133 | 4-week monetization plan: Footclan as paid code-review service (A$300–$2,000/mo) |
@@ -119,15 +119,21 @@
 ## 🔧 FOOTCLAN DISPATCH WORKFLOW
 
 ```
-Operator ──► FOOTCLAN_EXECUTOR.py --task "refactor auth module"
-                  │
+Operator ──► footclan_squad_dispatch.py --task "refactor auth module"
+                  │                                    (Stage 1: Dispatcher)
                   ├─ Read AGENT_REGISTRY.md (read-only, 2,793 agents)
                   ├─ Score agents: overlap_score + 0.5×cluster_affinity
                   ├─ Pick top-N (default 5, max 20)
                   ├─ Assign sub_task from {research, draft, execute, verify, summarize}
-                  │
-                  ├─ Default: --dry-run (print plan, write nothing)
-                  └─ With --run: append N dispatch rows + 1 summary to FOOTCLAN_DISPATCH.log
+                  └─ Append to FOOTCLAN_DISPATCH.log
+                           │
+                           ▼
+                  FOOTCLAN_EXECUTOR.py --dispatch-log FOOTCLAN_DISPATCH.log
+                           │                     (Stage 2: Executor)
+                           ├─ Read FOOTCLAN_DISPATCH.log (read-only)
+                           ├─ Assign status from {started, ok, skipped, refused, noop}
+                           ├─ Default: --dry-run (print plan, write nothing)
+                           └─ With --run: append N execution rows + 1 summary to FOOTCLAN_EXECUTION.log
 ```
 
 **Status enum:** `started | ok | skipped | refused | noop`
