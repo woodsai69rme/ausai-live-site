@@ -12,7 +12,7 @@
 |---|---|---|---|
 | 1 | AusAI Tech | 80 | 15 rounds, A$5K→A$10K/mo goal |
 | 2 | Agent Registry | 13 | 2,793 agents, 16 domains |
-| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, 🟢 LIVE — recon + revenue verified :8001 |
+| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, 🟢 LIVE — all 6 revenue actions verified :8001 |
 | 4 | ComfyUI Music Video Studio | 77K+ | 22-option launcher, port 8188 |
 | 5 | Voice PA System | 8 | 5 intent enum, Rule #8 fence |
 | 6 | Aether Core System | 24K+ | Sync bridge, empire audit |
@@ -102,7 +102,7 @@
 | Day 1 action plan | `DAY1_EXECUTION_PACK.md` |
 | All AI tools | `AI_TOOLS_DASHBOARD.html` |
 | AI Army live dashboard | `http://localhost:8001` 🟢 |
-| Push to GitHub | `github.com/settings/tokens` (2 commits) |
+| Push to GitHub | `github.com/settings/tokens` — token invalid, needs refresh |
 | Deploy site | `DEPLOYMENT_QUICK_START.md` |
 | Full history | `CHANGELOG.md` |
 

@@ -39,7 +39,7 @@
 |---|---|---|---|---|
 | 1 | **AusAI Tech** | 80 | `MASTER_INDEX_1PAGE.md` | ✅ 15 rounds, 67 new |
 | 2 | **Agent Registry** | 13 | `AGENT_REGISTRY_SYSTEM_INDEX.md` | ✅ 2,793 agents, 16 domains |
-| 3 | **AI Army (Foot Clan)** | 16 | `AI_ARMY_SYSTEM_INDEX.md` | 🟢 LIVE — recon + revenue verified :8001 |
+| 3 | **AI Army (Foot Clan)** | 16 | `AI_ARMY_SYSTEM_INDEX.md` | 🟢 LIVE — all 6 revenue actions + recon verified :8001 |
 | 4 | **ComfyUI Music Video Studio** | 77k+ | `ComfyUI/COMFYUI_SYSTEM_INDEX.md` | ✅ 22-option launcher |
 | 5 | **Voice PA System** | 8 | `VOICE_PA_SYSTEM_INDEX.md` | ✅ Voice-controlled assistant |
 | 6 | **Aether Core System** | 24k+ | `AETHER_CORE_SYSTEM_INDEX.md` | ✅ Sync bridge, empire audit |
@@ -136,9 +136,9 @@ EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) 
 
 | Metric | Value |
 |---|---|
-| Commits on master | 97 |
-| Commits this session | 19 |
-| Unpushed commits | 2 (needs GitHub auth) |
+| Commits on master | 101 |
+| Commits this session | 20 |
+| Unpushed commits | 4 (needs GitHub auth) |
 | Remote | `woodsai69rme/ausai-live-site` |
 | 🟢 Live | AI Army on port 8001 |
 
