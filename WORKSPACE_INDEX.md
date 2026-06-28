@@ -2,8 +2,8 @@
 
 > **Single-page master index covering ALL systems in the workspace.** Start here. Click through to each system's detailed index for deep reference.
 
-**Generated:** 2026-06-28
-**Systems documented:** 17 | **System indexes:** 19 | **Total files tracked:** 420+ organized
+**Generated:** 2026-06-29
+**Systems documented:** 17 | **System indexes:** 19 | **Total files tracked:** 423+ organized
 
 ---
 
@@ -39,7 +39,7 @@
 |---|---|---|---|---|
 | 1 | **AusAI Tech** | 80 | `MASTER_INDEX_1PAGE.md` | ✅ 15 rounds, 67 new |
 | 2 | **Agent Registry** | 13 | `AGENT_REGISTRY_SYSTEM_INDEX.md` | ✅ 2,793 agents, 16 domains |
-| 3 | **AI Army (Foot Clan)** | 16 | `AI_ARMY_SYSTEM_INDEX.md` | 🟢 LIVE :8001 |
+| 3 | **AI Army (Foot Clan)** | 16 | `AI_ARMY_SYSTEM_INDEX.md` | 🟢 LIVE + dispatch verified :8001 |
 | 4 | **ComfyUI Music Video Studio** | 77k+ | `ComfyUI/COMFYUI_SYSTEM_INDEX.md` | ✅ 22-option launcher |
 | 5 | **Voice PA System** | 8 | `VOICE_PA_SYSTEM_INDEX.md` | ✅ Voice-controlled assistant |
 | 6 | **Aether Core System** | 24k+ | `AETHER_CORE_SYSTEM_INDEX.md` | ✅ Sync bridge, empire audit |
@@ -51,7 +51,7 @@
 | 12 | **Bookmark Manager Pro** | 7,685 | `BOOKMARK_MANAGER_PRO_INDEX.md` | ✅ 17 categories, 100% coverage |
 | 13 | **AI Influencer Factory** | 4 | `AI_INFLUENCER_INDEX.md` | ✅ Ollama→ComfyUI→n8n |
 | 14 | **AI Tools Inventory** | 10+ | `AI_TOOLS_INVENTORY_INDEX.md` | ✅ 5 AI platforms, 4 runtimes |
-| 15 | **n8n Automation** | 95+ | `N8N_AUTOMATION_SYSTEM_INDEX.md` | ✅ Docker, 91 templates |
+| 15 | **n8n Automation** | 95+ | `N8N_AUTOMATION_SYSTEM_INDEX.md` | 🟡 Docker up — needs archon-postgres |
 | 16 | **YouTube Tools** | 5 | `YOUTUBE_TOOLS_SYSTEM_INDEX.md` | ✅ Transcript harvester |
 | 17 | **Workspace Meta** | 19 | (this file) | ✅ All 19 system indexes |
 
@@ -136,9 +136,9 @@ EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) 
 
 | Metric | Value |
 |---|---|
-| Commits on master | 88 |
-| Commits this session | 17 |
-| Unpushed commits | 17 (needs GitHub auth) |
+| Commits on master | 96 |
+| Commits this session | 18 |
+| Unpushed commits | 18 (needs GitHub auth) |
 | Remote | `woodsai69rme/ausai-live-site` |
 | 🟢 Live | AI Army on port 8001 |
 

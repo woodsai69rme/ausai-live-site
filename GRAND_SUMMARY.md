@@ -2,7 +2,7 @@
 
 > **One-page condensed reference for the entire workspace.** 17 systems, 19 indexes, 420+ files organized, 12 ports. 🟢 AI Army LIVE on port 8001. Print this.
 
-**Generated:** 2026-06-28 | **Systems:** 17 | **Ports:** 12 | **Commits:** 17 this session
+**Generated:** 2026-06-29 | **Systems:** 17 | **Ports:** 12 | **Commits:** 18 this session
 
 ---
 
@@ -12,7 +12,7 @@
 |---|---|---|---|
 | 1 | AusAI Tech | 80 | 15 rounds, A$5K→A$10K/mo goal |
 | 2 | Agent Registry | 13 | 2,793 agents, 16 domains |
-| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, 🟢 LIVE :8001 |
+| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, 🟢 LIVE + dispatch verified :8001 |
 | 4 | ComfyUI Music Video Studio | 77K+ | 22-option launcher, port 8188 |
 | 5 | Voice PA System | 8 | 5 intent enum, Rule #8 fence |
 | 6 | Aether Core System | 24K+ | Sync bridge, empire audit |
@@ -90,7 +90,7 @@
 | Batch 4: HTML + Empire + Golden Rules | 48 | ✅ |
 | Batch 5: Remaining docs (AUSAI, GITHUB, LINKEDIN) | 45 | ✅ |
 | Batch 6: Remaining scripts + data | 38 | ✅ |
-| **Total organized** | **~420** | ✅ |
+| **Total organized** | **~423** | ✅ |
 
 ---
 
@@ -102,7 +102,7 @@
 | Day 1 action plan | `DAY1_EXECUTION_PACK.md` |
 | All AI tools | `AI_TOOLS_DASHBOARD.html` |
 | AI Army live dashboard | `http://localhost:8001` 🟢 |
-| Push to GitHub | `github.com/settings/tokens` (16 commits) |
+| Push to GitHub | `github.com/settings/tokens` (18 commits) |
 | Deploy site | `DEPLOYMENT_QUICK_START.md` |
 | Full history | `CHANGELOG.md` |
 
