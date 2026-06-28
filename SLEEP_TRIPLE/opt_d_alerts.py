@@ -6,6 +6,18 @@ Reads SLEEP_TRIPLE_AUDIT.jsonl (last N hours), finds actionable signals or
 failures, formats per configured channel (Discord / Telegram / Slack /
 Pushover), and POSTs. Default --dry-run prints payload to stdout.
 
+Multi-channel fanout:
+    When --channel is NOT specified, opt_d_alerts inspects which target
+    channels have their env vars set and sends to all of them in one run.
+    Each channel's result is recorded individually; the audit row uses
+    the array schema (`channels: [{name, sent, info, status_code}, ...]`)
+    so rate-limits and per-channel errors don't get conflated.
+
+    When --channel IS specified, only that single channel is targeted and
+    the audit row uses the legacy single-channel schema (`channel`, `sent`,
+    `info`, `status_code`) for backward compat with existing dashboard
+    readers. Per-channel rate-limit still enforced.
+
 Closed enums:
     EXEC_STATUS    = (started, ok, skipped, refused, noop, failed)
     ALERT_CHANNEL  = (discord, telegram, slack, pushover)
@@ -45,6 +57,15 @@ EXEC_STATUS = ("started", "ok", "skipped", "refused", "noop", "failed")
 ALERT_CHANNEL = ("discord", "telegram", "slack", "pushover")
 ALERT_TRIGGER = ("actionable_spread", "audit_failure", "morning_digest")
 ALERT_TIER = ("info", "warning", "critical")
+
+# Channel -> list of env var names that must ALL be present for the channel
+# to be considered "set". Used by _detect_set_channels() for fanout.
+CHANNEL_ENV_REQUIREMENTS = {
+    "discord":   ("DISCORD_WEBHOOK_URL",),
+    "telegram":  ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"),
+    "slack":     ("SLACK_WEBHOOK_URL",),
+    "pushover":  ("PUSHOVER_APP_TOKEN", "PUSHOVER_USER_KEY"),
+}
 
 # Windows Python 3.12 ships an older CA store that trips BasicConstraints-not-
 # critical on some webhooks. Try verified first, fall back to CERT_NONE so
@@ -146,28 +167,50 @@ def detect_audit_failures(rows: list) -> list:
             and r.get("module") != "opt_d_alerts"]  # don't self-loop
 
 
+def detect_set_channels() -> list:
+    """Return [name, ...] for every channel whose all required env vars are set
+    in the current process environment, in the closed enum order."""
+    found = []
+    for name in ALERT_CHANNEL:
+        reqs = CHANNEL_ENV_REQUIREMENTS.get(name, ())
+        if reqs and all(os.environ.get(v) for v in reqs):
+            found.append(name)
+    return found
+
+
 def rate_limited(rows: list, trigger: str, channel: str, min_seconds: int) -> bool:
     """Scan recent ok rows from THIS module: if the last sent (trigger, channel)
-    was within `min_seconds`, return True to debounce."""
+    was within `min_seconds`, return True to debounce.
+
+    Recognizes both legacy single-channel rows (channel field is a string)
+    and new multi-channel rows (channel appears in the channels array)."""
     if min_seconds <= 0:
         return False
     cutoff = datetime.now() - timedelta(seconds=min_seconds)
     last_ts = None
     for r in rows:
-        if (r.get("module") == "opt_d_alerts"
-                and r.get("status") == "ok"
-                and r.get("trigger") == trigger
-                and r.get("channel") == channel
-                and r.get("sent") is not False):
-            ts_str = r.get("ts")
-            try:
-                ts = datetime.fromisoformat(ts_str)
-            except (TypeError, ValueError):
-                continue
-            if ts.tzinfo is None:
-                ts = ts.replace(tzinfo=ZoneInfo("UTC"))
-            if last_ts is None or ts > last_ts:
-                last_ts = ts
+        if (r.get("module") != "opt_d_alerts"
+                or r.get("status") != "ok"
+                or r.get("trigger") != trigger):
+            continue
+        # Determine which channels this row succeeded for.
+        chans = r.get("channels")
+        if isinstance(chans, list) and chans:
+            hit_channels = {c.get("name") for c in chans
+                            if isinstance(c, dict) and c.get("sent") is not False}
+        else:
+            hit_channels = {r.get("channel")} if r.get("sent") is not False else set()
+        if channel not in hit_channels:
+            continue
+        ts_str = r.get("ts")
+        try:
+            ts = datetime.fromisoformat(ts_str)
+        except (TypeError, ValueError):
+            continue
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=ZoneInfo("UTC"))
+        if last_ts is None or ts > last_ts:
+            last_ts = ts
     return (last_ts is not None
             and last_ts.astimezone(tz=None).replace(tzinfo=None) >= cutoff)
 
@@ -221,6 +264,18 @@ def build_pushover_payload(headline: str, lines: list) -> dict:
     return {"message": (headline + "\n" + "\n".join(lines))[:1024]}
 
 
+def build_payload(channel: str, tier: str, headline: str, lines: list, trigger: str) -> dict:
+    if channel == "discord":
+        return build_discord_payload(tier, headline, lines, trigger)
+    if channel == "telegram":
+        return build_telegram_payload(headline, lines)
+    if channel == "slack":
+        return build_slack_payload(headline, lines)
+    if channel == "pushover":
+        return build_pushover_payload(headline, lines)
+    raise ValueError(f"unknown channel {channel}")
+
+
 def send_alert(channel: str, payload: dict, dry_run: bool) -> tuple:
     """Returns (sent: bool, info: str, status_code: int or -1).
     On dry_run, sent=True because no error occurred; info explains the no-op."""
@@ -265,12 +320,54 @@ def send_alert(channel: str, payload: dict, dry_run: bool) -> tuple:
     return False, f"unknown channel {channel}", -1
 
 
+def detect_content(trigger: str, rows: list, audit_window_hours: int) -> tuple:
+    """Returns (headline, lines, tier) for the trigger, or (None, None, None) when
+    there's nothing to report (caller should noop)."""
+    if trigger == "actionable_spread":
+        actionable = detect_actionable_spreads(rows)
+        if not actionable:
+            return None, None, None
+        lines = [f"- {r.get('best_pair','?')} on {r.get('best_exchange','?')} "
+                 f"({r.get('best_spread_bps','?')} bps, {r.get('best_data_source','?')})"
+                 for r in actionable[:5]]
+        headline = f"{len(actionable)} actionable crypto spread(s) in last {audit_window_hours}h"
+        max_bps = max((r.get("best_spread_bps") or 0) for r in actionable)
+        return headline, lines, ("__TIER__", max_bps)  # tier computed per-call
+    if trigger == "audit_failure":
+        failures = detect_audit_failures(rows)
+        if not failures:
+            return None, None, None
+        lines = [f"- {r.get('module','?')} {r.get('status','?')}: {r.get('reason','?')}"
+                 for r in failures[:5]]
+        headline = f"{len(failures)} audit failure(s) in last {audit_window_hours}h"
+        return headline, lines, "warning"
+    # morning_digest
+    total_rows = len(rows)
+    by_status = {}
+    by_module = {}
+    for r in rows:
+        s = r.get("status", "unknown")
+        by_status[s] = by_status.get(s, 0) + 1
+        m = r.get("module", "unknown")
+        by_module[m] = by_module.get(m, 0) + 1
+    lines = [f"- {s}: {n}" for s, n in sorted(by_status.items())]
+    lines.append("")
+    lines.append("**by module:**")
+    lines.extend(f"- {m}: {n}" for m, n in sorted(by_module.items()))
+    headline = f"SLEEP_TRIPLE morning digest — {total_rows} rows in last {audit_window_hours}h"
+    return headline, lines, "info"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Option D — Webhook Alerts")
     ap.add_argument("--dry-run", action="store_true", help="Print payload, do not send")
     ap.add_argument("--run", action="store_true", help="Allow real send")
     ap.add_argument("--trigger", choices=ALERT_TRIGGER, default="actionable_spread")
-    ap.add_argument("--channel", choices=ALERT_CHANNEL, default="discord")
+    ap.add_argument("--channel", choices=ALERT_CHANNEL, default=None,
+                    help="Force a single channel. Default: auto-fanout to env-set channels.")
+    ap.add_argument("--fanout-mode", choices=("auto", "always", "single"), default="auto",
+                    help="auto=fanout if >=2 channels set; always=ignore --channel and fanout; "
+                         "single=use --channel or default_channel only.")
     ap.add_argument("--audit-window-hours", type=int, default=24)
     args = ap.parse_args()
 
@@ -303,87 +400,115 @@ def main() -> int:
         append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "refused",
                       "reason": "bad_trigger", "trigger": args.trigger})
         return 5
-    if args.channel not in ALERT_CHANNEL:
-        append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "refused",
-                      "reason": "bad_channel", "channel": args.channel})
-        return 5
+
+    # Resolve target channel list.
+    set_channels = detect_set_channels()
+    if args.channel is not None:
+        targets = [args.channel]
+        fanout_mode = "single"
+    elif args.fanout_mode == "always":
+        targets = set_channels if set_channels else [cfg.get("default_channel", "discord")]
+        fanout_mode = "always"
+    elif args.fanout_mode == "single":
+        targets = [cfg.get("default_channel", "discord")]
+        fanout_mode = "single"
+    else:  # auto
+        if len(set_channels) >= 2:
+            targets = set_channels
+            fanout_mode = "auto"
+        elif len(set_channels) == 1:
+            targets = set_channels
+            fanout_mode = "auto"
+        else:
+            # No env vars set — fall back to default channel for dry-run visibility.
+            targets = [cfg.get("default_channel", "discord")]
+            fanout_mode = "auto"
+
+    # Validate every target is in the closed enum.
+    for ch in targets:
+        if ch not in ALERT_CHANNEL:
+            append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "refused",
+                          "reason": "bad_channel", "channel": ch})
+            return 5
 
     append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "started",
-                  "trigger": args.trigger, "channel": args.channel,
-                  "dry_run": dry_run,
-                  "audit_window_hours": args.audit_window_hours})
+                  "trigger": args.trigger, "channels": targets, "fanout_mode": fanout_mode,
+                  "dry_run": dry_run, "audit_window_hours": args.audit_window_hours})
 
     rows = read_audit_last_window(args.audit_window_hours)
 
-    # Debounce: don't fire the same (trigger, channel) twice within rate_limit_seconds.
-    rate_sec = int(cfg.get("rate_limit_seconds", 0) or 0)
-    if rate_sec > 0 and rate_limited(rows, args.trigger, args.channel, rate_sec):
+    headline, lines, tier_signal = detect_content(args.trigger, rows, args.audit_window_hours)
+    if headline is None:
+        # No-op: nothing to report. Emit one noop row with channels list.
         append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "noop",
-                      "reason": "rate_limited", "rate_limit_seconds": rate_sec,
-                      "trigger": args.trigger, "channel": args.channel})
-        print(f"[opt_d] rate-limited: same trigger+channel sent within last {rate_sec}s; noop.")
+                      "reason": f"no_signal_in_window:{args.trigger}",
+                      "trigger": args.trigger, "channels": targets, "fanout_mode": fanout_mode})
+        print(f"[opt_d] no {args.trigger} signal in last {args.audit_window_hours}h; noop.")
         return 0
 
-    if args.trigger == "actionable_spread":
-        actionable = detect_actionable_spreads(rows)
-        if not actionable:
+    # Per-channel rate-limit filter.
+    rate_sec = int(cfg.get("rate_limit_seconds", 0) or 0)
+    if rate_sec > 0:
+        targets = [ch for ch in targets
+                   if not rate_limited(rows, args.trigger, ch, rate_sec)]
+        if not targets:
             append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "noop",
-                          "reason": "no_actionable_in_window",
-                          "trigger": args.trigger, "channel": args.channel})
-            print(f"[opt_d] no actionable spreads in last {args.audit_window_hours}h; noop.")
+                          "reason": "rate_limited_all_channels",
+                          "rate_limit_seconds": rate_sec, "trigger": args.trigger,
+                          "channels": targets})
+            print(f"[opt_d] rate-limited across all channels within last {rate_sec}s; noop.")
             return 0
-        lines = [f"- {r.get('best_pair','?')} on {r.get('best_exchange','?')} "
-                 f"({r.get('best_spread_bps','?')} bps, {r.get('best_data_source','?')})"
-                 for r in actionable[:5]]
-        headline = f"{len(actionable)} actionable crypto spread(s) in last {args.audit_window_hours}h"
-        max_bps = max((r.get("best_spread_bps") or 0) for r in actionable)
-        tier = tier_for_actionable(max_bps, cfg)
-    elif args.trigger == "audit_failure":
-        failures = detect_audit_failures(rows)
-        if not failures:
-            append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "noop",
-                          "reason": "no_failures_in_window",
-                          "trigger": args.trigger, "channel": args.channel})
-            print(f"[opt_d] no audit failures in last {args.audit_window_hours}h; noop.")
-            return 0
-        lines = [f"- {r.get('module','?')} {r.get('status','?')}: {r.get('reason','?')}"
-                 for r in failures[:5]]
-        headline = f"{len(failures)} audit failure(s) in last {args.audit_window_hours}h"
-        tier = "warning"
-    else:  # morning_digest
-        total_rows = len(rows)
-        by_status = {}
-        by_module = {}
-        for r in rows:
-            s = r.get("status", "unknown")
-            by_status[s] = by_status.get(s, 0) + 1
-            m = r.get("module", "unknown")
-            by_module[m] = by_module.get(m, 0) + 1
-        lines = [f"- {s}: {n}" for s, n in sorted(by_status.items())]
-        lines.append("")
-        lines.append("**by module:**")
-        lines.extend(f"- {m}: {n}" for m, n in sorted(by_module.items()))
-        headline = f"SLEEP_TRIPLE morning digest — {total_rows} rows in last {args.audit_window_hours}h"
-        tier = "info"
 
-    if args.channel == "discord":
-        payload = build_discord_payload(tier, headline, lines, args.trigger)
-    elif args.channel == "telegram":
-        payload = build_telegram_payload(headline, lines)
-    elif args.channel == "slack":
-        payload = build_slack_payload(headline, lines)
-    else:
-        payload = build_pushover_payload(headline, lines)
+    per_channel_results = []
+    any_sent = False
+    overall_status = "ok"
+    for ch in targets:
+        # Compute tier per channel (signalled via tuple from detect_content).
+        if isinstance(tier_signal, tuple) and tier_signal[0] == "__TIER__":
+            tier = tier_for_actionable(tier_signal[1], cfg)
+        else:
+            tier = tier_signal
+        try:
+            payload = build_payload(ch, tier, headline, lines, args.trigger)
+        except ValueError as exc:
+            per_channel_results.append({"name": ch, "sent": False, "info": str(exc),
+                                        "status_code": -1})
+            overall_status = "failed"
+            continue
+        sent, info, status_code = send_alert(ch, payload, dry_run)
+        per_channel_results.append({"name": ch, "sent": sent, "info": info,
+                                    "status_code": status_code})
+        any_sent = any_sent or sent
+        if not sent and not dry_run:
+            overall_status = "failed"
 
-    sent, info, status = send_alert(args.channel, payload, dry_run)
-    append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "ok" if sent else "failed",
-                  "trigger": args.trigger, "channel": args.channel, "tier": tier,
-                  "sent": sent, "info": info, "status_code": status, "dry_run": dry_run,
-                  "headline_chars": len(headline), "line_count": len(lines),
-                  "rows_scanned": len(rows)})
-    print(f"[opt_d] channel={args.channel} trigger={args.trigger} tier={tier} "
-          f"sent={sent} info={info}")
-    return 0 if sent else 2
+    # Schema: multi-channel uses `channels` array; legacy single-channel ALSO
+    # keeps the four flat fields populated so dashboard readers keep working.
+    audit_row = {
+        "ts": now_iso,
+        "module": "opt_d_alerts",
+        "status": overall_status,
+        "trigger": args.trigger,
+        "tier": (tier if "tier" in locals() else "unknown"),
+        "channels": per_channel_results,
+        "fanout_mode": fanout_mode,
+        "dry_run": dry_run,
+        "headline_chars": len(headline),
+        "line_count": len(lines),
+        "rows_scanned": len(rows),
+    }
+    if len(per_channel_results) == 1:
+        # Backward-compat: duplicate the (only) result so single-channel readers
+        # see the same fields the pre-fanout code emitted.
+        only = per_channel_results[0]
+        audit_row["channel"] = only["name"]
+        audit_row["sent"] = only["sent"]
+        audit_row["info"] = only["info"]
+        audit_row["status_code"] = only["status_code"]
+    append_audit(audit_row)
+    print(f"[opt_d] trigger={args.trigger} tier={audit_row['tier']} "
+          f"targets={targets} mode={fanout_mode} results={per_channel_results}")
+    return 0 if overall_status == "ok" else 2
 
 
 if __name__ == "__main__":

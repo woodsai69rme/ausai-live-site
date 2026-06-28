@@ -6,6 +6,7 @@
   "audit_window_hours": 24,
   "max_lines_per_message": 5,
   "rate_limit_seconds": 900,
+  "default_fanout_mode": "auto",
   "tier_thresholds": {
     "actionable_spread": {
       "critical_bps": 200,

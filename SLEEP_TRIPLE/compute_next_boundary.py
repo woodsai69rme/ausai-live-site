@@ -1,46 +1,72 @@
 #!/usr/bin/env python3
 """
-compute_next_boundary.py — emit the next sleep_window[0] in user-local HH:MM.
+compute_next_boundary.py — emit the next sleep_window boundary in user-local HH:MM.
 
-install_scheduler.bat captures this via `for /f` and passes it to
-`schtasks /create /sc daily /st HH:MM`, so the nightly trigger fires at the
-correct wall-clock moment regardless of what timezone the Windows box is set to.
+install_scheduler.bat (and the morning-digest installer) capture this via
+`for /f` and pass it to `schtasks /create /sc daily /st HH:MM`, so each
+scheduled trigger fires at the correct wall-clock moment regardless of what
+timezone the Windows box is set to.
 
 Reads:
   C:\\Users\\karma\\SLEEP_TRIPLE\\sleep_config.json
 Outputs to stdout:
-  HH:MM (24-hour, suitable for schtasks /st).
+  HH:MM (24-hour, suitable for schtasks /st). With --json, full ISO 8601 string
+  with the user-local timezone offset (debug only).
+
+Args:
+  --boundary start|end  which sleep_window index to use. Default: start.
 
 Return codes:
-  0 — success.
-  1 — sleep_config.json missing.
-  2 — sleep_window[0] not parseable as HH:MM.
-  3 — DST spring-forward gap (requested wall-clock doesn't exist on this date).
+  0  - success.
+  1  - sleep_config.json missing.
+  2  - sleep_window[index] not parseable as HH:MM.
+  3  - DST spring-forward gap (requested wall-clock doesn't exist on this date).
+  4  - bad --boundary argument.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-CFG = Path(r"C:\Users\karma\SLEEP_TRIPLE\sleep_config.json")
+CFG = Path(r"C:\\Users\\karma\\SLEEP_TRIPLE\\sleep_config.json")
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser(description="Compute next sleep-window boundary in user-local HH:MM")
+    ap.add_argument("--boundary", default="start",
+                    help="Which sleep_window index to compute: 'start' or 'end' "
+                         "(default: start). Validated manually so we can return "
+                         "code 4 instead of argparse's default rc=2.")
+    ap.add_argument("--json", action="store_true",
+                    help="Emit ISO 8601 datetime string instead of HH:MM (debug only)")
+    args = ap.parse_args()
+
+    if args.boundary not in ("start", "end"):
+        print(f"compute_next_boundary: bad --boundary {args.boundary!r}", file=sys.stderr)
+        return 4
+
     if not CFG.exists():
         print(f"compute_next_boundary: missing {CFG}", file=sys.stderr)
         return 1
     cfg = json.loads(CFG.read_text(encoding="utf-8"))
     tz_name = cfg.get("tz", "Australia/Sydney")
-    window_start = cfg["sleep_window"][0]  # "HH:MM"
+    idx = 0 if args.boundary == "start" else 1
     try:
-        hh, mm = map(int, window_start.split(":"))
+        window_part = cfg["sleep_window"][idx]
+    except (IndexError, KeyError, TypeError) as exc:
+        print(f"compute_next_boundary: sleep_window[{idx}] missing: {exc}", file=sys.stderr)
+        return 2
+    try:
+        hh, mm = map(int, window_part.split(":"))
     except (ValueError, AttributeError) as exc:
-        print(f"compute_next_boundary: bad sleep_window[0] {window_start!r}: {exc}",
+        print(f"compute_next_boundary: bad sleep_window[{idx}] {window_part!r}: {exc}",
               file=sys.stderr)
         return 2
+
     tz = ZoneInfo(tz_name)
     now_tz = datetime.now(tz)
 
@@ -81,7 +107,10 @@ def main() -> int:
     if target_tz <= now_tz:
         target_tz += timedelta(days=1)
     target_local = target_tz.astimezone()
-    sys.stdout.write(target_local.strftime("%H:%M") + "\n")
+    if args.json:
+        sys.stdout.write(target_local.isoformat() + "\n")
+    else:
+        sys.stdout.write(target_local.strftime("%H:%M") + "\n")
     return 0
 
 
