@@ -126,3 +126,60 @@ C:\Users\karma\SLEEP_TRIPLE\
 3. **Then:** wire exchange API keys + flip `max_capital_aud` if you want live crypto.
 4. **Then:** wire Windows Task Scheduler to fire `--run` nightly.
 5. **Then:** install a tiny dashboard that reads `SLEEP_TRIPLE_AUDIT.jsonl` + `REVENUE_LEDGER.jsonl` for a morning briefing.
+
+---
+
+## Recent Updates (since commit 7605fe4e)
+
+Seven incremental commits shipped after the initial comprehensive docs. Each fix is captured at the bottom of `DOCUMENTATION.md` Section 14 with commit-by-commit detail.
+
+### New files
+
+| File | Purpose |
+|---|---|
+| `SLEEP_TRIPLE/_ledger_writer.py` | Canonical `append_ledger_event` helper. Replaces 2 near-identical private copies in `opt_c` + `opt_d`. PS1 schema changes update one file. |
+| `Append-RevenueAggregator.ps1` | Reads `REVENUE_LEDGER.jsonl` (read-only), appends one markdown section per invocation to `REVENUE_SUMMARY.md`. Groups events by `(event, month)`. BOM-free UTF-8. |
+| `SLEEP_TRIPLE/run_weekly_rollup.bat` | Wrapper that invokes `Append-RevenueAggregator.ps1` with the project-local ledger + summary paths. |
+| `SLEEP_TRIPLE/install_aggregator_scheduler.bat` | Registers `SLEEP_TRIPLE\WeeklyRollup` Sunday 23:55 user-local (idempotent — uninstall + reinstall). |
+| `SLEEP_TRIPLE/uninstall_aggregator_scheduler.bat` | Symmetric delete of `SLEEP_TRIPLE\WeeklyRollup`. |
+
+### Updated files
+
+| File | Change |
+|---|---|
+| `Append-RevenueEvent.ps1` | `Append-Ledger`: BOM-free writer (`.NET UTF8Encoding($false)` + `File.AppendAllText`). Pre-fix `Add-Content -Encoding UTF8` emitted a 3-byte BOM that broke `JSON.parse`. |
+| `Append-RevenueAggregator.ps1` | `Append-SummarySection`: same BOM fix + explicit `+ "`n"` trailing newline to preserve prior `Add-Content` semantics. |
+| `SLEEP_TRIPLE/opt_c_crypto_yield.py` | Removed 35-line private `append_ledger_event`; replaced with `from _ledger_writer import append_ledger_event`. Schema-correct PS1 param names + per-request `safe_id` (no same-second collisions). Dead `import subprocess` removed. |
+| `SLEEP_TRIPLE/opt_d_alerts.py` | Same ledger writer import. Each effective channel now emits one `signal_emitted` row to the ledger. Dead `import subprocess` removed. |
+| `SLEEP_TRIPLE/dashboard_server.py` | One-line `httpd.allow_reuse_address = True` so prior server TIME_WAIT sockets don't block the bind. |
+| `SLEEP_TRIPLE/_smoke_retry.py` | Promoted from 7 → 12 sections (added HTTP integration, Unicode-arrow regression guard, dry-run parity). |
+
+### Bug closeouts (7 bugs in the ledger pipeline)
+
+1. UTF-8 BOM in `Append-RevenueEvent.ps1` — broke JSON.parse downstream.
+2. UTF-8 BOM in `Append-RevenueAggregator.ps1` — same root cause.
+3. Schema mismatch in `opt_c_crypto_yield.append_ledger_event` — wrong PS1 param names + 2 missing mandatory fields.
+4. ID collisions on same-second emissions — solved with per-request `safe_id` derivation + suffix.
+5. Dead `import subprocess` × 2 in `opt_c` + `opt_d` — removed after `_ledger_writer` extraction.
+6. Lost trailing newline in aggregator — `File.AppendAllText` writes exact bytes; `+ "`n"` restored.
+7. Port TIME_WAIT in `_smoke_retry.py` Section 11 — SO_REUSEADDR via `allow_reuse_address = True`.
+
+### Three scheduled tasks now
+
+| Task | Time (user-local) | Wrapper |
+|---|---|---|
+| `SLEEP_TRIPLE\Nightly` | 23:00 daily | `run_nightly.bat` |
+| `SLEEP_TRIPLE\MorningDigest` | 07:00 daily | `run_morning_digest.bat` |
+| `SLEEP_TRIPLE\WeeklyRollup` | Sun 23:55 | `run_weekly_rollup.bat` |
+
+### Smoke is 12 sections now
+
+```bash
+python _smoke_retry.py
+```
+
+Sections 1–7: existing unit tests (sentinel, clamping, retry decision, env-missing, dry-run parity, retry attempts, effective field contract). Section 8-9: HTTP integration (live `dashboard_server.py` on a free local port + asserts markers). Section 10: dashboard has no Unicode arrows (cp1252 stdout codec survives startup). Section 11 (was 10): HTTP endpoints. Section 12: opt_c + opt_d `--dry-run` leave `REVENUE_LEDGER.jsonl` row count unchanged. All 12 PASS.
+
+### Push status
+
+`git push origin master` returns rc=128 — graceful, no PAT on this shell. 9+ commits are local-only until credentials are supplied.

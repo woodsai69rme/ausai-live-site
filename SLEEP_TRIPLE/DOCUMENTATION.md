@@ -341,6 +341,27 @@ Drivers that work around Git Bash's path-quoting nonsense on `git add` + `git pu
 | R1 | syntax + JSON + compute_next_boundary (start/end/json) + opt_d fanout (default fallback) + detect_set_channels + _live_send_test refusal + bat files | All 7/7 PASS |
 | R1 followup | argparse `choices=(...)` regression | One FAIL: `--boundary nonsense` returned rc=2 (argparse) not rc=4 (custom). Fixed by removing the argparse constraint and relying on explicit validation. All 7 PASS after fix. |
 | R2 (regression) | compute_next_boundary `--boundary start \| end \| end --json \| nonsense \| default` | All 6/6 PASS; `--boundary nonsense` correctly returns rc=4 |
+| R3 | `_smoke_retry.py` widened to 12 sections; Section 10 guards against Unicode arrows in `dashboard_server.py` (3-byte UTF-8 codepoints `U+2190`..`U+2193` that cp1252 stdout codec would crash on); Section 11 launches `dashboard_server.py` in a background thread on a free local port and asserts `/`, `/tracker`, `/audit.jsonl`, `/ledger.jsonl`, `/healthz` all return 200 with correct markers; Section 12 verifies opt_c + opt_d `--dry-run` leave `REVENUE_LEDGER.jsonl` row count unchanged. | All 12/12 PASS once `httpd.allow_reuse_address = True` is set on the server, port TIME_WAIT is no longer an issue; pre-fix rc=1 was from `tail -20` capturing its own exit code, not python's |
+| R4 | (current) Re-aggregator smoke after trailing-newline restore + cleanup of dead `import subprocess`. | All 12/12 PASS |
+
+## 8b. Smoke Section Reference (R3+)
+
+If Section X breaks, see the corresponding entry below for the exact assertion.
+
+| # | Section | Asserts |
+|---|---|---|
+| 1 | `_STATUS_PERMANENT_CONFIG_ERROR` sentinel value | `_STATUS_PERMANENT_CONFIG_ERROR == 0` |
+| 2 | `_safe_int` clamping | `0/negative/string "0" → 1`; "auto"/None/`"abc" → default`; plain int unchanged |
+| 3 | `_safe_float` clamping | `negative → 0.0`; garbage → default; plain float unchanged |
+| 4 | `_is_retryable` decision table | `401/403/404/sc=0/success → False`; `429/5xx/-1 connect → True` |
+| 5 | `send_alert` env-missing → sc=0 sentinel | `sc=0`; `info` mentions env var |
+| 6 | dry-run via `send_alert` uses sentinel | `sent=True`; `sc=0` (so retries don't fire) |
+| 7 | unknown channel → sc=0 (NOT -1) | New fix — sc must be 0 so `_send_with_retry` early-exits |
+| 8 | `_send_with_retry` attempt-count behavior | live=3 attempts, dry-run=1, env-missing=1 |
+| 9 | effective field contract | `(not dry_run) and sent and sc in 2xx → effective` |
+| 10 | dashboard_server.py has no Unicode arrows | All 4 arrow codepoints (←↑→↓) absent; cp1252 stdout codec would crash |
+| 11 | HTTP integration smoke | All 5 endpoints (`/`, `/tracker`, `/audit.jsonl`, `/ledger.jsonl`, `/healthz`) return 200 + content markers |
+| 12 | opt_c + opt_d `--dry-run` parity | `REVENUE_LEDGER.jsonl` row count delta == 0 after both `--dry-run` invocations |
 
 ---
 
@@ -348,14 +369,22 @@ Drivers that work around Git Bash's path-quoting nonsense on `git add` + `git pu
 
 | Hash | Message |
 |---|---|
+| `2d474862` | SLEEP_TRIPLE: tidy `_ledger_writer` imports + add Section 12 dry-run guard |
+| `b6e5e923` | SLEEP_TRIPLE: drop dead subprocess imports + restore aggregator trailing newline |
+| `21ae88c3` | SLEEP_TRIPLE: extract ledger helper + Append-RevenueAggregator BOM fix + weekly rollup scheduling |
+| `8ee74b6c` | SLEEP_TRIPLE: SO_REUSEADDR on dashboard + opt_d_alerts ledger wiring |
+| `15f8a515` | SLEEP_TRIPLE: opt_c ledger schema fix + Append-RevenueEvent UTF-8 BOM fix |
+| `2f080f16` | SLEEP_TRIPLE: LEDGER per-request resolvers + Section 10 widen + HTTP smoke polish |
+| `7605fe4e` | docs(SLEEP_TRIPLE): comprehensive system reference covering all 4 options + scheduler + helpers |
 | `216ffba8` | feat(opt_d): multi-channel fanout + morning-digest auto-fire + live-send helper |
 | `6a312cbd` | fix(opt_d): dry-run semantics + config tier thresholds + rate-limit debounce + Discord dedupe |
 | `ee632c7d` | fix: DST spring-forward gap detection via naive+tzinfo+UTC roundtrip |
 | `d3acd167` | feat: wire IR fetcher + live AUD/USD FX + DST-safe scheduler |
 | `f0d3d735` | feat: real APIs + scheduler + dashboard |
 | `45034915` | chore: untrack SLEEP_TRIPLE/__pycache__/ bytecode; gitignore it |
+| `975a71fc` | feat: SLEEP_TRIPLE — three Aud-earning sleep systems (Option A/B/C) |
 
-⚠ **Push status:** all commits are local-only. `git push origin master` returns rc=128 (no PAT on this shell). The commits will not be on `origin/master` until a credential is supplied.
+⚠ **Push status:** all 14 commits are local-only. `git push origin master` returns rc=128 (no PAT on this shell). The commits will not be on `origin/master` until a credential is supplied.
 
 ---
 
@@ -456,3 +485,147 @@ python sleep_orchestrator.py --list
 ---
 
 *End of DOCUMENTATION.md. For how-to-run-it, see README.md. For ops audit log, see `SLEEP_TRIPLE_AUDIT.jsonl`. For revenue events, see `REVENUE_LEDGER.jsonl`.*
+
+---
+
+## 14. Recent Updates (commits `2f080f16` → `2d474862`)
+
+Seven incremental commits shipped since the initial comprehensive documentation (`7605fe4e`). Each is captured below for cold-readable archaeology.
+
+### 14.1 Ledger Writer Canonicalization
+
+**Commits:** `21ae88c3`, `b6e5e923`, `2d474862`
+
+The `signal_emitted` ledger appender was duplicated in `opt_c_crypto_yield.append_ledger_event` (35 lines) and `opt_d_alerts.append_ledger_event` (35 lines) — both invoked `Append-RevenueEvent.ps1` with the same argv shape, same `safe_id` derivation, same `-LedgerPath` override. PS1 schema changes would require updating both.
+
+Canonicalized to `SLEEP_TRIPLE/_ledger_writer.py` with public API:
+
+```python
+def append_ledger_event(ts: str, amount_usd: float, source: str,
+                        meta_obj: dict, dry_run: bool,
+                        id_suffix: str = "") -> bool
+```
+
+- Returns `True` on PS1 success (`rc=0`).
+- PS1 missing → stderr log + `False`. Never raises.
+- PS1 refusal (`rc != 0`) → stderr log + `False`. Audit row already recorded by caller's prior code path; we don't want to double-write.
+
+Consumers now one-line: `from _ledger_writer import append_ledger_event`. The `import subprocess` was removed from `opt_c` + `opt_d` after extraction (commit `b6e5e923`). PS1 schema drift now updates **one** file.
+
+### 14.2 UTF-8 BOM Bug Fixes
+
+**Commits:** `15f8a515` (event appender), `21ae88c3` (aggregator)
+
+Windows PowerShell 5.x `Add-Content -Value $Line -Encoding UTF8` emits a 3-byte BOM prefix (`0xEF 0xBB 0xBF`) on every append. JSON-aware clients (`JSON.parse`, `json.loads` strict-mode) reject the BOM as an unexpected first character — the entire row silently fails to parse.
+
+Two PS1 scripts had this bug:
+
+- **`Append-RevenueEvent.ps1` (`Append-Ledger`)** — fixed: switched to `.NET UTF8Encoding($false)` + `File.AppendAllText` (commit `15f8a515`).
+- **`Append-RevenueAggregator.ps1` (`Append-SummarySection`)** — fixed: same pattern, plus explicit `+ "`n"` trailing newline to match `Add-Content`'s pre-fix behavior (commits `21ae88c3` + `b6e5e923`).
+
+Pattern now canonical:
+
+```powershell
+$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+[System.IO.File]::AppendAllText($Path, $Line + "`n", $utf8NoBom)
+```
+
+### 14.3 Schema Mismatch in opt_c Ledger Wiring
+
+**Commits:** `15f8a515`
+
+`opt_c_crypto_yield.append_ledger_event` (the original private copy) had 4 bugs against the PS1 schema:
+
+1. Wrong PS1 param name (`-Source` sending a different value than PS1 expects).
+2. Missing mandatory `-Event` (must be in closed enum: `provider_key_active, deploy_published, creative_published, signal_emitted, notify_dispatched`).
+3. Missing mandatory `-Id` (PS1 rejects empty/whitespace via `[string]::IsNullOrWhiteSpace($Id)`).
+4. Silent exit-code discard — caller never knew if PS1 refused.
+
+Schema-correct: param names match the PS1 `param()` block; `safe_id` derives from ISO timestamp by stripping `:` and `.` (since `[string]::IsNullOrWhiteSpace($Id)` rejects whitespace but colons in PS1 strings are fine, the strip is cosmetic); per-request `id_suffix=""` argument disambiguates same-second emissions.
+
+### 14.4 HTTP Smoke Promotion to Section 11
+
+**Commits:** `2f080f16`, `8ee74b6c`, `b6e5e923`, `2d474862`
+
+Smoke expanded from 7 sections (R2) → 12 sections (R3):
+
+| Section | Purpose |
+|---|---|
+| 1 | `_STATUS_PERMANENT_CONFIG_ERROR` sentinel value (= 0) |
+| 2 | `_safe_int` clamping (0/negative → 1, garbage → default) |
+| 3 | `_safe_float` clamping (negative → 0.0) |
+| 4 | `_is_retryable` decision table (401/403/404 not-retry, 5xx/429 retry) |
+| 5 | `send_alert` env-missing → sc=0 sentinel |
+| 6 | dry-run via `send_alert` uses sc=0 sentinel (early-exit retry logic) |
+| 7 | unknown channel → sc=0 (NOT -1) |
+| 8 | `_send_with_retry`: live=3 attempts; dry-run=1 attempt; env-missing=1 attempt |
+| 9 | effective field contract (dry-run+sent=True → effective=False) |
+| 10 | dashboard has no Unicode arrows in all 4 directions (UTF-8 codepoints `U+2190..U+2193`) |
+| 11 | HTTP integration — live GET against `/`, `/tracker`, `/audit.jsonl`, `/ledger.jsonl`, `/healthz` |
+| 12 | opt_c + opt_d `--dry-run` leave `REVENUE_LEDGER.jsonl` row count unchanged |
+
+Section 11 launches `dashboard_server.py` in a background thread on a free local port (probe=pick, then bind), then asserts each endpoint returns 200 + correct content markers. Section 12 spawns `subprocess.run(...)` for both opts and asserts ledger row count delta == 0.
+
+### 14.5 Dashboard Port TIME_WAIT Fix
+
+**Commits:** `8ee74b6c`
+
+`ThreadingHTTPServer` inherits `allow_reuse_address = False` from `socketserver.BaseServer`. Section 11's HTTP smoke flapped to rc=1 when the previous dashboard server hadn't fully released the port. OS-level `bind()` raised `EADDRINUSE` even though the port was effectively idle (TIME_WAIT).
+
+Fix in `dashboard_server.py`:
+
+```python
+httpd = ThreadingHTTPServer((args.host, args.port), Handler)
+httpd.allow_reuse_address = True
+```
+
+`server_bind()` calls `setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)` before the actual bind, so time-WAIT sockets don't block the new bind. Section 11 now runs reliably even with prior server TIME_WAIT sockets lingering.
+
+### 14.6 Weekly Rollup Scheduler
+
+**Commits:** `21ae88c3`
+
+Three scheduled tasks now instead of two:
+
+| Task | Time (user-local) | Command | Wrapper |
+|---|---|---|---|
+| `SLEEP_TRIPLE\Nightly` | `23:00` daily | `python sleep_orchestrator.py --run --force-window` | `run_nightly.bat` |
+| `SLEEP_TRIPLE\MorningDigest` | `07:00` daily | `python opt_d_alerts.py --run --trigger morning_digest --audit-window-hours 8` | `run_morning_digest.bat` |
+| `SLEEP_TRIPLE\WeeklyRollup` | `Sun 23:55` | `powershell Append-RevenueAggregator.ps1 -LedgerPath ... -SummaryPath ...` | `run_weekly_rollup.bat` |
+
+Install: `install_aggregator_scheduler.bat`. Uninstall: `uninstall_aggregator_scheduler.bat`.
+
+`Append-RevenueAggregator.ps1` reads `REVENUE_LEDGER.jsonl` (read-only), groups events by `(event, month)`, and appends ONE markdown table per invocation to `REVENUE_SUMMARY.md`. Skips malformed rows (counts them), never truncates.
+
+### 14.7 opt_d Multichannel → Ledger Wiring
+
+**Commits:** `8ee74b6c`, `21ae88c3`
+
+Each effective channel in `opt_d_alerts.per_channel_results` (i.e. `sent=True` and `sc in {200, 201, 202, 203, 204}`) now emits one `signal_emitted` row to `REVENUE_LEDGER.jsonl` via the canonical `_ledger_writer` helper. ID suffix = `{args.trigger}-{channel_name}-{tier[:3]}` — closed enums in [a-z_] satisfy `[a-zA-Z0-9._-]`. `--dry-run` parity verified: ledger row count unchanged after `opt_d --dry-run --trigger morning_digest`.
+
+### 14.8 Bug Closeout Summary (7 bugs in the ledger pipeline)
+
+| # | Bug | Fix | Commit |
+|---|---|---|---|
+| 1 | UTF-8 BOM in `Append-RevenueEvent.ps1` | `.NET UTF8Encoding($false)` + `File.AppendAllText` | `15f8a515` |
+| 2 | UTF-8 BOM in `Append-RevenueAggregator.ps1` | Same pattern as #1 | `21ae88c3` |
+| 3 | Schema mismatch in `opt_c.append_ledger_event` | Schema-correct PS1 param names + safe_id | `15f8a515` |
+| 4 | ID collisions on same-second emissions | Per-request `safe_id` + `id_suffix=""` | `15f8a515` |
+| 5 | Dead `import subprocess` × 2 | Removed after `_ledger_writer` extraction | `b6e5e923` |
+| 6 | Lost trailing newline in aggregator | `File.AppendAllText` writes exact bytes; restored `+ "`n"` | `b6e5e923` |
+| 7 | Port TIME_WAIT in `_smoke_retry.py` Section 11 | `httpd.allow_reuse_address = True` | `8ee74b6c` |
+
+### 14.9 Push Status
+
+`git push origin master` returns rc=128 — graceful, no PAT on this shell. All 9+ local commits ahead of `origin/master` will sync the moment credentials are supplied.
+
+For commit-by-commit archaeology from a fresh shell:
+
+```bash
+git log --oneline HEAD~10..HEAD
+git log --oneline -- 'SLEEP_TRIPLE/*' 'Append-Revenue*'
+```
+
+---
+
+*End of Recent Updates (Section 14).*
