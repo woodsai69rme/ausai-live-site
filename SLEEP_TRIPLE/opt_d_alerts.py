@@ -41,7 +41,6 @@ import argparse
 import json
 import os
 import ssl
-import subprocess  # invoke Append-RevenueEvent.ps1 for signal_emitted ledger rows
 import sys
 import time
 import urllib.error

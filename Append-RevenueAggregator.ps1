@@ -64,8 +64,12 @@ function Append-SummarySection {
     # 0xEF 0xBB 0xBF). Use a .NET UTF8Encoding instance with BOM explicitly
     # disabled so REVENUE_SUMMARY.md stays BOM-free (markdown consumers and
     # future diff/grep tools should not collide with a BOM prefix).
+    # Add-Content -Encoding UTF8 (the pre-fix call) auto-appended a trailing
+    # newline; File.AppendAllText writes exactly the bytes supplied, so we
+    # explicitly re-add "`n" to preserve markdown-hygiene (file ends on its
+    # own line so multiple aggregator runs don't run together on one line).
     $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
-    [System.IO.File]::AppendAllText($SummaryPath, $Section, $utf8NoBom)
+    [System.IO.File]::AppendAllText($SummaryPath, $Section + "`n", $utf8NoBom)
 }
 
 function Get-IsoNow { (Get-Date).ToUniversalTime().ToString('o') }
