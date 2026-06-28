@@ -1,0 +1,707 @@
+{
+  "generated_at": "2026-06-29T02:41:56.545992",
+  "root": "C:\\Users\\karma",
+  "total_files": 100,
+  "files": [
+    {
+      "path": "C:\\Users\\karma\\.claude.json",
+      "name": ".claude.json",
+      "extension": ".json",
+      "size_bytes": 24858,
+      "indexed_at": "2026-06-29T02:41:56.526854"
+    },
+    {
+      "path": "C:\\Users\\karma\\.launch_pids.txt",
+      "name": ".launch_pids.txt",
+      "extension": ".txt",
+      "size_bytes": 35,
+      "indexed_at": "2026-06-29T02:41:56.526981"
+    },
+    {
+      "path": "C:\\Users\\karma\\.launch_tasks.txt",
+      "name": ".launch_tasks.txt",
+      "extension": ".txt",
+      "size_bytes": 52,
+      "indexed_at": "2026-06-29T02:41:56.527039"
+    },
+    {
+      "path": "C:\\Users\\karma\\.tmp_audit.txt",
+      "name": ".tmp_audit.txt",
+      "extension": ".txt",
+      "size_bytes": 1578,
+      "indexed_at": "2026-06-29T02:41:56.527096"
+    },
+    {
+      "path": "C:\\Users\\karma\\.tmp_untracked.txt",
+      "name": ".tmp_untracked.txt",
+      "extension": ".txt",
+      "size_bytes": 13122,
+      "indexed_at": "2026-06-29T02:41:56.527151"
+    },
+    {
+      "path": "C:\\Users\\karma\\.tmp_untracked_num.txt",
+      "name": ".tmp_untracked_num.txt",
+      "extension": ".txt",
+      "size_bytes": 17021,
+      "indexed_at": "2026-06-29T02:41:56.527312"
+    },
+    {
+      "path": "C:\\Users\\karma\\00_AUSAI_SYSTEM_INDEX.md",
+      "name": "00_AUSAI_SYSTEM_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 28785,
+      "indexed_at": "2026-06-29T02:41:56.527534"
+    },
+    {
+      "path": "C:\\Users\\karma\\404.html",
+      "name": "404.html",
+      "extension": ".html",
+      "size_bytes": 3623,
+      "indexed_at": "2026-06-29T02:41:56.527743"
+    },
+    {
+      "path": "C:\\Users\\karma\\AETHER_CORE_SYSTEM_INDEX.md",
+      "name": "AETHER_CORE_SYSTEM_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 4588,
+      "indexed_at": "2026-06-29T02:41:56.527955"
+    },
+    {
+      "path": "C:\\Users\\karma\\AETHER_SYNC_BRIDGE.py",
+      "name": "AETHER_SYNC_BRIDGE.py",
+      "extension": ".py",
+      "size_bytes": 3591,
+      "indexed_at": "2026-06-29T02:41:56.528261"
+    },
+    {
+      "path": "C:\\Users\\karma\\AGENCY_MISSION_CONTROL.md",
+      "name": "AGENCY_MISSION_CONTROL.md",
+      "extension": ".md",
+      "size_bytes": 2139,
+      "indexed_at": "2026-06-29T02:41:56.528420"
+    },
+    {
+      "path": "C:\\Users\\karma\\AGENT_REGISTRY.md",
+      "name": "AGENT_REGISTRY.md",
+      "extension": ".md",
+      "size_bytes": 6407,
+      "indexed_at": "2026-06-29T02:41:56.528638"
+    },
+    {
+      "path": "C:\\Users\\karma\\AGENT_REGISTRY_AUDIT.md",
+      "name": "AGENT_REGISTRY_AUDIT.md",
+      "extension": ".md",
+      "size_bytes": 5707,
+      "indexed_at": "2026-06-29T02:41:56.528860"
+    },
+    {
+      "path": "C:\\Users\\karma\\AGENT_REGISTRY_AUDIT_RUN.md",
+      "name": "AGENT_REGISTRY_AUDIT_RUN.md",
+      "extension": ".md",
+      "size_bytes": 5001,
+      "indexed_at": "2026-06-29T02:41:56.528926"
+    },
+    {
+      "path": "C:\\Users\\karma\\AGENT_REGISTRY_SYSTEM_INDEX.md",
+      "name": "AGENT_REGISTRY_SYSTEM_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 8332,
+      "indexed_at": "2026-06-29T02:41:56.529148"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_AGENT_INVENTORY.md",
+      "name": "AI_AGENT_INVENTORY.md",
+      "extension": ".md",
+      "size_bytes": 6999,
+      "indexed_at": "2026-06-29T02:41:56.529363"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_ARMY_FOOT_CLAN_DOSSIER.md",
+      "name": "AI_ARMY_FOOT_CLAN_DOSSIER.md",
+      "extension": ".md",
+      "size_bytes": 3641,
+      "indexed_at": "2026-06-29T02:41:56.529602"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_ARMY_SYSTEM_INDEX.md",
+      "name": "AI_ARMY_SYSTEM_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 11480,
+      "indexed_at": "2026-06-29T02:41:56.529669"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_AUTOMATION_AUDIT_CHECKLIST.md",
+      "name": "AI_AUTOMATION_AUDIT_CHECKLIST.md",
+      "extension": ".md",
+      "size_bytes": 11378,
+      "indexed_at": "2026-06-29T02:41:56.529732"
+    },
+    {
+      "path": "C:\\Users\\karma\\ai_influencer_config.json",
+      "name": "ai_influencer_config.json",
+      "extension": ".json",
+      "size_bytes": 325,
+      "indexed_at": "2026-06-29T02:41:56.529789"
+    },
+    {
+      "path": "C:\\Users\\karma\\ai_influencer_factory.py",
+      "name": "ai_influencer_factory.py",
+      "extension": ".py",
+      "size_bytes": 5006,
+      "indexed_at": "2026-06-29T02:41:56.530010"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_INFLUENCER_INDEX.md",
+      "name": "AI_INFLUENCER_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 2029,
+      "indexed_at": "2026-06-29T02:41:56.530218"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_SECURITY_SHOWCASE.html",
+      "name": "AI_SECURITY_SHOWCASE.html",
+      "extension": ".html",
+      "size_bytes": 11487,
+      "indexed_at": "2026-06-29T02:41:56.530454"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_TOOLS_DASHBOARD.html",
+      "name": "AI_TOOLS_DASHBOARD.html",
+      "extension": ".html",
+      "size_bytes": 13771,
+      "indexed_at": "2026-06-29T02:41:56.530790"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_TOOLS_INVENTORY_INDEX.md",
+      "name": "AI_TOOLS_INVENTORY_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 4394,
+      "indexed_at": "2026-06-29T02:41:56.531032"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_TOOL_COMPARISON.html",
+      "name": "AI_TOOL_COMPARISON.html",
+      "extension": ".html",
+      "size_bytes": 9898,
+      "indexed_at": "2026-06-29T02:41:56.531480"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_VOICE_PA.md",
+      "name": "AI_VOICE_PA.md",
+      "extension": ".md",
+      "size_bytes": 5575,
+      "indexed_at": "2026-06-29T02:41:56.531658"
+    },
+    {
+      "path": "C:\\Users\\karma\\AI_VOICE_PA_DESIGN.md",
+      "name": "AI_VOICE_PA_DESIGN.md",
+      "extension": ".md",
+      "size_bytes": 7137,
+      "indexed_at": "2026-06-29T02:41:56.532101"
+    },
+    {
+      "path": "C:\\Users\\karma\\analytics_data.json",
+      "name": "analytics_data.json",
+      "extension": ".json",
+      "size_bytes": 2730,
+      "indexed_at": "2026-06-29T02:41:56.532334"
+    },
+    {
+      "path": "C:\\Users\\karma\\api_key_vault.json",
+      "name": "api_key_vault.json",
+      "extension": ".json",
+      "size_bytes": 2230,
+      "indexed_at": "2026-06-29T02:41:56.532833"
+    },
+    {
+      "path": "C:\\Users\\karma\\API_USAGE.html",
+      "name": "API_USAGE.html",
+      "extension": ".html",
+      "size_bytes": 8298,
+      "indexed_at": "2026-06-29T02:41:56.533222"
+    },
+    {
+      "path": "C:\\Users\\karma\\Append-RevenueAggregator.md",
+      "name": "Append-RevenueAggregator.md",
+      "extension": ".md",
+      "size_bytes": 5850,
+      "indexed_at": "2026-06-29T02:41:56.533633"
+    },
+    {
+      "path": "C:\\Users\\karma\\Append-RevenueEvent.md",
+      "name": "Append-RevenueEvent.md",
+      "extension": ".md",
+      "size_bytes": 5435,
+      "indexed_at": "2026-06-29T02:41:56.533907"
+    },
+    {
+      "path": "C:\\Users\\karma\\APPEND_ONLY_HYGIENE_RUNNER.py",
+      "name": "APPEND_ONLY_HYGIENE_RUNNER.py",
+      "extension": ".py",
+      "size_bytes": 8507,
+      "indexed_at": "2026-06-29T02:41:56.534443"
+    },
+    {
+      "path": "C:\\Users\\karma\\ARCHON_MEMORY_INGESTION.py",
+      "name": "ARCHON_MEMORY_INGESTION.py",
+      "extension": ".py",
+      "size_bytes": 2007,
+      "indexed_at": "2026-06-29T02:41:56.534790"
+    },
+    {
+      "path": "C:\\Users\\karma\\ARCHON_V2_SYSTEM_INDEX.md",
+      "name": "ARCHON_V2_SYSTEM_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 5706,
+      "indexed_at": "2026-06-29T02:41:56.534885"
+    },
+    {
+      "path": "C:\\Users\\karma\\audit_aether_gal.py",
+      "name": "audit_aether_gal.py",
+      "extension": ".py",
+      "size_bytes": 558,
+      "indexed_at": "2026-06-29T02:41:56.535140"
+    },
+    {
+      "path": "C:\\Users\\karma\\audit_repos.py",
+      "name": "audit_repos.py",
+      "extension": ".py",
+      "size_bytes": 3032,
+      "indexed_at": "2026-06-29T02:41:56.535394"
+    },
+    {
+      "path": "C:\\Users\\karma\\AUSAI_OPS_DASHBOARD.html",
+      "name": "AUSAI_OPS_DASHBOARD.html",
+      "extension": ".html",
+      "size_bytes": 27489,
+      "indexed_at": "2026-06-29T02:41:56.535655"
+    },
+    {
+      "path": "C:\\Users\\karma\\AUSAI_TOOLKIT_INDEX.md",
+      "name": "AUSAI_TOOLKIT_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 4331,
+      "indexed_at": "2026-06-29T02:41:56.535913"
+    },
+    {
+      "path": "C:\\Users\\karma\\AUTOMATION_ROI_CALCULATOR.html",
+      "name": "AUTOMATION_ROI_CALCULATOR.html",
+      "extension": ".html",
+      "size_bytes": 11557,
+      "indexed_at": "2026-06-29T02:41:56.536172"
+    },
+    {
+      "path": "C:\\Users\\karma\\AUTOMATION_TEMPLATE_PACK.md",
+      "name": "AUTOMATION_TEMPLATE_PACK.md",
+      "extension": ".md",
+      "size_bytes": 8212,
+      "indexed_at": "2026-06-29T02:41:56.536341"
+    },
+    {
+      "path": "C:\\Users\\karma\\AUTO_ENHANCER.py",
+      "name": "AUTO_ENHANCER.py",
+      "extension": ".py",
+      "size_bytes": 1721,
+      "indexed_at": "2026-06-29T02:41:56.536565"
+    },
+    {
+      "path": "C:\\Users\\karma\\BACKUP_STATUS.html",
+      "name": "BACKUP_STATUS.html",
+      "extension": ".html",
+      "size_bytes": 7886,
+      "indexed_at": "2026-06-29T02:41:56.536715"
+    },
+    {
+      "path": "C:\\Users\\karma\\BEFORE_AFTER_DEMO.html",
+      "name": "BEFORE_AFTER_DEMO.html",
+      "extension": ".html",
+      "size_bytes": 9909,
+      "indexed_at": "2026-06-29T02:41:56.536925"
+    },
+    {
+      "path": "C:\\Users\\karma\\BOOKMARK_MANAGER_PRO_INDEX.md",
+      "name": "BOOKMARK_MANAGER_PRO_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 1383,
+      "indexed_at": "2026-06-29T02:41:56.537144"
+    },
+    {
+      "path": "C:\\Users\\karma\\BUDGET_CALCULATOR.html",
+      "name": "BUDGET_CALCULATOR.html",
+      "extension": ".html",
+      "size_bytes": 11545,
+      "indexed_at": "2026-06-29T02:41:56.537385"
+    },
+    {
+      "path": "C:\\Users\\karma\\Build_EmpireOS.py",
+      "name": "Build_EmpireOS.py",
+      "extension": ".py",
+      "size_bytes": 10353,
+      "indexed_at": "2026-06-29T02:41:56.537639"
+    },
+    {
+      "path": "C:\\Users\\karma\\CASE_STUDY_TEMPLATE.md",
+      "name": "CASE_STUDY_TEMPLATE.md",
+      "extension": ".md",
+      "size_bytes": 6491,
+      "indexed_at": "2026-06-29T02:41:56.537711"
+    },
+    {
+      "path": "C:\\Users\\karma\\CHANGELOG.md",
+      "name": "CHANGELOG.md",
+      "extension": ".md",
+      "size_bytes": 10496,
+      "indexed_at": "2026-06-29T02:41:56.537941"
+    },
+    {
+      "path": "C:\\Users\\karma\\CHAT_HISTORY_2026-06-25.txt",
+      "name": "CHAT_HISTORY_2026-06-25.txt",
+      "extension": ".txt",
+      "size_bytes": 13264,
+      "indexed_at": "2026-06-29T02:41:56.538039"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLAUDE-ARCHON.md",
+      "name": "CLAUDE-ARCHON.md",
+      "extension": ".md",
+      "size_bytes": 12216,
+      "indexed_at": "2026-06-29T02:41:56.538298"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLAUDE.md",
+      "name": "CLAUDE.md",
+      "extension": ".md",
+      "size_bytes": 13194,
+      "indexed_at": "2026-06-29T02:41:56.538384"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLIENT_GIFT_GUIDE.md",
+      "name": "CLIENT_GIFT_GUIDE.md",
+      "extension": ".md",
+      "size_bytes": 7128,
+      "indexed_at": "2026-06-29T02:41:56.538604"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLIENT_HEALTH_SCORECARD.md",
+      "name": "CLIENT_HEALTH_SCORECARD.md",
+      "extension": ".md",
+      "size_bytes": 8742,
+      "indexed_at": "2026-06-29T02:41:56.538846"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLIENT_OFFBOARDING.md",
+      "name": "CLIENT_OFFBOARDING.md",
+      "extension": ".md",
+      "size_bytes": 8854,
+      "indexed_at": "2026-06-29T02:41:56.539093"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLIENT_PORTAL.html",
+      "name": "CLIENT_PORTAL.html",
+      "extension": ".html",
+      "size_bytes": 13991,
+      "indexed_at": "2026-06-29T02:41:56.539329"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLIENT_TESTIMONIAL_SYSTEM.md",
+      "name": "CLIENT_TESTIMONIAL_SYSTEM.md",
+      "extension": ".md",
+      "size_bytes": 9218,
+      "indexed_at": "2026-06-29T02:41:56.539393"
+    },
+    {
+      "path": "C:\\Users\\karma\\CLIENT_WELCOME_KIT.md",
+      "name": "CLIENT_WELCOME_KIT.md",
+      "extension": ".md",
+      "size_bytes": 3334,
+      "indexed_at": "2026-06-29T02:41:56.539447"
+    },
+    {
+      "path": "C:\\Users\\karma\\COLD_OUTREACH_AB_TEST.md",
+      "name": "COLD_OUTREACH_AB_TEST.md",
+      "extension": ".md",
+      "size_bytes": 8448,
+      "indexed_at": "2026-06-29T02:41:56.539658"
+    },
+    {
+      "path": "C:\\Users\\karma\\community_support.json",
+      "name": "community_support.json",
+      "extension": ".json",
+      "size_bytes": 1232,
+      "indexed_at": "2026-06-29T02:41:56.539723"
+    },
+    {
+      "path": "C:\\Users\\karma\\COMPETITOR_BATTLE_CARDS.md",
+      "name": "COMPETITOR_BATTLE_CARDS.md",
+      "extension": ".md",
+      "size_bytes": 9716,
+      "indexed_at": "2026-06-29T02:41:56.539779"
+    },
+    {
+      "path": "C:\\Users\\karma\\COMPETITOR_MONITORING.md",
+      "name": "COMPETITOR_MONITORING.md",
+      "extension": ".md",
+      "size_bytes": 7075,
+      "indexed_at": "2026-06-29T02:41:56.539981"
+    },
+    {
+      "path": "C:\\Users\\karma\\COMPLIANCE_CHECKLIST.md",
+      "name": "COMPLIANCE_CHECKLIST.md",
+      "extension": ".md",
+      "size_bytes": 9541,
+      "indexed_at": "2026-06-29T02:41:56.540209"
+    },
+    {
+      "path": "C:\\Users\\karma\\conflicts.txt",
+      "name": "conflicts.txt",
+      "extension": ".txt",
+      "size_bytes": 7188,
+      "indexed_at": "2026-06-29T02:41:56.540305"
+    },
+    {
+      "path": "C:\\Users\\karma\\CONTENT_DISTRIBUTION_PLAYBOOK.md",
+      "name": "CONTENT_DISTRIBUTION_PLAYBOOK.md",
+      "extension": ".md",
+      "size_bytes": 5395,
+      "indexed_at": "2026-06-29T02:41:56.540367"
+    },
+    {
+      "path": "C:\\Users\\karma\\CONTRIBUTING.md",
+      "name": "CONTRIBUTING.md",
+      "extension": ".md",
+      "size_bytes": 16317,
+      "indexed_at": "2026-06-29T02:41:56.540423"
+    },
+    {
+      "path": "C:\\Users\\karma\\CREATIVE_STUDIO_OVERVIEW.md",
+      "name": "CREATIVE_STUDIO_OVERVIEW.md",
+      "extension": ".md",
+      "size_bytes": 6873,
+      "indexed_at": "2026-06-29T02:41:56.540509"
+    },
+    {
+      "path": "C:\\Users\\karma\\CRISIS_COMMS_PLAYBOOK.md",
+      "name": "CRISIS_COMMS_PLAYBOOK.md",
+      "extension": ".md",
+      "size_bytes": 11889,
+      "indexed_at": "2026-06-29T02:41:56.540732"
+    },
+    {
+      "path": "C:\\Users\\karma\\DASHBOARD_GUIDES.md",
+      "name": "DASHBOARD_GUIDES.md",
+      "extension": ".md",
+      "size_bytes": 14906,
+      "indexed_at": "2026-06-29T02:41:56.540791"
+    },
+    {
+      "path": "C:\\Users\\karma\\DASHBOARD_SYSTEM_INDEX.md",
+      "name": "DASHBOARD_SYSTEM_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 1499,
+      "indexed_at": "2026-06-29T02:41:56.540846"
+    },
+    {
+      "path": "C:\\Users\\karma\\DAY1_EXECUTION_PACK.md",
+      "name": "DAY1_EXECUTION_PACK.md",
+      "extension": ".md",
+      "size_bytes": 7868,
+      "indexed_at": "2026-06-29T02:41:56.541069"
+    },
+    {
+      "path": "C:\\Users\\karma\\DEPLOYMENT_QUICK_START.md",
+      "name": "DEPLOYMENT_QUICK_START.md",
+      "extension": ".md",
+      "size_bytes": 3811,
+      "indexed_at": "2026-06-29T02:41:56.541297"
+    },
+    {
+      "path": "C:\\Users\\karma\\deploy_revenue.py",
+      "name": "deploy_revenue.py",
+      "extension": ".py",
+      "size_bytes": 3016,
+      "indexed_at": "2026-06-29T02:41:56.541576"
+    },
+    {
+      "path": "C:\\Users\\karma\\DEVELOPMENT_ENVIRONMENT_IMPROVEMENT_PLAN.md",
+      "name": "DEVELOPMENT_ENVIRONMENT_IMPROVEMENT_PLAN.md",
+      "extension": ".md",
+      "size_bytes": 6795,
+      "indexed_at": "2026-06-29T02:41:56.541737"
+    },
+    {
+      "path": "C:\\Users\\karma\\Discovery_Call_Script.md",
+      "name": "Discovery_Call_Script.md",
+      "extension": ".md",
+      "size_bytes": 12520,
+      "indexed_at": "2026-06-29T02:41:56.541815"
+    },
+    {
+      "path": "C:\\Users\\karma\\DOTDIR_CATALOG.md",
+      "name": "DOTDIR_CATALOG.md",
+      "extension": ".md",
+      "size_bytes": 30042,
+      "indexed_at": "2026-06-29T02:41:56.542028"
+    },
+    {
+      "path": "C:\\Users\\karma\\DOTDIR_CATALOG_RUN.md",
+      "name": "DOTDIR_CATALOG_RUN.md",
+      "extension": ".md",
+      "size_bytes": 9710,
+      "indexed_at": "2026-06-29T02:41:56.542263"
+    },
+    {
+      "path": "C:\\Users\\karma\\DOTDIR_CATALOG_RUN.py",
+      "name": "DOTDIR_CATALOG_RUN.py",
+      "extension": ".py",
+      "size_bytes": 20634,
+      "indexed_at": "2026-06-29T02:41:56.542354"
+    },
+    {
+      "path": "C:\\Users\\karma\\EMAIL_SIGNATURE.html",
+      "name": "EMAIL_SIGNATURE.html",
+      "extension": ".html",
+      "size_bytes": 4538,
+      "indexed_at": "2026-06-29T02:41:56.542565"
+    },
+    {
+      "path": "C:\\Users\\karma\\EMAIL_TEMPLATES.md",
+      "name": "EMAIL_TEMPLATES.md",
+      "extension": ".md",
+      "size_bytes": 11591,
+      "indexed_at": "2026-06-29T02:41:56.542758"
+    },
+    {
+      "path": "C:\\Users\\karma\\EMPIRE_COMMAND_CENTER.html",
+      "name": "EMPIRE_COMMAND_CENTER.html",
+      "extension": ".html",
+      "size_bytes": 21428,
+      "indexed_at": "2026-06-29T02:41:56.542948"
+    },
+    {
+      "path": "C:\\Users\\karma\\EMPIRE_COMMAND_CENTER.py",
+      "name": "EMPIRE_COMMAND_CENTER.py",
+      "extension": ".py",
+      "size_bytes": 2381,
+      "indexed_at": "2026-06-29T02:41:56.543001"
+    },
+    {
+      "path": "C:\\Users\\karma\\EMPIRE_SYSTEM_INDEX.md",
+      "name": "EMPIRE_SYSTEM_INDEX.md",
+      "extension": ".md",
+      "size_bytes": 4505,
+      "indexed_at": "2026-06-29T02:41:56.543052"
+    },
+    {
+      "path": "C:\\Users\\karma\\EXECUTION_SCRATCHPAD.md",
+      "name": "EXECUTION_SCRATCHPAD.md",
+      "extension": ".md",
+      "size_bytes": 2314,
+      "indexed_at": "2026-06-29T02:41:56.543263"
+    },
+    {
+      "path": "C:\\Users\\karma\\EXIT_STRATEGY.md",
+      "name": "EXIT_STRATEGY.md",
+      "extension": ".md",
+      "size_bytes": 9577,
+      "indexed_at": "2026-06-29T02:41:56.543484"
+    },
+    {
+      "path": "C:\\Users\\karma\\extract_all_bookmarks.py",
+      "name": "extract_all_bookmarks.py",
+      "extension": ".py",
+      "size_bytes": 17433,
+      "indexed_at": "2026-06-29T02:41:56.543717"
+    },
+    {
+      "path": "C:\\Users\\karma\\extract_gal_test.py",
+      "name": "extract_gal_test.py",
+      "extension": ".py",
+      "size_bytes": 4671,
+      "indexed_at": "2026-06-29T02:41:56.543947"
+    },
+    {
+      "path": "C:\\Users\\karma\\extract_transcripts.py",
+      "name": "extract_transcripts.py",
+      "extension": ".py",
+      "size_bytes": 985,
+      "indexed_at": "2026-06-29T02:41:56.544154"
+    },
+    {
+      "path": "C:\\Users\\karma\\FACEBOOK_GROUPS_TARGETING.md",
+      "name": "FACEBOOK_GROUPS_TARGETING.md",
+      "extension": ".md",
+      "size_bytes": 8846,
+      "indexed_at": "2026-06-29T02:41:56.544383"
+    },
+    {
+      "path": "C:\\Users\\karma\\FAQ_PAGE.html",
+      "name": "FAQ_PAGE.html",
+      "extension": ".html",
+      "size_bytes": 10103,
+      "indexed_at": "2026-06-29T02:41:56.544572"
+    },
+    {
+      "path": "C:\\Users\\karma\\feature_flags.json",
+      "name": "feature_flags.json",
+      "extension": ".json",
+      "size_bytes": 911,
+      "indexed_at": "2026-06-29T02:41:56.544633"
+    },
+    {
+      "path": "C:\\Users\\karma\\firefox_bookmarks_extractor.py",
+      "name": "firefox_bookmarks_extractor.py",
+      "extension": ".py",
+      "size_bytes": 38486,
+      "indexed_at": "2026-06-29T02:41:56.544727"
+    },
+    {
+      "path": "C:\\Users\\karma\\First_Client_Onboarding.md",
+      "name": "First_Client_Onboarding.md",
+      "extension": ".md",
+      "size_bytes": 13021,
+      "indexed_at": "2026-06-29T02:41:56.544777"
+    },
+    {
+      "path": "C:\\Users\\karma\\FOOTCLAN_EXECUTOR.md",
+      "name": "FOOTCLAN_EXECUTOR.md",
+      "extension": ".md",
+      "size_bytes": 5874,
+      "indexed_at": "2026-06-29T02:41:56.544981"
+    },
+    {
+      "path": "C:\\Users\\karma\\FOOTCLAN_EXECUTOR.py",
+      "name": "FOOTCLAN_EXECUTOR.py",
+      "extension": ".py",
+      "size_bytes": 8077,
+      "indexed_at": "2026-06-29T02:41:56.545120"
+    },
+    {
+      "path": "C:\\Users\\karma\\FOOTCLAN_SQUAD.md",
+      "name": "FOOTCLAN_SQUAD.md",
+      "extension": ".md",
+      "size_bytes": 5861,
+      "indexed_at": "2026-06-29T02:41:56.545173"
+    },
+    {
+      "path": "C:\\Users\\karma\\FOOTCLAN_SQUAD_DESIGN.md",
+      "name": "FOOTCLAN_SQUAD_DESIGN.md",
+      "extension": ".md",
+      "size_bytes": 7665,
+      "indexed_at": "2026-06-29T02:41:56.545369"
+    },
+    {
+      "path": "C:\\Users\\karma\\footclan_squad_dispatch.py",
+      "name": "footclan_squad_dispatch.py",
+      "extension": ".py",
+      "size_bytes": 9927,
+      "indexed_at": "2026-06-29T02:41:56.545586"
+    },
+    {
+      "path": "C:\\Users\\karma\\FOOTCLAN_TO_REVENUE.md",
+      "name": "FOOTCLAN_TO_REVENUE.md",
+      "extension": ".md",
+      "size_bytes": 6843,
+      "indexed_at": "2026-06-29T02:41:56.545825"
+    }
+  ]
+}
