@@ -446,43 +446,9 @@ def detect_content(trigger: str, rows: list, audit_window_hours: int) -> tuple:
     return headline, lines, "info"
 
 
-def append_ledger_event(ts: str, amount_usd: float, source: str, meta_obj: dict,
-                        dry_run: bool, id_suffix: str = "") -> bool:
-    """Append a 'signal_emitted' row via Append-RevenueEvent.ps1.
-
-    Mirrors opt_c_crypto_yield.append_ledger_event so opt_d alerts also
-    surface in REVENUE_LEDGER.jsonl whenever a live send succeeds. Schema-
-    correct PS1 param names; safe_id derives from ISO ts by stripping ':' and
-    '.'; -LedgerPath is the project-local path so the dashboard resolver
-    picks it up. Stderr is surfaced on non-zero exit so operators can debug
-    PS1 refusals without losing the audit row.
-    """
-    script = Path(r"C:\Users\karma\Append-RevenueEvent.ps1")
-    if not script.exists():
-        print(f"[opt_d] PS1 helper missing: {script}", file=sys.stderr)
-        return False
-
-    safe_id = ts.replace(":", "-").replace(".", "-") + (f"-{id_suffix}" if id_suffix else "")
-    ledger_path = ROOT / "REVENUE_LEDGER.jsonl"
-    meta_json_str = json.dumps(meta_obj)
-
-    args = [
-        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
-        "-File", str(script),
-        "-Event", "signal_emitted",
-        "-Source", source,
-        "-Id", safe_id,
-        "-AmountUsd", f"{amount_usd:.2f}",
-        "-MetaJson", meta_json_str,
-        "-LedgerPath", str(ledger_path),
-    ]
-    if dry_run:
-        args.append("-DryRun")
-
-    r = subprocess.run(args, capture_output=True, text=True)
-    if r.returncode != 0:
-        print(f"[opt_d] Ledger append refused (exit {r.returncode}): {r.stderr.strip()}", file=sys.stderr)
-    return r.returncode == 0
+# Single source of truth for signal_emitted ledger row writes; shared with
+# opt_c_crypto_yield.py. Future PS1 schema changes update one file.
+from _ledger_writer import append_ledger_event
 
 
 def main() -> int:

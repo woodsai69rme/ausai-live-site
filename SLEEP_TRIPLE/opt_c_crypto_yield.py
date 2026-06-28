@@ -302,43 +302,9 @@ def append_audit(row: dict) -> None:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
 
-def append_ledger_event(ts: str, amount_usd: float, source: str, meta_obj: dict,
-                        dry_run: bool, id_suffix: str = "") -> bool:
-    """Append a 'signal_emitted' row via the existing PowerShell helper.
-
-    Forwards the schema-correct parameter names (-Event, -Source, -Id,
-    -AmountUsd, -MetaJson, -LedgerPath) so the PS1's refusal matrix is
-    satisfied. Builds safe_id by stripping ':' and '.' from the ISO ts so
-    the id contains only [a-zA-Z0-9._-]. Forwards -LedgerPath to the
-    project-local path so the row lands alongside audit logs (portable
-    across clones; dashboard server prefers local over global).
-    """
-    script = Path(r"C:\Users\karma\Append-RevenueEvent.ps1")
-    if not script.exists():
-        print(f"[opt_c] PS1 helper missing: {script}", file=sys.stderr)
-        return False
-
-    safe_id = ts.replace(":", "-").replace(".", "-") + (f"-{id_suffix}" if id_suffix else "")
-    ledger_path = ROOT / "REVENUE_LEDGER.jsonl"
-    meta_json_str = json.dumps(meta_obj)
-
-    args = [
-        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
-        "-File", str(script),
-        "-Event", "signal_emitted",
-        "-Source", source,
-        "-Id", safe_id,
-        "-AmountUsd", f"{amount_usd:.2f}",
-        "-MetaJson", meta_json_str,
-        "-LedgerPath", str(ledger_path),
-    ]
-    if dry_run:
-        args.append("-DryRun")
-
-    r = subprocess.run(args, capture_output=True, text=True)
-    if r.returncode != 0:
-        print(f"[opt_c] Ledger append refused (exit {r.returncode}): {r.stderr.strip()}", file=sys.stderr)
-    return r.returncode == 0
+# Single source of truth for signal_emitted ledger row writes; shared with
+# opt_d_alerts.py. Future PS1 schema changes update one file.
+from _ledger_writer import append_ledger_event
 
 
 def main() -> int:
