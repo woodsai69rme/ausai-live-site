@@ -31,13 +31,10 @@ matching repo is cloned.
   - `git clone <TODO: oracle repo URL> C:\Users\karma\oracle-agent`
   - `cd C:\Users\karma\oracle-agent && uv sync`
 
-- **Model mapping (recommended starting point):**
-  - Cloud (OpenRouter free): `qwen/qwen-2.5-7b-instruct:free`
+- **Model mapping (filled):**
+  - Cloud (OpenRouter free): `qwen/qwen3-next-80b-a3b-instruct:free`
   - Local fallback (Ollama): `qwen2.5-coder:7b` (already on disk per
-    `START-ALL-AI-TOOLS.bat` option 1)
-  - Swap-in placeholder when the agent supports paid tiers:
-    `<openrouter-free-qwen-oracle>` -- a verified-free model the user picks
-    once the persona is wired.
+    `START-ALL-AI-TOOLS.bat` option 4)
 
 - **Role-specific config sketch:**
   - Long-context window: dynamic; start with `8k`, scale up only when the
@@ -46,10 +43,10 @@ matching repo is cloned.
   - Vector-store adapter: Supabase (port 8181) or local `chromadb`
   - Tool allow-list: `rag_query`, `code_search`, `retrieve_doc`
 
-  **Config schema (`oracle.config.json`):**
+  **Config (`oracle.config.json`) — already filled:**
   ```json
   {
-    "cloud_model_id": "<openrouter-free-qwen-oracle>",
+    "cloud_model_id": "qwen/qwen3-next-80b-a3b-instruct:free",
     "local_model_id": "qwen2.5-coder:7b",
     "context_window": 8192,
     "vector_store": "chromadb",
@@ -68,10 +65,8 @@ matching repo is cloned.
   - `git clone <TODO: jarvis repo URL> C:\Users\karma\jarvis-agent`
   - `cd C:\Users\karma\jarvis-agent && uv sync`
 
-- **Model mapping:**
-  - Cloud (OpenRouter free): `<openrouter-free-qwen-coder>` *(verified-free
-    model the user picks from `config/openrouter_free_models.txt` -- avoid
-    guessing specific 32B/70B IDs: those are typically paid)*
+- **Model mapping (filled):**
+  - Cloud (OpenRouter free): `qwen/qwen3-next-80b-a3b-instruct:free`
   - Local fallback (Ollama): `qwen2.5-coder:7b`
 
 - **Role-specific config sketch:**
@@ -79,10 +74,10 @@ matching repo is cloned.
   - Terminal proxy: stream via OpenClaw gateway (port 18789 if running)
   - Tool allow-list: `bash`, `read_file`, `write_file`, `git`
 
-  **Config schema (`jarvis.config.json`):**
+  **Config (`jarvis.config.json`) — already filled:**
   ```json
   {
-    "cloud_model_id": "<openrouter-free-qwen-coder>",
+    "cloud_model_id": "qwen/qwen3-next-80b-a3b-instruct:free",
     "local_model_id": "qwen2.5-coder:7b",
     "file_sandbox": "C:/Users/karma/workspaces",
     "terminal_proxy": "http://127.0.0.1:18789",
@@ -101,10 +96,9 @@ matching repo is cloned.
   - `git clone <TODO: paperclip repo URL> C:\Users\karma\paperclip-agent`
   - `cd C:\Users\karma\paperclip-agent && uv sync`
 
-- **Model mapping:**
-  - Cloud (OpenRouter free): `<openrouter-free-llama>` *(verified-free
-    model the user picks from `config/openrouter_free_models.txt`)*
-  - Local fallback (Ollama): `phi3:latest` (already on disk per option 2)
+- **Model mapping (filled):**
+  - Cloud (OpenRouter free): `meta-llama/llama-3.3-70b-instruct:free`
+  - Local fallback (Ollama): `phi3:latest` (already on disk per option 5)
 
 - **Role-specific config sketch:**
   - Concurrency 1 (no parallel writes to the same dir)
@@ -112,10 +106,10 @@ matching repo is cloned.
     `C:\Users\karma\.paperclip\logs\paperclip.actions.jsonl`
   - Tool allow-list: `move_file`, `copy_file`, `delete_file`, `archive`
 
-  **Config schema (`paperclip.config.json`):**
+  **Config (`paperclip.config.json`) — already filled:**
   ```json
   {
-    "cloud_model_id": "<openrouter-free-llama>",
+    "cloud_model_id": "meta-llama/llama-3.3-70b-instruct:free",
     "local_model_id": "phi3:latest",
     "concurrency": 1,
     "tool_allowlist": ["move_file", "copy_file", "delete_file", "archive"],
@@ -186,22 +180,21 @@ should aggregate by reading all three files in parallel.
 
 ## Recommended Next Steps
 
-1. **Paste the three specific repo URLs** under the TODO blocks above. The
-   launcher will pick them up on the next `.bat` run automatically.
-2. **Create `~/.oracle`, `~/.jarvis`, `~/.paperclip`** stub directories and
-   put a minimal `oracle.config.json` / `jarvis.config.json` /
-   `paperclip.config.json` matching the schemas above.
-3. **Smoke-test each persona** by pressing the new menu options (8, 9, 10) in
-   `START-ALL-AI-TOOLS.bat` and verifying the TODO message -> clone -> launch
-   flow works end-to-end before enabling in production runtime.
-4. **Document the persona-switching logic** in
+1. **Paste the three specific repo URLs** under the TODO blocks above, then
+   clone into `oracle-agent/`, `jarvis-agent/`, `paperclip-agent/`.
+   The launcher will pick them up on the next `.bat` run automatically.
+2. **Smoke-test each persona** by pressing the new menu options (8, 9, 10) in
+   `START-ALL-AI-TOOLS.bat` and verifying the clone -> launch flow works
+   end-to-end before enabling in production runtime.
+3. **Document the persona-switching logic** in
    `OPENCLAW_HERMES_SETUP_AND_RESEARCH.md` once the routing layer is wired
    through the OpenClaw gateway.
+4. **Split Oracle/Jarvis models** when more Qwen free variants appear on
+   OpenRouter to avoid shared rate limits.
 
-## Swap-in checklist for the verified-free model slots
+## Verified-free model reference
 
-When the agent is wired up, swap `<openrouter-free-X>` placeholders for
-real model IDs. Source-of-truth list:
+Source-of-truth list:
 `C:\Users\karma\ComfyUI\config\openrouter_free_models.txt` (free-tier
 catalog, regenerated by `music_video_studio.py list-free-models`).
 

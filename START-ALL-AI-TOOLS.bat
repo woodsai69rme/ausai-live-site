@@ -37,6 +37,7 @@ echo  0. Exit
 echo.
 
 set /p choice="Enter choice (0-16): "
+if "%choice%"=="" goto menu
 
 if "%choice%"=="1" goto kilo
 if "%choice%"=="2" goto openclaw

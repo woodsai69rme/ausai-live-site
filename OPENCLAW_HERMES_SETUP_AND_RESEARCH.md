@@ -47,7 +47,7 @@ without direct inter-agent IPC.
 
 Hermes is the **default chat persona**. It uses a three-tier model fallback:
 
-1. **Tier 1 (Cloud via OpenRouter free):** `qwen/qwen-2.5-7b-instruct:free`
+1. **Tier 1 (Cloud via OpenRouter free):** `qwen/qwen3-next-80b-a3b-instruct:free`
 2. **Tier 2 (Cloud fallback):** OpenRouter's internal provider fallback
 3. **Tier 3 (Local floor):** Ollama `qwen2.5-coder:7b` on `127.0.0.1:11434`
 
