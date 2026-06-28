@@ -1,0 +1,18 @@
+{
+  "label": "Faceless YouTube Shorts + Affiliate Funnel",
+  "ollama_model_preference": "qwen2.5-coder:latest",
+  "target_duration_seconds": 30,
+  "transcript_seed_top_n": 5,
+  "comfyui_url": "http://127.0.0.1:8188",
+  "youtube_upload_dry_run": true,
+  "instant_approval_affiliate_programs": [
+    "https://affiliates.kraken.com",
+    "https://www.binance.com/en/activity/referral",
+    "https://www.hostinger.com/affiliates",
+    "https://crypto.com/affiliates",
+    "https://affiliateprogram.withpersona.com/affiliates",
+    "https://www.ledger.com/affiliate"
+  ],
+  "default_categories": ["ai_tools", "crypto_yield", "side_hustle"],
+  "voiceover_provider": "none_stub"
+}

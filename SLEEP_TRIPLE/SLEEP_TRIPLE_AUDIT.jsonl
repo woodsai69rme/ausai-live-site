@@ -1,0 +1,39 @@
+{"ts":"2026-06-29T05:45:02.148527+10:00","module":"opt_a","status":"started","kind":"ai_prompts","publish":"draft_only","dry_run":true,"topic":"AI prompts for Australian freelancers","model":"qwen2.5-coder:latest","products_per_night":1}
+{"ts":"2026-06-29T05:45:02.148527+10:00","module":"opt_a","status":"ok","kind":"ai_prompts","publish":"draft_only","dry_run":true,"product_path":"C:\\Users\\karma\\SLEEP_TRIPLE\\outbox\\a_digital_factory\\ai_prompts__ai_prompts_for_australian_freelancers__20260629_054502.txt","publish_summary":"draft_only: ai_prompts__ai_prompts_for_australian_freelancers__20260629_054502.txt","characters":1790,"comfyui_alive":true}
+{"ts":"2026-06-29T05:45:02.340849+10:00","module":"opt_b","status":"started","task":"harvest_topics","seed_top_n":5,"dry_run":true,"publish":false}
+{"ts":"2026-06-29T05:45:02.340849+10:00","module":"opt_b","status":"ok","task":"harvest_topics","candidates":5,"selected":"AI prompt packs that sold on Gumroad last week"}
+{"ts":"2026-06-29T05:45:02.340849+10:00","module":"opt_b","status":"ok","task":"write_script","script_chars":289,"script_path":"C:\\Users\\karma\\SLEEP_TRIPLE\\outbox\\b_faceless_shorts\\script__20260629_054502.txt","model":"qwen2.5-coder:latest"}
+{"ts":"2026-06-29T05:45:02.340849+10:00","module":"opt_b","status":"ok","task":"generate_video","comfyui_alive":true,"dry_run":true,"would_render_to":"outbox/b_faceless_shorts/AI_prompt_packs_that_sold_on_G.mp4"}
+{"ts":"2026-06-29T05:45:02.340849+10:00","module":"opt_b","status":"ok","task":"inject_links","description_chars":446,"description_path":"C:\\Users\\karma\\SLEEP_TRIPLE\\outbox\\b_faceless_shorts\\description__20260629_054502.md","affiliate_count":3}
+{"ts":"2026-06-29T05:45:02.340849+10:00","module":"opt_b","status":"ok","task":"upload_short","upload_status":"skipped_dry_run","youtube_upload_dry_run":true}
+{"ts":"2026-06-29T05:45:02.503238+10:00","module":"opt_c","status":"started","task":"scan_rates","exchanges":["coinspot","kraken","independentreserve"],"pairs":["USDC/AUD","USDT/AUD"],"dry_run":true,"execute":false,"snapshot_only":true}
+{"ts":"2026-06-29T05:45:02.503238+10:00","module":"opt_c","status":"ok","task":"scan_rates","rows_observed":6,"actionable_count":0,"top_spread_bps":30}
+{"ts":"2026-06-29T05:45:02.503238+10:00","module":"opt_c","status":"ok","task":"auto_compound","would_compound_count":0,"reason":"observation_only"}
+{"ts":"2026-06-29T05:45:02.503238+10:00","module":"opt_c","status":"noop","task":"arbitrage","reason":"below_threshold"}
+{"ts":"2026-06-29T05:45:02.658625+10:00","module":"orchestrator","status":"started","slug":"orchestrator","date":"2026-06-29","dry_run":true,"skip_a":false,"skip_b":false,"skip_c":false}
+{"ts":"2026-06-29T05:45:02.820483+10:00","module":"opt_a","status":"started","kind":"ai_prompts","publish":"draft_only","dry_run":true,"topic":"AI productivity for small business owners","model":"qwen2.5-coder:latest","products_per_night":1}
+{"ts":"2026-06-29T05:45:02.820483+10:00","module":"opt_a","status":"ok","kind":"ai_prompts","publish":"draft_only","dry_run":true,"product_path":"C:\\Users\\karma\\SLEEP_TRIPLE\\outbox\\a_digital_factory\\ai_prompts__ai_productivity_for_small_business_owner__20260629_054502.txt","publish_summary":"draft_only: ai_prompts__ai_productivity_for_small_business_owner__20260629_054502.txt","characters":1910,"comfyui_alive":true}
+{"ts":"2026-06-29T05:45:02.658625+10:00","module":"opt_a_digital_factory","slug":"opt_a_digital_factory","status":"ok","exit_code":0,"date":"2026-06-29","dry_run":true}
+{"ts":"2026-06-29T05:45:03.053868+10:00","module":"opt_b","status":"started","task":"harvest_topics","seed_top_n":5,"dry_run":true,"publish":false}
+{"ts":"2026-06-29T05:45:03.053868+10:00","module":"opt_b","status":"ok","task":"harvest_topics","candidates":5,"selected":"AI prompt packs that sold on Gumroad last week"}
+{"ts":"2026-06-29T05:45:03.053868+10:00","module":"opt_b","status":"ok","task":"write_script","script_chars":289,"script_path":"C:\\Users\\karma\\SLEEP_TRIPLE\\outbox\\b_faceless_shorts\\script__20260629_054503.txt","model":"qwen2.5-coder:latest"}
+{"ts":"2026-06-29T05:45:03.053868+10:00","module":"opt_b","status":"ok","task":"generate_video","comfyui_alive":true,"dry_run":true,"would_render_to":"outbox/b_faceless_shorts/AI_prompt_packs_that_sold_on_G.mp4"}
+{"ts":"2026-06-29T05:45:03.053868+10:00","module":"opt_b","status":"ok","task":"inject_links","description_chars":446,"description_path":"C:\\Users\\karma\\SLEEP_TRIPLE\\outbox\\b_faceless_shorts\\description__20260629_054503.md","affiliate_count":3}
+{"ts":"2026-06-29T05:45:03.053868+10:00","module":"opt_b","status":"ok","task":"upload_short","upload_status":"skipped_dry_run","youtube_upload_dry_run":true}
+{"ts":"2026-06-29T05:45:02.658625+10:00","module":"opt_b_faceless_shorts","slug":"opt_b_faceless_shorts","status":"ok","exit_code":0,"date":"2026-06-29","dry_run":true}
+{"ts":"2026-06-29T05:45:03.245671+10:00","module":"opt_c","status":"started","task":"scan_rates","exchanges":["coinspot","kraken","independentreserve"],"pairs":["USDC/AUD","USDT/AUD"],"dry_run":true,"execute":false,"snapshot_only":true}
+{"ts":"2026-06-29T05:45:03.245671+10:00","module":"opt_c","status":"ok","task":"scan_rates","rows_observed":6,"actionable_count":0,"top_spread_bps":30}
+{"ts":"2026-06-29T05:45:03.245671+10:00","module":"opt_c","status":"ok","task":"auto_compound","would_compound_count":0,"reason":"observation_only"}
+{"ts":"2026-06-29T05:45:03.245671+10:00","module":"opt_c","status":"noop","task":"arbitrage","reason":"below_threshold"}
+{"ts":"2026-06-29T05:45:02.658625+10:00","module":"opt_c_crypto_yield","slug":"opt_c_crypto_yield","status":"ok","exit_code":0,"date":"2026-06-29","dry_run":true}
+{"ts":"2026-06-29T05:45:02.658625+10:00","module":"orchestrator","slug":"orchestrator","status":"ok","failures":0,"date":"2026-06-29","dry_run":true}
+{"ts":"2026-06-29T05:45:03.445827+10:00","module":"orchestrator","status":"started","slug":"orchestrator","date":"2026-06-29","dry_run":true,"skip_a":false,"skip_b":false,"skip_c":false}
+{"ts":"2026-06-29T05:45:03.445827+10:00","module":"opt_a_digital_factory","slug":"opt_a_digital_factory","status":"noop","reason":"idempotent_today","date":"2026-06-29"}
+{"ts":"2026-06-29T05:45:03.445827+10:00","module":"opt_b_faceless_shorts","slug":"opt_b_faceless_shorts","status":"noop","reason":"idempotent_today","date":"2026-06-29"}
+{"ts":"2026-06-29T05:45:03.445827+10:00","module":"opt_c_crypto_yield","slug":"opt_c_crypto_yield","status":"noop","reason":"idempotent_today","date":"2026-06-29"}
+{"ts":"2026-06-29T05:45:03.445827+10:00","module":"orchestrator","slug":"orchestrator","status":"ok","failures":0,"date":"2026-06-29","dry_run":true}
+{"ts":"2026-06-29T05:45:03.674809+10:00","module":"orchestrator","status":"started","slug":"orchestrator","date":"2026-06-29","dry_run":true,"skip_a":false,"skip_b":false,"skip_c":false}
+{"ts":"2026-06-29T05:45:03.674809+10:00","module":"opt_a_digital_factory","slug":"opt_a_digital_factory","status":"noop","reason":"idempotent_today","date":"2026-06-29"}
+{"ts":"2026-06-29T05:45:03.674809+10:00","module":"opt_b_faceless_shorts","slug":"opt_b_faceless_shorts","status":"noop","reason":"idempotent_today","date":"2026-06-29"}
+{"ts":"2026-06-29T05:45:03.674809+10:00","module":"opt_c_crypto_yield","slug":"opt_c_crypto_yield","status":"noop","reason":"idempotent_today","date":"2026-06-29"}
+{"ts":"2026-06-29T05:45:03.674809+10:00","module":"orchestrator","slug":"orchestrator","status":"ok","failures":0,"date":"2026-06-29","dry_run":true}

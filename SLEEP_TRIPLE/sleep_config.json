@@ -1,0 +1,68 @@
+{
+  "name": "SLEEP_TRIPLE",
+  "version": "1.0.0",
+  "purpose": "Three independent systems that run while user sleeps and earn AUD with ZERO approvals (no ABN, no LLC, no partner-program applications).",
+  "tz": "Australia/Sydney",
+  "sleep_window": ["23:00", "07:00"],
+  "dry_run_default": true,
+  "max_daily_aud_spend": 0.0,
+  "max_daily_aud_risk": 0.0,
+  "ledger_path": "C:/Users/karma/REVENUE_LEDGER.jsonl",
+  "audit_log_path": "C:/Users/karma/SLEEP_TRIPLE/SLEEP_TRIPLE_AUDIT.jsonl",
+  "append_revenue_event_script": "C:/Users/karma/Append-RevenueEvent.ps1",
+  "personal_folders_fence": [
+    "Documents",
+    "Downloads",
+    "Pictures",
+    "Videos",
+    "Music",
+    "Desktop",
+    "OneDrive",
+    "ARCHIVE_OLD"
+  ],
+  "options": {
+    "a": {
+      "label": "AI Digital Product Factory",
+      "enabled": true,
+      "categories": ["ai_prompts", "code_snippets", "design_assets"],
+      "products_per_night": 1,
+      "ollama_model_preference": "qwen2.5-coder:latest",
+      "openrouter_model_fallback": "qwen/qwen3-next-80b-a3b-instruct:free",
+      "comfyui_url": "http://127.0.0.1:8188",
+      "gumroad_dry_run": true
+    },
+    "b": {
+      "label": "Faceless YouTube Shorts + Affiliate Funnel",
+      "enabled": true,
+      "shorts_per_night": 1,
+      "target_duration_seconds": 30,
+      "transcript_seed_top_n": 5,
+      "ollama_model_preference": "qwen2.5-coder:latest",
+      "comfyui_url": "http://127.0.0.1:8188",
+      "youtube_upload_dry_run": true,
+      "instant_approval_affiliate_programs": [
+        "https://affiliateprogram.withpersona.com/affiliates",
+        "https://www.hostinger.com/affiliates",
+        "https://crypto.com/affiliates",
+        "https://www.binance.com/en/activity/referral",
+        "https://affiliates.kraken.com"
+      ]
+    },
+    "c": {
+      "label": "Crypto Yield Automation",
+      "enabled": true,
+      "snapshot_only": true,
+      "exchanges_observed": ["coinspot", "kraken", "independentreserve"],
+      "stablecoin_pairs": ["USDC/AUD", "USDT/AUD"],
+      "max_capital_aud": 0,
+      "stablecoin_threshold_bps": 50
+    }
+  },
+  "notes": [
+    "Sleep Triple ships with AUD=$0 risk ceiling by default. --run --with-risk flag allows live operations.",
+    "Auto-listing to Gumroad stays in --dry-run until --publish flag is set on opt_a_digital_factory.py.",
+    "Crypto yield is OBSERVATION-ONLY by default. --execute flag is required for any live trade.",
+    "All outputs append to existing REVENUE_LEDGER.jsonl via Append-RevenueEvent.ps1.",
+    "Each module is independently skippable: --skip-a, --skip-b, --skip-c."
+  ]
+}

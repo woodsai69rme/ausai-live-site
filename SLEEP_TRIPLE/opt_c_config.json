@@ -1,0 +1,17 @@
+{
+  "label": "Crypto Yield Automation",
+  "snapshot_only": true,
+  "exchanges_observed": ["coinspot", "kraken", "independentreserve"],
+  "stablecoin_pairs": ["USDC/AUD", "USDT/AUD"],
+  "stablecoin_threshold_bps": 50,
+  "max_capital_aud": 0,
+  "stablecoin_floor_aud": {
+    "USDC/AUD": 1.49,
+    "USDT/AUD": 1.48
+  },
+  "notes": [
+    "Exchange choice: AU-licensed for AUD off-ramp (CoinSpot/IndependentReserve need KYC, but for AUD receipts only).",
+    "Kraken / Binance used for crypto snapshots (public endpoints, no KYC for read-only).",
+    "max_capital_aud == 0 forces observation-only; --execute is refused at runtime."
+  ]
+}
