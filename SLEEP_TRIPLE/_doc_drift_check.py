@@ -37,21 +37,24 @@ def _git_log_sleep_commits() -> list[str]:
     """Return most-recent-first list of 7/8-char short commit hashes that touch
     SLEEP_TRIPLE/ or Append-Revenue* on HEAD.
 
-    Filters OUT the most-recent commit IF its subject indicates that its ONLY
+    Filters OUT the most-recent commit IF its subject indicates the commit's
     purpose was to update DOCS / §9 itself. Without this filter, every amend
     creates a new hash that the §9 table can't yet contain (chicken-and-egg).
-    Recognized doc-update subject prefixes::
-    - `docs:` / `chore(docs):` / `docs(SLEEP_TRIPLE):` / `docs(*):`
-    - The canonical drift guard's own subject: `feat(SLEEP_TRIPLE): cold-start ...`
-    Pure-table §9 stays intact for the subject-prefix narrowing above; code
-    commits are never filtered.
+    The filter is regex-based so future subject variants stay covered.
+
+    Recognized doc-update subject signals (case-insensitive):
+      - Anchored conventional prefixes: docs:, docs(, docs(*):, chore:,
+        chore(*):, doc: (rare).
+      - Whole-word substrings anywhere: doc, docs, drift, readme.
+
+    Older doc-update commits are kept in the listing so §9 archaeology stays
+    complete. Code commits that incidentally contain "doc" as a SUBSTRING of
+    an unrelated word (e.g. "decode", "decoded") still pass through because
+    the substring check uses ``\\b`` word boundaries.
     """
-    DOC_UPDATE_PREFIXES = (
-        "docs:", "docs(", "chore(docs):", "chore:",
-        "feat(SLEEP_TRIPLE): cold-start",
-        "fix(SLEEP_TRIPLE): self-aware drift",
-        "fix(SLEEP_TRIPLE): docs",
-        "docs(SLEEP_TRIPLE): bump \u00a79",
+    DOC_UPDATE_RE = re.compile(
+        r"\A(?:docs?|chore)(?:\([^)]+\))?:\b|\b(?:docs?|drift|readme)\b",
+        re.IGNORECASE,
     )
     r = subprocess.run(
         ["git", "log", "--pretty=format:%h\t%s", "HEAD",
@@ -70,7 +73,7 @@ def _git_log_sleep_commits() -> list[str]:
         h, subj = parts[0].strip(), parts[1].strip()
         # Filter only the MOST-RECENT commit if it's a doc-update commit.
         # Older doc-update commits stay in the listing so §9 stays complete.
-        if not rows and any(subj.startswith(p) for p in DOC_UPDATE_PREFIXES):
+        if not rows and DOC_UPDATE_RE.search(subj):
             continue
         rows.append(h)
     return rows
