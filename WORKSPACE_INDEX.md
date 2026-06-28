@@ -3,7 +3,7 @@
 > **Single-page master index covering ALL systems in the workspace.** Start here. Click through to each system's detailed index for deep reference.
 
 **Generated:** 2026-06-28
-**Systems documented:** 17 | **System indexes:** 19 | **Total files tracked:** 380+ organized
+**Systems documented:** 17 | **System indexes:** 19 | **Total files tracked:** 420+ organized
 
 ---
 
@@ -137,8 +137,8 @@ EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) 
 | Metric | Value |
 |---|---|
 | Commits on master | 88 |
-| Commits this session | 16 |
-| Unpushed commits | 16 (needs GitHub auth) |
+| Commits this session | 17 |
+| Unpushed commits | 17 (needs GitHub auth) |
 | Remote | `woodsai69rme/ausai-live-site` |
 | 🟢 Live | AI Army on port 8001 |
 

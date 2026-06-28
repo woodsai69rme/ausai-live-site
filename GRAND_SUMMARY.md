@@ -1,8 +1,8 @@
 # 📋 GRAND_SUMMARY.md — Complete Workspace Reference
 
-> **One-page condensed reference for the entire workspace.** 17 systems, 19 indexes, 380+ files organized, 12 ports. 🟢 AI Army LIVE on port 8001. Print this.
+> **One-page condensed reference for the entire workspace.** 17 systems, 19 indexes, 420+ files organized, 12 ports. 🟢 AI Army LIVE on port 8001. Print this.
 
-**Generated:** 2026-06-28 | **Systems:** 17 | **Ports:** 12 | **Commits:** 16 this session
+**Generated:** 2026-06-28 | **Systems:** 17 | **Ports:** 12 | **Commits:** 17 this session
 
 ---
 
@@ -24,7 +24,7 @@
 | 12 | YouTube Tools | 5 | Transcript harvester |
 | 13 | Master Ecosystem Catalog | 11+ | 11 subsystems hub |
 | 14 | Dashboard System Scripts | 61 | Terminal automation layer |
-| 15 | Bookmark Manager Pro | 7,685 | Bookmarks, 17 categories, 100% coverage |
+| 15 | Bookmark Manager Pro | 20+ | 7,685 bookmarks, 17 categories, 100% coverage |
 | 16 | AI Influencer Factory | 4 | Ollama→Piper→ComfyUI→n8n pipeline |
 | 17 | Workspace Meta | 19 | All indexes, org plan, changelog |
 
@@ -90,7 +90,7 @@
 | Batch 4: HTML + Empire + Golden Rules | 48 | ✅ |
 | Batch 5: Remaining docs (AUSAI, GITHUB, LINKEDIN) | 45 | ✅ |
 | Batch 6: Remaining scripts + data | 38 | ✅ |
-| **Total organized** | **~380** | ✅ |
+| **Total organized** | **~420** | ✅ |
 
 ---
 
