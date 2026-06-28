@@ -42,6 +42,7 @@ import json
 import os
 import ssl
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timedelta
@@ -278,15 +279,22 @@ def build_payload(channel: str, tier: str, headline: str, lines: list, trigger: 
 
 def send_alert(channel: str, payload: dict, dry_run: bool) -> tuple:
     """Returns (sent: bool, info: str, status_code: int or -1).
-    On dry_run, sent=True because no error occurred; info explains the no-op."""
+    On dry_run, sent=True because no error occurred; info explains the no-op.
+
+    Use _send_with_retry() instead of this function directly when you want
+    automatic exponential-backoff retries on transient errors. This raw
+    function performs exactly one attempt."""
     if dry_run:
         safe_preview = json.dumps(payload, ensure_ascii=False)[:600]
-        return True, f"dry_run (would send: {safe_preview})", 0
+        return True, f"dry_run (would send: {safe_preview})", _STATUS_PERMANENT_CONFIG_ERROR
 
+    # Status-code _STATUS_PERMANENT_CONFIG_ERROR (not -1) for env-var-missing
+    # branches so _send_with_retry does NOT eat retry budget on a permanent
+    # config error.
     if channel == "discord":
         url = os.environ.get("DISCORD_WEBHOOK_URL")
         if not url:
-            return False, "DISCORD_WEBHOOK_URL env var not set", -1
+            return False, "DISCORD_WEBHOOK_URL env var not set", _STATUS_PERMANENT_CONFIG_ERROR
         rc, body = https_post_json(url, payload)
         return (rc in (200, 204)), f"http={rc} body={body[:160]}", rc
 
@@ -294,7 +302,7 @@ def send_alert(channel: str, payload: dict, dry_run: bool) -> tuple:
         token = os.environ.get("TELEGRAM_BOT_TOKEN")
         chat = os.environ.get("TELEGRAM_CHAT_ID")
         if not (token and chat):
-            return False, "TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID env vars required", -1
+            return False, "TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID env vars required", _STATUS_PERMANENT_CONFIG_ERROR
         url = f"https://api.telegram.org/bot{token}/sendMessage"
         rc, body = https_post_json(url, {"chat_id": chat, **payload})
         return (rc == 200), f"http={rc} body={body[:160]}", rc
@@ -302,7 +310,7 @@ def send_alert(channel: str, payload: dict, dry_run: bool) -> tuple:
     if channel == "slack":
         url = os.environ.get("SLACK_WEBHOOK_URL")
         if not url:
-            return False, "SLACK_WEBHOOK_URL env var not set", -1
+            return False, "SLACK_WEBHOOK_URL env var not set", _STATUS_PERMANENT_CONFIG_ERROR
         rc, body = https_post_json(url, payload)
         return (rc == 200), f"http={rc} body={body[:160]}", rc
 
@@ -310,14 +318,93 @@ def send_alert(channel: str, payload: dict, dry_run: bool) -> tuple:
         token = os.environ.get("PUSHOVER_APP_TOKEN")
         user = os.environ.get("PUSHOVER_USER_KEY")
         if not (token and user):
-            return False, "PUSHOVER_APP_TOKEN + PUSHOVER_USER_KEY env vars required", -1
+            return False, "PUSHOVER_APP_TOKEN + PUSHOVER_USER_KEY env vars required", _STATUS_PERMANENT_CONFIG_ERROR
         rc, body = https_post_json(
             "https://api.pushover.net/1/messages.json",
             {"token": token, "user": user, **payload},
         )
         return (rc == 200), f"http={rc} body={body[:160]}", rc
 
-    return False, f"unknown channel {channel}", -1
+    return False, f"unknown channel {channel}", _STATUS_PERMANENT_CONFIG_ERROR
+
+
+# HTTP status codes that warrant a retry. 5xx are usually transient server
+# issues; 408 = client-side request timeout (could be transient); 429 = rate
+# limited. Everything else (especially 4xx credentials errors like 401/403)
+# is treated as a permanent failure that won't fix itself on retry.
+_RETRYABLE_STATUS_CODES = frozenset({408, 429, 500, 502, 503, 504})
+
+# Sentinel status_code sent by send_alert() when a permanent configuration
+# error prevents the request (e.g. required env var missing). Distinct from
+# -1 (which means retryable connect/ssl/timeout) and from any literal HTTP code.
+# _is_retryable() below treats this as non-retryable so we don't burn retry
+# budget on a problem that retrying cannot fix. Name the convention so a
+# future refactor doesn't accidentally conflate it with success.
+_STATUS_PERMANENT_CONFIG_ERROR = 0
+
+
+def _safe_int(value, default: int) -> int:
+    """Coerce config JSON values into int without crashing on typos like
+    "auto" or empty strings. Falls back to `default` on any parse issue.
+    Clamps to max(1, parsed) so a config value of 0 doesn't silently disable
+    retries on transient errors that legitimately benefit from a second attempt."""
+    try:
+        parsed = int(value) if value is not None else default
+    except (TypeError, ValueError):
+        parsed = default
+    return max(1, parsed)
+
+
+def _safe_float(value, default: float) -> float:
+    """Coerce config JSON values into float without crashing on typos.
+    Clamps to max(0.0, parsed) so a negative delay never causes time.sleep
+    to raise a ValueError."""
+    try:
+        parsed = float(value) if value is not None else default
+    except (TypeError, ValueError):
+        parsed = default
+    return max(0.0, parsed)
+
+
+def _is_retryable(sent: bool, status_code: int, info: str) -> bool:
+    """Decide whether to retry a failed send. Returns True for transient
+    errors (connect / timeout / 5xx / 429 / 408). Returns False for failed
+    config (env var missing, `_STATUS_PERMANENT_CONFIG_ERROR`) or 4xx
+    credentials errors."""
+    if sent:
+        return False  # success, no retry
+    if status_code == _STATUS_PERMANENT_CONFIG_ERROR:
+        # Permanent config error: env var missing or otherwise unfixable.
+        return False
+    if status_code == -1:
+        # Connect error / SSL / timeout. Retry these.
+        return True
+    return status_code in _RETRYABLE_STATUS_CODES
+
+
+def _send_with_retry(channel: str, payload: dict, dry_run: bool,
+                     max_attempts: int = 3, base_delay: float = 5.0
+                     ) -> tuple:
+    """Wrap send_alert() with exponential backoff. Returns
+    (sent, info, status_code, attempts). Dry-run does single pass, no retry.
+
+    max_attempts: total attempts including the first try. Must be >= 1.
+    base_delay:   seconds before second attempt; doubled for third, etc."""
+    if dry_run:
+        sent, info, status_code = send_alert(channel, payload, dry_run=True)
+        return sent, info, status_code, 1
+
+    if max_attempts < 1:
+        max_attempts = 1
+
+    sent, info, status_code = send_alert(channel, payload, dry_run=False)
+    attempts = 1
+    while attempts < max_attempts and _is_retryable(sent, status_code, info):
+        delay = base_delay * (2 ** (attempts - 1))
+        time.sleep(delay)
+        sent, info, status_code = send_alert(channel, payload, dry_run=False)
+        attempts += 1
+    return sent, info, status_code, attempts
 
 
 def detect_content(trigger: str, rows: list, audit_window_hours: int) -> tuple:
@@ -433,7 +520,9 @@ def main() -> int:
 
     append_audit({"ts": now_iso, "module": "opt_d_alerts", "status": "started",
                   "trigger": args.trigger, "channels": targets, "fanout_mode": fanout_mode,
-                  "dry_run": dry_run, "audit_window_hours": args.audit_window_hours})
+                  "dry_run": dry_run, "audit_window_hours": args.audit_window_hours,
+                  "retry_attempts": _safe_int(cfg.get("retry_attempts"), 3),
+                  "retry_base_delay": _safe_float(cfg.get("retry_backoff_seconds"), 5.0)})
 
     rows = read_audit_last_window(args.audit_window_hours)
 
@@ -462,6 +551,9 @@ def main() -> int:
     per_channel_results = []
     any_sent = False
     overall_status = "ok"
+    retry_attempts_cfg = _safe_int(cfg.get("retry_attempts"), 3)
+    retry_base_delay_cfg = _safe_float(cfg.get("retry_backoff_seconds"), 5.0)
+    tier = None  # populated in the loop; ensure it's always defined for the audit row
     for ch in targets:
         # Compute tier per channel (signalled via tuple from detect_content).
         if isinstance(tier_signal, tuple) and tier_signal[0] == "__TIER__":
@@ -472,12 +564,22 @@ def main() -> int:
             payload = build_payload(ch, tier, headline, lines, args.trigger)
         except ValueError as exc:
             per_channel_results.append({"name": ch, "sent": False, "info": str(exc),
-                                        "status_code": -1})
+                                        "status_code": -1, "attempts": 0,
+                                        "dry_run": dry_run, "effective": False})
             overall_status = "failed"
             continue
-        sent, info, status_code = send_alert(ch, payload, dry_run)
+        sent, info, status_code, attempts = _send_with_retry(
+            ch, payload, dry_run,
+            max_attempts=retry_attempts_cfg,
+            base_delay=retry_base_delay_cfg,
+        )
+        # `effective` = a real POST returned 2xx. Distinguishes dry-run success
+        # and config-error returns from genuine live sends, so dashboard readers
+        # can never confuse the two at a glance.
+        effective = (not dry_run) and sent and status_code in (200, 201, 202, 203, 204)
         per_channel_results.append({"name": ch, "sent": sent, "info": info,
-                                    "status_code": status_code})
+                                    "status_code": status_code, "attempts": attempts,
+                                    "dry_run": dry_run, "effective": effective})
         any_sent = any_sent or sent
         if not sent and not dry_run:
             overall_status = "failed"
@@ -489,7 +591,7 @@ def main() -> int:
         "module": "opt_d_alerts",
         "status": overall_status,
         "trigger": args.trigger,
-        "tier": (tier if "tier" in locals() else "unknown"),
+        "tier": tier or "unknown",
         "channels": per_channel_results,
         "fanout_mode": fanout_mode,
         "dry_run": dry_run,
