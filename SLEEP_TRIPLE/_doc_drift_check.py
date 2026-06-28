@@ -47,8 +47,11 @@ def _git_log_sleep_commits() -> list[str]:
     commits are never filtered.
     """
     DOC_UPDATE_PREFIXES = (
-        "docs:", "docs(", "chore(docs):", "chore(docs):", "chore(docs):",
+        "docs:", "docs(", "chore(docs):", "chore:",
         "feat(SLEEP_TRIPLE): cold-start",
+        "fix(SLEEP_TRIPLE): self-aware drift",
+        "fix(SLEEP_TRIPLE): docs",
+        "docs(SLEEP_TRIPLE): bump \u00a79",
     )
     r = subprocess.run(
         ["git", "log", "--pretty=format:%h\t%s", "HEAD",

@@ -60,7 +60,7 @@
 | Smoke Section 12 rc=1 | `_ledger_writer` not wired — re-import `from _ledger_writer import append_ledger_event` |
 | `git push origin master` rc=128 | No PAT on this shell. Add to credential helper. |
 | `JSON.parse` rejects first byte of ledger row | UTF-8 BOM in appender — re-run `Append-RevenueEvent.ps1` BOM-fix patch |
-| `_doc_drift_check.py` rc=1 | DOCUMENTATION.md §9 latest commit != `git rev-parse HEAD` — re-run smoke + commit |
+| `_doc_drift_check.py` rc=1 | DOCUMENTATION.md §9 latest commit != filtered git-log top — re-run smoke, then regenerate §9 with the snippet in section 7 |
 
 For thorough failure-mode reference, see DOCUMENTATION.md §13.
 
