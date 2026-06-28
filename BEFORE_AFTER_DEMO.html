@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before & After — AusAI Tech Automation Demo</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --text: #e1e4ed;
+    --muted: #8b90a0;
+    --accent: #6c5ce7;
+    --green: #10b981;
+    --red: #ef4444;
+    --warn: #f59e0b;
+    --border: #2a2d3a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh; padding: 2rem 1rem;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 2.5rem; }
+  header h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  header p { color: var(--muted); margin-top: 0.5rem; font-size: 1.05rem; }
+
+  .demo-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 700px) { .demo-grid { grid-template-columns: 1fr; } }
+
+  .panel {
+    border-radius: 14px; padding: 1.75rem;
+    border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .panel.before {
+    background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02));
+    border-color: rgba(239,68,68,0.2);
+  }
+  .panel.after {
+    background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.02));
+    border-color: rgba(16,185,129,0.2);
+  }
+  .panel-badge {
+    position: absolute; top: 14px; right: 14px;
+    padding: 4px 12px; border-radius: 20px;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .before .panel-badge { background: rgba(239,68,68,0.15); color: var(--red); }
+  .after .panel-badge { background: rgba(16,185,129,0.15); color: var(--green); }
+
+  .panel h2 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .panel .subtitle { color: var(--muted); font-size: 0.82rem; margin-bottom: 1rem; }
+
+  .stat-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-icon { font-size: 1.2rem; width: 28px; text-align: center; }
+  .stat-label { flex: 1; font-size: 0.88rem; }
+  .stat-value { font-weight: 700; font-size: 0.92rem; white-space: nowrap; }
+  .before .stat-value { color: var(--red); }
+  .after .stat-value { color: var(--green); }
+
+  .saving-banner {
+    text-align: center; padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(16,185,129,0.08));
+    border: 1px solid rgba(108,92,231,0.2);
+    border-radius: 14px; margin-bottom: 2rem;
+  }
+  .saving-banner .big { font-size: 2.5rem; font-weight: 800; color: var(--green); }
+  .saving-banner .label { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
+
+  .flow-section { margin-bottom: 2rem; }
+  .flow-section h3 { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.8rem; }
+  .flow-row {
+    display: flex; align-items: center; gap: 0.6rem;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .flow-step {
+    padding: 0.5rem 1rem; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .flow-step.manual { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); color: var(--red); }
+  .flow-step.auto { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); color: var(--green); }
+  .flow-step.hybrid { background: rgba(108,92,231,0.08); border-color: rgba(108,92,231,0.2); color: var(--accent); }
+  .flow-arrow { color: var(--muted); font-size: 1.1rem; }
+
+  .cta-section { text-align: center; margin: 2rem 0; }
+  .cta-btn {
+    display: inline-block; padding: 0.9rem 2.5rem;
+    background: var(--accent); color: #fff;
+    border-radius: 10px; font-size: 1rem; font-weight: 700;
+    text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(108,92,231,0.25);
+  }
+  .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(108,92,231,0.4); }
+
+  footer { text-align: center; color: var(--muted); font-size: 0.75rem; opacity: 0.5; margin-top: 3rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>This Is What Automation Looks Like</h1>
+    <p>A real customer support workflow — before and after AusAI Tech</p>
+  </header>
+
+  <div class="demo-grid">
+    <div class="panel before">
+      <div class="panel-badge">Before</div>
+      <h2>Manual Chaos</h2>
+      <p class="subtitle">15 hrs/week. Missed tickets. Tired team.</p>
+      <div class="stat-row">
+        <span class="stat-icon">⏱️</span>
+        <span class="stat-label">Response time (avg)</span>
+        <span class="stat-value">4.2 hours</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">👤</span>
+        <span class="stat-label">Staff handling tickets</span>
+        <span class="stat-value">2 people full-time</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">📧</span>
+        <span class="stat-label">Tickets per week</span>
+        <span class="stat-value">120</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">🤖</span>
+        <span class="stat-label">Auto-resolved</span>
+        <span class="stat-value">0% (all manual)</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">😤</span>
+        <span class="stat-label">Weekend coverage</span>
+        <span class="stat-value">None</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">💰</span>
+        <span class="stat-label">Annual cost (labour)</span>
+        <span class="stat-value" style="font-size:1.1rem;">A$78,000</span>
+      </div>
+    </div>
+
+    <div class="panel after">
+      <div class="panel-badge">After</div>
+      <h2>AI-Powered</h2>
+      <p class="subtitle">1.5 hrs/week oversight. 78% auto-resolved.</p>
+      <div class="stat-row">
+        <span class="stat-icon">⚡</span>
+        <span class="stat-label">Response time (avg)</span>
+        <span class="stat-value">45 seconds</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">👤</span>
+        <span class="stat-label">Staff handling tickets</span>
+        <span class="stat-value">0.2 FTE (oversight)</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">📧</span>
+        <span class="stat-label">Tickets per week</span>
+        <span class="stat-value">120</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">🤖</span>
+        <span class="stat-label">Auto-resolved</span>
+        <span class="stat-value" style="font-size:1.15rem;">78% (AI)</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">✅</span>
+        <span class="stat-label">Weekend coverage</span>
+        <span class="stat-value">24/7</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-icon">💰</span>
+        <span class="stat-label">Annual cost (AI + oversight)</span>
+        <span class="stat-value" style="font-size:1.1rem;">A$3,120</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="saving-banner">
+    <div class="big">A$74,880/year saved</div>
+    <div class="label">12 staff hours freed per week · 45-second response time · 24/7 coverage</div>
+  </div>
+
+  <div class="flow-section">
+    <h3>Before — How It Worked</h3>
+    <div class="flow-row">
+      <span class="flow-step manual">Customer emails</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step manual">Inbox triage (30 min)</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step manual">Staff reads & categorises</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step manual">Staff drafts reply (15 min avg)</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step manual">Manager reviews (if unsure)</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step manual">Send reply</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step manual">Remember follow-up (often missed)</span>
+    </div>
+  </div>
+
+  <div class="flow-section">
+    <h3>After — AI Automated Workflow</h3>
+    <div class="flow-row">
+      <span class="flow-step auto">Customer emails</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step auto">AI classifies + extracts intent</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step auto">78% auto-resolved by AI</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step hybrid">22% escalated to human</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step hybrid">Staff reviews (2 min avg)</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step auto">Auto follow-up calendar</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step auto">Weekly analytics report</span>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <a href="#" class="cta-btn" onclick="window.open('https://calendly.com/YOUR_USERNAME/ai-audit','_blank');return false;">
+      🔍 See What This Looks Like For YOUR Business →
+    </a>
+    <p style="color:var(--muted);margin-top:0.7rem;font-size:0.85rem;">Free 30-min AI Audit. We'll map your workflow and show you the savings.</p>
+  </div>
+
+  <footer>
+    AusAI Tech — AI Automation & Security Consulting · github.com/woodsai69rme<br>
+    *Results shown are based on real automation patterns. Individual results vary by workflow and volume.
+  </footer>
+</div>
+</body>
+</html>

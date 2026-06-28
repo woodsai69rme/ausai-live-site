@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AusAI Tech — Email Signature</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --border: #1f2937;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    display: grid; place-items: center; min-height: 100vh;
+    padding: 24px;
+  }
+  .instructions {
+    max-width: 600px; margin-bottom: 24px;
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+  }
+  .instructions h2 { font-size: 16px; color: var(--text); margin-bottom: 8px; }
+  .instructions code {
+    background: var(--surface); padding: 2px 6px; border-radius: 4px;
+    font-size: 12px; color: var(--accent);
+  }
+  .signature-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    max-width: 480px; width: 100%;
+  }
+  .sig-row { display: flex; align-items: center; gap: 16px; }
+  .sig-avatar {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px; display: grid; place-items: center;
+    font-size: 20px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .sig-name { font-size: 16px; font-weight: 700; }
+  .sig-title { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .sig-divider {
+    height: 1px; background: var(--border); margin: 14px 0;
+  }
+  .sig-links {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .sig-links a {
+    font-size: 12px; color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .sig-links a:hover { text-decoration: underline; }
+  .sig-tagline {
+    font-size: 11px; color: var(--muted); margin-top: 10px; font-style: italic;
+  }
+
+  /* Light-mode fallback for email clients that don't support dark mode */
+  @media (prefers-color-scheme: light) {
+    body { background: #f3f4f6; }
+    .signature-box { background: #fff; border-color: #e5e7eb; }
+    .sig-name { color: #111827; }
+    .sig-title { color: #6b7280; }
+    .sig-divider { background: #e5e7eb; }
+    .sig-tagline { color: #6b7280; }
+  }
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <h2>📎 How to use this signature</h2>
+  <p><strong>Option A — Gmail:</strong> Open Gmail → Settings → See all settings → Signature. Copy the box below (including the avatar) and paste. Replace <code>{{placeholders}}</code> with your real info.</p>
+  <p><strong>Option B — Outlook (web / 365):</strong> Settings → Mail → Compose and reply → Email signature. Paste the HTML directly into the rich-text editor. The styled version should render correctly.</p>
+  <p><strong>Option C — Outlook desktop:</strong> Outlook desktop strips &lt;style&gt; tags. Use the plain-text version below, OR save the HTML file to <code>C:\Users\{{YOU}}\AppData\Roaming\Microsoft\Signatures\</code> and select it in Outlook → Options → Mail → Signatures.</p>
+  <p><strong>Option C — Plain text:</strong> Use the text version at the bottom of this page.</p>
+</div>
+
+<div class="signature-box" id="signature">
+  <div class="sig-row">
+    <div class="sig-avatar">A</div>
+    <div>
+      <div class="sig-name">karma</div>
+      <div class="sig-title">Founder & AI Automation Engineer — AusAI Tech</div>
+    </div>
+  </div>
+  <div class="sig-divider"></div>
+  <div class="sig-links">
+    <a href="https://woodsai69rme.github.io/ausai-live-site/">🌐 Website</a>
+    <a href="https://calendly.com/{{YOUR_USERNAME}}">📅 Book a Call</a>
+    <a href="https://linkedin.com/in/{{YOUR_LINKEDIN}}">💼 LinkedIn</a>
+    <a href="https://github.com/woodsai69rme">🐙 GitHub</a>
+  </div>
+  <div class="sig-tagline">"AI systems that ship this week, not next quarter."</div>
+</div>
+
+<div class="instructions" style="margin-top: 24px;">
+  <h2>📝 Plain-text version (for email clients that strip HTML)</h2>
+  <pre style="background: var(--surface); padding: 14px; border-radius: 8px; font-size: 12px; overflow-x: auto; color: var(--text);">
+—
+karma | Founder & AI Automation Engineer — AusAI Tech
+🌐 https://woodsai69rme.github.io/ausai-live-site/
+📅 https://calendly.com/{{YOUR_USERNAME}}
+💼 https://linkedin.com/in/{{YOUR_LINKEDIN}}
+🐙 https://github.com/woodsai69rme
+
+"AI systems that ship this week, not next quarter."
+  </pre>
+</div>
+
+</body>
+</html>

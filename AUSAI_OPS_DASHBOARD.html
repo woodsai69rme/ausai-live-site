@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AusAI Tech — Operations Dashboard</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #111827;
+    --surface-2: #1a2332;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --success: #10b981;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --border: #1f2937;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px; display: grid; place-items: center;
+    font-size: 18px; font-weight: 700;
+  }
+  .brand h1 { font-size: 20px; letter-spacing: -0.3px; }
+  .brand p { font-size: 12px; color: var(--muted); margin: 0; }
+  .date { font-size: 13px; color: var(--muted); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .card h3 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px;
+    color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .kpi {
+    font-size: 32px; font-weight: 700; margin-bottom: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .kpi-label { font-size: 13px; color: var(--muted); }
+  .target-bar {
+    height: 6px; background: var(--surface-2); border-radius: 3px; margin-top: 10px; overflow: hidden;
+  }
+  .target-fill {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .6s ease;
+  }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px; color: var(--muted);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] {
+    width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;
+  }
+  .checklist li.done { color: var(--success); text-decoration: line-through; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    cursor: pointer; border: none; text-decoration: none; color: #fff;
+    transition: opacity .2s; margin: 4px 4px 4px 0;
+  }
+  .btn:hover { opacity: .85; }
+  .btn-primary { background: var(--accent); }
+  .btn-success { background: var(--success); }
+  .btn-warn { background: var(--warn); color: #000; }
+  .btn-ghost {
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+  }
+
+  .tool-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px;
+  }
+  .tool-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px;
+    transition: transform .15s, border-color .15s;
+  }
+  .tool-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .tool-card h4 { font-size: 13px; margin-bottom: 4px; }
+  .tool-card p { font-size: 11px; color: var(--muted); margin: 0; }
+  .tool-card a { color: var(--text); text-decoration: none; display: block; }
+
+  .pipeline {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .pipeline-stage {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px; min-width: 120px; flex: 1;
+  }
+  .pipeline-stage h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); margin-bottom: 8px; }
+  .pipeline-stage .count { font-size: 22px; font-weight: 700; }
+  .pipeline-stage .value { font-size: 11px; color: var(--muted); }
+
+  .alert {
+    background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+    color: var(--warn); padding: 12px 16px; border-radius: 8px;
+    font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .alert.danger {
+    background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); color: var(--danger);
+  }
+  .alert.success {
+    background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); color: var(--success);
+  }
+
+  iframe { width: 100%; height: 420px; border: none; border-radius: 8px; }
+
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+    header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">A</div>
+      <div>
+        <h1>AusAI Tech — Operations Dashboard</h1>
+        <p>Your daily command centre</p>
+      </div>
+    </div>
+    <div class="date" id="todayDate"></div>
+  </header>
+
+  <div class="alert" id="abnAlert">
+    <span>⚠️</span>
+    <span><strong>ABN not registered yet.</strong> You cannot invoice Australian businesses without an ABN — clients must withhold 47%. Complete Phase 1 in <code>COMPLIANCE_CHECKLIST.md</code> before your first sale. Once registered, open browser console (F12) and run: <code>localStorage.setItem('ausai_abn_registered', 'true')</code> then refresh to clear this alert.</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🎯 30-Day Revenue Target</h3>
+      <div class="kpi" id="revenueKpi">$0</div>
+      <div class="kpi-label">of A$5,000 goal</div>
+      <div class="target-bar"><div class="target-fill" id="revenueBar" style="width:0%"></div></div>
+    </div>
+    <div class="card">
+      <h3>📅 Days Remaining</h3>
+      <div class="kpi" id="daysKpi">30</div>
+      <div class="kpi-label">days left in window</div>
+      <div class="target-bar"><div class="target-fill" id="daysBar" style="width:0%"></div></div>
+    </div>
+    <div class="card">
+      <h3>💬 Today's Outreach</h3>
+      <div class="kpi" id="outreachKpi">0 / 20</div>
+      <div class="kpi-label">LinkedIn DMs sent today</div>
+      <div class="target-bar"><div class="target-fill" id="outreachBar" style="width:0%"></div></div>
+    </div>
+    <div class="card">
+      <h3>📊 Pipeline Value</h3>
+      <div class="kpi" id="pipelineKpi">$0</div>
+      <div class="kpi-label">in active proposals</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card" style="grid-column: 1 / -1;">
+      <h3>📋 Daily Action Checklist</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" id="c1"><label for="c1">Send 5 LinkedIn connection requests (target: Aus SaaS founders, e-com owners)</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2">Send 5 LinkedIn follow-up DMs to yesterday's accepts</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3">Post 1 piece of content (Reddit, LinkedIn, or Twitter)</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4">Check Calendly for new bookings</label></li>
+        <li><input type="checkbox" id="c5"><label for="c5">Log yesterday's revenue & outreach in tracker</label></li>
+        <li><input type="checkbox" id="c6"><label for="c6">Review `Discovery_Call_Script.md` before any scheduled calls</label></li>
+        <li><input type="checkbox" id="c7"><label for="c7">Update prospect tracker (spreadsheet) with today's activity</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🛠️ Quick Tools</h3>
+      <div class="tool-grid">
+        <div class="tool-card">
+          <a href="Revenue_Dashboard_Static.html" target="_blank">
+            <h4>💰 Revenue Tracker</h4>
+            <p>Log income, check pace vs. A$5k target, export CSV</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="Invoice_Template.html" target="_blank">
+            <h4>🧾 Invoice Template</h4>
+            <p>Print-to-PDF, editable, auto-calculates GST</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="Proposal_Template.html" target="_blank">
+            <h4>📄 Proposal Template</h4>
+            <p>3-tier pricing, terms, signatures</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="Discovery_Call_Script.md" target="_blank">
+            <h4>📞 Call Script</h4>
+            <p>15-min structured sales conversation</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="First_Client_Onboarding.md" target="_blank">
+            <h4>🚀 Client Onboarding</h4>
+            <p>Kickoff checklist, SOW template, intake form</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="COMPLIANCE_CHECKLIST.md" target="_blank">
+            <h4>⚖️ Compliance</h4>
+            <p>ABN, GST, tax, insurance checklist</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="POST_LAUNCH_OPERATIONS.md" target="_blank">
+            <h4>📅 Week 2-4 Playbook</h4>
+            <p>Pulse / Outreach / Receipt rhythms</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="EMAIL_TEMPLATES.md" target="_blank">
+            <h4>📧 Email Templates</h4>
+            <p>6 templates: follow-up, nurture, kickoff, update, delay, delivery</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="WEEKLY_REVIEW_TEMPLATE.md" target="_blank">
+            <h4>📊 Weekly Review</h4>
+            <p>15-min retrospective: metrics, wins, blockers, priorities</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="FAQ_PAGE.html" target="_blank">
+            <h4>❓ FAQ Page</h4>
+            <p>10-question pre-sale FAQ for the live site</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="EMAIL_SIGNATURE.html" target="_blank">
+            <h4>✉️ Email Signature</h4>
+            <p>Branded signature for Gmail/Outlook</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="00_AUSAI_SYSTEM_INDEX.md" target="_blank">
+            <h4>🗺️ System Index</h4>
+            <p>Master TOC — all docs, all links</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="LEAD_TRACKER.html" target="_blank">
+            <h4>🎯 Lead Tracker</h4>
+            <p>CRM: funnel stages, follow-ups, deal value, CSV export</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="RETAINER_AGREEMENT.html" target="_blank">
+            <h4>🔧 Retainer Agreement</h4>
+            <p>Ongoing maintenance contract with SLA</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CASE_STUDY_TEMPLATE.md" target="_blank">
+            <h4>🏆 Case Study Template</h4>
+            <p>Turn delivered projects into portfolio pieces</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="SERVICE_TIER_ONEPAGER.html" target="_blank">
+            <h4>📊 Service Tiers</h4>
+            <p>Visual one-pager for discovery call leave-behind</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CLIENT_OFFBOARDING.md" target="_blank">
+            <h4>🎬 Client Offboarding</h4>
+            <p>Handoff, testimonials, retainers, referrals</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="AUTOMATION_ROI_CALCULATOR.html" target="_blank">
+            <h4>📈 ROI Calculator</h4>
+            <p>Show prospects their automation savings</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="AI_AUTOMATION_AUDIT_CHECKLIST.md" target="_blank">
+            <h4>🔍 Audit Checklist</h4>
+            <p>Standardised SOP for A$497 AI Audits</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="COMPETITOR_BATTLE_CARDS.md" target="_blank">
+            <h4>⚔️ Battle Cards</h4>
+            <p>Objection handlers vs agencies, DIY, platforms</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="REFERRAL_PROGRAM.md" target="_blank">
+            <h4>🔗 Referral Program</h4>
+            <p>15% commissions, retainer credits, affiliate</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="TECH_STACK_DECISION_TREE.md" target="_blank">
+            <h4>🌳 Tech Stack Tree</h4>
+            <p>Which tool for which job — internal guide</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="PROJECT_MANAGEMENT_SOP.md" target="_blank">
+            <h4>📋 Project Mgmt SOP</h4>
+            <p>6-phase delivery checklist + status templates</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="SCOPE_CREEP_DEFENSE.md" target="_blank">
+            <h4>🛡️ Scope Creep Defense</h4>
+            <p>Boundary-setting scripts for every scenario</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CRISIS_COMMS_PLAYBOOK.md" target="_blank">
+            <h4>🚨 Crisis Comms</h4>
+            <p>What to say when projects go wrong</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="TAX_TIME_CHECKLIST.md" target="_blank">
+            <h4>🧾 Tax Time Checklist</h4>
+            <p>EOFY prep for sole traders</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="PRICING_PSYCHOLOGY_GUIDE.md" target="_blank">
+            <h4>💎 Pricing Psychology</h4>
+            <p>When to raise, how to handle objections</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="BEFORE_AFTER_DEMO.html" target="_blank">
+            <h4>🔄 Before/After Demo</h4>
+            <p>Interactive automation demo for calls</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="LIVE_DEMO_SCRIPT.md" target="_blank">
+            <h4>🎥 Live Demo Script</h4>
+            <p>5-min script to boost close rate 22→38%</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CLIENT_TESTIMONIAL_SYSTEM.md" target="_blank">
+            <h4>⭐ Testimonial System</h4>
+            <p>5-Ask system across the client lifecycle</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="DEPLOYMENT_QUICK_START.md" target="_blank">
+            <h4>🚀 Deploy Quick Start</h4>
+            <p>1-page go-live checklist — 35 min</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="AI_SECURITY_SHOWCASE.html" target="_blank">
+            <h4>🔒 Security Showcase</h4>
+            <p>11-finding scan demo for prospects</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="NETWORKING_PLAYBOOK.md" target="_blank">
+            <h4>🤝 Networking Playbook</h4>
+            <p>Event strategy + scripts for solo consultants</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="UPSELL_PLAYBOOK.md" target="_blank">
+            <h4>📈 Upsell Playbook</h4>
+            <p>Audit→Build→Partner conversion scripts</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="PROPOSAL_FOLLOWUP_SYSTEM.md" target="_blank">
+            <h4>📬 Proposal Follow-Up</h4>
+            <p>14-day cadence to close more deals</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="AUTOMATION_TEMPLATE_PACK.md" target="_blank">
+            <h4>🧩 Template Pack</h4>
+            <p>8 reusable automation blueprints</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="AI_TOOL_COMPARISON.html" target="_blank">
+            <h4>⚒️ Tool Comparison</h4>
+            <p>Zapier vs Make vs n8n public page</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="QUARTERLY_REVIEW_TEMPLATE.md" target="_blank">
+            <h4>📊 Quarterly Review</h4>
+            <p>QBR template for retainer clients</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="SUBCONTRACTOR_PLAYBOOK.md" target="_blank">
+            <h4>👥 Subcontractor Guide</h4>
+            <p>Hire, brief, QA, and manage subs</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="LOCAL_SEO_GUIDE.md" target="_blank">
+            <h4>🔍 Local SEO Guide</h4>
+            <p>AU-specific passive inbound leads</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="UPWORK_LAUNCH_GUIDE.md" target="_blank">
+            <h4>🚀 Upwork Launch</h4>
+            <p>Profile, proposals, JSS protection</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="PASSIVE_INCOME_PLAN.md" target="_blank">
+            <h4>💰 Passive Income</h4>
+            <p>4 lanes beyond consulting revenue</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="SOCIAL_PROOF_ENGINE.md" target="_blank">
+            <h4>📢 Social Proof Engine</h4>
+            <p>LinkedIn, Fiverr, Reddit distribution</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="COLD_OUTREACH_AB_TEST.md" target="_blank">
+            <h4>🧪 Outreach A/B Test</h4>
+            <p>Optimise DMs with data, not guesses</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="YOUTUBE_SHORTS_STRATEGY.md" target="_blank">
+            <h4>📱 YouTube Shorts</h4>
+            <p>50 Shorts in 90 days strategy</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CLIENT_PORTAL.html" target="_blank">
+            <h4>🔑 Client Portal</h4>
+            <p>Project hub for active clients</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="MASTER_INDEX_1PAGE.md" target="_blank">
+            <h4>🗺️ 1-Page Index</h4>
+            <p>Printable cheat sheet — all 65+ docs</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CLIENT_HEALTH_SCORECARD.md" target="_blank">
+            <h4>📊 Client Health</h4>
+            <p>Score clients, catch churn early</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="EXIT_STRATEGY.md" target="_blank">
+            <h4>🚪 Exit Strategy</h4>
+            <p>Decision tree if targets aren't hit</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="COMPETITOR_MONITORING.md" target="_blank">
+            <h4>📡 Competitor Monitor</h4>
+            <p>Track pricing + positioning monthly</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CLIENT_GIFT_GUIDE.md" target="_blank">
+            <h4>🎁 Gift Guide</h4>
+            <p>What/when/how to gift, ATO rules</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="HIRING_YOUR_FIRST_VA.md" target="_blank">
+            <h4>🤝 Hire a VA</h4>
+            <p>Sourcing, test task, delegation system</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="BUDGET_CALCULATOR.html" target="_blank">
+            <h4>💰 Budget Calculator</h4>
+            <p>Interactive P&L with scenario presets</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="LAUNCH_CHECKLIST_DAY1.md" target="_blank">
+            <h4>📅 30-Day Launch</h4>
+            <p>Day-by-day first month checklist</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="ONBOARDING_VIDEO_SCRIPT.md" target="_blank">
+            <h4>🎥 Welcome Video Script</h4>
+            <p>3-min Loom for new clients</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="REVIEW_MANAGEMENT_GUIDE.md" target="_blank">
+            <h4>⭐ Review Management</h4>
+            <p>Google, Fiverr, Upwork review system</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="PORTFOLIO_ENHANCEMENT_GUIDE.md" target="_blank">
+            <h4>📸 Portfolio Upgrade</h4>
+            <p>Before/after framework + screenshots</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CONTENT_DISTRIBUTION_PLAYBOOK.md" target="_blank">
+            <h4>📡 Content Distribution</h4>
+            <p>Guest posts + podcast pitches combined</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="CLIENT_WELCOME_KIT.md" target="_blank">
+            <h4>🎁 Client Welcome Kit</h4>
+            <p>Send to every new client Day 1</p>
+          </a>
+        </div>
+        <div class="tool-card">
+          <a href="SEO_CONTENT_CALENDAR.md" target="_blank">
+            <h4>📅 SEO Calendar</h4>
+            <p>90-day blog content plan</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔄 Sales Pipeline</h3>
+      <div class="pipeline">
+        <div class="pipeline-stage">
+          <h4>Prospects</h4>
+          <div class="count" id="stageProspects">0</div>
+          <div class="value">in queue</div>
+        </div>
+        <div class="pipeline-stage">
+          <h4>Connected</h4>
+          <div class="count" id="stageConnected">0</div>
+          <div class="value">LinkedIn accepts</div>
+        </div>
+        <div class="pipeline-stage">
+          <h4>Replied</h4>
+          <div class="count" id="stageReplied">0</div>
+          <div class="value">conversations</div>
+        </div>
+        <div class="pipeline-stage">
+          <h4>Call Booked</h4>
+          <div class="count" id="stageCalls">0</div>
+          <div class="value">discovery calls</div>
+        </div>
+        <div class="pipeline-stage">
+          <h4>Proposal Sent</h4>
+          <div class="count" id="stageProposals">0</div>
+          <div class="value">awaiting sign</div>
+        </div>
+        <div class="pipeline-stage">
+          <h4>Closed</h4>
+          <div class="count" id="stageClosed">0</div>
+          <div class="value">won deals</div>
+        </div>
+      </div>
+      <div style="margin-top:14px">
+        <a class="btn btn-ghost" href="LINKEDIN_PROSPECTING_SYSTEM.md" target="_blank">Open Prospecting Guide</a>
+        <a class="btn btn-ghost" href="LINKEDIN_DM_TEMPLATES.md" target="_blank">Open DM Templates</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card" style="grid-column: 1 / -1;">
+      <h3>💰 Revenue Tracker (Embedded)</h3>
+      <iframe src="Revenue_Dashboard_Static.html" title="Revenue Tracker"></iframe>
+      <div style="margin-top:10px">
+        <a class="btn btn-primary" href="Revenue_Dashboard_Static.html" target="_blank">Open Full Tracker</a>
+        <button class="btn btn-ghost" onclick="document.querySelector('iframe').contentWindow.location.reload()">Refresh</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>📚 Top Docs (Open These)</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <a class="btn btn-ghost" href="EXECUTION_SCRATCHPAD.md" target="_blank">⚡ Execution Scratchpad (go-live checklist)</a>
+        <a class="btn btn-ghost" href="MASTER_MONEY_PLAN.md" target="_blank">🎯 Master Money Plan (30/90-day targets)</a>
+        <a class="btn btn-ghost" href="SOCIAL_MEDIA_LAUNCH_POSTS.md" target="_blank">📣 Social Media Launch Posts</a>
+        <a class="btn btn-ghost" href="Reddit_Karma_Building_MiniPlaybook.md" target="_blank">🔺 Reddit Karma Playbook</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>⚡ Quick Actions</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <a class="btn btn-success" href="https://github.com/woodsai69rme/ausai-live-site" target="_blank">🚀 Push pages.yml (GitHub)</a>
+        <a class="btn btn-warn" href="https://dashboard.stripe.com/register" target="_blank">💳 Create Stripe Account</a>
+        <a class="btn btn-primary" href="https://calendly.com/signup" target="_blank">📅 Create Calendly Account</a>
+        <a class="btn btn-ghost" href="https://www.abr.gov.au/business-super-funds-charities/applying-abn" target="_blank">📝 Apply for ABN</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Date display
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-AU', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Load revenue tracker data from localStorage (shared key with Revenue_Dashboard_Static.html)
+  function loadDashboard() {
+    const raw = localStorage.getItem('ausai_revenue_dashboard_v1');
+    const state = raw ? JSON.parse(raw) : { transactions: [], startDate: new Date().toISOString().split('T')[0] };
+    const txs = state.transactions || [];
+    const actual = txs.reduce((s, t) => s + (parseFloat(t.amount) || 0), 0);
+    const target = 5000;
+    const start = new Date(state.startDate || Date.now());
+    const now = new Date();
+    const elapsed = Math.max(0, Math.floor((now - start) / 86400000));
+    const remaining = Math.max(0, 30 - elapsed);
+
+    document.getElementById('revenueKpi').textContent = '$' + actual.toLocaleString('en-AU');
+    document.getElementById('revenueBar').style.width = Math.min(100, (actual / target) * 100) + '%';
+    document.getElementById('daysKpi').textContent = remaining;
+    document.getElementById('daysBar').style.width = Math.min(100, (elapsed / 30) * 100) + '%';
+
+    // Pipeline from transactions (naive: "pending" = status pending, "received" = closed)
+    const pipeline = txs.filter(t => t.status === 'pending').reduce((s, t) => s + (parseFloat(t.amount) || 0), 0);
+    document.getElementById('pipelineKpi').textContent = '$' + pipeline.toLocaleString('en-AU');
+
+    // ABN alert toggle (if user has "abn_registered" in localStorage)
+    if (localStorage.getItem('ausai_abn_registered')) {
+      const alert = document.getElementById('abnAlert');
+      alert.classList.add('success');
+      alert.innerHTML = '<span>✅</span><span><strong>ABN registered.</strong> You are cleared to invoice Australian businesses. Remember to set aside 25-30% for tax.</span>';
+    }
+  }
+  loadDashboard();
+
+  // Checklist persistence
+  document.querySelectorAll('.checklist input').forEach(cb => {
+    const key = 'ausai_check_' + cb.id;
+    cb.checked = localStorage.getItem(key) === 'true';
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked);
+      cb.closest('li').classList.toggle('done', cb.checked);
+    });
+    cb.closest('li').classList.toggle('done', cb.checked);
+  });
+
+  // Refresh iframe every 30s
+  setInterval(() => {
+    const iframe = document.querySelector('iframe');
+    if (iframe) iframe.contentWindow.location.reload();
+  }, 30000);
+</script>
+
+</body>
+</html>

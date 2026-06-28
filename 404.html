@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — AusAI Tech</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --border: #1f2937;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    display: grid; place-items: center; min-height: 100vh;
+    padding: 24px; text-align: center;
+  }
+  .box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 36px;
+    max-width: 480px; width: 100%;
+  }
+  .code {
+    font-size: 64px; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  h1 { font-size: 22px; margin-bottom: 8px; }
+  p { color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+  .nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .nav a {
+    display: inline-block; padding: 10px 18px; border-radius: 8px;
+    background: transparent; color: var(--text); text-decoration: none;
+    border: 1px solid var(--border); font-size: 13px; font-weight: 500;
+    transition: border-color .2s, background .2s;
+  }
+  .nav a:hover { border-color: var(--accent); background: rgba(59,130,246,0.08); }
+  .nav a.primary { background: var(--accent); border-color: var(--accent); }
+  .nav a.primary:hover { opacity: .9; }
+  .status { margin-top: 20px; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="box">
+  <div class="code">404</div>
+  <h1>Page not found</h1>
+  <p id="msg">This page doesn't exist or may have moved.<br>If you followed a link, it might be outdated.</p>
+
+  <div class="nav">
+    <a href="/ausai-live-site/" class="primary">🏠 Home</a>
+    <a href="/ausai-live-site/sales/checkout.html">💳 Services</a>
+    <a href="/ausai-live-site/book.html">📅 Book a Call</a>
+    <a href="/ausai-live-site/portfolio/">🖼️ Portfolio</a>
+  </div>
+
+  <div class="status" id="status"></div>
+</div>
+
+<script>
+  // SPA redirect recovery for GitHub Pages
+  // If the path matches a known route, redirect back to index.html
+  // with the original path preserved in the hash for potential client-side handling
+  const knownPaths = [
+    '/sales/checkout.html',
+    '/book.html',
+    '/portfolio/',
+    '/portfolio/index.html',
+    '/portfolio/gallery.html'
+  ];
+
+  const path = window.location.pathname;
+  const repoBase = '/ausai-live-site';
+  const relativePath = path.replace(repoBase, '') || '/';
+
+  // Check if this is a known route that should redirect to index
+  const isKnown = knownPaths.some(kp => relativePath === kp || relativePath.startsWith(kp));
+
+  if (isKnown) {
+    document.getElementById('msg').innerHTML =
+      'Redirecting you to the right page...<br><span style="font-size:12px;color:var(--muted)">' +
+      relativePath + '</span>';
+    document.querySelector('.nav').style.display = 'none';
+    // Preserve the original path in hash so future SPA routing could use it
+    const target = window.location.origin + repoBase + '/#!' + encodeURIComponent(relativePath);
+    setTimeout(() => { window.location.replace(target); }, 1200);
+  } else {
+    document.getElementById('status').textContent =
+      'Requested: ' + window.location.pathname + window.location.search;
+  }
+</script>
+
+</body>
+</html>

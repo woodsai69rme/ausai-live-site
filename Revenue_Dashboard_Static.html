@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💰 AusAI Tech — Revenue Dashboard</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #14141b;
+      --bg-card-hover: #1c1c26;
+      --border: #27272f;
+      --text: #e4e4e7;
+      --text-dim: #71717a;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #eab308;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 2rem; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 32px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: background 0.15s ease;
+    }
+    .card:hover { background: var(--bg-card-hover); }
+    .card-label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .card-value {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .card-value.green { color: var(--green); }
+    .card-value.red { color: var(--red); }
+    .card-value.yellow { color: var(--yellow); }
+    .card-meta { font-size: 0.8rem; color: var(--text-dim); margin-top: 4px; }
+    .progress-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      transition: width 0.4s ease;
+    }
+    .progress-fill.green { background: linear-gradient(90deg, var(--green), #4ade80); }
+    .progress-fill.red { background: var(--red); }
+    section { margin-bottom: 40px; }
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg-card-hover);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover { background: var(--bg-card-hover); }
+    input, select, button {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+    input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+    button {
+      cursor: pointer;
+      background: var(--accent);
+      border-color: var(--accent);
+      font-weight: 500;
+      transition: background 0.15s ease;
+    }
+    button:hover { background: var(--accent-hover); }
+    button.secondary { background: var(--bg-card); border-color: var(--border); }
+    button.secondary:hover { background: var(--bg-card-hover); }
+    .form-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr auto;
+      gap: 8px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+    .form-row input, .form-row select { width: 100%; }
+    .delete-btn {
+      background: transparent;
+      color: var(--red);
+      border-color: transparent;
+      padding: 4px 8px;
+    }
+    .delete-btn:hover { background: var(--bg-card-hover); border-color: var(--red); }
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .pill.green { background: var(--green); color: #052e16; }
+    .pill.yellow { background: var(--yellow); color: #422006; }
+    .pill.red { background: var(--red); color: #450a0a; }
+    .export-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-note {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+    .flash {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--green);
+      color: #052e16;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .flash.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <h1>💰 AusAI Tech — Revenue Dashboard</h1>
+  <p class="subtitle">Track actual revenue vs. <code>MASTER_MONEY_PLAN.md</code> targets. Data saved locally (localStorage). <span id="last-updated"></span></p>
+
+  <!-- Top KPI cards -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">30-day target</div>
+      <div class="card-value">A$5,000</div>
+      <div class="card-meta">Goal from MASTER_MONEY_PLAN § Conservative path</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Actual revenue</div>
+      <div class="card-value green" id="kpi-actual">A$0</div>
+      <div class="progress-bar"><div class="progress-fill" id="kpi-progress" style="width:0%"></div></div>
+      <div class="card-meta" id="kpi-pct">0% of 30-day target</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Open pipeline</div>
+      <div class="card-value yellow" id="kpi-pipeline">A$0</div>
+      <div class="card-meta">Quoted + awaiting response</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Days remaining</div>
+      <div class="card-value" id="kpi-days">—</div>
+      <div class="card-meta" id="kpi-goal-pace">Set start date below</div>
+    </div>
+  </div>
+
+  <!-- Add revenue form -->
+  <section>
+    <h2>＋ Log a transaction</h2>
+    <div class="form-row">
+      <input type="text" id="form-client" placeholder="Client name or description">
+      <select id="form-source">
+        <option value="stripe">Stripe (direct)</option>
+        <option value="fiverr">Fiverr</option>
+        <option value="hourly">Consulting</option>
+        <option value="booking">Calendly booking</option>
+        <option value="other">Other</option>
+      </select>
+      <select id="form-status">
+        <option value="received">Received</option>
+        <option value="pending">Pending (in pipeline)</option>
+      </select>
+      <input type="number" id="form-amount" placeholder="A$" min="0" step="10">
+      <button onclick="addTransaction()">＋ Add</button>
+    </div>
+  </section>
+
+  <!-- Transactions table -->
+  <section>
+    <h2>📋 Transactions</h2>
+    <table id="tx-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Client</th>
+          <th>Source</th>
+          <th>Status</th>
+          <th style="text-align:right">Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tx-tbody">
+        <tr><td colspan="6" class="empty-state">No transactions yet. Add your first using the form above.</td></tr>
+      </tbody>
+    </table>
+    <div class="export-row">
+      <button class="secondary" onclick="exportCSV()">📤 Export CSV</button>
+      <button class="secondary" onclick="exportJSON()">📋 Copy JSON backup</button>
+      <button class="secondary" onclick="if(confirm('Clear ALL transaction data? This cannot be undone.')) clearAll()">🗑️ Clear all</button>
+    </div>
+  </section>
+
+  <!-- Pace calculator -->
+  <section>
+    <h2>🎯 30-day goal pace</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">Day 0 (start)</div>
+        <input type="date" id="pace-start" style="width:100%; margin-top:4px">
+        <div class="card-meta">When did your 30-day clock start ticking?</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Behind / Ahead</div>
+        <div class="card-value" id="pace-status">—</div>
+        <div class="card-meta" id="pace-detail">vs. linear A$167/day pace</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Required daily run-rate</div>
+        <div class="card-value yellow" id="pace-runrate">—</div>
+        <div class="card-meta">To hit 30-day target by end of window</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    Sources: <code>MASTER_MONEY_PLAN.md</code> A$5k / 30 days · A$10k / 90 days.<br>
+    Local-only — data never leaves your browser.
+  </div>
+
+  <div class="flash" id="flash">✓ Saved</div>
+
+  <script>
+    const STORAGE_KEY = 'ausai_revenue_dashboard_v1';
+
+    let state = {
+      transactions: [],
+      startDate: null
+    };
+
+    function load() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) state = JSON.parse(raw);
+      } catch (e) { console.error('Load failed:', e); }
+    }
+
+    function save() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        flashMessage('✓ Saved');
+      } catch (e) { console.error('Save failed:', e); }
+      document.getElementById('last-updated').textContent = 'Last saved: ' + new Date().toLocaleTimeString();
+    }
+
+    function flashMessage(msg) {
+      const el = document.getElementById('flash');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 1500);
+    }
+
+    function addTransaction() {
+      const client = document.getElementById('form-client').value.trim();
+      const source = document.getElementById('form-source').value;
+      const status = document.getElementById('form-status').value;
+      const amount = parseInt(document.getElementById('form-amount').value);
+      if (!client || !amount) {
+        flashMessage('⚠ Fill client + amount');
+        return;
+      }
+      state.transactions.unshift({
+        id: Date.now(),
+        date: new Date().toISOString().split('T')[0],
+        client, source, status, amount
+      });
+      save();
+      render();
+      document.getElementById('form-client').value = '';
+      document.getElementById('form-amount').value = '';
+    }
+
+    function deleteTransaction(id) {
+      state.transactions = state.transactions.filter(t => t.id !== id);
+      save();
+      render();
+    }
+
+    function clearAll() {
+      state.transactions = [];
+      save();
+      render();
+    }
+
+    function renderKPIs() {
+      const actual = state.transactions.filter(t => t.status === 'received').reduce((s, t) => s + t.amount, 0);
+      const pipeline = state.transactions.filter(t => t.status === 'pending').reduce((s, t) => s + t.amount, 0);
+      const target = 5000;
+      const pct = Math.min(100, Math.round(actual / target * 100));
+
+      document.getElementById('kpi-actual').textContent = `A$${actual.toLocaleString()}`;
+      document.getElementById('kpi-pipeline').textContent = `A$${pipeline.toLocaleString()}`;
+      const fill = document.getElementById('kpi-progress');
+      fill.style.width = pct + '%';
+      fill.classList.toggle('green', pct >= 80);
+      fill.classList.toggle('red', pct < 30);
+      document.getElementById('kpi-pct').textContent = `${pct}% of 30-day target`;
+
+      // Days
+      const daysEl = document.getElementById('kpi-days');
+      const goalPaceEl = document.getElementById('kpi-goal-pace');
+      if (state.startDate) {
+        const start = new Date(state.startDate);
+        const now = new Date();
+        const elapsed = Math.floor((now - start) / (1000*60*60*24));
+        const remaining = Math.max(0, 30 - elapsed);
+        daysEl.textContent = `${remaining} days`;
+        goalPaceEl.textContent = `Day ${elapsed + 1} of 30`;
+      } else {
+        daysEl.textContent = '—';
+        goalPaceEl.textContent = 'Set start date below';
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tx-tbody');
+      if (state.transactions.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No transactions yet. Add your first using the form above.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = state.transactions.map(t => `
+        <tr>
+          <td>${t.date}</td>
+          <td>${escapeHtml(t.client)}</td>
+          <td><span class="pill ${t.source === 'stripe' ? 'green' : t.source === 'fiverr' ? 'yellow' : ''}">${t.source}</span></td>
+          <td><span class="pill ${t.status === 'received' ? 'green' : 'yellow'}">${t.status}</span></td>
+          <td style="text-align:right"><strong>A$${t.amount.toLocaleString()}</strong></td>
+          <td><button class="delete-btn" onclick="deleteTransaction(${t.id})">✕</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderPace() {
+      const statusEl = document.getElementById('pace-status');
+      const detailEl = document.getElementById('pace-detail');
+      const runrateEl = document.getElementById('pace-runrate');
+      if (!state.startDate) {
+        statusEl.textContent = '—';
+        statusEl.className = 'card-value';
+        detailEl.textContent = 'Set start date';
+        runrateEl.textContent = '—';
+        return;
+      }
+      const actual = state.transactions.filter(t => t.status === 'received').reduce((s, t) => s + t.amount, 0);
+      const start = new Date(state.startDate);
+      const now = new Date();
+      const elapsed = Math.max(1, Math.floor((now - start) / (1000*60*60*24)));
+      const dailyPace = actual / elapsed;
+      const expectedPace = 5000 / 30;
+      const delta = dailyPace - expectedPace;
+      const pctDeviation = Math.round(delta / expectedPace * 100);
+
+      if (pctDeviation > 10) {
+        statusEl.textContent = `+${pctDeviation}%`;
+        statusEl.className = 'card-value green';
+        detailEl.textContent = `Pacing A$${Math.round(dailyPace)}/day vs target A$${Math.round(expectedPace)}/day`;
+      } else if (pctDeviation < -10) {
+        statusEl.textContent = `${pctDeviation}%`;
+        statusEl.className = 'card-value red';
+        detailEl.textContent = `Pacing A$${Math.round(dailyPace)}/day vs target A$${Math.round(expectedPace)}/day`;
+      } else {
+        statusEl.textContent = 'on track';
+        statusEl.className = 'card-value yellow';
+        detailEl.textContent = `Currently A$${Math.round(dailyPace)}/day (target A$${Math.round(expectedPace)}/day)`;
+      }
+
+      const remaining = Math.max(1, 30 - elapsed);
+      const remainingTarget = Math.max(0, 5000 - actual);
+      runrateEl.textContent = `A$${Math.round(remainingTarget / remaining)}/day`;
+    }
+
+    function render() {
+      renderKPIs();
+      renderTable();
+      renderPace();
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function exportCSV() {
+      const hdr = 'date,client,source,status,amount\n';
+      const rows = state.transactions.map(t => `${t.date},"${t.client}",${t.source},${t.status},${t.amount}`).join('\n');
+      const blob = new Blob([hdr + rows], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `ausai-revenue-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      flashMessage('📤 CSV downloaded');
+    }
+
+    function exportJSON() {
+      const json = JSON.stringify(state, null, 2);
+      navigator.clipboard.writeText(json).then(() => flashMessage('📋 JSON copied to clipboard'))
+        .catch(() => prompt('Copy this manually:', json));
+    }
+
+    // Event wiring
+    document.getElementById('pace-start').addEventListener('change', e => {
+      state.startDate = e.target.value || null;
+      save();
+      render();
+    });
+    document.getElementById('form-amount').addEventListener('keypress', e => {
+      if (e.key === 'Enter') addTransaction();
+    });
+
+    // Init
+    load();
+    if (state.startDate) document.getElementById('pace-start').value = state.startDate;
+    render();
+  </script>
+</body>
+</html>

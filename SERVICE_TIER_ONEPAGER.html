@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AusAI Tech — Service Tiers</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+    --text: #e2e8f0; --text2: #94a3b8; --accent: #38bdf8; --accent2: #818cf8;
+    --success: #4ade80; --warn: #fbbf24; --danger: #f87171;
+    --basic: #60a5fa; --standard: #a78bfa; --premium: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    min-height: 100vh; padding: 2rem 1rem;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 2rem; }
+  header h1 { font-size: 1.7rem; margin-bottom: .4rem; }
+  header p { color: var(--text2); max-width: 500px; margin: 0 auto; }
+  .tiers {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 2rem;
+  }
+  @media (max-width: 800px) { .tiers { grid-template-columns: 1fr; } }
+  .tier {
+    background: var(--surface); border: 2px solid var(--surface2); border-radius: .7rem;
+    padding: 1.5rem; display: flex; flex-direction: column; position: relative;
+    transition: transform .15s, border-color .15s;
+  }
+  .tier:hover { transform: translateY(-3px); border-color: var(--surface2); }
+  .tier.basic { border-top: 4px solid var(--basic); }
+  .tier.standard { border-top: 4px solid var(--standard); border-color: var(--standard); }
+  .tier.premium { border-top: 4px solid var(--premium); }
+  .tier-badge {
+    position: absolute; top: -12px; right: 1rem;
+    background: var(--standard); color: #0f172a; font-size: .65rem; font-weight: 700;
+    padding: .2rem .6rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em;
+  }
+  .tier h2 { font-size: 1.1rem; margin-bottom: .3rem; }
+  .tier .subtitle { font-size: .82rem; color: var(--text2); margin-bottom: 1rem; }
+  .tier .price { font-size: 2rem; font-weight: 700; margin-bottom: .2rem; }
+  .tier .price span { font-size: .9rem; font-weight: 400; color: var(--text2); }
+  .tier .price-note { font-size: .78rem; color: var(--text2); margin-bottom: 1.2rem; }
+  .tier ul { list-style: none; flex: 1; }
+  .tier ul li {
+    padding: .35rem 0; padding-left: 1.4rem; position: relative; font-size: .88rem;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+  }
+  .tier ul li::before {
+    content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700;
+  }
+  .tier ul li.x::before { content: '—'; color: var(--text2); }
+  .tier ul li.x { color: var(--text2); text-decoration: line-through; opacity: .6; }
+  .tier .cta {
+    display: block; text-align: center; margin-top: 1.2rem;
+    padding: .65rem; border-radius: .4rem; font-weight: 600; text-decoration: none;
+    font-size: .9rem; transition: opacity .15s;
+  }
+  .tier.basic .cta { background: var(--basic); color: #0f172a; }
+  .tier.standard .cta { background: var(--standard); color: #0f172a; }
+  .tier.premium .cta { background: var(--premium); color: #0f172a; }
+  .tier .cta:hover { opacity: .85; }
+
+  .section { background: var(--surface); border-radius: .6rem; padding: 1.2rem 1.5rem; margin-bottom: 1rem; border: 1px solid var(--surface2); }
+  .section h3 { font-size: 1rem; color: var(--accent); margin-bottom: .6rem; }
+  .section p, .section ul { font-size: .88rem; color: var(--text2); }
+  .section ul { padding-left: 1.2rem; }
+  .section ul li { margin-bottom: .3rem; }
+
+  .trust { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
+  .trust-item { text-align: center; }
+  .trust-item .num { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+  .trust-item .lab { font-size: .72rem; color: var(--text2); text-transform: uppercase; }
+
+  footer { text-align: center; color: var(--text2); font-size: .8rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--surface2); }
+  .controls {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    display: flex; gap: .6rem; z-index: 10;
+  }
+  .controls button {
+    background: var(--accent); color: #0f172a; border: none;
+    padding: .6rem 1.1rem; border-radius: .4rem; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+  .controls button.secondary { background: var(--surface2); color: var(--text); }
+  @media print {
+    body { background: #fff; color: #000; padding: 0; }
+    .tier { border-color: #ccc; break-inside: avoid; }
+    .tier.standard { border-color: #888; }
+    .controls { display: none; }
+    .section { border-color: #ddd; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🤖 AusAI Tech — Service Tiers</h1>
+  <p>AI automation and consulting for Australian businesses. Choose the engagement that fits your stage.</p>
+</header>
+
+<div class="trust">
+  <div class="trust-item"><div class="num">24h</div><div class="lab">Avg. Response</div></div>
+  <div class="trust-item"><div class="num">7-Day</div><div class="lab">Delivery Standard</div></div>
+  <div class="trust-item"><div class="num">100%</div><div class="lab">Australian-Owned</div></div>
+</div>
+
+<div class="tiers">
+  <div class="tier basic">
+    <h2>🔍 AI Audit</h2>
+    <div class="subtitle">Know exactly where AI can help</div>
+    <div class="price">A$497 <span>one-time</span></div>
+    <div class="price-note">Perfect for: first-time buyers, budget-conscious teams</div>
+    <ul>
+      <li>90-min deep-dive interview</li>
+      <li>Process mapping of 2-3 workflows</li>
+      <li>AI opportunity scorecard</li>
+      <li>Prioritised roadmap (Quick wins → Strategic)</li>
+      <li>ROI estimate per opportunity</li>
+      <li>Delivered as PDF within 48 hours</li>
+      <li class="x">No implementation</li>
+      <li class="x">No ongoing support</li>
+    </ul>
+    <a class="cta" href="https://calendly.com/YOUR_USERNAME/ai-audit" target="_blank">Book an Audit</a>
+  </div>
+
+  <div class="tier standard">
+    <div class="tier-badge">Most Popular</div>
+    <h2>⚡ AI Build</h2>
+    <div class="subtitle">One automation, built end-to-end</div>
+    <div class="price">A$1,497 <span>one-time</span></div>
+    <div class="price-note">Perfect for: teams with a clear problem to solve</div>
+    <ul>
+      <li>Everything in AI Audit</li>
+      <li>Single workflow or agent built & deployed</li>
+      <li>n8n / Make / custom API integration</li>
+      <li>Connected to your existing tools (Slack, Sheets, CRM, etc.)</li>
+      <li>30-min handoff + recorded walkthrough</li>
+      <li>7-day email support post-delivery</li>
+      <li>30-day bug-fix warranty</li>
+      <li class="x">No ongoing monitoring</li>
+    </ul>
+    <a class="cta" href="https://calendly.com/YOUR_USERNAME/build-kickoff" target="_blank">Start a Build</a>
+  </div>
+
+  <div class="tier premium">
+    <h2>🚀 AI Partner</h2>
+    <div class="subtitle">Ongoing AI capability for your business</div>
+    <div class="price">A$2,497 <span>/month</span></div>
+    <div class="price-note">Perfect for: growth-stage businesses investing in AI long-term</div>
+    <ul>
+      <li>Everything in AI Build</li>
+      <li>Up to 3 active workflows or agents</li>
+      <li>Monthly optimisation & tuning</li>
+      <li>Priority Slack / email support</li>
+      <li>24-hour response SLA</li>
+      <li>Monthly performance report</li>
+      <li>Quarterly strategy review</li>
+      <li>Free audit of new opportunities</li>
+    </ul>
+    <a class="cta" href="https://calendly.com/YOUR_USERNAME/strategy-deep-dive" target="_blank">Book a Deep-Dive</a>
+  </div>
+</div>
+
+<div class="section">
+  <h3>📋 What's Included in Every Tier</h3>
+  <ul>
+    <li>All work scoped and documented before commencement (no surprise invoices)</li>
+    <li>Client owns all code, prompts, and configurations upon full payment</li>
+    <li>Anonymised portfolio use permitted unless explicitly declined</li>
+    <li>Payment: 50% upfront to commence, 50% on delivery (invoices via Stripe)</li>
+    <li>All prices in AUD, GST not applicable until A$75,000/year threshold reached</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>❓ Not Sure Which Tier?</h3>
+  <p>Start with the <strong>AI Audit</strong>. If you proceed to a Build within 14 days, the audit fee is credited toward the Build price. If you proceed to AI Partner within 30 days, the Build fee is credited toward your first month.</p>
+  <p style="margin-top:.6rem"><strong>Questions?</strong> Check the <a href="faq.html" style="color:var(--accent)">FAQ</a> or book a free 15-min call — no pitch, just honest advice.</p>
+</div>
+
+<div class="section">
+  <h3>🛡️ Trust & Transparency</h3>
+  <ul>
+    <li><strong>No lock-in:</strong> AI Partner is month-to-month with 30 days' notice</li>
+    <li><strong>No hidden fees:</strong> Third-party API costs (OpenAI, etc.) are your own or quoted upfront</li>
+    <li><strong>Scope protection:</strong> Changes outside the agreed scope require a signed change order</li>
+    <li><strong>Data safety:</strong> Client data is never used to train models or shared with third parties</li>
+  </ul>
+</div>
+
+<footer>
+  AusAI Tech • Australian AI Automation Consultancy • ABN: {{YOUR_ABN}}<br>
+  📧 hello@ausai-tech.com (placeholder) • 🔗 linkedin.com/in/{{YOUR_USERNAME}} • Built with 💙 in Australia
+</footer>
+
+</div>
+
+<div class="controls">
+  <button class="secondary" onclick="document.querySelectorAll('.cta').forEach(a=>a.href=a.href.replace('YOUR_USERNAME','REPLACE_ME'))">✏️ Replace Calendly Links</button>
+  <button onclick="window.print()">🖨️ Print / Save PDF</button>
+</div>
+</body>
+</html>

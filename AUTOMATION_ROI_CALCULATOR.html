@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation ROI Calculator — AusAI Tech</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e1e4ed;
+    --muted: #8b90a0;
+    --accent: #6c5ce7;
+    --accent-glow: rgba(108,92,231,0.25);
+    --green: #00d4aa;
+    --red: #ff6b6b;
+    --warn: #ffa726;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 1rem 4rem;
+  }
+  .container { max-width: 720px; width: 100%; }
+  
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Scenario switcher */
+  .scenario-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--card);
+    padding: 0.35rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .scenario-tab {
+    flex: 1;
+    padding: 0.65rem 0.5rem;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .scenario-tab.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 12px var(--accent-glow);
+  }
+  .scenario-tab:hover:not(.active) {
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .card-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  /* Sliders */
+  .slider-group { margin-bottom: 1.25rem; }
+  .slider-group:last-child { margin-bottom: 0; }
+  .slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.4rem;
+  }
+  .slider-header label { font-size: 0.9rem; color: var(--text); }
+  .slider-header .value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 5rem;
+    text-align: right;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--card);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  /* Results */
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  @media (max-width: 500px) { .results-grid { grid-template-columns: 1fr; } }
+  .result-box {
+    background: rgba(108,92,231,0.06);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .result-box .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+  .result-box .number {
+    font-size: 1.6rem;
+    font-weight: 800;
+  }
+  .result-box .number.waste { color: var(--red); }
+  .result-box .number.saved { color: var(--green); }
+  .result-box .number.accent { color: var(--accent); }
+
+  /* Payback highlight */
+  .payback-banner {
+    background: linear-gradient(135deg, rgba(0,212,170,0.12), rgba(0,212,170,0.04));
+    border: 1px solid rgba(0,212,170,0.25);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+  .payback-banner .label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--green);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+  .payback-banner .months {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--green);
+  }
+  .payback-banner .detail {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.35rem;
+  }
+
+  /* CTA */
+  .cta-section { text-align: center; margin-top: 0.5rem; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.9rem 2.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px var(--accent-glow);
+  }
+  .cta-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(108,92,231,0.4);
+    background: #7c6df0;
+  }
+  .cta-sub {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 0.6rem;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>How Much Is Manual Work Costing You?</h1>
+    <p>Drag the sliders. See the waste. Then book a free audit to stop it.</p>
+  </header>
+
+  <!-- Scenario presets -->
+  <div class="scenario-tabs">
+    <button class="scenario-tab active" onclick="setPreset('manual')">📋 Manual Tasks</button>
+    <button class="scenario-tab" onclick="setPreset('support')">💬 Customer Support</button>
+    <button class="scenario-tab" onclick="setPreset('data')">📊 Data Entry</button>
+  </div>
+
+  <!-- Sliders -->
+  <div class="card">
+    <div class="card-label">⚙️ What's Your Situation?</div>
+    
+    <div class="slider-group">
+      <div class="slider-header">
+        <label>Hours/week spent on repeatable tasks</label>
+        <span class="value" id="hoursVal">20 hrs</span>
+      </div>
+      <input type="range" id="hoursSlider" min="1" max="80" value="20" step="1" oninput="updateAll()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-header">
+        <label>People doing these tasks</label>
+        <span class="value" id="peopleVal" style="color:var(--accent)">2 people</span>
+      </div>
+      <input type="range" id="peopleSlider" min="1" max="20" value="2" step="1" oninput="updateAll()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-header">
+        <label>Average hourly cost (salary + overhead)</label>
+        <span class="value" id="rateVal" style="color:var(--accent)">A$45/hr</span>
+      </div>
+      <input type="range" id="rateSlider" min="15" max="150" value="45" step="1" oninput="updateAll()">
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results-grid" id="resultsGrid">
+    <div class="result-box">
+      <div class="label">💰 Per Week Wasted</div>
+      <div class="number waste" id="weekWaste">A$1,800</div>
+    </div>
+    <div class="result-box">
+      <div class="label">📅 Per Year Wasted</div>
+      <div class="number waste" id="yearWaste">A$93,600</div>
+    </div>
+    <div class="result-box">
+      <div class="label">🤖 Automatable (est. 80%)</div>
+      <div class="number saved" id="savable">A$74,880</div>
+    </div>
+    <div class="result-box">
+      <div class="label">⚡ After Our Build</div>
+      <div class="number accent" id="afterPrice">A$73,383</div>
+    </div>
+  </div>
+
+  <!-- Payback -->
+  <div class="payback-banner">
+    <div class="label">📈 Your Payback Period</div>
+    <div class="months" id="paybackMonths">1.2</div>
+    <div class="detail">months to break even on a <strong>A$1,497</strong> AI Build engagement</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a href="#" class="cta-btn" onclick="openCalendly(); return false;">
+      🔍 Book Your Free AI Audit →
+    </a>
+    <p class="cta-sub">30 min. No obligation. We'll build your real numbers together.</p>
+  </div>
+
+  <footer>
+    AusAI Tech — AI Automation & Security Consulting · github.com/woodsai69rme
+  </footer>
+</div>
+
+<script>
+// State
+let currentPreset = 'manual';
+
+const presets = {
+  manual:   { hours: 20, people: 2, rate: 45 },
+  support:  { hours: 40, people: 3, rate: 35 },
+  data:     { hours: 15, people: 1, rate: 50 }
+};
+
+function setPreset(name) {
+  currentPreset = name;
+  const p = presets[name];
+  document.getElementById('hoursSlider').value = p.hours;
+  document.getElementById('peopleSlider').value = p.people;
+  document.getElementById('rateSlider').value = p.rate;
+  
+  document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.scenario-tab[onclick*="${name}"]`).classList.add('active');
+  
+  updateAll();
+}
+
+function fmtAUD(n) {
+  if (n >= 1000) {
+    return 'A$' + (n / 1000).toLocaleString('en-AU', { minimumFractionDigits: 0, maximumFractionDigits: 1 }) + 'k';
+  }
+  return 'A$' + n.toLocaleString('en-AU');
+}
+
+function fmtAUDexact(n) {
+  return 'A$' + n.toLocaleString('en-AU');
+}
+
+function updateAll() {
+  const hours = parseInt(document.getElementById('hoursSlider').value);
+  const people = parseInt(document.getElementById('peopleSlider').value);
+  const rate = parseInt(document.getElementById('rateSlider').value);
+  
+  // Update labels
+  document.getElementById('hoursVal').textContent = hours + ' hrs';
+  document.getElementById('peopleVal').textContent = people + ' ' + (people === 1 ? 'person' : 'people');
+  document.getElementById('rateVal').textContent = 'A$' + rate + '/hr';
+  
+  // Calculations
+  const weeksPerYear = 48; // account for 4 weeks leave/holidays
+  const weekWaste = hours * people * rate;
+  const yearWaste = weekWaste * weeksPerYear;
+  const automatablePct = 0.80;
+  const savable = yearWaste * automatablePct;
+  
+  // AusAI Build price
+  const buildPrice = 1497;
+  const afterPrice = savable - buildPrice;
+  
+  // Payback in months
+  const monthlySaving = savable / 12;
+  const payback = monthlySaving > 0 ? buildPrice / monthlySaving : 999;
+  
+  // Update DOM
+  document.getElementById('weekWaste').textContent = fmtAUDexact(weekWaste);
+  document.getElementById('yearWaste').textContent = fmtAUDexact(yearWaste);
+  document.getElementById('savable').textContent = fmtAUDexact(Math.round(savable));
+  document.getElementById('afterPrice').textContent = afterPrice > 0 ? fmtAUDexact(Math.round(afterPrice)) : fmtAUDexact(Math.round(savable));
+  
+  // Payback
+  const pmEl = document.getElementById('paybackMonths');
+  if (payback > 100) {
+    pmEl.textContent = '∞';
+    pmEl.style.color = 'var(--muted)';
+  } else {
+    pmEl.textContent = payback.toFixed(1);
+    pmEl.style.color = payback < 2 ? 'var(--green)' : payback < 6 ? 'var(--warn)' : 'var(--red)';
+  }
+}
+
+function openCalendly() {
+  // Replace CALENDLY_USERNAME with your actual Calendly handle
+  const username = localStorage.getItem('ausai_calendly_username') || 'YOUR_USERNAME';
+  const url = `https://calendly.com/${username}/ai-audit`;
+  window.open(url, '_blank');
+}
+
+// Init
+updateAll();
+
+// Store Calendly username hint
+console.log('%c💡 Tip: Set your Calendly username with %clocalStorage.setItem("ausai_calendly_username", "your-handle")',
+  'color:#a78bfa;', 'color:#6c5ce7;font-weight:bold;');
+</script>
+</body>
+</html>

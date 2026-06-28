@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AusAI Tech — Lead Tracker</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+    --text: #e2e8f0; --text2: #94a3b8; --accent: #38bdf8; --accent2: #818cf8;
+    --success: #4ade80; --warn: #fbbf24; --danger: #f87171;
+    --stage-prospect: #94a3b8; --stage-contacted: #fbbf24; --stage-responded: #60a5fa;
+    --stage-call: #818cf8; --stage-proposal: #a78bfa; --stage-negotiate: #f472b6;
+    --stage-won: #4ade80; --stage-lost: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    padding: 1.5rem 2rem; border-bottom: 1px solid var(--surface2);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  header h1 { font-size: 1.5rem; display: flex; align-items: center; gap: .6rem; }
+  header h1 span { font-size: 1.8rem; }
+  .badge { font-size: .7rem; padding: .15rem .5rem; border-radius: 999px; background: var(--surface2); color: var(--text2); }
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: .75rem;
+    padding: 1rem 2rem; background: var(--bg);
+    border-bottom: 1px solid var(--surface2);
+  }
+  .stat-card {
+    background: var(--surface); padding: .75rem 1rem; border-radius: .5rem;
+    border: 1px solid var(--surface2); text-align: center;
+  }
+  .stat-card .value { font-size: 1.5rem; font-weight: 700; }
+  .stat-card .label { font-size: .7rem; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; }
+  .main { padding: 1.5rem 2rem; max-width: 1400px; margin: 0 auto; }
+  .toolbar {
+    display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;
+  }
+  .toolbar input, .toolbar select, .toolbar button {
+    background: var(--surface); color: var(--text); border: 1px solid var(--surface2);
+    padding: .5rem .75rem; border-radius: .4rem; font-size: .9rem;
+  }
+  .toolbar input:focus, .toolbar select:focus { outline: 2px solid var(--accent); }
+  .toolbar button {
+    cursor: pointer; background: var(--accent); color: #0f172a; font-weight: 600; border: none;
+    transition: opacity .2s;
+  }
+  .toolbar button:hover { opacity: .85; }
+  .toolbar button.secondary { background: var(--surface2); color: var(--text); }
+  .leads-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  .leads-table th {
+    text-align: left; padding: .6rem .75rem; background: var(--surface2);
+    color: var(--text2); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .03em;
+    position: sticky; top: 0; z-index: 2;
+  }
+  .leads-table td { padding: .6rem .75rem; border-bottom: 1px solid var(--surface2); vertical-align: top; }
+  .leads-table tr:hover td { background: rgba(56,189,248,.05); }
+  .stage-pill {
+    display: inline-block; padding: .2rem .55rem; border-radius: 999px; font-size: .72rem; font-weight: 600;
+    white-space: nowrap;
+  }
+  .stage-prospecting { background: rgba(148,163,184,.15); color: var(--stage-prospect); }
+  .stage-contacted   { background: rgba(251,191,36,.15); color: var(--stage-contacted); }
+  .stage-responded   { background: rgba(96,165,250,.15); color: var(--stage-responded); }
+  .stage-call-booked { background: rgba(129,140,248,.15); color: var(--stage-call); }
+  .stage-proposal-sent { background: rgba(167,139,250,.15); color: var(--stage-proposal); }
+  .stage-negotiating { background: rgba(244,114,182,.15); color: var(--stage-negotiate); }
+  .stage-closed-won  { background: rgba(74,222,128,.15); color: var(--stage-won); }
+  .stage-closed-lost { background: rgba(248,113,113,.15); color: var(--stage-lost); }
+  .overdue { color: var(--danger); font-weight: 600; }
+  .today { color: var(--warn); font-weight: 600; }
+  .actions button {
+    background: none; border: none; color: var(--text2); cursor: pointer; font-size: 1rem;
+    padding: .2rem; margin-right: .3rem;
+  }
+  .actions button:hover { color: var(--accent); }
+  .value-cell { font-family: 'SF Mono', monospace; font-size: .85rem; }
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.6);
+    display: none; align-items: center; justify-content: center; z-index: 50; padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--surface2); border-radius: .6rem;
+    width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto;
+  }
+  .modal-header {
+    padding: 1rem 1.25rem; border-bottom: 1px solid var(--surface2);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-header h2 { font-size: 1.1rem; }
+  .modal-body { padding: 1.25rem; }
+  .form-row { margin-bottom: .9rem; }
+  .form-row label { display: block; font-size: .78rem; color: var(--text2); margin-bottom: .25rem; text-transform: uppercase; letter-spacing: .03em; }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%; background: var(--bg); color: var(--text); border: 1px solid var(--surface2);
+    padding: .5rem .6rem; border-radius: .35rem; font-size: .9rem;
+  }
+  .form-row textarea { min-height: 80px; resize: vertical; }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: 2px solid var(--accent); }
+  .form-actions { display: flex; gap: .6rem; justify-content: flex-end; padding: 0 1.25rem 1.25rem; }
+  .form-actions button { padding: .5rem 1rem; border-radius: .35rem; cursor: pointer; font-weight: 600; border: none; }
+  .btn-primary { background: var(--accent); color: #0f172a; }
+  .btn-secondary { background: var(--surface2); color: var(--text); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .empty-state {
+    text-align: center; padding: 3rem 1rem; color: var(--text2);
+  }
+  .empty-state span { font-size: 3rem; display: block; margin-bottom: .5rem; }
+  @media print {
+    header, .toolbar, .actions, .modal-overlay { display: none !important; }
+    body { background: #fff; color: #000; }
+    .leads-table td, .leads-table th { border-color: #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span>🎯</span> AusAI Tech — Lead Tracker</h1>
+  <div class="badge">v1.0 • Local-only • No cloud</div>
+</header>
+
+<div class="stats-bar" id="statsBar"></div>
+
+<div class="main">
+  <div class="toolbar">
+    <button onclick="openModal()">+ Add Lead</button>
+    <input type="text" id="searchInput" placeholder="🔍 Search name or company…" oninput="render()">
+    <select id="filterStage" onchange="render()">
+      <option value="">All Stages</option>
+      <option value="Prospecting">Prospecting</option>
+      <option value="Contacted">Contacted</option>
+      <option value="Responded">Responded</option>
+      <option value="Call Booked">Call Booked</option>
+      <option value="Proposal Sent">Proposal Sent</option>
+      <option value="Negotiating">Negotiating</option>
+      <option value="Closed Won">Closed Won</option>
+      <option value="Closed Lost">Closed Lost</option>
+    </select>
+    <select id="sortBy" onchange="render()">
+      <option value="followUp">Sort: Follow-up Date</option>
+      <option value="value">Sort: Deal Value</option>
+      <option value="added">Sort: Date Added</option>
+      <option value="name">Sort: Name</option>
+    </select>
+    <button class="secondary" onclick="exportCSV()">📤 Export CSV</button>
+    <button class="secondary" onclick="if(confirm('Delete ALL leads? This cannot be undone.')) { localStorage.removeItem('ausai_leads'); render(); }">🗑️ Clear All</button>
+  </div>
+
+  <div id="tableContainer"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Add Lead</h2>
+      <button onclick="closeModal()" style="background:none;border:none;color:var(--text2);font-size:1.3rem;cursor:pointer;">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="leadId">
+      <div class="form-row">
+        <label>Name *</label>
+        <input type="text" id="name" placeholder="Jane Smith">
+      </div>
+      <div class="form-row">
+        <label>Company</label>
+        <input type="text" id="company" placeholder="Acme Corp">
+      </div>
+      <div class="form-row">
+        <label>Source</label>
+        <select id="source">
+          <option>LinkedIn DM</option>
+          <option>LinkedIn Post</option>
+          <option>Reddit</option>
+          <option>Fiverr</option>
+          <option>Referral</option>
+          <option>Calendly Inbound</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Stage</label>
+        <select id="stage">
+          <option>Prospecting</option>
+          <option>Contacted</option>
+          <option>Responded</option>
+          <option>Call Booked</option>
+          <option>Proposal Sent</option>
+          <option>Negotiating</option>
+          <option>Closed Won</option>
+          <option>Closed Lost</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Deal Value (A$)</label>
+        <input type="number" id="value" placeholder="500" min="0" step="1">
+      </div>
+      <div class="form-row">
+        <label>Follow-up Date</label>
+        <input type="date" id="followUp">
+      </div>
+      <div class="form-row">
+        <label>Notes</label>
+        <textarea id="notes" placeholder="What they said, their pain points, next actions…"></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn-danger" id="deleteBtn" style="display:none;" onclick="deleteLead()">Delete</button>
+      <button class="btn-primary" onclick="saveLead()">Save Lead</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'ausai_leads';
+const STAGES = ['Prospecting','Contacted','Responded','Call Booked','Proposal Sent','Negotiating','Closed Won','Closed Lost'];
+
+function getLeads() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+function setLeads(leads) { localStorage.setItem(STORAGE_KEY, JSON.stringify(leads)); }
+
+function formatDate(d) {
+  if (!d) return '';
+  const date = new Date(d + 'T00:00:00');
+  return date.toLocaleDateString('en-AU', { day:'numeric', month:'short', year:'2-digit' });
+}
+function daysFromNow(d) {
+  if (!d) return null;
+  const diff = Math.ceil((new Date(d + 'T00:00:00') - new Date().setHours(0,0,0,0)) / 86400000);
+  return diff;
+}
+
+function renderStats(leads) {
+  const active = leads.filter(l => l.stage !== 'Closed Won' && l.stage !== 'Closed Lost');
+  const won = leads.filter(l => l.stage === 'Closed Won');
+  const totalValue = leads.reduce((s,l) => s + (parseFloat(l.value)||0), 0);
+  const pipelineValue = active.reduce((s,l) => s + (parseFloat(l.value)||0), 0);
+  const wonValue = won.reduce((s,l) => s + (parseFloat(l.value)||0), 0);
+  const overdue = active.filter(l => daysFromNow(l.followUp) < 0).length;
+  const today = active.filter(l => daysFromNow(l.followUp) === 0).length;
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat-card"><div class="value">${leads.length}</div><div class="label">Total Leads</div></div>
+    <div class="stat-card"><div class="value">${active.length}</div><div class="label">Active</div></div>
+    <div class="stat-card"><div class="value">${won.length}</div><div class="label">Closed Won</div></div>
+    <div class="stat-card"><div class="value" style="color:var(--accent)">A$${pipelineValue.toLocaleString()}</div><div class="label">Pipeline Value</div></div>
+    <div class="stat-card"><div class="value" style="color:var(--success)">A$${wonValue.toLocaleString()}</div><div class="label">Revenue Won</div></div>
+    <div class="stat-card"><div class="value" style="color:${overdue? 'var(--danger)' : 'var(--text2)'}">${overdue}</div><div class="label">Overdue</div></div>
+    <div class="stat-card"><div class="value" style="color:${today? 'var(--warn)' : 'var(--text2)'}">${today}</div><div class="label">Due Today</div></div>
+  `;
+}
+
+function render() {
+  let leads = getLeads();
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const stageFilter = document.getElementById('filterStage').value;
+  const sortBy = document.getElementById('sortBy').value;
+
+  if (search) leads = leads.filter(l => (l.name+' '+l.company+' '+l.notes).toLowerCase().includes(search));
+  if (stageFilter) leads = leads.filter(l => l.stage === stageFilter);
+
+  leads.sort((a,b) => {
+    if (sortBy === 'followUp') {
+      if (!a.followUp) return 1; if (!b.followUp) return -1;
+      return a.followUp.localeCompare(b.followUp);
+    }
+    if (sortBy === 'value') return (parseFloat(b.value)||0) - (parseFloat(a.value)||0);
+    if (sortBy === 'added') return (b.addedAt||'').localeCompare(a.addedAt||'');
+    return (a.name||'').localeCompare(b.name||'');
+  });
+
+  renderStats(getLeads());
+
+  const container = document.getElementById('tableContainer');
+  if (!leads.length) {
+    container.innerHTML = `<div class="empty-state"><span>📭</span>No leads yet. Click "+ Add Lead" to start tracking prospects.</div>`;
+    return;
+  }
+
+  const rows = leads.map(l => {
+    const d = daysFromNow(l.followUp);
+    let followClass = '', followText = formatDate(l.followUp);
+    if (d !== null) {
+      if (d < 0) { followClass = 'overdue'; followText += ` (${d}d ago)`; }
+      else if (d === 0) { followClass = 'today'; followText += ` (today)`; }
+      else if (d === 1) followText += ` (tomorrow)`;
+      else followText += ` (in ${d}d)`;
+    }
+    const stageClass = 'stage-' + l.stage.toLowerCase().replace(/\s+/g,'-');
+    return `<tr>
+      <td><strong>${escapeHtml(l.name)}</strong>${l.company ? `<br><span style="color:var(--text2);font-size:.8rem">${escapeHtml(l.company)}</span>` : ''}</td>
+      <td><span class="stage-pill ${stageClass}">${l.stage}</span></td>
+      <td>${escapeHtml(l.source||'')}</td>
+      <td class="value-cell">${l.value ? 'A$'+parseFloat(l.value).toLocaleString() : ''}</td>
+      <td class="${followClass}">${followText}</td>
+      <td style="color:var(--text2);font-size:.82rem;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${escapeHtml(l.notes||'')}">${escapeHtml(l.notes||'')}</td>
+      <td class="actions">
+        <button onclick='editLead("${l.id}")' title="Edit">✏️</button>
+        <button onclick='advanceStage("${l.id}")' title="Advance stage">➡️</button>
+      </td>
+    </tr>`;
+  }).join('');
+
+  container.innerHTML = `<table class="leads-table"><thead><tr>
+    <th>Name</th><th>Stage</th><th>Source</th><th>Value</th><th>Follow-up</th><th>Notes</th><th></th>
+  </tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function escapeHtml(t) {
+  const d = document.createElement('div'); d.textContent = t; return d.innerHTML;
+}
+
+function openModal(id) {
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('modalTitle').textContent = id ? 'Edit Lead' : 'Add Lead';
+  document.getElementById('deleteBtn').style.display = id ? 'inline-block' : 'none';
+  if (!id) {
+    ['leadId','name','company','value','notes'].forEach(f => document.getElementById(f).value = '');
+    document.getElementById('source').selectedIndex = 0;
+    document.getElementById('stage').selectedIndex = 0;
+    // Default follow-up = 3 days from now
+    const d = new Date(); d.setDate(d.getDate()+3);
+    document.getElementById('followUp').value = d.toISOString().split('T')[0];
+  }
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function saveLead() {
+  const id = document.getElementById('leadId').value || crypto.randomUUID();
+  const name = document.getElementById('name').value.trim();
+  if (!name) { alert('Name is required'); return; }
+  const leads = getLeads().filter(l => l.id !== id);
+  leads.push({
+    id, name,
+    company: document.getElementById('company').value.trim(),
+    source: document.getElementById('source').value,
+    stage: document.getElementById('stage').value,
+    value: document.getElementById('value').value,
+    followUp: document.getElementById('followUp').value,
+    notes: document.getElementById('notes').value.trim(),
+    addedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  });
+  setLeads(leads);
+  closeModal();
+  render();
+}
+
+function editLead(id) {
+  const l = getLeads().find(x => x.id === id); if (!l) return;
+  openModal(id);
+  document.getElementById('leadId').value = l.id;
+  document.getElementById('name').value = l.name;
+  document.getElementById('company').value = l.company || '';
+  document.getElementById('source').value = l.source || 'LinkedIn DM';
+  document.getElementById('stage').value = l.stage || 'Prospecting';
+  document.getElementById('value').value = l.value || '';
+  document.getElementById('followUp').value = l.followUp || '';
+  document.getElementById('notes').value = l.notes || '';
+}
+
+function deleteLead() {
+  const id = document.getElementById('leadId').value;
+  if (!id) return;
+  setLeads(getLeads().filter(l => l.id !== id));
+  closeModal();
+  render();
+}
+
+function advanceStage(id) {
+  const leads = getLeads();
+  const l = leads.find(x => x.id === id); if (!l) return;
+  const idx = STAGES.indexOf(l.stage);
+  if (idx >= 0 && idx < STAGES.length - 1) {
+    l.stage = STAGES[idx + 1];
+    l.updatedAt = new Date().toISOString();
+    // Auto-set follow-up based on stage
+    const d = new Date();
+    if (l.stage === 'Contacted') d.setDate(d.getDate()+3);
+    else if (l.stage === 'Responded') d.setDate(d.getDate()+2);
+    else if (l.stage === 'Call Booked') d.setDate(d.getDate()+1);
+    else if (l.stage === 'Proposal Sent') d.setDate(d.getDate()+5);
+    else if (l.stage === 'Negotiating') d.setDate(d.getDate()+3);
+    else d.setDate(d.getDate()+7);
+    l.followUp = d.toISOString().split('T')[0];
+    setLeads(leads);
+    render();
+  }
+}
+
+function exportCSV() {
+  const leads = getLeads();
+  if (!leads.length) { alert('No leads to export'); return; }
+  const headers = ['Name','Company','Source','Stage','Value','FollowUp','Notes','AddedAt','UpdatedAt'];
+  const rows = leads.map(l => [
+    l.name, l.company||'', l.source||'', l.stage||'', l.value||'',
+    l.followUp||'', `"${(l.notes||'').replace(/"/g,'""')}"`, l.addedAt||'', l.updatedAt||''
+  ]);
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ausai-leads-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+render();
+</script>
+</body>
+</html>

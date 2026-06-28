@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal — AusAI Tech</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --card: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --border: #1f2937;
+    --success: #10b981;
+    --warn: #f59e0b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+  .page {
+    max-width: 860px;
+    margin: 40px auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 56px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-size: 22px; font-weight: 700; color: #fff;
+  }
+  .brand-text h1 {
+    margin: 0; font-size: 22px; letter-spacing: -0.3px;
+  }
+  .brand-text p {
+    margin: 2px 0 0; font-size: 13px; color: var(--muted);
+  }
+  .doc-meta {
+    text-align: right;
+  }
+  .doc-meta .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  .doc-meta .value {
+    font-size: 16px; font-weight: 600;
+  }
+  h2 {
+    font-size: 18px; margin: 32px 0 14px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 15px; margin: 22px 0 10px; color: var(--accent); }
+  p, li { font-size: 14px; color: var(--muted); }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  .placeholder {
+    color: #f59e0b; font-weight: 500;
+    background: rgba(245,158,11,0.08); padding: 1px 5px; border-radius: 4px;
+  }
+  .highlight-box {
+    background: linear-gradient(90deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .tiers {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin: 20px 0;
+  }
+  .tier {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform .15s, border-color .15s;
+  }
+  .tier:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .tier.recommended {
+    border-color: var(--accent);
+    position: relative;
+  }
+  .tier.recommended::before {
+    content: "RECOMMENDED";
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.6px;
+    padding: 3px 10px; border-radius: 10px;
+  }
+  .tier-name { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 8px; }
+  .tier-price { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .tier-price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+  .tier-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; min-height: 32px; }
+  .tier ul { text-align: left; padding-left: 16px; margin: 0; }
+  .tier li { font-size: 12px; margin-bottom: 6px; color: var(--text); }
+  .tier li.missing { color: var(--muted); text-decoration: line-through; }
+
+  .terms-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 24px;
+    font-size: 13px;
+  }
+  .terms-box h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; }
+  .terms-box ul { padding-left: 18px; margin: 0; }
+  .terms-box li { margin-bottom: 5px; font-size: 13px; }
+
+  .signature-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .sig-block h4 { margin: 0 0 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); }
+  .sig-line {
+    border-bottom: 1px solid var(--border);
+    height: 36px; margin-bottom: 6px;
+  }
+  .sig-label { font-size: 12px; color: var(--muted); }
+
+  .print-hide {
+    margin-top: 32px; text-align: center;
+  }
+  .btn {
+    display: inline-block; padding: 10px 22px;
+    border-radius: 8px; font-size: 14px; font-weight: 500;
+    cursor: pointer; border: none; margin: 0 6px;
+    transition: opacity .2s;
+  }
+  .btn:hover { opacity: .85; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .page { box-shadow: none; border: none; margin: 0; padding: 0; max-width: 100%; background: #fff; color: #111; }
+    .print-hide { display: none !important; }
+    .tier { background: #f9fafb; border-color: #e5e7eb; }
+    .tier.recommended { border-color: #3b82f6; }
+    .terms-box, .highlight-box { background: #f9fafb; border-color: #e5e7eb; }
+    h3 { color: #2563eb; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">A</div>
+      <div class="brand-text">
+        <h1>AusAI Tech</h1>
+        <p>AI Automation & Security Consulting</p>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div class="label">Proposal #</div>
+      <div class="value"><span class="placeholder">PROP-001</span></div>
+      <div class="label" style="margin-top:10px">Valid until</div>
+      <div class="value" style="font-size:15px;font-weight:400" id="validUntil"><span class="placeholder">YYYY-MM-DD</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>1. Project Overview</h2>
+    <p>
+      Prepared for: <strong><span class="placeholder">Client Name / Company</span></strong><br>
+      Project: <strong><span class="placeholder">Brief project title</span></strong><br>
+      Date: <span class="placeholder">YYYY-MM-DD</span>
+    </p>
+    <div class="highlight-box">
+      <strong>Executive Summary:</strong> <span class="placeholder">1-2 sentence summary of the client's pain point and how AusAI Tech solves it. E.g., "We will conduct a comprehensive AI-powered security audit of your e-commerce platform, identifying vulnerabilities before they become breaches, with a 20-page actionable report delivered within 48 hours."</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Scope of Work</h2>
+    <h3>Included</h3>
+    <ul>
+      <li><span class="placeholder">Specific deliverable 1 — e.g., AI security vulnerability scan across all public endpoints</span></li>
+      <li><span class="placeholder">Specific deliverable 2 — e.g., 20-page PDF report with CVSS severity ratings</span></li>
+      <li><span class="placeholder">Specific deliverable 3 — e.g., Step-by-step remediation instructions for each finding</span></li>
+      <li><span class="placeholder">Specific deliverable 4 — e.g., 30-day post-delivery support via email</span></li>
+    </ul>
+    <h3>Not Included</h3>
+    <ul>
+      <li>Implementation or remediation of identified issues (available as add-on)</li>
+      <li>Ongoing monitoring or retainer services beyond the support window</li>
+      <li>Source code review or internal network penetration testing</li>
+      <li>Third-party vendor coordination or procurement</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. Timeline</h2>
+    <ul>
+      <li><strong>Kickoff:</strong> Within 24 hours of signed proposal + deposit received</li>
+      <li><strong>Discovery / Access:</strong> <span class="placeholder">Day 1</span> — gather credentials, scope confirmation</li>
+      <li><strong>Execution:</strong> <span class="placeholder">Days 1-2</span> — perform scan / build / deliver</li>
+      <li><strong>Delivery:</strong> <span class="placeholder">Day 2</span> — handover report / files / walkthrough</li>
+      <li><strong>Support window closes:</strong> <span class="placeholder">Day 32</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Investment</h2>
+    <p style="margin-bottom:8px">All prices in Australian Dollars (AUD), inclusive of GST where applicable.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Basic</div>
+        <div class="tier-price">$<span class="placeholder">400</span><span> AUD</span></div>
+        <div class="tier-desc"><span class="placeholder">1 deliverable, 48-hr turnaround, 1 revision</span></div>
+        <ul>
+          <li><span class="placeholder">Core service only</span></li>
+          <li>Email support (7 days)</li>
+          <li>Standard report format</li>
+          <li class="missing">No walkthrough call</li>
+          <li class="missing">No priority queue</li>
+        </ul>
+      </div>
+      <div class="tier recommended">
+        <div class="tier-name">Standard</div>
+        <div class="tier-price">$<span class="placeholder">800</span><span> AUD</span></div>
+        <div class="tier-desc"><span class="placeholder">Full scope, 72-hr turnaround, 2 revisions</span></div>
+        <ul>
+          <li><span class="placeholder">All core deliverables</span></li>
+          <li>Email support (30 days)</li>
+          <li>Enhanced report + recommendations</li>
+          <li>30-min handover walkthrough call</li>
+          <li class="missing">Priority queue</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Premium</div>
+        <div class="tier-price">$<span class="placeholder">1,500</span><span> AUD</span></div>
+        <div class="tier-desc"><span class="placeholder">Enterprise scope, 96-hr turnaround, unlimited revisions</span></div>
+        <ul>
+          <li><span class="placeholder">Everything in Standard</span></li>
+          <li>Priority queue + dedicated Slack</li>
+          <li>Implementation assistance (4 hrs)</li>
+          <li>60-min strategy session</li>
+          <li>90-day support window</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Terms & Conditions</h2>
+    <div class="terms-box">
+      <ul>
+        <li><strong>Payment terms:</strong> 50% deposit to commence work; 50% balance due on delivery. Invoices payable within 7 days.</li>
+        <li><strong>Cancellation:</strong> Client may cancel within 24 hours of kickoff for full deposit refund. After work has commenced, deposit is non-refundable but may be credited to a future engagement.</li>
+        <li><strong>Intellectual property:</strong> All deliverables become Client's property upon final payment. AusAI Tech retains the right to use anonymised versions for portfolio and case study purposes (with Client's written consent per case).</li>
+        <li><strong>Confidentiality:</strong> Both parties agree to keep proprietary information confidential. AusAI Tech will not disclose findings to third parties.</li>
+        <li><strong>Limitation of liability:</strong> AusAI Tech's liability is limited to the total fee paid for this engagement. We do not guarantee that all vulnerabilities will be found or that systems will be breach-proof after remediation.</li>
+        <li><strong>Governing law:</strong> This agreement is governed by the laws of Australia. Disputes will be resolved via good-faith negotiation, then mediation if necessary.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Acceptance</h2>
+    <p>By signing below, the Client agrees to the scope, pricing, and terms outlined in this proposal.</p>
+    <div class="signature-grid">
+      <div class="sig-block">
+        <h4>Client</h4>
+        <div class="sig-line"></div>
+        <div class="sig-label">Signature</div>
+        <div style="margin-top:14px">
+          <div class="sig-line" style="height:22px;border-bottom-style:dashed"></div>
+          <div class="sig-label">Print Name & Title</div>
+        </div>
+        <div style="margin-top:14px">
+          <div class="sig-line" style="height:22px;border-bottom-style:dashed"></div>
+          <div class="sig-label">Date</div>
+        </div>
+      </div>
+      <div class="sig-block">
+        <h4>AusAI Tech</h4>
+        <div class="sig-line"></div>
+        <div class="sig-label">Signature</div>
+        <div style="margin-top:14px">
+          <div class="sig-line" style="height:22px;border-bottom-style:dashed"></div>
+          <div class="sig-label">Print Name & Title</div>
+        </div>
+        <div style="margin-top:14px">
+          <div class="sig-line" style="height:22px;border-bottom-style:dashed"></div>
+          <div class="sig-label">Date</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="print-hide">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="btn btn-ghost" onclick="document.designMode=document.designMode==='on'?'off':'on';this.textContent=document.designMode==='on'?'Done Editing':'Enable Editing'">Enable Editing</button>
+  </div>
+
+</div>
+
+<script>
+  // Auto-set valid-until date to 14 days from today
+  (function() {
+    const d = new Date();
+    d.setDate(d.getDate() + 14);
+    const iso = d.toISOString().split('T')[0];
+    const el = document.getElementById('validUntil');
+    if (el) el.innerHTML = iso;
+  })();
+</script>
+
+</body>
+</html>

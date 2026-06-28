@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice — AusAI Tech</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --card: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --border: #1f2937;
+    --success: #10b981;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  .page {
+    max-width: 800px;
+    margin: 40px auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 48px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-size: 22px; font-weight: 700; color: #fff;
+  }
+  .brand-text h1 {
+    margin: 0; font-size: 22px; letter-spacing: -0.3px;
+  }
+  .brand-text p {
+    margin: 2px 0 0; font-size: 13px; color: var(--muted);
+  }
+  .doc-meta {
+    text-align: right;
+  }
+  .doc-meta .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  .doc-meta .value {
+    font-size: 18px; font-weight: 600;
+  }
+  .status-badge {
+    display: inline-block;
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    margin-top: 8px;
+  }
+  .status-unpaid {
+    background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25);
+  }
+  .status-paid {
+    background: rgba(16,185,129,0.12); color: var(--success); border: 1px solid rgba(16,185,129,0.25);
+  }
+
+  .grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    margin-bottom: 32px;
+  }
+  .block h3 {
+    margin: 0 0 10px; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--muted);
+  }
+  .block p, .block div {
+    margin: 0; font-size: 14px; line-height: 1.6;
+  }
+  .placeholder {
+    color: #f59e0b; font-weight: 500;
+    background: rgba(245,158,11,0.08); padding: 1px 5px; border-radius: 4px;
+  }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 24px 0;
+    font-size: 14px;
+  }
+  thead th {
+    text-align: left; padding: 12px 14px;
+    background: var(--bg); color: var(--muted);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    padding: 14px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .right { text-align: right; }
+  .total-row td {
+    font-weight: 600; background: var(--bg);
+    border-top: 2px solid var(--border);
+  }
+  .grand-total td {
+    font-size: 18px; font-weight: 700;
+    background: linear-gradient(90deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+  }
+
+  .terms {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px; color: var(--muted);
+  }
+  .terms h4 {
+    margin: 0 0 8px; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.6px; color: var(--text);
+  }
+  .terms ul { margin: 0; padding-left: 18px; }
+  .terms li { margin-bottom: 4px; }
+
+  .bank-box {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .bank-box strong {
+    color: var(--text); display: inline-block; min-width: 110px;
+  }
+
+  .print-hide {
+    margin-top: 28px; text-align: center;
+  }
+  .btn {
+    display: inline-block; padding: 10px 22px;
+    border-radius: 8px; font-size: 14px; font-weight: 500;
+    cursor: pointer; border: none; margin: 0 6px;
+    transition: opacity .2s;
+  }
+  .btn:hover { opacity: .85; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .line-items { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+  .summary-table { max-width: 320px; margin-left: auto; margin-top: 8px; border-collapse: collapse; font-size: 14px; }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .page {
+      box-shadow: none; border: none; margin: 0; padding: 0; max-width: 100%;
+      background: #fff; color: #111;
+    }
+    .print-hide { display: none !important; }
+    .status-unpaid, .status-paid {
+      background: #f3f4f6 !important; color: #111 !important; border-color: #d1d5db !important;
+    }
+    thead th { background: #f9fafb; color: #6b7280; }
+    .total-row td, .grand-total td { background: #f9fafb !important; }
+    .bank-box { background: #f9fafb; border-color: #e5e7eb; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">A</div>
+      <div class="brand-text">
+        <h1>AusAI Tech</h1>
+        <p>AI Automation & Security Consulting</p>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div class="label">Invoice #</div>
+      <div class="value"><span class="placeholder">INV-001</span></div>
+      <div class="label" style="margin-top:10px">Date</div>
+      <div class="value" style="font-size:15px;font-weight:400"><span class="placeholder">YYYY-MM-DD</span></div>
+      <span class="status-badge status-unpaid" id="statusBadge" onclick="toggleStatus()" style="cursor:pointer" title="Click to toggle Paid/Unpaid">UNPAID</span>
+    </div>
+  </header>
+
+  <div class="grid-2">
+    <div class="block">
+      <h3>From</h3>
+      <p><strong>AusAI Tech</strong></p>
+      <div>ABN: <span class="placeholder">XX XXX XXX XXX</span></div>
+      <div><span class="placeholder">your@email.com</span></div>
+      <div><span class="placeholder">+61 4XX XXX XXX</span></div>
+      <div><span class="placeholder">Australia</span></div>
+    </div>
+    <div class="block">
+      <h3>Bill To</h3>
+      <p><strong><span class="placeholder">Client Name / Company</span></strong></p>
+      <div><span class="placeholder">client@company.com</span></div>
+      <div><span class="placeholder">Client address line 1</span></div>
+      <div><span class="placeholder">Suburb, State, Postcode</span></div>
+    </div>
+  </div>
+
+  <table class="line-items">
+    <thead>
+      <tr>
+        <th style="width:50%">Description</th>
+        <th class="right">Qty</th>
+        <th class="right">Rate (AUD)</th>
+        <th class="right">Amount (AUD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <strong><span class="placeholder">AI Security Audit</span></strong>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">
+            <span class="placeholder">Complete vulnerability scan, 20-page report, fix instructions, 30-day support</span>
+          </div>
+        </td>
+        <td class="right">1</td>
+        <td class="right">$<span class="placeholder">500.00</span></td>
+        <td class="right">$<span class="placeholder">500.00</span></td>
+      </tr>
+      <!-- Add more rows by duplicating the <tr> above -->
+    </tbody>
+  </table>
+
+  <table class="summary-table">
+    <tbody>
+      <tr>
+        <td class="right" style="border:none">Subtotal</td>
+        <td class="right" style="border:none;width:110px">$<span class="placeholder">500.00</span></td>
+      </tr>
+      <tr>
+        <td class="right" style="border:none">GST (10%)</td>
+        <td class="right" style="border:none">$<span class="placeholder">50.00</span></td>
+      </tr>
+      <tr class="grand-total">
+        <td class="right">Total Due (AUD)</td>
+        <td class="right">$<span class="placeholder">550.00</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="terms">
+    <h4>Payment Terms</h4>
+    <ul>
+      <li>Payment due within <strong>7 days</strong> of invoice date.</li>
+      <li>Late payment fee: interest at the rate specified in applicable Australian state legislation.</li>
+      <li>50% deposit may be required for engagements over A$1,000.</li>
+      <li>All prices in Australian Dollars (AUD) inclusive of GST where applicable.</li>
+      <li><strong>Australian legal requirement:</strong> For invoices over A$1,000, the buyer's name or ABN must appear on the invoice. If missing, add it below the Bill To section before sending.</li>
+      <li><strong>ABN required:</strong> You must have an ABN to invoice Australian businesses. Without one, the client is legally required to withhold 47% of payment. See <code>COMPLIANCE_CHECKLIST.md</code> Phase 1.</li>
+    </ul>
+
+    <div class="bank-box">
+      <div><strong>Bank:</strong> <span class="placeholder">Commonwealth Bank of Australia</span></div>
+      <div><strong>Account name:</strong> <span class="placeholder">AusAI Tech</span></div>
+      <div><strong>BSB:</strong> <span class="placeholder">XXX-XXX</span></div>
+      <div><strong>Account #:</strong> <span class="placeholder">XXXX XXXX</span></div>
+      <div style="margin-top:6px;font-size:12px;color:var(--muted)">Please include invoice number in payment reference.</div>
+    </div>
+  </div>
+
+  <div class="print-hide">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="btn btn-ghost" onclick="document.designMode=document.designMode==='on'?'off':'on';this.textContent=document.designMode==='on'?'Done Editing':'Enable Editing'">Enable Editing</button>
+  </div>
+
+</div>
+
+<script>
+  // Simple calculator: auto-compute GST and total from subtotal
+  function recalc() {
+    const rows = document.querySelectorAll('table:first-of-type tbody tr');
+    let subtotal = 0;
+    rows.forEach(tr => {
+      const qty = parseFloat(tr.children[1].textContent) || 0;
+      const rateText = tr.children[2].textContent.replace(/[$,]/g,'');
+      const rate = parseFloat(rateText) || 0;
+      const amt = qty * rate;
+      tr.children[3].textContent = '$' + amt.toFixed(2);
+      subtotal += amt;
+    });
+    const gst = subtotal * 0.10;
+    const total = subtotal + gst;
+    const summaryRows = document.querySelectorAll('table:last-of-type tbody tr');
+    if (summaryRows[0]) summaryRows[0].children[1].textContent = '$' + subtotal.toFixed(2);
+    if (summaryRows[1]) summaryRows[1].children[1].textContent = '$' + gst.toFixed(2);
+    if (summaryRows[2]) summaryRows[2].children[1].textContent = '$' + total.toFixed(2);
+  }
+  function toggleStatus() {
+    const badge = document.getElementById('statusBadge');
+    if (badge.classList.contains('status-unpaid')) {
+      badge.classList.remove('status-unpaid');
+      badge.classList.add('status-paid');
+      badge.textContent = 'PAID';
+    } else {
+      badge.classList.remove('status-paid');
+      badge.classList.add('status-unpaid');
+      badge.textContent = 'UNPAID';
+    }
+  }
+  // Recalc when clicking out of rate cells (editable mode)
+  document.querySelector('.line-items').addEventListener('focusout', recalc);
+</script>
+
+</body>
+</html>

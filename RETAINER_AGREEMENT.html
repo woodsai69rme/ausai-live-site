@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AusAI Tech — Retainer Agreement</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+    --text: #e2e8f0; --text2: #94a3b8; --accent: #38bdf8; --accent2: #818cf8;
+    --success: #4ade80; --warn: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    min-height: 100vh; padding: 2rem 1rem;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  header {
+    text-align: center; padding-bottom: 1.5rem; border-bottom: 2px solid var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: .3rem; }
+  header p { color: var(--text2); font-size: .9rem; }
+  .doc-meta {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .doc-meta .field {
+    background: var(--surface); padding: .6rem .9rem; border-radius: .4rem;
+    border: 1px solid var(--surface2);
+  }
+  .doc-meta .field label { display: block; font-size: .7rem; color: var(--text2); text-transform: uppercase; letter-spacing: .03em; margin-bottom: .15rem; }
+  .doc-meta .field .value { font-size: .95rem; font-weight: 500; min-height: 1.4rem; }
+  .editable .value { outline: 1px dashed var(--accent); padding: .15rem .3rem; border-radius: .2rem; cursor: text; }
+  h2 { font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 .6rem; border-bottom: 1px solid var(--surface2); padding-bottom: .3rem; }
+  h3 { font-size: .95rem; color: var(--accent2); margin: 1rem 0 .4rem; }
+  p, ul { margin-bottom: .7rem; font-size: .92rem; }
+  ul { padding-left: 1.4rem; }
+  li { margin-bottom: .35rem; }
+  .highlight-box {
+    background: rgba(56,189,248,.08); border-left: 3px solid var(--accent);
+    padding: .8rem 1rem; border-radius: 0 .4rem .4rem 0; margin: 1rem 0;
+  }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  .sig-box {
+    border: 2px solid var(--surface2); border-radius: .5rem; padding: 1rem;
+    text-align: center;
+  }
+  .sig-box .line {
+    border-bottom: 1px solid var(--text2); height: 2.5rem; margin-bottom: .4rem;
+  }
+  .sig-box .label { font-size: .75rem; color: var(--text2); }
+  .controls {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    display: flex; gap: .6rem; z-index: 10;
+  }
+  .controls button {
+    background: var(--accent); color: #0f172a; border: none;
+    padding: .6rem 1.1rem; border-radius: .4rem; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+  .controls button.secondary { background: var(--surface2); color: var(--text); }
+  .placeholder { color: var(--warn); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: .8rem 0; font-size: .88rem; }
+  th, td { padding: .5rem .7rem; text-align: left; border-bottom: 1px solid var(--surface2); }
+  th { color: var(--text2); font-size: .75rem; text-transform: uppercase; }
+  @media print {
+    body { background: #fff; color: #000; padding: 0; }
+    .controls, .editable .value { outline: none !important; cursor: default; }
+    .highlight-box { background: #f0f9ff; border-left-color: #0ea5e9; }
+    .sig-box { border-color: #ccc; }
+    .container { max-width: 100%; }
+    .placeholder { color: #666; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🔧 Retainer Agreement</h1>
+  <p>Ongoing Maintenance & Support — AusAI Tech</p>
+</header>
+
+<div class="doc-meta" id="docMeta">
+  <div class="field"><label>Client Name</label><div class="value" data-placeholder="Client Pty Ltd">{{CLIENT_NAME}}</div></div>
+  <div class="field"><label>AusAI Operator</label><div class="value">Karma — AusAI Tech</div></div>
+  <div class="field"><label>Agreement Date</label><div class="value" id="agreementDate"></div></div>
+  <div class="field"><label>Retainer Start</label><div class="value" data-placeholder="1 July 2026">{{START_DATE}}</div></div>
+  <div class="field"><label>Monthly Fee</label><div class="value" data-placeholder="A$1,200">{{MONTHLY_FEE}}</div></div>
+  <div class="field"><label>Term</label><div class="value">Month-to-month (30-day notice)</div></div>
+</div>
+
+<h2>1. Scope of Ongoing Services</h2>
+<p>This agreement covers <strong>maintenance, monitoring, and light enhancement</strong> of the systems delivered under the original Statement of Work. The following services are included in the monthly retainer:</p>
+
+<h3>1.1 Included (covered by monthly fee)</h3>
+<ul>
+  <li><strong>System monitoring:</strong> Weekly health checks of deployed workflows, APIs, and automations</li>
+  <li><strong>Bug fixes:</strong> Resolution of defects in delivered code at no additional charge</li>
+  <li><strong>Minor tweaks:</strong> Up to 2 hours/month of small adjustments (prompt tuning, filter changes, routing rules)</li>
+  <li><strong>Security patches:</strong> Critical dependency updates and security advisory monitoring</li>
+  <li><strong>Monthly status report:</strong> One-page PDF summarising uptime, changes made, and recommendations</li>
+  <li><strong>Response time SLA:</strong> Acknowledgement within 24 hours on business days; resolution target 3 business days for P2 issues, 1 business day for P1 (system down)</li>
+</ul>
+
+<h3>1.2 Not Included (billed separately)</h3>
+<ul>
+  <li>New feature development or integrations not in the original scope</li>
+  <li>Major model migrations (e.g., switching from GPT-4 to Claude 3.5)</li>
+  <li>Data migration or re-training on new datasets</li>
+  <li>Work exceeding 2 hours/month of minor tweaks (billed at agreed hourly rate)</li>
+  <li>Third-party API costs (OpenRouter, Supabase, etc.) — these are passed through at cost + 10% admin fee</li>
+</ul>
+
+<h2>2. Service Level Agreement (SLA)</h2>
+<table>
+  <tr><th>Priority</th><th>Definition</th><th>Acknowledgement</th><th>Resolution Target</th></tr>
+  <tr><td><strong>P1 — Critical</strong></td><td>System down or core function broken</td><td>4 hours</td><td>1 business day</td></tr>
+  <tr><td><strong>P2 — Standard</strong></td><td>Bug or degraded performance</td><td>24 hours</td><td>3 business days</td></tr>
+  <tr><td><strong>P3 — Enhancement</strong></td><td>Feature request or optimisation</td><td>48 hours</td><td>Quoted separately</td></tr>
+</table>
+
+<div class="highlight-box">
+  <strong>Business days:</strong> Monday–Friday, 9:00–17:00 AEST/AEDT. Public holidays excluded. For P1 issues outside business hours, send an SMS to the operator's mobile for fastest response.
+</div>
+
+<h2>3. Fees & Payment</h2>
+<ul>
+  <li><strong>Monthly retainer:</strong> <span class="placeholder">{{MONTHLY_FEE}}</span> AUD, invoiced on the 1st of each month</li>
+  <li><strong>Payment terms:</strong> 7 days from invoice date (per <code>Invoice_Template.html</code>)</li>
+  <li><strong>Late fee:</strong> 1.5% per month on overdue amounts, per applicable Australian state legislation</li>
+  <li><strong>Overage rate:</strong> Work beyond included scope billed at <span class="placeholder">{{HOURLY_RATE}}</span>/hour (e.g., A$150/hr), quoted and approved before commencement</li>
+  <li><strong>Pass-through costs:</strong> Third-party API usage billed monthly in arrears with receipts attached</li>
+</ul>
+
+<h2>4. Term & Termination</h2>
+<ul>
+  <li>This agreement begins on the Start Date above and continues month-to-month</li>
+  <li>Either party may terminate with <strong>30 days' written notice</strong> (email acceptable)</li>
+  <li>On termination, all client data and system access credentials are returned or securely deleted within 7 days</li>
+  <li>Final invoice issued for any pro-rata retainer portion plus outstanding overages</li>
+</ul>
+
+<h2>5. Intellectual Property</h2>
+<p>All new code, prompts, and configurations created during the retainer period are the <strong>client's property</strong> upon full payment. AusAI Tech retains the right to use anonymised learnings and patterns for future client work (no proprietary business logic or data is retained).</p>
+
+<h2>6. Confidentiality</h2>
+<p>Both parties agree to keep all business information, data, and system details confidential. This survives termination for a period of 2 years.</p>
+
+<h2>7. Limitation of Liability</h2>
+<p>AusAI Tech's total liability under this agreement is capped at the <strong>greater of (a) 3 months of retainer fees or (b) A$5,000</strong>, except where prohibited by Australian consumer law. This does not limit liability for fraud, wilful misconduct, or breaches of confidentiality.</p>
+
+<h2>8. Governing Law</h2>
+<p>This agreement is governed by the laws of <span class="placeholder">{{STATE}}</span>, Australia. Disputes resolved via good-faith negotiation; mediation if necessary.</p>
+
+<h2>9. Signatures</h2>
+<p>By signing below, both parties agree to the terms of this Retainer Agreement.</p>
+
+<div class="two-col">
+  <div class="sig-box">
+    <div class="line"></div>
+    <div class="label"><strong>Client</strong> — Name, Title, Date</div>
+  </div>
+  <div class="sig-box">
+    <div class="line"></div>
+    <div class="label"><strong>AusAI Tech</strong> — Karma, Principal, Date</div>
+  </div>
+</div>
+
+<div class="highlight-box" style="margin-top:2rem">
+  <strong>Next steps:</strong> ① Customise placeholders above (double-click or enable editing). ② Send to client for review. ③ Collect signature. ④ Set calendar reminder for monthly status report (1st of each month). ⑤ Add client to <code>LEAD_TRACKER.html</code> with stage "Closed Won — Retainer".
+</div>
+
+</div>
+
+<div class="controls">
+  <button class="secondary" onclick="toggleEdit()">✏️ Enable Editing</button>
+  <button onclick="window.print()">🖨️ Print / Save PDF</button>
+</div>
+
+<script>
+  document.getElementById('agreementDate').textContent = new Date().toLocaleDateString('en-AU', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+
+  let editing = false;
+  function toggleEdit() {
+    editing = !editing;
+    document.querySelectorAll('.value[data-placeholder]').forEach(el => {
+      el.contentEditable = editing;
+      el.classList.toggle('editable', editing);
+      if (editing && el.textContent.trim().startsWith('{{')) {
+        el.textContent = '';
+        el.focus();
+      }
+    });
+    document.querySelector('.controls button:first-child').textContent = editing ? '✅ Done Editing' : '✏️ Enable Editing';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting Budget & Profit Calculator — AusAI Tech</title>
+<style>
+  :root {
+    --bg: #0a0a0f; --card: #13131a; --border: #1e1e2e; --text: #e4e4e7;
+    --muted: #71717a; --accent: #22c55e; --blue: #3b82f6; --warn: #f59e0b;
+    --danger: #ef4444; --purple: #8b5cf6;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+  .container { max-width: 720px; margin: 0 auto; padding: 32px 20px; }
+  header { text-align: center; margin-bottom: 32px; }
+  header h1 { font-size: 26px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  header p { color: var(--muted); margin-top: 6px; font-size: 14px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 540px) { .grid { grid-template-columns: 1fr; } }
+  label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  input[type=number] {
+    width: 100%; background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 14px;
+  }
+  .val { font-size: 18px; font-weight: 700; display: inline; }
+  .val.green { color: var(--accent); }
+  .val.blue { color: var(--blue); }
+  .val.warn { color: var(--warn); }
+  .val.danger { color: var(--danger); }
+  .val.purple { color: var(--purple); }
+  .metric-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-row .label { font-size: 13px; }
+  .metric-row .value { font-size: 16px; font-weight: 700; }
+  .bar { height: 10px; background: var(--border); border-radius: 6px; margin-top: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 6px; transition: width .4s ease; }
+  .bar-fill.green { background: var(--accent); }
+  .bar-fill.blue { background: var(--blue); }
+  .bar-fill.purple { background: var(--purple); }
+  .btn { display: inline-block; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all .2s; cursor: pointer; }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-primary:hover { background: #16a34a; }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .scenario-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .scenario-btn { padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--muted); transition: all .2s; }
+  .scenario-btn:hover { border-color: var(--blue); color: var(--blue); }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Consulting Budget Calculator</h1>
+    <p>Plan your monthly revenue, expenses, and profit — then hit your A$5k → A$10k targets.</p>
+  </header>
+
+  <!-- Revenue -->
+  <div class="card">
+    <h3>Revenue Inputs</h3>
+    <div class="grid">
+      <div>
+        <label>Clients per month <span id="clientsVal" class="val blue">3</span></label>
+        <input type="range" id="clients" min="1" max="10" value="3" step="1">
+      </div>
+      <div>
+        <label>Average project value (A$) <span id="avgVal" class="val blue">1,500</span></label>
+        <input type="range" id="avgProject" min="500" max="5000" value="1500" step="100">
+      </div>
+      <div>
+        <label>Retainer clients <span id="retClientsVal" class="val purple">1</span></label>
+        <input type="range" id="retClients" min="0" max="5" value="1" step="1">
+      </div>
+      <div>
+        <label>Retainer rate (A$/mo) <span id="retRateVal" class="val purple">2,497</span></label>
+        <input type="range" id="retRate" min="1000" max="5000" value="2497" step="100">
+      </div>
+      <div>
+        <label>Passive income/mo (A$) <span id="passiveVal" class="val green">200</span></label>
+        <input type="range" id="passive" min="0" max="3000" value="200" step="50">
+      </div>
+      <div>
+        <label>Hours worked/week <span id="hoursVal" class="val warn">30</span></label>
+        <input type="range" id="hours" min="10" max="60" value="30" step="5">
+      </div>
+    </div>
+  </div>
+
+  <!-- Expenses -->
+  <div class="card">
+    <h3>Monthly Expenses</h3>
+    <div class="grid">
+      <div>
+        <label>Tool subscriptions (A$) <span id="toolsVal" class="val">100</span></label>
+        <input type="range" id="tools" min="0" max="500" value="100" step="10">
+      </div>
+      <div>
+        <label>Marketing (A$) <span id="mktgVal" class="val">50</span></label>
+        <input type="range" id="mktg" min="0" max="500" value="50" step="10">
+      </div>
+      <div>
+        <label>VA / Subcontractor (A$) <span id="vaVal" class="val">0</span></label>
+        <input type="range" id="va" min="0" max="3000" value="0" step="100">
+      </div>
+      <div>
+        <label>Other (insurance, legal, etc.) (A$) <span id="otherVal" class="val">80</span></label>
+        <input type="range" id="other" min="0" max="500" value="80" step="10">
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="card">
+    <h3>Monthly P&L</h3>
+    <div class="metric-row"><span class="label">Project Revenue</span><span class="value" id="projectRev">A$0</span></div>
+    <div class="metric-row"><span class="label">Retainer Revenue</span><span class="value" id="retRev">A$0</span></div>
+    <div class="metric-row"><span class="label">Passive Income</span><span class="value val green" id="passRev">A$0</span></div>
+    <div class="metric-row" style="border-top:2px solid var(--border);"><span class="label"><strong>Total Revenue</strong></span><span class="value val blue" id="totalRev">A$0</span></div>
+    <div class="metric-row"><span class="label">Total Expenses</span><span class="value val warn" id="totalExp">A$0</span></div>
+    <div class="metric-row" style="border-top:2px solid var(--border);"><span class="label"><strong>Pre-Tax Profit</strong></span><span class="value val green" id="profit">A$0</span></div>
+    <div class="metric-row"><span class="label">Tax set-aside (25%)</span><span class="value" id="taxSetAside">A$0</span></div>
+    <div class="metric-row"><span class="label"><strong>Take-Home</strong></span><span class="value val purple" id="takeHome">A$0</span></div>
+    <div class="metric-row"><span class="label">Effective hourly rate</span><span class="value" id="effectiveRate">A$0/hr</span></div>
+  </div>
+
+  <!-- Targets -->
+  <div class="card">
+    <h3>Target Progress</h3>
+    <div class="metric-row">
+      <span class="label">A$5k/mo target</span>
+      <span class="value" id="target5k">0%</span>
+    </div>
+    <div class="bar"><div class="bar-fill green" id="bar5k" style="width:0%"></div></div>
+    <div class="metric-row" style="margin-top:12px;">
+      <span class="label">A$10k/mo target</span>
+      <span class="value" id="target10k">0%</span>
+    </div>
+    <div class="bar"><div class="bar-fill blue" id="bar10k" style="width:0%"></div></div>
+  </div>
+
+  <!-- Scenarios -->
+  <div class="card">
+    <h3>Quick Scenarios</h3>
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="setScenario('start')">Starting Out</button>
+      <button class="scenario-btn" onclick="setScenario('mid')">Mid-Tier</button>
+      <button class="scenario-btn" onclick="setScenario('target')">A$10k Target</button>
+      <button class="scenario-btn" onclick="setScenario('scale')">Scaling</button>
+    </div>
+  </div>
+
+  <footer>AusAI Tech · Adjust sliders to model your real numbers · <a href="https://calendly.com/YOUR_USERNAME" style="color:var(--blue);">Book a call</a></footer>
+</div>
+
+<script>
+  const sliders = ['clients','avgProject','retClients','retRate','passive','hours','tools','mktg','va','other'];
+  sliders.forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => {
+      document.getElementById(id+'Val').textContent = parseInt(el.value).toLocaleString();
+      recalc();
+    });
+    document.getElementById(id+'Val').textContent = parseInt(el.value).toLocaleString();
+  });
+
+  function setScenario(s) {
+    const vals = {
+      start: [2,800,0,2000,0,20,50,30,0,50],
+      mid: [3,1500,1,2497,200,30,100,50,0,80],
+      target: [4,2000,3,2497,500,35,150,100,500,100],
+      scale: [6,2500,5,3000,1500,25,200,200,1500,150]
+    };
+    const v = vals[s];
+    ['clients','avgProject','retClients','retRate','passive','hours','tools','mktg','va','other'].forEach((id,i) => {
+      const el = document.getElementById(id);
+      el.value = v[i];
+      document.getElementById(id+'Val').textContent = v[i].toLocaleString();
+    });
+    recalc();
+  }
+
+  function recalc() {
+    const c = +document.getElementById('clients').value;
+    const ap = +document.getElementById('avgProject').value;
+    const rc = +document.getElementById('retClients').value;
+    const rr = +document.getElementById('retRate').value;
+    const p = +document.getElementById('passive').value;
+    const h = +document.getElementById('hours').value;
+    const ts = +document.getElementById('tools').value;
+    const m = +document.getElementById('mktg').value;
+    const v = +document.getElementById('va').value;
+    const o = +document.getElementById('other').value;
+
+    const projRev = c * ap;
+    const retRev = rc * rr;
+    const totalRev = projRev + retRev + p;
+    const totalExp = ts + m + v + o;
+    const profit = totalRev - totalExp;
+    const tax = Math.round(profit * 0.25);
+    const takeHome = profit - tax;
+    const weeks = h > 0 ? (h * 4.33) : 1;
+    const effRate = Math.round(totalRev / weeks);
+
+    document.getElementById('projectRev').textContent = 'A$' + projRev.toLocaleString();
+    document.getElementById('retRev').textContent = 'A$' + retRev.toLocaleString();
+    document.getElementById('passRev').textContent = 'A$' + p.toLocaleString();
+    document.getElementById('totalRev').textContent = 'A$' + totalRev.toLocaleString();
+    document.getElementById('totalExp').textContent = 'A$' + totalExp.toLocaleString();
+    document.getElementById('profit').textContent = 'A$' + profit.toLocaleString();
+    document.getElementById('taxSetAside').textContent = 'A$' + tax.toLocaleString();
+    document.getElementById('takeHome').textContent = 'A$' + takeHome.toLocaleString();
+    document.getElementById('effectiveRate').textContent = 'A$' + effRate + '/hr';
+    document.getElementById('target5k').textContent = Math.min(100, Math.round(totalRev/5000*100)) + '%';
+    document.getElementById('bar5k').style.width = Math.min(100, totalRev/5000*100) + '%';
+    document.getElementById('target10k').textContent = Math.min(100, Math.round(totalRev/10000*100)) + '%';
+    document.getElementById('bar10k').style.width = Math.min(100, totalRev/10000*100) + '%';
+  }
+
+  recalc();
+</script>
+</body>
+</html>

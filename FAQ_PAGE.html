@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — AusAI Tech</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #111827;
+    --surface-2: #1a2332;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --border: #1f2937;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+  header { text-align: center; margin-bottom: 40px; }
+  header h1 {
+    font-size: 28px; font-weight: 700; letter-spacing: -0.5px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header p { color: var(--muted); font-size: 15px; margin-top: 8px; }
+
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .faq-item:hover { border-color: var(--accent); }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px; cursor: pointer; font-weight: 600; font-size: 15px;
+    user-select: none;
+  }
+  .faq-q::after {
+    content: '+';
+    font-size: 20px; color: var(--accent);
+    transition: transform .3s ease;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease, padding .35s ease;
+    padding: 0 22px;
+    font-size: 14px; color: var(--muted); line-height: 1.7;
+  }
+  .faq-item.open .faq-a {
+    max-height: 500px;
+    padding: 0 22px 20px;
+  }
+  .faq-a strong { color: var(--text); }
+  .faq-a a { color: var(--accent); text-decoration: none; }
+  .faq-a a:hover { text-decoration: underline; }
+
+  .cta {
+    text-align: center; margin-top: 36px; padding: 28px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .cta h3 { font-size: 18px; margin-bottom: 8px; }
+  .cta p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+  .btn {
+    display: inline-block; padding: 12px 24px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    background: var(--accent); color: #fff; margin: 4px;
+    transition: opacity .2s;
+  }
+  .btn:hover { opacity: .9; }
+  .btn-ghost {
+    background: transparent; color: var(--text); border: 1px solid var(--border);
+  }
+
+  footer {
+    text-align: center; margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid var(--border); font-size: 12px; color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    header h1 { font-size: 22px; }
+    .faq-q { font-size: 14px; padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know before working with AusAI Tech</p>
+  </header>
+
+  <div class="faq-item">
+    <div class="faq-q">What exactly does AusAI Tech do?</div>
+    <div class="faq-a">
+      AusAI Tech builds production-ready AI and automation systems for small-to-medium businesses. Common projects include: custom AI chatbots, n8n workflow automation, security audits of AI infrastructure, and local AI media studios (ComfyUI + Ollama). Everything is built to run — not just prototype — with clear documentation and handoff.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How much does a typical project cost?</div>
+    <div class="faq-a">
+      Most projects fall into three brackets:
+      <br><br>
+      <strong>Basic (A$200–400):</strong> Single deliverable — e.g., a focused security scan, one workflow, or a landing-page review.<br>
+      <strong>Standard (A$600–1,000):</strong> Full scope — e.g., a complete AI chatbot with RAG, or an end-to-end n8n automation pipeline.<br>
+      <strong>Premium (A$1,500+):</strong> Complex or ongoing — multi-system integrations, custom model training, or monthly retainer support.
+      <br><br>
+      Every engagement starts with a <strong>free 30-minute AI Audit</strong> so you get a fixed-price quote before committing. <a href="book.html">Book your audit →</a>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How long does a project take?</div>
+    <div class="faq-a">
+      <strong>Basic:</strong> 3–5 business days<br>
+      <strong>Standard:</strong> 7–14 business days<br>
+      <strong>Premium:</strong> 2–4 weeks (depends on complexity)<br><br>
+      Timelines are fixed in the Statement of Work before work begins. If delays occur, you'll know immediately — not on the original deadline day.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Is my data safe?</div>
+    <div class="faq-a">
+      Yes. Three principles guide every build:<br><br>
+      <strong>1. Local-first where possible:</strong> Sensitive AI workloads (LLMs, image generation) can run entirely on your own hardware (Ollama, ComfyUI) — no data ever leaves your network.<br>
+      <strong>2. No model training on your data:</strong> I do not use client data to train or fine-tune models. Your inputs stay yours.<br>
+      <strong>3. Clear data handling:</strong> Every SOW specifies who owns what data, how long it's retained, and how it's deleted post-delivery. If you need an NDA, I'm happy to sign one before the audit.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What AI models and tools do you use?</div>
+    <div class="faq-a">
+      I match the tool to the job — no vendor lock-in. Common stack:<br><br>
+      • <strong>LLMs:</strong> OpenRouter (routes 50+ providers), Ollama (local), OpenAI, Anthropic, DeepSeek<br>
+      • <strong>Automation:</strong> n8n (self-hosted), Zapier (if already in use)<br>
+      • <strong>Vector / RAG:</strong> PostgreSQL + pgvector, Supabase, Pinecone<br>
+      • <strong>Image / Video:</strong> ComfyUI, Stable Diffusion, Juggernaut-XL<br>
+      • <strong>Hosting:</strong> GitHub Pages, Netlify, self-hosted VPS<br><br>
+      If you already have tools in place, I integrate with them rather than replace.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Do you work with our existing systems?</div>
+    <div class="faq-a">
+      Absolutely. Most clients already have CRMs, email platforms, or cloud setups. I build <em>around</em> what you have — adding AI and automation layers rather than forcing a rip-and-replace. During the free audit, I'll map your current stack and identify the highest-ROI integration points.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What if I'm not satisfied with the result?</div>
+    <div class="faq-a">
+      Every project includes a <strong>14-day warranty</strong> post-delivery. If something doesn't work as specified in the SOW, I'll fix it within 48 hours at no charge.<br><br>
+      The SOW also defines a single, measurable acceptance criterion — so "done" is never ambiguous. If we genuinely can't meet that criterion, we'll discuss a proportional refund or revised scope. Fairness is non-negotiable.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What's the difference between the Basic, Standard, and Premium tiers?</div>
+    <div class="faq-a">
+      <strong>Basic</strong> is scoped to one specific outcome — ideal for tight budgets or testing the water.<br><br>
+      <strong>Standard</strong> is the most common choice — end-to-end delivery with documentation, testing, and a handoff call.<br><br>
+      <strong>Premium</strong> adds complexity (multi-system integrations, custom model work) or ongoing monthly support (retainer).<br><br>
+      Not sure which fits? The free audit will tell you — I only recommend what you actually need. <a href="sales/checkout.html">See all tiers →</a>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Do you offer ongoing support after delivery?</div>
+    <div class="faq-a">
+      Yes. After the 14-day warranty, you can add a monthly retainer for:<br><br>
+      • Monitoring and alerts<br>
+      • Model drift detection and retraining<br>
+      • Monthly optimization tweaks<br>
+      • Priority support (same-day response)<br><br>
+      Retainers start at A$500/month and scale with system complexity. No lock-in — cancel anytime with 30 days' notice.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How do I get started?</div>
+    <div class="faq-a">
+      Three steps:<br><br>
+      <strong>1.</strong> <a href="book.html">Book a free 30-minute AI Audit</a> — I'll diagnose your biggest automation opportunity and give you a fixed-price quote.<br>
+      <strong>2.</strong> Review the proposal. If it looks right, approve it and pay the 50% deposit via Stripe.<br>
+      <strong>3.</strong> I'll build, test, and hand it off — typically within 7–14 days.<br><br>
+      No long-term commitment. No hidden fees. Just a working system.
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>Still have questions?</h3>
+    <p>Book a free 30-minute AI Audit. No pitch — just answers.</p>
+    <a class="btn" href="book.html">📅 Book Free Audit</a>
+    <a class="btn btn-ghost" href="sales/checkout.html">💳 See Pricing</a>
+    <a class="btn btn-ghost" href="index.html">🏠 Back to Home</a>
+  </div>
+
+  <footer>
+    © 2026 AusAI Tech. Built by karma. All inquiries: reply to any email or book above.
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      // Open clicked if it was closed
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

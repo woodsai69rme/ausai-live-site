@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zapier vs Make vs n8n vs Custom — Which Automation Tool? | AusAI Tech</title>
+<style>
+  :root {
+    --bg: #0f1117; --card: #1a1d27; --text: #e1e4ed; --muted: #8b90a0;
+    --accent: #6c5ce7; --green: #10b981; --warn: #f59e0b; --border: #2a2d3a;
+    --zap: #ff4a00; --make: #6c5ce7; --n8n: #ea4b38;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh; padding: 2rem 1rem 4rem;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 2.5rem; }
+  header h1 { font-size: 1.9rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  header p { color: var(--muted); margin-top: 0.5rem; font-size: 1rem; }
+
+  .compare-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .compare-table th, .compare-table td {
+    padding: 1rem 1.25rem; text-align: left; font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table th {
+    background: var(--card); font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted); font-weight: 700;
+  }
+  .compare-table th:first-child { min-width: 160px; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td { background: var(--card); }
+  .compare-table td:first-child { font-weight: 600; color: var(--text); }
+  .compare-table td.best { color: var(--green); font-weight: 700; }
+  .compare-table td.worst { color: var(--muted); }
+  .col-label { font-size: 0.82rem; font-weight: 700; }
+  .col-label.zap { color: var(--zap); }
+  .col-label.make { color: var(--make); }
+  .col-label.n8n { color: var(--n8n); }
+
+  .match-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .match-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    border-top: 3px solid;
+  }
+  .match-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+  .match-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .match-card .verdict { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+  .match-card.zap { border-top-color: var(--zap); } .match-card.zap .verdict { color: var(--zap); }
+  .match-card.make { border-top-color: var(--make); } .match-card.make .verdict { color: var(--make); }
+  .match-card.n8n { border-top-color: var(--n8n); } .match-card.n8n .verdict { color: var(--n8n); }
+
+  .cta-section { text-align: center; margin: 2.5rem 0; }
+  .cta-btn {
+    display: inline-block; padding: 0.9rem 2.5rem;
+    background: var(--accent); color: #fff; border-radius: 10px;
+    font-size: 1rem; font-weight: 700; text-decoration: none;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(108,92,231,0.25);
+  }
+  .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(108,92,231,0.4); }
+  footer { text-align: center; color: var(--muted); font-size: 0.75rem; opacity: 0.5; margin-top: 3rem; }
+
+  @media (max-width: 768px) {
+    .compare-table { font-size: 0.75rem; }
+    .compare-table th, .compare-table td { padding: 0.65rem 0.75rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Zapier vs Make vs n8n vs Custom Build</h1>
+    <p>Which automation tool is right for your business? Plain-language comparison by an AI automation consultant.</p>
+  </header>
+
+  <table class="compare-table">
+    <tr>
+      <th>Feature</th>
+      <th><span class="col-label zap">Zapier</span></th>
+      <th><span class="col-label make">Make</span></th>
+      <th><span class="col-label n8n">n8n</span></th>
+      <th>Custom Build</th>
+    </tr>
+    <tr>
+      <td>Starting price</td>
+      <td class="worst">Free (100 tasks/mo) → $20/mo</td>
+      <td>Free (1,000 ops/mo) → $9/mo</td>
+      <td class="best">Free (self-hosted, unlimited ops)</td>
+      <td class="worst">A$1,500+ one-time build</td>
+    </tr>
+    <tr>
+      <td>Number of integrations</td>
+      <td class="best">6,000+</td>
+      <td>1,500+</td>
+      <td>400+</td>
+      <td class="best">Unlimited (any API)</td>
+    </tr>
+    <tr>
+      <td>Ease of use</td>
+      <td class="best">Easiest — drag & drop, 3-min setup</td>
+      <td>Visual editor, moderate learning curve</td>
+      <td class="worst">Visual editor, steeper learning curve</td>
+      <td class="worst">Requires developer skills</td>
+    </tr>
+    <tr>
+      <td>Best for</td>
+      <td>Simple single-step automations</td>
+      <td>Multi-step workflows, data transformation</td>
+      <td class="best">Complex workflows, budget-conscious, AI-heavy</td>
+      <td>Compliance-heavy, real-time, unique requirements</td>
+    </tr>
+    <tr>
+      <td>AI / LLM integration</td>
+      <td class="worst">ChatGPT, Claude actions (basic)</td>
+      <td>OpenAI, Google AI modules</td>
+      <td class="best">Full LangChain nodes, any OpenRouter model</td>
+      <td class="best">Full control — any model, custom chains</td>
+    </tr>
+    <tr>
+      <td>Error handling</td>
+      <td class="worst">Basic — error emails, limited replay</td>
+      <td>Good — detailed logs, replay capability</td>
+      <td class="best">Excellent — retry, error workflows, fallback nodes</td>
+      <td class="best">Full custom — dead letter queues, Sentry</td>
+    </tr>
+    <tr>
+      <td>Self-hosting option</td>
+      <td class="worst">No (cloud only)</td>
+      <td class="worst">No (cloud only)</td>
+      <td class="best">Yes — Docker, Railway, any VPS</td>
+      <td class="best">Yes — any infrastructure</td>
+    </tr>
+    <tr>
+      <td>Data residency (Australia)</td>
+      <td class="worst">US/EU data centers</td>
+      <td class="worst">US/EU data centers</td>
+      <td class="best">Self-host in AU (Railway ap-southeast-1)</td>
+      <td class="best">Any region</td>
+    </tr>
+    <tr>
+      <td>HIPAA / compliance</td>
+      <td class="worst">Not HIPAA compliant</td>
+      <td class="worst">Not HIPAA compliant</td>
+      <td class="worst">Not HIPAA compliant (self-hosted is grey area)</td>
+      <td class="best">Full compliance possible</td>
+    </tr>
+    <tr>
+      <td>Version control</td>
+      <td class="worst">None</td>
+      <td class="worst">None</td>
+      <td class="worst">JSON export (unreadable diffs)</td>
+      <td class="best">Git native, full history</td>
+    </tr>
+    <tr>
+      <td>Ongoing monthly cost (typical)</td>
+      <td>$0-50/mo</td>
+      <td class="best">$0-30/mo</td>
+      <td class="best">$0-5/mo (self-hosted)</td>
+      <td>$0-50/mo hosting</td>
+    </tr>
+    <tr>
+      <td>Who should use it</td>
+      <td>Non-technical, simple needs</td>
+      <td>Non-technical to semi-technical</td>
+      <td>Technical, budget-conscious, AI builders</td>
+      <td>Developers, compliance-heavy, unique needs</td>
+    </tr>
+  </table>
+
+  <div class="match-cards">
+    <div class="match-card zap">
+      <h3>Pick Zapier if...</h3>
+      <p>You need one or two simple automations. "When I get a new Gmail, send me a Slack message." You don't want to think about hosting or code. You're okay with paying as you scale.</p>
+      <div class="verdict">Best for: Beginners & Simple Tasks</div>
+    </div>
+    <div class="match-card make">
+      <h3>Pick Make if...</h3>
+      <p>You need multi-step workflows with data transformation. You want more power than Zapier but don't want to self-host. You need the larger integration library (1,500+ apps).</p>
+      <div class="verdict">Best for: Power Users & Data Flows</div>
+    </div>
+    <div class="match-card n8n">
+      <h3>Pick n8n if...</h3>
+      <p>You want maximum power at minimum cost. You're comfortable with a steeper learning curve. You need AI/LLM integration, error handling, and self-hosting for data control. This is what we recommend for most businesses.</p>
+      <div class="verdict">Best for: Most Businesses ★ Our Recommendation</div>
+    </div>
+    <div class="match-card" style="border-top-color: var(--accent);">
+      <h3>Pick a Custom Build if...</h3>
+      <p>You have HIPAA/compliance requirements. You need real-time sub-second processing. You're handling 1M+ operations/month. Your workflow is too complex for visual editors. This is more expensive but infinitely flexible.</p>
+      <div class="verdict">Best for: Enterprise & Compliance</div>
+    </div>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;text-align:center;">
+    <p style="font-size:1rem;margin-bottom:0.3rem;"><strong>Not sure which is right for you?</strong></p>
+    <p style="color:var(--muted);font-size:0.85rem;">Most businesses overpay for Zapier or under-build with no-code. We'll map your workflows and tell you the right tool — no obligation.</p>
+  </div>
+
+  <div class="cta-section">
+    <a href="#" class="cta-btn" onclick="window.open('https://calendly.com/YOUR_USERNAME/ai-audit','_blank');return false;">
+      🔍 Get Your Free Tool Recommendation →
+    </a>
+    <p style="color:var(--muted);margin-top:0.7rem;font-size:0.85rem;">30-min call. We'll map your workflows to the right tool.</p>
+  </div>
+
+  <footer>
+    AusAI Tech — AI Automation & Security Consulting · github.com/woodsai69rme<br>
+    *Prices and feature counts as of mid-2026. Verify with each platform for current details.*
+  </footer>
+</div>
+</body>
+</html>
