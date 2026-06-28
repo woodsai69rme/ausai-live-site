@@ -1,0 +1,8 @@
+{
+  "cloud_model_id": "<openrouter-free-qwen-oracle>",
+  "local_model_id": "qwen2.5-coder:7b",
+  "context_window": 8192,
+  "vector_store": "chromadb",
+  "tool_allowlist": ["rag_query", "code_search", "retrieve_doc"],
+  "audit_log": ".oracle/logs/oracle.actions.jsonl"
+}

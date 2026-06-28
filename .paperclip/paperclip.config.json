@@ -1,0 +1,7 @@
+{
+  "cloud_model_id": "<openrouter-free-llama>",
+  "local_model_id": "phi3:latest",
+  "concurrency": 1,
+  "tool_allowlist": ["move_file", "copy_file", "delete_file", "archive"],
+  "audit_log": ".paperclip/logs/paperclip.actions.jsonl"
+}

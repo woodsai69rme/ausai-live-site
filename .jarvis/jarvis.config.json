@@ -1,0 +1,8 @@
+{
+  "cloud_model_id": "<openrouter-free-qwen-coder>",
+  "local_model_id": "qwen2.5-coder:7b",
+  "file_sandbox": "C:/Users/karma/workspaces",
+  "terminal_proxy": "http://127.0.0.1:18789",
+  "tool_allowlist": ["bash", "read_file", "write_file", "git"],
+  "audit_log": ".jarvis/logs/jarvis.actions.jsonl"
+}
