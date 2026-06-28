@@ -3,7 +3,9 @@
 opt_a_digital_factory.py — Option A: AI Digital Product Factory.
 
 Generates AI prompt packs, code snippets, and design assets while user sleeps.
-Stages them as Gumroad product drafts (auto-listing in --publish mode).
+Calls local Ollama (HTTP POST /api/generate) for real generation with model
+discovery fallback if preferred model isn't installed. Stages products as
+Gumroad drafts (auto-listing in --publish mode).
 
 Closed enums:
     EXEC_STATUS  = (started, ok, skipped, refused, noop, failed)
@@ -20,8 +22,8 @@ import argparse
 import json
 import socket
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -64,41 +66,84 @@ def load_orchestrator_config() -> dict:
 def ping_comfyui(url: str, timeout: float = 2.0) -> bool:
     """TCP-only probe (rules out crashed endpoint without making an HTTP call)."""
     try:
-        with socket.create_connection((url.split("//", 1)[-1].split(":")[0],
-                                       int(url.rsplit(":", 1)[-1].split("/", 1)[0])),
-                                      timeout=timeout):
+        host = url.split("//", 1)[-1].split(":")[0]
+        port = int(url.rsplit(":", 1)[-1].split("/", 1)[0])
+        with socket.create_connection((host, port), timeout=timeout):
             return True
     except OSError:
         return False
 
 
-def generate_prompts(model: str, topic: str, dry_run: bool) -> str:
-    """Produce a 30-prompt pack. Calls Ollama if available; else stamps a deterministic placeholder."""
+def select_ollama_model(preferred: str) -> str:
+    """Probe /api/tags; return preferred if installed; else first qwen* or other fallback."""
+    try:
+        with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=5) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            installed = {m["name"] for m in data.get("models", [])}
+    except (urllib.error.URLError, OSError, json.JSONDecodeError):
+        return preferred
+    if preferred in installed:
+        return preferred
+    for m in sorted(installed):
+        if m.startswith(("qwen2.5-coder", "qwen2.5", "qwen3")):
+            return m
+    for m in sorted(installed):
+        if any(name in m for name in ("deepseek-r1", "gemma", "phi", "mistral", "llama")):
+            return m
+    return next(iter(installed), preferred)
+
+
+def ollama_generate(model: str, prompt: str, timeout: float = 120.0) -> str:
+    """POST /api/generate with stream=False and 5-min keep_alive."""
+    body = json.dumps({
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "keep_alive": "5m",
+        "options": {"temperature": 0.7, "num_predict": 2048},
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        "http://127.0.0.1:11434/api/generate",
+        data=body, headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+        return (payload.get("response") or "").strip()
+
+
+def generate_prompts(model: str, topic: str, dry_run: bool) -> tuple:
+    """Produce a 30-prompt pack. Returns (body, data_source).
+    data_source values: 'placeholder' (dry-run), 'real' (ollama succeeded), 'synthetic' (fallback)."""
     prompt = (
-        f"Generate a concise 30-item curated prompt pack for the topic: {topic}. "
-        f"Numbered list only. No preamble."
+        f"Generate a curated 30-item prompt pack for the topic: {topic}. "
+        f"Numbered list only. No preamble, no closing remarks, no markdown fences."
     )
     if dry_run:
-        # Deterministic placeholder; live path would post to Ollama HTTP API
-        lines = [f"{i:02d}. [PROMPT FOR: {topic} #{i}]" for i in range(1, 31)]
-        return "\n".join(lines)
+        lines = [f"{i:02d}. [PLACEHOLDER_PROMPT #{i} FOR TOPIC: {topic}]"
+                 for i in range(1, 31)]
+        return "\n".join(lines), "placeholder"
+    resolved = select_ollama_model(model)
     try:
-        body = json.dumps({"model": model, "prompt": prompt, "stream": False}).encode("utf-8")
-        req = urllib.request.Request("http://127.0.0.1:11434/api/generate",
-                                     data=body, headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            payload = json.loads(resp.read().decode("utf-8"))
-            return (payload.get("response") or "").strip()
-    except (urllib.error.URLError, OSError, json.JSONDecodeError) as exc:
-        return f"[ollama-unreachable: {exc.__class__.__name__}]\n" + generate_prompts(model, topic, True)
+        text = ollama_generate(resolved, prompt, timeout=120.0)
+        if text and len(text) > 60:
+            print(f"[opt_a] ollama ok: model={resolved}, chars={len(text)}", file=sys.stderr)
+            return text, "real"
+    except (urllib.error.URLError, OSError, json.JSONDecodeError, TimeoutError) as exc:
+        print(f"[opt_a] ollama_generate failed ({resolved}): {exc.__class__.__name__}: {exc}",
+              file=sys.stderr)
+    placeholder = "\n".join(
+        [f"{i:02d}. [PLACEHOLDER_PROMPT #{i} FOR TOPIC: {topic}]" for i in range(1, 31)])
+    return "[ollama-failed-fallback-to-placeholder]\n" + placeholder, "synthetic"
 
 
-def save_product(kind: str, topic: str, body: str, dry_run: bool) -> Path:
+def save_product(kind: str, topic: str, body: str, data_source: str, dry_run: bool) -> Path:
     OUTBOX.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     slug = topic.lower().replace(" ", "_").replace("/", "_")[:40]
     out_path = OUTBOX / f"{kind}__{slug}__{stamp}.txt"
-    header = f"# {kind.replace('_', ' ').title()}: {topic}\n# generated by opt_a_digital_factory.py\n# dry_run={dry_run}\n\n"
+    header = (f"# {kind.replace('_', ' ').title()}: {topic}\n"
+              f"# generated by opt_a_digital_factory.py\n"
+              f"# dry_run={dry_run} | data_source={data_source}\n\n")
     out_path.write_text(header + body, encoding="utf-8")
     return out_path
 
@@ -110,7 +155,6 @@ def gumroad_publish_stub(product_path: Path, mode: str, dry_run: bool) -> str:
     if mode == "staged":
         return f"staged: would upload to Gumroad (would_create_url=gumroad.com/l/{product_path.stem})"
     if mode == "published" and not dry_run:
-        # Real implementation would POST to https://api.gumroad.com/v2/products
         return f"published: stubbed (real call would hit api.gumroad.com/v2/products)"
     return f"published: stubbed dry-run"
 
@@ -143,6 +187,13 @@ def main() -> int:
                       "reason": "rule8_path", "path": str(OUTBOX)})
         return rc
 
+    if args.dry_run and args.run:
+        print("REFUSED: --dry-run and --run together (drop --dry-run to allow real uploads)",
+              file=sys.stderr)
+        append_audit({"ts": now_iso, "module": "opt_a", "status": "refused",
+                      "reason": "dryrun_and_run"})
+        return 5
+
     if args.kind not in PRODUCT_KIND:
         print(f"REFUSED: --kind {args.kind} not in closed enum", file=sys.stderr)
         append_audit({"ts": now_iso, "module": "opt_a", "status": "refused",
@@ -156,24 +207,25 @@ def main() -> int:
 
     append_audit({"ts": now_iso, "module": "opt_a", "status": "started",
                   "kind": args.kind, "publish": args.publish, "dry_run": dry_run,
-                  "topic": args.topic, "model": cfg["ollama_model_preference"],
+                  "topic": args.topic, "model_requested": cfg["ollama_model_preference"],
                   "products_per_night": cfg["products_per_night"]})
 
     comfy_alive = ping_comfyui(cfg["comfyui_url"])
-    if not comfy_alive and cfg["enable_comfy_cover"]:
+    if not comfy_alive and cfg.get("enable_comfy_cover", False):
         append_audit({"ts": now_iso, "module": "opt_a", "status": "refused",
                       "reason": "comfyui_down", "url": cfg["comfyui_url"]})
         return 6
 
-    body = generate_prompts(cfg["ollama_model_preference"], args.topic, dry_run)
-    product_path = save_product(args.kind, args.topic, body, dry_run)
+    body, data_source = generate_prompts(cfg["ollama_model_preference"], args.topic, dry_run)
+    product_path = save_product(args.kind, args.topic, body, data_source, dry_run)
     publish_summary = gumroad_publish_stub(product_path, args.publish, dry_run)
 
     append_audit({"ts": now_iso, "module": "opt_a", "status": "ok",
                   "kind": args.kind, "publish": args.publish, "dry_run": dry_run,
                   "product_path": str(product_path), "publish_summary": publish_summary,
-                  "characters": len(body), "comfyui_alive": comfy_alive})
-    print(f"[opt_a] wrote {product_path.name} ({len(body)} chars) | {publish_summary}")
+                  "characters": len(body), "data_source": data_source,
+                  "comfyui_alive": comfy_alive})
+    print(f"[opt_a] wrote {product_path.name} ({len(body)} chars, {data_source}) | {publish_summary}")
     return 0
 
 

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SLEEP_TRIPLE Dashboard</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 0;
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background:
+           radial-gradient(ellipse 1200px 700px at 10% -10%, rgba(99,102,241,0.18), transparent 60%),
+           radial-gradient(ellipse 900px 600px at 110% 20%, rgba(139,92,246,0.16), transparent 65%),
+           linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+         color: #e2e8f0; min-height: 100vh; }
+  header { padding: 28px 36px; border-bottom: 1px solid rgba(148,163,184,0.12);
+           background: rgba(15,23,42,0.7); backdrop-filter: blur(8px); display: flex; justify-content: space-between; align-items: baseline; }
+  h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+  .sub { font-size: 13px; opacity: 0.65; }
+  .pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+           background: #34d399; margin-right: 8px; box-shadow: 0 0 6px #34d399;
+           animation: breath 3s ease-in-out infinite; }
+  @keyframes breath { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  main { padding: 28px 36px; display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .card { background: rgba(30,41,59,0.55); border: 1px solid rgba(148,163,184,0.14);
+          border-radius: 14px; padding: 22px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+  .card h2 { margin: 0 0 14px 0; font-size: 15px; font-weight: 500; opacity: 0.92;
+             text-transform: uppercase; letter-spacing: 0.04em; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px;
+          font-family: ui-monospace, SFMono-Regular, "Cascadia Code", Menlo, monospace; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid rgba(148,163,184,0.08); }
+  th { opacity: 0.55; font-weight: 500; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; }
+  tr:hover td { background: rgba(99,102,241,0.05); }
+  .status-ok { color: #34d399; }
+  .status-refused, .status-failed { color: #f87171; }
+  .status-started { color: #60a5fa; }
+  .status-skipped, .status-noop { color: #94a3b8; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px;
+          font-weight: 500; background: rgba(148,163,184,0.12); }
+  .pill.status-ok { background: rgba(52,211,153,0.15); color: #34d399; }
+  .pill.status-refused, .pill.status-failed { background: rgba(248,113,113,0.15); color: #f87171; }
+  .pill.status-started { background: rgba(96,165,250,0.15); color: #60a5fa; }
+  .pill.status-skipped, .pill.status-noop { background: rgba(148,163,184,0.15); color: #94a3b8; }
+  .empty { opacity: 0.55; font-style: italic; padding: 14px 0; text-align: center; }
+  .meta { display: flex; gap: 28px; margin-bottom: 14px; font-size: 13px; opacity: 0.85;
+          padding-bottom: 12px; border-bottom: 1px solid rgba(148,163,184,0.10); }
+  .meta .k { opacity: 0.55; margin-right: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .meta .v { font-weight: 500; font-family: ui-monospace, monospace; }
+  .refresh-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .bar { background: rgba(99,102,241,0.12); border-radius: 6px; height: 3px; width: 80px; overflow: hidden; }
+  .bar::after { content: ''; display: block; height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(99,102,241,0.6), transparent);
+                animation: pulse 2s linear infinite; }
+  @keyframes pulse { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  footer { padding: 20px 36px; opacity: 0.4; font-size: 11px; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1><span class="pulse"></span>SLEEP_TRIPLE Dashboard</h1>
+    <div class="sub">3 AUD-earning systems · auto-refreshing every 10s · overnight audit trail</div>
+  </div>
+  <div class="sub" id="last-refresh">—</div>
+</header>
+
+<main>
+  <section class="card">
+    <div class="refresh-bar">
+      <h2>SLEEP_TRIPLE Audit Log</h2>
+      <span class="bar"></span>
+    </div>
+    <div id="audit-meta" class="meta"></div>
+    <div id="audit-table"></div>
+  </section>
+
+  <section class="card">
+    <div class="refresh-bar">
+      <h2>REVENUE LEDGER (append-only)</h2>
+      <span class="bar"></span>
+    </div>
+    <div id="ledger-meta" class="meta"></div>
+    <div id="ledger-table"></div>
+  </section>
+</main>
+
+<footer>SLEEP_TRIPLE · local-only · no human reviews required · uses Ollama + ComfyUI + CoinSpot/Kraken public APIs</footer>
+
+<script>
+const REFRESH_MS = 10000;
+const AUDIT_FIELDS = ['ts','module','status','task','reason','data_source','product_path','script_path'];
+const LEDGER_FIELDS = ['ts','event','amount_aud','note'];
+const STATUS_CLASS = {
+  ok: 'status-ok', refused: 'status-refused', failed: 'status-failed',
+  started: 'status-started', skipped: 'status-skipped', noop: 'status-noop'
+};
+
+async function loadJsonl(url) {
+  try {
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) return [];
+    const text = await r.text();
+    return text.trim().split('\n').filter(Boolean).map(parseRow);
+  } catch (e) { console.warn('fetch failed', url, e); return []; }
+}
+
+function parseRow(line) {
+  try { return JSON.parse(line); } catch { return { __raw: line }; }
+}
+
+function fmtCell(v) {
+  if (v === undefined || v === null) return '';
+  if (typeof v === 'object') return JSON.stringify(v);
+  const s = String(v);
+  return s.length > 90 ? s.slice(0, 87) + '…' : s;
+}
+
+function statusPill(s) {
+  const cls = STATUS_CLASS[s] || '';
+  return `<span class="pill ${cls}">${s || '—'}</span>`;
+}
+
+function renderRows(rows, fields) {
+  if (!rows.length) return '<div class="empty">no rows yet — run the orchestrator</div>';
+  const last = rows.slice(-50).reverse();
+  let html = '<table><thead><tr>';
+  for (const f of fields) html += `<th>${f}</th>`;
+  html += '</tr></thead><tbody>';
+  for (const r of last) {
+    html += '<tr>';
+    for (const f of fields) {
+      let v = r[f];
+      if (f === 'status') html += `<td>${statusPill(r.status)}</td>`;
+      else html += `<td>${fmtCell(v)}</td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  return html;
+}
+
+async function refreshAudit() {
+  const rows = await loadJsonl('/audit.jsonl');
+  const started_at = rows.length ? rows[rows.length-1].ts : null;
+  const started_pretty = started_at ? new Date(started_at).toLocaleString() : '—';
+  const byStatus = {};
+  for (const r of rows) byStatus[r.status] = (byStatus[r.status] || 0) + 1;
+  document.getElementById('audit-meta').innerHTML = `
+    <div><span class="k">Total rows</span><span class="v">${rows.length}</span></div>
+    <div><span class="k">Latest</span><span class="v">${started_pretty}</span></div>
+    <div><span class="k">OK</span><span class="v">${byStatus.ok||0}</span></div>
+    <div><span class="k">Refused</span><span class="v">${byStatus.refused||0}</span></div>
+  `;
+  document.getElementById('audit-table').innerHTML = renderRows(rows, AUDIT_FIELDS);
+}
+
+async function refreshLedger() {
+  const rows = await loadJsonl('/ledger.jsonl');
+  const total = rows.reduce((s,r) => s + (+r.amount_aud || 0), 0);
+  const byEvent = {};
+  for (const r of rows) byEvent[r.event] = (byEvent[r.event] || 0) + 1;
+  document.getElementById('ledger-meta').innerHTML = `
+    <div><span class="k">Total rows</span><span class="v">${rows.length}</span></div>
+    <div><span class="k">Total AUD</span><span class="v">${total.toFixed(2)}</span></div>
+    <div><span class="k">Last entry</span><span class="v">${rows.length ? new Date(rows[rows.length-1].ts).toLocaleString() : '—'}</span></div>
+  `;
+  document.getElementById('ledger-table').innerHTML = renderRows(rows, LEDGER_FIELDS);
+}
+
+async function refresh() {
+  document.getElementById('last-refresh').textContent = 'refreshed ' + new Date().toLocaleTimeString();
+  await Promise.all([refreshAudit(), refreshLedger()]);
+}
+
+refresh();
+setInterval(refresh, REFRESH_MS);
+</script>
+</body>
+</html>

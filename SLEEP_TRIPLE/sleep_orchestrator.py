@@ -95,6 +95,11 @@ def emit(row: dict, dry_run: bool) -> None:
 
 
 def run_module(module_path: Path, run_mode: bool, dry_run_default: bool, extra: list[str]) -> int:
+    # Idempotency note: check_idempotent() above looks up (today, slug, status=ok)
+    # in SLEEP_TRIPLE_AUDIT.jsonl. The only row carrying `slug` is the wrapper
+    # row emitted by main() IMMEDIATELY after this call returns, NOT by the
+    # modules themselves. If you change main() to drop the per-module
+    # ok/failed wrapper row, idempotency silently breaks (re-runs every time).
     subprocess_args = [sys.executable, str(module_path)]
     if run_mode:
         subprocess_args.append("--run")
