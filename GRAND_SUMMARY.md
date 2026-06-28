@@ -12,7 +12,7 @@
 |---|---|---|---|
 | 1 | AusAI Tech | 80 | 15 rounds, A$5K→A$10K/mo goal |
 | 2 | Agent Registry | 13 | 2,793 agents, 16 domains |
-| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, 🟢 LIVE + dispatch verified :8001 |
+| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, 🟢 LIVE — recon + revenue verified :8001 |
 | 4 | ComfyUI Music Video Studio | 77K+ | 22-option launcher, port 8188 |
 | 5 | Voice PA System | 8 | 5 intent enum, Rule #8 fence |
 | 6 | Aether Core System | 24K+ | Sync bridge, empire audit |
@@ -20,7 +20,7 @@
 | 8 | Archon V2 | 50+ | 4 microservices, 5 MCP tools |
 | 9 | Project Brain 2.0 | 10+ | SHA256 ingestion, Phase F-H |
 | 10 | AI Tools Inventory | 10+ | 5 platforms, 4 runtimes |
-| 11 | n8n Automation | 95+ | Docker, 91 templates, port 5678 |
+| 11 | n8n Automation | 95+ | Docker, 91 templates, 🟢 LIVE :5678 |
 | 12 | YouTube Tools | 5 | Transcript harvester |
 | 13 | Master Ecosystem Catalog | 11+ | 11 subsystems hub |
 | 14 | Dashboard System Scripts | 61 | Terminal automation layer |
@@ -90,7 +90,7 @@
 | Batch 4: HTML + Empire + Golden Rules | 48 | ✅ |
 | Batch 5: Remaining docs (AUSAI, GITHUB, LINKEDIN) | 45 | ✅ |
 | Batch 6: Remaining scripts + data | 38 | ✅ |
-| **Total organized** | **~423** | ✅ |
+| **Total organized** | **~424** | ✅ |
 
 ---
 
@@ -102,7 +102,7 @@
 | Day 1 action plan | `DAY1_EXECUTION_PACK.md` |
 | All AI tools | `AI_TOOLS_DASHBOARD.html` |
 | AI Army live dashboard | `http://localhost:8001` 🟢 |
-| Push to GitHub | `github.com/settings/tokens` (18 commits) |
+| Push to GitHub | `github.com/settings/tokens` (2 commits) |
 | Deploy site | `DEPLOYMENT_QUICK_START.md` |
 | Full history | `CHANGELOG.md` |
 
