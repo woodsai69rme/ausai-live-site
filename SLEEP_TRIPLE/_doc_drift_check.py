@@ -34,17 +34,43 @@ HASH_RE = re.compile(r"`([0-9a-f]{7,8})`")
 
 
 def _git_log_sleep_commits() -> list[str]:
-    """Return most-recent-first list of 7-char short commit hashes that touch
+    """Return most-recent-first list of 7/8-char short commit hashes that touch
     SLEEP_TRIPLE/ or Append-Revenue* on HEAD.
+
+    Filters OUT the most-recent commit IF its subject indicates that its ONLY
+    purpose was to update DOCS / §9 itself. Without this filter, every amend
+    creates a new hash that the §9 table can't yet contain (chicken-and-egg).
+    Recognized doc-update subject prefixes::
+    - `docs:` / `chore(docs):` / `docs(SLEEP_TRIPLE):` / `docs(*):`
+    - The canonical drift guard's own subject: `feat(SLEEP_TRIPLE): cold-start ...`
+    Pure-table §9 stays intact for the subject-prefix narrowing above; code
+    commits are never filtered.
     """
+    DOC_UPDATE_PREFIXES = (
+        "docs:", "docs(", "chore(docs):", "chore(docs):", "chore(docs):",
+        "feat(SLEEP_TRIPLE): cold-start",
+    )
     r = subprocess.run(
-        ["git", "log", "--pretty=format:%h", "HEAD",
+        ["git", "log", "--pretty=format:%h\t%s", "HEAD",
          "--", "SLEEP_TRIPLE/*", "Append-Revenue*"],
         capture_output=True, text=True, cwd=str(ROOT.parent),
     )
     if r.returncode != 0:
         return []
-    return [line.strip() for line in r.stdout.splitlines() if line.strip()]
+    rows: list[str] = []
+    for line in r.stdout.splitlines():
+        if not line.strip():
+            continue
+        parts = line.split("\t", 1)
+        if len(parts) != 2:
+            continue
+        h, subj = parts[0].strip(), parts[1].strip()
+        # Filter only the MOST-RECENT commit if it's a doc-update commit.
+        # Older doc-update commits stay in the listing so §9 stays complete.
+        if not rows and any(subj.startswith(p) for p in DOC_UPDATE_PREFIXES):
+            continue
+        rows.append(h)
+    return rows
 
 
 def _section_h9_hashes(doc_text: str) -> list[str]:
