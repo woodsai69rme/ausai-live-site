@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 Progress Tracker - $2,000 Target</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ff88;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            background: #1a1a2e;
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 2px solid #00ff88;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00cc6a);
+            width: 0%;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 20px;
+            font-weight: bold;
+            color: #0f0f23;
+        }
+        
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .day-card {
+            background: #1a1a2e;
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .day-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        .day-goal {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .task-list {
+            list-style: none;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #0f0f23;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .task-item:hover {
+            background: #252540;
+        }
+        
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #555;
+            border-radius: 4px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .task-checkbox.checked {
+            background: #00ff88;
+            border-color: #00ff88;
+            color: #0f0f23;
+        }
+        
+        .task-text {
+            flex: 1;
+        }
+        
+        .task-time {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .revenue-tracker {
+            background: #1a1a2e;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+            border: 2px solid #ffd700;
+        }
+        
+        .revenue-label {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        
+        .revenue-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .revenue-target {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .stat-box {
+            background: #1a1a2e;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        input[type="number"] {
+            background: #0f0f23;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            width: 100px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 WEEK 1 PROGRESS TRACKER</h1>
+        <p class="subtitle">Target: $2,000 AUD | Time: 26 hours</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="mainProgress">0%</div>
+        </div>
+        
+        <div class="days-grid">
+            <!-- Day 1 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-title">Day 1: Setup</div>
+                    <div class="day-goal">4 hours</div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Create Stripe account</div>
+                        <div class="task-time">30m</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Create PayPal account</div>
+                        <div class="task-time">30m</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Set up Carrd landing page</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Create Google Form order</div>
+                        <div class="task-time">15m</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Test pentest-copilot</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Create report template</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Day 2 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-title">Day 2: Productize</div>
+                    <div class="day-goal">6 hours</div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Create sample report</div>
+                        <div class="task-time">2h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Design flyer in Canva</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Write email templates</div>
+                        <div class="task-time">1.5h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Set up Calendly</div>
+                        <div class="task-time">30m</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Optimize LinkedIn profile</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Day 3 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-title">Day 3: Outreach</div>
+                    <div class="day-goal">8 hours | $500-2K</div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Find 50 LinkedIn prospects</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Send 20 LinkedIn messages</div>
+                        <div class="task-time">2h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Join 10 Facebook groups</div>
+                        <div class="task-time">30m</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Post in 3 Facebook groups</div>
+                        <div class="task-time">30m</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Build list of 50 emails</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Send 20 cold emails</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Respond to all replies</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Update tracking sheet</div>
+                        <div class="task-time">30m</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Day 4 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-title">Day 4: Sales</div>
+                    <div class="day-goal">4 hours | $500-2K</div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Conduct 3-5 sales calls</div>
+                        <div class="task-time">2h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Close 1-4 sales</div>
+                        <div class="task-time">-</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Run security audit</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Create & send report</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Day 5 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-title">Day 5: Systems</div>
+                    <div class="day-goal">4 hours</div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Create SOP document</div>
+                        <div class="task-time">2h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Refine all templates</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-text">Plan Week 2</div>
+                        <div class="task-time">1h</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="revenue-tracker">
+            <div class="revenue-label">💰 WEEK 1 REVENUE</div>
+            <div class="revenue-amount">$<input type="number" id="revenueInput" value="0" onchange="updateRevenue()"> AUD</div>
+            <div class="revenue-target">Target: $500 - $2,000</div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value" id="messagesSent">0</div>
+                <div class="stat-label">Messages Sent</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="callsBooked">0</div>
+                <div class="stat-label">Calls Booked</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="salesClosed">0</div>
+                <div class="stat-label">Sales Closed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="hoursWorked">0</div>
+                <div class="stat-label">Hours Worked</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let completedTasks = 0;
+        const totalTasks = 39;
+        
+        function toggleTask(element) {
+            const checkbox = element.querySelector('.task-checkbox');
+            checkbox.classList.toggle('checked');
+            checkbox.innerHTML = checkbox.classList.contains('checked') ? '✓' : '';
+            
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const checked = document.querySelectorAll('.task-checkbox.checked').length;
+            const percentage = Math.round((checked / totalTasks) * 100);
+            document.getElementById('mainProgress').style.width = percentage + '%';
+            document.getElementById('mainProgress').textContent = percentage + '%';
+        }
+        
+        function updateRevenue() {
+            const revenue = document.getElementById('revenueInput').value;
+            // Save to localStorage
+            localStorage.setItem('week1revenue', revenue);
+        }
+        
+        // Load saved data
+        window.onload = function() {
+            const savedRevenue = localStorage.getItem('week1revenue');
+            if (savedRevenue) {
+                document.getElementById('revenueInput').value = savedRevenue;
+            }
+        }
+    </script>
+</body>
+</html>
