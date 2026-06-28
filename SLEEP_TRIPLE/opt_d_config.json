@@ -1,0 +1,26 @@
+{
+  "label": "Webhook Alerts",
+  "enabled": true,
+  "default_channel": "discord",
+  "default_trigger": "actionable_spread",
+  "audit_window_hours": 24,
+  "max_lines_per_message": 5,
+  "rate_limit_seconds": 900,
+  "tier_thresholds": {
+    "actionable_spread": {
+      "critical_bps": 200,
+      "warning_bps": 100
+    }
+  },
+  "notes": [
+    "Webhook URLs and bot tokens are NOT stored here. Use environment variables:",
+    "  DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/<id>/<token>",
+    "  TELEGRAM_BOT_TOKEN=123456789:ABC...",
+    "  TELEGRAM_CHAT_ID=987654321",
+    "  SLACK_WEBHOOK_URL=https://hooks.slack.com/services/T.../B.../...",
+    "  PUSHOVER_APP_TOKEN=<app-token>",
+    "  PUSHOVER_USER_KEY=<user-key>",
+    "All four channels are zero-approval: just paste tokens into env vars, no human review.",
+    "Set env vars in Windows: System Properties > Environment Variables, or via setx in cmd.exe."
+  ]
+}
