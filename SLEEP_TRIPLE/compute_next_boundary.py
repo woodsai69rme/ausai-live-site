@@ -10,12 +10,18 @@ Reads:
   C:\\Users\\karma\\SLEEP_TRIPLE\\sleep_config.json
 Outputs to stdout:
   HH:MM (24-hour, suitable for schtasks /st).
+
+Return codes:
+  0 — success.
+  1 — sleep_config.json missing.
+  2 — sleep_window[0] not parseable as HH:MM.
+  3 — DST spring-forward gap (requested wall-clock doesn't exist on this date).
 """
 from __future__ import annotations
 
 import json
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -37,21 +43,36 @@ def main() -> int:
         return 2
     tz = ZoneInfo(tz_name)
     now_tz = datetime.now(tz)
-    # DST safety: detect two failure modes for non-23:00 windows.
-    #   - Spring-forward gap: the requested wall-clock doesn't exist
-    #     (Australia/Sydney: 02:00 jumps to 03:00). .replace() silently maps
-    #     to post-transition, giving a 1-hour mis-fire. Verify by roundtripping.
-    #   - Autumn-fallback overlap: 02:00–03:00 repeats once. fold=0 = pre-transition,
-    #     fold=1 = post-transition. Pick fold=1 explicitly.
-    fold0 = now_tz.replace(hour=hh, minute=mm, second=0, microsecond=0, fold=0)
-    rt = fold0.astimezone(tz)
+
+    # DST safety: detect spring-forward gap (requested wall-clock doesn't
+    # exist on this date) and autumn-fallback overlap (wall-clock exists
+    # twice). Build naive datetime + ZoneInfo with explicit fold values so
+    # the UTC instant is computed *from the requested wall-clock*. Crucially,
+    # we DON'T use now_tz.replace(hour=hh) because that preserves the UTC
+    # instant of "now" — astimezone() roundtrips to the same wall-clock
+    # representation and the gap is unreachable. The naive-construct idiom
+    # is the canonical zoneinfo way to surface non-existent local time.
+    naive = datetime(now_tz.year, now_tz.month, now_tz.day, hh, mm,
+                     second=0, microsecond=0)
+    fold0 = naive.replace(tzinfo=tz, fold=0)
+    fold1 = naive.replace(tzinfo=tz, fold=1)
+
+    # Spring-forward gap detection: roundtrip through UTC. During gap the
+    # naive+tinfo+fold=0 lands on a UTC instant that's *earlier* than the
+    # minutes-math allows (because zoneinfo maps to pre-transition offset),
+    # and astimezone(tz) re-renders that UTC instant in tz which lands at
+    # a DIFFERENT wall-clock than the one we asked for.
+    rt = fold0.astimezone(timezone.utc).astimezone(tz)
     if rt.hour != hh or rt.minute != mm:
-        print(f"compute_next_boundary: non-existent time {hh:02d}:{mm:02d} on "
-              f"{now_tz.date()} in {tz_name} (DST spring-forward gap); aborting.",
-              file=sys.stderr)
+        print(f"compute_next_boundary: non-existent time "
+              f"{hh:02d}:{mm:02d} on {now_tz.date()} in {tz_name} "
+              f"(DST spring-forward gap); aborting.", file=sys.stderr)
         return 3
-    fold1 = now_tz.replace(hour=hh, minute=mm, second=0, microsecond=0, fold=1)
+
     if fold0.utcoffset() != fold1.utcoffset():
+        # Overlap (autumn fallback): wall-clock exists twice today; pick
+        # the *later* UTC instant (fold=1 = post-transition) so the daily
+        # recurrence keeps firing at the same wall-clock after DST ends.
         print(f"compute_next_boundary: DST-ambiguous {hh:02d}:{mm:02d} in {tz_name}; "
               f"using fold=1 (post-transition)", file=sys.stderr)
         target_tz = fold1
