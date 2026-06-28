@@ -1,32 +1,34 @@
 """
 Self-Healing Daemon.
 
-Monitors critical services and attempts basic recovery
-actions when they are detected as down.
+Monitors critical services and plans recovery actions
+when they are detected as down.
 """
 
 import os
-import json
-import logging
-import urllib.request
+import time
 from datetime import datetime
+from typing import List, Dict, Any
 
-# Configuration
-OUTPUT_FILE = r"C:\Users\karma\REVENUE_GENERATORS\healing_report.json"
-SERVICES = [
+import httpx
+
+from revenue_utils import setup_logging, write_json, REVENUE_DIR
+
+logger = setup_logging(__name__)
+
+OUTPUT_FILE = os.path.join(REVENUE_DIR, "healing_report.json")
+
+SERVICES: List[Dict[str, Any]] = [
     {"name": "AI Army", "url": "http://localhost:8001/", "port": 8001},
     {"name": "n8n", "url": "http://localhost:5678/", "port": 5678},
     {"name": "ComfyUI", "url": "http://localhost:8188/", "port": 8188},
     {"name": "Ollama", "url": "http://localhost:11434/api/tags", "port": 11434},
 ]
 
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-logger = logging.getLogger(__name__)
 
-
-def check_service(service: dict) -> dict:
+def check_service(service: Dict[str, Any]) -> Dict[str, Any]:
     """Check if a service is responding."""
-    result = {
+    result: Dict[str, Any] = {
         "name": service["name"],
         "url": service["url"],
         "checked_at": datetime.now().isoformat(),
@@ -35,11 +37,10 @@ def check_service(service: dict) -> dict:
     }
 
     try:
-        import time
         start = time.time()
-        req = urllib.request.Request(service["url"], method="GET")
-        with urllib.request.urlopen(req, timeout=5.0) as resp:
-            _ = resp.read()
+        with httpx.Client(timeout=5.0) as client:
+            resp = client.get(service["url"])
+            resp.raise_for_status()
         elapsed = (time.time() - start) * 1000
         result["status"] = "healthy"
         result["response_time_ms"] = round(elapsed, 2)
@@ -52,23 +53,23 @@ def check_service(service: dict) -> dict:
     return result
 
 
-def attempt_heal(service: dict) -> dict:
-    """Attempt a basic healing action for a down service."""
-    heal_result = {
+def plan_heal(service: Dict[str, Any]) -> Dict[str, Any]:
+    """Plan a healing action for a down service."""
+    heal_result: Dict[str, Any] = {
         "service": service["name"],
-        "attempted_at": datetime.now().isoformat(),
+        "planned_at": datetime.now().isoformat(),
         "action": "none",
-        "result": "skipped"
+        "result": "plan_created"
     }
 
     if service["name"] == "AI Army":
-        heal_result["action"] = "would restart python server.py"
+        heal_result["action"] = "restart python server.py"
     elif service["name"] == "n8n":
-        heal_result["action"] = "would docker-compose restart"
+        heal_result["action"] = "docker-compose restart"
     elif service["name"] == "ComfyUI":
-        heal_result["action"] = "would restart ComfyUI server"
+        heal_result["action"] = "restart ComfyUI server"
     elif service["name"] == "Ollama":
-        heal_result["action"] = "would restart Ollama service"
+        heal_result["action"] = "restart Ollama service"
 
     logger.info(f"Healing plan for {service['name']}: {heal_result['action']}")
     return heal_result
@@ -76,16 +77,16 @@ def attempt_heal(service: dict) -> dict:
 
 def main() -> None:
     logger.info("Starting Self-Healing Daemon scan...")
-    health_results = []
-    heal_actions = []
+    health_results: List[Dict[str, Any]] = []
+    heal_actions: List[Dict[str, Any]] = []
 
     for svc in SERVICES:
         result = check_service(svc)
         health_results.append(result)
         if result["status"] != "healthy":
-            heal_actions.append(attempt_heal(svc))
+            heal_actions.append(plan_heal(svc))
 
-    report = {
+    report: Dict[str, Any] = {
         "scan_time": datetime.now().isoformat(),
         "services_checked": len(SERVICES),
         "healthy": sum(1 for r in health_results if r["status"] == "healthy"),
@@ -94,14 +95,8 @@ def main() -> None:
         "heal_actions": heal_actions
     }
 
-    try:
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump(report, f, indent=2)
-        logger.info(f"Healing report saved to {OUTPUT_FILE}")
-    except Exception as e:
-        logger.error(f"Failed to save report: {e}")
-        raise
-
+    write_json(OUTPUT_FILE, report)
+    logger.info(f"Healing report saved to {OUTPUT_FILE}")
     logger.info(f"Daemon scan complete. {report['healthy']}/{report['services_checked']} services healthy.")
 
 

@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-06-29T02:39:41.838709",
+  "scan_time": "2026-06-29T02:55:43.414473",
   "services_checked": 4,
   "healthy": 4,
   "down": 0,
@@ -7,30 +7,30 @@
     {
       "name": "AI Army",
       "url": "http://localhost:8001/",
-      "checked_at": "2026-06-29T02:39:37.222619",
+      "checked_at": "2026-06-29T02:55:35.747515",
       "status": "healthy",
-      "response_time_ms": 2084.27
+      "response_time_ms": 3079.77
     },
     {
       "name": "n8n",
       "url": "http://localhost:5678/",
-      "checked_at": "2026-06-29T02:39:39.307188",
+      "checked_at": "2026-06-29T02:55:38.830040",
       "status": "healthy",
-      "response_time_ms": 31.62
+      "response_time_ms": 774.49
     },
     {
       "name": "ComfyUI",
       "url": "http://localhost:8188/",
-      "checked_at": "2026-06-29T02:39:39.339041",
+      "checked_at": "2026-06-29T02:55:39.607571",
       "status": "healthy",
-      "response_time_ms": 2059.04
+      "response_time_ms": 2765.94
     },
     {
       "name": "Ollama",
       "url": "http://localhost:11434/api/tags",
-      "checked_at": "2026-06-29T02:39:41.398240",
+      "checked_at": "2026-06-29T02:55:42.375856",
       "status": "healthy",
-      "response_time_ms": 440.29
+      "response_time_ms": 1034.5
     }
   ],
   "heal_actions": []

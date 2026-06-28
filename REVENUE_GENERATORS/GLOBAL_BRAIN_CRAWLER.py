@@ -6,23 +6,22 @@ into a searchable brain for the AI ecosystem.
 """
 
 import os
-import json
-import logging
+import time
 from datetime import datetime
+from typing import List, Dict, Any
 
-# Configuration
-TARGET_DIR = r"C:\Users\karma"
-INDEX_FILE = r"C:\Users\karma\REVENUE_GENERATORS\brain_index.json"
+from revenue_utils import setup_logging, write_json, REVENUE_DIR
+
+logger = setup_logging(__name__)
+
 EXTENSIONS = {".md", ".txt", ".pdf", ".py", ".json", ".html"}
 MAX_FILES = 100
-
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-logger = logging.getLogger(__name__)
+INDEX_FILE = os.path.join(REVENUE_DIR, "brain_index.json")
 
 
-def crawl_directory(root: str) -> list:
+def crawl_directory(root: str) -> List[Dict[str, Any]]:
     """Recursively crawl for indexable files."""
-    findings = []
+    findings: List[Dict[str, Any]] = []
     logger.info(f"Crawling {root} for knowledge sources...")
 
     if not os.path.exists(root):
@@ -43,7 +42,8 @@ def crawl_directory(root: str) -> list:
                         "size_bytes": size,
                         "indexed_at": datetime.now().isoformat()
                     })
-                except (OSError, PermissionError):
+                except (OSError, PermissionError) as e:
+                    logger.warning(f"Cannot access {full_path}: {e}")
                     continue
 
             if len(findings) >= MAX_FILES:
@@ -57,29 +57,25 @@ def crawl_directory(root: str) -> list:
 
 def main() -> None:
     logger.info("Starting Global Brain Crawler...")
-    findings = crawl_directory(TARGET_DIR)
+    start = time.time()
+    findings = crawl_directory(os.path.expanduser("~"))
+    elapsed = time.time() - start
 
     if not findings:
         logger.warning("No indexable files found.")
         return
 
-    logger.info(f"Indexed {len(findings)} files.")
+    logger.info(f"Indexed {len(findings)} files in {elapsed:.2f}s.")
 
-    index = {
+    index: Dict[str, Any] = {
         "generated_at": datetime.now().isoformat(),
-        "root": TARGET_DIR,
+        "root": os.path.expanduser("~"),
         "total_files": len(findings),
         "files": findings[:MAX_FILES]
     }
 
-    try:
-        with open(INDEX_FILE, "w", encoding="utf-8") as f:
-            json.dump(index, f, indent=2)
-        logger.info(f"Brain index saved to {INDEX_FILE}")
-    except Exception as e:
-        logger.error(f"Failed to save index: {e}")
-        raise
-
+    write_json(INDEX_FILE, index)
+    logger.info(f"Brain index saved to {INDEX_FILE}")
     logger.info("Brain Crawler complete.")
 
 

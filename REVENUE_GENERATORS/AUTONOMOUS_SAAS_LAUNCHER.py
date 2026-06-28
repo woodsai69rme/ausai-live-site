@@ -5,36 +5,35 @@ Scans for SaaS-ready projects and prepares launch checklists,
 environment configs, and deployment manifests.
 """
 
-import os
 import json
-import logging
+import os
 from datetime import datetime
+from typing import List, Dict, Any, Set
 
-# Configuration
-TARGET_DIR = r"C:\Users\karma\REVENUE_GENERATORS"
-VALID_MARKERS = {"package.json", "main.py", "app.py", "pyproject.toml", "requirements.txt"}
+from revenue_utils import setup_logging, ensure_revenue_dir, write_json, REVENUE_DIR
 
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-logger = logging.getLogger(__name__)
+logger = setup_logging(__name__)
+
+VALID_MARKERS: Set[str] = {"package.json", "main.py", "app.py", "pyproject.toml", "requirements.txt"}
 
 
-def find_saas_projects() -> list:
+def find_saas_projects() -> List[Dict[str, Any]]:
     """Find directories that look like deployable SaaS projects."""
-    projects = []
-    logger.info(f"Scanning {TARGET_DIR} for SaaS projects...")
+    projects: List[Dict[str, Any]] = []
+    logger.info(f"Scanning {REVENUE_DIR} for SaaS projects...")
 
-    if not os.path.exists(TARGET_DIR):
-        logger.error(f"Target directory {TARGET_DIR} not found.")
+    if not os.path.exists(REVENUE_DIR):
+        logger.error(f"Target directory {REVENUE_DIR} not found.")
         return projects
 
     try:
-        items = os.listdir(TARGET_DIR)
+        items = os.listdir(REVENUE_DIR)
     except Exception as e:
-        logger.error(f"Failed to list {TARGET_DIR}: {e}")
+        logger.error(f"Failed to list {REVENUE_DIR}: {e}")
         return projects
 
     for item in items:
-        full_path = os.path.join(TARGET_DIR, item)
+        full_path = os.path.join(REVENUE_DIR, item)
         if os.path.isdir(full_path):
             try:
                 files = set(os.listdir(full_path))
@@ -51,7 +50,7 @@ def find_saas_projects() -> list:
     return projects
 
 
-def generate_launch_manifest(project: dict) -> dict:
+def generate_launch_manifest(project: Dict[str, Any]) -> Dict[str, Any]:
     """Generate a launch checklist for a project."""
     return {
         "project": project["name"],
@@ -70,6 +69,7 @@ def generate_launch_manifest(project: dict) -> dict:
 
 def main() -> None:
     logger.info("Starting Autonomous SaaS Launcher...")
+    ensure_revenue_dir()
     projects = find_saas_projects()
 
     if not projects:
@@ -78,21 +78,15 @@ def main() -> None:
 
     logger.info(f"Found {len(projects)} potential SaaS project(s).")
 
-    manifests = []
+    manifests: List[Dict[str, Any]] = []
     for proj in projects:
         manifest = generate_launch_manifest(proj)
         manifests.append(manifest)
         logger.info(f"Prepared launch manifest for: {proj['name']}")
 
-    output_path = os.path.join(TARGET_DIR, "saas_launch_manifests.json")
-    try:
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(manifests, f, indent=2)
-        logger.info(f"Launch manifests saved to {output_path}")
-    except Exception as e:
-        logger.error(f"Failed to save manifests: {e}")
-        raise
-
+    output_path = os.path.join(REVENUE_DIR, "saas_launch_manifests.json")
+    write_json(output_path, manifests)
+    logger.info(f"Launch manifests saved to {output_path}")
     logger.info("SaaS Launcher complete.")
 
 

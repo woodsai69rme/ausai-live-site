@@ -5,23 +5,22 @@ Generates content plans, drafts, and publishing schedules
 for social media, blogs, and video scripts.
 """
 
-import os
 import json
-import logging
 from datetime import datetime
+from typing import List, Dict, Any
 
-# Configuration
-TARGET_DIR = r"C:\Users\karma\REVENUE_GENERATORS"
-CONTENT_TOPICS = ["AI automation", "no-code tools", "productivity hacks", "revenue growth"]
-PLATFORMS = ["LinkedIn", "Twitter/X", "YouTube", "Blog", "Newsletter"]
+from revenue_utils import setup_logging, ensure_revenue_dir, write_json, REVENUE_DIR
+import os
 
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-logger = logging.getLogger(__name__)
+logger = setup_logging(__name__)
+
+CONTENT_TOPICS: List[str] = ["AI automation", "no-code tools", "productivity hacks", "revenue growth"]
+PLATFORMS: List[str] = ["LinkedIn", "Twitter/X", "YouTube", "Blog", "Newsletter"]
 
 
-def generate_content_plan() -> dict:
+def generate_content_plan() -> Dict[str, Any]:
     """Generate a weekly content plan."""
-    plan = {
+    plan: Dict[str, Any] = {
         "generated_at": datetime.now().isoformat(),
         "week_of": datetime.now().strftime("%Y-%m-%d"),
         "topics": CONTENT_TOPICS,
@@ -40,18 +39,13 @@ def generate_content_plan() -> dict:
 
 def main() -> None:
     logger.info("Starting Autonomous Content Factory...")
+    ensure_revenue_dir()
     plan = generate_content_plan()
     logger.info(f"Generated content plan with {len(plan['schedule'])} posts")
 
-    output_path = os.path.join(TARGET_DIR, "content_plan.json")
-    try:
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(plan, f, indent=2)
-        logger.info(f"Content plan saved to {output_path}")
-    except Exception as e:
-        logger.error(f"Failed to save plan: {e}")
-        raise
-
+    output_path = os.path.join(REVENUE_DIR, "content_plan.json")
+    write_json(output_path, plan)
+    logger.info(f"Content plan saved to {output_path}")
     logger.info("Content Factory complete.")
 
 
