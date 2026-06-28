@@ -1,0 +1,11 @@
+#############################################
+#        SECURITY WARNING - DO NOT DELETE    #
+#                                            #
+#  This system is protected                  #
+#  All user files are IMPORTANT             #
+#  DO NOT bulk delete without review        #
+#                                            #
+#  Protected: 19 Feb 2026                    #
+#  Owner: karma                              #
+#############################################
+SECURITY_WARNING_FILE - DO NOT REMOVE THIS FILE

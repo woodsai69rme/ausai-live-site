@@ -1,0 +1,32 @@
+===========================================
+FREE LOCAL AI - DESKTOP QUICK REFERENCE
+===========================================
+
+DOUBLE-CLICK TO RUN:
+
+[CHAT-CODING.bat]     -> Ollama with qwen2.5-coder
+[START-AI-TOOLS.bat]  -> Menu with all tools
+[START-HERMES.bat]    -> Hermes self-improving agent
+
+QUICK COMMAND LINE:
+
+# Coding agent
+openclaw agent --agent myagent
+
+# Fast chat
+ollama run phi3:latest
+
+# Music generation  
+cd tadpole-studio; python start.py
+
+# Video generation
+cd ComfyUI; python main.py
+
+# List skills
+npx skills list
+
+# Show models
+ollama list
+
+ALL FREE - NO API KEYS - OFFLINE CAPABLE
+==========================================

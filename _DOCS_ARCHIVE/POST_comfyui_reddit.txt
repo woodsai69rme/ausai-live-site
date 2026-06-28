@@ -1,0 +1,24 @@
+Hey everyone,
+
+If you've been eyeing ComfyUI but held back by the costs of services like Midjourney or want a fully local setup, I have some great news for RTX 4060 8GB users! This guide will walk you through creating a free and efficient ComfyUI environment. Let's dive in:
+
+Why go local with ComfyUI?
+Local generation is a game-changer. You avoid API costs, maintain full control over your creations, and don't have to worry about data privacy or rate limits. Plus, once set up, it’s super fast!
+
+Best cheap VRAM tricks for 8GB cards
+1. Reduce model size: SD 1.5 and Juggernaut XL are great choices that fit well within the constraints.
+2. Optimize your pipeline: Use smaller batch sizes during training or generation to keep everything running smoothly.
+
+Specific recommended models for 8GB cards
+For 8GB RTX 4060, I recommend starting with SD 1.5 and Juggernaut XL. Both are powerful enough to produce decent results without overwhelming the GPU.
+
+Common errors and fixes
+- "Out of VRAM" error: Lower model settings or use smaller batch sizes.
+- "Model not found": Ensure your model files are correctly downloaded and placed in the right directory.
+- "Permission denied": Check file permissions on both Windows and Linux/MacOS systems.
+
+Ready to give it a shot? Follow these steps, and don't hesitate to reach out if you encounter any issues or need advice. I'm here to help in the comments!
+
+Happy generating! 🎨✨
+
+Feel free to ask questions or share your experiences below.
