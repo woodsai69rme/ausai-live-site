@@ -3,7 +3,7 @@
 > **Single-page master index covering ALL systems in the workspace.** Start here. Click through to each system's detailed index for deep reference.
 
 **Generated:** 2026-06-28
-**Systems documented:** 10 | **System indexes:** 10 | **Total files tracked:** 200+
+**Systems documented:** 13 | **System indexes:** 15 | **Total files tracked:** 300+
 
 ---
 
@@ -20,6 +20,9 @@
 | Dispatch agent squads | `AI_ARMY_SYSTEM_INDEX.md` |
 | Voice-control your system | `VOICE_PA_SYSTEM_INDEX.md` |
 | Sync projects across ecosystem | `AETHER_CORE_SYSTEM_INDEX.md` |
+| Manage your empire dashboard | `EMPIRE_SYSTEM_INDEX.md` |
+| Query your knowledge base | `ARCHON_V2_SYSTEM_INDEX.md` |
+| Ingest knowledge into brain | `PROJECT_BRAIN_2_0_SYSTEM_INDEX.md` |
 | See what AI tools are installed | `AI_TOOLS_INVENTORY_INDEX.md` |
 | Organize top-level clutter | `WORKSPACE_ORGANIZATION_PLAN.md` |
 
@@ -35,10 +38,13 @@
 | 4 | **ComfyUI Music Video Studio** | 77k+ | `ComfyUI/COMFYUI_SYSTEM_INDEX.md` | ✅ 22-option launcher |
 | 5 | **Voice PA System** | 8 | `VOICE_PA_SYSTEM_INDEX.md` | ✅ Voice-controlled assistant |
 | 6 | **Aether Core System** | 24k+ | `AETHER_CORE_SYSTEM_INDEX.md` | ✅ Sync bridge, empire audit |
-| 7 | **AI Tools Inventory** | 10+ | `AI_TOOLS_INVENTORY_INDEX.md` | ✅ 5 AI platforms, 4 runtimes |
-| 8 | **n8n Automation** | 95+ | `N8N_AUTOMATION_SYSTEM_INDEX.md` | ✅ Docker, 91 templates |
-| 9 | **YouTube Tools** | 5 | `YOUTUBE_TOOLS_SYSTEM_INDEX.md` | ✅ Transcript harvester |
-| 10 | **Workspace Meta** | 8 | (this file) | ✅ Organization plan, changelog |
+| 7 | **Empire Command Center** | 15+ | `EMPIRE_SYSTEM_INDEX.md` | ✅ 3 ports, C-drive valuation |
+| 8 | **Archon V2** | 50+ | `ARCHON_V2_SYSTEM_INDEX.md` | ✅ 4 microservices, 5 MCP tools |
+| 9 | **Project Brain 2.0** | 10+ | `PROJECT_BRAIN_2_0_SYSTEM_INDEX.md` | ✅ SHA256 ingestion, Phase F-H |
+| 10 | **AI Tools Inventory** | 10+ | `AI_TOOLS_INVENTORY_INDEX.md` | ✅ 5 AI platforms, 4 runtimes |
+| 11 | **n8n Automation** | 95+ | `N8N_AUTOMATION_SYSTEM_INDEX.md` | ✅ Docker, 91 templates |
+| 12 | **YouTube Tools** | 5 | `YOUTUBE_TOOLS_SYSTEM_INDEX.md` | ✅ Transcript harvester |
+| 13 | **Workspace Meta** | 12 | (this file) | ✅ All system indexes, org plan |
 
 ### Supporting Documents
 
@@ -72,14 +78,19 @@ launch_music_video_studio.bat → brainstorm (OpenRouter) → transcribe (Whispe
 python FOOTCLAN_EXECUTOR.py --task "audit revenue" → registry scoring → dispatch log → execute → report
 ```
 
-### Harvest YouTube Knowledge
+### Harvest YouTube Knowledge → Brain Ingestion
 ```
-youtube_transcript_harvest.py → parse captions → split sentences → PROJECT_BRAIN_2_0/ingest.py → audit log
+youtube_transcript_harvest.py → parse captions → split sentences → PROJECT_BRAIN_2_0/ingest.py → ChromaDB → RAG search
 ```
 
 ### Automate a Revenue Workflow (n8n)
 ```
 REVENUE_N8N_CONNECTOR.py → /webhook/revenue/status → n8n (port 5678) → workflow template → action
+```
+
+### Empire Full Boot
+```
+EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) + Revenue + Web3 + Content + Voice
 ```
 
 ---
@@ -90,12 +101,16 @@ REVENUE_N8N_CONNECTOR.py → /webhook/revenue/status → n8n (port 5678) → wor
 |---|---|---|
 | 11434 | Ollama API | AI Tools |
 | 1234 | LM Studio | AI Tools |
+| 3142 | Empire Dashboard | Empire |
+| 3737 | Archon Frontend | Archon V2 |
+| 5000 | Empire Media API | Empire |
 | 5678 | n8n | n8n Automation |
 | 8001 | AI Army FastAPI | AI Army |
-| 8051 | MCP Server | Agent Registry |
+| 8051 | MCP Server | Archon V2 |
+| 8052 | Agents Service | Archon V2 |
 | 8181 | Archon Main Server | Archon V2 |
 | 8188 | ComfyUI | ComfyUI |
-| 3737 | Archon Frontend | Archon V2 |
+| 8888 | Empire HUD | Empire |
 
 ---
 
@@ -117,11 +132,12 @@ REVENUE_N8N_CONNECTOR.py → /webhook/revenue/status → n8n (port 5678) → wor
 | Metric | Value |
 |---|---|
 | Commits on master | 75+ |
-| Commits this session | 9 |
-| Unpushed commits | 9 (needs GitHub auth) |
+| Commits this session | 12 |
+| Unpushed commits | 12 (needs GitHub auth) |
 | Remote | `woodsai69rme/ausai-live-site` |
 
 > **To push:** Register SSH key at `github.com/settings/keys` → `git remote set-url origin git@github.com:woodsai69rme/ausai-live-site.git` → `git push origin master`
+> **OR:** Create PAT at `github.com/settings/tokens` → paste token as password when pushing
 
 ---
 
