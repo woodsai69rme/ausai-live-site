@@ -117,8 +117,8 @@ REVENUE_N8N_CONNECTOR.py → /webhook/revenue/status → n8n (port 5678) → wor
 | Metric | Value |
 |---|---|
 | Commits on master | 75+ |
-| Commits this session | 7 |
-| Unpushed commits | 7 (needs GitHub auth) |
+| Commits this session | 9 |
+| Unpushed commits | 9 (needs GitHub auth) |
 | Remote | `woodsai69rme/ausai-live-site` |
 
 > **To push:** Register SSH key at `github.com/settings/keys` → `git remote set-url origin git@github.com:woodsai69rme/ausai-live-site.git` → `git push origin master`
