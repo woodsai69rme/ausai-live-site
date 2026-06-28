@@ -32,6 +32,10 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+# Single source of truth for signal_emitted ledger row writes; shared with
+# opt_d_alerts.py. Future PS1 schema changes update one file.
+from _ledger_writer import append_ledger_event
+
 ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "opt_c_config.json"
 AUDIT_LOG = ROOT / "SLEEP_TRIPLE_AUDIT.jsonl"
@@ -299,11 +303,6 @@ def append_audit(row: dict) -> None:
     AUDIT_LOG.parent.mkdir(parents=True, exist_ok=True)
     with open(AUDIT_LOG, "a", encoding="utf-8") as f:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
-
-
-# Single source of truth for signal_emitted ledger row writes; shared with
-# opt_d_alerts.py. Future PS1 schema changes update one file.
-from _ledger_writer import append_ledger_event
 
 
 def main() -> int:

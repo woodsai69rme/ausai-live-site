@@ -49,6 +49,10 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+# Single source of truth for signal_emitted ledger row writes; shared with
+# opt_c_crypto_yield.py. Future PS1 schema changes update one file.
+from _ledger_writer import append_ledger_event
+
 ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "opt_d_config.json"
 AUDIT_LOG = ROOT / "SLEEP_TRIPLE_AUDIT.jsonl"
@@ -443,11 +447,6 @@ def detect_content(trigger: str, rows: list, audit_window_hours: int) -> tuple:
     lines.extend(f"- {m}: {n}" for m, n in sorted(by_module.items()))
     headline = f"SLEEP_TRIPLE morning digest — {total_rows} rows in last {audit_window_hours}h"
     return headline, lines, "info"
-
-
-# Single source of truth for signal_emitted ledger row writes; shared with
-# opt_c_crypto_yield.py. Future PS1 schema changes update one file.
-from _ledger_writer import append_ledger_event
 
 
 def main() -> int:

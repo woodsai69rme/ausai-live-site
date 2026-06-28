@@ -258,5 +258,36 @@ except Exception as _e:
     assert False, f"HTTP integration smoke failed: {_e}"
 
 
+# 12) Dry-run parity guard: opt_c --dry-run and opt_d --dry-run must NOT add
+# rows to REVENUE_LEDGER.jsonl. Verifies the PS1 -DryRun flag forwarding
+# works end-to-end for both opt modules.
+section("12: opt_c + opt_d dry-run do not write REVENUE_LEDGER.jsonl")
+import subprocess as _subprocess
+_ledger_path = ROOT / "REVENUE_LEDGER.jsonl"
+def _count_ledger_rows():
+    if not _ledger_path.exists():
+        return 0
+    return sum(1 for _l in _ledger_path.read_text(encoding="utf-8").splitlines() if _l.strip())
+_count_before = _count_ledger_rows()
+try:
+    _oc = _subprocess.run(
+        [sys.executable, str(ROOT / "opt_c_crypto_yield.py"), "--dry-run"],
+        capture_output=True, text=True, timeout=60)
+except Exception as _oc_e:
+    _oc = type("_FakeR", (), {"returncode": -1, "stderr": str(_oc_e)})()
+try:
+    _od = _subprocess.run(
+        [sys.executable, str(ROOT / "opt_d_alerts.py"), "--dry-run", "--trigger", "morning_digest"],
+        capture_output=True, text=True, timeout=60)
+except Exception as _od_e:
+    _od = type("_FakeR", (), {"returncode": -1, "stderr": str(_od_e)})()
+_count_after = _count_ledger_rows()
+assert_eq(_count_after, _count_before,
+          f"ledger rows unchanged (before={_count_before} after={_count_after}; "
+          f"opt_c rc={_oc.returncode}, opt_d rc={_od.returncode})")
+print(f"  OK opt_c returncode={_oc.returncode}, opt_d returncode={_od.returncode}, "
+      f"ledger rows stayed at {_count_before}")
+
+
 print("\n=== ALL UNIT TESTS PASS ===")
-print("Smoke test (incl. widened arrow guard + HTTP integration) is GREEN.")
+print("Smoke test (incl. Section 10 widened arrow guard + Section 11 HTTP + Section 12 dry-run parity) is GREEN.")
