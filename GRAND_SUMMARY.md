@@ -1,8 +1,8 @@
 # 📋 GRAND_SUMMARY.md — Complete Workspace Reference
 
-> **One-page condensed reference for the entire workspace.** 13 systems, 15 indexes, 300+ tracked files, 12 ports. Print this.
+> **One-page condensed reference for the entire workspace.** 17 systems, 19 indexes, 380+ files organized, 12 ports. 🟢 AI Army LIVE on port 8001. Print this.
 
-**Generated:** 2026-06-28 | **Systems:** 13 | **Ports:** 12 | **Commits:** 13 this session
+**Generated:** 2026-06-28 | **Systems:** 17 | **Ports:** 12 | **Commits:** 16 this session
 
 ---
 
@@ -12,17 +12,21 @@
 |---|---|---|---|
 | 1 | AusAI Tech | 80 | 15 rounds, A$5K→A$10K/mo goal |
 | 2 | Agent Registry | 13 | 2,793 agents, 16 domains |
-| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, port 8001 |
+| 3 | AI Army (Foot Clan) | 16 | 6 agents, 9 API routes, 🟢 LIVE :8001 |
 | 4 | ComfyUI Music Video Studio | 77K+ | 22-option launcher, port 8188 |
 | 5 | Voice PA System | 8 | 5 intent enum, Rule #8 fence |
 | 6 | Aether Core System | 24K+ | Sync bridge, empire audit |
-| 7 | Empire Command Center | 15+ | 3 ports (3142/5000/8888), A$8K-$225K valuation |
+| 7 | Empire Command Center | 15+ | 3 ports (3142/5000/8888), A$8K-$225K |
 | 8 | Archon V2 | 50+ | 4 microservices, 5 MCP tools |
 | 9 | Project Brain 2.0 | 10+ | SHA256 ingestion, Phase F-H |
 | 10 | AI Tools Inventory | 10+ | 5 platforms, 4 runtimes |
 | 11 | n8n Automation | 95+ | Docker, 91 templates, port 5678 |
 | 12 | YouTube Tools | 5 | Transcript harvester |
-| 13 | Workspace Meta | 12 | All indexes, org plan |
+| 13 | Master Ecosystem Catalog | 11+ | 11 subsystems hub |
+| 14 | Dashboard System Scripts | 61 | Terminal automation layer |
+| 15 | Bookmark Manager Pro | 7,685 | Bookmarks, 17 categories, 100% coverage |
+| 16 | AI Influencer Factory | 4 | Ollama→Piper→ComfyUI→n8n pipeline |
+| 17 | Workspace Meta | 19 | All indexes, org plan, changelog |
 
 ---
 
@@ -32,7 +36,7 @@
 11434  Ollama API        3142  Empire Dashboard
 1234   LM Studio         3737  Archon Frontend
 5000   Empire Media      5678  n8n
-8001   AI Army           8051  MCP Server
+8001   AI Army 🟢        8051  MCP Server
 8052   Agents Service    8181  Archon Main
 8188   ComfyUI           8888  Empire HUD
 ```
@@ -49,6 +53,7 @@
 | Harvest YouTube → brain | `youtube_transcript_harvest.py` → captions → `PROJECT_BRAIN_2_0/ingest.py` → ChromaDB |
 | Automate revenue | `REVENUE_N8N_CONNECTOR.py` → webhook → n8n (5678) → workflow |
 | Boot the empire | `EMPIRE_JARVIS_LAUNCHER.bat` → Dashboard + HUD + Media + Revenue + Web3 |
+| AI Influencer content | `ai_influencer_factory.py` → Ollama/qwen2.5 → Piper TTS → ComfyUI → n8n publish |
 | Find any agent | `grep -F "<id>" AGENT_REGISTRY.md` → 2,793 agents, 16 domains |
 
 ---
@@ -79,11 +84,13 @@
 
 | Batch | Files | Status |
 |---|---|---|
-| Batch 1: Docs | 61 | ✅ |
-| Batch 2: Docs | 187 | ✅ |
-| Batch 3: Scripts | 44 | ✅ |
-| Batch 4: HTML + remaining | 48 | ✅ |
-| **Total organized** | **340** | ✅ |
+| Batch 1: Docs (MCP, Week, Setup, OPENCODE) | 61 | ✅ |
+| Batch 2: Docs (COMPLETE, ULTIMATE, QWEN) | 187 | ✅ |
+| Batch 3: Scripts (Python, PowerShell) | 44 | ✅ |
+| Batch 4: HTML + Empire + Golden Rules | 48 | ✅ |
+| Batch 5: Remaining docs (AUSAI, GITHUB, LINKEDIN) | 45 | ✅ |
+| Batch 6: Remaining scripts + data | 38 | ✅ |
+| **Total organized** | **~380** | ✅ |
 
 ---
 
@@ -91,10 +98,11 @@
 
 | Need | Open |
 |---|---|
-| Everything at a glance | `WORKSPACE_INDEX.md` |
+| Everything at a glance | `WORKSPACE_INDEX.md` (17 systems) |
 | Day 1 action plan | `DAY1_EXECUTION_PACK.md` |
 | All AI tools | `AI_TOOLS_DASHBOARD.html` |
-| Push to GitHub | `github.com/settings/tokens` |
+| AI Army live dashboard | `http://localhost:8001` 🟢 |
+| Push to GitHub | `github.com/settings/tokens` (16 commits) |
 | Deploy site | `DEPLOYMENT_QUICK_START.md` |
 | Full history | `CHANGELOG.md` |
 
