@@ -41,6 +41,7 @@ import argparse
 import json
 import os
 import ssl
+import subprocess  # invoke Append-RevenueEvent.ps1 for signal_emitted ledger rows
 import sys
 import time
 import urllib.error
@@ -445,6 +446,45 @@ def detect_content(trigger: str, rows: list, audit_window_hours: int) -> tuple:
     return headline, lines, "info"
 
 
+def append_ledger_event(ts: str, amount_usd: float, source: str, meta_obj: dict,
+                        dry_run: bool, id_suffix: str = "") -> bool:
+    """Append a 'signal_emitted' row via Append-RevenueEvent.ps1.
+
+    Mirrors opt_c_crypto_yield.append_ledger_event so opt_d alerts also
+    surface in REVENUE_LEDGER.jsonl whenever a live send succeeds. Schema-
+    correct PS1 param names; safe_id derives from ISO ts by stripping ':' and
+    '.'; -LedgerPath is the project-local path so the dashboard resolver
+    picks it up. Stderr is surfaced on non-zero exit so operators can debug
+    PS1 refusals without losing the audit row.
+    """
+    script = Path(r"C:\Users\karma\Append-RevenueEvent.ps1")
+    if not script.exists():
+        print(f"[opt_d] PS1 helper missing: {script}", file=sys.stderr)
+        return False
+
+    safe_id = ts.replace(":", "-").replace(".", "-") + (f"-{id_suffix}" if id_suffix else "")
+    ledger_path = ROOT / "REVENUE_LEDGER.jsonl"
+    meta_json_str = json.dumps(meta_obj)
+
+    args = [
+        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
+        "-File", str(script),
+        "-Event", "signal_emitted",
+        "-Source", source,
+        "-Id", safe_id,
+        "-AmountUsd", f"{amount_usd:.2f}",
+        "-MetaJson", meta_json_str,
+        "-LedgerPath", str(ledger_path),
+    ]
+    if dry_run:
+        args.append("-DryRun")
+
+    r = subprocess.run(args, capture_output=True, text=True)
+    if r.returncode != 0:
+        print(f"[opt_d] Ledger append refused (exit {r.returncode}): {r.stderr.strip()}", file=sys.stderr)
+    return r.returncode == 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Option D — Webhook Alerts")
     ap.add_argument("--dry-run", action="store_true", help="Print payload, do not send")
@@ -608,6 +648,35 @@ def main() -> int:
         audit_row["info"] = only["info"]
         audit_row["status_code"] = only["status_code"]
     append_audit(audit_row)
+
+    # Emit one signal_emitted row per effective channel so REVENUE_LEDGER.jsonl
+    # tracks every live alert dispatch. Dry-run / noop / refused / failed
+    # rows do NOT emit (effective=False means no live 2xx POST happened).
+    # PS1 refusal surfaces on stderr; audit row remains the source of truth
+    # so dashboard readers see the original per_channel_results array.
+    safe_tier = (tier or "unk")[:3]
+    for ch_res in per_channel_results:
+        if ch_res.get("effective"):
+            ch_name = ch_res["name"]
+            meta_obj = {
+                "trigger": args.trigger,
+                "channel": ch_name,
+                "tier": tier or "unknown",
+                "fanout_mode": fanout_mode,
+                "rows_scanned": len(rows),
+                "headline_chars": len(headline),
+                "headline_preview": headline[:60],
+                "line_count": len(lines),
+            }
+            append_ledger_event(
+                ts=now_iso,
+                amount_usd=0.0,
+                source=f"pipeline:opt_d_alerts:{args.trigger}",
+                meta_obj=meta_obj,
+                dry_run=dry_run,
+                id_suffix=f"{args.trigger}-{ch_name}-{safe_tier}",
+            )
+
     print(f"[opt_d] trigger={args.trigger} tier={audit_row['tier']} "
           f"targets={targets} mode={fanout_mode} results={per_channel_results}")
     return 0 if overall_status == "ok" else 2

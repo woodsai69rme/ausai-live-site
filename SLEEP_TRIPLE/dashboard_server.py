@@ -97,6 +97,10 @@ def main() -> int:
     ap.add_argument("--port", type=int, default=3144, help="bind port (default 3144)")
     args = ap.parse_args()
     httpd = ThreadingHTTPServer((args.host, args.port), Handler)
+    # SO_REUSEADDR: TIME_WAIT sockets from prior server runs don't block the
+    # bind. Without this, _smoke_retry.py's Section 11 HTTP smoke flaps to
+    # rc=1 when the previous dashboard server hasn't fully released the port.
+    httpd.allow_reuse_address = True
     # Use ASCII arrows ('->') instead of Unicode '->' because Windows
     # Python's default console codec (cp1252) crashes on the unicode
     # arrow when --log-stdout is the only place stdout gets touched.
