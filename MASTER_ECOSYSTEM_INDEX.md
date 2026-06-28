@@ -66,8 +66,12 @@ MASTER_ECOSYSTEM/ (hub)
 
 | System | Index |
 |---|---|
+| AI Army | `AI_ARMY_SYSTEM_INDEX.md` |
+| Agent Registry | `AGENT_REGISTRY_SYSTEM_INDEX.md` |
+| Empire Command Center | `EMPIRE_SYSTEM_INDEX.md` |
+| Archon V2 | `ARCHON_V2_SYSTEM_INDEX.md` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
-| All 13 systems | Individual system indexes |
+| Grand Summary | `GRAND_SUMMARY.md` |
 
 ---
 
