@@ -1,56 +1,50 @@
-# Development Environment
+# Local AI Fleet — Development Environment
 
-Welcome to the development environment for multiple AI and automation projects. This environment contains several interconnected systems for AI development, Android recovery tools, and dashboard systems.
+Welcome to the unified local-AI toolchain at `C:\Users\karma\`. This environment runs a **local-first, cloud-fallback** fleet of AI agents, coding tools, creative studios, and dashboards — all launchable from a single menu.
 
-## Current Projects
+## Quick Start
 
-### 1. AI Voice Assistant Enhanced
-An advanced voice assistant system with multiple capabilities.
+1. **Launch the fleet menu:** Double-click `START-ALL-AI-TOOLS.bat`
+2. **Read the master docs:** Open `ALL-TOOLS-CONFIGURED.md`
+3. **Quick index:** See `ALL_TOOLS_QUICK_REFERENCE.md` for a one-page menu map
 
-### 2. Android Recovery Toolkit
-A comprehensive toolkit for Android device recovery with security-focused validation.
+## Fleet Overview
 
-### 3. AI Influencer Pipeline
-Automated influencer campaign management system.
+| Layer | Tools | Status |
+|-------|-------|--------|
+| **Gateway** | OpenClaw (port 18789) | ✅ Active |
+| **Autonomous Agents** | Hermes, Agent Zero, Oracle, Jarvis, Paperclip | 2 active, 1 cloned, 3 configs ready |
+| **Coding Tools** | Kilo AI, OpenCode AI | ✅ Ready |
+| **Local Models** | Ollama (qwen2.5-coder, phi3) | ✅ Ready |
+| **Creative** | Tadpole Studio (music), ComfyUI (video/image) | ✅ Ready |
+| **Dashboard** | God-Mode (port 3142) | ✅ Ready |
 
-### 4. AI Content Analysis
-Advanced content analysis and processing system.
+## Documentation
 
-### 5. RAG Document Ingestor
-Retrieval-Augmented Generation document processing system.
+| Document | Purpose |
+|----------|---------|
+| [`ALL-TOOLS-CONFIGURED.md`](ALL-TOOLS-CONFIGURED.md) | **Master fleet docs** — configs, ports, models, troubleshooting |
+| [`ALL_TOOLS_QUICK_REFERENCE.md`](ALL_TOOLS_QUICK_REFERENCE.md) | One-page index of all 16 launcher options |
+| [`OPENCLAW_HERMES_SETUP_AND_RESEARCH.md`](OPENCLAW_HERMES_SETUP_AND_RESEARCH.md) | OpenClaw gateway + Hermes agent deep dive |
+| [`ORACLE_JARVIS_PAPERCLIP_SETUP.md`](ORACLE_JARVIS_PAPERCLIP_SETUP.md) | Oracle / Jarvis / Paperclip setup + schemas |
+| [`TODO_TRACKER.md`](TODO_TRACKER.md) | Append-only project tracker |
 
-### 6. Enterprise Development Hub
-Comprehensive project management and coordination system.
+## Security
 
-## Security Posture
+- No hardcoded API keys in configs — only public model identifiers.
+- Git history scrubbed for PATs and secrets.
+- Personal folders protected (Rule #8) — never touched by automation.
+- Audit logs are append-only and isolated per persona.
 
-This environment implements strong security practices:
-- Input validation and sanitization
-- Protection against command injection
-- Path traversal prevention
-- Secure credential management
+## Requirements
 
-## Improvement Plan
-
-A comprehensive improvement plan is documented in [DEVELOPMENT_ENVIRONMENT_IMPROVEMENT_PLAN.md](DEVELOPMENT_ENVIRONMENT_IMPROVEMENT_PLAN.md) which outlines:
-
-1. Critical infrastructure improvements
-2. Security vulnerability remediation
-3. System optimization
-4. Quality assurance enhancements
-5. Advanced feature development
-
-## Getting Started
-
-1. Ensure Git is properly configured
-2. Review the security guidelines
-3. Follow the documentation in the respective project directories
-4. Implement the improvements outlined in the plan
+- Git, Python 3.12+, `uv`, Node.js 20+, Ollama
+- OpenRouter API key (for cloud fallback; optional if running local-only)
+- Optional: CUDA for ComfyUI GPU acceleration
 
 ## Contributing
 
-When contributing to this environment:
-1. Follow secure coding practices
-2. Ensure all sensitive information is properly handled
-3. Update documentation as needed
-4. Run security checks before committing changes
+1. Follow secure coding practices.
+2. Never commit secrets — use environment variables.
+3. Update `ALL-TOOLS-CONFIGURED.md` when adding new tools or agents.
+4. Run `gitleaks detect --source . --verbose` before committing.
