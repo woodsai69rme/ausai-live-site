@@ -7,11 +7,13 @@ Quick problem this solves: when commits pile up locally and the docs aren't
 updated, future-me reading DOCUMENTATION.md has no idea which commit it
 corresponds to. Drift = trust = repo rot. This script catches that.
 
-What it checks:
-  1. The most recent commit hash in section 9's commit table matches the most
-     recent SLEEP_TRIPLE-related commit in `git log`.
+What it checks (after stripping leading doc-update commits from BOTH sides):
+  1. The most recent (non-doc-update) commit hash in section 9's commit table
+     matches the most recent (non-doc-update) commit in `git log` that touches
+     ``SLEEP_TRIPLE/`` or ``Append-Revenue*``.
   2. Every commit hash in the table exists in the repo (no stale references).
-  3. The table count is consistent with the git log size (no orphans, no stale).
+  3. Each live commit hash is listed in section 9 (no orphans in git that
+     the table forgot).
 
 Exits 0 on PASS, 1 on FAIL. stderr carries human-readable diagnostics.
 
@@ -30,69 +32,91 @@ ROOT = Path(__file__).resolve().parent
 DOC = ROOT / "DOCUMENTATION.md"
 
 HEADER_RE = re.compile(r"^##\s+\d+\b")
-HASH_RE = re.compile(r"`([0-9a-f]{7,8})`")
+# §9 table row: `| `HASH` | SUBJECT |`. Hash is 7-8 hex chars; subject is
+# captured lazily up to the final `|` on the line. Anchored at end-of-line
+# so trailing whitespace does not eat a boundary.
+SECTION9_ROW_RE = re.compile(r"\|\s*`([0-9a-f]{7,8})`\s*\|\s*(.+?)\s*\|\s*$")
+
+# Recognised doc-update subject signals (case-insensitive):
+#   - Anchored conventional prefixes: docs:, docs(, docs(*):, chore:,
+#     chore(*):, doc: (rare).
+#   - Whole-word substrings anywhere: doc, docs, drift, readme.
+# Word boundaries (``\b``) keep substring matches narrow: ``doc`` won't
+# match ``decoder`` / ``docker`` / ``decode``.
+DOC_UPDATE_RE = re.compile(
+    r"\A(?:docs?|chore)(?:\([^)]+\))?:\b|\b(?:docs?|drift|readme)\b",
+    re.IGNORECASE,
+)
 
 
-def _git_log_sleep_commits() -> list[str]:
-    """Return most-recent-first list of 7/8-char short commit hashes that touch
-    SLEEP_TRIPLE/ or Append-Revenue* on HEAD.
+def _strip_leading_doc_updates(
+    rows: list[tuple[str, str]],
+) -> tuple[list[tuple[str, str]], int]:
+    """Skip entries at the head of ``rows`` whose subject matches
+    ``DOC_UPDATE_RE``. Once a non-doc-update entry is appended, every
+    subsequent (older) entry is kept regardless of subject.
 
-    Filters OUT the most-recent commit IF its subject indicates the commit's
-    purpose was to update DOCS / §9 itself. Without this filter, every amend
-    creates a new hash that the §9 table can't yet contain (chicken-and-egg).
-    The filter is regex-based so future subject variants stay covered.
-
-    Recognized doc-update subject signals (case-insensitive):
-      - Anchored conventional prefixes: docs:, docs(, docs(*):, chore:,
-        chore(*):, doc: (rare).
-      - Whole-word substrings anywhere: doc, docs, drift, readme.
-
-    Older doc-update commits are kept in the listing so §9 archaeology stays
-    complete. Code commits that incidentally contain "doc" as a SUBSTRING of
-    an unrelated word (e.g. "decode", "decoded") still pass through because
-    the substring check uses ``\\b`` word boundaries.
+    Used symmetrically by the doc-side (caller parses §9) and the live-side
+    (caller parses ``git log``). The function is a pure state machine on a
+    list, so it can be re-applied to either side without losing meaning.
     """
-    DOC_UPDATE_RE = re.compile(
-        r"\A(?:docs?|chore)(?:\([^)]+\))?:\b|\b(?:docs?|drift|readme)\b",
-        re.IGNORECASE,
-    )
+    out: list[tuple[str, str]] = []
+    skipped = 0
+    for h, subj in rows:
+        if not out and DOC_UPDATE_RE.search(subj):
+            skipped += 1
+            continue
+        out.append((h, subj))
+    return out, skipped
+
+
+def _git_log_sleep_commits_with_subjects() -> tuple[list[tuple[str, str]], int]:
+    """Return ``(rows, skipped_from_head)`` where ``rows`` is a
+    most-recent-first list of ``(hash, subject)`` tuples for commits
+    touching ``SLEEP_TRIPLE/`` or ``Append-Revenue*`` on HEAD, with LEADING
+    doc-updates already stripped via ``_strip_leading_doc_updates``.
+
+    The leading-strip is the amend-loop break: a fix to this very file (or
+    any docs-update commit) lands as a new hash that can't yet appear in
+    §9's table, so without the strip the check would perpetually fail after
+    every amend. The same strip is applied to the doc side in ``main()``.
+    """
     r = subprocess.run(
         ["git", "log", "--pretty=format:%h\t%s", "HEAD",
          "--", "SLEEP_TRIPLE/*", "Append-Revenue*"],
         capture_output=True, text=True, cwd=str(ROOT.parent),
     )
     if r.returncode != 0:
-        return []
-    rows: list[str] = []
+        return [], 0
+    raw: list[tuple[str, str]] = []
     for line in r.stdout.splitlines():
         if not line.strip():
             continue
         parts = line.split("\t", 1)
         if len(parts) != 2:
             continue
-        h, subj = parts[0].strip(), parts[1].strip()
-        # Filter only the MOST-RECENT commit if it's a doc-update commit.
-        # Older doc-update commits stay in the listing so §9 stays complete.
-        if not rows and DOC_UPDATE_RE.search(subj):
-            continue
-        rows.append(h)
-    return rows
+        raw.append((parts[0].strip(), parts[1].strip()))
+    return _strip_leading_doc_updates(raw)
 
 
-def _section_h9_hashes(doc_text: str) -> list[str]:
-    """Return 7-char hex hashes backticked in lines between ## 9. and the next
-    ## <other-digits>. heading. Robust to headers with trailing parentheticals
-    like '## 9. Commit History (local, awaiting push)'.
+def _section_h9_rows(doc_text: str) -> list[tuple[str, str]]:
+    """Return ``(hash, subject)`` tuples parsed from §9 commit-history table
+    rows. Each row in §9 has the form ``| `HASH` | SUBJECT |``.
+
+    Robust to:
+      * Heading variations like ``## 9. Commit History (local, awaiting push)``.
+      * Lines outside §9 (header table at §5, R3/R4 tables at §8b, etc.).
+      * The trailing push-status warning paragraph and ``---`` separator.
     """
     lines = doc_text.splitlines()
     in_h9 = False
-    rows: list[str] = []
+    rows: list[tuple[str, str]] = []
     for line in lines:
         if HEADER_RE.match(line):
-            heading_num_match = re.match(r"^##\s+(\d+)\b", line)
-            if not heading_num_match:
+            m = re.match(r"^##\s+(\d+)\b", line)
+            if not m:
                 continue
-            num = heading_num_match.group(1)
+            num = m.group(1)
             if in_h9 and num != "9":
                 break  # next numbered section, leave.
             if num == "9":
@@ -100,9 +124,10 @@ def _section_h9_hashes(doc_text: str) -> list[str]:
                 continue
         if not in_h9:
             continue
-        # Greedy harvest of all 7-char hex hashes in this line.
-        for m in HASH_RE.finditer(line):
-            rows.append(m.group(1))
+        m = SECTION9_ROW_RE.match(line)
+        if not m:
+            continue
+        rows.append((m.group(1).strip(), m.group(2).strip()))
     return rows
 
 
@@ -113,6 +138,20 @@ def _hash_exists(short: str) -> bool:
         capture_output=True, text=True, cwd=str(ROOT.parent),
     )
     return r.returncode == 0 and r.stdout.strip() == "commit"
+
+
+def _count_unstripped_live() -> int:
+    """How many entries would ``git log`` return WITHOUT the DOC_UPDATE_RE
+    strip? Used to disambiguate "no commits in repo" vs "every commit is a
+    doc-update and got stripped" in the failure message."""
+    r = subprocess.run(
+        ["git", "log", "--pretty=format:%h", "HEAD",
+         "--", "SLEEP_TRIPLE/*", "Append-Revenue*"],
+        capture_output=True, text=True, cwd=str(ROOT.parent),
+    )
+    if r.returncode != 0:
+        return 0
+    return sum(1 for l in r.stdout.splitlines() if l.strip())
 
 
 def main() -> int:
@@ -126,56 +165,77 @@ def main() -> int:
         return 1
 
     text = DOC.read_text(encoding="utf-8")
-    doc_hashes = _section_h9_hashes(text)
-    if not doc_hashes:
+    doc_rows_raw = _section_h9_rows(text)
+    if not doc_rows_raw:
         print(f"[doc-drift] FAIL: no commits found in section 9 of {DOC}",
               file=sys.stderr)
         return 1
+    doc_stripped, doc_skipped = _strip_leading_doc_updates(doc_rows_raw)
 
-    live_hashes = _git_log_sleep_commits()
-    if not live_hashes:
-        print("[doc-drift] FAIL: no git history found (not in a git tree?)",
-              file=sys.stderr)
+    live_rows, live_skipped = _git_log_sleep_commits_with_subjects()
+    if not live_rows:
+        # Disambiguate the empty-after-strip case from the empty-repo case.
+        raw_count = _count_unstripped_live()
+        if raw_count == 0:
+            print("[doc-drift] FAIL: no SLEEP_TRIPLE/ or Append-Revenue/ "
+                  "commits in git history", file=sys.stderr)
+        else:
+            print(f"[doc-drift] FAIL: all {raw_count} SLEEP_TRIPLE/ commits "
+                  f"match DOC_UPDATE_RE — every commit is a doc-update and "
+                  f"§9 has nothing to anchor against", file=sys.stderr)
         return 1
 
     failures: list[str] = []
 
-    # 1. Most recent commit match.
-    doc_top = doc_hashes[0]
-    live_top = live_hashes[0]
-    if doc_top != live_top:
-        failures.append(
-            f"latest commit hash mismatch: section 9 top=`{doc_top}` "
-            f"but git log top=`{live_top}`")
-
-    # 2. Each doc hash resolves.
-    for h in doc_hashes:
+    # 1. Every doc hash resolves in git. Catches typos and stale entries
+    #    left behind by previous §9 versions.
+    for h, _ in doc_rows_raw:
         if not _hash_exists(h):
             failures.append(f"stale or bogus commit hash in section 9: `{h}`")
 
-    # 3. Doc table count must be reasonably close to git log count.
-    # Drift in EITHER direction is suspect: more in doc than git = orphan
-    # hashes; more in git than doc = section 9 is stale. >5 in either
-    # direction means the table diverged from reality.
-    extra = len(doc_hashes) - len(live_hashes)
-    if abs(extra) > 5:
-        direction = "doc table LONGER" if extra > 0 else "doc table SHORTER"
+    # 2. §9 must have at least one non-doc-update row to anchor against.
+    if not doc_stripped:
         failures.append(
-            f"section 9 drift: {direction} than git log ("
-            f"doc={len(doc_hashes)} git={len(live_hashes)} delta={extra})")
+            "section 9 contains ONLY doc-update commits after stripping "
+            "leading rows — no real trailblazer remains to anchor against")
+
+    # 3. Latest non-doc-update commit must match between doc and git.
+    if doc_stripped:
+        doc_top = doc_stripped[0][0]
+        live_top = live_rows[0][0]
+        if doc_top != live_top:
+            failures.append(
+                f"latest commit hash mismatch after stripping leading "
+                f"doc-updates: section 9 top=`{doc_top}` but git top=`{live_top}` "
+                f"(live skipped {live_skipped}, doc skipped {doc_skipped})")
+
+    # 4. No orphans: every stripped-live hash must appear in stripped-doc set.
+    if doc_stripped:
+        doc_hashes = {h for h, _ in doc_stripped}
+        missing = [h for h, _ in live_rows if h not in doc_hashes]
+        if missing:
+            failures.append(
+                f"section 9 missing {len(missing)} commit hash(es): "
+                f"{', '.join(missing[:5])}"
+                f"{'...' if len(missing) > 5 else ''}")
 
     if failures:
         print("[doc-drift] FAIL:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
-        print(f"[doc-drift] doc_top=`{doc_top}` live_top=`{live_top}` "
-              f"doc_count={len(doc_hashes)} git_count={len(live_hashes)}",
+        print(f"[doc-drift] doc_rows_raw={len(doc_rows_raw)} live_rows={len(live_rows)} "
+              f"doc_stripped={len(doc_stripped)} live_skipped={live_skipped} "
+              f"doc_skipped={doc_skipped}",
               file=sys.stderr)
         return 1
 
     if not args.quiet:
-        print(f"[doc-drift] GREEN: section 9 in sync (top=`{doc_top}`, "
-              f"{len(doc_hashes)} commits match git history)")
+        top = doc_stripped[0][0] if doc_stripped else "?"
+        print(
+            f"[doc-drift] GREEN: section 9 in sync (top=`{top}`, "
+            f"{len(doc_stripped)} commits recorded, "
+            f"{live_skipped + doc_skipped} leading doc-updates stripped)"
+        )
     return 0
 
 
