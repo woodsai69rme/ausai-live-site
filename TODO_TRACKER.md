@@ -398,6 +398,13 @@
 > - Code review fixes applied: Agent Zero added to README fleet overview; architecture diagram in ALL-TOOLS-CONFIGURED.md expanded to include Coding Tools, Local Models, and Agent Zero; empty-input guard added to bat.
 > - Totals still 28 ✅ / 103 ⬜ / 131 since docs ship as 🟦 sub-artifacts under existing rows.
 
+> **Update logged (this turn):** test, fix, and enhance batch — bat structural fixes, Hermes config sync, doc merge-conflict resolution, help option.
+> - `ALL-TOOLS-CONFIGURED.md`: removed Git merge conflict markers (`<<<<<<< HEAD` / `=======` / `>>>>>>> 86ae6744`) that were corrupting the master fleet doc; added missing OpenRouter free models (DeepSeek R1, DeepSeek V3, Shuttle 3) to the model table.
+> - `START-ALL-AI-TOOLS.bat`: fixed `:paperclip` label to use `cd /d C:\Users\karma` (was missing `/d` flag, inconsistent with all 16 other labels); added `h` / `H` help option — new prompt text "Enter choice (0-16, h):", new `if` branches, new `:help` label with quick tips and Enter-to-return.
+> - `.hermes/config/hermes.config.json`: added `qwen/qwen3-next-80b-a3b-instruct:free` as primary free model in `models.openrouter.freeModels`; updated `routing.default` and `routing.byTask.code` from Gemini/DeepSeek to Qwen so the config matches the documented claim.
+> - Validation: all JSON valid, all 17 bat goto labels resolve, menu options 0-16 + h present, empty-input guard present, no conflict markers in doc.
+> - Pushed to `origin/master` at `6d48b4a2`.
+
 > **Update logged (this turn):** multi-tool setup fixes -- dual-menu desync resolved, OPENCLAW_HERMES doc recreated, JSON schemas added, .gitignore updated
 > - Bat: :menu label moved to line 4 (single source-of-truth menu); added Skills as option 15 (shifted Docs to 16); prompt (0-15) -> (0-16); deleted stale bottom :menu/:end blocks. Now 1 menu display + 1 if-elif chain. All 16 goto targets resolve.
 > - New: OPENCLAW_HERMES_SETUP_AND_RESEARCH.md (107 lines) -- OpenClaw gateway (port 18789, workspace state, /steer command), Hermes agent (3-tier fallback, SOUL.md identity), routing architecture, cross-link to Oracle/Jarvis/Paperclip doc.
