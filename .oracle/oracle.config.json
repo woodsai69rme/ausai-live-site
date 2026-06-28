@@ -1,5 +1,5 @@
 {
-  "cloud_model_id": "<openrouter-free-qwen-oracle>",
+  "cloud_model_id": "qwen/qwen3-next-80b-a3b-instruct:free",
   "local_model_id": "qwen2.5-coder:7b",
   "context_window": 8192,
   "vector_store": "chromadb",
