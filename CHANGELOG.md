@@ -14,6 +14,41 @@
 - **New operator walkthrough** — Added to `ALL-TOOLS-CONFIGURED.md`: 5-minute first launch guide, decision tree for picking the right agent, typical daily workflow table, offline vs. online mode explanation.
 - **Config schema comparison** — Added side-by-side table comparing Hermes, Oracle, Jarvis, and Paperclip config fields.
 
+### Revenue Agent Suite
+- **Shared module** — `REVENUE_GENERATORS/revenue_utils.py` created with `setup_logging()`, `REVENUE_DIR`, `ensure_revenue_dir()`, and `write_json()` helpers.
+- **Stub refactor** — All 5 revenue stubs refactored to use the shared module with type hints (`-> Dict[str, Any]`, `-> List[Dict[str, Any]]`):
+  - `AUTONOMOUS_CONTENT_FACTORY.py` — content plan generation
+  - `AUTONOMOUS_SAAS_LAUNCHER.py` — vertical SaaS launch planner
+  - `GLOBAL_BRAIN_CRAWLER.py` — filesystem indexer, `PermissionError` now logs full path
+  - `REVENUE_SINGULARITY_ENGINE.py` — source discovery + readiness scoring
+  - `SELF_HEALING_DAEMON.py` — service health checks, `httpx.Client` replaces `urllib`, `attempt_heal` renamed to `plan_heal`
+- **Suite documentation** — `REVENUE_GENERATORS/README.md` created: 6-script overview, dispatch API examples, output file reference, architecture diagram, changelog.
+- **All 6 revenue actions verified live** — `deploy_revenue`, `content_factory`, `saas_launcher`, `brain_crawler`, `singularity`, `self_healing` — all dispatch via AI Army `:8001` and return success.
+- **Service health monitor** — `REVENUE_GENERATORS/SERVICE_HEALTH_MONITOR.py` added.
+
+### Archon V2 Server Live
+- **Lazy Supabase init** — Three files converted from eager `create_client()` at module-import time to lazy initialization, so the server no longer crashes when Supabase credentials are missing/invalid:
+  - `python/src/server/middleware/auth_middleware.py` — thread-safe `_get_supabase()` with `threading.Lock` and double-check locking; `authenticate_api_key` short-circuits to skip DB validation when Supabase is unavailable.
+  - `python/src/server/api_routes/auth_api.py` — endpoints (`register`, `login`) call `_get_supabase()` first and return `503 Service Unavailable` when None.
+  - `python/src/server/services/cost_optimization_service.py` — thread-safe `supabase_client` property (per-instance `_client_lock`), thread-safe `_cost_optimization_service` singleton (module-level lock), DB methods gracefully handle empty Supabase.
+- **Server starts successfully** — `uv run python -m src.server.main` now boots cleanly without `SUPABASE_URL`/`SUPABASE_SERVICE_KEY` in `.env`.
+- **Verified** — `curl http://localhost:8181/health` responds.
+
+### Github Push Resolved
+- **Auth fixed** — `gh auth switch -u woodsai69rme` activated the keyring PAT; `GITHUB_TOKEN` env var was previously overriding it.
+- **All session commits pushed** — 19 unpushed commits pushed to `origin/master`. Latest: `aa981e8a`.
+
+### n8n Automation Stack
+- **Recreated** — Stopped broken `archon-n8n` container. Recreated from `n8n-automation-stack/docker-compose.yml` with port mapping fixed.
+- **All endpoints 200** — `/`, `/home`, `/healthz` return 200 on `:5678`.
+
+### Code Review
+- **9 files reviewed** — Lazy initialization, thread-safety, None-safety, type hints. Three must-fix items flagged, all addressed:
+  1. Added `threading.Lock` to `auth_middleware._get_supabase()` with double-check locking.
+  2. Added `threading.Lock` to `cost_optimization_service.CostOptimizationService.supabase_client` property and `get_cost_optimization_service()` singleton.
+  3. Verified `auth_api.py` short-circuits to `503` BEFORE any `.supabase.<attr>` access (already correct, no change needed).
+- **Verified `write_json` default** — already `indent=2` for human-readable reports (no change needed).
+
 ## 2026-06-26
 
 ### Launcher

@@ -9,6 +9,7 @@ usage and cost data, then provides actionable insights.
 from typing import Any, Dict, List, Optional
 from datetime import datetime, timedelta
 import json
+import threading
 
 from src.server.services.credential_service import credential_service
 from src.server.utils import get_supabase_client
@@ -20,20 +21,29 @@ logger = get_logger(__name__)
 class CostOptimizationService:
     """Service for cloud cost analysis and optimization."""
 
+    # Per-instance lock for thread-safe lazy initialization of the Supabase client
+    _client_lock = threading.Lock()
+
     def __init__(self, supabase_client=None):
         """Initialize with optional supabase client."""
         self._supabase_client = supabase_client
+        self._client_initialized = supabase_client is not None
 
     @property
     def supabase_client(self):
-        """Lazy-load Supabase client on first access."""
-        if self._supabase_client is None:
+        """Lazy-load Supabase client on first access (thread-safe)."""
+        if self._client_initialized:
+            return self._supabase_client
+        with self._client_lock:
+            if self._client_initialized:
+                return self._supabase_client
             try:
                 self._supabase_client = get_supabase_client()
             except Exception as e:
                 logger.warning(f"Supabase unavailable in CostOptimizationService: {e}")
                 self._supabase_client = None
-        return self._supabase_client
+            self._client_initialized = True
+            return self._supabase_client
 
     async def get_cloud_credentials(self, project_id: str) -> Dict[str, Any]:
         """
@@ -393,13 +403,17 @@ class CostOptimizationService:
             return {"error": str(e), "project_id": project_id}
 
 
-# Global instance (lazy-initialized on first use)
-_cost_optimization_service: CostOptimizationService | None = None
+# Global instance (lazy-initialized on first use, thread-safe singleton)
+_cost_optimization_service: Optional[CostOptimizationService] = None
+_cost_optimization_service_lock = threading.Lock()
 
 
 def get_cost_optimization_service() -> CostOptimizationService:
-    """Get the cost optimization service instance."""
+    """Get the cost optimization service instance (thread-safe singleton)."""
     global _cost_optimization_service
-    if _cost_optimization_service is None:
-        _cost_optimization_service = CostOptimizationService()
-    return _cost_optimization_service
+    if _cost_optimization_service is not None:
+        return _cost_optimization_service
+    with _cost_optimization_service_lock:
+        if _cost_optimization_service is None:
+            _cost_optimization_service = CostOptimizationService()
+        return _cost_optimization_service
