@@ -16,7 +16,7 @@ OpenClaw/Hermes pair already covers the orchestration + chat-agent persona
 
 All three are intended to run as sibling processes alongside Hermes and
 OpenClaw. The launcher (`START-ALL-AI-TOOLS.bat`) already exposes them as
-menu options **7, 8, 9**; pressing them now prints a `TODO` summary until the
+menu options **8, 9, 10**; pressing them now prints a `TODO` summary until the
 matching repo is cloned.
 
 ## Configuration Details
@@ -46,6 +46,18 @@ matching repo is cloned.
   - Vector-store adapter: Supabase (port 8181) or local `chromadb`
   - Tool allow-list: `rag_query`, `code_search`, `retrieve_doc`
 
+  **Config schema (`oracle.config.json`):**
+  ```json
+  {
+    "cloud_model_id": "<openrouter-free-qwen-oracle>",
+    "local_model_id": "qwen2.5-coder:7b",
+    "context_window": 8192,
+    "vector_store": "chromadb",
+    "tool_allowlist": ["rag_query", "code_search", "retrieve_doc"],
+    "audit_log": ".oracle/logs/oracle.actions.jsonl"
+  }
+  ```
+
 ### 2. Jarvis Agent (System / Coding persona)
 
 - **Files (planned):**
@@ -66,6 +78,18 @@ matching repo is cloned.
   - File-system sandbox: only operate inside `C:\Users\karma\<workspaces>`
   - Terminal proxy: stream via OpenClaw gateway (port 18789 if running)
   - Tool allow-list: `bash`, `read_file`, `write_file`, `git`
+
+  **Config schema (`jarvis.config.json`):**
+  ```json
+  {
+    "cloud_model_id": "<openrouter-free-qwen-coder>",
+    "local_model_id": "qwen2.5-coder:7b",
+    "file_sandbox": "C:/Users/karma/workspaces",
+    "terminal_proxy": "http://127.0.0.1:18789",
+    "tool_allowlist": ["bash", "read_file", "write_file", "git"],
+    "audit_log": ".jarvis/logs/jarvis.actions.jsonl"
+  }
+  ```
 
 ### 3. Paperclip Agent (Admin / File-ops persona)
 
@@ -88,16 +112,25 @@ matching repo is cloned.
     `C:\Users\karma\.paperclip\logs\paperclip.actions.jsonl`
   - Tool allow-list: `move_file`, `copy_file`, `delete_file`, `archive`
 
+  **Config schema (`paperclip.config.json`):**
+  ```json
+  {
+    "cloud_model_id": "<openrouter-free-llama>",
+    "local_model_id": "phi3:latest",
+    "concurrency": 1,
+    "tool_allowlist": ["move_file", "copy_file", "delete_file", "archive"],
+    "audit_log": ".paperclip/logs/paperclip.actions.jsonl"
+  }
+  ```
+
 ## Master Launcher Integration
 
-`START-ALL-AI-TOOLS.bat` now exposes the trio as options **7, 8, 9** (the
-utility entries List-models / List-skills / Open-docs have been shifted to
-**10, 11, 12**). Each entry uses the same `IF EXIST` launcher pattern as
+`START-ALL-AI-TOOLS.bat` now exposes the trio as options **8, 9, 10** (the
+utility entries List-models / List-skills / Open-docs have beenshifted to **14, 15, 16**). Each entry uses the same `IF EXIST` launcher pattern as
 Hermes: if the local clone exists the bat `cd`s in and `uv run`s the agent;
 if not, it prints the clone command + links to this file so the operator
 knows exactly which slot to fill in.
-
-The prompt was widened from `Enter choice (0-9)` to `Enter choice (0-12)` to
+The prompt was widened from `Enter choice (0-9)` to `Enter choice (0-16)` to
 accommodate the shifted utility entries.
 
 Note: `OPENCLAW_HERMES_SETUP_AND_RESEARCH.md` (line 25) used to reference a
@@ -158,7 +191,7 @@ should aggregate by reading all three files in parallel.
 2. **Create `~/.oracle`, `~/.jarvis`, `~/.paperclip`** stub directories and
    put a minimal `oracle.config.json` / `jarvis.config.json` /
    `paperclip.config.json` matching the schemas above.
-3. **Smoke-test each persona** by pressing the new menu options (7, 8, 9) in
+3. **Smoke-test each persona** by pressing the new menu options (8, 9, 10) in
    `START-ALL-AI-TOOLS.bat` and verifying the TODO message -> clone -> launch
    flow works end-to-end before enabling in production runtime.
 4. **Document the persona-switching logic** in

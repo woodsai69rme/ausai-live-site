@@ -418,6 +418,7 @@ devid
 .helix/
 .hermes/
 .husky/
+.jarvis/
 .jetbrains/
 .julius/
 .jupyter/
@@ -440,12 +441,14 @@ devid
 .notes/
 .octocoder/
 .ollama/
+.oracle/
 .openai-coder/
 .openclients/
 .opencode/
 .opencoder/
 .openrouter-cli/
 .oxcoder/
+.paperclip/
 .pi-mono/
 .pieces/
 .qwen-code/

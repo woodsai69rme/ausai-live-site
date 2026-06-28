@@ -1,6 +1,7 @@
 @echo off
 title All AI Tools - Menu Launcher v2
 color 0A
+:menu
 cls
 echo ================================================================
 echo     ALL AI TOOLS QUICK LAUNCHER - ZERO-HUMAN COMMAND CENTER
@@ -30,11 +31,12 @@ echo.
 echo === DASHBOARD ===
 echo 13. Launch God-Mode Dashboard (Port 3142)
 echo 14. List all models
-echo 15. Open documentation
+echo 15. List all skills
+echo 16. Open documentation
 echo  0. Exit
 echo.
 
-set /p choice="Enter choice (0-15): "
+set /p choice="Enter choice (0-16): "
 
 if "%choice%"=="1" goto kilo
 if "%choice%"=="2" goto openclaw
@@ -50,7 +52,8 @@ if "%choice%"=="11" goto tadpole
 if "%choice%"=="12" goto comfyui
 if "%choice%"=="13" goto godmode
 if "%choice%"=="14" goto models
-if "%choice%"=="15" goto docs
+if "%choice%"=="15" goto skills
+if "%choice%"=="16" goto docs
 if "%choice%"=="0" exit
 goto menu
 
@@ -220,44 +223,3 @@ echo Opening documentation...
 start notepad C:\Users\karma\ALL-TOOLS-CONFIGURED.md
 goto menu
 
-:menu
-cls
-echo ========================================
-echo   ALL AI TOOLS QUICK LAUNCHER
-echo   Updated: 2026-06-17
-echo ========================================
-echo.
-echo Select an option:
-echo.
-echo 1. Ollama Chat (qwen2.5-coder - best coding)
-echo 2. Ollama Chat (phi3 - fastest)
-echo 3. OpenClaw Agent (with /steer)
-echo 4. Hermes Agent (self-improving)
-echo 5. Tadpole Studio (Music)
-echo 6. ComfyUI (Video)
-echo 7. Oracle Agent  (RAG/Data   - clone TBD; see ORACLE_JARVIS_PAPERCLIP_SETUP.md)
-echo 8. Jarvis Agent  (Coding/Sys - clone TBD; see ORACLE_JARVIS_PAPERCLIP_SETUP.md)
-echo 9. Paperclip Agt (Admin/Fops - clone TBD; see ORACLE_JARVIS_PAPERCLIP_SETUP.md)
-echo 10. List all models
-echo 11. List all skills
-echo 12. Open documentation
-echo 0. Exit
-echo.
-goto end
-
-:end
-set /p choice="Enter choice (0-12): "
-if "%choice%"=="1" goto ollama_coder
-if "%choice%"=="2" goto ollama_phi3
-if "%choice%"=="3" goto openclaw
-if "%choice%"=="4" goto hermes
-if "%choice%"=="5" goto tadpole
-if "%choice%"=="6" goto comfyui
-if "%choice%"=="7" goto oracle
-if "%choice%"=="8" goto jarvis
-if "%choice%"=="9" goto paperclip
-if "%choice%"=="10" goto models
-if "%choice%"=="11" goto skills
-if "%choice%"=="12" goto docs
-if "%choice%"=="0" exit
-goto end

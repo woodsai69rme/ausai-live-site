@@ -390,6 +390,11 @@
 > - TODO slots: 15 explicit `TODO` markers for the specific repo URLs and model IDs the user will paste next (per "Specific repos" answer on the prior ask); swap-in checklist points operator at `C:\Users\karma\ComfyUI\config\openrouter_free_models.txt` as the free-tier source-of-truth catalog.
 > - Reviewer fixes already applied: (1) free-model hallucination -- dropped `qwen-2.5-coder-32b-instruct:free` and `llama-3.3-70b-instruct:free` in favor of `<openrouter-free-qwen-coder>` / `<openrouter-free-llama>` placeholders; (2) audit-log sentence rewritten as three per-persona paths (`oracle.actions.jsonl`, `jarvis.actions.jsonl`, `paperclip.actions.jsonl`) instead of "renamed-per-persona"; (3) bat trailing backslash removed from `if exist "C:\Users\karma\<persona>-agent\"` -> `if exist "C:\Users\karma\<persona>-agent"`.
 > - Operator action (NOT done by me): paste the three specific repo URLs into the `git clone <URL>` TODO slots in `ORACLE_JARVIS_PAPERCLIP_SETUP.md`, then `git clone` each into `C:\Users\karma\<persona>-agent\`. After that the bat options 7/8/9 become live launchers rather than guided setup prompts.
+> **Update logged (this turn):** multi-tool setup fixes -- dual-menu desync resolved, OPENCLAW_HERMES doc recreated, JSON schemas added, .gitignore updated
+> - Bat: :menu label moved to line 4 (single source-of-truth menu); added Skills as option 15 (shifted Docs to 16); prompt (0-15) -> (0-16); deleted stale bottom :menu/:end blocks. Now 1 menu display + 1 if-elif chain. All 16 goto targets resolve.
+> - New: OPENCLAW_HERMES_SETUP_AND_RESEARCH.md (107 lines) -- OpenClaw gateway (port 18789, workspace state, /steer command), Hermes agent (3-tier fallback, SOUL.md identity), routing architecture, cross-link to Oracle/Jarvis/Paperclip doc.
+> - Oracle doc: option numbers updated (7/8/9 -> 8/9/10, 10/11/12 -> 14/15/16) in Overview, Master Launcher, and Recommended Next Steps; 3 concrete JSON schema code-blocks added per persona (each showing cloud_model_id field).
+> - .gitignore: .oracle/, .jarvis/, .paperclip/ added (alphabetical in dotdir block).
 ## ✅ COMPLIANCE FOOTER
 
 ```
