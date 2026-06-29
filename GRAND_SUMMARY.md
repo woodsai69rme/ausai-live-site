@@ -33,13 +33,22 @@
 ## 🖥️ PORT MAP
 
 ```
-11434  Ollama API        3142  Empire Dashboard
+11434  Ollama API  🟢    3142  Empire Dashboard
 1234   LM Studio         3737  Archon Frontend
-5000   Empire Media      5678  n8n
-8001   AI Army 🟢        8051  MCP Server
-8052   Agents Service    8181  Archon 🟢
-8188   ComfyUI           8888  Empire HUD
+5000   Empire Media      5678  n8n 🟢
+8001   AI Army           8051  MCP Server 🔴 (Docker stack)
+8052   Agents            8181  Archon 🟢 (lazy Supabase init)
+8188   ComfyUI  🟢       8888  Empire HUD
 ```
+
+**2026-06-29 service status:**
+- 🟢 Archon `:8181` — lazy Supabase init, thread-safe, `/health` returns 200 (14 unit tests pass in 9.1s)
+- 🟢 n8n `:5678` — recreated from `n8n-automation-stack/docker-compose.yml`
+- 🟢 ComfyUI `:8188` — media generation ready
+- 🟢 Ollama `:11434` — models loaded
+- 🔴 MCP `:8051` — module-path/Unicode fixes shipped (`mcp_server.py`); runtime requires Docker compose networking for service-client
+- 🔴 Agents `:8052` — uvicorn-direct fix shipped (`server.py`); runtime expects Docker `archon-server` hostname
+- 🔴 AI Army `:8001` — deployer script (`AI_EMPIRE_EXPANSION.py`), not a server
 
 ---
 

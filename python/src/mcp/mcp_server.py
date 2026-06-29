@@ -155,12 +155,12 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
 
         try:
             # Initialize session manager
-            logger.info("🔐 Initializing session manager...")
+            logger.info("[SECURE] Initializing session manager...")
             session_manager = get_session_manager()
             logger.info("Session manager initialized")
 
             # Initialize service client for HTTP calls
-            logger.info("🌐 Initializing service client...")
+            logger.info("[NET] Initializing service client...")
             service_client = get_mcp_service_client()
             logger.info("Service client initialized")
 
@@ -184,8 +184,8 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
             raise
         finally:
             # Clean up resources
-            logger.info("🧹 Cleaning up MCP server...")
-            logger.info("✅ MCP server shutdown complete")
+            logger.info("[CLEANUP] Cleaning up MCP server...")
+            logger.info("[OK] MCP server shutdown complete")
 
 
 # Initialize the main FastMCP server with fixed configuration
@@ -201,7 +201,7 @@ try:
     logger.info("FastMCP server instance created successfully")
 
 except Exception as e:
-    logger.error(f"✗ Failed to create FastMCP server: {e}")
+    logger.error(f"[FAIL] Failed to create FastMCP server: {e}")
     logger.error(traceback.format_exc())
     raise
 
@@ -308,9 +308,9 @@ def register_modules():
         modules_registered += 1
         logger.info("RAG module registered (HTTP-based)")
     except ImportError as e:
-        logger.warning(f"⚠ RAG module not available: {e}")
+        logger.warning(f"[WARN] RAG module not available: {e}")
     except Exception as e:
-        logger.error(f"✗ Error registering RAG module: {e}")
+        logger.error(f"[FAIL] Error registering RAG module: {e}")
         logger.error(traceback.format_exc())
 
     # Import and register Project module - only if Projects are enabled
@@ -323,12 +323,12 @@ def register_modules():
             modules_registered += 1
             logger.info("Project module registered (HTTP-based)")
         except ImportError as e:
-            logger.warning(f"⚠ Project module not available: {e}")
+            logger.warning(f"[WARN] Project module not available: {e}")
         except Exception as e:
-            logger.error(f"✗ Error registering Project module: {e}")
+            logger.error(f"[FAIL] Error registering Project module: {e}")
             logger.error(traceback.format_exc())
     else:
-        logger.info("⚠ Project module skipped - Projects are disabled")
+        logger.info("[WARN] Project module skipped - Projects are disabled")
 
     logger.info(f"Total modules registered: {modules_registered}")
 
@@ -373,7 +373,7 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        logger.info("👋 MCP server stopped by user")
+        logger.info("[STOP] MCP server stopped by user")
     except Exception as e:
         logger.error(f"Unhandled exception: {e}")
         logger.error(traceback.format_exc())

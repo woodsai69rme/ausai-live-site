@@ -15,8 +15,8 @@ from concurrent.futures import ThreadPoolExecutor
 from unittest.mock import MagicMock, patch
 
 import pytest
-from fastapi import HTTPException
 
+from src.server.services.cost_optimization_service import CostOptimizationService
 
 # ---------------------------------------------------------------------------
 # auth_middleware._get_supabase()
@@ -47,7 +47,6 @@ def test_get_supabase_returns_none_when_env_missing(reset_auth_middleware_state,
     """Missing SUPABASE_URL OR SUPABASE_SERVICE_KEY -> returns None without raising."""
     from src.server.middleware.auth_middleware import _get_supabase
 
-    other = "SUPABASE_SERVICE_KEY" if missing == "SUPABASE_URL" else "SUPABASE_URL"
     if missing == "SUPABASE_URL":
         os.environ.pop("SUPABASE_URL", None)
         os.environ["SUPABASE_SERVICE_KEY"] = "test-key"
@@ -139,9 +138,7 @@ def test_get_supabase_thread_safe_single_call(reset_auth_middleware_state):
 # ---------------------------------------------------------------------------
 
 
-def _build_service(supabase_client=None) -> "CostOptimizationService":
-    from src.server.services.cost_optimization_service import CostOptimizationService
-
+def _build_service(supabase_client=None) -> CostOptimizationService:
     return CostOptimizationService(supabase_client=supabase_client)
 
 
@@ -229,10 +226,10 @@ def test_cost_service_thread_safe_single_init():
 
 def test_get_cost_optimization_service_is_singleton():
     """Successive calls return the same instance."""
+    import src.server.services.cost_optimization_service as mod
     from src.server.services.cost_optimization_service import (
         get_cost_optimization_service,
     )
-    import src.server.services.cost_optimization_service as mod
 
     mod._cost_optimization_service = None
     try:
@@ -298,6 +295,7 @@ def auth_api_client():
     """TestClient bound directly to the auth_api router (no main-app prefix)."""
     from fastapi import FastAPI
     from fastapi.testclient import TestClient
+
     from src.server.api_routes.auth_api import router as auth_router
 
     app = FastAPI()

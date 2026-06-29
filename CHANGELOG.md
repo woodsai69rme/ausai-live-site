@@ -56,6 +56,22 @@
   - `get_cost_optimization_service()` singleton — same-instance, thread-safe single-construct (counts `__init__` calls).
   - `auth_api` 503 short-circuit — `/register` and `/login` return 503 when `_get_supabase()` returns None; no `create_user` / `table` calls leak past the short-circuit.
 - **Code review passed** — reviewer confirmed mock targets match each module's `from … import …` bindings, double-check locking tests use real contention via `Barrier(20) + ThreadPoolExecutor(20)`, and fixes (re-read `__init__` from class dict, parametrized missing-env, isolated `TestClient` bound directly to the auth router) addressed prior failures.
+- **Lint clean** — `ruff check` passes; `from __future__ import annotations` keeps type evaluation lazy at runtime; `CostOptimizationService` import hoisted to module top; unused local removed.
+
+### MCP / Agents runtime hardening
+- **`python/src/mcp/mcp_server.py`** — replaced 11 unicode emoji chars in Python `logger.info/warning/error` calls with ASCII bracket tags (`[OK]`/`[SECURE]`/`[NET]`/`[CLEANUP]`/`[FAIL]`/`[WARN]`/`[STOP]`). Fixes `UnicodeEncodeError: 'charmap' codec can't encode character '\u2713'` on Windows cp1252 default encoding; bracketed form remains grok-friendly.
+- **`python/src/agents/server.py`** — replaced `uvicorn.run("server:app", ...)` with `uvicorn.run(app, host="0.0.0.0", port=port, ...)`. The string form returned `[FAIL] Could not import module "server"` when launched via `python -m src.agents.server`; passing the in-scope FastAPI `app` directly avoids the string-based import lookup entirely.
+- **Docker-compose requirement** — `src/agents/server.py` fetches credentials from `http://archon-server:8181/internal/credentials/agents` and `src/mcp/mcp_server.py`'s service_client targets the same hostname. Both services are designed to run as part of the Archon Docker stack on the `default` Docker network; running them as bare Windows processes requires a hosts alias for `archon-server → 127.0.0.1` plus a working `/internal/credentials/agents` endpoint on Archon.
+- **Code review passed** — reviewer endorsed both fixes and noted `uvicorn.run(app, ...)` is more robust than the string form.
+
+### Service status (final 2026-06-29)
+- 🟢 **n8n** `:5678` — all endpoints 200
+- 🟢 **Archon** `:8181` — `/health` 200, lazy-init Supabase, threading-safe
+- 🟢 **ComfyUI** `:8188` — `/system_stats` 200
+- 🟢 **Ollama** `:11434` — `/api/tags` 200
+- 🔴 **MCP** `:8051` — service designed for Docker stack; standalone Windows startup blocked by missing service-client hostnames
+- 🔴 **Agents** `:8052` — service designed for Docker stack; standalone Windows startup blocked by `archon-server` credential-fetch hostname
+- 🔴 **AI Army** `:8001` — `AI_EMPIRE_EXPANSION.py` is a one-shot deployer (writes `ai_agent_api.py` files into AI projects), not a server; the `:8001` service that was running was a separate launcher (FOOTCLAN), now down.
 
 ## 2026-06-26
 
