@@ -49,6 +49,14 @@
   3. Verified `auth_api.py` short-circuits to `503` BEFORE any `.supabase.<attr>` access (already correct, no change needed).
 - **Verified `write_json` default** — already `indent=2` for human-readable reports (no change needed).
 
+### Unit tests for lazy Supabase initialization
+- **`python/tests/test_lazy_supabase_init.py`** created (14 tests, all passing in 9.1s):
+  - `_get_supabase()` — missing-env (parametrized for URL/KEY), create-raises, cached-client, thread-safe single-call (20-thread barrier).
+  - `CostOptimizationService.supabase_client` property — injected-client, lazy caching, failure-path caching, thread-safe single-init.
+  - `get_cost_optimization_service()` singleton — same-instance, thread-safe single-construct (counts `__init__` calls).
+  - `auth_api` 503 short-circuit — `/register` and `/login` return 503 when `_get_supabase()` returns None; no `create_user` / `table` calls leak past the short-circuit.
+- **Code review passed** — reviewer confirmed mock targets match each module's `from … import …` bindings, double-check locking tests use real contention via `Barrier(20) + ThreadPoolExecutor(20)`, and fixes (re-read `__init__` from class dict, parametrized missing-env, isolated `TestClient` bound directly to the auth router) addressed prior failures.
+
 ## 2026-06-26
 
 ### Launcher
