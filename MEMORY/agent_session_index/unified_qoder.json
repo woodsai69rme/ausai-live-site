@@ -56,6 +56,17 @@
   },
   {
     "tool": "qoder",
+    "session_id": "4a35e094-84f0-490e-93af-717d1ed46dc6:2026-09-23T23-00-36-544+10-00-3kq5ub-p76556.jsonl",
+    "title": "qoder segment 4a35e094",
+    "created": "2026-09-23T13:00:50.099683+00:00",
+    "updated": "2026-09-23T13:00:50.099683+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\4a35e094-84f0-490e-93af-717d1ed46dc6\\segments\\2026-09-23T23-00-36-544+10-00-3kq5ub-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 2246,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
     "session_id": "6120b1a6-b08e-4c5a-a618-c92ba0ae92f5:2026-09-22T01-14-57-831+10-00-ogloyx-p12628.jsonl",
     "title": "qoder segment 6120b1a6",
     "created": "2026-09-21T15:15:12.599256+00:00",
@@ -67,13 +78,57 @@
   },
   {
     "tool": "qoder",
-    "session_id": "e2ce69a2-ddd6-4992-b232-ed8b3883142a:2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
-    "title": "qoder segment e2ce69a2",
-    "created": "2026-09-21T15:15:11.876608+00:00",
-    "updated": "2026-09-21T15:15:11.876608+00:00",
-    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\e2ce69a2-ddd6-4992-b232-ed8b3883142a\\segments\\2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
+    "session_id": "750d7bb2-da4b-4220-bd1b-8a191c7433c6:2026-09-23T23-00-44-549+10-00-2oio6d-p76556.jsonl",
+    "title": "qoder segment 750d7bb2",
+    "created": "2026-09-23T13:00:58.785116+00:00",
+    "updated": "2026-09-23T13:00:58.785116+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\750d7bb2-da4b-4220-bd1b-8a191c7433c6\\segments\\2026-09-23T23-00-44-549+10-00-2oio6d-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 2544,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "88dfd433-0cef-4fa7-9798-c68b3c922a50:2026-09-23T23-00-53-730+10-00-c6z7to-p76556.jsonl",
+    "title": "qoder segment 88dfd433",
+    "created": "2026-09-23T13:00:57.222317+00:00",
+    "updated": "2026-09-23T13:00:57.222317+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\88dfd433-0cef-4fa7-9798-c68b3c922a50\\segments\\2026-09-23T23-00-53-730+10-00-c6z7to-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 1883,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "9656b42c-a5eb-4cf2-a003-f768a16851b5:2026-09-23T23-00-36-563+10-00-m7tb6m-p76556.jsonl",
+    "title": "qoder segment 9656b42c",
+    "created": "2026-09-23T13:00:37.563441+00:00",
+    "updated": "2026-09-23T13:00:37.563441+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\9656b42c-a5eb-4cf2-a003-f768a16851b5\\segments\\2026-09-23T23-00-36-563+10-00-m7tb6m-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 472,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "b060fcbf-ca99-4a45-8e25-3a061829ed92:2026-09-23T23-00-54-158+10-00-jyamdy-p76556.jsonl",
+    "title": "qoder segment b060fcbf",
+    "created": "2026-09-23T13:00:58.097969+00:00",
+    "updated": "2026-09-23T13:00:58.097969+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\b060fcbf-ca99-4a45-8e25-3a061829ed92\\segments\\2026-09-23T23-00-54-158+10-00-jyamdy-p76556.jsonl",
     "format": "qoder.segment.jsonl",
     "bytes": 1990,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "e2ce69a2-ddd6-4992-b232-ed8b3883142a:2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
+    "title": "qoder segment e2ce69a2",
+    "created": "2026-09-23T13:00:28.384575+00:00",
+    "updated": "2026-09-23T13:00:28.384575+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\e2ce69a2-ddd6-4992-b232-ed8b3883142a\\segments\\2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 2545,
     "extra": {}
   },
   {
@@ -276,6 +331,105 @@
   },
   {
     "tool": "qoder",
+    "session_id": "00d4f866-fb3b-44c6-9b83-90e0a2af753c:2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "title": "qoder segment 00d4f866",
+    "created": "2026-09-22T20:46:26.089395+00:00",
+    "updated": "2026-09-22T20:46:26.089395+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\00d4f866-fb3b-44c6-9b83-90e0a2af753c\\segments\\2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 330750,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "00d4f866-fb3b-44c6-9b83-90e0a2af753c:2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "title": "qoder segment 00d4f866",
+    "created": "2026-09-23T13:00:28.423217+00:00",
+    "updated": "2026-09-23T13:00:28.423217+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\00d4f866-fb3b-44c6-9b83-90e0a2af753c\\segments\\2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 298234,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "00d4f866-fb3b-44c6-9b83-90e0a2af753c:2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "title": "qoder segment 00d4f866",
+    "created": "2026-09-23T13:27:53.742395+00:00",
+    "updated": "2026-09-23T13:27:53.742395+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\00d4f866-fb3b-44c6-9b83-90e0a2af753c\\segments\\2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 136837,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "2f8f789a-fa3c-43d9-869e-f343a7856839:2026-09-23T23-08-23-591+10-00-euoldx-p76556.jsonl",
+    "title": "qoder segment 2f8f789a",
+    "created": "2026-09-23T13:08:35.089417+00:00",
+    "updated": "2026-09-23T13:08:35.089417+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\2f8f789a-fa3c-43d9-869e-f343a7856839\\segments\\2026-09-23T23-08-23-591+10-00-euoldx-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20085,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "3886d58f-607b-4077-be26-fb1fb8e7b961:2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "title": "qoder segment 3886d58f",
+    "created": "2026-09-23T13:01:16.693636+00:00",
+    "updated": "2026-09-23T13:01:16.693636+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\3886d58f-607b-4077-be26-fb1fb8e7b961\\segments\\2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 364,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "449d93ed-4019-4230-81fb-5ad45cbbd5fc:2026-09-23T22-34-08-288+10-00-7f3744-p12628.jsonl",
+    "title": "qoder segment 449d93ed",
+    "created": "2026-09-23T12:34:20.754641+00:00",
+    "updated": "2026-09-23T12:34:20.754641+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\449d93ed-4019-4230-81fb-5ad45cbbd5fc\\segments\\2026-09-23T22-34-08-288+10-00-7f3744-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20144,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "47470f41-c290-49ed-967c-739f6c1b8f0f:2026-09-23T22-36-39-170+10-00-kn71t3-p12628.jsonl",
+    "title": "qoder segment 47470f41",
+    "created": "2026-09-23T12:36:46.813037+00:00",
+    "updated": "2026-09-23T12:36:46.813037+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\47470f41-c290-49ed-967c-739f6c1b8f0f\\segments\\2026-09-23T22-36-39-170+10-00-kn71t3-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 14965,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "5020a0e6-57f3-48fd-a7f7-b8bbcc0105bb:2026-09-23T23-00-44-550+10-00-8w5ejy-p76556.jsonl",
+    "title": "qoder segment 5020a0e6",
+    "created": "2026-09-23T13:01:02.439594+00:00",
+    "updated": "2026-09-23T13:01:02.439594+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\5020a0e6-57f3-48fd-a7f7-b8bbcc0105bb\\segments\\2026-09-23T23-00-44-550+10-00-8w5ejy-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 19325,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "5ee975e2-011d-4e82-a804-5eb1374ccb13:2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "title": "qoder segment 5ee975e2",
+    "created": "2026-09-22T19:43:09.762440+00:00",
+    "updated": "2026-09-22T19:43:09.762440+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\5ee975e2-011d-4e82-a804-5eb1374ccb13\\segments\\2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 364,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
     "session_id": "762e50f8-21ad-4479-8d63-1ae6bbfcfa4c:2026-09-22T01-55-08-459+10-00-nbon5w-p12628.jsonl",
     "title": "qoder segment 762e50f8",
     "created": "2026-09-21T15:55:10.214746+00:00",
@@ -294,6 +448,39 @@
     "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\8167b841-722f-40cd-bf37-b944bdb81d4a\\segments\\2026-09-21T22-04-43-418+10-00-47pllx-p77372.jsonl",
     "format": "qoder.segment.jsonl",
     "bytes": 19513,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "963d81a4-b2b5-4723-b687-11356a9a1fad:2026-09-23T22-15-29-741+10-00-pkbkvk-p12628.jsonl",
+    "title": "qoder segment 963d81a4",
+    "created": "2026-09-23T12:15:45.567556+00:00",
+    "updated": "2026-09-23T12:15:45.567556+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\963d81a4-b2b5-4723-b687-11356a9a1fad\\segments\\2026-09-23T22-15-29-741+10-00-pkbkvk-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 21346,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "a0aba2bd-1de6-4fab-b024-796e12bc6574:2026-09-23T05-46-36-412+10-00-qzvc7a-p12628.jsonl",
+    "title": "qoder segment a0aba2bd",
+    "created": "2026-09-22T19:46:48.063234+00:00",
+    "updated": "2026-09-22T19:46:48.063234+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\a0aba2bd-1de6-4fab-b024-796e12bc6574\\segments\\2026-09-23T05-46-36-412+10-00-qzvc7a-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20074,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "a525a161-36fe-4bd3-a081-687f9a1a8308:2026-09-23T22-40-10-045+10-00-c47o2u-p12628.jsonl",
+    "title": "qoder segment a525a161",
+    "created": "2026-09-23T12:40:24.582422+00:00",
+    "updated": "2026-09-23T12:40:24.582422+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\a525a161-36fe-4bd3-a081-687f9a1a8308\\segments\\2026-09-23T22-40-10-045+10-00-c47o2u-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 21408,
     "extra": {}
   },
   {
@@ -320,6 +507,17 @@
   },
   {
     "tool": "qoder",
+    "session_id": "d623e1ab-94ce-400b-bb22-856acacf9cf8:2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "title": "qoder segment d623e1ab",
+    "created": "2026-09-23T12:11:13.534053+00:00",
+    "updated": "2026-09-23T12:11:13.534053+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\d623e1ab-94ce-400b-bb22-856acacf9cf8\\segments\\2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 364,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
     "session_id": "d8e68b92-0747-4ec7-ae12-d8ac29462032:2026-09-22T01-55-34-457+10-00-o3g3cl-p12628.jsonl",
     "title": "qoder segment d8e68b92",
     "created": "2026-09-21T15:55:51.186490+00:00",
@@ -327,6 +525,50 @@
     "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\d8e68b92-0747-4ec7-ae12-d8ac29462032\\segments\\2026-09-22T01-55-34-457+10-00-o3g3cl-p12628.jsonl",
     "format": "qoder.segment.jsonl",
     "bytes": 19547,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "db9fde2d-2a79-4e4f-bb16-241253596dcb:2026-09-23T06-26-57-720+10-00-7e1iwj-p12628.jsonl",
+    "title": "qoder segment db9fde2d",
+    "created": "2026-09-22T20:27:10.784419+00:00",
+    "updated": "2026-09-22T20:27:10.784419+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\db9fde2d-2a79-4e4f-bb16-241253596dcb\\segments\\2026-09-23T06-26-57-720+10-00-7e1iwj-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20237,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "eca0085b-bb67-4da9-a97b-402837aef434:2026-09-23T06-07-14-242+10-00-umopal-p12628.jsonl",
+    "title": "qoder segment eca0085b",
+    "created": "2026-09-22T20:07:25.857469+00:00",
+    "updated": "2026-09-22T20:07:25.857469+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\eca0085b-bb67-4da9-a97b-402837aef434\\segments\\2026-09-23T06-07-14-242+10-00-umopal-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20059,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "ee346fa5-af17-4b51-b0d8-219be964670f:2026-09-23T05-53-42-849+10-00-45ki26-p12628.jsonl",
+    "title": "qoder segment ee346fa5",
+    "created": "2026-09-22T19:53:52.859276+00:00",
+    "updated": "2026-09-22T19:53:52.859276+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\ee346fa5-af17-4b51-b0d8-219be964670f\\segments\\2026-09-23T05-53-42-849+10-00-45ki26-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 21121,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "ff7d9c43-b383-404b-be41-c6cc2b19dc35:2026-09-23T22-13-22-190+10-00-kmoi8w-p12628.jsonl",
+    "title": "qoder segment ff7d9c43",
+    "created": "2026-09-23T12:13:32.770220+00:00",
+    "updated": "2026-09-23T12:13:32.770220+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\ff7d9c43-b383-404b-be41-c6cc2b19dc35\\segments\\2026-09-23T22-13-22-190+10-00-kmoi8w-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20251,
     "extra": {}
   }
 ]

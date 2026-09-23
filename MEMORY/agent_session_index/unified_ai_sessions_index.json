@@ -166,7 +166,7 @@
     "session_id": "ses_fb82c4fbaffeiy7DCN3XBhvfEN",
     "title": "Finding missing Kilo sessions",
     "created": "2026-08-28T10:04:10.693000+00:00",
-    "updated": "2026-09-20T14:16:08.493000+00:00",
+    "updated": "2026-09-23T14:14:24.190000+00:00",
     "path": "C:/Users/karma",
     "format": "kilo.db",
     "bytes": null,
@@ -174,9 +174,27 @@
       "parent": null,
       "version": "7.5.5",
       "agent": "code",
-      "messages": 56,
-      "parts": 188,
+      "messages": 66,
+      "parts": 221,
       "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fb82c4fbaffeiy7DCN3XBhvfEN.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_f317f6a55ffe0RRj7HEBX27Tfn",
+    "title": "New session - 2026-09-23T13:42:08.554Z",
+    "created": "2026-09-23T13:42:08.554000+00:00",
+    "updated": "2026-09-23T13:44:37.295000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.7.6",
+      "agent": "code",
+      "messages": 11,
+      "parts": 49,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_f317f6a55ffe0RRj7HEBX27Tfn.json"
     }
   },
   {
@@ -440,7 +458,7 @@
     "session_id": "ses_33149b895ffegKHSMC0FF5kHdH",
     "title": "Concurrent browser agent to automate opening and finishing lovable.dev projects across 6–12 tabs",
     "created": "2026-03-08T18:29:38.282000+00:00",
-    "updated": "2026-09-21T16:15:43.492000+00:00",
+    "updated": "2026-09-23T13:41:47.838000+00:00",
     "path": "C:/Users/karma",
     "format": "opencode.db",
     "bytes": null,
@@ -448,7 +466,7 @@
       "parent": null,
       "version": "1.2.21",
       "agent": "build",
-      "messages": 1094
+      "messages": 1100
     }
   },
   {
@@ -920,7 +938,7 @@
     "session_id": "ses_1307695a5ffeaWY5EymC0plGjw",
     "title": "RTX 4060 8GB AI image video generation free setup",
     "created": "2026-06-16T08:25:49.914000+00:00",
-    "updated": "2026-09-18T09:53:42.678000+00:00",
+    "updated": "2026-09-22T08:34:09.089000+00:00",
     "path": "C:/Users/karma",
     "format": "opencode.db",
     "bytes": null,
@@ -928,7 +946,7 @@
       "parent": null,
       "version": "1.17.7",
       "agent": "build",
-      "messages": 2839
+      "messages": 2842
     }
   },
   {
@@ -1480,7 +1498,7 @@
     "session_id": "ses_069f108a8ffeLi9r7dUqbCe0j1",
     "title": "Wild Turkey platform architecture and MVP",
     "created": "2026-07-24T21:36:31.063000+00:00",
-    "updated": "2026-09-20T08:45:30.455000+00:00",
+    "updated": "2026-09-22T10:01:21.605000+00:00",
     "path": "X:/GITHUBREPO",
     "format": "opencode.db",
     "bytes": null,
@@ -1488,7 +1506,7 @@
       "parent": null,
       "version": "1.18.4",
       "agent": "build",
-      "messages": 43
+      "messages": 45
     }
   },
   {
@@ -2152,7 +2170,7 @@
     "session_id": "ses_fe0d8d74bffe574nkCKjX4n0Qx",
     "title": "TellemThatsMe Studio OS specification",
     "created": "2026-08-20T12:30:55.156000+00:00",
-    "updated": "2026-09-02T13:27:23.004000+00:00",
+    "updated": "2026-09-22T10:00:01.936000+00:00",
     "path": "C:/Users/karma",
     "format": "opencode.db",
     "bytes": null,
@@ -2160,7 +2178,7 @@
       "parent": null,
       "version": "1.18.19",
       "agent": "build",
-      "messages": 428
+      "messages": 430
     }
   },
   {
@@ -2472,7 +2490,7 @@
     "session_id": "ses_f5290c231ffebhDf2q5NJUqzDT",
     "title": "Find mr wilson review footclan ai army",
     "created": "2026-09-17T03:35:43.822000+00:00",
-    "updated": "2026-09-21T17:23:35.736000+00:00",
+    "updated": "2026-09-22T08:35:41.476000+00:00",
     "path": "C:/Users/karma",
     "format": "opencode.db",
     "bytes": null,
@@ -2480,7 +2498,7 @@
       "parent": null,
       "version": "1.18.31",
       "agent": "build",
-      "messages": 102
+      "messages": 130
     }
   },
   {
@@ -2488,7 +2506,7 @@
     "session_id": "ses_f3b74ef50ffeMR04pjRODHvyqf",
     "title": "Opencode sessions summary & status review",
     "created": "2026-09-21T15:17:23.247000+00:00",
-    "updated": "2026-09-21T17:23:32.452000+00:00",
+    "updated": "2026-09-21T17:26:02.786000+00:00",
     "path": "C:/Users/karma",
     "format": "opencode.db",
     "bytes": null,
@@ -2496,7 +2514,7 @@
       "parent": null,
       "version": "1.18.31",
       "agent": "build",
-      "messages": 28
+      "messages": 30
     }
   },
   {
@@ -2560,13 +2578,13 @@
     "tool": "antigravity",
     "session_id": "02207994-d87e-49fd-a671-608151720876",
     "title": "AG brain 02207994",
-    "created": "2026-09-21T15:50:37.062147+00:00",
-    "updated": "2026-09-21T15:50:37.062147+00:00",
+    "created": "2026-09-22T08:25:21.693586+00:00",
+    "updated": "2026-09-22T08:25:21.693586+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\02207994-d87e-49fd-a671-608151720876\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 84717,
+    "bytes": 93031,
     "extra": {
-      "transcript_lines": 72
+      "transcript_lines": 78
     }
   },
   {
@@ -2599,13 +2617,13 @@
     "tool": "antigravity",
     "session_id": "05dbbdf9-9c43-4b06-9145-04c84f568a6c",
     "title": "AG brain 05dbbdf9",
-    "created": "2026-09-21T17:23:29.509801+00:00",
-    "updated": "2026-09-21T17:23:29.509801+00:00",
+    "created": "2026-09-23T13:14:56.298004+00:00",
+    "updated": "2026-09-23T13:14:56.298004+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\05dbbdf9-9c43-4b06-9145-04c84f568a6c\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 5596910,
+    "bytes": 5852372,
     "extra": {
-      "transcript_lines": 4823
+      "transcript_lines": 5039
     }
   },
   {
@@ -2658,6 +2676,32 @@
     "bytes": 27509,
     "extra": {
       "transcript_lines": 12
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "1158c197-6a7a-4f1f-af22-e82ac1efe152",
+    "title": "AG brain 1158c197",
+    "created": "2026-09-23T13:13:06.618479+00:00",
+    "updated": "2026-09-23T13:13:06.618479+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\1158c197-6a7a-4f1f-af22-e82ac1efe152\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 237975,
+    "extra": {
+      "transcript_lines": 195
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "135c2376-e729-4711-9dae-42e65b8ca3e1",
+    "title": "AG brain 135c2376",
+    "created": "2026-09-22T08:29:29.839959+00:00",
+    "updated": "2026-09-22T08:29:29.839959+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\135c2376-e729-4711-9dae-42e65b8ca3e1\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 97527,
+    "extra": {
+      "transcript_lines": 87
     }
   },
   {
@@ -2794,13 +2838,13 @@
     "tool": "antigravity",
     "session_id": "44e38d25-6e4b-4bea-aaff-fccace01e89e",
     "title": "AG brain 44e38d25",
-    "created": "2026-09-21T17:23:32.392758+00:00",
-    "updated": "2026-09-21T17:23:32.392758+00:00",
+    "created": "2026-09-21T17:24:50.222274+00:00",
+    "updated": "2026-09-21T17:24:50.222274+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\44e38d25-6e4b-4bea-aaff-fccace01e89e\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 801892,
+    "bytes": 819722,
     "extra": {
-      "transcript_lines": 637
+      "transcript_lines": 650
     }
   },
   {
@@ -2870,13 +2914,13 @@
     "tool": "antigravity",
     "session_id": "501d7bb2-c119-43b7-aa3d-35db13ca7b1f",
     "title": "AG brain 501d7bb2",
-    "created": "2026-09-21T15:55:54.821780+00:00",
-    "updated": "2026-09-21T15:55:54.821780+00:00",
+    "created": "2026-09-23T13:21:43.050369+00:00",
+    "updated": "2026-09-23T13:21:43.050369+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\501d7bb2-c119-43b7-aa3d-35db13ca7b1f\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 706033,
+    "bytes": 745322,
     "extra": {
-      "transcript_lines": 539
+      "transcript_lines": 580
     }
   },
   {
@@ -2966,6 +3010,19 @@
     "bytes": 148303,
     "extra": {
       "transcript_lines": 49
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "6a67442c-fcf8-4276-bad1-a20010a93bc0",
+    "title": "AG brain 6a67442c",
+    "created": "2026-09-23T13:05:52.140261+00:00",
+    "updated": "2026-09-23T13:05:52.140261+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\6a67442c-fcf8-4276-bad1-a20010a93bc0\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 100728,
+    "extra": {
+      "transcript_lines": 52
     }
   },
   {
@@ -3063,13 +3120,13 @@
     "tool": "antigravity",
     "session_id": "7592ee05-11fa-490b-a458-dc04c2296995",
     "title": "AG brain 7592ee05",
-    "created": "2026-09-16T21:30:51.449096+00:00",
-    "updated": "2026-09-16T21:30:51.449096+00:00",
+    "created": "2026-09-22T08:29:31.747887+00:00",
+    "updated": "2026-09-22T08:29:31.747887+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\7592ee05-11fa-490b-a458-dc04c2296995\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 391804,
+    "bytes": 444300,
     "extra": {
-      "transcript_lines": 310
+      "transcript_lines": 354
     }
   },
   {
@@ -3219,13 +3276,13 @@
     "tool": "antigravity",
     "session_id": "8637524f-bd1d-4107-ba23-275a4013a9f7",
     "title": "AG brain 8637524f",
-    "created": "2026-09-21T15:53:58.185250+00:00",
-    "updated": "2026-09-21T15:53:58.185250+00:00",
+    "created": "2026-09-23T11:26:03.154820+00:00",
+    "updated": "2026-09-23T11:26:03.154820+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\8637524f-bd1d-4107-ba23-275a4013a9f7\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 1374434,
+    "bytes": 1488119,
     "extra": {
-      "transcript_lines": 1095
+      "transcript_lines": 1170
     }
   },
   {
@@ -3265,6 +3322,32 @@
     "bytes": 281534,
     "extra": {
       "transcript_lines": 253
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "88fd05cb-8d59-4ee9-8a4d-490c7470be63",
+    "title": "AG brain 88fd05cb",
+    "created": "2026-09-22T08:29:32.506109+00:00",
+    "updated": "2026-09-22T08:29:32.506109+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\88fd05cb-8d59-4ee9-8a4d-490c7470be63\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 81084,
+    "extra": {
+      "transcript_lines": 66
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "8f851fd6-48f7-4c12-a637-5ce577e032f2",
+    "title": "AG brain 8f851fd6",
+    "created": "2026-09-23T13:08:39.395241+00:00",
+    "updated": "2026-09-23T13:08:39.395241+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\8f851fd6-48f7-4c12-a637-5ce577e032f2\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 124146,
+    "extra": {
+      "transcript_lines": 99
     }
   },
   {
@@ -3347,13 +3430,13 @@
     "tool": "antigravity",
     "session_id": "9322777d-6b2b-4d42-a5ff-f9cb71d6e7c7",
     "title": "AG brain 9322777d",
-    "created": "2026-09-21T15:48:44.656578+00:00",
-    "updated": "2026-09-21T15:48:44.656578+00:00",
+    "created": "2026-09-22T08:25:51.734632+00:00",
+    "updated": "2026-09-22T08:25:51.734632+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\9322777d-6b2b-4d42-a5ff-f9cb71d6e7c7\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 1811703,
+    "bytes": 1823033,
     "extra": {
-      "transcript_lines": 1426
+      "transcript_lines": 1443
     }
   },
   {
@@ -3503,13 +3586,13 @@
     "tool": "antigravity",
     "session_id": "a93c05e5-8dd2-4493-8ac3-ed649e87ebcb",
     "title": "AG brain a93c05e5",
-    "created": "2026-09-16T15:25:32.588813+00:00",
-    "updated": "2026-09-16T15:25:32.588813+00:00",
+    "created": "2026-09-22T08:45:38.088289+00:00",
+    "updated": "2026-09-22T08:45:38.088289+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\a93c05e5-8dd2-4493-8ac3-ed649e87ebcb\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 2704232,
+    "bytes": 2715044,
     "extra": {
-      "transcript_lines": 2439
+      "transcript_lines": 2456
     }
   },
   {
@@ -3542,13 +3625,13 @@
     "tool": "antigravity",
     "session_id": "aea2e350-d5db-4eb9-9442-6414ddf6fa68",
     "title": "AG brain aea2e350",
-    "created": "2026-09-21T17:23:31.384255+00:00",
-    "updated": "2026-09-21T17:23:31.384255+00:00",
+    "created": "2026-09-23T11:40:03.193609+00:00",
+    "updated": "2026-09-23T11:40:03.193609+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\aea2e350-d5db-4eb9-9442-6414ddf6fa68\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 2559615,
+    "bytes": 2824104,
     "extra": {
-      "transcript_lines": 1803
+      "transcript_lines": 2019
     }
   },
   {
@@ -3594,13 +3677,13 @@
     "tool": "antigravity",
     "session_id": "b41d51a5-ca02-4f14-87a4-043d90b7c714",
     "title": "AG brain b41d51a5",
-    "created": "2026-09-17T17:49:45.096515+00:00",
-    "updated": "2026-09-17T17:49:45.096515+00:00",
+    "created": "2026-09-22T15:05:21.113366+00:00",
+    "updated": "2026-09-22T15:05:21.113366+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\b41d51a5-ca02-4f14-87a4-043d90b7c714\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 518374,
+    "bytes": 608272,
     "extra": {
-      "transcript_lines": 423
+      "transcript_lines": 484
     }
   },
   {
@@ -3672,13 +3755,13 @@
     "tool": "antigravity",
     "session_id": "c8b35457-d094-4e66-b735-81c5c3d7c9e8",
     "title": "AG brain c8b35457",
-    "created": "2026-08-26T12:20:19.447459+00:00",
-    "updated": "2026-08-26T12:20:19.447459+00:00",
+    "created": "2026-09-23T11:32:48.016364+00:00",
+    "updated": "2026-09-23T11:32:48.016364+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\c8b35457-d094-4e66-b735-81c5c3d7c9e8\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 847635,
+    "bytes": 921256,
     "extra": {
-      "transcript_lines": 625
+      "transcript_lines": 717
     }
   },
   {
@@ -3716,6 +3799,19 @@
     "bytes": 390316,
     "extra": {
       "transcript_lines": 256
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "d872577f-76ef-4629-a42f-d5bf685fbe1e",
+    "title": "AG brain d872577f",
+    "created": "2026-09-22T08:29:12.465226+00:00",
+    "updated": "2026-09-22T08:29:12.465226+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\d872577f-76ef-4629-a42f-d5bf685fbe1e\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 99780,
+    "extra": {
+      "transcript_lines": 97
     }
   },
   {
@@ -3774,13 +3870,13 @@
     "tool": "antigravity",
     "session_id": "e028665e-ab3e-4ef5-9d28-447542c8a485",
     "title": "AG brain e028665e",
-    "created": "2026-09-04T22:56:04.317918+00:00",
-    "updated": "2026-09-04T22:56:04.317918+00:00",
+    "created": "2026-09-22T14:48:32.366217+00:00",
+    "updated": "2026-09-22T14:48:32.366217+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\e028665e-ab3e-4ef5-9d28-447542c8a485\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 1282728,
+    "bytes": 1358301,
     "extra": {
-      "transcript_lines": 947
+      "transcript_lines": 1007
     }
   },
   {
@@ -3917,8 +4013,8 @@
     "tool": "antigravity",
     "session_id": "tempmediaStorage",
     "title": "AG brain tempmedi",
-    "created": "2026-09-21T10:38:51.966558+00:00",
-    "updated": "2026-09-21T10:38:51.966558+00:00",
+    "created": "2026-09-22T08:44:51.294817+00:00",
+    "updated": "2026-09-22T08:44:51.294817+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\tempmediaStorage",
     "format": "ag.brain",
     "bytes": null,
@@ -22509,13 +22605,35 @@
   },
   {
     "tool": "cline",
+    "session_id": "session_1789987701158_1lawy.compaction",
+    "title": "session_1789987701158_1lawy.compaction",
+    "created": "2026-09-23T13:53:48.833367+00:00",
+    "updated": "2026-09-23T13:53:48.822000+00:00",
+    "path": "C:\\Users\\karma\\.cline\\data\\sessions\\session_1789987701158_1lawy\\session_1789987701158_1lawy.compaction.json",
+    "format": "cline.json",
+    "bytes": 37975,
+    "extra": {}
+  },
+  {
+    "tool": "cline",
     "session_id": "session_1789987701158_1lawy",
     "title": "session_1789987701158_1lawy",
-    "created": "2026-09-21T17:21:45.680955+00:00",
-    "updated": "2026-09-21T17:21:45.680955+00:00",
+    "created": "2026-09-23T14:19:50.671613+00:00",
+    "updated": "2026-09-23T14:19:50.671613+00:00",
     "path": "C:\\Users\\karma\\.cline\\data\\sessions\\session_1789987701158_1lawy\\session_1789987701158_1lawy.json",
     "format": "cline.json",
-    "bytes": 469757,
+    "bytes": 634639,
+    "extra": {}
+  },
+  {
+    "tool": "cline",
+    "session_id": "session_1790173052515_4l7ml",
+    "title": "session_1790173052515_4l7ml",
+    "created": "2026-09-23T14:17:36.083863+00:00",
+    "updated": "2026-09-23T14:17:36.083863+00:00",
+    "path": "C:\\Users\\karma\\.cline\\data\\sessions\\session_1790173052515_4l7ml\\session_1790173052515_4l7ml.json",
+    "format": "cline.json",
+    "bytes": 154812,
     "extra": {}
   },
   {
@@ -22685,6 +22803,17 @@
   },
   {
     "tool": "qoder",
+    "session_id": "4a35e094-84f0-490e-93af-717d1ed46dc6:2026-09-23T23-00-36-544+10-00-3kq5ub-p76556.jsonl",
+    "title": "qoder segment 4a35e094",
+    "created": "2026-09-23T13:00:50.099683+00:00",
+    "updated": "2026-09-23T13:00:50.099683+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\4a35e094-84f0-490e-93af-717d1ed46dc6\\segments\\2026-09-23T23-00-36-544+10-00-3kq5ub-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 2246,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
     "session_id": "6120b1a6-b08e-4c5a-a618-c92ba0ae92f5:2026-09-22T01-14-57-831+10-00-ogloyx-p12628.jsonl",
     "title": "qoder segment 6120b1a6",
     "created": "2026-09-21T15:15:12.599256+00:00",
@@ -22696,13 +22825,57 @@
   },
   {
     "tool": "qoder",
-    "session_id": "e2ce69a2-ddd6-4992-b232-ed8b3883142a:2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
-    "title": "qoder segment e2ce69a2",
-    "created": "2026-09-21T15:15:11.876608+00:00",
-    "updated": "2026-09-21T15:15:11.876608+00:00",
-    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\e2ce69a2-ddd6-4992-b232-ed8b3883142a\\segments\\2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
+    "session_id": "750d7bb2-da4b-4220-bd1b-8a191c7433c6:2026-09-23T23-00-44-549+10-00-2oio6d-p76556.jsonl",
+    "title": "qoder segment 750d7bb2",
+    "created": "2026-09-23T13:00:58.785116+00:00",
+    "updated": "2026-09-23T13:00:58.785116+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\750d7bb2-da4b-4220-bd1b-8a191c7433c6\\segments\\2026-09-23T23-00-44-549+10-00-2oio6d-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 2544,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "88dfd433-0cef-4fa7-9798-c68b3c922a50:2026-09-23T23-00-53-730+10-00-c6z7to-p76556.jsonl",
+    "title": "qoder segment 88dfd433",
+    "created": "2026-09-23T13:00:57.222317+00:00",
+    "updated": "2026-09-23T13:00:57.222317+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\88dfd433-0cef-4fa7-9798-c68b3c922a50\\segments\\2026-09-23T23-00-53-730+10-00-c6z7to-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 1883,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "9656b42c-a5eb-4cf2-a003-f768a16851b5:2026-09-23T23-00-36-563+10-00-m7tb6m-p76556.jsonl",
+    "title": "qoder segment 9656b42c",
+    "created": "2026-09-23T13:00:37.563441+00:00",
+    "updated": "2026-09-23T13:00:37.563441+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\9656b42c-a5eb-4cf2-a003-f768a16851b5\\segments\\2026-09-23T23-00-36-563+10-00-m7tb6m-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 472,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "b060fcbf-ca99-4a45-8e25-3a061829ed92:2026-09-23T23-00-54-158+10-00-jyamdy-p76556.jsonl",
+    "title": "qoder segment b060fcbf",
+    "created": "2026-09-23T13:00:58.097969+00:00",
+    "updated": "2026-09-23T13:00:58.097969+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\b060fcbf-ca99-4a45-8e25-3a061829ed92\\segments\\2026-09-23T23-00-54-158+10-00-jyamdy-p76556.jsonl",
     "format": "qoder.segment.jsonl",
     "bytes": 1990,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "e2ce69a2-ddd6-4992-b232-ed8b3883142a:2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
+    "title": "qoder segment e2ce69a2",
+    "created": "2026-09-23T13:00:28.384575+00:00",
+    "updated": "2026-09-23T13:00:28.384575+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma\\e2ce69a2-ddd6-4992-b232-ed8b3883142a\\segments\\2026-09-22T01-15-06-236+10-00-4sim9f-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 2545,
     "extra": {}
   },
   {
@@ -22905,6 +23078,105 @@
   },
   {
     "tool": "qoder",
+    "session_id": "00d4f866-fb3b-44c6-9b83-90e0a2af753c:2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "title": "qoder segment 00d4f866",
+    "created": "2026-09-22T20:46:26.089395+00:00",
+    "updated": "2026-09-22T20:46:26.089395+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\00d4f866-fb3b-44c6-9b83-90e0a2af753c\\segments\\2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 330750,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "00d4f866-fb3b-44c6-9b83-90e0a2af753c:2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "title": "qoder segment 00d4f866",
+    "created": "2026-09-23T13:00:28.423217+00:00",
+    "updated": "2026-09-23T13:00:28.423217+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\00d4f866-fb3b-44c6-9b83-90e0a2af753c\\segments\\2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 298234,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "00d4f866-fb3b-44c6-9b83-90e0a2af753c:2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "title": "qoder segment 00d4f866",
+    "created": "2026-09-23T13:27:53.742395+00:00",
+    "updated": "2026-09-23T13:27:53.742395+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\00d4f866-fb3b-44c6-9b83-90e0a2af753c\\segments\\2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 136837,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "2f8f789a-fa3c-43d9-869e-f343a7856839:2026-09-23T23-08-23-591+10-00-euoldx-p76556.jsonl",
+    "title": "qoder segment 2f8f789a",
+    "created": "2026-09-23T13:08:35.089417+00:00",
+    "updated": "2026-09-23T13:08:35.089417+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\2f8f789a-fa3c-43d9-869e-f343a7856839\\segments\\2026-09-23T23-08-23-591+10-00-euoldx-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20085,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "3886d58f-607b-4077-be26-fb1fb8e7b961:2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "title": "qoder segment 3886d58f",
+    "created": "2026-09-23T13:01:16.693636+00:00",
+    "updated": "2026-09-23T13:01:16.693636+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\3886d58f-607b-4077-be26-fb1fb8e7b961\\segments\\2026-09-23T23-01-15-311+10-00-xazgix-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 364,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "449d93ed-4019-4230-81fb-5ad45cbbd5fc:2026-09-23T22-34-08-288+10-00-7f3744-p12628.jsonl",
+    "title": "qoder segment 449d93ed",
+    "created": "2026-09-23T12:34:20.754641+00:00",
+    "updated": "2026-09-23T12:34:20.754641+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\449d93ed-4019-4230-81fb-5ad45cbbd5fc\\segments\\2026-09-23T22-34-08-288+10-00-7f3744-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20144,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "47470f41-c290-49ed-967c-739f6c1b8f0f:2026-09-23T22-36-39-170+10-00-kn71t3-p12628.jsonl",
+    "title": "qoder segment 47470f41",
+    "created": "2026-09-23T12:36:46.813037+00:00",
+    "updated": "2026-09-23T12:36:46.813037+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\47470f41-c290-49ed-967c-739f6c1b8f0f\\segments\\2026-09-23T22-36-39-170+10-00-kn71t3-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 14965,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "5020a0e6-57f3-48fd-a7f7-b8bbcc0105bb:2026-09-23T23-00-44-550+10-00-8w5ejy-p76556.jsonl",
+    "title": "qoder segment 5020a0e6",
+    "created": "2026-09-23T13:01:02.439594+00:00",
+    "updated": "2026-09-23T13:01:02.439594+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\5020a0e6-57f3-48fd-a7f7-b8bbcc0105bb\\segments\\2026-09-23T23-00-44-550+10-00-8w5ejy-p76556.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 19325,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "5ee975e2-011d-4e82-a804-5eb1374ccb13:2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "title": "qoder segment 5ee975e2",
+    "created": "2026-09-22T19:43:09.762440+00:00",
+    "updated": "2026-09-22T19:43:09.762440+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\5ee975e2-011d-4e82-a804-5eb1374ccb13\\segments\\2026-09-23T05-43-08-303+10-00-sda87v-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 364,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
     "session_id": "762e50f8-21ad-4479-8d63-1ae6bbfcfa4c:2026-09-22T01-55-08-459+10-00-nbon5w-p12628.jsonl",
     "title": "qoder segment 762e50f8",
     "created": "2026-09-21T15:55:10.214746+00:00",
@@ -22923,6 +23195,39 @@
     "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\8167b841-722f-40cd-bf37-b944bdb81d4a\\segments\\2026-09-21T22-04-43-418+10-00-47pllx-p77372.jsonl",
     "format": "qoder.segment.jsonl",
     "bytes": 19513,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "963d81a4-b2b5-4723-b687-11356a9a1fad:2026-09-23T22-15-29-741+10-00-pkbkvk-p12628.jsonl",
+    "title": "qoder segment 963d81a4",
+    "created": "2026-09-23T12:15:45.567556+00:00",
+    "updated": "2026-09-23T12:15:45.567556+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\963d81a4-b2b5-4723-b687-11356a9a1fad\\segments\\2026-09-23T22-15-29-741+10-00-pkbkvk-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 21346,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "a0aba2bd-1de6-4fab-b024-796e12bc6574:2026-09-23T05-46-36-412+10-00-qzvc7a-p12628.jsonl",
+    "title": "qoder segment a0aba2bd",
+    "created": "2026-09-22T19:46:48.063234+00:00",
+    "updated": "2026-09-22T19:46:48.063234+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\a0aba2bd-1de6-4fab-b024-796e12bc6574\\segments\\2026-09-23T05-46-36-412+10-00-qzvc7a-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20074,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "a525a161-36fe-4bd3-a081-687f9a1a8308:2026-09-23T22-40-10-045+10-00-c47o2u-p12628.jsonl",
+    "title": "qoder segment a525a161",
+    "created": "2026-09-23T12:40:24.582422+00:00",
+    "updated": "2026-09-23T12:40:24.582422+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\a525a161-36fe-4bd3-a081-687f9a1a8308\\segments\\2026-09-23T22-40-10-045+10-00-c47o2u-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 21408,
     "extra": {}
   },
   {
@@ -22949,6 +23254,17 @@
   },
   {
     "tool": "qoder",
+    "session_id": "d623e1ab-94ce-400b-bb22-856acacf9cf8:2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "title": "qoder segment d623e1ab",
+    "created": "2026-09-23T12:11:13.534053+00:00",
+    "updated": "2026-09-23T12:11:13.534053+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\d623e1ab-94ce-400b-bb22-856acacf9cf8\\segments\\2026-09-23T22-11-11-990+10-00-h5uw38-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 364,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
     "session_id": "d8e68b92-0747-4ec7-ae12-d8ac29462032:2026-09-22T01-55-34-457+10-00-o3g3cl-p12628.jsonl",
     "title": "qoder segment d8e68b92",
     "created": "2026-09-21T15:55:51.186490+00:00",
@@ -22956,6 +23272,50 @@
     "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\d8e68b92-0747-4ec7-ae12-d8ac29462032\\segments\\2026-09-22T01-55-34-457+10-00-o3g3cl-p12628.jsonl",
     "format": "qoder.segment.jsonl",
     "bytes": 19547,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "db9fde2d-2a79-4e4f-bb16-241253596dcb:2026-09-23T06-26-57-720+10-00-7e1iwj-p12628.jsonl",
+    "title": "qoder segment db9fde2d",
+    "created": "2026-09-22T20:27:10.784419+00:00",
+    "updated": "2026-09-22T20:27:10.784419+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\db9fde2d-2a79-4e4f-bb16-241253596dcb\\segments\\2026-09-23T06-26-57-720+10-00-7e1iwj-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20237,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "eca0085b-bb67-4da9-a97b-402837aef434:2026-09-23T06-07-14-242+10-00-umopal-p12628.jsonl",
+    "title": "qoder segment eca0085b",
+    "created": "2026-09-22T20:07:25.857469+00:00",
+    "updated": "2026-09-22T20:07:25.857469+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\eca0085b-bb67-4da9-a97b-402837aef434\\segments\\2026-09-23T06-07-14-242+10-00-umopal-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20059,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "ee346fa5-af17-4b51-b0d8-219be964670f:2026-09-23T05-53-42-849+10-00-45ki26-p12628.jsonl",
+    "title": "qoder segment ee346fa5",
+    "created": "2026-09-22T19:53:52.859276+00:00",
+    "updated": "2026-09-22T19:53:52.859276+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\ee346fa5-af17-4b51-b0d8-219be964670f\\segments\\2026-09-23T05-53-42-849+10-00-45ki26-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 21121,
+    "extra": {}
+  },
+  {
+    "tool": "qoder",
+    "session_id": "ff7d9c43-b383-404b-be41-c6cc2b19dc35:2026-09-23T22-13-22-190+10-00-kmoi8w-p12628.jsonl",
+    "title": "qoder segment ff7d9c43",
+    "created": "2026-09-23T12:13:32.770220+00:00",
+    "updated": "2026-09-23T12:13:32.770220+00:00",
+    "path": "C:\\Users\\karma\\.qoder\\logs\\sessions\\C--Users-karma-Documents-Qoder-2026-09-21-00d4f866\\ff7d9c43-b383-404b-be41-c6cc2b19dc35\\segments\\2026-09-23T22-13-22-190+10-00-kmoi8w-p12628.jsonl",
+    "format": "qoder.segment.jsonl",
+    "bytes": 20251,
     "extra": {}
   }
 ]

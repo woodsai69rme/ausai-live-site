@@ -166,7 +166,7 @@
     "session_id": "ses_fb82c4fbaffeiy7DCN3XBhvfEN",
     "title": "Finding missing Kilo sessions",
     "created": "2026-08-28T10:04:10.693000+00:00",
-    "updated": "2026-09-20T14:16:08.493000+00:00",
+    "updated": "2026-09-23T14:14:24.190000+00:00",
     "path": "C:/Users/karma",
     "format": "kilo.db",
     "bytes": null,
@@ -174,9 +174,27 @@
       "parent": null,
       "version": "7.5.5",
       "agent": "code",
-      "messages": 56,
-      "parts": 188,
+      "messages": 66,
+      "parts": 221,
       "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fb82c4fbaffeiy7DCN3XBhvfEN.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_f317f6a55ffe0RRj7HEBX27Tfn",
+    "title": "New session - 2026-09-23T13:42:08.554Z",
+    "created": "2026-09-23T13:42:08.554000+00:00",
+    "updated": "2026-09-23T13:44:37.295000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.7.6",
+      "agent": "code",
+      "messages": 11,
+      "parts": 49,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_f317f6a55ffe0RRj7HEBX27Tfn.json"
     }
   }
 ]

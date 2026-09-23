@@ -1112,13 +1112,35 @@
   },
   {
     "tool": "cline",
+    "session_id": "session_1789987701158_1lawy.compaction",
+    "title": "session_1789987701158_1lawy.compaction",
+    "created": "2026-09-23T13:53:48.833367+00:00",
+    "updated": "2026-09-23T13:53:48.822000+00:00",
+    "path": "C:\\Users\\karma\\.cline\\data\\sessions\\session_1789987701158_1lawy\\session_1789987701158_1lawy.compaction.json",
+    "format": "cline.json",
+    "bytes": 37975,
+    "extra": {}
+  },
+  {
+    "tool": "cline",
     "session_id": "session_1789987701158_1lawy",
     "title": "session_1789987701158_1lawy",
-    "created": "2026-09-21T17:21:45.680955+00:00",
-    "updated": "2026-09-21T17:21:45.680955+00:00",
+    "created": "2026-09-23T14:19:50.671613+00:00",
+    "updated": "2026-09-23T14:19:50.671613+00:00",
     "path": "C:\\Users\\karma\\.cline\\data\\sessions\\session_1789987701158_1lawy\\session_1789987701158_1lawy.json",
     "format": "cline.json",
-    "bytes": 469757,
+    "bytes": 634639,
+    "extra": {}
+  },
+  {
+    "tool": "cline",
+    "session_id": "session_1790173052515_4l7ml",
+    "title": "session_1790173052515_4l7ml",
+    "created": "2026-09-23T14:17:36.083863+00:00",
+    "updated": "2026-09-23T14:17:36.083863+00:00",
+    "path": "C:\\Users\\karma\\.cline\\data\\sessions\\session_1790173052515_4l7ml\\session_1790173052515_4l7ml.json",
+    "format": "cline.json",
+    "bytes": 154812,
     "extra": {}
   }
 ]

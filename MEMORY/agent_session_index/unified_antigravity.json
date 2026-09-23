@@ -29,13 +29,13 @@
     "tool": "antigravity",
     "session_id": "02207994-d87e-49fd-a671-608151720876",
     "title": "AG brain 02207994",
-    "created": "2026-09-21T15:50:37.062147+00:00",
-    "updated": "2026-09-21T15:50:37.062147+00:00",
+    "created": "2026-09-22T08:25:21.693586+00:00",
+    "updated": "2026-09-22T08:25:21.693586+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\02207994-d87e-49fd-a671-608151720876\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 84717,
+    "bytes": 93031,
     "extra": {
-      "transcript_lines": 72
+      "transcript_lines": 78
     }
   },
   {
@@ -68,13 +68,13 @@
     "tool": "antigravity",
     "session_id": "05dbbdf9-9c43-4b06-9145-04c84f568a6c",
     "title": "AG brain 05dbbdf9",
-    "created": "2026-09-21T17:23:29.509801+00:00",
-    "updated": "2026-09-21T17:23:29.509801+00:00",
+    "created": "2026-09-23T13:14:56.298004+00:00",
+    "updated": "2026-09-23T13:14:56.298004+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\05dbbdf9-9c43-4b06-9145-04c84f568a6c\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 5596910,
+    "bytes": 5852372,
     "extra": {
-      "transcript_lines": 4823
+      "transcript_lines": 5039
     }
   },
   {
@@ -127,6 +127,32 @@
     "bytes": 27509,
     "extra": {
       "transcript_lines": 12
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "1158c197-6a7a-4f1f-af22-e82ac1efe152",
+    "title": "AG brain 1158c197",
+    "created": "2026-09-23T13:13:06.618479+00:00",
+    "updated": "2026-09-23T13:13:06.618479+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\1158c197-6a7a-4f1f-af22-e82ac1efe152\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 237975,
+    "extra": {
+      "transcript_lines": 195
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "135c2376-e729-4711-9dae-42e65b8ca3e1",
+    "title": "AG brain 135c2376",
+    "created": "2026-09-22T08:29:29.839959+00:00",
+    "updated": "2026-09-22T08:29:29.839959+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\135c2376-e729-4711-9dae-42e65b8ca3e1\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 97527,
+    "extra": {
+      "transcript_lines": 87
     }
   },
   {
@@ -263,13 +289,13 @@
     "tool": "antigravity",
     "session_id": "44e38d25-6e4b-4bea-aaff-fccace01e89e",
     "title": "AG brain 44e38d25",
-    "created": "2026-09-21T17:23:32.392758+00:00",
-    "updated": "2026-09-21T17:23:32.392758+00:00",
+    "created": "2026-09-21T17:24:50.222274+00:00",
+    "updated": "2026-09-21T17:24:50.222274+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\44e38d25-6e4b-4bea-aaff-fccace01e89e\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 801892,
+    "bytes": 819722,
     "extra": {
-      "transcript_lines": 637
+      "transcript_lines": 650
     }
   },
   {
@@ -339,13 +365,13 @@
     "tool": "antigravity",
     "session_id": "501d7bb2-c119-43b7-aa3d-35db13ca7b1f",
     "title": "AG brain 501d7bb2",
-    "created": "2026-09-21T15:55:54.821780+00:00",
-    "updated": "2026-09-21T15:55:54.821780+00:00",
+    "created": "2026-09-23T13:21:43.050369+00:00",
+    "updated": "2026-09-23T13:21:43.050369+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\501d7bb2-c119-43b7-aa3d-35db13ca7b1f\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 706033,
+    "bytes": 745322,
     "extra": {
-      "transcript_lines": 539
+      "transcript_lines": 580
     }
   },
   {
@@ -435,6 +461,19 @@
     "bytes": 148303,
     "extra": {
       "transcript_lines": 49
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "6a67442c-fcf8-4276-bad1-a20010a93bc0",
+    "title": "AG brain 6a67442c",
+    "created": "2026-09-23T13:05:52.140261+00:00",
+    "updated": "2026-09-23T13:05:52.140261+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\6a67442c-fcf8-4276-bad1-a20010a93bc0\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 100728,
+    "extra": {
+      "transcript_lines": 52
     }
   },
   {
@@ -532,13 +571,13 @@
     "tool": "antigravity",
     "session_id": "7592ee05-11fa-490b-a458-dc04c2296995",
     "title": "AG brain 7592ee05",
-    "created": "2026-09-16T21:30:51.449096+00:00",
-    "updated": "2026-09-16T21:30:51.449096+00:00",
+    "created": "2026-09-22T08:29:31.747887+00:00",
+    "updated": "2026-09-22T08:29:31.747887+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\7592ee05-11fa-490b-a458-dc04c2296995\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 391804,
+    "bytes": 444300,
     "extra": {
-      "transcript_lines": 310
+      "transcript_lines": 354
     }
   },
   {
@@ -688,13 +727,13 @@
     "tool": "antigravity",
     "session_id": "8637524f-bd1d-4107-ba23-275a4013a9f7",
     "title": "AG brain 8637524f",
-    "created": "2026-09-21T15:53:58.185250+00:00",
-    "updated": "2026-09-21T15:53:58.185250+00:00",
+    "created": "2026-09-23T11:26:03.154820+00:00",
+    "updated": "2026-09-23T11:26:03.154820+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\8637524f-bd1d-4107-ba23-275a4013a9f7\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 1374434,
+    "bytes": 1488119,
     "extra": {
-      "transcript_lines": 1095
+      "transcript_lines": 1170
     }
   },
   {
@@ -734,6 +773,32 @@
     "bytes": 281534,
     "extra": {
       "transcript_lines": 253
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "88fd05cb-8d59-4ee9-8a4d-490c7470be63",
+    "title": "AG brain 88fd05cb",
+    "created": "2026-09-22T08:29:32.506109+00:00",
+    "updated": "2026-09-22T08:29:32.506109+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\88fd05cb-8d59-4ee9-8a4d-490c7470be63\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 81084,
+    "extra": {
+      "transcript_lines": 66
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "8f851fd6-48f7-4c12-a637-5ce577e032f2",
+    "title": "AG brain 8f851fd6",
+    "created": "2026-09-23T13:08:39.395241+00:00",
+    "updated": "2026-09-23T13:08:39.395241+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\8f851fd6-48f7-4c12-a637-5ce577e032f2\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 124146,
+    "extra": {
+      "transcript_lines": 99
     }
   },
   {
@@ -816,13 +881,13 @@
     "tool": "antigravity",
     "session_id": "9322777d-6b2b-4d42-a5ff-f9cb71d6e7c7",
     "title": "AG brain 9322777d",
-    "created": "2026-09-21T15:48:44.656578+00:00",
-    "updated": "2026-09-21T15:48:44.656578+00:00",
+    "created": "2026-09-22T08:25:51.734632+00:00",
+    "updated": "2026-09-22T08:25:51.734632+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\9322777d-6b2b-4d42-a5ff-f9cb71d6e7c7\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 1811703,
+    "bytes": 1823033,
     "extra": {
-      "transcript_lines": 1426
+      "transcript_lines": 1443
     }
   },
   {
@@ -972,13 +1037,13 @@
     "tool": "antigravity",
     "session_id": "a93c05e5-8dd2-4493-8ac3-ed649e87ebcb",
     "title": "AG brain a93c05e5",
-    "created": "2026-09-16T15:25:32.588813+00:00",
-    "updated": "2026-09-16T15:25:32.588813+00:00",
+    "created": "2026-09-22T08:45:38.088289+00:00",
+    "updated": "2026-09-22T08:45:38.088289+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\a93c05e5-8dd2-4493-8ac3-ed649e87ebcb\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 2704232,
+    "bytes": 2715044,
     "extra": {
-      "transcript_lines": 2439
+      "transcript_lines": 2456
     }
   },
   {
@@ -1011,13 +1076,13 @@
     "tool": "antigravity",
     "session_id": "aea2e350-d5db-4eb9-9442-6414ddf6fa68",
     "title": "AG brain aea2e350",
-    "created": "2026-09-21T17:23:31.384255+00:00",
-    "updated": "2026-09-21T17:23:31.384255+00:00",
+    "created": "2026-09-23T11:40:03.193609+00:00",
+    "updated": "2026-09-23T11:40:03.193609+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\aea2e350-d5db-4eb9-9442-6414ddf6fa68\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 2559615,
+    "bytes": 2824104,
     "extra": {
-      "transcript_lines": 1803
+      "transcript_lines": 2019
     }
   },
   {
@@ -1063,13 +1128,13 @@
     "tool": "antigravity",
     "session_id": "b41d51a5-ca02-4f14-87a4-043d90b7c714",
     "title": "AG brain b41d51a5",
-    "created": "2026-09-17T17:49:45.096515+00:00",
-    "updated": "2026-09-17T17:49:45.096515+00:00",
+    "created": "2026-09-22T15:05:21.113366+00:00",
+    "updated": "2026-09-22T15:05:21.113366+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\b41d51a5-ca02-4f14-87a4-043d90b7c714\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 518374,
+    "bytes": 608272,
     "extra": {
-      "transcript_lines": 423
+      "transcript_lines": 484
     }
   },
   {
@@ -1141,13 +1206,13 @@
     "tool": "antigravity",
     "session_id": "c8b35457-d094-4e66-b735-81c5c3d7c9e8",
     "title": "AG brain c8b35457",
-    "created": "2026-08-26T12:20:19.447459+00:00",
-    "updated": "2026-08-26T12:20:19.447459+00:00",
+    "created": "2026-09-23T11:32:48.016364+00:00",
+    "updated": "2026-09-23T11:32:48.016364+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\c8b35457-d094-4e66-b735-81c5c3d7c9e8\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 847635,
+    "bytes": 921256,
     "extra": {
-      "transcript_lines": 625
+      "transcript_lines": 717
     }
   },
   {
@@ -1185,6 +1250,19 @@
     "bytes": 390316,
     "extra": {
       "transcript_lines": 256
+    }
+  },
+  {
+    "tool": "antigravity",
+    "session_id": "d872577f-76ef-4629-a42f-d5bf685fbe1e",
+    "title": "AG brain d872577f",
+    "created": "2026-09-22T08:29:12.465226+00:00",
+    "updated": "2026-09-22T08:29:12.465226+00:00",
+    "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\d872577f-76ef-4629-a42f-d5bf685fbe1e\\.system_generated\\logs\\transcript.jsonl",
+    "format": "ag.jsonl",
+    "bytes": 99780,
+    "extra": {
+      "transcript_lines": 97
     }
   },
   {
@@ -1243,13 +1321,13 @@
     "tool": "antigravity",
     "session_id": "e028665e-ab3e-4ef5-9d28-447542c8a485",
     "title": "AG brain e028665e",
-    "created": "2026-09-04T22:56:04.317918+00:00",
-    "updated": "2026-09-04T22:56:04.317918+00:00",
+    "created": "2026-09-22T14:48:32.366217+00:00",
+    "updated": "2026-09-22T14:48:32.366217+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\e028665e-ab3e-4ef5-9d28-447542c8a485\\.system_generated\\logs\\transcript.jsonl",
     "format": "ag.jsonl",
-    "bytes": 1282728,
+    "bytes": 1358301,
     "extra": {
-      "transcript_lines": 947
+      "transcript_lines": 1007
     }
   },
   {
@@ -1386,8 +1464,8 @@
     "tool": "antigravity",
     "session_id": "tempmediaStorage",
     "title": "AG brain tempmedi",
-    "created": "2026-09-21T10:38:51.966558+00:00",
-    "updated": "2026-09-21T10:38:51.966558+00:00",
+    "created": "2026-09-22T08:44:51.294817+00:00",
+    "updated": "2026-09-22T08:44:51.294817+00:00",
     "path": "C:\\Users\\karma\\.gemini\\antigravity\\brain\\tempmediaStorage",
     "format": "ag.brain",
     "bytes": null,
