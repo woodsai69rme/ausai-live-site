@@ -1,7 +1,7 @@
 {
   "label": "Crypto Yield Automation",
   "snapshot_only": true,
-  "exchanges_observed": ["coinspot", "kraken", "independentreserve"],
+  "exchanges_observed": ["coinspot", "kraken", "independentreserve", "binance"],
   "stablecoin_pairs": ["USDC/AUD", "USDT/AUD"],
   "stablecoin_threshold_bps": 50,
   "max_capital_aud": 0,

@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMonetize AI — Monetizable App Discovery, Builder & Revenue Engine</title>
+    <meta name="description" content="Autonomous AI system powered by OpenRouter free models to discover monetizable app platforms, build full-stack code, execute automated sandbox tests, and launch revenue models.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- JSZip Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>AutoMonetize <span class="badge-free">FREE AI</span></h2>
+                    <p>OpenRouter Revenue Studio</p>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="tab-explorer">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Market Explorer</span>
+                </button>
+                <button class="nav-item" data-tab="tab-forge">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>Money Idea Forge</span>
+                </button>
+                <button class="nav-item" data-tab="tab-builder">
+                    <i class="fa-solid fa-code"></i>
+                    <span>App Spec & Builder</span>
+                </button>
+                <button class="nav-item" data-tab="tab-gallery">
+                    <i class="fa-solid fa-box-archive"></i>
+                    <span>App Package Gallery</span>
+                </button>
+                <button class="nav-item" data-tab="tab-sandbox">
+                    <i class="fa-solid fa-flask"></i>
+                    <span>Sandbox & Testing</span>
+                </button>
+                <button class="nav-item" data-tab="tab-autopilot">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>24/7 Auto-Pilot Hub</span>
+                </button>
+                <button class="nav-item" data-tab="tab-arena">
+                    <i class="fa-solid fa-swords"></i>
+                    <span>LLM Model Arena</span>
+                </button>
+                <button class="nav-item" data-tab="tab-analytics">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Live MRR Analytics</span>
+                </button>
+                <button class="nav-item" data-tab="tab-real-apps">
+                    <i class="fa-solid fa-radar text-cyan"></i>
+                    <span>Real Apps Radar</span>
+                </button>
+                <button class="nav-item" data-tab="tab-marketing">
+                    <i class="fa-solid fa-bullhorn text-gold"></i>
+                    <span>Marketing & GTM</span>
+                </button>
+                <button class="nav-item" data-tab="tab-domains">
+                    <i class="fa-solid fa-globe text-purple"></i>
+                    <span>Domain Finder ($0.99)</span>
+                </button>
+                <button class="nav-item" data-tab="tab-qa">
+                    <i class="fa-solid fa-shield-halved text-green"></i>
+                    <span>QA & Security Audit</span>
+                </button>
+                <button class="nav-item" data-tab="tab-voice">
+                    <i class="fa-solid fa-microphone-lines text-pink"></i>
+                    <span>Neural Voice Studio</span>
+                </button>
+                <button class="nav-item" data-tab="tab-vault">
+                    <i class="fa-solid fa-book-bookmark text-cyan"></i>
+                    <span>Knowledge Vault</span>
+                </button>
+                <button class="nav-item" data-tab="tab-projects">
+                    <i class="fa-solid fa-database text-gold"></i>
+                    <span>Saved Projects DB</span>
+                </button>
+                <button class="nav-item" data-tab="tab-launchpad">
+                    <i class="fa-solid fa-rocket"></i>
+                    <span>Monetization Launch</span>
+                </button>
+                <button class="nav-item" data-tab="tab-swarm">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>4-Agent Swarm</span>
+                </button>
+                <button class="nav-item" data-tab="tab-settings">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>OpenRouter Models</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-status">
+                <div class="status-indicator online"></div>
+                <div class="status-info">
+                    <span class="status-label">AI Engine Active</span>
+                    <span class="status-model" id="active-model-name">openrouter/free</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="page-title">Market & Platform Explorer</h1>
+                    <p id="page-desc">Scan high-yield tech platforms, micro-SaaS opportunities, and monetizable API niches.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="stat-badge" id="model-health-pill" style="cursor:pointer;" title="Click to probe OpenRouter free model latency">
+                        <span class="status-indicator online" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00dfa2; margin-right:6px;"></span>
+                        <span>AI: <strong id="model-health-status" style="color:#00dfa2;">ONLINE</strong> (<span id="model-health-latency">~320ms</span>)</span>
+                    </div>
+                    <div class="stat-badge">
+                        <i class="fa-solid fa-coins text-gold"></i>
+                        <span>Target MRR: <strong id="header-target-mrr">$5,000 / mo</strong></span>
+                    </div>
+                    <button class="btn btn-primary" id="btn-quick-generate">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Generate Idea
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB 1: Market Explorer -->
+            <section class="tab-page active" id="tab-explorer">
+                <div class="explorer-grid">
+                    <div class="glass-panel sector-selector">
+                        <h3><i class="fa-solid fa-layer-group"></i> Monetization Sectors</h3>
+                        <div class="sector-list" id="sector-list"></div>
+                    </div>
+
+                    <div class="glass-panel sector-details">
+                        <div class="sector-header">
+                            <div class="sector-title-group">
+                                <span class="sector-badge" id="current-sector-category">Micro-SaaS</span>
+                                <h2 id="current-sector-title">AI Automation Utilities & Micro-Tools</h2>
+                            </div>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button class="btn btn-secondary btn-sm" id="btn-live-market-trends">
+                                    <i class="fa-solid fa-fire text-orange"></i> Live Trends Radar
+                                </button>
+                                <button class="btn btn-secondary btn-sm" id="btn-analyze-sector">
+                                    <i class="fa-solid fa-arrows-rotate"></i> AI Deep Scan
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="sector-description" id="current-sector-desc">
+                            High margin browser extensions, single-purpose API tools, and workflow automation helpers built for creators and developer workflows.
+                        </p>
+
+                        <div class="metrics-row">
+                            <div class="metric-card">
+                                <span class="metric-label">Market Demand</span>
+                                <div class="metric-value text-cyan" id="metric-demand">94/100</div>
+                                <div class="progress-bar"><div class="progress-fill cyan" style="width: 94%;"></div></div>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Competition Density</span>
+                                <div class="metric-value text-orange" id="metric-competition">Medium</div>
+                                <div class="progress-bar"><div class="progress-fill orange" style="width: 55%;"></div></div>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Avg. Time-to-Market</span>
+                                <div class="metric-value text-green" id="metric-time">24-48 Hours</div>
+                                <div class="progress-bar"><div class="progress-fill green" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Est. Monthly Revenue</span>
+                                <div class="metric-value text-purple" id="metric-mrr">$1,200 - $12,500</div>
+                                <div class="progress-bar"><div class="progress-fill purple" style="width: 78%;"></div></div>
+                            </div>
+                        </div>
+
+                        <h3 class="section-subtitle"><i class="fa-solid fa-fire"></i> Top Monetizable App Concepts in Sector</h3>
+                        <div class="ideas-cards-grid" id="platform-ideas-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Money Idea Forge -->
+            <section class="tab-page" id="tab-forge">
+                <div class="forge-container">
+                    <div class="glass-panel forge-controls">
+                        <h3><i class="fa-solid fa-sliders"></i> Idea Criteria Generator</h3>
+                        <div class="form-group">
+                            <label for="forge-niche">Target Niche / Platform</label>
+                            <input type="text" id="forge-niche" class="form-control" placeholder="e.g. Developer APIs, YouTube Creators, Shopify Owners, Crypto Analytics">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="forge-pricing-model">Monetization Model</label>
+                                <select id="forge-pricing-model" class="form-control">
+                                    <option value="subscription" selected>Monthly Recurring SaaS Subscription ($19-$49/mo)</option>
+                                    <option value="usage">Pay-Per-API Call / Token Usage ($0.005/req)</option>
+                                    <option value="freemium">Freemium + Pro Unlocks</option>
+                                    <option value="one-time">Lifetime License Deal ($99)</option>
+                                    <option value="affiliate">Affiliate & Arbitrage Commission</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="forge-complexity">Build Complexity</label>
+                                <select id="forge-complexity" class="form-control">
+                                    <option value="rapid">Rapid Single-Page App (1-2 Hours)</option>
+                                    <option value="medium" selected>Micro-SaaS App (1 Day)</option>
+                                    <option value="extension">Browser Extension Manifest V3</option>
+                                    <option value="bot">Telegram / Discord AI Bot</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="forge-custom-prompt">Custom Focus / Constraint (Optional)</label>
+                            <textarea id="forge-custom-prompt" class="form-control" rows="2" placeholder="e.g., Must leverage OpenRouter free models for processing, target indie hackers with Stripe checkout..."></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-block" id="btn-forge-generate">
+                            <i class="fa-solid fa-lightbulb"></i> Generate Money-Making Blueprint
+                        </button>
+                    </div>
+
+                    <div class="glass-panel forge-output">
+                        <div class="output-header">
+                            <h3><i class="fa-solid fa-scroll"></i> AI Monetization Blueprint</h3>
+                            <div class="output-actions">
+                                <span class="ai-status-tag" id="forge-ai-status">Ready</span>
+                                <button class="btn btn-secondary btn-sm" id="btn-copy-blueprint">
+                                    <i class="fa-solid fa-copy"></i> Copy Spec
+                                </button>
+                                <button class="btn btn-success btn-sm" id="btn-send-to-builder">
+                                    <i class="fa-solid fa-code"></i> Build App Code &rarr;
+                                </button>
+                            </div>
+                        </div>
+                        <div class="blueprint-content" id="blueprint-display">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-brain empty-icon"></i>
+                                <p>Click <strong>"Generate Money-Making Blueprint"</strong> to create a full app specification, monetization flow, and revenue breakdown using OpenRouter free models.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: App Spec & Builder -->
+            <section class="tab-page" id="tab-builder">
+                <div class="builder-container">
+                    <div class="glass-panel builder-header-panel">
+                        <div class="builder-meta">
+                            <h3 id="builder-app-title">Active App Project: <span class="highlight">Auto-Monetize Quick Tool</span></h3>
+                            <p id="builder-app-desc">Multi-file Web App with integrated checkout script & OpenRouter API client.</p>
+                        </div>
+                        <div class="builder-actions">
+                            <button class="btn btn-primary" id="btn-generate-all-code">
+                                <i class="fa-solid fa-bolt"></i> AI Generate Full Code Stack
+                            </button>
+                            <button class="btn btn-success" id="btn-run-preview">
+                                <i class="fa-solid fa-play"></i> Live Sandbox Preview
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="builder-workspace">
+                        <div class="glass-panel editor-panel">
+                            <div class="editor-tabs">
+                                <button class="editor-tab active" data-file="html">index.html</button>
+                                <button class="editor-tab" data-file="css">style.css</button>
+                                <button class="editor-tab" data-file="js">app.js</button>
+                                <button class="editor-tab" data-file="py">backend.py</button>
+                                <button class="editor-tab" data-file="monetize">monetization.js</button>
+                            </div>
+                            <div class="editor-body">
+                                <textarea id="code-editor" class="code-textarea" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel preview-panel">
+                            <div class="preview-header">
+                                <span><i class="fa-solid fa-desktop"></i> Sandbox Preview Engine</span>
+                                <div class="device-toggle">
+                                    <button class="device-btn active" data-device="desktop"><i class="fa-solid fa-laptop"></i></button>
+                                    <button class="device-btn" data-device="mobile"><i class="fa-solid fa-mobile-screen"></i></button>
+                                </div>
+                            </div>
+                            <div class="preview-frame-container">
+                                <iframe id="preview-iframe" title="App Preview"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW TAB: App Package Gallery -->
+            <section class="tab-page" id="tab-gallery">
+                <div class="glass-panel">
+                    <div class="panel-title-bar">
+                        <h2><i class="fa-solid fa-box-archive text-gold"></i> Pre-Built Monetizable App Gallery</h2>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Browse and download complete production-ready monetization app packages built by AutoMonetize AI.</p>
+                    <div class="ideas-cards-grid">
+                        <div class="idea-card">
+                            <div class="idea-card-header">
+                                <h4>01: Form Lead Validator SaaS</h4>
+                                <span class="idea-card-mrr">$3,500 MRR</span>
+                            </div>
+                            <p>Real-time lead email & disposable domain validator API with Stripe tier pricing.</p>
+                            <div class="idea-card-footer">
+                                <div class="idea-tags"><span class="tag">Micro-SaaS</span><span class="tag">Stripe</span></div>
+                                <a href="/generated_apps/01-api-validator-saas/index.html" target="_blank" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open App</a>
+                            </div>
+                        </div>
+                        <div class="idea-card">
+                            <div class="idea-card-header">
+                                <h4>02: LinkedIn Craft Chrome Ext.</h4>
+                                <span class="idea-card-mrr">$5,200 MRR</span>
+                            </div>
+                            <p>Manifest V3 Chrome Extension for AI response generation with Gumroad license key unlock.</p>
+                            <div class="idea-card-footer">
+                                <div class="idea-tags"><span class="tag">Extension</span><span class="tag">Gumroad</span></div>
+                                <a href="/generated_apps/02-chrome-extension-ai/popup.html" target="_blank" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Preview Popup</a>
+                            </div>
+                        </div>
+                        <div class="idea-card">
+                            <div class="idea-card-header">
+                                <h4>03: Telegram Monetized Bot</h4>
+                                <span class="idea-card-mrr">$4,200 MRR</span>
+                            </div>
+                            <p>Python Telegram Bot script for automated YouTube Shorts script generation powered by OpenRouter free models.</p>
+                            <div class="idea-card-footer">
+                                <div class="idea-tags"><span class="tag">Telegram</span><span class="tag">Python</span></div>
+                                <button class="btn btn-secondary btn-sm" onclick="alert('Python bot code located at c:\\Users\\karma\\monetize-ai-engine\\generated_apps\\03-telegram-ai-bot\\bot.py')"><i class="fa-solid fa-code"></i> View Code</button>
+                            </div>
+                        </div>
+                        <div class="idea-card">
+                            <div class="idea-card-header">
+                                <h4>04: Developer API Rate Limiter</h4>
+                                <span class="idea-card-mrr">$6,400 MRR</span>
+                            </div>
+                            <p>High-availability API Gateway Proxy in Python FastAPI enforcing paid subscription API keys.</p>
+                            <div class="idea-card-footer">
+                                <div class="idea-tags"><span class="tag">API Proxy</span><span class="tag">FastAPI</span></div>
+                                <button class="btn btn-secondary btn-sm" onclick="alert('FastAPI code located at c:\\Users\\karma\\monetize-ai-engine\\generated_apps\\04-llm-api-proxy\\proxy.py')"><i class="fa-solid fa-code"></i> View Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: Sandbox & Testing -->
+            <section class="tab-page" id="tab-sandbox">
+                <div class="sandbox-container">
+                    <div class="glass-panel test-suite-panel">
+                        <div class="panel-title-bar">
+                            <h3><i class="fa-solid fa-check-double"></i> Automated App Code & Quality Tests</h3>
+                            <button class="btn btn-primary btn-sm" id="btn-run-tests">
+                                <i class="fa-solid fa-vial"></i> Run All Tests
+                            </button>
+                        </div>
+                        <div class="test-results-list" id="test-results-list">
+                            <div class="test-item">
+                                <div class="test-icon pass"><i class="fa-solid fa-check"></i></div>
+                                <div class="test-details">
+                                    <strong>HTML5 Syntax & Semantic Structure</strong>
+                                    <span>Validates DOCTYPE, meta tags, and accessibility markup.</span>
+                                </div>
+                                <span class="test-badge pass">PASSED</span>
+                            </div>
+                            <div class="test-item">
+                                <div class="test-icon pass"><i class="fa-solid fa-check"></i></div>
+                                <div class="test-details">
+                                    <strong>OpenRouter Free API Integration</strong>
+                                    <span>Verifies openrouter/free gateway and latency.</span>
+                                </div>
+                                <span class="test-badge pass">PASSED</span>
+                            </div>
+                            <div class="test-item">
+                                <div class="test-icon pass"><i class="fa-solid fa-check"></i></div>
+                                <div class="test-details">
+                                    <strong>Monetization Gateway Script</strong>
+                                    <span>Stripe / Gumroad checkout trigger & webhook handler validation.</span>
+                                </div>
+                                <span class="test-badge pass">PASSED</span>
+                            </div>
+                            <div class="test-item">
+                                <div class="test-icon pass"><i class="fa-solid fa-check"></i></div>
+                                <div class="test-details">
+                                    <strong>Responsive Layout & Mobile Viewport</strong>
+                                    <span>Verifies flex/grid CSS variables without breakages.</span>
+                                </div>
+                                <span class="test-badge pass">PASSED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel revenue-simulator-panel">
+                        <div class="panel-title-bar">
+                            <h3><i class="fa-solid fa-chart-line"></i> 12-Month Traffic & Revenue Conversion Simulator</h3>
+                        </div>
+
+                        <div class="sim-controls-grid">
+                            <div class="form-group">
+                                <label>Monthly Visitors</label>
+                                <input type="number" id="sim-traffic" class="form-control" value="5000" step="500">
+                            </div>
+                            <div class="form-group">
+                                <label>Visitor Conversion Rate (%)</label>
+                                <input type="number" id="sim-conv-rate" class="form-control" value="3.5" step="0.5">
+                            </div>
+                            <div class="form-group">
+                                <label>Avg. Price / Subscription ($)</label>
+                                <input type="number" id="sim-arpu" class="form-control" value="29" step="5">
+                            </div>
+                            <div class="form-group">
+                                <label>Monthly Churn Rate (%)</label>
+                                <input type="number" id="sim-churn" class="form-control" value="5" step="1">
+                            </div>
+                        </div>
+
+                        <div class="sim-summary-cards">
+                            <div class="sim-card">
+                                <span>Month 1 Revenue</span>
+                                <strong id="sim-m1-rev" class="text-cyan">$5,075</strong>
+                            </div>
+                            <div class="sim-card">
+                                <span>Month 6 MRR</span>
+                                <strong id="sim-m6-mrr" class="text-purple">$18,420</strong>
+                            </div>
+                            <div class="sim-card">
+                                <span>12-Month Total ARR</span>
+                                <strong id="sim-year-arr" class="text-green">$214,800</strong>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-bars" id="sim-chart-bars"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: 24/7 Auto-Pilot Hub -->
+            <section class="tab-page" id="tab-autopilot">
+                <div class="glass-panel">
+                    <div class="panel-title-bar">
+                        <h2><i class="fa-solid fa-robot text-cyan"></i> 24/7 Background Auto-Pilot Engine</h2>
+                        <button class="btn btn-success" id="btn-trigger-autopilot-now">
+                            <i class="fa-solid fa-play"></i> Trigger Single Iteration Now
+                        </button>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Automatically discovers trending monetization niches, generates full-stack code using OpenRouter free models, executes Playwright browser tests, and packages deployable apps in <code>generated_apps/</code>.
+                    </p>
+                    <div id="autopilot-log-box" class="code-block" style="height: 350px; overflow-y: auto;">
+                        [SYSTEM] Auto-Pilot Engine Ready. Click "Trigger Single Iteration Now" to run autonomous loop.
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: LLM Model Arena -->
+            <section class="tab-page" id="tab-arena">
+                <div class="glass-panel">
+                    <div class="panel-title-bar">
+                        <h2><i class="fa-solid fa-swords text-gold"></i> Free LLM Multi-Model Arena</h2>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Benchmark prompt execution simultaneously across multiple OpenRouter free models side-by-side.</p>
+                    <div class="form-group">
+                        <label>Benchmark Prompt</label>
+                        <input type="text" id="arena-prompt" class="form-control" value="Invent a 1-sentence monetizable micro-SaaS app for developers.">
+                    </div>
+                    <button class="btn btn-primary" id="btn-run-arena">
+                        <i class="fa-solid fa-bolt"></i> Run Multi-Model Comparison
+                    </button>
+                    <div class="arena-grid" id="arena-results-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;"></div>
+                </div>
+            </section>
+
+            <!-- NEW TAB: Live MRR Analytics -->
+            <section class="tab-page" id="tab-analytics">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-chart-pie text-green"></i> Live MRR & Subscription Analytics Control Center</h2>
+                        <button class="btn btn-primary btn-sm" id="btn-simulate-payment-event">
+                            <i class="fa-solid fa-credit-card"></i> Simulate Live Stripe Sale ($49/mo)
+                        </button>
+                    </div>
+                    <div class="metrics-row" style="margin-top: 1.5rem;">
+                        <div class="metric-card">
+                            <span class="metric-label">Active MRR</span>
+                            <div class="metric-value text-cyan">$8,450 / mo</div>
+                            <div class="progress-bar"><div class="progress-fill cyan" style="width: 84%;"></div></div>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Total Active Subscribers</span>
+                            <div class="metric-value text-purple">291 Active</div>
+                            <div class="progress-bar"><div class="progress-fill purple" style="width: 72%;"></div></div>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Average ARPU</span>
+                            <div class="metric-value text-green">$29.04</div>
+                            <div class="progress-bar"><div class="progress-fill green" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Monthly Churn</span>
+                            <div class="metric-value text-orange">2.4%</div>
+                            <div class="progress-bar"><div class="progress-fill orange" style="width: 24%;"></div></div>
+                        </div>
+                    </div>
+                    <h3 style="margin-top: 1.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-bolt text-gold"></i> Live Real-Time Activity Feed</h3>
+                    <div class="code-block" style="height: 220px; overflow-y: auto;">
+                        [07:12:04] 🟢 New Subscriber: Pro Tier ($29/mo) — user_8912@domain.com<br>
+                        [07:05:41] 🟢 Stripe Webhook Verified: Payment Received ($79/mo) — enterprise_acct@company.io<br>
+                        [06:48:19] 🟢 Gumroad License Key Generated — key_89a12bc90fa<br>
+                        [06:15:30] 🟢 New Lead Verified via AutoForm API — lead_val_991
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: Monetization Launchpad -->
+            <section class="tab-page" id="tab-launchpad">
+                <div class="launchpad-container">
+                    <div class="glass-panel launchpad-hero">
+                        <h2><i class="fa-solid fa-rocket"></i> Launch & Monetize Your Application</h2>
+                        <p>Export your full application package, setup payment gateways, and launch to production.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" id="btn-export-files">
+                                <i class="fa-solid fa-download"></i> Download Zip Bundle (.ZIP)
+                            </button>
+                            <button class="btn btn-secondary" id="btn-copy-landing">
+                                <i class="fa-solid fa-code"></i> Copy Landing Page HTML
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="launchpad-grid">
+                        <div class="glass-panel launch-card">
+                            <div class="launch-card-header">
+                                <i class="fa-brands fa-stripe text-purple launch-icon"></i>
+                                <h3>Stripe / LemonSqueezy Checkout</h3>
+                            </div>
+                            <p>Embed seamless credit card and subscription payments into your app code with pre-configured tier pricing.</p>
+                            <button class="btn btn-secondary btn-sm" id="btn-gen-stripe-snippet">Generate Payment Script</button>
+                        </div>
+
+                        <div class="glass-panel launch-card">
+                            <div class="launch-card-header">
+                                <i class="fa-solid fa-store text-gold launch-icon"></i>
+                                <h3>Gumroad Product Integration</h3>
+                            </div>
+                            <p>Generate Gumroad overlay embeds and license key verification for digital downloads and software keys.</p>
+                            <button class="btn btn-secondary btn-sm" id="btn-gen-gumroad-snippet">Generate Gumroad Embed</button>
+                        </div>
+
+                        <div class="glass-panel launch-card">
+                            <div class="launch-card-header">
+                                <i class="fa-solid fa-cloud-arrow-up text-cyan launch-icon"></i>
+                                <h3>1-Click Hosting Setup</h3>
+                            </div>
+                            <p>Get ready-to-use deployment scripts for Vercel, Netlify, Cloudflare Pages, or Render.</p>
+                            <button class="btn btn-secondary btn-sm" id="btn-gen-deploy-config">View Vercel Config</button>
+                        </div>
+
+                        <div class="glass-panel launch-card">
+                            <div class="launch-card-header">
+                                <i class="fa-solid fa-bullhorn text-pink launch-icon"></i>
+                                <h3>Social Launch Copy Writer</h3>
+                            </div>
+                            <p>Generate viral launch posts for X (Twitter), ProductHunt, Reddit, and HackerNews using OpenRouter free models.</p>
+                            <button class="btn btn-secondary btn-sm" id="btn-gen-launch-posts">Generate Launch Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel launch-output-panel" id="launch-output-box" style="display:none;">
+                        <div class="output-header">
+                            <h4 id="launch-output-title">Generated Launch Snippet</h4>
+                            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('launch-output-box').style.display='none'">Close</button>
+                        </div>
+                        <pre class="code-block" id="launch-output-content"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: 4-Agent Swarm Hub -->
+            <section class="tab-page" id="tab-swarm">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-users-gear text-cyan"></i> 4-Agent Autonomous Swarm Orchestrator</h2>
+                        <button class="btn btn-primary" id="btn-run-swarm-now">
+                            <i class="fa-solid fa-play"></i> Launch 4-Agent Swarm
+                        </button>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Coordinates a 4-agent team: 🕵️ <strong>Researcher</strong> (Wigolo multi-engine search), 🧠 <strong>Architect</strong> (monetization blueprints), 💻 <strong>Coder</strong> (full-stack HTML/CSS/FastAPI), and 🧪 <strong>QA Browser Agent</strong> (Playwright visual verification).
+                    </p>
+                    <div class="form-group">
+                        <label>Target Niche for Agent Swarm</label>
+                        <input type="text" id="swarm-niche-input" class="form-control" value="AI Lead Validator Micro-SaaS">
+                    </div>
+                    <div id="swarm-log-box" class="code-block" style="height: 380px; overflow-y: auto;">
+                        [SYSTEM] 4-Agent Swarm Ready. Click "Launch 4-Agent Swarm" to run autonomous team collaboration.
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: Real Apps Radar -->
+            <section class="tab-page" id="tab-real-apps">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-radar text-cyan"></i> Real Monetizable App Opportunities Radar</h2>
+                        <button class="btn btn-primary" id="btn-refresh-real-apps">
+                            <i class="fa-solid fa-arrows-rotate"></i> Scan Live Market Apps
+                        </button>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Real-time intelligence from Product Hunt, Hacker News Show HN, and Reddit SaaS benchmarks. Discover real apps making $2k - $40k MRR with verified market gaps.
+                    </p>
+                    <div class="explorer-grid" id="real-apps-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem;"></div>
+                </div>
+            </section>
+
+            <!-- TAB: Marketing & GTM -->
+            <section class="tab-page" id="tab-marketing">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-bullhorn text-gold"></i> Go-to-Market Marketing Campaign Engine</h2>
+                        <button class="btn btn-primary" id="btn-generate-marketing">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Complete Marketing Kit
+                        </button>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Generates high-converting cold outreach email sequences, viral X/Twitter threads, Product Hunt launch playbook, and programmatic SEO keywords.
+                    </p>
+                    <div class="form-row" style="display:flex; gap:1rem; margin-bottom:1rem;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Product Name</label>
+                            <input type="text" id="marketing-app-name" class="form-control" value="AutoForm Lead Validator Micro-SaaS">
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Target Audience</label>
+                            <input type="text" id="marketing-target-audience" class="form-control" value="B2B SaaS Founders & Marketing Agencies">
+                        </div>
+                    </div>
+                    <div id="marketing-results-container" style="display:none; margin-top:1.5rem;"></div>
+                </div>
+            </section>
+
+            <!-- TAB: Cheap Domain Finder -->
+            <section class="tab-page" id="tab-domains">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-globe text-purple"></i> Cheap Domain Name Finder ($0.99 - $9.99)</h2>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Instant real-time DNS availability check across cheap TLDs (<code>.xyz</code>, <code>.site</code>, <code>.tech</code>, <code>.dev</code>, <code>.co</code>, <code>.com</code>). Zero markup direct registration links.
+                    </p>
+                    <div class="input-with-button" style="margin-bottom:1.5rem;">
+                        <input type="text" id="domain-search-input" class="form-control" placeholder="Enter your app brand name (e.g., leadguard, autopulse)..." value="leadguard">
+                        <button class="btn btn-primary" id="btn-search-domains">
+                            <i class="fa-solid fa-search"></i> Check Live Availability
+                        </button>
+                    </div>
+                    <div id="domain-results-table-container"></div>
+                </div>
+            </section>
+
+            <!-- TAB: Deep QA & Security Audit -->
+            <section class="tab-page" id="tab-qa">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-shield-halved text-green"></i> Deep QA & Code Security Auditor</h2>
+                        <button class="btn btn-primary" id="btn-run-full-qa">
+                            <i class="fa-solid fa-vial-circle-check"></i> Run Full Static QA Audit
+                        </button>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Static code analysis auditing XSS vulnerabilities, secret key leaks, mobile viewport tags, and Stripe/Gumroad payment gateway trigger signatures.
+                    </p>
+                    <div id="qa-results-container"></div>
+                </div>
+            </section>
+
+            <!-- TAB: Free Neural Voice Studio -->
+            <section class="tab-page" id="tab-voice">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-microphone-lines text-pink"></i> Free Neural Voice Studio ($0 API Cost)</h2>
+                        <span class="badge" style="background:rgba(236,72,153,0.2); color:#ec4899; border:1px solid #ec4899; padding:4px 10px; border-radius:6px;">
+                            <i class="fa-solid fa-bolt"></i> Edge-TTS Engine Active
+                        </span>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        High-fidelity neural text-to-speech engine powered by Microsoft Edge neural models. Generate viral promo audio, product walkthrough narrations, and podcast ads in seconds with zero API fees.
+                    </p>
+                    
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+                        <div>
+                            <div class="form-group">
+                                <label>Select Neural Voice</label>
+                                <select id="voice-select" class="form-control">
+                                    <option value="en-US-ChristopherNeural" selected>Christopher (US Male - Deep, Energetic & Confident)</option>
+                                    <option value="en-US-JennyNeural">Jenny (US Female - Natural, Friendly & Engaging)</option>
+                                    <option value="en-US-GuyNeural">Guy (US Male - Professional, Trustworthy & Clear)</option>
+                                    <option value="en-GB-SoniaNeural">Sonia (British Female - Elegant, Premium & Articulate)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                                    <label style="margin-bottom:0;">Voiceover Script</label>
+                                    <div style="display:flex; gap:0.4rem;">
+                                        <button class="btn btn-secondary btn-sm" id="btn-voice-preset-hook">Hook Preset</button>
+                                        <button class="btn btn-secondary btn-sm" id="btn-voice-preset-pitch">Pitch Preset</button>
+                                        <button class="btn btn-secondary btn-sm" id="btn-voice-preset-cta">CTA Preset</button>
+                                    </div>
+                                </div>
+                                <textarea id="voice-script-text" class="form-control" style="height:140px; resize:vertical; font-family:inherit; line-height:1.5;" placeholder="Type or paste your SaaS marketing pitch or product demo script here...">Welcome to AutoMonetize AI. Discover, build, and monetize profitable software applications on autopilot with zero upfront costs.</textarea>
+                            </div>
+
+                            <button class="btn btn-primary" id="btn-generate-voice" style="width:100%; padding:0.8rem;">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Synthesize Neural Audio
+                            </button>
+                        </div>
+
+                        <div class="glass-panel" style="background:rgba(0,0,0,0.25); display:flex; flex-direction:column; justify-content:space-between;">
+                            <div>
+                                <h3><i class="fa-solid fa-volume-high text-cyan"></i> Audio Preview & Export</h3>
+                                <div id="voice-status-box" style="margin:1.2rem 0; padding:1rem; background:rgba(255,255,255,0.03); border-radius:8px; text-align:center;">
+                                    <i class="fa-solid fa-headphones text-pink" style="font-size:2rem; margin-bottom:0.5rem;"></i>
+                                    <p style="font-size:0.9rem; color:var(--text-muted);">Ready to synthesize. Click generate to create your high-quality narration.</p>
+                                </div>
+                                <audio id="voice-audio-element" controls style="width:100%; display:none; margin-bottom:1rem; border-radius:30px;"></audio>
+                            </div>
+
+                            <div style="display:flex; gap:0.8rem;">
+                                <a id="btn-download-audio" class="btn btn-secondary" style="flex:1; text-align:center; display:none;" download="narration.mp3">
+                                    <i class="fa-solid fa-download"></i> Download .MP3
+                                </a>
+                                <button class="btn btn-secondary" id="btn-use-audio-in-launchpad" style="display:none;">
+                                    <i class="fa-solid fa-box-archive"></i> Attach to Bundle
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: Knowledge Vault & Playbooks -->
+            <section class="tab-page" id="tab-vault">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-book-bookmark text-cyan"></i> 2026 AI Monetization Knowledge Vault</h2>
+                        <div style="display:flex; gap:0.5rem; align-items:center;">
+                            <input type="text" id="vault-search-input" class="form-control" placeholder="Filter research guides..." style="width:240px; padding:0.4rem 0.8rem; font-size:0.85rem;">
+                        </div>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Full offline research intelligence covering agentic commerce, awesome lists, YouTube automation swarms (Lumen), Kokoro-82M/F5-TTS/Wan 2.2 workflows, and Stripe payment blueprints.
+                    </p>
+
+                    <div style="display:grid; grid-template-columns:320px 1fr; gap:1.5rem; height:600px;">
+                        <div id="vault-docs-list" class="glass-panel" style="overflow-y:auto; background:rgba(0,0,0,0.2); padding:0.8rem;"></div>
+                        <div class="glass-panel" style="display:flex; flex-direction:column; overflow:hidden; background:rgba(0,0,0,0.35);">
+                            <div style="padding-bottom:0.8rem; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center;">
+                                <h3 id="vault-active-title" style="font-size:1.1rem; margin:0;">Select a document</h3>
+                                <button class="btn btn-secondary btn-sm" id="btn-copy-vault-doc"><i class="fa-solid fa-copy"></i> Copy Markdown</button>
+                            </div>
+                            <div id="vault-doc-content" style="flex:1; overflow-y:auto; margin-top:1rem; font-size:0.9rem; line-height:1.6; color:#d1d5db; padding-right:0.5rem;">
+                                <div style="text-align:center; padding:3rem; color:var(--text-muted);">
+                                    <i class="fa-solid fa-book-open text-cyan" style="font-size:2.5rem; margin-bottom:1rem;"></i>
+                                    <p>Select any research guide from the left to read full blueprint.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: Saved Projects & History DB -->
+            <section class="tab-page" id="tab-projects">
+                <div class="glass-panel">
+                    <div class="panel-title-bar" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2><i class="fa-solid fa-database text-gold"></i> Saved Micro-SaaS Projects & History</h2>
+                        <button class="btn btn-primary" id="btn-save-current-to-db">
+                            <i class="fa-solid fa-floppy-disk"></i> Save Current Builder Code to DB
+                        </button>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Persistent SQLite project storage (<code>automonetize.db</code>). Reload customized blueprints, inspect QA scores, export complete project ZIPs, and track stored marketing campaigns.
+                    </p>
+
+                    <div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem;">
+                        <button class="btn btn-secondary btn-sm active" id="btn-show-db-projects">Saved Projects</button>
+                        <button class="btn btn-secondary btn-sm" id="btn-show-db-campaigns">Marketing Campaigns</button>
+                        <button class="btn btn-secondary btn-sm" id="btn-show-db-domains">Domain Watchlist</button>
+                    </div>
+
+                    <div id="db-content-container" style="min-height:300px;"></div>
+                </div>
+            </section>
+
+            <!-- TAB 6: Settings & OpenRouter Models -->
+            <section class="tab-page" id="tab-settings">
+                <div class="settings-container">
+                    <div class="glass-panel settings-card">
+                        <h3><i class="fa-solid fa-key"></i> OpenRouter API Configuration</h3>
+                        <div class="form-group">
+                            <label for="openrouter-api-key">OpenRouter API Key</label>
+                            <div class="input-with-button">
+                                <input type="password" id="openrouter-api-key" class="form-control" placeholder="sk-or-v1-...">
+                                <button class="btn btn-secondary" id="btn-toggle-key-visibility"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                            <small class="help-text">Key loaded from system memories. You can update it anytime.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="model-select">Select Active OpenRouter Model</label>
+                            <select id="model-select" class="form-control">
+                                <option value="openrouter/free" selected>openrouter/free (Recommended - Auto-Routes to Online Free LLMs)</option>
+                                <option value="google/gemma-4-31b-it:free">google/gemma-4-31b-it:free (Google High Intelligence)</option>
+                                <option value="openai/gpt-oss-20b:free">openai/gpt-oss-20b:free (OpenAI Tuned Open Model)</option>
+                                <option value="cohere/north-mini-code:free">cohere/north-mini-code:free (Specialized Code Generation)</option>
+                                <option value="inclusionai/ling-3.0-flash:free">inclusionai/ling-3.0-flash:free (Ultra Fast Flash)</option>
+                                <option value="nvidia/nemotron-3-nano-30b-a3b:free">nvidia/nemotron-3-nano-30b-a3b:free (NVIDIA Reasoning)</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary" id="btn-save-settings">
+                            <i class="fa-solid fa-check"></i> Save & Refresh Model Hub
+                        </button>
+                    </div>
+
+                    <div class="glass-panel models-hub-card">
+                        <div class="panel-title-bar">
+                            <h3><i class="fa-solid fa-network-wired"></i> OpenRouter Free Models Live Hub</h3>
+                            <button class="btn btn-secondary btn-sm" id="btn-fetch-live-models">
+                                <i class="fa-solid fa-arrows-rotate"></i> Query Live Models
+                            </button>
+                        </div>
+                        <p>Automatically querying <code>https://openrouter.ai/api/v1/models</code> for 100% free models (0 price prompt & completion).</p>
+                        <div class="models-grid" id="live-models-list"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="openrouter.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

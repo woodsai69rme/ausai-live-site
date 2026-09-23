@@ -28,6 +28,7 @@ Welcome to the unified local-AI toolchain at `C:\Users\karma\`. This environment
 | [`OPENCLAW_HERMES_SETUP_AND_RESEARCH.md`](OPENCLAW_HERMES_SETUP_AND_RESEARCH.md) | OpenClaw gateway + Hermes agent deep dive |
 | [`ORACLE_JARVIS_PAPERCLIP_SETUP.md`](ORACLE_JARVIS_PAPERCLIP_SETUP.md) | Oracle / Jarvis / Paperclip setup + schemas |
 | [`TODO_TRACKER.md`](TODO_TRACKER.md) | Append-only project tracker |
+| [`REFERENCE_DOCS_INDEX.md`](REFERENCE_DOCS_INDEX.md) | **Reference docs nav** — YouTube GitHub ecosystem research, hardware shopping tiers, Sunshine+Moonlight setup, awesome-list catalogue, daily digest |
 
 ## Security
 

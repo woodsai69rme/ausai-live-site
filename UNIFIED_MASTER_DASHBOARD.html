@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIFIED MASTER DASHBOARD — Empire + Recovery + Diagnostics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-soft: rgba(99, 102, 241, 0.18);
+            --primary-glow: rgba(99, 102, 241, 0.45);
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --success-soft: rgba(16, 185, 129, 0.18);
+            --danger: #ef4444;
+            --danger-soft: rgba(239, 68, 68, 0.20);
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --darker: #111827;
+            --darkest: #0b0f1a;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --surface: rgba(31, 41, 55, 0.65);
+            --surface-strong: rgba(31, 41, 55, 0.85);
+            --surface-border: rgba(148, 163, 184, 0.18);
+            --surface-highlight: rgba(255, 255, 255, 0.06);
+            --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.35);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background:
+                radial-gradient(ellipse 1200px 700px at 12% -10%, rgba(99, 102, 241, 0.22), transparent 60%),
+                radial-gradient(ellipse 900px 600px at 110% 20%, rgba(139, 92, 246, 0.18), transparent 65%),
+                radial-gradient(ellipse 800px 500px at 50% 110%, rgba(16, 185, 129, 0.10), transparent 70%),
+                linear-gradient(135deg, var(--darkest), #1e1b4b 60%, #0b0f1a);
+            background-attachment: fixed;
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container { max-width: 1800px; margin: 0 auto; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shimmer { 0% { background-position: -480px 0; } 100% { background-position: 480px 0; } }
+        @keyframes breathe { 0%, 100% { box-shadow: 0 0 12px var(--success); } 50% { box-shadow: 0 0 22px var(--success); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 28px;
+            background: var(--surface-strong);
+            border-radius: 18px;
+            border: 1px solid var(--surface-border);
+            backdrop-filter: blur(14px) saturate(140%);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+            box-shadow: var(--shadow-soft);
+            animation: fadeUp 0.6s ease both;
+            position: relative;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, var(--surface-highlight), transparent 35%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 999px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .badge-primary { background: var(--primary-soft); color: var(--primary); border: 1px solid rgba(99,102,241,0.3); }
+        .badge-success { background: var(--success-soft); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+        .badge-warning { background: rgba(245,158,11,0.20); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+        .badge-danger { background: var(--danger-soft); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+
+        .section-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--surface-border);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-title i { color: var(--primary); }
+
+        .grid-empire { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-bottom: 30px; }
+        .grid-recovery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 30px; }
+        .grid-quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 30px; }
+        .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 30px; }
+
+        .card {
+            background: var(--surface);
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid var(--surface-border);
+            backdrop-filter: blur(10px) saturate(130%);
+            -webkit-backdrop-filter: blur(10px) saturate(130%);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+            transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), border-color 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.6s ease both;
+            cursor: pointer;
+        }
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top, var(--surface-highlight), transparent 70%);
+            pointer-events: none;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-glow);
+            box-shadow: 0 14px 36px rgba(99, 102, 241, 0.30);
+        }
+        .card a { color: var(--light); text-decoration: none; display: block; height: 100%; }
+        .card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; margin-bottom: 12px;
+        }
+        .card h3 { font-size: 0.95rem; margin-bottom: 4px; }
+        .card p { font-size: 0.78rem; color: var(--gray); margin: 0; }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 14px;
+            padding: 22px 24px;
+            border: 1px solid var(--surface-border);
+            text-align: center;
+            backdrop-filter: blur(10px) saturate(130%);
+            -webkit-backdrop-filter: blur(10px) saturate(130%);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.6s ease both;
+        }
+        .stat-card:hover { transform: translateY(-6px); border-color: var(--primary-glow); box-shadow: 0 14px 36px rgba(99,102,241,0.30); }
+        .stat-value { font-size: 2.2rem; font-weight: bold; color: var(--primary); margin-bottom: 8px; }
+        .stat-label { color: var(--gray); font-size: 1rem; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+            cursor: pointer; border: none; text-decoration: none; color: #fff;
+            transition: transform 0.2s ease, box-shadow 0.25s ease, filter 0.2s ease;
+            margin: 4px;
+        }
+        .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+        .btn-primary { background: linear-gradient(45deg, var(--primary), var(--secondary)); box-shadow: 0 6px 18px var(--primary-glow); }
+        .btn-success { background: linear-gradient(45deg, #059669, #10b981); box-shadow: 0 6px 18px rgba(16,185,129,0.3); }
+        .btn-warning { background: linear-gradient(45deg, #d97706, #f59e0b); box-shadow: 0 6px 18px rgba(245,158,11,0.3); }
+        .btn-danger { background: linear-gradient(45deg, #dc2626, #ef4444); box-shadow: 0 6px 18px rgba(239,68,68,0.3); }
+        .btn-ghost { background: transparent; border: 1px solid var(--surface-border); color: var(--gray); }
+
+        .guide-section {
+            margin-bottom: 30px;
+        }
+        .guide-card {
+            background: var(--surface);
+            border-radius: 14px;
+            padding: 24px;
+            border: 1px solid var(--surface-border);
+            backdrop-filter: blur(10px) saturate(130%);
+            margin-bottom: 14px;
+        }
+        .guide-card h3 { color: var(--primary); margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .guide-step {
+            display: flex; gap: 14px; padding: 12px 0;
+            border-bottom: 1px solid rgba(148,163,184,0.1);
+        }
+        .guide-step:last-child { border-bottom: none; }
+        .step-num {
+            width: 30px; height: 30px; min-width: 30px;
+            border-radius: 50%; background: var(--primary-soft);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85rem; color: var(--primary);
+        }
+        .step-content { flex: 1; }
+        .step-content strong { color: var(--light); }
+        .step-content p { font-size: 0.85rem; color: var(--gray); margin-top: 4px; }
+
+        .verdict-banner {
+            padding: 16px 20px; border-radius: 12px; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 14px;
+            font-size: 0.95rem;
+        }
+        .verdict-banner.success { background: var(--success-soft); border: 1px solid rgba(16,185,129,0.3); color: var(--success); }
+        .verdict-banner.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); color: var(--warning); }
+        .verdict-banner.danger { background: var(--danger-soft); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); }
+        .verdict-banner i { font-size: 1.5rem; }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
+            z-index: 9999; backdrop-filter: blur(4px);
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--dark); padding: 32px; border-radius: 16px;
+            border: 1px solid var(--primary); max-width: 700px;
+            max-height: 80vh; overflow-y: auto; min-width: 400px;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--gray); }
+        .modal-title { font-size: 1.4rem; color: var(--primary); }
+        .modal-close { background: none; border: none; color: var(--light); font-size: 1.5rem; cursor: pointer; padding: 5px 10px; }
+        .modal-close:hover { color: var(--danger); }
+        .modal-body { color: var(--light); line-height: 1.6; }
+
+        .code-block {
+            background: var(--darkest); padding: 12px 16px; border-radius: 8px;
+            font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.82rem;
+            border: 1px solid var(--surface-border); overflow-x: auto;
+            margin: 8px 0; color: #e5e7eb;
+        }
+
+        .tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab {
+            padding: 8px 18px; border-radius: 8px 8px 0 0;
+            background: var(--surface); border: 1px solid var(--surface-border);
+            border-bottom: none; cursor: pointer; font-size: 0.85rem; font-weight: 500;
+            color: var(--gray); transition: all 0.2s;
+        }
+        .tab.active { background: var(--surface-strong); color: var(--primary); border-color: var(--primary); }
+        .tab:hover:not(.active) { color: var(--light); }
+
+        .search-box {
+            width: 100%; padding: 14px 14px 14px 44px;
+            background: var(--darkest); border: 1px solid var(--surface-border);
+            border-radius: 10px; color: var(--light); font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .search-box:focus { outline: none; border-color: var(--primary); }
+        .search-wrap { position: relative; margin-bottom: 20px; }
+        .search-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--gray); }
+
+        .connection-status {
+            position: fixed; bottom: 20px; right: 20px;
+            background: var(--dark); padding: 10px 15px; border-radius: 8px;
+            border: 1px solid var(--gray); font-size: 0.9rem; z-index: 100;
+        }
+        .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+        .status-dot.online { background: var(--success); box-shadow: 0 0 14px var(--success); animation: breathe 2.4s ease-in-out infinite; }
+        .status-dot.offline { background: var(--danger); box-shadow: 0 0 14px var(--danger); }
+
+        .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 6px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 500;
+            background: transparent; border: 1px solid var(--surface-border); color: var(--gray);
+            cursor: pointer; transition: all 0.2s;
+        }
+        .filter-btn.active { background: var(--primary-soft); border-color: var(--primary); color: var(--primary); }
+        .filter-btn:hover:not(.active) { border-color: var(--gray); color: var(--light); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .grid-empire { grid-template-columns: repeat(2, 1fr); }
+            .grid-recovery { grid-template-columns: repeat(2, 1fr); }
+            .modal-content { min-width: 90%; padding: 20px; }
+            .grid-stats { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header>
+            <h1><i class="fas fa-crown" aria-hidden="true"></i> UNIFIED MASTER DASHBOARD</h1>
+            <div style="color: var(--gray); font-size: 1.1rem; margin-bottom: 12px;">
+                Empire Hub + AI Agency + Phone Recovery + Diagnostics + Carrier Unlock
+            </div>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <span class="badge badge-success"><i class="fas fa-check-circle" aria-hidden="true"></i> All Systems</span>
+                <span class="badge badge-primary"><i class="fas fa-layer-group" aria-hidden="true"></i> 5 Sections</span>
+                <span class="badge badge-warning"><i class="fas fa-tools" aria-hidden="true"></i> Recovery Suite</span>
+            </div>
+        </header>
+
+        <!-- ===== STATS ROW ===== -->
+        <div class="grid-stats" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-value" id="statEmpire">12</div>
+                <div class="stat-label">Empire Links</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statTools">18</div>
+                <div class="stat-label">Recovery Tools</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statCarriers">10</div>
+                <div class="stat-label">AU Carriers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statGuides">12</div>
+                <div class="stat-label">Step Guides</div>
+            </div>
+        </div>
+
+        <!-- ===== TABS ===== -->
+        <div class="tabs" id="mainTabs"> role="tablist"
+            <div class="tab active" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-empire" data-tab="empire" onclick="switchTab('empire')"><i class="fas fa-crown" aria-hidden="true"></i> Empire</div>
+            <div class="tab" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-agency" data-tab="agency" onclick="switchTab('agency')"><i class="fas fa-users" aria-hidden="true"></i> AI Agency</div>
+            <div class="tab" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-recovery" data-tab="recovery" onclick="switchTab('recovery')"><i class="fas fa-mobile-screen" aria-hidden="true"></i> Recovery Suite</div>
+            <div class="tab" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-diagnose" data-tab="diagnose" onclick="switchTab('diagnose')"><i class="fas fa-stethoscope" aria-hidden="true"></i> Diagnostics</div>
+            <div class="tab" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-unlock" data-tab="unlock" onclick="switchTab('unlock')"><i class="fas fa-unlock" aria-hidden="true"></i> Carrier Unlock</div>
+        </div>
+
+        <!-- ===== TAB 1: EMPIRE ===== -->
+        <div class="tab-content" id="tab-empire"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-crown" aria-hidden="true"></i> AI Empire Command Center</h2>
+
+            <div class="search-wrap">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="search-box" id="empireSearch" placeholder="Search empire links..." oninput="filterEmpire()">
+            </div>
+
+            <div class="grid-empire" id="empireGrid">
+                <div class="card" data-tag="youtube empire">
+                    <a href="AUSAI_OPS_DASHBOARD.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(220,38,38,0.2);color:#ef4444;"><i class="fab fa-youtube"></i></div>
+                        <h3>Operations Dashboard</h3>
+                        <p>Revenue tracker, daily checklist, sales pipeline, 40+ tool links</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="youtube">
+                    <a href="auggdash26_consolidated/dashboards/UNIFIED_COMMAND_CENTER.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(220,38,38,0.2);color:#ef4444;"><i class="fab fa-youtube"></i></div>
+                        <h3>YouTube Empire</h3>
+                        <p>150+ channels, AI/ML/Web Dev learning paths</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="projects">
+                    <a href="auggdash26_consolidated/dashboards/COMPLETE_EMPIRE_MASTER.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(59,130,246,0.2);color:#3b82f6;"><i class="fas fa-server" aria-hidden="true"></i></div>
+                        <h3>System Projects</h3>
+                        <p>Complete inventory of C: & X: drive projects</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="skills ai">
+                    <a href="auggdash26_consolidated/dashboards/AGENT_INTEGRATION_DASHBOARD.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                        <h3>OpenClaw Skills</h3>
+                        <p>7 agent skill definitions for automation</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="resources awesome">
+                    <a href="auggdash26_consolidated/dashboards/MASTER_DASHBOARD_HUB.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-star" aria-hidden="true"></i></div>
+                        <h3>Awesome Lists</h3>
+                        <p>50+ curated GitHub resource lists</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="revenue money">
+                    <a href="Revenue_Dashboard_Static.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-dollar-sign" aria-hidden="true"></i></div>
+                        <h3>Revenue Hub</h3>
+                        <p>Track income, A$5k target, pipeline value</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="crypto bitcoin">
+                    <a href="auggdash26_consolidated/dashboards/CRYPTO_COMMAND_CENTER.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(249,115,22,0.2);color:#f97316;"><i class="fab fa-bitcoin"></i></div>
+                        <h3>Crypto Command</h3>
+                        <p>Trading bots, portfolio tracking, arbitrage</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="ai agents">
+                    <a href="ULTIMATE_AI_EMPIRE_ENHANCED_DASHBOARD_V2.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                        <h3>AI Systems</h3>
+                        <p>Agent swarm control + 10+ dashboards</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="archon n8n mcp">
+                    <a href="ARCHON_V2_SYSTEM_INDEX.md" target="_blank">
+                        <div class="card-icon" style="background:rgba(6,182,212,0.2);color:#06b6d4;"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
+                        <h3>Archon MCP</h3>
+                        <p>N8N & MCP integrations, agent orchestration</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="empire influencer">
+                    <a href="AI_TOOLS_DASHBOARD.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-crown" aria-hidden="true"></i></div>
+                        <h3>AI Tools Dashboard</h3>
+                        <p>Installed assistants, models, tool inventory</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="tools development">
+                    <a href="ALL_TOOLS_QUICK_REFERENCE.md" target="_blank">
+                        <div class="card-icon" style="background:rgba(107,114,128,0.2);color:#9ca3af;"><i class="fas fa-tools" aria-hidden="true"></i></div>
+                        <h3>Development Tools</h3>
+                        <p>Utilities, scrapers, handlers, automation</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="audit report">
+                    <a href="auggdash26_consolidated/dashboards/COMPREHENSIVE_EMPIRE_DASHBOARD.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(20,184,166,0.2);color:#14b8a6;"><i class="fas fa-file-alt" aria-hidden="true"></i></div>
+                        <h3>Research Dashboard</h3>
+                        <p>YouTube + Projects + Agents + Complete Analysis</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="agency marketing team">
+                    <a href="http://localhost:8010/dashboard" target="_blank">
+                        <div class="card-icon" style="background:rgba(244,114,182,0.2);color:#f472b6;"><i class="fas fa-users" aria-hidden="true"></i></div>
+                        <h3>AI Agency Team</h3>
+                        <p>9-member virtual IT company — browser + marketing + computer use</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="agency marketing content">
+                    <a href="http://localhost:8010/marketing" target="_blank">
+                        <div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
+                        <h3>Marketing Studio</h3>
+                        <p>Content drafts, campaigns, SEO, email sequences — custom engine</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="devmonitor pro telemetry monitoring pyqt god mode">
+                    <a href="LAUNCH_DEVMONITOR.bat" target="_blank">
+                        <div class="card-icon" style="background:rgba(34,211,238,0.2);color:#22d3ee;"><i class="fas fa-gauge-high" aria-hidden="true"></i></div>
+                        <h3>DevMonitor Pro</h3>
+                        <p>PyQt desktop widget — live telemetry ws://localhost:8765, RGB sync, racing gauges</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="god mode command center omninexus swarm nextjs">
+                    <a href="START_GOD_MODE.bat" target="_blank">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                        <h3>God Mode Stack</h3>
+                        <p>Next.js :3142 + DevMonitor + Swarm orchestrator + Project Brain search</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 2: AI AGENCY ===== -->
+        <div class="tab-content" id="tab-agency" style="display:none;"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-users" aria-hidden="true"></i> AI Agency Virtual Team</h2>
+
+            <div class="verdict-banner" id="agencyBanner" style="margin-bottom:20px;">
+                <span class="status-dot" id="agencyDot"></span>
+                <span id="agencyStatusText">Checking agency API on :8010...</span>
+            </div>
+
+            <div class="grid-recovery" id="agencyGrid">
+                <div class="card" data-cat="hub">
+                    <a href="http://localhost:8010/dashboard" target="_blank">
+                        <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-gauge-high" aria-hidden="true"></i></div>
+                        <h3>Team Dashboard</h3>
+                        <p>9 AI employees, task dispatch, live status</p>
+                    </a>
+                </div>
+                <div class="card" data-cat="marketing">
+                    <a href="http://localhost:8010/marketing" target="_blank">
+                        <div class="card-icon" style="background:rgba(244,114,182,0.2);color:#f472b6;"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
+                        <h3>Marketing Studio</h3>
+                        <p>6 marketing skills — content, calendar, SEO, email</p>
+                    </a>
+                </div>
+                <div class="card" data-cat="tools">
+                    <a href="http://localhost:8010/workbench" target="_blank">
+                        <div class="card-icon" style="background:rgba(34,211,238,0.2);color:#22d3ee;"><i class="fas fa-wrench" aria-hidden="true"></i></div>
+                        <h3>Tools Workbench</h3>
+                        <p>Custom browser agent, fetcher, vault, scheduler</p>
+                    </a>
+                </div>
+                <div class="card" data-cat="clients">
+                    <a href="http://localhost:8010/clients" target="_blank">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-id-card" aria-hidden="true"></i></div>
+                        <h3>Client Accounts</h3>
+                        <p>Onboard clients, vault credentials per service, browser login tests</p>
+                    </a>
+                </div>
+                <div class="card" data-cat="launcher" onclick="showCardDetail(this)">
+                    <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-play" aria-hidden="true"></i></div>
+                    <h3>Launch Agency</h3>
+                    <p>Start server + all dashboards</p>
+                    <div class="code-block" style="margin-top:8px;font-size:0.75rem;">AI_AGENCY\launch_ai_agency.bat → [1]</div>
+                </div>
+                <div class="card" data-cat="marketing" onclick="exportAgencyToSocial()">
+                    <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-share-nodes" aria-hidden="true"></i></div>
+                    <h3>Export to Social</h3>
+                    <p>Push calendar → scheduled_posts.json for auto-posting</p>
+                </div>
+                <div class="card" data-cat="tools" onclick="showCardDetail(this)">
+                    <div class="card-icon" style="background:rgba(239,68,68,0.2);color:#ef4444;"><i class="fas fa-rotate" aria-hidden="true"></i></div>
+                    <h3>Restart Server</h3>
+                    <p>Kill :8010 and start fresh instance</p>
+                    <div class="code-block" style="margin-top:8px;font-size:0.75rem;">AI_AGENCY\restart_server.bat</div>
+                </div>
+                <div class="card" data-cat="marketing" onclick="runAgencySkill('content_draft')">
+                    <div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-pen" aria-hidden="true"></i></div>
+                    <h3>Content Draft</h3>
+                    <p>Platform-specific copy with hashtags</p>
+                </div>
+                <div class="card" data-cat="marketing" onclick="runAgencySkill('social_calendar')">
+                    <div class="card-icon" style="background:rgba(6,182,212,0.2);color:#06b6d4;"><i class="fas fa-calendar-days" aria-hidden="true"></i></div>
+                    <h3>Social Calendar</h3>
+                    <p>7-day content plan via Head of Marketing</p>
+                </div>
+                <div class="card" data-cat="marketing" onclick="runAgencySkill('seo_copy')">
+                    <div class="card-icon" style="background:rgba(249,115,22,0.2);color:#f97316;"><i class="fas fa-search" aria-hidden="true"></i></div>
+                    <h3>SEO Copy</h3>
+                    <p>Landing page copy for target keywords</p>
+                </div>
+                <div class="card" data-cat="marketing" onclick="runAgencySkill('email_sequence')">
+                    <div class="card-icon" style="background:rgba(107,114,128,0.2);color:#9ca3af;"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+                    <h3>Email Sequence</h3>
+                    <p>Drip nurture emails for B2B IT offers</p>
+                </div>
+                <div class="card" data-cat="tools" onclick="testAgencyN8n()">
+                    <div class="card-icon" style="background:rgba(34,211,238,0.2);color:#22d3ee;"><i class="fas fa-plug" aria-hidden="true"></i></div>
+                    <h3>n8n Webhook</h3>
+                    <p>POST /webhook/n8n — automate tasks from n8n workflows</p>
+                </div>
+                <div class="card" data-cat="launcher" onclick="runAgencyDemo()">
+                    <div class="card-icon" style="background:rgba(234,179,8,0.2);color:#eab308;"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                    <h3>Live Demo</h3>
+                    <p>Run full capability showcase (health, export, skills)</p>
+                    <div class="code-block" style="margin-top:8px;font-size:0.75rem;">AI_AGENCY\tools\demo_all.py</div>
+                </div>
+                <div class="card" data-cat="launcher" onclick="showCardDetail(this)">
+                    <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#818cf8;"><i class="fas fa-rocket" aria-hidden="true"></i></div>
+                    <h3>Full Stack Launch</h3>
+                    <p>Server + dashboards + n8n + demo in one click</p>
+                    <div class="code-block" style="margin-top:8px;font-size:0.75rem;">AI_AGENCY\launch_full_stack.bat</div>
+                </div>
+            </div>
+            <div id="agencyOutput" class="code-block" style="display:none;margin-top:16px;white-space:pre-wrap;"></div>
+        </div>
+
+        <!-- ===== TAB 3: RECOVERY SUITE ===== -->
+        <div class="tab-content" id="tab-recovery" style="display:none;"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-mobile-screen" aria-hidden="true"></i> Phone Recovery Suite</h2>
+
+            <div class="filter-bar" id="recoveryFilter">
+                <span class="filter-btn active" onclick="filterRecovery('all')">All</span>
+                <span class="filter-btn" onclick="filterRecovery('android')">Android</span>
+                <span class="filter-btn" onclick="filterRecovery('iphone')">iPhone</span>
+                <span class="filter-btn" onclick="filterRecovery('oppo')">Oppo</span>
+                <span class="filter-btn" onclick="filterRecovery('utility')">Utilities</span>
+                <span class="filter-btn" onclick="filterRecovery('diagnose')">Diagnostics</span>
+            </div>
+
+            <div class="grid-recovery" id="recoveryGrid">
+                <!-- ANDROID -->
+                <div class="card" data-cat="android">
+                    <a href="COMPLETED_PROJECTS/mobile_backup/RECOVERY_SUITE.bat" target="_blank">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-play" aria-hidden="true"></i></div>
+                        <h3>RECOVERY_SUITE.bat</h3>
+                        <p>Master menu — all 18 tools. Press <strong>D</strong> for diagnostics</p>
+                    </a>
+                </div>
+                <div class="card" data-cat="android diagnose android">
+                    <div onclick="openModal('Phone Diagnostics','<div style=\\\"line-height:1.8\\\"><h4>Phone Diagnostics Tool</h4><p>Auto-diagnose SIM/network issues via ADB.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python phone_diagnostics.py</div><br><h4>10 Checks:</h4><ul>\\\'+[\\\'Device model\\\',\\\'Carrier lock (ro.csc.sales_code)\\\',\\\'SIM registration\\\',\\\'Mobile data toggle\\\',\\\'Airplane mode\\\',\\\'Data roaming\\\',\\\'Network operator\\\',\\\'APN config (3 fallbacks)\\\',\\\'IMEI\\\',\\\'Device properties (Android version, SIM country)\\\'].map(l=>\\\'<li>\\\"+l+\\\"</li>\\\').join(\\\'\\\')+\\\'</ul><br><p>Exit codes: 0=OK, 2=carrier locked, 3=SIM not registered, 4=data disabled, 5=airplane mode</p></div>')">
+                        <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-stethoscope" aria-hidden="true"></i></div>
+                        <h3>PHONE DIAGNOSTICS</h3>
+                        <p>SIM/network troublshooter — D key in menu</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="android">
+                    <div onclick="openModal('Android Unlock GUI','<div style=\\\"line-height:1.8\\\"><h4>Android Unlock Tool</h4><p>Python Tkinter GUI for Android unlock operations.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python android_unlock_tool.py</div><br><p>All-in-one GUI for FRP bypass, screen unlock, carrier unlock assistance.</p></div>')">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-unlock" aria-hidden="true"></i></div>
+                        <h3>Android Unlock GUI</h3>
+                        <p>Tkinter GUI — option 1 in menu</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="android">
+                    <div onclick="openModal('Recovery Suite (Dr.Fone Alt)','<div style=\\\"line-height:1.8\\\"><h4>Enhanced Recovery Suite</h4><p>Batch-based Dr.Fone alternative with connection tester and scrcpy.</p><br><div class=\\\"code-block\\\">SCRIPTS\\\\BATCH\\\\Enhanced-Advanced-Recovery-Suite.bat</div><br><p>Option 2 in RECOVERY_SUITE menu. Includes: FRP bypass, screen unlock, firmware flash, ADB diagnostics.</p></div>')">
+                        <div class="card-icon" style="background:rgba(59,130,246,0.2);color:#3b82f6;"><i class="fas fa-flask" aria-hidden="true"></i></div>
+                        <h3>Dr.Fone Alt — Batch</h3>
+                        <p>Option 2 — Enhanced recovery suite</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="android">
+                    <div onclick="openModal('Connection Tester + SCRCPY','<div style=\\\"line-height:1.8\\\"><h4>Phone Connection Tester</h4><p>Test ADB, fastboot, scrcpy connections with broken-screen support.</p><br><div class=\\\"code-block\\\">SCRIPTS\\\\BATCH\\\\Enhanced-Phone-Connection-Tester.bat</div><br><p>Option 3 in menu. Features: wireless ADB, scrcpy mirroring, APK installer, device detection.</p></div>')">
+                        <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-plug" aria-hidden="true"></i></div>
+                        <h3>Connection Tester</h3>
+                        <p>Option 3 — ADB + scrcpy tester</p>
+                    </div>
+                </div>
+
+                <!-- IPHONE -->
+                <div class="card" data-cat="iphone">
+                    <div onclick="openModal('iPhone Pro — Dr.Fone Alternative','<div style=\\\"line-height:1.8\\\"><h4>iPhone Pro Dashboard</h4><p>Modern Flask web app merging beautiful UI with real iPhone tools.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python -X utf8 iphone_pro_drfone_alt.py --port 8455</div><br><p>Then open <strong>http://localhost:8455</strong></p><br><h4>Features:</h4><ul><li>Live device detection (pymobiledevice3/libimobiledevice)</li><li>Device info: model, iOS, serial, battery</li><li>6 unlock/recovery services with pricing</li><li>Encrypted backup via idevicebackup2</li><li>Syslog tail viewer</li><li>Session tracking in SQLite</li><li>Crypto payment simulation</li><li>Stats & revenue dashboard</li></ul><br><p><strong>Option 5</strong> in RECOVERY_SUITE menu</p></div>')">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-mobile" aria-hidden="true"></i></div>
+                        <h3>iPhone Pro v2</h3>
+                        <p>Dr.Fone Alternative — option 5, port 8455</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="iphone">
+                    <div onclick="openModal('iPhone Recovery (Real Tools)','<div style=\\\"line-height:1.8\\\"><h4>iPhone Recovery Suite</h4><p>Real pymobiledevice3 + libimobiledevice tools — no emulation.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python iphone_recovery.py</div><br><h4>Features:</h4><ul><li>Device info: serial, IMEI, iOS version, battery</li><li>Encrypted backup via idevicebackup2</li><li>Syslog streaming</li><li>Broken screen guide</li></ul><br><p><strong>Requires:</strong> pip install pymobiledevice3 pymobiledevice3-native<br>or: choco install libimobiledevice</p><p><strong>Option 4</strong> in RECOVERY_SUITE menu</p></div>')">
+                        <div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-rotate" aria-hidden="true"></i></div>
+                        <h3>iPhone Recovery</h3>
+                        <p>Real pymobiledevice3 — option 4</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="iphone">
+                    <div onclick="openModal('iPhone Legacy (Reference)','<div style=\\\"line-height:1.8\\\"><h4>iPhone Dr.Fone-Alt Legacy</h4><p>Original Flask UI — reference only.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python IPHONE_UNLOCK_DRFONE_ALTERNATIVE.py</div><br><p>Then open <strong>http://localhost:8455</strong></p><p><strong>Option L</strong> in RECOVERY_SUITE menu. Kept for reference.</p></div>')">
+                        <div class="card-icon" style="background:rgba(107,114,128,0.2);color:#9ca3af;"><i class="fas fa-flask" aria-hidden="true"></i></div>
+                        <h3>iPhone Legacy</h3>
+                        <p>Old Dr.Fone Alt — option L, port 8455</p>
+                    </div>
+                </div>
+
+                <!-- OPPO -->
+                <div class="card" data-cat="oppo">
+                    <div onclick="openModal('Oppo Broken-Screen Specialist','<div style=\\\"line-height:1.8\\\"><h4>Oppo Broken-Screen Specialist</h4><p>Decision tree + chipset detection for Oppo devices with dead screens.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python oppo_broken_screen.py</div><br><p><strong>Option 6</strong> in RECOVERY_SUITE menu. Handles: dead screen + locked + various chipsets (MediaTek, Qualcomm, Oppo proprietary).</p></div>')">
+                        <div class="card-icon" style="background:rgba(249,115,22,0.2);color:#f97316;"><i class="fas fa-microchip" aria-hidden="true"></i></div>
+                        <h3>Oppo Specialist</h3>
+                        <p>Broken-screen decision tree — option 6</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="oppo">
+                    <div onclick="openModal('Oppo Web UI (Legacy)','<div style=\\\"line-height:1.8\\\"><h4>Oppo Unlock Flask UI</h4><p>Legacy Flask web UI for Oppo operations.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python OPPO_PHONE_UNLOCK_FACTORY_RESET_BYPASS.py</div><br><p>Then open <strong>http://localhost:8450</strong></p><p><strong>Option 7</strong> in RECOVERY_SUITE menu. Reference only.</p></div>')">
+                        <div class="card-icon" style="background:rgba(107,114,128,0.2);color:#9ca3af;"><i class="fas fa-globe" aria-hidden="true"></i></div>
+                        <h3>Oppo Web UI</h3>
+                        <p>Legacy Flask — option 7, port 8450</p>
+                    </div>
+                </div>
+
+                <!-- UTILITIES -->
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Phone Info Dumper (CLI)','<div style=\\\"line-height:1.8\\\"><h4>Universal Phone Info Dumper</h4><p>Dumps all available info from Android (ADB) and iPhone (libimobiledevice).</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python phone_info_dumper.py --output-dir phone_dumps</div><br><p><strong>Option U</strong> in RECOVERY_SUITE menu. Outputs to phone_dumps/ directory.</p></div>')">
+                        <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-terminal" aria-hidden="true"></i></div>
+                        <h3>Info Dumper (CLI)</h3>
+                        <p>Option U — Universal phone info dump</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Phone Info Dumper (GUI)','<div style=\\\"line-height:1.8\\\"><h4>Universal Phone Info Dumper (GUI)</h4><p>Tkinter graphical interface for phone info dumping.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python phone_info_dumper_gui.py</div><br><p><strong>Option G</strong> in RECOVERY_SUITE menu.</p></div>')">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-desktop" aria-hidden="true"></i></div>
+                        <h3>Info Dumper (GUI)</h3>
+                        <p>Option G — Tkinter GUI version</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Phone Info Dumper (Web)','<div style=\\\"line-height:1.8\\\"><h4>Web Dashboard — Port 8470</h4><p>Web-based phone info dumper accessible from any LAN device.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python phone_info_dumper_web.py --port 8470</div><br><p>Then open <strong>http://localhost:8470</strong></p><p>Accessible from LAN at http://YOUR_IP:8470</p><p><strong>Option W</strong> in RECOVERY_SUITE menu.</p></div>')">
+                        <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-globe" aria-hidden="true"></i></div>
+                        <h3>Info Dumper (Web)</h3>
+                        <p>Option W — web dashboard, port 8470</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Third-Party Tools Catalog','<div style=\\\"line-height:1.8\\\"><h4>Third-Party Mobile Tools</h4><p>Complete catalog of useful third-party tools:</p><ul><li><strong>3uTools</strong> — iOS flash/jailbreak/backup</li><li><strong>Odin</strong> — Samsung firmware flashing</li><li><strong>SP Flash Tool</strong> — MediaTek devices</li><li><strong>MSM Download Tool</strong> — Qualcomm brick recovery</li><li><strong>USB Drivers</strong> — Qualcomm, MediaTek, Samsung, Apple</li><li><strong>Root tools</strong> — Magisk, TWRP</li><li><strong>Diagnostics</strong> — scrcpy, APKTool, JADX, Frida</li></ul><br><p><strong>Option T</strong> in RECOVERY_SUITE menu.</p></div>')">
+                        <div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-box" aria-hidden="true"></i></div>
+                        <h3>Third-Party Tools</h3>
+                        <p>Option T — 3uTools, Odin, SP Flash...</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Mobile Method Explorer','<div style=\\\"line-height:1.8\\\"><h4>Mobile Method Explorer</h4><p>Interactive tool that asks about your situation and suggests EVERY possible method.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python mobile_method_explorer.py</div><br><p>Alternative: <code>python mobile_method_explorer.py --situation \\\"broken screen android\\\"</code></p><p><strong>Option M</strong> in RECOVERY_SUITE menu.</p></div>')">
+                        <div class="card-icon" style="background:rgba(6,182,212,0.2);color:#06b6d4;"><i class="fas fa-compass" aria-hidden="true"></i></div>
+                        <h3>Method Explorer</h3>
+                        <p>Option M — interactive guide for any situation</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Pre-Flight Checks','<div style=\\\"line-height:1.8\\\"><h4>Pre-Flight Dependency Check</h4><p>Checks all installed tools and dependencies:</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>Select option P from RECOVERY_SUITE</div><br><p>Checks: ADB, Fastboot, Scrcpy, Python, pymobiledevice3, libimobiledevice, tkinter, Flask, Ollama</p><br><p><strong>Option P</strong> in RECOVERY_SUITE menu.</p></div>')">
+                        <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-check-double" aria-hidden="true"></i></div>
+                        <h3>Pre-Flight Checks</h3>
+                        <p>Option P — verify all dependencies</p>
+                    </div>
+                </div>
+
+                <!-- LEGACY FLASK -->
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Android Unlock Empire (Legacy)','<div style=\\\"line-height:1.8\\\"><h4>Android Unlock Empire Flask UI</h4><p>Legacy Flask web UI for Android unlock operations.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python ENHANCED_ANDROID_UNLOCK_EMPIRE.py</div><br><p>Then open <strong>http://localhost:8565</strong></p><p><strong>Option 8</strong> in RECOVERY_SUITE menu. Reference only.</p></div>')">
+                        <div class="card-icon" style="background:rgba(107,114,128,0.2);color:#9ca3af;"><i class="fas fa-flask" aria-hidden="true"></i></div>
+                        <h3>Android Empire</h3>
+                        <p>Option 8 — legacy Flask, port 8565</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Mobile Backup UI (Legacy)','<div style=\\\"line-height:1.8\\\"><h4>Ultimate Mobile Backup & Restore</h4><p>Legacy Flask web UI for mobile backup operations.</p><br><div class=\\\"code-block\\\">cd COMPLETED_PROJECTS\\\\mobile_backup<br>python ULTIMATE_MOBILE_BACKUP_RESTORE_TOOL.py</div><br><p>Then open <strong>http://localhost:8460</strong></p><p><strong>Option 9</strong> in RECOVERY_SUITE menu. Reference only.</p></div>')">
+                        <div class="card-icon" style="background:rgba(107,114,128,0.2);color:#9ca3af;"><i class="fas fa-database" aria-hidden="true"></i></div>
+                        <h3>Backup UI</h3>
+                        <p>Option 9 — legacy Flask, port 8460</p>
+                    </div>
+                </div>
+                <div class="card" data-cat="utility">
+                    <div onclick="openModal('Tools Index (Docs)','<div style=\\\"line-height:1.8\\\"><h4>MOBILE_TOOLS_INDEX.md</h4><p>Master documentation index — every mobile recovery tool documented with links to all supporting files.</p><br><div class=\\\"code-block\\\">notepad COMPLETED_PROJECTS\\\\mobile_backup\\\\MOBILE_TOOLS_INDEX.md</div><br><p><strong>Option I</strong> in RECOVERY_SUITE menu. Comprehensive index of all tools, methods, and documentation in the mobile backup toolkit.</p></div>')">
+                        <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-book-open" aria-hidden="true"></i></div>
+                        <h3>Tools Index</h3>
+                        <p>Option I — MOBILE_TOOLS_INDEX.md</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 3: DIAGNOSTICS ===== -->
+        <div class="tab-content" id="tab-diagnose" style="display:none;"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-stethoscope" aria-hidden="true"></i> Phone Diagnostics Center</h2>
+
+            <!-- ADB Status -->
+            <div class="verdict-banner" id="adbBanner">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                <div>
+                    <strong>ADB Status: </strong><span id="adbStatusText">Checking...</span><br>
+                    <span style="font-size:0.85rem;">USB debugging required — connect your Android phone via USB with Developer Options enabled</span>
+                </div>
+            </div>
+
+            <div class="grid-stats" id="diagStats">
+                <div class="stat-card" onclick="runDiagnostic('carrier')" style="cursor:pointer;">
+                    <div class="stat-value" style="font-size:1.6rem;"><i class="fas fa-lock" aria-hidden="true"></i></div>
+                    <div class="stat-label">Carrier Lock Check<br><small style="color:var(--gray)">Click to run → adb shell getprop ro.csc.sales_code</small></div>
+                </div>
+                <div class="stat-card" onclick="runDiagnostic('sim')" style="cursor:pointer;">
+                    <div class="stat-value" style="font-size:1.6rem;"><i class="fas fa-sim-card" aria-hidden="true"></i></div>
+                    <div class="stat-label">SIM State<br><small style="color:var(--gray)">Click to run → dumpsys telephony.registry</small></div>
+                </div>
+                <div class="stat-card" onclick="runDiagnostic('apn')" style="cursor:pointer;">
+                    <div class="stat-value" style="font-size:1.6rem;"><i class="fas fa-wifi" aria-hidden="true"></i></div>
+                    <div class="stat-label">APN Config<br><small style="color:var(--gray)">Click to check APN settings</small></div>
+                </div>
+                <div class="stat-card" onclick="runDiagnostic('full')" style="cursor:pointer;">
+                    <div class="stat-value" style="font-size:1.6rem;"><i class="fas fa-microscope" aria-hidden="true"></i></div>
+                    <div class="stat-label">Full Diagnostic<br><small style="color:var(--gray)">Click to run phone_diagnostics.py</small></div>
+                </div>
+            </div>
+
+            <div id="diagResult" style="display:none;">
+                <div class="guide-card">
+                    <h3><i class="fas fa-clipboard-check" aria-hidden="true"></i> Diagnostic Result</h3>
+                    <div id="diagOutput" style="background:var(--darkest); padding:16px; border-radius:8px; font-family:monospace; font-size:0.85rem; white-space:pre-wrap; word-break:break-word; border:1px solid var(--surface-border);"></div>
+                </div>
+            </div>
+
+            <!-- Quick Reference: Belong APN -->
+            <div class="guide-card">
+                <h3><i class="fas fa-sim-card" aria-hidden="true"></i> Belong SIM Quick Reference</h3>
+                <div class="guide-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Activate SIM</strong>
+                        <p>Go to <a href="https://www.belong.com.au/go/activate-sim" target="_blank" style="color:var(--primary);">belong.com.au/go/activate-sim</a> — enter the 13-digit SIM number (on the plastic card)</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Check Carrier Lock</strong>
+                        <p>Run: <span class="code-block" style="display:inline;padding:2px 8px;">adb shell getprop ro.csc.sales_code</span></p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Configure APN (if data doesn't work)</strong>
+                        <p>Settings → Connections → Mobile Networks → Access Point Names → Add</p>
+                        <div class="code-block">Name: Belong<br>APN: telstra.internet<br>Proxy: Not set<br>Port: Not set<br>Authentication type: None<br>APN type: default,supl<br>APN protocol: IPv4/IPv6<br>APN roaming protocol: IPv4/IPv6<br>Bearer: Unspecified<br>MVNO type: None</div>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Verify Network</strong>
+                        <p>Check registered operator: <span class="code-block" style="display:inline;padding:2px 8px;">adb shell getprop gsm.operator.alpha</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 4: CARRIER UNLOCK ===== -->
+        <div class="tab-content" id="tab-unlock" style="display:none;"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-unlock" aria-hidden="true"></i> Australian Carrier Unlock Guide</h2>
+
+            <!-- Decision Tree Banner -->
+            <div class="verdict-banner warning">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <div>
+                    <strong>Before you start:</strong> Australian carriers <em>must</em> unlock your phone for free if:
+                    <ul style="margin-top:6px;padding-left:20px;">
+                        <li>The phone is paid off (no outstanding contract)</li>
+                        <li>Not reported as lost or stolen</li>
+                        <li>IMEI is clean (not blacklisted)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 1: Identify -->
+            <div class="guide-card">
+                <h3><i class="fas fa-search" aria-hidden="true"></i> Step 1: Identify Your Carrier Lock</h3>
+                <div class="guide-step">
+                    <div class="step-num"><i class="fas fa-terminal" aria-hidden="true"></i></div>
+                    <div class="step-content">
+                        <strong>Run this ADB command (Samsung)</strong>
+                        <div class="code-block">adb shell getprop ro.csc.sales_code</div>
+                        <p>Common results:</p>
+                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:8px;">
+                            <div style="background:var(--success-soft);padding:8px 12px;border-radius:6px;color:var(--success);">XSA / XSP → <strong>Unlocked</strong> ✓</div>
+                            <div style="background:rgba(220,38,38,0.15);padding:8px 12px;border-radius:6px;color:#ef4444;">TEL → <strong>Telstra</strong></div>
+                            <div style="background:rgba(220,38,38,0.15);padding:8px 12px;border-radius:6px;color:#ef4444;">VAU / VA → <strong>Vodafone</strong></div>
+                            <div style="background:rgba(220,38,38,0.15);padding:8px 12px;border-radius:6px;color:#ef4444;">OPP / OPS → <strong>Optus</strong></div>
+                            <div style="background:rgba(220,38,38,0.15);padding:8px 12px;border-radius:6px;color:#ef4444;">INU → <strong>Singtel</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TELSTRA -->
+            <div class="guide-card">
+                <h3><i class="fas fa-building" style="color:#00A4FF;"></i> Telstra Unlock (Code: TEL)</h3>
+                <div class="guide-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Check eligibility</strong>
+                        <p>Phone must be out of contract / paid off. You can do this even if you're not a Telstra customer.</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Submit unlock request</strong>
+                        <p>Call <strong>125 111</strong> (Telstra support) or visit <a href="https://www.telstra.com.au/support/mobile/request-device-unlock-code" target="_blank" style="color:var(--primary);">telstra.com.au/devices/unlock</a></p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Provide IMEI</strong>
+                        <div class="code-block">adb shell getprop gsm.baseband.imei</div>
+                        <p>Or dial <strong>*#06#</strong> on the phone.</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Wait for unlock code</strong>
+                        <p>Telstra typically sends the unlock code via SMS within <strong>1-2 business days</strong>. Some prepaid phones qualify after 6 months of active use.</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <strong>Enter unlock code</strong>
+                        <p>Insert a non-Telstra SIM → turn on → enter the code when prompted. If no prompt appears, go to Settings → Connections → SIM Card Manager → SIM Lock.</p>
+                    </div>
+                </div>
+                <div style="margin-top:10px;padding:10px 14px;background:rgba(245,158,11,0.12);border-radius:8px;border:1px solid rgba(245,158,11,0.2);">
+                    <strong>Note for Belong users:</strong> Belong is a Telstra MVNO. If your phone is TEL-locked, Belong <em>should</em> work since Belong uses Telstra's network. If it doesn't, contact Belong support.
+                </div>
+            </div>
+
+            <!-- OPTUS -->
+            <div class="guide-card">
+                <h3><i class="fas fa-building" style="color:#FF6B00;"></i> Optus Unlock (Code: OPP/OPS)</h3>
+                <div class="guide-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Check eligibility</strong>
+                        <p>Postpaid: phone must be paid off. Prepaid: requires <strong>6 months continuous active service</strong> on an Optus prepaid plan with a recharge in the last 30 days.</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Submit unlock request</strong>
+                        <p>Visit: <a href="https://www.optus.com.au/support/support-wizard/unlock-your-mobile" target="_blank" style="color:var(--primary);">optus.com.au/prepaid/unlock-your-phone</a><br>
+                        Or call <strong>133 937</strong> (Optus support)</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Use Optus Unlock App (Samsung)</strong>
+                        <p>If available, download "Optus Unlock" from Galaxy Store or Play Store and follow in-app instructions. This can be faster than the web form.</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Wait 2-5 business days</strong>
+                        <p>Optus sends unlock code via SMS. For prepaid, there is <strong>no fee</strong> after the 6-month requirement. For postpaid out-of-contract, also free.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VODAFONE -->
+            <div class="guide-card">
+                <h3><i class="fas fa-building" style="color:#E60000;"></i> Vodafone Unlock (Code: VAU/VA)</h3>
+                <div class="guide-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Check eligibility</strong>
+                        <p>Postpaid: handset must be fully paid off. Prepaid: active for <strong>6 months</strong> with at least $40 recharge in the last 6 months.</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Submit unlock request</strong>
+                        <p>Vodafone unlock portal: <a href="https://unlock.vodafone.com.au" target="_blank" style="color:var(--primary);">unlock.vodafone.com.au</a><br>
+                        Or call <strong>1300 650 410</strong></p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Provide IMEI & phone number</strong>
+                        <p>You'll need the IMEI and the Vodafone phone number associated with the device (if known).</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Wait 1-3 business days</strong>
+                        <p>Vodafone sends instructions via SMS. Enter the code when prompted with a non-Vodafone SIM inserted.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Carriers -->
+            <div class="guide-card">
+                <h3><i class="fas fa-list" aria-hidden="true"></i> Other Australian Carriers</h3>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;">
+                    <div style="background:var(--darkest);padding:14px;border-radius:8px;border:1px solid var(--surface-border);">
+                        <strong>Boost Mobile</strong> (Telstra MVNO)
+                        <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Call 1300 662 678 or use unlock request form on their website.</p>
+                    </div>
+                    <div style="background:var(--darkest);padding:14px;border-radius:8px;border:1px solid var(--surface-border);">
+                        <strong>TPG / iiNet / Internode</strong> (Vodafone MVNO)
+                        <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Must have been active for 6+ months. Contact support via online portal.</p>
+                    </div>
+                    <div style="background:var(--darkest);padding:14px;border-radius:8px;border:1px solid var(--surface-border);">
+                        <strong>Felix Mobile</strong> (Vodafone MVNO)
+                        <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Unlock via Felix customer support app or chat.</p>
+                    </div>
+                    <div style="background:var(--darkest);padding:14px;border-radius:8px;border:1px solid var(--surface-border);">
+                        <strong>Woolworths Mobile</strong> (Telstra MVNO)
+                        <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Call 1300 367 979. Must be active 6+ months.</p>
+                    </div>
+                    <div style="background:var(--darkest);padding:14px;border-radius:8px;border:1px solid var(--surface-border);">
+                        <strong>ALDI Mobile</strong> (Telstra MVNO)
+                        <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Contact ALDI Mobile support — typically 12 months active required.</p>
+                    </div>
+                    <div style="background:var(--darkest);padding:14px;border-radius:8px;border:1px solid var(--surface-border);">
+                        <strong>Belong</strong> (Telstra MVNO)
+                        <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Call 1300 235 664. Since Belong uses Telstra network, TEL-locked phones may work.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Samsung-specific -->
+            <div class="guide-card">
+                <h3><i class="fas fa-mobile-screen" aria-hidden="true"></i> Samsung-Specific Tips</h3>
+                <div class="guide-step">
+                    <div class="step-num"><i class="fas fa-key" aria-hidden="true"></i></div>
+                    <div class="step-content">
+                        <strong>Alternative unlock code entry</strong>
+                        <p>If the SIM lock prompt doesn't appear after inserting a non-carrier SIM:</p>
+                        <ol style="padding-left:20px;color:var(--gray);font-size:0.85rem;">
+                            <li>Settings → Connections → SIM Card Manager</li>
+                            <li>Tap "SIM Lock" or "Network Lock"</li>
+                            <li>Enter the unlock code provided by the carrier</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num"><i class="fas fa-phone" aria-hidden="true"></i></div>
+                    <div class="step-content">
+                        <strong>Check lock status via service menu</strong>
+                        <div class="code-block">adb shell service call iphonesubinfo 1 | grep -o '[0-9]\{10,16\}'</div>
+                        <p>Or dial <strong>*#7465625#</strong> on the Samsung dialer to check network lock status.</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div>
+                    <div class="step-content">
+                        <strong>Belong + Telstra-locked Samsung</strong>
+                        <p>Belong is a Telstra MVNO. <strong>TEL</strong>-locked phones <em>should</em> accept Belong SIMs since Belong uses Telstra's network infrastructure. If your TEL-locked phone doesn't work with Belong:</p>
+                        <ul style="padding-left:20px;color:var(--gray);font-size:0.85rem;margin-top:4px;">
+                            <li>Check APN: ensure <code>telstra.internet</code> is set</li>
+                            <li>Check APN type: <code>default,supl</code></li>
+                            <li>Reset network settings: Settings → General Management → Reset → Reset Network Settings</li>
+                            <li>Contact Belong: <strong>1300 235 664</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== BOTTOM ACTION BAR ===== -->
+        <div style="text-align:center; margin: 30px 0;">
+            <a class="btn btn-primary" href="COMPLETED_PROJECTS/mobile_backup/RECOVERY_SUITE.bat"><i class="fas fa-play" aria-hidden="true"></i> Launch Recovery Suite</a>
+            <a class="btn btn-success" href="http://localhost:8010/marketing" target="_blank"><i class="fas fa-bullhorn" aria-hidden="true"></i> Marketing Studio</a>
+            <a class="btn btn-warning" href="#tab-unlock" onclick="switchTab('unlock')"><i class="fas fa-unlock" aria-hidden="true"></i> Unlock Guide</a>
+            <button class="btn btn-ghost" onclick="switchTab('agency')"><i class="fas fa-users" aria-hidden="true"></i> AI Agency</button>
+            <button class="btn btn-ghost" onclick="openModal('About This Dashboard','<div style=\\\"line-height:1.8\\\"><h4>Unified Master Dashboard v1.0</h4><p>Built: July 2026</p><br><h4>Sections:</h4><ul><li><strong>Empire</strong> — 12 AI empire command center links</li><li><strong>Recovery Suite</strong> — All 18 RECOVERY_SUITE.bat tools as interactive cards</li><li><strong>Diagnostics</strong> — Phone diagnostics center with ADB checks, Belong SIM quick reference</li><li><strong>Carrier Unlock</strong> — Complete Australian carrier unlock guide (Telstra, Optus, Vodafone, +6)</li></ul><br><p>This dashboard replaces: ULTIMATE_AI_EMPIRE_ENHANCED_DASHBOARD_V2.html, UNIFIED_COMMAND_CENTER.html, and the RECOVERY_SUITE.bat menu with a unified experience.</p></div>')">
+                <i class="fas fa-info-circle" aria-hidden="true"></i> About
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Connection Status -->
+    <div class="connection-status" id="connectionStatus">
+        <span class="status-dot online"></span>
+        <span>Dashboard Online</span>
+    </div>
+
+    <!-- Modal -->
+    <script type="module" src="dashboards.mjs"></script>
+    <script>
+        // ===== TAB SWITCHING =====
+        function switchTab(name) {
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.getElementById('tab-' + name).style.display = 'block';
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.querySelector('.tab[data-tab="' + name + '"]').classList.add('active');
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ===== EMPIRE SEARCH =====
+        function filterEmpire() {
+            const q = document.getElementById('empireSearch').value.toLowerCase();
+            document.querySelectorAll('#empireGrid .card').forEach(card => {
+                const tag = (card.dataset.tag || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+                card.style.display = (tag.includes(q) || text.includes(q)) ? '' : 'none';
+            });
+        }
+
+        // ===== RECOVERY FILTER =====
+        function filterRecovery(cat) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('#recoveryGrid .card').forEach(card => {
+                const cats = (card.dataset.cat || '').split(' ');
+                card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
+            });
+        }
+
+        // ===== DIAGNOSTICS =====
+        function runDiagnostic(type) {
+            const resultDiv = document.getElementById('diagResult');
+            const output = document.getElementById('diagOutput');
+            resultDiv.style.display = 'block';
+
+            const checks = {
+                carrier: '=== INSTRUCTIONS — Run on YOUR PC (S24 connected via USB) ===\n\nadb shell getprop ro.csc.sales_code\n\nCommon results:\n  XSA  → Unlocked ✓\n  TEL  → Telstra (Belong should work)\n  VAU  → Vodafone (locked)\n  OPP  → Optus (locked)\n\nIf locked, see "Carrier Unlock" tab for step-by-step guides.',
+                sim: '=== INSTRUCTIONS — Run on YOUR PC (S24 connected via USB) ===\n\nadb shell dumpsys telephony.registry | grep -E "mServiceState|mSimState"\n\nCheck for:\n  mServiceState=0  → Registered on network ✓\n  mSimState=5      → SIM ready ✓\n  mSimState=0      → SIM absent ✗\n\nIf SIM shows absent but works in other phones:\n  → Carrier lock issue (see Carrier Unlock tab)',
+                apn: '=== INSTRUCTIONS — Run on YOUR PC (S24 connected via USB) ===\n\nadb shell content query --uri content://telephony/carriers\n\nFor Belong, APN should be:\n  Name: Belong\n  APN:  telstra.internet\n\nIf no APN is set:\n  Settings → Connections → Mobile Networks → APN → Add\n  Enter: telstra.internet, save, select it.',
+                full: '=== INSTRUCTIONS — Run on YOUR PC (S24 connected via USB) ===\n\ncd COMPLETED_PROJECTS\\mobile_backup\npython phone_diagnostics.py\n\nThis runs ALL 10 checks:\n  1. Device model\n  2. Carrier lock (ro.csc.sales_code)\n  3. SIM state & registration\n  4. Mobile data toggle\n  5. Airplane mode\n  6. Data roaming\n  7. Network operator\n  8. APN config (3 methods)\n  9. IMEI\n  10. Device properties\n\nReport saved to:\n  phone_diagnostics_logs/diagnostics_*.log'
+            };
+
+            output.textContent = checks[type] || 'Unknown diagnostic type';
+        }
+
+        // ===== MODAL ===== Modal system (openModal / showModal / showCardDetail /
+        // closeModal / makeP, plus Escape + focus-trap + background-click handlers)
+        // lives in shared dashboards.mjs (ES module, deferred via `type="module"`)
+        // — loaded just above in <script type="module" src="dashboards.mjs"></script>.
+        // See DASHBOARD_ARCHITECTURE.md for the API reference.
+
+        // ===== AI AGENCY =====
+        const AGENCY_API = 'http://localhost:8010';
+
+        async function checkAgencyStatus() {
+            const banner = document.getElementById('agencyBanner');
+            const dot = document.getElementById('agencyDot');
+            const statusText = document.getElementById('agencyStatusText');
+            if (!banner) return;
+            try {
+                const r = await fetch(AGENCY_API + '/');
+                const data = await r.json();
+                banner.className = 'verdict-banner success';
+                dot.className = 'status-dot online';
+                statusText.textContent = 'Agency Online — ' + data.team_size + ' members, ' +
+                    (data.marketing ? 'marketing ready' : 'API ready');
+            } catch (e) {
+                banner.className = 'verdict-banner warning';
+                dot.className = 'status-dot offline';
+                statusText.textContent = 'Agency offline — run AI_AGENCY\\launch_ai_agency.bat → [1]';
+            }
+        }
+
+        async function exportAgencyToSocial() {
+            const out = document.getElementById('agencyOutput');
+            out.style.display = 'block';
+            out.textContent = 'Exporting calendar to scheduled_posts.json...';
+            try {
+                const r = await fetch(AGENCY_API + '/marketing/export-to-social', { method: 'POST' });
+                const data = await r.json();
+                if (!r.ok) throw new Error(data.detail || r.statusText);
+                out.textContent = 'Exported ' + data.posts_exported + ' posts to:\n' + data.output_file +
+                    '\nPlatforms: ' + (data.platforms || []).join(', ');
+            } catch (e) {
+                out.textContent = 'Export failed: ' + e.message +
+                    '\n\nFallback CLI:\npython AI_AGENCY\\tools\\marketing_to_social.py';
+            }
+        }
+
+        async function runAgencySkill(skill) {
+            const out = document.getElementById('agencyOutput');
+            out.style.display = 'block';
+            out.textContent = 'Running skill: ' + skill + ' (may take 30-60s with Ollama)...';
+            const body = { title: skill, type: 'skill', skill: skill };
+            if (skill === 'seo_copy') body.keyword = 'managed IT services Australia';
+            if (skill === 'email_sequence') body.offer = 'Free IT audit for SMBs';
+            if (skill === 'content_draft') { body.topic = 'AI automation for small business'; body.platform = 'linkedin'; }
+            try {
+                const r = await fetch(AGENCY_API + '/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await r.json();
+                if (!r.ok) throw new Error(data.detail || r.statusText);
+                const res = data.results || {};
+                const text = res.copy || res.brief || res.sequence || res.analysis ||
+                    (res.posts ? JSON.stringify(res.posts, null, 2) : JSON.stringify(res, null, 2));
+                out.textContent = 'Agent: ' + data.agent_title + '\n\n' + text;
+            } catch (e) {
+                out.textContent = 'Skill failed: ' + e.message;
+            }
+        }
+
+        async function testAgencyN8n() {
+            const out = document.getElementById('agencyOutput');
+            out.style.display = 'block';
+            out.textContent = 'Testing n8n webhook...';
+            try {
+                const r = await fetch(AGENCY_API + '/webhook/n8n', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title: 'Dashboard test', type: 'health' })
+                });
+                const data = await r.json();
+                if (!r.ok) throw new Error(data.detail || r.statusText);
+                out.textContent = 'n8n webhook OK\nAgent: ' + (data.agent_title || 'n/a') +
+                    '\n\nImport: AI_AGENCY\\config\\n8n_agency_webhook.json\nn8n UI: http://localhost:5678';
+            } catch (e) {
+                out.textContent = 'Webhook failed: ' + e.message;
+            }
+        }
+
+        async function runAgencyDemo() {
+            const out = document.getElementById('agencyOutput');
+            out.style.display = 'block';
+            out.textContent = 'Running live demo (health → export → n8n → team)...';
+            const lines = [];
+            try {
+                const health = await fetch(AGENCY_API + '/run', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title: 'Demo', type: 'health' })
+                }).then(r => r.json());
+                lines.push('health: ' + (health.agent_title || 'ok'));
+                const exp = await fetch(AGENCY_API + '/marketing/export-to-social', { method: 'POST' }).then(r => r.json());
+                lines.push('export: ' + (exp.posts_exported || 0) + ' posts');
+                const team = await fetch(AGENCY_API + '/team').then(r => r.json());
+                lines.push('team: ' + team.length + ' members');
+                const skills = await fetch(AGENCY_API + '/skills').then(r => r.json());
+                lines.push('skills: ' + skills.length);
+                out.textContent = 'DEMO PASSED\n\n' + lines.join('\n') +
+                    '\n\nFull report: python AI_AGENCY\\tools\\demo_all.py';
+            } catch (e) {
+                out.textContent = 'Demo failed: ' + e.message;
+            }
+        }
+
+        // ===== ADB STATUS CHECK =====
+        async function checkAdbStatus() {
+            const banner = document.getElementById('adbBanner');
+            const statusText = document.getElementById('adbStatusText');
+
+            try {
+                const response = await fetch('http://localhost:8181/api/system/adb_status');
+                const result = await response.json();
+                if (result.success && result.adb_available) {
+                    banner.className = 'verdict-banner success';
+                    statusText.textContent = 'ADB Available ✓';
+                } else {
+                    banner.className = 'verdict-banner warning';
+                    statusText.textContent = 'ADB Not Available — run diagnostics from your PC';
+                }
+            } catch (e) {
+                banner.className = 'verdict-banner warning';
+                statusText.textContent = 'Backend offline — run diagnostics directly from your PC';
+            }
+        }
+
+        // Try ADB + Agency checks, don't block if backends unavailable
+        setTimeout(checkAdbStatus, 500);
+        setTimeout(checkAgencyStatus, 600);
+
+        // ===== STATS COUNTER =====
+        document.getElementById('statEmpire').textContent = document.querySelectorAll('#empireGrid .card').length;
+        document.getElementById('statTools').textContent = document.querySelectorAll('#recoveryGrid .card').length;
+        document.getElementById('statCarriers').textContent = 10;
+        document.getElementById('statGuides').textContent = document.querySelectorAll('#tab-unlock .guide-step').length;
+
+        console.log('🚀 UNIFIED MASTER DASHBOARD loaded');
+        console.log('📊 Stats: ' + document.getElementById('statEmpire').textContent + ' empire links, ' +
+                    document.getElementById('statTools').textContent + ' tools, ' +
+                    '10 carriers, ' + document.getElementById('statGuides').textContent + ' guides');
+    </script>
+</body>
+</html>

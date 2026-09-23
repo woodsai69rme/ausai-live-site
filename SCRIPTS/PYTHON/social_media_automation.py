@@ -10,16 +10,33 @@ from typing import Dict, List, Any, Optional
 import logging
 from dataclasses import dataclass
 import requests
-from selenium import webdriver  # pip install selenium
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-import tweepy  # pip install tweepy
-import instabot  # pip install instabot
-from facebook_business.adobjects.page import Page  # pip install facebook-business
-from facebook_business.api import FacebookAdsApi
+
+try:
+    from selenium import webdriver  # pip install selenium
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.chrome.options import Options
+    from selenium.common.exceptions import TimeoutException, NoSuchElementException
+except ImportError:
+    webdriver = None  # type: ignore[assignment,misc]
+
+try:
+    import tweepy  # pip install tweepy
+except ImportError:
+    tweepy = None  # type: ignore[assignment,misc]
+
+try:
+    import instabot  # pip install instabot
+except ImportError:
+    instabot = None  # type: ignore[assignment,misc]
+
+try:
+    from facebook_business.adobjects.page import Page  # pip install facebook-business
+    from facebook_business.api import FacebookAdsApi
+except ImportError:
+    Page = None  # type: ignore[assignment,misc]
+    FacebookAdsApi = None  # type: ignore[assignment,misc]
 
 
 @dataclass
@@ -127,6 +144,9 @@ class SocialMediaAutomation:
     
     def init_twitter(self):
         """Initialize Twitter API client."""
+        if tweepy is None:
+            self.logger.warning("tweepy not installed — Twitter posting disabled")
+            return
         twitter_config = self.config.get('twitter', {})
         if all(twitter_config.get(key) for key in ['api_key', 'api_secret', 'access_token', 'access_token_secret']):
             try:
@@ -555,6 +575,36 @@ class SocialMediaAutomation:
         scheduler_thread.start()
         self.logger.info("Scheduler started")
     
+    def import_from_agency(
+        self,
+        report_path: Optional[str] = None,
+        merge: bool = True,
+    ) -> Dict[str, Any]:
+        """
+        Import posts from AI Agency social_calendar report into scheduled queue.
+
+        Delegates to AI_AGENCY/tools/marketing_to_social.py.
+        """
+        import sys
+        agency_tools = Path(__file__).resolve().parents[2] / "AI_AGENCY"
+        if str(agency_tools) not in sys.path:
+            sys.path.insert(0, str(agency_tools))
+        from tools.marketing_to_social import export_to_social
+
+        output_path = self.scheduled_posts_file.resolve()
+        summary = export_to_social(
+            report_path=report_path,
+            output_path=output_path,
+            merge=merge,
+        )
+        self.scheduled_posts = self.load_scheduled_posts()
+        self.logger.info(
+            "Imported %d agency posts (total scheduled: %d)",
+            summary["posts_exported"],
+            summary["total_scheduled"],
+        )
+        return summary
+
     def start_auto_posting(self, platform: str, content_ideas: List[str]):
         """Start automatic posting based on content ideas."""
         posting_schedule = self.config.get('posting_schedule', {}).get(platform, "09:00,13:00,17:00")
@@ -585,6 +635,32 @@ class SocialMediaAutomation:
 
 def main():
     """Main function to demonstrate the social media automation tools."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Social media automation")
+    parser.add_argument("--import-agency", metavar="REPORT", nargs="?", const="latest",
+                        help="Import AI Agency social calendar (latest report if path omitted)")
+    parser.add_argument("--config", default="./social_media_config.json")
+    parser.add_argument("--no-merge", action="store_true", help="Replace scheduled posts on agency import")
+    cli_args, _ = parser.parse_known_args()
+
+    if cli_args.import_agency is not None:
+        import sys
+        agency_root = Path(__file__).resolve().parents[2] / "AI_AGENCY"
+        if str(agency_root) not in sys.path:
+            sys.path.insert(0, str(agency_root))
+        from tools.marketing_to_social import export_to_social
+
+        report = None if cli_args.import_agency == "latest" else cli_args.import_agency
+        output_path = Path(cli_args.config).resolve().parent / "scheduled_posts.json"
+        summary = export_to_social(
+            report_path=report,
+            output_path=output_path,
+            merge=not cli_args.no_merge,
+        )
+        print(json.dumps(summary, indent=2))
+        return
+
     print("Social Media Automation Tools")
     print("=" * 30)
     

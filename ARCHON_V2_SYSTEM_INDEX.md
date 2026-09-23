@@ -174,6 +174,7 @@ docker-compose logs -f                  # View logs
 | Agent Registry | `AGENT_REGISTRY_SYSTEM_INDEX.md` |
 | AI Tools Dashboard | `AI_TOOLS_DASHBOARD.html` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

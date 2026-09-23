@@ -1,0 +1,53 @@
+{
+  "passed": 9,
+  "total": 9,
+  "details": {
+    "Real Apps Harvester": {
+      "status": "PASS",
+      "count": 5,
+      "sample": "DocuChat AI / PDF Extract SaaS"
+    },
+    "Marketing Engine": {
+      "status": "PASS",
+      "keys": [
+        "cold_email",
+        "viral_x_thread",
+        "product_hunt_kit",
+        "seo_keywords",
+        "affiliate_pitch"
+      ]
+    },
+    "Domain Scanner": {
+      "status": "PASS",
+      "scanned": 27,
+      "available": 18
+    },
+    "QA Auditor": {
+      "status": "PASS",
+      "score": 95,
+      "grade": "A+"
+    },
+    "Market Trends": {
+      "status": "PASS",
+      "count": 7
+    },
+    "Stripe Simulator": {
+      "status": "PASS",
+      "amount": 49.0,
+      "plan": "Growth Suite"
+    },
+    "Wigolo Search": {
+      "status": "PASS",
+      "count": 10
+    },
+    "Neural Voice (Edge-TTS)": {
+      "status": "PASS",
+      "audio_url": "/test_audio.mp3"
+    },
+    "Model Health": {
+      "status": "PASS",
+      "online": 1,
+      "total": 6
+    }
+  }
+}

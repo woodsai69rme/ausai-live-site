@@ -1,0 +1,82 @@
+{
+  "song_id": "SONG-020",
+  "title": "Tellem Track #020 \u2014 Formula Blue Boost Anthem",
+  "bpm": 132,
+  "vehicle": "Holden VL Calais Turbo",
+  "scenes": [
+    {
+      "idx": 1,
+      "title": "Opening Drift & Spool",
+      "vehicle": "Holden VL Calais Turbo",
+      "duration": "00:00 - 00:15"
+    },
+    {
+      "idx": 2,
+      "title": "Kayla Cockpit Action",
+      "character": "Kayla V001",
+      "duration": "00:15 - 00:30"
+    },
+    {
+      "idx": 3,
+      "title": "Macro Exhaust Flame Burst",
+      "vehicle": "Holden VL Calais Turbo",
+      "duration": "00:30 - 00:45"
+    },
+    {
+      "idx": 4,
+      "title": "Story Bridge High-Speed Tandem",
+      "vehicle": "Holden VL Calais Turbo",
+      "duration": "00:45 - 01:00"
+    }
+  ],
+  "sfx": "RB30ET Single Turbo Spool + 4-inch Dump",
+  "qc": {
+    "song_id": "SONG-020",
+    "status": "PASSED",
+    "checks": {
+      "rhd": "PASS (Australia Spec)",
+      "kayla": "PASS (Canonical DNA 97%)",
+      "brand": "PASS (Safe Margins Top-Left)",
+      "lighting": "PASS (Brisbane Night LUT)"
+    }
+  },
+  "derivatives": [
+    {
+      "type": "Master 4K Video",
+      "ratio": "16:9",
+      "platform": "YouTube"
+    },
+    {
+      "type": "Hook Drop Short",
+      "ratio": "9:16",
+      "platform": "YouTube Shorts"
+    },
+    {
+      "type": "Turbo BOV Highlight",
+      "ratio": "9:16",
+      "platform": "TikTok"
+    },
+    {
+      "type": "Kayla Cockpit Reel",
+      "ratio": "9:16",
+      "platform": "Instagram Reels"
+    },
+    {
+      "type": "Lyric Video Short",
+      "ratio": "9:16",
+      "platform": "YouTube Shorts"
+    },
+    {
+      "type": "BTS Studio Clip",
+      "ratio": "9:16",
+      "platform": "TikTok"
+    },
+    {
+      "type": "A/B Thumbnail Pack",
+      "ratio": "16:9",
+      "platform": "YouTube"
+    }
+  ],
+  "revenue_aud": 980.0,
+  "processed_at": "2026-09-22T01:52:47.454909"
+}

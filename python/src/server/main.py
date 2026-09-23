@@ -21,6 +21,7 @@ from pydantic import ValidationError
 # Note: socketio_handlers is registered transitively via
 # `projects_api.py`'s `from .socketio_handlers import ...` import. No
 # explicit side-effect import is needed here.
+from .api_routes.account_browser_api import router as account_browser_router
 from .api_routes.agent_chat_api import router as agent_chat_router
 from .api_routes.auth_api import router as auth_router
 from .api_routes.bug_report_api import router as bug_report_router
@@ -29,7 +30,10 @@ from .api_routes.dashboard_api import router as dashboard_router
 from .api_routes.internal_api import router as internal_router
 from .api_routes.knowledge_api import router as knowledge_router
 from .api_routes.mcp_api import router as mcp_router
+from .api_routes.media_api import router as media_router
 from .api_routes.projects_api import router as projects_router
+from .api_routes.research_api import router as research_router
+from .api_routes.ai_workspace_api import router as ai_workspace_router
 from .api_routes.settings_api import router as settings_router
 from .api_routes.system_api import router as system_router
 from .api_routes.tests_api import router as tests_router
@@ -126,6 +130,7 @@ async def health_check():
 #   /api/projects/{project_id}/versions
 # If you add /api/projects/dashboard or similar, route it through
 # system_router (registered here) -- never after projects_router.
+app.include_router(account_browser_router)
 app.include_router(agent_chat_router)
 app.include_router(auth_router)
 app.include_router(bug_report_router)
@@ -134,6 +139,9 @@ app.include_router(dashboard_router)
 app.include_router(internal_router)
 app.include_router(knowledge_router)
 app.include_router(mcp_router)
+app.include_router(research_router)
+app.include_router(media_router)
+app.include_router(ai_workspace_router)
 app.include_router(system_router)
 app.include_router(projects_router)
 app.include_router(settings_router)

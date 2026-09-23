@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoForm Validator — Real-Time Lead Verification SaaS</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0e17; color: #f1f5f9; padding: 3rem; text-align: center; }
+        .card { background: #131a2a; border: 1px solid #1e293b; padding: 2.5rem; border-radius: 16px; max-width: 550px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,242,254,0.1); }
+        h1 { color: #00f2fe; margin-bottom: 0.5rem; }
+        input { width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #334155; background: #0b0f19; color: #fff; margin: 1rem 0; font-size: 1rem; }
+        .btn { background: linear-gradient(135deg, #00f2fe, #7928ca); color: #fff; border: none; padding: 0.9rem 1.8rem; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+        .pricing-tier { display: flex; justify-content: space-around; margin-top: 2rem; border-top: 1px solid #1e293b; padding-top: 1.5rem; }
+        .tier { background: #0f172a; padding: 1rem; border-radius: 8px; width: 45%; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>⚡ AutoForm Validator API</h1>
+        <p>Prevent fake signups and disposable emails in real-time.</p>
+        <input type="email" id="test-email" placeholder="Test email address (e.g. user@tempmail.com)...">
+        <button class="btn" onclick="validate()">Run Instant AI Scan</button>
+        <div id="result" style="margin-top: 1rem; font-weight: bold;"></div>
+
+        <div class="pricing-tier">
+            <div class="tier">
+                <h3>Starter</h3>
+                <p>1,000 Validations / mo</p>
+                <strong>$19 / mo</strong>
+            </div>
+            <div class="tier" style="border: 1px solid #00f2fe;">
+                <h3>Pro Scale</h3>
+                <p>50,000 Validations / mo</p>
+                <strong>$79 / mo</strong>
+            </div>
+        </div>
+    </div>
+    <script>
+        function validate() {
+            const email = document.getElementById('test-email').value;
+            const isFake = email.includes('temp') || email.includes('disposable') || !email.includes('@');
+            const resDiv = document.getElementById('result');
+            resDiv.innerHTML = isFake 
+                ? '<span style="color: #ff007a;">❌ Risk Detected: Disposable/Invalid Email!</span>'
+                : '<span style="color: #00dfa2;">✅ Clean Lead Verified! Safe for CRM.</span>';
+        }
+    </script>
+</body>
+</html>

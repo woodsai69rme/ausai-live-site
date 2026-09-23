@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn AI Comment Craft Pro",
+  "version": "1.0.0",
+  "description": "Generates insightful, non-spammy LinkedIn post replies to build personal brand.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "permissions": ["activeTab", "storage"]
+}

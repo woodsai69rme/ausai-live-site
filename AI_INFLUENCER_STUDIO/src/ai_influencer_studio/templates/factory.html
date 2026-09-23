@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Influencer Studio — Factory</title>
+    <style>
+        :root {
+            --bg: #0f0f13;
+            --surface: #16161d;
+            --surface-2: #1e1e28;
+            --text: #f0f0f5;
+            --muted: #a0a0b0;
+            --accent: #8b5cf6;
+            --accent-2: #ec4899;
+            --radius: 12px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        nav {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: var(--surface);
+            border-bottom: 1px solid #2a2a35;
+        }
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        nav a:hover { opacity: 1; }
+        .container { padding: 2rem; max-width: 800px; margin: 0 auto; }
+        h1 { margin-bottom: 0.5rem; }
+        .subtitle { color: var(--muted); margin-bottom: 2rem; }
+        .card {
+            background: var(--surface);
+            border: 1px solid #2a2a35;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        label { display: block; margin-bottom: 0.5rem; color: var(--muted); font-weight: 600; }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background: var(--surface-2);
+            border: 1px solid #2a2a35;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        textarea { min-height: 120px; resize: vertical; }
+        button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+        #result {
+            display: none;
+            margin-top: 1rem;
+            background: var(--surface-2);
+            border: 1px solid #2a2a35;
+            border-radius: var(--radius);
+            padding: 1rem;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .loading { opacity: 0.6; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/factory">Factory</a>
+        <a href="/calendar">Calendar</a>
+    </nav>
+    <div class="container">
+        <h1>Content Factory</h1>
+        <p class="subtitle">Generate posts, captions, scripts, and videos</p>
+
+        <div class="card">
+            <form id="factoryForm">
+                <label for="content_type">Content Type</label>
+                <select id="content_type" name="content_type">
+                    <option value="post">Social Post</option>
+                    <option value="caption">Caption</option>
+                    <option value="blog">Blog Post</option>
+                    <option value="video_script">Video Script</option>
+                    <option value="talking_head">Talking-Head Short</option>
+                    <option value="social_video">Social Video</option>
+                </select>
+
+                <label for="topic">Topic / Prompt</label>
+                <input type="text" id="topic" name="topic" placeholder="e.g. AI automation trends" required>
+
+                <label for="platform">Target Platform</label>
+                <select id="platform" name="platform">
+                    <option value="instagram">Instagram</option>
+                    <option value="twitter">X / Twitter</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="youtube">YouTube</option>
+                </select>
+
+                <button type="submit">Generate</button>
+            </form>
+            <pre id="result"></pre>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('factoryForm');
+        const resultBox = document.getElementById('result');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            resultBox.style.display = 'block';
+            resultBox.textContent = 'Generating...';
+            form.classList.add('loading');
+
+            try {
+                const response = await fetch('/factory/generate', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+                resultBox.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                resultBox.textContent = 'Error: ' + String(err);
+            } finally {
+                form.classList.remove('loading');
+            }
+        });
+    </script>
+</body>
+</html>

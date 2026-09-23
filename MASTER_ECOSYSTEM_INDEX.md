@@ -33,6 +33,7 @@
 | `01_ACTIVE_PROJECTS.md` | Active project inventory |
 | `STRUCTURE_INDEX.md` | Internal structure reference |
 | `REVENUE_GENERATORS.md` | Revenue generator catalog |
+| `REFERENCE_DOCS_INDEX.md` | Single-page nav for the 5 top-level reference docs (YouTube research, hardware shopping tiers, Sunshine+Moonlight setup, awesome-list catalogue) + daily digest |
 
 ### 🔷 Companion Catalog
 
@@ -72,6 +73,7 @@ MASTER_ECOSYSTEM/ (hub)
 | Archon V2 | `ARCHON_V2_SYSTEM_INDEX.md` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
 | Grand Summary | `GRAND_SUMMARY.md` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

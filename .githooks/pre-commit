@@ -1,0 +1,150 @@
+#!/bin/sh
+# .githooks/pre-commit -- cross-platform pre-commit hook v3 (v3.3.2, paired-ack).
+#
+# Windows shim: when a .bat sibling exists AND cmd.exe is on PATH, the
+# hook MUST delegate to the .bat via cmd.exe (because PureMSYS-bash hook
+# sub-processes strip PATH -- the canonical Node install at
+# C:\Program Files\nodejs\node.EXE is invisible to `[ -f ]` / `command -v`
+# / `where node` from inside the bash subprocess). The .bat runs in a
+# fresh cmd.exe process that inherits the FULL Windows PATH, so `where
+# node` reliably finds the canonical install.
+#
+# Detection strategy (architect-pass after the v1 baseline failed Step D
+# empirically because MSYSTEM was unset on the test MSYS):
+#   1. Strong signal: a `.bat` sibling exists AND `command -v cmd.exe`
+#      returns a path -> Windows shell capable of running .bat.
+#   2. cygpath path-bridge: convert POSIX path to Windows-cmd-acceptable
+#      backslash path. Fallback: forward-slash path IF the bash_path has
+#      no space (cmd.exe on Win 10+ accepts either; paths with spaces
+#      require backslash).
+#   3. When neither signal matches, fall through to Unix-style Stage A +
+#      Stage B below.
+#
+# v3.3.2 paired-ack policy (Unix path applies same policy as Windows .bat):
+#   PRECOMMIT_BYPASS=1          requires PRECOMMIT_BYPASS_ACK=1 (paired)
+#   PRECOMMIT_SKIP_SMOKE=1      requires PRECOMMIT_SKIP_SMOKE_ACK=1 (paired)
+#   Single-var set returns rc=2 with "missing ACK" message; defends against
+#   accidental CI bleed-through / parent-shell env var inheritance. See
+#   CHANGELOG ## 2026-07-13 (post-cont.5-fup-12) for paired-ack rationale.
+
+set -e
+
+# --- 1. Resolve paths ------------------------------------------------------
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+bat_path="$script_dir/pre-commit.bat"
+
+# --- 2. Windows shim: delegate to .bat when available ----------------------
+# Strongest detection signal: .bat sibling exists AND cmd.exe on PATH.
+# This catches ALL real-world Windows shells (MSYS1 / MSYS2 / Git-for-Win /
+# Cygwin / MinGW / WSL-bridged) regardless of whether MSYSTEM / OSTYPE
+# is set, because cmd.exe is always on Windows PATH.
+if [ -f "$bat_path" ] && command -v cmd.exe >/dev/null 2>&1; then
+    if command -v cygpath >/dev/null 2>&1; then
+        win_bat="$(cygpath -w "$bat_path")"
+    elif case "$bat_path" in *' '*) false;; *) true;; esac; then
+        # cygpath unavailable BUT path has no space -> forward-slash path
+        # works for cmd.exe on Win 10+.
+        win_bat="$bat_path"
+    else
+        # No cygpath AND path has a space: refuse rather than risk
+        # malformed cmd.exe invocation.
+        echo "[hook] FAIL: Windows-detected but cygpath unavailable AND"
+        echo "[hook]       .githooks path contains a space ($bat_path)."
+        echo "[hook]       Install cygpath (re-run Git for Windows installer"
+        echo "[hook]       with 'Git Bash' component enabled) or relocate"
+        echo "[hook]       the repo to a no-space path (e.g. C:\Users\)."
+        exit 1
+    fi
+    exec cmd.exe /c "$win_bat" "$@"
+fi
+
+# Belt-and-braces: even without .bat sibling, if MSYSTEM / OSTYPE / uname
+# signal says Windows, log a loud warning. Patterns tightened to AVOID
+# false-matching macOS (Darwin contains `win`).
+case "${MSYSTEM:-}${OSTYPE:-}$(uname -s 2>/dev/null)" in
+    *MINGW*|*MSYS*|*CYGWIN*|*_NT-*)
+        echo "[hook] WARN: Windows shell detected (MSYSTEM=$MSYSTEM," >&2
+        echo "[hook]       OSTYPE=$OSTYPE, uname -s=$(uname -s 2>/dev/null))" >&2
+        echo "[hook]       but .githooks/pre-commit.bat sibling missing OR cmd.exe" >&2
+        echo "[hook]       not on PATH. Run bin\\install_precommit_hook.bat to" >&2
+        echo "[hook]       restore the canonical hook." >&2
+        ;;
+esac
+
+# --- 3. Unix path: paired-ack hatches (gate before Stage A + B) ----------------
+# Both env vars required for each hatch. Single-var set returns rc=2.
+# See CHANGELOG ## 2026-07-13 (post-cont.5-fup-12) for paired-ack rationale.
+
+# Bypass hatch -- skip the hook entirely (both Stage A + B).
+if [ -n "${PRECOMMIT_BYPASS:-}" ]; then
+    if [ -z "${PRECOMMIT_BYPASS_ACK:-}" ]; then
+        echo "[hook] FAIL: PRECOMMIT_BYPASS=1 requires PRECOMMIT_BYPASS_ACK=1 paired ack." >&2
+        echo "[hook]       To bypass the hook entirely, set BOTH env vars:" >&2
+        echo "[hook]         export PRECOMMIT_BYPASS=1 PRECOMMIT_BYPASS_ACK=1 && git commit ..." >&2
+        echo "[hook]       Single-var set is refused to prevent accidental CI bleed-through." >&2
+        exit 2
+    fi
+    echo "[hook] WARN: PRECOMMIT_BYPASS=1 + PRECOMMIT_BYPASS_ACK=1 -- hook will be skipped."
+    echo "[hook]       Stage A syntax + Stage B smoke both bypassed. Verify manually before pushing."
+    exit 0
+fi
+
+# Skip-smoke hatch -- skip ONLY Stage B; Stage A still runs.
+if [ -n "${PRECOMMIT_SKIP_SMOKE:-}" ] && [ -z "${PRECOMMIT_SKIP_SMOKE_ACK:-}" ]; then
+    echo "[hook] FAIL: PRECOMMIT_SKIP_SMOKE=1 requires PRECOMMIT_SKIP_SMOKE_ACK=1 paired ack." >&2
+    echo "[hook]       To skip just Stage B smoke, set BOTH env vars:" >&2
+    echo "[hook]         export PRECOMMIT_SKIP_SMOKE=1 PRECOMMIT_SKIP_SMOKE_ACK=1 && git commit ..." >&2
+    echo "[hook]       Single-var set is refused to prevent accidental CI bleed-through." >&2
+    exit 2
+fi
+
+# --- 4. Unix path: Stage A + Stage B via POSIX `command -v` ----------------
+echo "[hook] Pre-commit Stage A (node --check syntax)..."
+
+NODE_BIN="$(command -v node || true)"
+if [ -z "$NODE_BIN" ]; then
+    echo "[hook] FAIL: node interpreter not in PATH; install Node.js LTS."
+    exit 1
+fi
+echo "  -- node: $NODE_BIN"
+
+# Stage A: syntax-check staged dashboard files.
+for target in dashboards.mjs UNIFIED_MASTER_DASHBOARD.html AI_TOOLS_DASHBOARD.html AUSAI_OPS_DASHBOARD.html WORKSPACE_REVIEW_DASHBOARD.html; do
+    if [ ! -f "$target" ]; then
+        echo "  -- A: skip (not found): $target"
+        continue
+    fi
+    # `git diff --cached --quiet` returns 0 when there are NO staged diffs
+    # -> we want to skip those files; returns 1 when staged diffs exist
+    # -> we want to syntax-check them.
+    if git diff --cached --quiet -- "$target" 2>/dev/null; then
+        echo "  -- A: skip (no staged changes): $target"
+        continue
+    fi
+    echo "  -- A: syntax-checking (staged): $target"
+    "$NODE_BIN" --check "$target" || {
+        echo "[hook] FAIL: $target has syntax errors -- fix before committing."
+        exit 1
+    }
+done
+
+# Stage B: smoke regression -- REQUIRED to catch Cat 16 (v3.3 Spotlight
+# Levenshtein fallback + history dropdown + Ctrl+H binding -- linkedom-driven
+# tests that --check cannot see).
+echo "[hook] Pre-commit Stage B (smoke regression)..."
+# Single source of truth: paired-ack validated at top of script.
+if [ -n "${PRECOMMIT_SKIP_SMOKE:-}" ] && [ -n "${PRECOMMIT_SKIP_SMOKE_ACK:-}" ]; then
+    echo "[hook] -- skipped (paired-ack: PRECOMMIT_SKIP_SMOKE=1 + PRECOMMIT_SKIP_SMOKE_ACK=1)"
+else
+    "$NODE_BIN" tools/test_dashboards.js || {
+        echo "[hook] FAIL: smoke regression failed; run 'node tools/test_dashboards.js' for details."
+        exit 1
+    }
+fi
+
+if [ -n "${PRECOMMIT_SKIP_SMOKE:-}" ] && [ -n "${PRECOMMIT_SKIP_SMOKE_ACK:-}" ]; then
+    echo "[hook] OK: pre-commit Stage A PASSED. (Stage B skipped via paired-ack: PRECOMMIT_SKIP_SMOKE=1 + PRECOMMIT_SKIP_SMOKE_ACK=1)"
+else
+    echo "[hook] OK: pre-commit Stage A + Stage B PASSED."
+fi
+exit 0

@@ -51,17 +51,62 @@
       "apiKey": "${OPENROUTER_API_KEY}",
       "freeModels": [
         {
-          "id": "qwen/qwen3-next-80b-a3b-instruct:free",
-          "name": "Qwen 3 Next 80B A3B Instruct",
-          "context": 32000,
+          "id": "google/gemma-4-26b-a4b-it:free",
+          "name": "Gemma 4 26B A4B IT",
+          "context": 256000,
+          "costPer1k": 0,
+          "speed": "fast",
+          "useCase": "creative",
+          "enabled": true
+        },
+        {
+          "id": "google/gemma-4-31b-it:free",
+          "name": "Gemma 4 31B IT",
+          "context": 256000,
+          "costPer1k": 0,
+          "speed": "fast",
+          "useCase": "general",
+          "enabled": true
+        },
+        {
+          "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+          "name": "Nemotron 3 Ultra 550B",
+          "context": 128000,
+          "costPer1k": 0,
+          "speed": "medium",
+          "useCase": "code",
+          "enabled": true
+        },
+        {
+          "id": "nvidia/nemotron-3-super-120b-a12b:free",
+          "name": "Nemotron 3 Super 120B",
+          "context": 128000,
+          "costPer1k": 0,
+          "speed": "medium",
+          "useCase": "general",
+          "enabled": true
+        },
+        {
+          "id": "nvidia/nemotron-3-nano-30b-a3b:free",
+          "name": "Nemotron 3 Nano 30B",
+          "context": 128000,
           "costPer1k": 0,
           "speed": "fast",
           "useCase": "code",
           "enabled": true
         },
         {
-          "id": "google/gemini-2.5-flash-exp:free",
-          "name": "Gemini 2.5 Flash Experimental",
+          "id": "nvidia/nemotron-nano-9b-v2:free",
+          "name": "Nemotron Nano 9B",
+          "context": 128000,
+          "costPer1k": 0,
+          "speed": "fast",
+          "useCase": "fast",
+          "enabled": true
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning:free",
+          "name": "Nemotron 3.5 Lightning",
           "context": 1000000,
           "costPer1k": 0,
           "speed": "fast",
@@ -69,17 +114,53 @@
           "enabled": true
         },
         {
-          "id": "google/gemini-2.0-flash-exp:free",
-          "name": "Gemini 2.0 Flash Experimental",
-          "context": 1048576,
+          "id": "z-ai/glm-5.2:free",
+          "name": "GLM 5.2",
+          "context": 128000,
           "costPer1k": 0,
           "speed": "fast",
           "useCase": "general",
           "enabled": true
         },
         {
-          "id": "deepseek/deepseek-r1:free",
-          "name": "DeepSeek R1",
+          "id": "poolside/laguna-s-2.1:free",
+          "name": "Poolside Laguna S 2.1",
+          "context": 128000,
+          "costPer1k": 0,
+          "speed": "fast",
+          "useCase": "code",
+          "enabled": true
+        },
+        {
+          "id": "poolside/laguna-xs-2.1:free",
+          "name": "Poolside Laguna XS 2.1",
+          "context": 128000,
+          "costPer1k": 0,
+          "speed": "fast",
+          "useCase": "code",
+          "enabled": true
+        },
+        {
+          "id": "cohere/north-mini-code:free",
+          "name": "Cohere North Mini Code",
+          "context": 32000,
+          "costPer1k": 0,
+          "speed": "fast",
+          "useCase": "code",
+          "enabled": true
+        },
+        {
+          "id": "nvidia/nemotron-nano-12b-v2-vl:free",
+          "name": "Nemotron Nano 12B VL",
+          "context": 128000,
+          "costPer1k": 0,
+          "speed": "fast",
+          "useCase": "vision",
+          "enabled": true
+        },
+        {
+          "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "name": "Nemotron 3 Nano Omni 30B Reasoning",
           "context": 128000,
           "costPer1k": 0,
           "speed": "medium",
@@ -87,49 +168,58 @@
           "enabled": true
         },
         {
-          "id": "deepseek/deepseek-r1-distill-llama-70b:free",
-          "name": "DeepSeek R1 Distill Llama 70B",
-          "context": 128000,
+          "id": "nvidia/nemotron-3.5-content-safety:free",
+          "name": "Nemotron 3.5 Content Safety",
+          "context": 32000,
           "costPer1k": 0,
-          "speed": "medium",
-          "useCase": "reasoning",
+          "speed": "fast",
+          "useCase": "safety",
           "enabled": true
         },
         {
-          "id": "deepseek/deepseek-chat:free",
-          "name": "DeepSeek V3",
+          "id": "thinkingmachines/inkling:free",
+          "name": "Thinking Machines Inkling",
+          "context": 64000,
+          "costPer1k": 0,
+          "speed": "medium",
+          "useCase": "vision",
+          "enabled": true
+        },
+        {
+          "id": "thinkingmachines/inkling-small:free",
+          "name": "Thinking Machines Inkling Small",
           "context": 64000,
           "costPer1k": 0,
           "speed": "fast",
-          "useCase": "general",
+          "useCase": "vision",
           "enabled": true
         },
         {
-          "id": "shuttleai/shuttle-3:free",
-          "name": "Shuttle 3",
-          "context": 32768,
+          "id": "dots-studio/dots-3-note-preview:free",
+          "name": "Dots 3 Note Preview",
+          "context": 32000,
           "costPer1k": 0,
           "speed": "fast",
           "useCase": "general",
           "enabled": true
         },
         {
-          "id": "shuttleai/shuttle-3-mini:free",
-          "name": "Shuttle 3 Mini",
-          "context": 32768,
+          "id": "liquid/lfm-2.5-2.6b:free",
+          "name": "Liquid LFM 2.6B",
+          "context": 32000,
           "costPer1k": 0,
           "speed": "fast",
-          "useCase": "general",
+          "useCase": "fast",
           "enabled": true
         }
       ],
       "routing": {
-        "default": "qwen/qwen3-next-80b-a3b-instruct:free",
+        "default": "google/gemma-4-26b-a4b-it:free",
         "byTask": {
-          "code": "qwen/qwen3-next-80b-a3b-instruct:free",
-          "reasoning": "deepseek/deepseek-r1:free",
-          "fast": "google/gemini-2.0-flash-exp:free",
-          "creative": "google/gemini-2.5-flash-exp:free"
+          "code": "nvidia/nemotron-3-ultra-550b-a55b:free",
+          "reasoning": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "fast": "nvidia/nemotron-nano-9b-v2:free",
+          "creative": "google/gemma-4-26b-a4b-it:free"
         }
       },
       "rateLimits": {

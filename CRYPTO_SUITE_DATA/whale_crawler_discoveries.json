@@ -1,0 +1,60 @@
+[
+  {
+    "id": "crawl_01",
+    "name": "Murad High-Conviction Flow",
+    "chain": "SOLANA",
+    "address": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
+    "winRate": "82.5%",
+    "pnl30d": "+$845,000",
+    "avgHoldHours": 96.0,
+    "favoriteTokens": [
+      "POPCAT",
+      "BONK",
+      "GOAT"
+    ],
+    "alphaScore": 95,
+    "discoverySource": "Raydium CPMM Pool Volume Clustering",
+    "status": "DISCOVERED_HIGH_ALPHA",
+    "lastAction": "Accumulated $140K POPCAT in 3 tranches",
+    "lastActionTime": "14 mins ago"
+  },
+  {
+    "id": "crawl_02",
+    "name": "Wintermute Institutional Liquidity",
+    "chain": "ETHEREUM",
+    "address": "0xdbf5e9c5206d0db70a90108bf936da60221dc080",
+    "winRate": "79.4%",
+    "pnl30d": "+$2,890,000",
+    "avgHoldHours": 36.0,
+    "favoriteTokens": [
+      "ETH",
+      "LINK",
+      "UNI",
+      "AAVE"
+    ],
+    "alphaScore": 92,
+    "discoverySource": "Uniswap v3 Top Inflow Analysis",
+    "status": "DISCOVERED_HIGH_ALPHA",
+    "lastAction": "Transferred 1,200 ETH into Uniswap liquidity",
+    "lastActionTime": "28 mins ago"
+  },
+  {
+    "id": "crawl_03",
+    "name": "Lookonchain 100x Early Sniper",
+    "chain": "SOLANA",
+    "address": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+    "winRate": "86.1%",
+    "pnl30d": "+$520,000",
+    "avgHoldHours": 6.5,
+    "favoriteTokens": [
+      "SOL",
+      "JUP",
+      "WIF"
+    ],
+    "alphaScore": 97,
+    "discoverySource": "Solana RPC Microstructure Scanner",
+    "status": "DISCOVERED_HIGH_ALPHA",
+    "lastAction": "Sniped 350 SOL on new liquidity pool",
+    "lastActionTime": "35 mins ago"
+  }
+]

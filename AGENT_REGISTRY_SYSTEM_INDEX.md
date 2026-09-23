@@ -172,6 +172,7 @@ Open `SKILLS_MATRIX.md` → find skill row → cross-reference tool column.
 | AI Tools Dashboard | `AI_TOOLS_DASHBOARD.html` |
 | AusAI Tech | `MASTER_INDEX_1PAGE.md` |
 | All systems | `CHANGELOG.md` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

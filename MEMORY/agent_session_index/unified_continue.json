@@ -1,0 +1,33 @@
+[
+  {
+    "tool": "continue",
+    "session_id": "23bdceb6-dd26-43a6-9be2-7658dc40e603.json",
+    "title": "Error Handling Code Updates",
+    "created": null,
+    "updated": null,
+    "path": "C:\\Users\\karma\\.continue\\sessions\\23bdceb6-dd26-43a6-9be2-7658dc40e603.json",
+    "format": "continue.json",
+    "bytes": 4522,
+    "extra": {
+      "messages": 2
+    }
+  },
+  {
+    "tool": "continue",
+    "session_id": "ed315519-d463-4231-a304-5c283bd339fc.json",
+    "title": "<think>\nThe user query is asking me to provide a",
+    "created": null,
+    "updated": null,
+    "path": "C:\\Users\\karma\\.continue\\sessions\\ed315519-d463-4231-a304-5c283bd339fc.json",
+    "format": "continue.json",
+    "bytes": 26780,
+    "extra": {
+      "messages": 4
+    }
+  },
+  {
+    "tool": "continue",
+    "error": "'list' object has no attribute 'get'",
+    "path": "C:\\Users\\karma\\.continue\\sessions\\sessions.json"
+  }
+]

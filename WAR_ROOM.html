@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>🏛️ WAR ROOM · Operator Command Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Operator self-use command-center HUD. Live status lights + one-click invocations. Daily driver for C:\Users\karma\." />
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; border-radius: 0 !important; }
+body {
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, "Consolas", monospace;
+  font-size: 13px; line-height: 1.5;
+  color: #c9d1d9; background: #0a0d11;
+  margin: 0; padding: 0;
+  background-image: repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,0.012) 2px 3px);
+}
+.wrap { max-width: 1380px; margin: 0 auto; padding: 0; }
+header.status-banner {
+  border-bottom: 2px solid #30363d;
+  padding: 0.7rem 1.25rem;
+  background: #161b22;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+header.status-banner h1 {
+  font-size: 1.1rem; margin: 0; color: #58a6ff; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+header.status-banner .meta { color: #8b949e; font-size: 0.78rem; }
+.status-lights { display: flex; gap: 0.85rem; align-items: center; }
+.status-light {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; padding: 0.2rem 0.55rem;
+  background: #0d1117; border: 1px solid #30363d;
+  font-family: ui-monospace, monospace;
+}
+.dot { width: 8px; height: 8px; display: inline-block; border-radius: 50% !important; }
+.dot.green { background: #2ea043; box-shadow: 0 0 6px #2ea04399; }
+.dot.red { background: #bd561d; box-shadow: 0 0 6px #bd561d99; }
+.dot.gray { background: #444c56; }
+.dot.yellow { background: #d29922; box-shadow: 0 0 6px #d2992299; }
+
+main { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+aside.action-rail {
+  background: #0d1117; border-right: 2px solid #30363d;
+  padding: 1rem 0.85rem; font-size: 0.85rem;
+}
+aside.action-rail h2 {
+  font-size: 0.75rem; margin: 0.4rem 0 0.6rem; color: #58a6ff;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.action-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+.action-list li { margin: 0.18rem 0; }
+.action-list button {
+  background: transparent; border: 1px solid #30363d; color: #c9d1d9;
+  padding: 0.4rem 0.6rem; cursor: pointer; width: 100%;
+  text-align: left; font-family: inherit; font-size: 0.82rem;
+  transition: all 0.1s ease-out;
+}
+.action-list button:hover { background: #1f2937; border-color: #58a6ff; color: #58a6ff; }
+.action-list button:active { background: #0d419d22; }
+.action-list button::before { content: "> "; color: #2ea043; }
+
+div.tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; padding: 1.25rem; }
+@media (max-width: 980px) {
+  main { grid-template-columns: 1fr; }
+  div.tile-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) { div.tile-grid { grid-template-columns: 1fr; } }
+
+.tile {
+  background: #161b22; border: 1px solid #30363d;
+  padding: 1rem 1.15rem; transition: all 0.1s ease-out;
+  cursor: default; min-height: 180px;
+  position: relative;
+}
+.tile:hover { border-color: #58a6ff; transform: translateY(-1px); box-shadow: 0 0 12px rgba(88,166,255,0.15); }
+.tile .tile-tag {
+  display: inline-block;
+  font-size: 0.66rem; font-weight: 700;
+  padding: 0.15rem 0.45rem; margin-bottom: 0.5rem;
+  background: #1f6feb; color: #fff;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.tile .tile-tag.warn { background: #d29922; }
+.tile .tile-tag.evidence { background: #a371f7; }
+.tile h3 { margin: 0 0 0.45rem; font-size: 1rem; color: #f0f6fc; letter-spacing: 0.02em; }
+.tile p.summary { color: #8b949e; font-size: 0.8rem; margin: 0 0 0.7rem; font-style: italic; }
+.tile .tile-actions { display: flex; flex-direction: column; gap: 0.25rem; }
+.tile .tile-actions a {
+  color: #58a6ff; text-decoration: none; font-size: 0.82rem;
+  padding: 0.25rem 0; border-bottom: 1px dotted #30363d33;
+  transition: all 0.1s;
+}
+.tile .tile-actions a:hover { color: #aff5c7; padding-left: 0.35rem; }
+.tile .tile-actions a::before { content: "// "; color: #444c56; }
+
+footer.cmd-footer {
+  background: #0d1117; border-top: 2px solid #30363d;
+  padding: 0.7rem 1.25rem; font-size: 0.75rem;
+  color: #8b949e; font-family: ui-monospace, monospace;
+}
+footer.cmd-footer code { color: #58a6ff; }
+footer.cmd-footer a { color: #58a6ff; text-decoration: none; }
+footer.cmd-footer a:hover { text-decoration: underline; }
+
+@media print {
+  body { background: white; color: black; background-image: none; }
+  .status-banner, aside, footer { display: none; }
+  div.tile-grid { grid-template-columns: repeat(2, 1fr); padding: 0.5cm; }
+  .tile { background: white; border: 1px solid #ccc; box-shadow: none; }
+  .tile h3 { color: black; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="status-banner">
+  <div>
+    <h1>🏛️ WAR ROOM · OPERATOR HUD</h1>
+    <div class="meta">C:\Users\karma\ · 2026-07-09 · 7 tiles · live health-probe every 8s · golden-rules: append / preserve / protect</div>
+  </div>
+  <div class="status-lights" id="statusLights">
+    <div class="status-light"><span class="dot gray"></span><span>Ollama</span><span class="lat">(off)</span></div>
+    <div class="status-light"><span class="dot gray"></span><span>ComfyUI</span><span class="lat">(off)</span></div>
+    <div class="status-light"><span class="dot gray"></span><span>Archon</span><span class="lat">(off)</span></div>
+    <div class="status-light"><span class="dot gray"></span><span>n8n</span><span class="lat">(off)</span></div>
+    <div class="status-light"><span class="dot gray"></span><span>AI Army</span><span class="lat">(off)</span></div>
+  </div>
+</header>
+
+<main>
+  <aside class="action-rail">
+    <h2>>_ ACTIONS</h2>
+    <ul class="action-list">
+      <li><button onclick="invoke('vs-code')">[1] Open VS Code</button></li>
+      <li><button onclick="invoke('ai-army')">[2] Start AI Army</button></li>
+      <li><button onclick="invoke('mobile-recovery')">[3] Mobile Recovery Suite</button></li>
+      <li><button onclick="invoke('reality-audit')">[4] Reality vs Claim audit</button></li>
+      <li><button onclick="invoke('pc-scan')">[5] Re-scan PC apps</button></li>
+      <li><button onclick="invoke('fleet-summary')">[6] Tool kit fleet summary</button></li>
+    </ul>
+    <h2>>_ QUICK JUMP</h2>
+    <ul class="action-list">
+      <li><button onclick="openFile('WAR_ROOM.md')">Open this WAR_ROOM.md</button></li>
+      <li><button onclick="openFile('AI_AND_IT_TOOLKIT.html')">AI &amp; IT Toolkit</button></li>
+      <li><button onclick="openFile('GRAND_SUMMARY.md')">Grand Summary</button></li>
+      <li><button onclick="openFile('WAR_ROOM_PUBLIC.html')">PUBLIC teaser</button></li>
+    </ul>
+  </aside>
+
+  <div>
+    <div class="tile-grid">
+
+      <article class="tile">
+        <span class="tile-tag">STATUS</span>
+        <h3>[ LIVE HEALTH ]</h3>
+        <p class="summary">Five local AI/services probed every 8 seconds via fetch() TCP-poll. Green = responsive · red = refused · gray = unknown.</p>
+        <div class="tile-actions">
+          <a href="javascript:void(0)" onclick="pollNow()">[refresh] manual probe</a>
+          <a href="javascript:void(0)" onclick="invoke('health-cli')">CLI version → <code>python war_room.py health</code></a>
+          <a href="tool_kit.py" onclick="openFile('tool_kit.py'); return false;">tool_kit.py also exposes health probe</a>
+        </div>
+      </article>
+
+      <article class="tile">
+        <span class="tile-tag">ACTION</span>
+        <h3>[ ONE-CLICK OPS ]</h3>
+        <p class="summary">Six high-frequency invocations wired to <code>war_room.py launch &lt;tile&gt;</code> — copy invocation, paste into terminal.</p>
+        <div class="tile-actions">
+          <a href="javascript:void(0)" onclick="invoke('vs-code')">vs-code → <code>code .</code></a>
+          <a href="javascript:void(0)" onclick="invoke('ai-army')">ai-army → <code>python AI_ARMY\server.py</code></a>
+          <a href="javascript:void(0)" onclick="invoke('mobile-recovery')">mobile-recovery → <code>recovery.bat</code></a>
+          <a href="javascript:void(0)" onclick="invoke('reality-audit')">reality-audit → <code>REALITY_VS_CLAIM_AUDIT.py --run</code></a>
+          <a href="javascript:void(0)" onclick="invoke('pc-scan')">pc-scan → <code>scan_pc_apps.ps1</code></a>
+        </div>
+      </article>
+
+      <article class="tile">
+        <span class="tile-tag warn">RECON</span>
+        <h3>[ ANTI-SCAM INTEL ]</h3>
+        <p class="summary">Public-help workflow pointers. Brendan Foots case context + Known-scammer index. Operator-curated content only.</p>
+        <div class="tile-actions">
+          <a href="ANTI_SCAM_PLAYBOOK.md" onclick="openFile('ANTI_SCAM_PLAYBOOK.md'); return false;">Anti-scam playbook (TBD)</a>
+          <a href="KNOWN_SCAMMERS.md" onclick="openFile('KNOWN_SCAMMERS.md'); return false;">Known scammers index (TBD)</a>
+          <a href="WAR_ROOM_PUBLIC.html" onclick="openFile('WAR_ROOM_PUBLIC.html'); return false;">Public-shareable teaser</a>
+          <a href="CONTRIBUTOR_PROFILE.md" onclick="openFile('CONTRIBUTOR_PROFILE.md'); return false;">Contributor profile</a>
+        </div>
+      </article>
+
+      <article class="tile">
+        <span class="tile-tag evidence">EVIDENCE</span>
+        <h3>[ CHAIN-OF-CUSTODY ]</h3>
+        <p class="summary">Append-only audit family + backup-integrity scripts. For public-help posts that need evidence trails.</p>
+        <div class="tile-actions">
+          <a href="REALITY_VS_CLAIM_AUDIT.py" onclick="openFile('REALITY_VS_CLAIM_AUDIT.py'); return false;">REALITY_VS_CLAIM_AUDIT.py</a>
+          <a href="INDEX_DELTA_SCANNER.py" onclick="openFile('INDEX_DELTA_SCANNER.py'); return false;">INDEX_DELTA_SCANNER.py</a>
+          <a href="INDEX_DELTA_RECURSIVE.py" onclick="openFile('INDEX_DELTA_RECURSIVE.py'); return false;">INDEX_DELTA_RECURSIVE.py</a>
+          <a href="MASTER_INDEX_RECONCILER.py" onclick="openFile('MASTER_INDEX_RECONCILER.py'); return false;">MASTER_INDEX_RECONCILER.py</a>
+          <a href="BACKUP_AUDIT_RUN.ps1" onclick="openFile('BACKUP_AUDIT_RUN.ps1'); return false;">BACKUP_AUDIT_RUN.ps1</a>
+          <a href="append_only_hygiene_runner.py" onclick="openFile('append_only_hygiene_runner.py'); return false;">append-only hygiene</a>
+        </div>
+      </article>
+
+      <article class="tile">
+        <span class="tile-tag" style="background:#1f6f3a;">COMMS</span>
+        <h3>[ ROUTING ]</h3>
+        <p class="summary">One-click jump-to for tunneled comms apps. Bridge between operator HUD and the actual messaging tools.</p>
+        <div class="tile-actions">
+          <a href="javascript:void(0)" onclick="invoke('telegram')">Telegram Desktop → <code>start "" "Telegram.exe"</code></a>
+          <a href="javascript:void(0)" onclick="invoke('discord')">Discord → <code>start "" discord</code></a>
+          <a href="javascript:void(0)" onclick="invoke('slack')">Slack → <code>start "" slack</code></a>
+          <a href="javascript:void(0)" onclick="invoke('footclan-bridge')">Footclan bridge → <code>python voice_pa_bridge.py</code></a>
+        </div>
+      </article>
+
+      <article class="tile">
+        <span class="tile-tag" style="background:#444c56;">REFERENCE</span>
+        <h3>[ THE VAULT ]</h3>
+        <p class="summary">Deeper catalogs. Click out to the master indexes + tool inventory + grand summary.</p>
+        <div class="tile-actions">
+          <a href="AI_AND_IT_TOOLKIT.html" onclick="openFile('AI_AND_IT_TOOLKIT.html'); return false;">AI &amp; IT Toolkit (12 cats · 100 cards)</a>
+          <a href="tool_kit.py" onclick="openFile('tool_kit.py'); return false;">tool_kit.py CLI dispatcher</a>
+          <a href="GRAND_SUMMARY.md" onclick="openFile('GRAND_SUMMARY.md'); return false;">Grand Summary (START HERE)</a>
+          <a href="WORKSPACE_INDEX.md" onclick="openFile('WORKSPACE_INDEX.md'); return false;">Workspace master index (18 systems)</a>
+          <a href="CHANGELOG.md" onclick="openFile('CHANGELOG.md'); return false;">CHANGELOG.md</a>
+          <a href="REFERENCE_DOCS_INDEX.md" onclick="openFile('REFERENCE_DOCS_INDEX.md'); return false;">Reference docs index</a>
+        </div>
+      </article>
+
+      <article class="tile">
+        <span class="tile-tag" style="background:#7d3c98;">MOBILE</span>
+        <h3>[ PHONE/TABLET TOOLS ]</h3>
+        <p class="summary">12 tool_kit.py mobile entries (Android + iOS) + 4 war_room.py tile-rows. Curation biased toward APK/lib inspection chain (apktool + jadx + frida) for FB-anti-scam evidence work; signature case Brendan Foots.</p>
+        <div class="tile-actions">
+          <a href="javascript:void(0)" onclick="invoke('adb')">adb devices &rarr; <code>adb devices</code></a>
+          <a href="javascript:void(0)" onclick="invoke('apktool')">apktool &rarr; <code>java -jar apktool.jar</code></a>
+          <a href="javascript:void(0)" onclick="invoke('jadx-gui')">jadx-gui &rarr; <code>jadx-gui</code></a>
+          <a href="javascript:void(0)" onclick="invoke('android-studio')">Android Studio &rarr; <code>studio64.exe</code></a>
+          <a href="AI_AND_IT_TOOLKIT.html" onclick="openFile('AI_AND_IT_TOOLKIT.html'); return false;">Full mobile inventory (16 tools)</a>
+          <a href="MOBILE_FILTERED.csv" onclick="openFile('MOBILE_FILTERED.csv'); return false;">MOBILE_FILTERED.csv (operator PC-scan subset)</a>
+          <a href="javascript:void(0)" onclick="invoke('mobile-recovery')">Recovery Suite (top-level shim)</a>
+        </div>
+      </article>
+
+    </div>
+
+    <footer class="cmd-footer">
+      <div>
+        <strong>CLI DRIVER:</strong> <code>python war_room.py --help</code> · <code>python war_room.py status</code> · <code>python war_room.py launch vs-code</code> · <code>python war_room.py open --public</code>
+      </div>
+      <div style="margin-top:0.3rem;">
+        <strong>Companions:</strong> <a href="WAR_ROOM.md">WAR_ROOM.md (canonical)</a> · <a href="WAR_ROOM_PUBLIC.html">WAR_ROOM_PUBLIC.html (FB-shareable)</a> · <a href="war_room.py">war_room.py (CLI)</a>
+      </div>
+      <div style="margin-top:0.3rem; opacity:0.66;">
+        HEALTH-PROBE SCHEDULE: 8s · AUDIT TRAIL: append-only JSONL · GOLDEN RULES: append / preserve / protect
+      </div>
+    </footer>
+  </div>
+</main>
+
+</div>
+
+<script>
+// ============================================
+// LIVE HEALTH-POLL · probes 5 local services via fetch() with timeout.
+// ============================================
+const SERVICES = [
+  { name: 'Ollama',  url: 'http://127.0.0.1:11434/api/tags' },
+  { name: 'ComfyUI', url: 'http://127.0.0.1:8188/system_stats' },
+  { name: 'Archon',  url: 'http://127.0.0.1:8181/health' },
+  { name: 'n8n',     url: 'http://127.0.0.1:5678/healthz' },
+  { name: 'AI Army', url: 'http://127.0.0.1:8001/health' },
+];
+
+async function probeOne(url, timeoutMs = 1500) {
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), timeoutMs);
+  const t0 = performance.now();
+  try {
+    const r = await fetch(url, { mode: 'cors', signal: ctrl.signal });
+    clearTimeout(tid);
+    const ms = Math.round(performance.now() - t0);
+    if (r.ok) return { ok: true, ms };
+    return { ok: false, ms, code: r.status };
+  } catch (e) {
+    clearTimeout(tid);
+    return { ok: false, ms: Math.round(performance.now() - t0), err: e.name };
+  }
+}
+
+async function pollNow() {
+  const lights = document.querySelectorAll('#statusLights .status-light');
+  // Mass-update all latencies to '...' simultaneously; lights retain their
+  // previous dot color during the probe (avoids cold-start false-alarm red walk).
+  lights.forEach(light => {
+    const lat = light.querySelector('.lat');
+    if (lat) lat.textContent = '…';
+  });
+  // Parallelize probes so all 5 resolve together (no sequential red-walk).
+  const results = await Promise.all(SERVICES.map(svc => probeOne(svc.url)));
+  for (let i = 0; i < SERVICES.length; i++) {
+    const r = results[i];
+    const dot = lights[i].querySelector('.dot');
+    const lat = lights[i].querySelector('.lat');
+    dot.classList.remove('green', 'red', 'gray', 'yellow');
+    if (r.ok) {
+      dot.classList.add('green');
+      if (lat) lat.textContent = '(' + r.ms + 'ms)';
+    } else if (r.err === 'AbortError') {
+      dot.classList.add('red');
+      if (lat) lat.textContent = '(timeout)';
+    } else {
+      dot.classList.add('red');
+      if (lat) lat.textContent = '(down)';
+    }
+  }
+}
+
+setInterval(pollNow, 8000);
+pollNow();
+
+// ============================================
+// COPY/INVOKE — display the canonical invocation
+// ============================================
+const INVOCATIONS = {
+  'vs-code':           'code .',
+  'ai-army':            'python AI_ARMY\\server.py',
+  'mobile-recovery':    'recovery.bat   (top-level shim)',
+  'reality-audit':      'python REALITY_VS_CLAIM_AUDIT.py --run --emit-summary',
+  'pc-scan':            'powershell scan_pc_apps.ps1 -OutputPath C:\\Users\\karma\\RAW_PC_APPS_INVENTORY.csv',
+  'fleet-summary':      'python tool_kit.py list  (terse 4-col table)',
+  'health-cli':         'python war_room.py health',
+  'telegram':           'start "" "Telegram.exe"',
+  'discord':            'start "" discord',
+  'slack':              'start "" slack',
+  'footclan-bridge':    'python voice_pa_bridge.py',
+  'adb':                'adb devices',
+  'apktool':            'java -jar "C:\Program Files\apktool\apktool.jar"  # or GUI mode',
+  'jadx-gui':           'start "" jadx-gui  # DEX decompiler GUI',
+  'android-studio':     'start "" "Android Studio"  # full APK dev IDE',
+};
+
+function invoke(name) {
+  const cmd = INVOCATIONS[name] || ('# ' + name + ' not configured');
+  const text = prompt('Copy invocation → paste into terminal: ', cmd);
+  if (text !== null) {
+    try { navigator.clipboard.writeText(cmd); } catch (e) {}
+  }
+}
+
+function openFile(name) {
+  // Just open in new tab; browser will handle missing-file gracefully.
+  window.open(name, '_blank');
+}
+</script>
+
+</body>
+</html>

@@ -383,6 +383,10 @@ C:\Users\karma\
 ├── START-ALL-AI-TOOLS.bat          ← Master launcher
 ├── ALL-TOOLS-CONFIGURED.md         ← This file
 ├── ALL_TOOLS_QUICK_REFERENCE.md    ← One-page menu index
+├── .githooks/                      ← Cross-platform pre-commit hook (v3.3.1)
+│   ├── pre-commit                  ← bash dispatcher (Windows → .bat; Unix → native)
+│   ├── pre-commit.bat              ← Windows thin wrapper (cmd.exe + full PATH)
+│   └── README.md                   ← operator install + BREAKING paired-ack docs
 │
 ├── .openclaw/                      ← OpenClaw gateway config
 │   ├── openclaw.json
@@ -502,6 +506,7 @@ npm run dev
 | `ORACLE_JARVIS_PAPERCLIP_SETUP.md` | Oracle, Jarvis, Paperclip setup + config schemas |
 | `ComfyUI/README.md` | ComfyUI Music Video Studio full guide |
 | `TODO_TRACKER.md` | Append-only project tracker (131 items) |
+| `.githooks/README.md` | Cross-platform pre-commit hook install (v3.3.1) + BREAKING paired-ack (v3.3.2) |
 
 ---
 
@@ -513,3 +518,4 @@ npm run dev
 | 2026-06-26 | Added Oracle, Jarvis, Paperclip configs with real OpenRouter model IDs |
 | 2026-06-26 | Created `ALL_TOOLS_QUICK_REFERENCE.md` |
 | 2026-06-29 | Created `ALL-TOOLS-CONFIGURED.md` (this master document) |
+| 2026-07-13 | v3.3.1 + v3.3.2 — added cross-platform `.githooks/` pre-commit hook package + canonical Windows runner `bin\precommit_check.bat` + BREAKING paired-ack env-var policy. See `CHANGELOG.md` → `## 2026-07-13 (post-cont.5-fup-13)`. |

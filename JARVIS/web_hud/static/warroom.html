@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS TACTICAL WAR ROOM // EMPIRE COMMAND</title>
+    <style>
+        :root {
+            --bg-base: #030712;
+            --panel-bg: rgba(9, 14, 28, 0.85);
+            --panel-border: rgba(0, 240, 255, 0.2);
+            --neon-cyan: #00f0ff;
+            --neon-amber: #f59e0b;
+            --neon-emerald: #10b981;
+            --neon-rose: #f43f5e;
+            --neon-purple: #a855f7;
+            --neon-glow: rgba(0, 240, 255, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 16px;
+            overflow-x: hidden;
+        }
+
+        /* Scanline Overlay */
+        body::before {
+            content: " ";
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Top Banner */
+        .warroom-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .brand-zone {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .arc-reactor {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan), inset 0 0 10px var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.06); opacity: 1; filter: drop-shadow(0 0 8px var(--neon-cyan)); }
+        }
+
+        .title-block h1 {
+            font-size: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .title-block span.tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(0, 240, 255, 0.15);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-family: monospace;
+        }
+
+        /* Radar Status Bar */
+        .radar-bar {
+            display: flex;
+            gap: 10px;
+            font-family: monospace;
+            font-size: 11px;
+        }
+
+        .radar-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(6, 11, 25, 0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        .beacon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--neon-rose);
+        }
+        .beacon.active {
+            background: var(--neon-emerald);
+            box-shadow: 0 0 8px var(--neon-emerald);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Tactical Grid */
+        .tactical-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr 380px;
+            gap: 16px;
+            height: calc(100vh - 100px);
+        }
+
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 10px; height: 10px;
+            border-top: 2px solid var(--neon-cyan);
+            border-left: 2px solid var(--neon-cyan);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+        }
+
+        /* Screen Viewport */
+        .viewport-wrapper {
+            flex: 1;
+            background: #020617;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+        }
+
+        .viewport-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .crosshair {
+            position: absolute;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, transparent 40%, rgba(0, 240, 255, 0.05) 41%),
+                linear-gradient(to right, transparent 49.8%, rgba(0, 240, 255, 0.2) 50%, transparent 50.2%),
+                linear-gradient(to bottom, transparent 49.8%, rgba(0, 240, 255, 0.2) 50%, transparent 50.2%);
+        }
+
+        /* Interactive Controls */
+        .btn {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(2, 132, 199, 0.3));
+            border: 1px solid var(--neon-cyan);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: monospace;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 15px var(--neon-cyan);
+            background: var(--neon-cyan);
+            color: #000;
+            transform: translateY(-1px);
+        }
+
+        .btn-gold {
+            border-color: var(--neon-amber);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(180, 83, 9, 0.4));
+            color: var(--neon-amber);
+        }
+        .btn-gold:hover {
+            background: var(--neon-amber);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-amber);
+        }
+
+        .btn-green {
+            border-color: var(--neon-emerald);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.4));
+            color: var(--neon-emerald);
+        }
+        .btn-green:hover {
+            background: var(--neon-emerald);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-emerald);
+        }
+
+        .input-dark {
+            width: 100%;
+            background: rgba(3, 7, 18, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 6px;
+            color: #fff;
+            padding: 8px 10px;
+            font-size: 12px;
+            font-family: monospace;
+            outline: none;
+            margin-bottom: 8px;
+        }
+
+        .input-dark:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Terminal Console */
+        .terminal-box {
+            background: #020617;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Consolas', monospace;
+            font-size: 11px;
+            color: #38bdf8;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 180px;
+        }
+
+        .shelf-list {
+            list-style: none;
+            overflow-y: auto;
+            max-height: 140px;
+        }
+
+        .shelf-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(6, 11, 25, 0.8);
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 11px;
+            font-family: monospace;
+        }
+
+        .shelf-item a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 1000; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: var(--panel-bg); border: 1px solid var(--neon-cyan);
+            border-radius: 12px; width: 100%; max-width: 900px; max-height: 85vh;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.3); display: flex; flex-direction: column;
+            padding: 20px; overflow: hidden;
+        }
+        .modal-body {
+            flex: 1; overflow-y: auto; font-family: monospace; font-size: 12px;
+            color: #cbd5e1; line-height: 1.6; margin: 14px 0; background: #020617;
+            padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="warroom-header">
+        <div class="brand-zone">
+            <div class="arc-reactor">⚡</div>
+            <div class="title-block">
+                <h1>JARVIS WAR ROOM <span class="tag">DEFCON 1 ACTIVE</span></h1>
+            </div>
+        </div>
+
+        <div class="radar-bar">
+            <button class="btn" id="bumblebee-btn" onclick="toggleBumblebeeMode()" style="border-color: #eab308; color: #eab308; font-size: 11px; padding: 4px 10px; font-weight: bold;">
+                🐝 BUMBLEBEE (MR. WILSON)
+            </button>
+            <button class="btn" id="voice-btn" onclick="toggleVoiceRadar()" style="border-color: var(--neon-purple); color: var(--neon-purple); font-size: 11px; padding: 4px 10px;">
+                🎙️ VOICE RADAR (IDLE)
+            </button>
+            <div class="radar-pill"><div class="beacon" id="b-3142"></div>:3142 GOD-MODE</div>
+            <div class="radar-pill"><div class="beacon active" id="b-6970"></div>:6970 JARVIS HUD</div>
+            <div class="radar-pill"><div class="beacon" id="b-8000"></div>:8000 RESEARCH</div>
+            <div class="radar-pill"><div class="beacon" id="b-8088"></div>:8088 CRYPTO RADAR</div>
+            <div class="radar-pill"><div class="beacon active" id="b-audio"></div>🔊 BUTLER TTS</div>
+        </div>
+    </div>
+
+    <!-- Main Tactical Grid -->
+    <div class="tactical-grid">
+        
+        <!-- Left Wing: Tactical Battle Stations & AI Employees -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            
+            <!-- 5-Phase Master Mission Strike -->
+            <div class="card" style="border-color: rgba(245, 158, 11, 0.4);">
+                <div class="card-header" style="color: var(--neon-amber);">
+                    <span>👑 Master Mission Strike</span>
+                    <span style="font-size: 10px; font-family: monospace;">5-PHASE</span>
+                </div>
+                <input type="text" id="mm-c" class="input-dark" placeholder="Target Client [OmniCorp Global]">
+                <input type="text" id="mm-s" class="input-dark" placeholder="Scope [Autonomous Copilot]">
+                <input type="text" id="mm-i" class="input-dark" placeholder="Invoice Amount [$6,500]">
+                <button class="btn btn-gold" onclick="launchMasterMission()">
+                    🚀 Launch Full Empire Mission
+                </button>
+            </div>
+
+            <!-- TARS & SPARK Strike Squad -->
+            <div class="card">
+                <div class="card-header">
+                    <span>💼 TARS AI Proposal Ops</span>
+                </div>
+                <input type="text" id="tars-c" class="input-dark" placeholder="Client Name">
+                <button class="btn" onclick="execTars()">⚡ Generate 3-Tier Proposal</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="color: var(--neon-purple);">
+                    <span>⚡ SPARK AI Content Explosion</span>
+                </div>
+                <input type="text" id="spark-t" class="input-dark" placeholder="Core Topic">
+                <button class="btn" style="border-color: var(--neon-purple); color: var(--neon-purple);" onclick="execSpark()">
+                    💥 Explode to 15+ Assets
+                </button>
+            </div>
+
+            <!-- 60s Video Storyboard Generator -->
+            <div class="card" style="border-color: rgba(168, 85, 247, 0.4);">
+                <div class="card-header" style="color: var(--neon-purple);">
+                    <span>🎬 60s Video Storyboard Manifest</span>
+                    <span style="font-size: 10px; font-family: monospace;">WAN 2.2</span>
+                </div>
+                <input type="text" id="video-topic" class="input-dark" placeholder="Topic (e.g. Autonomous AI Copilots)">
+                <button class="btn" style="border-color: var(--neon-purple); color: var(--neon-purple);" onclick="generateVideo()">
+                    ⚡ Generate 60s Scene Manifest
+                </button>
+            </div>
+
+            <!-- Auto-Pilot Schedulers -->
+            <div class="card">
+                <div class="card-header" style="color: var(--neon-emerald);">
+                    <span>⏰ Auto-Pilot Scheduled Loops</span>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                    <button class="btn btn-green" style="flex:1;" onclick="execLoop('morning')">🌅 Brief</button>
+                    <button class="btn btn-green" style="flex:1;" onclick="execLoop('midday')">⚡ Content</button>
+                    <button class="btn btn-green" style="flex:1;" onclick="execLoop('evening')">🌙 Audit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center: Tactical Radar Viewport & Grounding -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="card" style="flex: 1; display: flex; flex-direction: column;">
+                <div class="card-header">
+                    <span>👁️ Tactical Screen Radar & Set-of-Marks</span>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn" onclick="toggleSoM()">🏷️ Toggle SoM</button>
+                        <button class="btn" onclick="refreshFrame()">🔄 Refresh</button>
+                    </div>
+                </div>
+
+                <div class="viewport-wrapper">
+                    <div class="crosshair"></div>
+                    <img id="radar-img" src="/api/screenshot" class="viewport-img" alt="Tactical Screen Feed">
+                </div>
+
+                <!-- Live Targeting Controls -->
+                <div style="margin-top: 12px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px;">
+                    <div>
+                        <input type="text" id="arrow-target" class="input-dark" placeholder="Target UI Button / Menu...">
+                        <div style="display: flex; gap: 6px;">
+                            <button class="btn" style="flex: 1;" onclick="targetArrow('guide')">🎯 Show Arrow</button>
+                            <button class="btn" style="flex: 1;" onclick="targetArrow('takeover')">⚡ Strike & Click</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="text" id="takeover-goal" class="input-dark" placeholder="Autonomous Takeover Goal...">
+                        <button class="btn" style="width: 100%;" onclick="execTakeover()">🤖 Execute Takeover</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Telemetry Log -->
+            <div class="card" style="height: 190px;">
+                <div class="card-header">
+                    <span>📡 Live Tactical Telemetry Stream</span>
+                    <span id="log-count" style="font-size: 10px; font-family: monospace;">ONLINE</span>
+                </div>
+                <div class="terminal-box" id="term-box">
+                    [00:00:00] JARVIS War Room Core Online.<br/>
+                    [00:00:01] 6-Port Master Gateway Radar active.<br/>
+                    [00:00:02] Set-of-Marks visual tracking armed.
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Wing: Fast RAG Search, Campaigns, Vault & Mem0 Core -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            
+            <!-- Fast RAG Instant Search -->
+            <div class="card" style="border-color: rgba(0, 240, 255, 0.35);">
+                <div class="card-header" style="color: var(--neon-cyan);">
+                    <span>⚡ Fast RAG Search (4,206 Docs)</span>
+                </div>
+                <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+                    <input type="text" id="rag-query" class="input-dark" placeholder="Search workspace memories..." style="margin-bottom:0;" onkeydown="if(event.key==='Enter') searchFastRAG()">
+                    <button class="btn" onclick="searchFastRAG()">Search</button>
+                </div>
+                <ul class="shelf-list" id="rag-results" style="max-height: 110px;">
+                    <li class="shelf-item"><span>Enter search term to query 4,206 documents</span></li>
+                </ul>
+            </div>
+
+            <!-- 10 Niche Outbound Campaigns & Packages -->
+            <div class="card">
+                <div class="card-header" style="color: var(--neon-emerald);">
+                    <span>💼 10 Niche Agency Campaigns ($2.5k - $8.5k)</span>
+                </div>
+                <ul class="shelf-list" id="pkg-shelf" style="max-height: 120px;">
+                    <li class="shelf-item"><span>Loading campaigns...</span></li>
+                </ul>
+            </div>
+
+            <!-- Production Vault Shelf -->
+            <div class="card">
+                <div class="card-header">
+                    <span>📦 Production Vault, Invoices & Video Manifests</span>
+                </div>
+                <ul class="shelf-list" id="vault-shelf" style="max-height: 110px;">
+                    <li class="shelf-item"><span>Loading assets...</span></li>
+                </ul>
+            </div>
+
+            <!-- Mem0 Tactical Memory Core -->
+            <div class="card" style="flex: 1;">
+                <div class="card-header">
+                    <span>🧠 Mem0 Persistent Memory Core</span>
+                </div>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                    <input type="text" id="mem-fact" class="input-dark" placeholder="Inject fact to memory..." style="margin-bottom:0;">
+                    <button class="btn" onclick="saveMem()">Save</button>
+                </div>
+                <ul class="shelf-list" id="mem-shelf" style="max-height: 120px;">
+                    <li class="shelf-item"><span>Loading memories...</span></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Campaign Inspector Modal -->
+    <div id="campaign-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--neon-cyan); padding-bottom: 10px;">
+                <h3 id="modal-campaign-title" style="color: var(--neon-cyan); margin: 0; font-size: 16px;">Campaign</h3>
+                <button class="btn" onclick="closeModal('campaign-modal')">✕ Close</button>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                <input type="text" id="lead-name" class="input-dark" placeholder="Lead First Name..." style="margin-bottom:0; flex: 1;">
+                <input type="text" id="lead-company" class="input-dark" placeholder="Lead Company Name..." style="margin-bottom:0; flex: 1;">
+                <button class="btn btn-green" onclick="personalizeCampaign()">⚡ Personalize</button>
+            </div>
+            <div id="modal-campaign-body" class="modal-body"></div>
+            <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                <button class="btn" onclick="copyCampaignText()">📋 Copy All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Storyboard Preview Modal -->
+    <div id="storyboard-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 1000px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--neon-purple); padding-bottom: 10px;">
+                <h3 id="modal-storyboard-title" style="color: var(--neon-purple); margin: 0; font-size: 16px;">Storyboard Preview</h3>
+                <button class="btn" onclick="closeModal('storyboard-modal')">✕ Close</button>
+            </div>
+            <div style="flex: 1; overflow: auto; padding: 10px; display: flex; justify-content: center; align-items: center; background: #020617; margin: 12px 0; border-radius: 8px;">
+                <img id="modal-storyboard-img" src="" style="max-width: 100%; border-radius: 6px; border: 1px solid rgba(168, 85, 247, 0.4);" alt="Storyboard Preview">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isSoM = false;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playTacticalChirp(freq = 880, type = 'sine', duration = 0.08) {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(freq * 1.5, ctx.currentTime + duration);
+                gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function playLaunchSound() {
+            try {
+                const ctx = getAudioContext();
+                const freqs = [220, 330, 440, 660, 880];
+                freqs.forEach((f, i) => {
+                    setTimeout(() => playTacticalChirp(f, 'triangle', 0.12), i * 60);
+                });
+            } catch (e) {}
+        }
+
+        function playSuccessSound() {
+            try {
+                const ctx = getAudioContext();
+                const freqs = [523.25, 659.25, 783.99, 1046.50];
+                freqs.forEach((f, i) => {
+                    setTimeout(() => playTacticalChirp(f, 'sine', 0.18), i * 80);
+                });
+            } catch (e) {}
+        }
+
+        function playRadioStaticTune() {
+            try {
+                const ctx = getAudioContext();
+                const bufferSize = ctx.sampleRate * 0.25;
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = (Math.random() * 2 - 1) * 0.15;
+                }
+                const noise = ctx.createBufferSource();
+                noise.buffer = buffer;
+                const gain = ctx.createGain();
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                noise.connect(gain);
+                gain.connect(ctx.destination);
+                noise.start();
+
+                const osc = ctx.createOscillator();
+                const oscGain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(320, ctx.currentTime + 0.05);
+                osc.frequency.exponentialRampToValueAtTime(1400, ctx.currentTime + 0.25);
+                oscGain.gain.setValueAtTime(0.12, ctx.currentTime);
+                oscGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                osc.connect(oscGain);
+                oscGain.connect(ctx.destination);
+                osc.start(ctx.currentTime + 0.05);
+                osc.stop(ctx.currentTime + 0.25);
+            } catch (e) {}
+        }
+
+        let isBumblebeeMode = false;
+
+        async function toggleBumblebeeMode() {
+            isBumblebeeMode = !isBumblebeeMode;
+            const btn = document.getElementById('bumblebee-btn');
+            playRadioStaticTune();
+
+            if (isBumblebeeMode) {
+                btn.innerText = "🐝 BUMBLEBEE (MR. WILSON)";
+                btn.style.background = "rgba(234, 179, 8, 0.25)";
+                btn.style.boxShadow = "0 0 15px rgba(234, 179, 8, 0.6)";
+                termLog("📻 [BUMBLEBEE ACTIVE]: Radio song transmission protocol online for Mr. Wilson!");
+                bumblebeeRadio('greeting', 'War Room');
+            } else {
+                btn.innerText = "🐝 BUMBLEBEE (OFF)";
+                btn.style.background = "transparent";
+                btn.style.boxShadow = "none";
+                termLog("Standard JARVIS voice protocol restored.");
+            }
+        }
+
+        async function bumblebeeRadio(cat, topic = '') {
+            try {
+                const res = await fetch('/api/bumblebee/speak', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({category: cat, topic: topic})
+                });
+                const data = await res.json();
+                termLog(`🐝 [Radio]: ${data.snippet}`);
+            } catch (e) {}
+        }
+
+        function termLog(msg) {
+            const el = document.getElementById('term-box');
+            const now = new Date().toTimeString().split(' ')[0];
+            el.innerHTML += `<br/>[${now}] ${msg}`;
+            el.scrollTop = el.scrollHeight;
+        }
+
+        function refreshFrame() {
+            playTacticalChirp(520, 'sine', 0.06);
+            isSoM = false;
+            document.getElementById('radar-img').src = '/api/screenshot?t=' + Date.now();
+            termLog('Radar viewport refreshed.');
+        }
+
+        function toggleSoM() {
+            playTacticalChirp(660, 'square', 0.08);
+            isSoM = !isSoM;
+            document.getElementById('radar-img').src = `/api/${isSoM ? 'som' : 'screenshot'}?t=` + Date.now();
+            termLog(isSoM ? 'Set-of-Marks UI tags engaged.' : 'Raw screen feed restored.');
+        }
+
+        async function launchMasterMission() {
+            playLaunchSound();
+            const client = document.getElementById('mm-c').value.trim() || 'OmniCorp Global';
+            const scope = document.getElementById('mm-s').value.trim() || 'Autonomous Copilot Deployment';
+            const inv = document.getElementById('mm-i').value.trim() || '$6,500';
+            termLog(`LAUNCHING 5-PHASE STRIKE FOR: ${client}...`);
+            if (isBumblebeeMode) {
+                bumblebeeRadio('success', `Master Mission for Mr. Wilson (${client})`);
+            }
+            const res = await fetch('/api/master-mission/run', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({client: client, scope: scope, invoice: inv})
+            });
+            const data = await res.json();
+            playSuccessSound();
+            termLog(`MISSION SUCCESS: Proposal, Invoices & Content Staged for Mr. Wilson.`);
+            loadVault();
+        }
+
+        async function execTars() {
+            playTacticalChirp(440, 'sine', 0.1);
+            const c = document.getElementById('tars-c').value.trim() || 'Stark Industries';
+            termLog(`TARS AI compiling 3-tier proposal for: ${c}...`);
+            if (isBumblebeeMode) {
+                bumblebeeRadio('proposal', `TARS Proposal for Mr. Wilson (${c})`);
+            }
+            await fetch('/api/tars/proposal', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({client_name: c, service_scope: 'Autonomous AI Copilot Deployment'})
+            });
+            playSuccessSound();
+            termLog(`Proposal compiled for ${c}`);
+            loadVault();
+        }
+
+        async function execSpark() {
+            playTacticalChirp(580, 'triangle', 0.1);
+            const t = document.getElementById('spark-t').value.trim() || 'Autonomous AI Agents';
+            termLog(`SPARK AI exploding content for: "${t}"...`);
+            if (isBumblebeeMode) {
+                bumblebeeRadio('affirmative', `Content Explosion for Mr. Wilson`);
+            }
+            await fetch('/api/spark/explode', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({topic: t})
+            });
+            playSuccessSound();
+            termLog(`15+ Assets generated in Content Vault.`);
+            loadVault();
+        }
+
+        async function execInvoice() {
+            const prompt = document.getElementById('inv-p')?.value.trim() || 'Bill Stark Industries $5,000 for AI Setup';
+            playTacticalChirp(500, 'sine', 0.1);
+            termLog(`Generating Invoice: "${prompt}"...`);
+            if (isBumblebeeMode) {
+                bumblebeeRadio('invoice', 'Invoicing for Mr. Wilson');
+            }
+            const res = await fetch('/api/invoice', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({prompt: prompt})
+            });
+            const data = await res.json();
+            playSuccessSound();
+            termLog(`Invoice Ready for Mr. Wilson: ${data.data?.pdf_path || 'Saved'}`);
+            loadVault();
+        }
+
+        async function execLoop(loopName) {
+            termLog(`Executing scheduled loop: ${loopName}...`);
+            if (isBumblebeeMode) {
+                bumblebeeRadio('affirmative', `${loopName} loop for Mr. Wilson`);
+            }
+            await fetch('/api/scheduler/trigger', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({loop: loopName})
+            });
+            termLog(`Loop [${loopName}] complete.`);
+            loadVault();
+        }
+
+        async function targetArrow(mode) {
+            const q = document.getElementById('arrow-target').value.trim();
+            if (!q) return alert('Enter target');
+            termLog(`AI Arrow targeting: "${q}" (${mode})...`);
+            await fetch('/api/arrow', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({query: q, mode: mode})
+            });
+        }
+
+        async function execTakeover() {
+            const task = document.getElementById('takeover-goal').value.trim();
+            if (!task) return alert('Enter goal');
+            termLog(`Autonomous Takeover Initiated: "${task}"...`);
+            await fetch('/api/takeover', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({task: task})
+            });
+        }
+
+        async function saveMem() {
+            const fact = document.getElementById('mem-fact').value.trim();
+            if (!fact) return;
+            await fetch('/api/memory/add', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({content: fact, category: 'warroom_fact'})
+            });
+            document.getElementById('mem-fact').value = '';
+            termLog(`Memory fact stored: "${fact}"`);
+            loadMem();
+        }
+
+        async function searchFastRAG() {
+            const q = document.getElementById('rag-query').value.trim();
+            if (!q) return;
+            playTacticalChirp(520, 'triangle', 0.08);
+            termLog(`Querying Fast RAG across 4,206 documents for: "${q}"...`);
+            try {
+                const res = await fetch(`/api/rag/search?q=${encodeURIComponent(q)}`);
+                const data = await res.json();
+                const shelf = document.getElementById('rag-results');
+                shelf.innerHTML = '';
+                if (!data.results || data.results.length === 0) {
+                    shelf.innerHTML = '<li class="shelf-item"><span>No documents matched.</span></li>';
+                    return;
+                }
+                data.results.slice(0, 4).forEach(h => {
+                    shelf.innerHTML += `<li class="shelf-item"><span>⚡ [${h.category}] ${h.filename}</span></li>`;
+                });
+                playSuccessSound();
+                termLog(`Found ${data.count} matching knowledge chunks.`);
+            } catch (e) {
+                termLog(`RAG Search error: ${e.message}`);
+            }
+        }
+
+        async function generateVideo() {
+            const t = document.getElementById('video-topic').value.trim() || 'How AI Employees Run Autonomous Workstations';
+            playLaunchSound();
+            termLog(`Generating 60s Video Manifest for: "${t}"...`);
+            try {
+                const res = await fetch('/api/video/manifest', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({topic: t})
+                });
+                const data = await res.json();
+                playSuccessSound();
+                termLog(`Video Manifest Created: ${data.manifest?.total_duration || '60s'} timeline ready.`);
+                loadVault();
+            } catch (e) {
+                termLog(`Video manifest error: ${e.message}`);
+            }
+        }
+
+        let currentCampaignRaw = '';
+        let recognition = null;
+        let isVoiceListening = false;
+
+        function toggleVoiceRadar() {
+            playTacticalChirp(700, 'square', 0.1);
+            const btn = document.getElementById('voice-btn');
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!SpeechRecognition) {
+                termLog("Web Speech API not supported in this browser.");
+                return;
+            }
+
+            if (isVoiceListening) {
+                if (recognition) recognition.stop();
+                isVoiceListening = false;
+                btn.innerText = "🎙️ VOICE RADAR (IDLE)";
+                btn.style.borderColor = "var(--neon-purple)";
+                btn.style.color = "var(--neon-purple)";
+                termLog("Voice Radar standing down.");
+                return;
+            }
+
+            recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isVoiceListening = true;
+                btn.innerText = "🔴 LISTENING (JARVIS)...";
+                btn.style.borderColor = "#ef4444";
+                btn.style.color = "#ef4444";
+                termLog("Voice Radar online: Speak commands (e.g., 'invoice Acme 5000', 'proposal Stark', 'screen', 'briefing').");
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
+                termLog(`🎙️ Voice Command: "${transcript}"`);
+                playTacticalChirp(880, 'sine', 0.08);
+
+                if (transcript.includes('sorry mr wilson') || transcript.includes('sorry mr. wilson') || transcript.includes('sorry mister wilson')) {
+                    termLog("✨ [SECRET PROTOCOL]: 'Sorry Mr. Wilson' detected. Switching to intimate Australian voice...");
+                    playRadioStaticTune();
+                    fetch('/api/bumblebee/secret', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({category: 'secret'})
+                    }).then(r => r.json()).then(data => {
+                        termLog(`💋 [Aussie Intimate]: ${data.response}`);
+                    });
+                } else if (transcript.includes('screen') || transcript.includes('refresh')) {
+                    refreshFrame();
+                } else if (transcript.includes('mark') || transcript.includes('som') || transcript.includes('tag')) {
+                    toggleSoM();
+                } else if (transcript.includes('briefing') || transcript.includes('morning')) {
+                    execLoop('morning');
+                } else if (transcript.includes('midday') || transcript.includes('content')) {
+                    execLoop('midday');
+                } else if (transcript.includes('evening') || transcript.includes('audit')) {
+                    execLoop('evening');
+                } else if (transcript.includes('mission') || transcript.includes('strike')) {
+                    launchMasterMission();
+                } else if (transcript.includes('invoice') || transcript.includes('bill')) {
+                    document.getElementById('inv-p').value = transcript;
+                    execInvoice();
+                } else if (transcript.includes('proposal') || transcript.includes('tars')) {
+                    document.getElementById('tars-c').value = transcript.replace('proposal', '').replace('for', '').replace('tars', '').trim() || 'Client';
+                    execTars();
+                } else if (transcript.includes('explode') || transcript.includes('spark')) {
+                    document.getElementById('spark-t').value = transcript.replace('explode', '').replace('spark', '').trim() || 'Autonomous Systems';
+                    execSpark();
+                } else if (transcript.includes('search') || transcript.includes('memory')) {
+                    const q = transcript.replace('search', '').replace('memory', '').replace('for', '').trim();
+                    document.getElementById('rag-query').value = q;
+                    searchFastRAG();
+                } else {
+                    termLog(`Command parsed: "${transcript}". Storing to memory.`);
+                    fetch('/api/memory/add', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({content: `Voice command: ${transcript}`, category: 'voice_command'})
+                    });
+                }
+            };
+
+            recognition.onerror = function(event) {
+                termLog(`Voice error: ${event.error}`);
+            };
+
+            recognition.onend = function() {
+                if (isVoiceListening) {
+                    try { recognition.start(); } catch (e) {}
+                }
+            };
+
+            recognition.start();
+        }
+
+        async function openCampaign(filename, title) {
+            playTacticalChirp(600, 'sine', 0.08);
+            try {
+                const res = await fetch(`/api/campaigns/${encodeURIComponent(filename)}`);
+                const data = await res.json();
+                currentCampaignRaw = data.content;
+                document.getElementById('modal-campaign-title').innerText = `🎯 Campaign: ${title}`;
+                document.getElementById('modal-campaign-body').innerText = currentCampaignRaw;
+                document.getElementById('campaign-modal').classList.add('active');
+            } catch (e) {
+                termLog(`Error loading campaign: ${e.message}`);
+            }
+        }
+
+        function personalizeCampaign() {
+            const name = document.getElementById('lead-name').value.trim() || '[First Name]';
+            const comp = document.getElementById('lead-company').value.trim() || '[Company]';
+            let txt = currentCampaignRaw;
+            txt = txt.replaceAll('[First Name]', name).replaceAll('[Company]', comp);
+            document.getElementById('modal-campaign-body').innerText = txt;
+            playSuccessSound();
+            termLog(`Campaign personalized for ${name} @ ${comp}.`);
+        }
+
+        function copyCampaignText() {
+            const txt = document.getElementById('modal-campaign-body').innerText;
+            navigator.clipboard.writeText(txt);
+            playSuccessSound();
+            termLog("Campaign content copied to clipboard.");
+        }
+
+        function openStoryboard(filename, title) {
+            playTacticalChirp(750, 'triangle', 0.1);
+            document.getElementById('modal-storyboard-title').innerText = `🎬 Storyboard Contact Sheet: ${title}`;
+            document.getElementById('modal-storyboard-img').src = `/api/video/manifests/${encodeURIComponent(filename)}/preview?t=` + Date.now();
+            document.getElementById('storyboard-modal').classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        async function loadVault() {
+            try {
+                const [resV, resI, resM] = await Promise.all([
+                    fetch('/api/content/vault'),
+                    fetch('/api/invoices'),
+                    fetch('/api/video/manifests')
+                ]);
+                const vData = await resV.json();
+                const iData = await resI.json();
+                const mData = await resM.json();
+                const shelf = document.getElementById('vault-shelf');
+                shelf.innerHTML = '';
+                (mData.manifests || []).slice(0, 3).forEach(m => {
+                    shelf.innerHTML += `<li class="shelf-item" style="cursor: pointer;" onclick="openStoryboard('${m.filename}', '${m.title.replace(/'/g, '')}')"><span>🎬 ${m.title.slice(0, 24)}...</span><span style="color:#a855f7;">View Preview ↗</span></li>`;
+                });
+                (vData.files || []).slice(0, 2).forEach(f => {
+                    shelf.innerHTML += `<li class="shelf-item"><span>📦 ${f.name}</span><span style="color:#00f0ff">Doc</span></li>`;
+                });
+                (iData.invoices || []).slice(0, 2).forEach(inv => {
+                    shelf.innerHTML += `<li class="shelf-item"><span>📄 ${inv.name}</span><a href="/api/download/invoice/${encodeURIComponent(inv.name)}" target="_blank">PDF ↗</a></li>`;
+                });
+            } catch (e) {}
+        }
+
+        async function loadPkgs() {
+            try {
+                const [resC, resP] = await Promise.all([
+                    fetch('/api/campaigns'),
+                    fetch('/api/agency/packages')
+                ]);
+                const cData = await resC.json();
+                const pData = await resP.json();
+                const shelf = document.getElementById('pkg-shelf');
+                shelf.innerHTML = '';
+                (cData.campaigns || []).forEach(c => {
+                    shelf.innerHTML += `<li class="shelf-item" style="cursor: pointer;" onclick="openCampaign('${c.filename}', '${c.title}')"><span>🎯 ${c.title}</span><span style="color:#10b981;">Inspect ↗</span></li>`;
+                });
+                (pData.packages || []).forEach(p => {
+                    shelf.innerHTML += `<li class="shelf-item"><span>💼 ${p.title}</span><span style="color:#00f0ff;">Tier</span></li>`;
+                });
+            } catch (e) {}
+        }
+
+        async function loadMem() {
+            try {
+                const res = await fetch('/api/memory');
+                const data = await res.json();
+                const shelf = document.getElementById('mem-shelf');
+                shelf.innerHTML = '';
+                (data.memories || []).slice(0, 4).forEach(m => {
+                    shelf.innerHTML += `<li class="shelf-item"><span>💡 [${m.category}] ${m.content.slice(0, 35)}...</span></li>`;
+                });
+            } catch (e) {}
+        }
+
+        async function auditRadar() {
+            try {
+                const res = await fetch('/api/gateway/status');
+                const data = await res.json();
+                const s = data.services || {};
+                if (s.GOD_MODE && s.GOD_MODE.online) document.getElementById('b-3142').classList.add('active');
+                if (s.JARVIS_HUD && s.JARVIS_HUD.online) document.getElementById('b-6970').classList.add('active');
+                if (s.RESEARCHOS && s.RESEARCHOS.online) document.getElementById('b-8000').classList.add('active');
+                if (s.CRYPTO_API && s.CRYPTO_API.online) document.getElementById('b-8088').classList.add('active');
+            } catch (e) {}
+        }
+
+        loadVault();
+        loadPkgs();
+        loadMem();
+        auditRadar();
+        setInterval(() => { if (!isSoM) refreshFrame(); auditRadar(); }, 8000);
+    </script>
+</body>
+</html>

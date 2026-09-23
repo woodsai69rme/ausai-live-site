@@ -1,0 +1,27 @@
+{
+  "label": "Print-on-Demand AI Design Factory",
+  "ollama_model_preference": "qwen2.5-coder:latest",
+  "comfyui_url": "http://127.0.0.1:8188",
+  "shopify_store_url": "REPLACE_WITH_YOUR_SHOPIFY_URL",
+  "shopify_admin_api_token": "REPLACE_WITH_SHOPIFY_ADMIN_TOKEN",
+  "printful_api_key": "REPLACE_WITH_PRINTFUL_API_KEY",
+  "product_niches": ["ai_humor", "crypto_lifestyle", "dev_memes", "ai_art", "productivity"],
+  "products_per_night": 1,
+  "default_product_kind": "tshirt",
+  "publish_mode": "draft_only",
+  "enable_comfy_design": true,
+  "pricing": {
+    "tshirt": {"cost_aud": 18, "sell_aud": 35, "margin_aud": 17},
+    "hoodie": {"cost_aud": 35, "sell_aud": 65, "margin_aud": 30},
+    "poster": {"cost_aud": 12, "sell_aud": 29, "margin_aud": 17},
+    "mug": {"cost_aud": 10, "sell_aud": 25, "margin_aud": 15},
+    "phone_case": {"cost_aud": 12, "sell_aud": 30, "margin_aud": 18}
+  },
+  "notes": [
+    "Zero approvals: Shopify (instant signup, 3-day trial) + Printful (instant, free to connect).",
+    "Replace REPLACE_* values with real credentials after account creation.",
+    "Per-item cost is deducted by Printful from sale price — no upfront inventory cost.",
+    "Shopify basic plan: A$45/mo after 3-day trial. Use free trial to test first.",
+    "Gumroad W-8BEN not needed for Shopify (AU-based)."
+  ]
+}

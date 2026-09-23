@@ -20,6 +20,11 @@
 
 Covering: unified system docs, comprehensive audits, project completion reports, revenue dashboards, system status dashboards, and monitoring reports.
 
+| File | Purpose |
+|---|---|
+| `SESSION_DASHBOARD_SYSTEM.md` | AI CLI session dashboard + report + scheduler docs |
+| `X:\sesh\README.md` | Archive README for session dashboard consumers |
+
 ---
 
 ## 🏗️ ARCHITECTURE
@@ -42,6 +47,7 @@ DASHBOARD_SYSTEM_SCRIPTS/ (61 items)
 | Empire Command Center | `EMPIRE_SYSTEM_INDEX.md` |
 | AI Tools Inventory | `AI_TOOLS_INVENTORY_INDEX.md` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

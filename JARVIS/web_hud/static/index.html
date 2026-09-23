@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS Autonomous Command Center v2.2 Complete</title>
+    <style>
+        :root {
+            --bg-base: #060913;
+            --panel-bg: rgba(13, 22, 44, 0.75);
+            --neon-cyan: #00f0ff;
+            --neon-blue: #0284c7;
+            --neon-purple: #a855f7;
+            --neon-green: #10b981;
+            --neon-glow: rgba(0, 240, 255, 0.35);
+            --text-main: #f0f6fc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(0, 240, 255, 0.25);
+            --border-hover: rgba(0, 240, 255, 0.8);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 60%),
+                linear-gradient(to bottom, #060913, #0b1120);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .hud-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px dashed var(--neon-cyan);
+            animation: spin 12s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--neon-glow);
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .title-text h1 {
+            font-size: 26px;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .title-text p {
+            font-size: 13px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px var(--neon-glow);
+        }
+
+        .radar-bar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .port-badge {
+            background: rgba(6, 11, 25, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+        .dot.online {
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .panel-header h2 {
+            font-size: 16px;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .screen-preview {
+            width: 100%;
+            height: 260px;
+            background: #020617;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .screen-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .input-group {
+            margin-bottom: 14px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: rgba(6, 11, 25, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #fff;
+            padding: 9px 12px;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-glow);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border: 1px solid var(--neon-cyan);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 16px var(--neon-glow);
+            transform: translateY(-1px);
+        }
+
+        .btn-cyan {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
+            border-color: var(--neon-purple);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #059669, #047857);
+            border-color: var(--neon-green);
+        }
+
+        .log-box {
+            background: #020617;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Consolas', monospace;
+            font-size: 11px;
+            color: #38bdf8;
+            height: 140px;
+            overflow-y: auto;
+        }
+
+        .items-list {
+            list-style: none;
+            margin-top: 8px;
+            max-height: 110px;
+            overflow-y: auto;
+        }
+
+        .list-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(6, 11, 25, 0.6);
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+        }
+
+        .list-entry a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-title">
+            <div class="hud-circle">⚡</div>
+            <div class="title-text">
+                <h1>JARVIS AI HUD v2.2</h1>
+                <p>Complete Enterprise Multi-Modal Copilot & Autonomous AI Employee Fleet</p>
+            </div>
+        </div>
+        <div class="radar-bar" id="gateway-radar">
+            <div class="port-badge" title="God-Mode AI Command Center"><div class="dot" id="dot-3142"></div>:3142 God-Mode</div>
+            <div class="port-badge" title="JARVIS Holographic HUD"><div class="dot online" id="dot-6970"></div>:6970 JARVIS</div>
+            <div class="port-badge" title="ResearchOS Universal Suite"><div class="dot" id="dot-8000"></div>:8000 ResearchOS</div>
+            <div class="port-badge" title="Crypto Top Buyer API"><div class="dot" id="dot-8088"></div>:8088 Crypto</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <!-- Left Column: Screen Vision, AI Arrow, Master Mission & Schedulers -->
+        <div>
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>👁️ Screen Perception & Set-of-Marks</h2>
+                    <div style="display: flex; gap: 6px;">
+                        <button class="btn btn-cyan" onclick="toggleSoM()">🏷️ SoM Badges</button>
+                        <button class="btn" onclick="refreshScreenshot()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div class="screen-preview">
+                    <img id="screen-img" src="/api/screenshot" alt="Desktop Screenshot">
+                </div>
+            </div>
+
+            <!-- Master Mission Card -->
+            <div class="panel" style="border-color: rgba(234, 179, 8, 0.4);">
+                <div class="panel-header">
+                    <h2 style="color: #facc15;">👑 Complete 5-Phase Master Mission</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="mm-client" placeholder="Client Name [OmniCorp Global]" style="margin-bottom: 6px;">
+                    <input type="text" id="mm-scope" placeholder="Scope [Autonomous Copilot Deployment]" style="margin-bottom: 6px;">
+                    <input type="text" id="mm-invoice" placeholder="Invoice Amount [$6,500]">
+                </div>
+                <button class="btn" style="background: linear-gradient(135deg, #ca8a04, #a16207); border-color: #facc15; width: 100%; justify-content: center;" onclick="runMasterMission()">
+                    🚀 Execute Full 5-Phase Empire Mission
+                </button>
+            </div>
+
+            <!-- Scheduled Loops -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>⏰ Autonomous Scheduled Loops (Auto-Pilot)</h2>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-cyan" onclick="triggerLoop('morning')">🌅 Morning Brief</button>
+                    <button class="btn btn-purple" onclick="triggerLoop('midday')">⚡ Midday Content</button>
+                    <button class="btn btn-green" onclick="triggerLoop('evening')">🌙 Evening Audit</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>🎯 AI Arrow Guidance ("Where Do I Click?")</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="arrow-query" placeholder="Target element (e.g. Settings gear, Submit button)">
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="triggerArrow('guide')">Show Visual Arrow</button>
+                    <button class="btn btn-cyan" onclick="triggerArrow('takeover')">Takeover & Click</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: AI Employees, Agency Packages & Logs -->
+        <div>
+            <!-- TARS & SPARK AI Employees -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>💼 TARS AI: 3-Tier Proposal Generator</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="tars-client" placeholder="Client Name, e.g. Stark Industries" style="margin-bottom: 6px;">
+                    <input type="text" id="tars-scope" placeholder="Service Scope">
+                </div>
+                <button class="btn btn-cyan" onclick="generateProposal()">⚡ Generate Proposal Pack</button>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>⚡ SPARK AI: Content Explosion (1 -> 15+ Assets)</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="spark-topic" placeholder="Core Topic, e.g. Autonomous AI Copilots in 2026">
+                </div>
+                <button class="btn btn-purple" onclick="explodeContent()">💥 Explode 1 Topic</button>
+            </div>
+
+            <!-- Agency Packages Shelf -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>📦 High-Ticket Agency Offerings</h2>
+                </div>
+                <ul class="items-list" id="agency-packages-list">
+                    <li class="list-entry"><span>Loading packages...</span></li>
+                </ul>
+            </div>
+
+            <!-- Mem0 Memory -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>🧠 Mem0 Persistent Memories</h2>
+                </div>
+                <div class="input-group" style="display: flex; gap: 6px;">
+                    <input type="text" id="memory-add-input" placeholder="Remember fact..." style="flex: 1;">
+                    <button class="btn btn-purple" onclick="addMemory()">Save</button>
+                </div>
+                <ul class="items-list" id="memories-list">
+                    <li class="list-entry"><span>Loading memories...</span></li>
+                </ul>
+            </div>
+
+            <!-- Action Stream -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>📜 Live Action Stream</h2>
+                </div>
+                <div class="log-box" id="action-log">
+                    [00:00:00] JARVIS HUD Core initialized.<br/>
+                    [00:00:01] Gateway Port Radar active.<br/>
+                    [00:00:02] Scheduler loops ready.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isSoM = false;
+
+        function log(msg) {
+            const el = document.getElementById('action-log');
+            const now = new Date().toTimeString().split(' ')[0];
+            el.innerHTML += `<br/>[${now}] ${msg}`;
+            el.scrollTop = el.scrollHeight;
+        }
+
+        function refreshScreenshot() {
+            isSoM = false;
+            document.getElementById('screen-img').src = '/api/screenshot?t=' + Date.now();
+            log('Screen frame refreshed.');
+        }
+
+        function toggleSoM() {
+            isSoM = !isSoM;
+            if (isSoM) {
+                document.getElementById('screen-img').src = '/api/som?t=' + Date.now();
+                log('Set-of-Marks UI overlay generated.');
+            } else {
+                refreshScreenshot();
+            }
+        }
+
+        async function triggerArrow(mode) {
+            const q = document.getElementById('arrow-query').value.trim();
+            if (!q) return alert('Enter target description');
+            log(`Triggering AI Arrow (${mode}) for: "${q}"`);
+            const res = await fetch('/api/arrow', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({query: q, mode: mode})
+            });
+            const data = await res.json();
+            log(data.message || 'Arrow dispatched.');
+        }
+
+        async function runMasterMission() {
+            const client = document.getElementById('mm-client').value.trim() || 'OmniCorp Global';
+            const scope = document.getElementById('mm-scope').value.trim() || 'Autonomous Copilot Deployment';
+            const invoice = document.getElementById('mm-invoice').value.trim() || '$6,500';
+            log(`Executing 5-Phase Master Mission for ${client}...`);
+            const res = await fetch('/api/master-mission/run', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({client: client, scope: scope, invoice: invoice})
+            });
+            const data = await res.json();
+            log(`Mission Completed! Proposal, Invoice & Content Staged.`);
+            loadMemories();
+        }
+
+        async function triggerLoop(loopName) {
+            log(`Triggering scheduled loop: ${loopName}...`);
+            const res = await fetch('/api/scheduler/trigger', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({loop: loopName})
+            });
+            const data = await res.json();
+            log(`Loop ${loopName} finished.`);
+        }
+
+        async function generateProposal() {
+            const client = document.getElementById('tars-client').value.trim() || 'Stark Industries';
+            const scope = document.getElementById('tars-scope').value.trim() || 'Copilot Deployment';
+            log(`TARS generating proposal for ${client}...`);
+            const res = await fetch('/api/tars/proposal', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({client_name: client, service_scope: scope})
+            });
+            log(`Proposal compiled for ${client}`);
+        }
+
+        async function explodeContent() {
+            const topic = document.getElementById('spark-topic').value.trim() || 'Autonomous AI Copilots';
+            log(`SPARK exploding topic: "${topic}"...`);
+            const res = await fetch('/api/spark/explode', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({topic: topic})
+            });
+            const data = await res.json();
+            log(`Content Pack saved: ${data.file}`);
+        }
+
+        async function addMemory() {
+            const txt = document.getElementById('memory-add-input').value.trim();
+            if (!txt) return alert('Enter fact');
+            await fetch('/api/memory/add', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({content: txt, category: 'user_fact'})
+            });
+            document.getElementById('memory-add-input').value = '';
+            log(`Memory stored in Mem0: "${txt}"`);
+            loadMemories();
+        }
+
+        async function loadMemories() {
+            try {
+                const res = await fetch('/api/memory');
+                const data = await res.json();
+                const container = document.getElementById('memories-list');
+                if (!data.memories || data.memories.length === 0) {
+                    container.innerHTML = '<li class="list-entry">No memories stored yet.</li>';
+                    return;
+                }
+                container.innerHTML = data.memories.slice(0, 4).map(m => `
+                    <li class="list-entry">
+                        <span>💡 [${m.category}] ${m.content.slice(0, 40)}...</span>
+                    </li>
+                `).join('');
+            } catch (e) {}
+        }
+
+        async function loadAgencyPackages() {
+            try {
+                const res = await fetch('/api/agency/packages');
+                const data = await res.json();
+                const container = document.getElementById('agency-packages-list');
+                if (!data.packages || data.packages.length === 0) {
+                    container.innerHTML = '<li class="list-entry">No packages loaded.</li>';
+                    return;
+                }
+                container.innerHTML = data.packages.map(p => `
+                    <li class="list-entry">
+                        <span>💼 ${p.title}</span>
+                        <span style="color: var(--neon-cyan); font-size: 10px;">Ready</span>
+                    </li>
+                `).join('');
+            } catch (e) {}
+        }
+
+        async function auditGateway() {
+            try {
+                const res = await fetch('/api/gateway/status');
+                const data = await res.json();
+                const s = data.services || {};
+                if (s.GOD_MODE && s.GOD_MODE.online) document.getElementById('dot-3142').classList.add('online');
+                if (s.JARVIS_HUD && s.JARVIS_HUD.online) document.getElementById('dot-6970').classList.add('online');
+                if (s.RESEARCHOS && s.RESEARCHOS.online) document.getElementById('dot-8000').classList.add('online');
+                if (s.CRYPTO_API && s.CRYPTO_API.online) document.getElementById('dot-8088').classList.add('online');
+            } catch (e) {}
+        }
+
+        loadMemories();
+        loadAgencyPackages();
+        auditGateway();
+        setInterval(() => { if (!isSoM) refreshScreenshot(); auditGateway(); }, 8000);
+    </script>
+</body>
+</html>

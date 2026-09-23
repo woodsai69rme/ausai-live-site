@@ -100,6 +100,7 @@ python AETHER_SYNC_BRIDGE.py
 | AI Army | `AI_ARMY/` |
 | Empire Command Center | `EMPIRE_COMMAND_CENTER.py`, `EMPIRE_COMMAND_CENTER.html` |
 | Master Ecosystem Catalog | `MASTER_ECOSYSTEM/` |
+| 🔧 Reference Docs (NEW 2026-07-09) | [`REFERENCE_DOCS_INDEX.md`](REFERENCE_DOCS_INDEX.md) |
 
 ---
 

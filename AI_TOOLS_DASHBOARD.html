@@ -1,258 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Tools Dashboard — Unified Control Panel</title>
-<style>
-  :root {
-    --bg: #08090d; --card: #111318; --border: #1e2130; --text: #dde0e8;
-    --muted: #6b7080; --accent: #6366f1; --green: #22c55e; --warn: #f59e0b;
-    --red: #ef4444; --blue: #3b82f6; --purple: #8b5cf6; --orange: #f97316;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
-  header { text-align: center; margin-bottom: 28px; }
-  header h1 { font-size: 22px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  header p { color: var(--muted); margin-top: 4px; font-size: 13px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Dashboard — Coding Assistants + Local Models + Quick Links</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-soft: rgba(99, 102, 241, 0.18);
+            --primary-glow: rgba(99, 102, 241, 0.45);
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --success-soft: rgba(16, 185, 129, 0.18);
+            --danger: #ef4444;
+            --danger-soft: rgba(239, 68, 68, 0.20);
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --darker: #111827;
+            --darkest: #0b0f1a;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --surface: rgba(31, 41, 55, 0.65);
+            --surface-strong: rgba(31, 41, 55, 0.85);
+            --surface-border: rgba(148, 163, 184, 0.18);
+            --surface-highlight: rgba(255, 255, 255, 0.06);
+            --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.35);
+        }
 
-  .status-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-  .stat { flex: 1; min-width: 100px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
-  .stat .num { font-size: 26px; font-weight: 800; }
-  .stat .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .stat .num.green { color: var(--green); }
-  .stat .num.warn { color: var(--warn); }
-  .stat .num.red { color: var(--red); }
-  .stat .num.blue { color: var(--blue); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background:
+                radial-gradient(ellipse 1100px 700px at 12% -10%, rgba(99, 102, 241, 0.22), transparent 60%),
+                radial-gradient(ellipse 900px 600px at 110% 20%, rgba(139, 92, 246, 0.18), transparent 65%),
+                radial-gradient(ellipse 800px 500px at 50% 110%, rgba(16, 185, 129, 0.10), transparent 70%),
+                linear-gradient(135deg, var(--darkest), #1e1b4b 60%, #0b0f1a);
+            background-attachment: fixed;
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  .section-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); margin-bottom: 10px; margin-top: 20px; }
-  .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-bottom: 16px; }
-  .tool-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 16px; transition: border-color .2s, transform .15s;
-  }
-  .tool-card:hover { border-color: var(--accent); transform: translateY(-1px); }
-  .tool-card .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .tool-card h4 { font-size: 14px; font-weight: 700; }
-  .tool-card .status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
-  .tool-card .status-dot.active { background: var(--green); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
-  .tool-card .status-dot.configured { background: var(--warn); box-shadow: 0 0 6px rgba(245,158,11,0.3); }
-  .tool-card .status-dot.unknown { background: var(--red); opacity: 0.5; }
-  .tool-card .desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
-  .tool-card .meta { font-size: 11px; color: var(--muted); }
-  .tool-card .meta span { margin-right: 10px; }
+        .container { max-width: 1600px; margin: 0 auto; }
 
-  .btn { display: inline-block; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none; transition: all .2s; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted); }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .btn-primary:hover { background: #4f46e5; }
-  .btn-green { border-color: var(--green); color: var(--green); }
-  .btn-green:hover { background: rgba(34,197,94,0.08); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-  .project-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
-  .project-pill {
-    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 10px 16px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500;
-  }
-  .project-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
-  .project-pill .dot.green { background: var(--green); }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 28px;
+            background: var(--surface-strong);
+            border-radius: 18px;
+            border: 1px solid var(--surface-border);
+            backdrop-filter: blur(14px) saturate(140%);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+            box-shadow: var(--shadow-soft);
+            animation: fadeUp 0.6s ease both;
+        }
 
-  footer { text-align: center; color: var(--muted); font-size: 11px; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--border); }
-</style>
+        h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 999px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .badge-primary { background: var(--primary-soft); color: var(--primary); border: 1px solid rgba(99,102,241,0.3); }
+        .badge-success { background: var(--success-soft); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+        .badge-warning { background: rgba(245,158,11,0.20); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--surface-border);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-title i { color: var(--primary); }
+
+        .grid-tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-bottom: 30px; }
+        .grid-quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-bottom: 30px; }
+        .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 30px; }
+
+        .card {
+            background: var(--surface);
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid var(--surface-border);
+            backdrop-filter: blur(10px) saturate(130%);
+            -webkit-backdrop-filter: blur(10px) saturate(130%);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+            transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), border-color 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.6s ease both;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-glow);
+            box-shadow: 0 14px 36px rgba(99, 102, 241, 0.30);
+        }
+        .card a { color: var(--light); text-decoration: none; display: block; height: 100%; }
+        .card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; margin-bottom: 12px;
+        }
+        .card h3 { font-size: 0.95rem; margin-bottom: 4px; }
+        .card p { font-size: 0.78rem; color: var(--gray); margin: 0; }
+        .card .meta { font-size: 0.72rem; color: var(--gray); margin-top: 10px; }
+        .card .meta span { margin-right: 10px; }
+        .card .status-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-top: 8px;
+        }
+        .status-pill.active { background: var(--success-soft); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+        .status-pill.configured { background: rgba(245,158,11,0.20); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+        .status-pill.unknown { background: var(--danger-soft); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+
+        .modal-tip { font-size: 0.78rem; color: var(--gray); margin-top: 10px; }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 14px;
+            padding: 22px 24px;
+            border: 1px solid var(--surface-border);
+            text-align: center;
+            backdrop-filter: blur(10px) saturate(130%);
+            -webkit-backdrop-filter: blur(10px) saturate(130%);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            animation: fadeUp 0.6s ease both;
+        }
+        .stat-card:hover { transform: translateY(-4px); border-color: var(--primary-glow); }
+        .stat-value { font-size: 2.2rem; font-weight: bold; color: var(--primary); margin-bottom: 8px; }
+        .stat-label { color: var(--gray); font-size: 1rem; }
+
+        .tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab {
+            padding: 8px 18px; border-radius: 8px;
+            background: var(--surface); border: 1px solid var(--surface-border);
+            cursor: pointer; font-size: 0.85rem; font-weight: 500;
+            color: var(--gray); transition: all 0.2s;
+        }
+        .tab.active { background: var(--surface-strong); color: var(--primary); border-color: var(--primary); }
+        .tab:hover:not(.active) { color: var(--light); }
+
+        .search-box {
+            width: 100%; padding: 14px 14px 14px 44px;
+            background: var(--darkest); border: 1px solid var(--surface-border);
+            border-radius: 10px; color: var(--light); font-size: 1rem;
+        }
+        .search-box:focus { outline: none; border-color: var(--primary); }
+        .search-wrap { position: relative; margin-bottom: 20px; }
+        .search-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--gray); }
+
+        .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 6px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 500;
+            background: transparent; border: 1px solid var(--surface-border); color: var(--gray);
+            cursor: pointer; transition: all 0.2s;
+        }
+        .filter-btn.active { background: var(--primary-soft); border-color: var(--primary); color: var(--primary); }
+        .filter-btn:hover:not(.active) { border-color: var(--gray); color: var(--light); }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
+            z-index: 9999; backdrop-filter: blur(4px);
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--dark); padding: 32px; border-radius: 16px;
+            border: 1px solid var(--primary); max-width: 700px;
+            max-height: 80vh; overflow-y: auto; min-width: 400px;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--gray); }
+        .modal-title { font-size: 1.4rem; color: var(--primary); }
+        .modal-close { background: none; border: none; color: var(--light); font-size: 1.5rem; cursor: pointer; padding: 5px 10px; }
+        .modal-close:hover { color: var(--danger); }
+        .modal-body { color: var(--light); line-height: 1.6; }
+
+        .code-block {
+            background: var(--darkest); padding: 12px 16px; border-radius: 8px;
+            font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.82rem;
+            border: 1px solid var(--surface-border); overflow-x: auto;
+            margin: 8px 0; color: #e5e7eb;
+        }
+
+        .project-pill {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 18px 22px;
+            display: flex; align-items: center; gap: 12px;
+            font-size: 0.95rem; font-weight: 600;
+            backdrop-filter: blur(10px) saturate(130%);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .project-pill:hover { border-color: var(--primary-glow); transform: translateY(-2px); }
+        .project-pill .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--success); box-shadow: 0 0 12px var(--success); }
+        .project-pill .desc { color: var(--gray); font-weight: 400; font-size: 0.82rem; margin-top: 4px; }
+
+        footer { text-align: center; color: var(--gray); font-size: 0.85rem; margin-top: 30px; padding: 16px; border-top: 1px solid var(--surface-border); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .grid-tools { grid-template-columns: repeat(2, 1fr); }
+            .grid-quick { grid-template-columns: repeat(2, 1fr); }
+            .modal-content { min-width: 90%; padding: 20px; }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1>🧠 AI Tools Unified Dashboard</h1>
-    <p>All installed AI coding assistants, local models, and automation tools — February 2026</p>
-  </header>
+    <div class="container">
 
-  <div class="status-bar">
-    <div class="stat"><div class="num green">14</div><div class="lbl">AI Coding Tools</div></div>
-    <div class="stat"><div class="num blue">6</div><div class="lbl">Local Models (Ollama)</div></div>
-    <div class="stat"><div class="num warn">14</div><div class="lbl">Active AI Configs</div></div>
-    <div class="stat"><div class="num green">✅</div><div class="lbl">ComfyUI Studio</div></div>
-    <div class="stat"><div class="num green">✅</div><div class="lbl">AusAI Tech</div></div>
-  </div>
+        <!-- ===== HEADER ===== -->
+        <header>
+            <h1><i class="fas fa-brain" aria-hidden="true"></i> AI TOOLS DASHBOARD</h1>
+            <div style="color: var(--gray); font-size: 1.05rem; margin-bottom: 12px;">
+                Coding Assistants &middot; Local Models &middot; Quick Links &middot; Active Projects
+            </div>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <span class="badge badge-success"><i class="fas fa-check-circle" aria-hidden="true"></i> 14 Coding Tools</span>
+                <span class="badge badge-primary"><i class="fas fa-server" aria-hidden="true"></i> 6 Local Models</span>
+                <span class="badge badge-warning"><i class="fas fa-rocket" aria-hidden="true"></i> 5 Active Projects</span>
+            </div>
+        </header>
 
-  <!-- Active Projects -->
-  <div class="section-title">🚀 Active Projects</div>
-  <div class="project-row">
-    <div class="project-pill"><span class="dot green"></span>AusAI Tech — 67 docs, 15 rounds</div>
-    <div class="project-pill"><span class="dot green"></span>ComfyUI Studio — Local media generation</div>
-    <div class="project-pill"><span class="dot green"></span>AI Voice Assistant — Voice-controlled PA</div>
-  </div>
+        <!-- ===== STATS ROW ===== -->
+        <div class="grid-stats" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-value" id="statCoding">14</div>
+                <div class="stat-label">Coding Assistants</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statModels">6</div>
+                <div class="stat-label">Local Models</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statLinks">6</div>
+                <div class="stat-label">Quick Links</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statProjects">3</div>
+                <div class="stat-label">Active Projects</div>
+            </div>
+        </div>
 
-  <!-- AI Coding Assistants -->
-  <div class="section-title">💻 AI Coding Assistants</div>
-  <div class="tool-grid">
-    <div class="tool-card">
-      <div class="top"><h4>🤖 Codebuff (Claude)</h4><span class="status-dot active"></span></div>
-      <div class="desc">Primary AI coding assistant. 67 AUSAI files built in 15 rounds.</div>
-      <div class="meta"><span>CLI</span><span>DeepSeek v4</span></div>
-      <span class="btn btn-green">Active</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🧠 Claude Code</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Anthropic's agentic coding tool. Claude 4 Opus.</div>
-      <div class="meta"><span>CLI</span><span>Config: .claude/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🔮 Gemini CLI</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Google's coding assistant. Gemini 2.5 Pro.</div>
-      <div class="meta"><span>CLI</span><span>Config: .gemini/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>📝 Cursor AI</h4><span class="status-dot configured"></span></div>
-      <div class="desc">VS Code fork with AI. Multi-model support.</div>
-      <div class="meta"><span>IDE</span><span>Config: .cursor/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🔧 Continue.dev</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Open-source AI code assistant. VS Code/JetBrains.</div>
-      <div class="meta"><span>IDE Plugin</span><span>Config: .continue/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>⚡ Cline</h4><span class="status-dot configured"></span></div>
-      <div class="desc">VS Code extension. Autonomous coding agent.</div>
-      <div class="meta"><span>IDE Plugin</span><span>Config: .cline/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🦊 OpenClaw</h4><span class="status-dot configured"></span></div>
-      <div class="desc">AI agent framework. Multi-provider.</div>
-      <div class="meta"><span>CLI</span><span>Config: .openclaw/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>📋 Qwen Code</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Alibaba's Qwen Coder model. Local + cloud.</div>
-      <div class="meta"><span>CLI</span><span>Config: .qwen/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🔄 Trae AI</h4><span class="status-dot configured"></span></div>
-      <div class="desc">ByteDance AI coding assistant.</div>
-      <div class="meta"><span>CLI</span><span>Config: .trae/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>📚 Codex (OpenAI)</h4><span class="status-dot configured"></span></div>
-      <div class="desc">OpenAI's coding agent in terminal.</div>
-      <div class="meta"><span>CLI</span><span>Config: .codex/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🏃 Kilo Code</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Lightweight AI coding agent.</div>
-      <div class="meta"><span>CLI</span><span>Config: .kilocode/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>💎 Monica Code</h4><span class="status-dot configured"></span></div>
-      <div class="desc">AI code review and pair programming.</div>
-      <div class="meta"><span>CLI</span><span>Config: .monica-code/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🌋 Crush</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Multi-agent coding framework.</div>
-      <div class="meta"><span>CLI</span><span>Config: .crush/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🕊️ Hermes</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Agent communication protocol.</div>
-      <div class="meta"><span>CLI</span><span>Config: .hermes/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-  </div>
+        <!-- ===== TABS ===== -->
+        <div class="tabs" id="mainTabs"> role="tablist"
+            <div class="tab active" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-coding" data-tab="coding" onclick="switchTab('coding')"><i class="fas fa-code" aria-hidden="true"></i> Coding Assistants</div>
+            <div class="tab" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-models" data-tab="models" onclick="switchTab('models')"><i class="fas fa-microchip" aria-hidden="true"></i> Local Models</div>
+            <div class="tab" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-links" data-tab="links" onclick="switchTab('links')"><i class="fas fa-link" aria-hidden="true"></i> Quick Links</div>
+            <div class="tab" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-projects" data-tab="projects" onclick="switchTab('projects')"><i class="fas fa-rocket" aria-hidden="true"></i> Active Projects</div>
+        </div>
 
-  <!-- Local AI -->
-  <div class="section-title">🏠 Local AI Models</div>
-  <div class="tool-grid">
-    <div class="tool-card">
-      <div class="top"><h4>🦙 Ollama</h4><span class="status-dot active"></span></div>
-      <div class="desc">Local LLM runtime. Multiple models installed.</div>
-      <div class="meta"><span>Port: 11434</span><span>Config: .ollama/</span></div>
-      <span class="btn btn-green">Running</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🧠 LM Studio</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Desktop LLM runner. GGUF models. GPU accelerated.</div>
-      <div class="meta"><span>Port: 1234</span><span>Config: .lmstudio/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🎵 ComfyUI Studio</h4><span class="status-dot active"></span></div>
-      <div class="desc">AI media generation. Music videos, images, animation.</div>
-      <div class="meta"><span>Port: 8188</span><span>RTX 4060 8GB</span></div>
-      <span class="btn btn-green">Active</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🔧 Pinokio</h4><span class="status-dot configured"></span></div>
-      <div class="desc">1-click AI app launcher. Scriptable.</div>
-      <div class="meta"><span>Config: .pinokio/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>⚡ n8n</h4><span class="status-dot configured"></span></div>
-      <div class="desc">Self-hosted workflow automation.</div>
-      <div class="meta"><span>Port: 5678</span><span>Config: .n8n/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🎨 AITK</h4><span class="status-dot configured"></span></div>
-      <div class="desc">AI toolkit. 427 items in config.</div>
-      <div class="meta"><span>Config: .aitk/</span></div>
-      <span class="btn">Configured</span>
-    </div>
-  </div>
+        <!-- ===== TAB 1: CODING ASSISTANTS ===== -->
+        <div class="tab-content" id="tab-coding"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-code" aria-hidden="true"></i> AI Coding Assistants</h2>
 
-  <!-- Quick Links -->
-  <div class="section-title">🔗 Quick Links</div>
-  <div class="tool-grid">
-    <div class="tool-card">
-      <div class="top"><h4>📄 Open AUSAI Dashboard</h4></div>
-      <div class="desc">Your daily operations command centre.</div>
-      <a href="AUSAI_OPS_DASHBOARD.html" class="btn btn-primary" style="margin-top:6px;">Open</a>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🗺️ AUSAI 1-Page Index</h4></div>
-      <div class="desc">Printable cheat sheet — all 67 docs.</div>
-      <a href="MASTER_INDEX_1PAGE.md" class="btn" style="margin-top:6px;">Open</a>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>🎬 ComfyUI System Index</h4></div>
-      <div class="desc">Music video studio documentation.</div>
-      <a href="ComfyUI/COMFYUI_SYSTEM_INDEX.md" class="btn" style="margin-top:6px;">Open</a>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>⚡ Launch ComfyUI Studio</h4></div>
-      <div class="desc">22-option menu launcher.</div>
-      <span class="btn btn-green" style="margin-top:6px;" title="Run in terminal: launch_music_video_studio.bat">▶ Terminal Command</span>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>📋 Day 1 Execution Pack</h4></div>
-      <div class="desc">Copy-paste Fiverr, LinkedIn, Reddit.</div>
-      <a href="DAY1_EXECUTION_PACK.md" class="btn" style="margin-top:6px;">Open</a>
-    </div>
-    <div class="tool-card">
-      <div class="top"><h4>📊 Budget Calculator</h4></div>
-      <div class="desc">Interactive consulting P&L planner.</div>
-      <a href="BUDGET_CALCULATOR.html" class="btn" style="margin-top:6px;">Open</a>
-    </div>
-  </div>
+            <div class="search-wrap">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="search-box" id="codingSearch" placeholder="Search coding assistants..." oninput="filterCoding()">
+            </div>
 
-  <footer>
-    AI Tools Dashboard v1.0 · 14 coding tools · 6 local models · 3 active projects<br>
-    Built 2026-06-28 · github.com/woodsai69rme
-  </footer>
-</div>
+            <div class="filter-bar">
+                <span class="filter-btn active" onclick="filterStatus('all', this)">All</span>
+                <span class="filter-btn" onclick="filterStatus('active', this)">Active</span>
+                <span class="filter-btn" onclick="filterStatus('configured', this)">Configured</span>
+                <span class="filter-btn" onclick="filterStatus('ide', this)">IDE</span>
+                <span class="filter-btn" onclick="filterStatus('cli', this)">CLI</span>
+            </div>
+
+            <div class="grid-tools" id="codingGrid">
+                <div class="card" data-tag="active primary cli claude codebuff" data-status="active">
+                    <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                    <h3>Codebuff (Claude)</h3>
+                    <p>Primary AI coding assistant. 67 AUSAI files built in 15 rounds.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>DeepSeek v4</span></div>
+                    <span class="status-pill active">Active</span>
+                </div>
+                <div class="card" data-tag="cli anthropic" data-status="configured claude">
+                    <div class="card-icon" style="background:rgba(217,119,6,0.2);color:#d97706;"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                    <h3>Claude Code</h3>
+                    <p>Anthropic's agentic coding tool. Claude 4 Opus.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .claude/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli google gemini" data-status="configured gemini">
+                    <div class="card-icon" style="background:rgba(59,130,246,0.2);color:#3b82f6;"><i class="fas fa-eye" aria-hidden="true"></i></div>
+                    <h3>Gemini CLI</h3>
+                    <p>Google's coding assistant. Gemini 2.5 Pro.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .gemini/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="ide cursor" data-status="configured cursor ide">
+                    <div class="card-icon" style="background:rgba(20,184,166,0.2);color:#14b8a6;"><i class="fas fa-i-cursor" aria-hidden="true"></i></div>
+                    <h3>Cursor AI</h3>
+                    <p>VS Code fork with AI. Multi-model support.</p>
+                    <div class="meta"><span><i class="fas fa-window-maximize" aria-hidden="true"></i> IDE</span><span>Config: .cursor/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="ide continue" data-status="configured continue ide">
+                    <div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-forward" aria-hidden="true"></i></div>
+                    <h3>Continue.dev</h3>
+                    <p>Open-source AI code assistant. VS Code/JetBrains.</p>
+                    <div class="meta"><span><i class="fas fa-plug" aria-hidden="true"></i> IDE Plugin</span><span>Config: .continue/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="ide cline vscode" data-status="configured cline ide">
+                    <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                    <h3>Cline</h3>
+                    <p>VS Code extension. Autonomous coding agent.</p>
+                    <div class="meta"><span><i class="fas fa-plug" aria-hidden="true"></i> IDE Plugin</span><span>Config: .cline/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli openclaw agent" data-status="configured openclaw cli">
+                    <div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-paw" aria-hidden="true"></i></div>
+                    <h3>OpenClaw</h3>
+                    <p>AI agent framework. Multi-provider.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .openclaw/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli qwen alibaba" data-status="configured qwen cli">
+                    <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-list-check" aria-hidden="true"></i></div>
+                    <h3>Qwen Code</h3>
+                    <p>Alibaba's Qwen Coder model. Local + cloud.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .qwen/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli trae bytedance" data-status="configured trae cli">
+                    <div class="card-icon" style="background:rgba(249,115,22,0.2);color:#f97316;"><i class="fas fa-arrows-rotate" aria-hidden="true"></i></div>
+                    <h3>Trae AI</h3>
+                    <p>ByteDance AI coding assistant.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .trae/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli openai codex" data-status="configured codex cli">
+                    <div class="card-icon" style="background:rgba(6,182,212,0.2);color:#06b6d4;"><i class="fas fa-book" aria-hidden="true"></i></div>
+                    <h3>Codex (OpenAI)</h3>
+                    <p>OpenAI's coding agent in terminal.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .codex/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli kilo" data-status="configured kilo cli">
+                    <div class="card-icon" style="background:rgba(220,38,38,0.2);color:#ef4444;"><i class="fas fa-person-running" aria-hidden="true"></i></div>
+                    <h3>Kilo Code</h3>
+                    <p>Lightweight AI coding agent.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .kilocode/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli monica" data-status="configured monica cli">
+                    <div class="card-icon" style="background:rgba(168,85,247,0.2);color:#a855f7;"><i class="fas fa-gem" aria-hidden="true"></i></div>
+                    <h3>Monica Code</h3>
+                    <p>AI code review and pair programming.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .monica-code/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli crush agent" data-status="configured crush cli">
+                    <div class="card-icon" style="background:rgba(239,68,68,0.2);color:#ef4444;"><i class="fas fa-volcano" aria-hidden="true"></i></div>
+                    <h3>Crush</h3>
+                    <p>Multi-agent coding framework.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .crush/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="cli hermes protocol" data-status="configured hermes cli">
+                    <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#818cf8;"><i class="fas fa-dove" aria-hidden="true"></i></div>
+                    <h3>Hermes</h3>
+                    <p>Agent communication protocol.</p>
+                    <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> CLI</span><span>Config: .hermes/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 2: LOCAL MODELS ===== -->
+        <div class="tab-content" id="tab-models" style="display:none;"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-microchip" aria-hidden="true"></i> Local AI Models</h2>
+
+            <div class="search-wrap">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="search-box" id="modelSearch" placeholder="Search local models..." oninput="filterModels()">
+            </div>
+
+            <div class="grid-tools" id="modelGrid">
+                <div class="card" data-tag="ollama llama local 11434" data-status="active">
+                    <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-server" aria-hidden="true"></i></div>
+                    <h3>Ollama</h3>
+                    <p>Local LLM runtime. Multiple models installed.</p>
+                    <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> Port: 11434</span><span>Config: .ollama/</span></div>
+                    <span class="status-pill active">Running</span>
+                </div>
+                <div class="card" data-tag="lm studio gguf local" data-status="configured">
+                    <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                    <h3>LM Studio</h3>
+                    <p>Desktop LLM runner. GGUF models. GPU accelerated.</p>
+                    <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> Port: 1234</span><span>Config: .lmstudio/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="comfyui studio media 8188" data-status="active">
+                    <div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-music" aria-hidden="true"></i></div>
+                    <h3>ComfyUI Studio</h3>
+                    <p>AI media generation. Music videos, images, animation.</p>
+                    <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> Port: 8188</span><span>RTX 4060 8GB</span></div>
+                    <span class="status-pill active">Active</span>
+                </div>
+                <div class="card" data-tag="pinokio launcher local" data-status="configured">
+                    <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-wrench" aria-hidden="true"></i></div>
+                    <h3>Pinokio</h3>
+                    <p>1-click AI app launcher. Scriptable.</p>
+                    <div class="meta"><span><i class="fas fa-folder" aria-hidden="true"></i> Config: .pinokio/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="n8n workflow 5678" data-status="configured">
+                    <div class="card-icon" style="background:rgba(220,38,38,0.2);color:#ef4444;"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                    <h3>n8n</h3>
+                    <p>Self-hosted workflow automation.</p>
+                    <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> Port: 5678</span><span>Config: .n8n/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="aitk toolkit" data-status="configured">
+                    <div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-palette" aria-hidden="true"></i></div>
+                    <h3>AITK</h3>
+                    <p>AI toolkit. 427 items in config.</p>
+                    <div class="meta"><span><i class="fas fa-folder" aria-hidden="true"></i> Config: .aitk/</span></div>
+                    <span class="status-pill configured">Configured</span>
+                </div>
+                <div class="card" data-tag="devmonitor pro telemetry monitoring pyqt god mode" data-status="active">
+                    <div class="card-icon" style="background:rgba(34,211,238,0.2);color:#22d3ee;"><i class="fas fa-gauge-high" aria-hidden="true"></i></div>
+                    <h3>DevMonitor Pro</h3>
+                    <p>PyQt desktop widget. Live WebSocket telemetry for God Mode dashboards.</p>
+                    <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> Port: 8765</span><span>Desktop\DevMonitorWidget</span></div>
+                    <span class="status-pill active">Active</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 3: QUICK LINKS ===== -->
+        <div class="tab-content" id="tab-links" style="display:none;"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-link" aria-hidden="true"></i> Quick Links</h2>
+
+            <div class="search-wrap">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="search-box" id="linkSearch" placeholder="Search quick links..." oninput="filterLinks()">
+            </div>
+
+            <div class="grid-quick" id="linkGrid">
+                <div class="card" data-tag="ausai operations dashboard ops">
+                    <a href="AUSAI_OPS_DASHBOARD.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-file-alt" aria-hidden="true"></i></div>
+                        <h3>AUSAI Dashboard</h3>
+                        <p>Your daily operations command centre.</p>
+                        <div class="meta"><span><i class="fas fa-external-link-alt" aria-hidden="true"></i> Open</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="master index 1page cheat sheet">
+                    <a href="MASTER_INDEX_1PAGE.md" target="_blank">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-map" aria-hidden="true"></i></div>
+                        <h3>AUSAI 1-Page Index</h3>
+                        <p>Printable cheat sheet — all 67 docs.</p>
+                        <div class="meta"><span><i class="fas fa-external-link-alt" aria-hidden="true"></i> Open</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="comfyui studio music video media">
+                    <a href="ComfyUI/COMFYUI_SYSTEM_INDEX.md" target="_blank">
+                        <div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-film" aria-hidden="true"></i></div>
+                        <h3>ComfyUI System Index</h3>
+                        <p>Music video studio documentation.</p>
+                        <div class="meta"><span><i class="fas fa-external-link-alt" aria-hidden="true"></i> Open</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="comfyui launcher terminal">
+                    <a href="ComfyUI/launch_music_video_studio.bat" target="_blank">
+                        <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-play" aria-hidden="true"></i></div>
+                        <h3>Launch ComfyUI Studio</h3>
+                        <p>22-option menu launcher.</p>
+                        <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> Run in terminal</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="day1 execution fiverr linkedin reddit">
+                    <a href="DAY1_EXECUTION_PACK.md" target="_blank">
+                        <div class="card-icon" style="background:rgba(220,38,38,0.2);color:#ef4444;"><i class="fas fa-clipboard" aria-hidden="true"></i></div>
+                        <h3>Day 1 Execution Pack</h3>
+                        <p>Copy-paste Fiverr, LinkedIn, Reddit.</p>
+                        <div class="meta"><span><i class="fas fa-external-link-alt" aria-hidden="true"></i> Open</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="budget calculator consulting plan financials">
+                    <a href="BUDGET_CALCULATOR.html" target="_blank">
+                        <div class="card-icon" style="background:rgba(6,182,212,0.2);color:#06b6d4;"><i class="fas fa-calculator" aria-hidden="true"></i></div>
+                        <h3>Budget Calculator</h3>
+                        <p>Interactive consulting P&L planner.</p>
+                        <div class="meta"><span><i class="fas fa-external-link-alt" aria-hidden="true"></i> Open</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="devmonitor pro telemetry monitoring god mode pyqt widget">
+                    <a href="LAUNCH_DEVMONITOR.bat" target="_blank">
+                        <div class="card-icon" style="background:rgba(34,211,238,0.2);color:#22d3ee;"><i class="fas fa-gauge-high" aria-hidden="true"></i></div>
+                        <h3>DevMonitor Pro</h3>
+                        <p>Desktop widget — CPU/RAM telemetry, racing gauges, God Mode sync.</p>
+                        <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> ws://localhost:8765</span><span><i class="fas fa-terminal" aria-hidden="true"></i> Run in terminal</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="god mode command center omninexus nextjs swarm">
+                    <a href="START_GOD_MODE.bat" target="_blank">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                        <h3>God Mode Stack</h3>
+                        <p>Next.js :3142 + DevMonitor telemetry + Swarm + Project Brain.</p>
+                        <div class="meta"><span><i class="fas fa-terminal" aria-hidden="true"></i> Run in terminal</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 4: ACTIVE PROJECTS ===== -->
+        <div class="tab-content" id="tab-projects" style="display:none;"> role="tabpanel"
+            <h2 class="section-title"><i class="fas fa-rocket" aria-hidden="true"></i> Active Projects</h2>
+
+            <div style="display: flex; flex-direction: column; gap: 14px; max-width: 900px;">
+                <div class="project-pill">
+                    <span class="dot" aria-hidden="true"></span>
+                    <div>
+                        AusAI Tech &mdash; 67 docs, 15 rounds
+                        <div class="desc">Australian AI consulting project. Daily operations command centre.</div>
+                    </div>
+                </div>
+                <div class="project-pill">
+                    <span class="dot" aria-hidden="true"></span>
+                    <div>
+                        ComfyUI Studio &mdash; Local media generation
+                        <div class="desc">RTX 4060 8GB. Whisper, BLIP captioning, music video workflows.</div>
+                    </div>
+                </div>
+                <div class="project-pill">
+                    <span class="dot" aria-hidden="true"></span>
+                    <div>
+                        AI Voice Assistant &mdash; Voice-controlled PA
+                        <div class="desc">Speech recognition + LLM + TTS. Local-first pipeline.</div>
+                    </div>
+                </div>
+                <div class="project-pill">
+                    <span class="dot" aria-hidden="true"></span>
+                    <div>
+                        PasteGrab v2.0 &mdash; Video downloader + browser extensions
+                        <div class="desc">yt-dlp GUI, FIFO queue, ComfyUI presets, API :17890, Chrome/Firefox extensions.</div>
+                    </div>
+                </div>
+                <div class="project-pill">
+                    <span class="dot" aria-hidden="true"></span>
+                    <div>
+                        DevMonitor Pro v18.5 &mdash; Desktop system monitor + God Mode telemetry
+                        <div class="desc">PyQt widget, racing gauges, RGB sync, WebSocket :8765, START_GOD_MODE integration.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            AI Tools Dashboard v2.0 &middot; 14 coding tools &middot; 6 local models &middot; 4 active projects<br>
+            Built 2026-07-12 &middot; mirrors UNIFIED_MASTER_DASHBOARD.html design
+        </footer>
+
+    </div>
+
+    <!-- Modal -->
+    <script type="module" src="dashboards.mjs"></script>
+    <script>
+        // ===== TAB SWITCHING =====
+        function switchTab(name) {
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.getElementById('tab-' + name).style.display = 'block';
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.querySelector('.tab[data-tab="' + name + '"]').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ===== CODING SEARCH =====
+        function filterCoding() {
+            const q = document.getElementById('codingSearch').value.toLowerCase();
+            document.querySelectorAll('#codingGrid .card').forEach(card => {
+                const tag = (card.dataset.tag || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+                card.style.display = (tag.includes(q) || text.includes(q)) ? '' : 'none';
+            });
+        }
+
+        // ===== STATUS FILTER (Coding tab) =====
+        function filterStatus(filter, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            document.querySelectorAll('#codingGrid .card').forEach(card => {
+                const tag = (card.dataset.tag || '').toLowerCase();
+                card.style.display = (filter === 'all' || tag.split(' ').includes(filter)) ? '' : 'none';
+            });
+        }
+
+        // ===== MODELS SEARCH =====
+        function filterModels() {
+            const q = document.getElementById('modelSearch').value.toLowerCase();
+            document.querySelectorAll('#modelGrid .card').forEach(card => {
+                const tag = (card.dataset.tag || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+                card.style.display = (tag.includes(q) || text.includes(q)) ? '' : 'none';
+            });
+        }
+
+        // ===== LINKS SEARCH =====
+        function filterLinks() {
+            const q = document.getElementById('linkSearch').value.toLowerCase();
+            document.querySelectorAll('#linkGrid .card').forEach(card => {
+                const tag = (card.dataset.tag || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+                card.style.display = (tag.includes(q) || text.includes(q)) ? '' : 'none';
+            });
+        }
+
+        // ===== MODAL ===== Modal system (showCardDetail / closeModal / makeP, plus
+        // Escape + focus-trap + background-click handlers) lives in shared
+        // dashboards.mjs (ES module, deferred) — loaded just above via
+        // <script type="module" src="dashboards.mjs"></script>.
+        // See DASHBOARD_ARCHITECTURE.md for the API reference.
+
+        // ===== STATS COUNTERS =====
+        document.getElementById('statCoding').textContent = document.querySelectorAll('#codingGrid .card').length;
+        document.getElementById('statModels').textContent = document.querySelectorAll('#modelGrid .card').length;
+        document.getElementById('statLinks').textContent = document.querySelectorAll('#linkGrid .card').length;
+        document.getElementById('statProjects').textContent = document.querySelectorAll('#tab-projects .project-pill').length;
+
+        // ===== SAFE CARD DETAIL (DOM-based, no innerHTML) =====
+        // Builds the modal using createElement + textContent so card-derived strings
+        // (h3 / p / .meta / .status-pill text) are inserted as TEXT NODES only,
+        // never parsed as HTML. This avoids the XSS-via-innerHTML foot-gun when
+        // tool names/descriptions contain '&', '<', '>'.
+
+        // ===== EVENT DELEGATION =====
+        document.querySelectorAll('#codingGrid, #modelGrid').forEach(grid => {
+            grid.addEventListener('click', function(e) {
+                const card = e.target.closest('.card');
+                if (card) showCardDetail(card);
+            });
+        });
+
+        console.log('AI TOOLS DASHBOARD loaded');
+    </script>
 </body>
 </html>

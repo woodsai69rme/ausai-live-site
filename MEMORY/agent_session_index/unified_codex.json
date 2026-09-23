@@ -1,0 +1,57 @@
+[
+  {
+    "tool": "codex",
+    "session_id": "rollout-2026-01-08T00-50-23-019b98ef-fc85-74c0-b116-1e94eeec61f5.jsonl",
+    "title": "rollout-2026-01-08T00-50-23-019b98ef-fc85-74c0-b116-1e94eeec61f5.jsonl",
+    "created": "2026-01-07T14:50:51.164477+00:00",
+    "updated": "2026-01-07T14:50:51.164477+00:00",
+    "path": "C:\\Users\\karma\\.codex\\sessions\\2026\\01\\08\\rollout-2026-01-08T00-50-23-019b98ef-fc85-74c0-b116-1e94eeec61f5.jsonl",
+    "format": "codex.rollout.jsonl",
+    "bytes": 6859,
+    "extra": {}
+  },
+  {
+    "tool": "codex",
+    "session_id": "rollout-2026-04-30T11-43-55-019ddc0e-931b-70e2-ab47-f7bed04605ef.jsonl",
+    "title": "rollout-2026-04-30T11-43-55-019ddc0e-931b-70e2-ab47-f7bed04605ef.jsonl",
+    "created": "2026-04-30T01:44:03.978326+00:00",
+    "updated": "2026-04-30T01:44:03.978326+00:00",
+    "path": "C:\\Users\\karma\\.codex\\sessions\\2026\\04\\30\\rollout-2026-04-30T11-43-55-019ddc0e-931b-70e2-ab47-f7bed04605ef.jsonl",
+    "format": "codex.rollout.jsonl",
+    "bytes": 42374,
+    "extra": {}
+  },
+  {
+    "tool": "codex",
+    "session_id": "rollout-2026-08-06T22-21-38-019fd705-a12f-7862-b011-843dd35a837f.jsonl",
+    "title": "rollout-2026-08-06T22-21-38-019fd705-a12f-7862-b011-843dd35a837f.jsonl",
+    "created": "2026-08-06T12:21:46.824503+00:00",
+    "updated": "2026-08-06T12:21:46.824503+00:00",
+    "path": "C:\\Users\\karma\\.codex\\sessions\\2026\\08\\06\\rollout-2026-08-06T22-21-38-019fd705-a12f-7862-b011-843dd35a837f.jsonl",
+    "format": "codex.rollout.jsonl",
+    "bytes": 123064,
+    "extra": {}
+  },
+  {
+    "tool": "codex",
+    "session_id": "rollout-2026-09-14T12-35-17-01a09dc4-d598-73d1-aee8-5816675febd1.jsonl",
+    "title": "rollout-2026-09-14T12-35-17-01a09dc4-d598-73d1-aee8-5816675febd1.jsonl",
+    "created": "2026-09-14T02:35:18.580131+00:00",
+    "updated": "2026-09-14T02:35:18.580131+00:00",
+    "path": "C:\\Users\\karma\\.codex\\sessions\\2026\\09\\14\\rollout-2026-09-14T12-35-17-01a09dc4-d598-73d1-aee8-5816675febd1.jsonl",
+    "format": "codex.rollout.jsonl",
+    "bytes": 161055,
+    "extra": {}
+  },
+  {
+    "tool": "codex",
+    "session_id": "rollout-2026-09-15T10-42-11-01a0a283-a5ec-7c63-a0d0-a4122688dccc.jsonl",
+    "title": "rollout-2026-09-15T10-42-11-01a0a283-a5ec-7c63-a0d0-a4122688dccc.jsonl",
+    "created": "2026-09-15T00:42:23.351550+00:00",
+    "updated": "2026-09-15T00:42:23.351550+00:00",
+    "path": "C:\\Users\\karma\\.codex\\sessions\\2026\\09\\15\\rollout-2026-09-15T10-42-11-01a0a283-a5ec-7c63-a0d0-a4122688dccc.jsonl",
+    "format": "codex.rollout.jsonl",
+    "bytes": 160072,
+    "extra": {}
+  }
+]

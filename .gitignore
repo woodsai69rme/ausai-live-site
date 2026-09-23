@@ -666,3 +666,539 @@ fseventsd
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 .apdisk
+
+# Scratch / diagnostic scripts from v-series rounds (added 2026-06-30)
+# Exception: operator SSH push cheat sheet requested at this path.
+# Using tmp/* (not tmp/) so the negation below can take effect.
+tmp/*
+!tmp/SSH_PUSH_SETUP.md
+tmp_v*.py
+
+# (AppData is now blanket-ignored in Pass-7; the old subdir patterns below were superseded)
+
+# Pass-3: Machine Learning Cache & Data (added 2026-07-01; de-leading-slashed v23 amend-#2)
+/.keras/
+/.matplotlib/
+
+# Pass-3: IDE & Editor State (added 2026-07-01; de-leading-slashed v23 amend-#2)
+/.vs/
+/.viminfo
+
+# Pass-3: REPL & CLI History (added 2026-07-01; de-leading-slashed v23 amend-#2)
+/.node_repl_history
+
+# (Documents is now blanket-ignored in Pass-7; the old Documents/Cline/ pattern was superseded)
+
+# (AppData blanket-ignored in Pass-7; old subdir patterns superseded)
+
+# Pass-5: Transient automation output dirs (added 2026-07-01; de-leading-slashed v23 amend-#2; v30 inline-comment-fix)
+# refreshes per monitor/scheduled run
+SLEEP_TRIPLE/outbox/
+# refreshes per AI Army deploy
+AI_ARMY/reports/
+
+# (Desktop is now blanket-ignored in Pass-7; the old Desktop/.tmp.driveupload/ pattern was superseded)
+
+# Pass-7: Windows OS user profile directories at workspace root (added 2026-07-01)
+# These are user-profile folders accidentally visible at C:\Users\karma\
+# workspace root. They are NOT project assets and MUST NOT be committed.
+Contacts/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Music/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+AppData/
+
+# Pass-7: External project / sub-project directories (added 2026-07-01)
+# Each is a separate project cloned into or created within the workspace.
+# They have their own .git repos, READMEs, or are otherwise independent.
+# Anchored patterns (leading /) only match at repo root, not nested dirs.
+_LAUNCHER_ARCHIVE/
+_archive_2026-06-25/
+ARCHIVED_PROJECTS/
+agent-zero/
+ai-coding-portal/
+ai-development-ecosystem/
+ai-music-video-studio/
+ai-security-checklist/
+ai_completion/
+ai_shorts_generator/
+ai_social_media_monitor/
+aigf/
+ausai_live/
+awesome-free-models/
+awesome-n8n-templates/
+backup_20260121_224426/
+bookmarks_directory/
+browser-extension/
+chatgptproj/
+claude/
+coleam00/
+comfyui-workflow-recipes/
+crushdash/
+dyad-apps/
+enterprise-dev-hub-docs/
+firefox_bookmarks_output/
+generated_content/
+github-repo-downloader/
+hermes-agent/
+jarvis-dashboard/
+jdm-video-planner/
+kubernetes/
+lovable-agent-complete/
+marketing/
+memory-movie-creator/
+my-video/
+n8n-automation-stack/
+n8n-templates/
+newbeg/
+newgit/
+open-webui/
+orchids-projects/
+phonetools/
+plans/
+plugins/
+production_deployment_20251010_205856/
+project-dashboard/
+projects/
+public-apis/
+reposort/
+revenue_content/
+solo/
+supabase/
+tadpole-studio/
+test_documents/
+# /tests/ removed in cont.12 -- sub-projects' tests/ dirs already carved-out earlier;
+# project-root tests/unit/test_*.py is now tracked.
+# /__pycache__/ (no leading slash!) covers Python caches ANYWHERE in the tree:
+#   tests/unit/__pycache__/, python/__pycache__/, src/example/__pycache__/, etc.
+__pycache__/
+/tests/.pytest_cache/
+ultimate-ai-assistant/
+whisper.cpp/
+woodsai69rme-profile/
+
+# Pass-7: State, log, and transient diagnostic files (added 2026-07-01)
+.launch_pids.txt
+.launch_tasks.txt
+.tmp_audit.txt
+.tmp_untracked.txt
+.tmp_untracked_num.txt
+replacements.txt
+morning_briefing.txt
+benchmark_coders_results.jsonl
+agents_server.err
+agents_server.out
+archon_server.err
+archon_server.out
+mcp_server.err
+mcp_server.out
+popen_test.err
+
+# Pass-8: Remaining workspace-root project/archive dirs (added 2026-07-08)
+# These were intentionally skipped in Pass-7 — may contain project content.
+# Blanket-ignored per golden rule "break things to improve them." If any
+# contain source that should be committed, undo this block and git add.
+04_DEVELOPMENT/
+08_SCRIPTS/
+1/
+ACTIVE_PROJECTS/
+AETHER_CORE_SYSTEM/
+AGENT_REPORTS/
+AI_TOOLS/
+AI_VOICE_ASSISTANT/
+AUSAI_TECH_LANDING_PAGE/
+BOOKMARK_MANAGER_PRO/
+DASHBOARD_SYSTEM_SCRIPTS/
+DOCUMENTATION/
+EMPIRE_GUIDES/
+ENHANCEMENTS/
+Knowledge_Base/
+MASTER_ECOSYSTEM/
+MASTER_ECOSYSTEM_CATALOG_2026/
+MASTER_KNOWLEDGE_VAULT_2026/
+MEDIA/
+PORTFOLIO_IMAGES/
+PROJECT_BRAIN_2_0/
+QWEN_CODE_DOCUMENTATION/
+RESCUE_DUMP_~0,14/
+STAGING/
+SYSTEM_MONITOR/
+UnSlop.Design/
+
+# Pass-8: User config and diagnostic files at root (added 2026-07-08)
+# (Duplicates from Pass-7/9 consolidated here; kept once)
+.gitconfig
+.gitignore_template
+agents_run_smoke.py
+msedgewebview2.sln
+make_money_tab.png
+projects_tab.png
+services_tab.png
+package.json
+sitemap.xml
+wikipedia)
+music-video-creation-guide.md
+z55.md
+affiliate-ai-lesson8-prompts.md
+
+# Pass-10: Diagnostic one-shot scripts (added 2026-07-08)
+# These are ad-hoc debugging/inspection scripts, not reusable tools.
+check_repo.py
+check_repo2.py
+dict_bug_repro.py
+final_list.py
+test_system.py
+inspect_44gb_gal.py
+inspect_data.py
+extract_gal_test.py
+fetch_manuagi.py
+parse_desc.py
+parse_yt.py
+summarize_benchmark.py
+
+# Pass-11: Diagnostic one-shot scripts + state files + sub-project dirs (added 2026-07-08)
+# These are ad-hoc inspection/extraction/audit scripts and transient state.
+CHAT_HISTORY_2026-06-25.txt
+audit_aether_gal.py
+audit_repos.py
+extract_all_bookmarks.py
+extract_gal.ps1
+extract_repos.py
+extract_transcripts.py
+fetch_all_repos.py
+firefox_bookmarks_extractor.py
+generate_index.py
+generate_portfolio_images.py
+get_active_workflows.py
+get_models.py
+restart_services.py
+run_deep_dives.py
+search_crypto.py
+system-dashboard/
+New folder/
+
+# Pass-12: Diagnostic shell scripts (added 2026-07-08)
+_harness_recipe_check.sh
+diag_archon.sh
+verify_ornith_precheck.sh
+verify_ornith_wiring.sh
+AETHER_SYNC_BRIDGE.py
+AGENCY_MISSION_CONTROL.md
+AGENT_REGISTRY.md
+AI_AGENT_INVENTORY.md
+AI_VOICE_PA.md
+AI_VOICE_PA_DESIGN.md
+API_USAGE.html
+APPEND_ONLY_HYGIENE_RUNNER.py
+ARCHON_MEMORY_INGESTION.py
+AUTO_ENHANCER.py
+BACKUP_STATUS.html
+Build_EmpireOS.py
+CREATIVE_STUDIO_OVERVIEW.md
+DASHBOARD_GUIDES.md
+EMPIRE_COMMAND_CENTER.html
+EMPIRE_COMMAND_CENTER.py
+FACEBOOK_GROUPS_TARGETING.md
+FOOTCLAN_EXECUTOR.md
+FOOTCLAN_EXECUTOR.py
+FOOTCLAN_SQUAD.md
+FOOTCLAN_SQUAD_DESIGN.md
+FOOTCLAN_TO_REVENUE.md
+FREEBUFF_SESSIONS_REVIEW.md
+GAL_INTEGRITY_VERIFY.md
+GAL_INTEGRITY_VERIFY.py
+GAL_VERIFICATION_PLAN.md
+MARKETPLACE_DASHBOARD.tsx
+OMNI_AGGREGATOR.py
+OMNI_AUTO_DOCUMENTER.py
+OMNI_CATALOGER.py
+OMNI_DOC_POPULATOR.py
+OUTREACH_TEMPLATES.md
+OUTSTANDING_WORK_PLAN.md
+QUICK_START.md
+QUICK_START_SECURE_BOOTSTRAP.md
+QUICK_START_YOUTUBE_ENHANCEMENT_TOOLS.md
+REALITY_VS_CLAIM_AUDIT.py
+REAL_MONEY_PLAN_2026-06-25.md
+REAL_TIME_DASHBOARD.md
+REDDIT_POST.md
+REVENUE_DASHBOARD.html
+REVENUE_N8N_CONNECTOR.py
+REVENUE_READINESS_REPORT.md
+REVENUE_TRACKING_DESIGN.md
+Revenue_Tracking_System.py
+SALES_CALL_SCRIPT.md
+SERVERS_RUNNING_STATUS.md
+SESSION_COMPLETE_DOCUMENTATION.md
+SKILLS_IMPLEMENTATION_REPORT.md
+SKILLS_MATRIX.md
+STABILIZE.py
+STABILIZE_PHASE2.py
+VOICE_PA_BRIDGE.md
+VOICE_PA_BRIDGE.py
+YOUTUBE-ENHANCEMENTS.md
+YOUTUBE_TRANSCRIPT_HARVEST_DESIGN.md
+footclan_squad_dispatch.py
+orchestrator.py
+project_dashboard.html
+youtube_transcript_harvest.md
+youtube_transcript_harvest.py
+
+# Pass-13: Remaining personal toolset files (added 2026-07-08)
+# Blanket-gitignored per user directive.
+
+# Pass-14: Malformed unicode directory artifact
+X\357\200\272/
+# Cont.12 carve-out: re-include project-root tests/unit/*.py back into the repo.
+# (Operator Pass-8 blanket-ignores /tests/ wholesale; this re-includes our pytest
+#  unit-test files. Other tests/ contents stay ignored.)
+!/tests/unit/
+!/tests/unit/test_*.py
+
+# Pass-15: PyInstaller build artifacts (cont.16-fup-6 -- bin\build_audit_exe.bat)
+# Although the global `dist/` and `build/` patterns above already catch *most*
+# PyInstaller outputs in any subdirectory, we add explicit `bin/`-anchored
+# entries for archaeology clarity. `.spec` files SHOULD NOT be committed --
+# they're rebuild-derived; the canonical build path is `bin\build_audit_exe.bat`.
+/bin/dist/
+/bin/build/
+/bin/*.spec
+
+# ComfyUI source files (TRACK -- never blanket-ignored anymore):
+# - ComfyUI/tools/music_video_studio.py (operator-discoverable source)
+# - ComfyUI/config/openrouter_free_models.txt (operator-discovery file)
+# These land via the cont.17-fup-3 atomic-fix commit on 2026-07-11.
+# Heavy-weight / generated subdirs remain excluded.
+/ComfyUI/models/
+/ComfyUI/custom_nodes/
+/ComfyUI/output/
+/ComfyUI/input/
+/ComfyUI/.git/
+
+# Surgical unblock (cont.17-fup-3 commit 3 rescue): negation for the blanket
+# TOOLS/ (line 830) and [Cc]onfig/ (line 300) rules, which -- on Windows with
+# core.ignorecase=true -- would otherwise block /ComfyUI/tools/ and
+# /ComfyUI/config/ source files from beging tracked. These two negations let
+# the existing blanket rules still cover other TOOLS/ + Config dirs in the repo.
+!/ComfyUI/tools/
+!/ComfyUI/config/
+
+# Rescue-side backup from cont.17-fup-3 (rename, not rm -- preserves 90MB of
+# upstream ComfyUI version metadata so the operator can `mv` it back if needed).
+# Without this rule the 90MB would surface as `?? ComfyUI/_dot_git_bak_20260711/`
+# in every git status; the name-specific /ComfyUI/.git/ rule does NOT match.
+# (code-reviewer MUST-FIX landed as part of commit 4dbb29e00 amendment.)
+/ComfyUI/_dot_git_bak_*/
+
+# === Cont.17-fup-3 follow-up: explicit per-subdir + per-file deny rules for upstream-ComfyUI infra ===
+# Why not just /ComfyUI/ blanket-denied: per gitignore "last matching pattern wins"
+# semantics, a blanket /ComfyUI/ BEFORE the existing !/ComfyUI/tools/ + !/ComfyUI/config/
+# negation rules would cascade-hide ALL children and override the negation
+# ("git doesn't list excluded directories for performance reasons, so any
+# patterns on contained files have no effect"). So we list each upstream-ComfyUI
+# infra dir/file explicitly, AFTER the existing deny rules but BEFORE the new
+# carve-out negation rules (below).
+#
+# Source-of-truth reference: `git status ComfyUI/` showed 92 untracked files
+# after the cont.17-fup-3 source-file rescue unblocked tracking. The rules
+# below suppress the 90+ upstream-ComfyUI infra files; the four blocks below
+# re-include ONLY the operator-useful carve-outs (CLAUDE.md-referenced).
+
+# Upstream-ComfyUI infra subdirs (no operator value)
+/ComfyUI/.ci/
+/ComfyUI/.github/
+/ComfyUI/alembic_db/
+/ComfyUI/api_server/
+/ComfyUI/app/
+/ComfyUI/blueprints/
+/ComfyUI/comfy/
+/ComfyUI/comfy_api/
+/ComfyUI/comfy_api_nodes/
+/ComfyUI/comfy_config/
+/ComfyUI/comfy_execution/
+/ComfyUI/comfy_extras/
+/ComfyUI/comfyui_stderr.txt
+/ComfyUI/comfyui_stdout.txt
+/ComfyUI/comfyui_version.py
+/ComfyUI/middleware/
+/ComfyUI/script_examples/
+/ComfyUI/tests/
+/ComfyUI/tests-unit/
+/ComfyUI/utils/
+
+# Upstream-ComfyUI loose files (build / config / core / boilerplate)
+/ComfyUI/.gitignore
+/ComfyUI/.gitattributes
+/ComfyUI/.coderabbit.yaml
+/ComfyUI/.env.example
+/ComfyUI/.spectral.yaml
+/ComfyUI/CODEOWNERS
+/ComfyUI/CONTRIBUTING.md
+/ComfyUI/LICENSE
+/ComfyUI/SECURITY.md
+/ComfyUI/alembic.ini
+/ComfyUI/cuda_malloc.py
+/ComfyUI/download_model.py
+/ComfyUI/execution.py
+/ComfyUI/extra_model_paths.yaml.example
+/ComfyUI/folder_paths.py
+/ComfyUI/hook_breaker_ac10a0.py
+/ComfyUI/latent_preview.py
+/ComfyUI/main.py
+/ComfyUI/manager_requirements.txt
+/ComfyUI/node_helpers.py
+/ComfyUI/nodes.py
+/ComfyUI/openapi.yaml
+/ComfyUI/protocol.py
+/ComfyUI/pyproject.toml
+/ComfyUI/pytest.ini
+/ComfyUI/requirements.txt
+/ComfyUI/server.py
+
+# Upstream-ComfyUI ad-hoc helper scripts (in tools/, no operator value)
+/ComfyUI/tools/_analyze_wf.py
+/ComfyUI/tools/_check_queue.py
+/ComfyUI/tools/_queue_wan.py
+/ComfyUI/tools/_queue_wan2.py
+/ComfyUI/tools/_wan_run_log.txt
+/ComfyUI/tools/analyze_audio_fast.py
+/ComfyUI/tools/auto_poster.py
+/ComfyUI/tools/date_bucket_report.py
+/ComfyUI/tools/download_models.py
+/ComfyUI/tools/drive_organize.py
+/ComfyUI/tools/mp3_identity_scan.py
+/ComfyUI/tools/mp3_lyrics_verify.py
+/ComfyUI/tools/social_video_pipeline.py
+/ComfyUI/tools/video_identity_scan.py
+
+# Upstream-ComfyUI launchers (only the operator-useful CLAUDE.md-referenced ones
+# are re-included below)
+/ComfyUI/launch_comfyui.bat
+
+# === Operator-useful carve-outs (negation rules; must come AFTER the deny rules) ===
+# These override the explicit per-subdir/per-file deny rules above via
+# gitignore "last matching pattern wins" semantics.
+
+# Top-level docs (CLAUDE.md-referenced operator memory + reference)
+!/ComfyUI/AGENTS.md
+!/ComfyUI/README.md
+!/ComfyUI/MASTER_REFERENCE.md
+!/ComfyUI/MASTER_PLAN.md
+!/ComfyUI/MODEL_DASHBOARD.md
+!/ComfyUI/COMFYUI_QUICK_START.md
+!/ComfyUI/COMFYUI_SYSTEM_INDEX.md
+!/ComfyUI/QUANTIZATION.md
+!/ComfyUI/USAGE_GUIDE.md
+
+# CLAUDE.md-referenced launchers (operator)
+!/ComfyUI/launch_music_video_studio.bat
+!/ComfyUI/launch_comfyui_menu.bat
+
+# Operator-useful tools/ scripts (CLAUDE.md + operator-discoverable)
+!/ComfyUI/tools/check_gpu_stack.bat
+!/ComfyUI/tools/configure_remote_stay_connected.bat
+!/ComfyUI/tools/fix_pagefile.bat
+!/ComfyUI/tools/fix_pagefile.ps1
+!/ComfyUI/tools/free_model_switch.bat
+!/ComfyUI/tools/free_model_switch.ps1
+!/ComfyUI/tools/local_ai_assistant.bat
+!/ComfyUI/tools/local_ai_assistant.py
+!/ComfyUI/tools/setup_holo31.bat
+!/ComfyUI/tools/setup_holo31.py
+!/ComfyUI/tools/update_comfyui_tools.bat
+
+# Operator-useful subtrees (CLAUDE.md-referenced subdirs — re-include whole subtree
+# via negation; contents visible unless explicitly excluded below)
+!/ComfyUI/workflow_templates/
+!/ComfyUI/docs/
+
+# === Cont.17-fup-7 follow-up: blanket-ignore ComfyUI/config/ scratch files === 7 files
+# at level-1 of ComfyUI/config/ surface as untracked every git status:
+# ALL_FREE_MODELS_COMPLETE.md, COMPLETE_SYSTEM_STATE.md,
+# OPENROUTER_ALL_FREE_MODELS.txt, SESSION_SUMMARY_Jul8.md,
+# free_models_all.md, free_models_setup.md, music_video_studio_config.json.
+# Per the cont.17-fup-3 carve-out consensus (deny-sublists-before-re-include-files
+# via "last matching pattern wins"), these scratch + operator-runtime files get
+# blanket-denied here, then the ONE tracked file re-included via ! rule below.
+# (complementar to the existing !/ComfyUI/config/ which re-includes the subtree.)
+/ComfyUI/config/*
+!/ComfyUI/config/openrouter_free_models.txt
+# Pass-15b: Files that churn on every test / monitor run (added 2026-07-14)
+# These are local operational logs, not source; git status churn only.
+TODO_TRACKER.md
+SLEEP_TRIPLE/SLEEP_TRIPLE_AUDIT.jsonl
+
+# Pass-16: Terminal session logs (added 2026-07-13)
+# terminals/ contains CLI session capture files — two exceed 40MB each (239.txt=55MB, 249.txt=43MB).
+# These are runtime artifacts, not source code. Preserved on disk per Golden Rule #1; just not committed.
+# No leading slash (matches anywhere in tree, same convention as tmp/ above).
+terminals/
+
+# Pass-16: Grok CLI tool (added 2026-07-13)
+# .grok/ contains Grok CLI binary (137MB), session DB, downloads, and docs.
+# Selective: preserve .grok/skills/ (referenced by CLAUDE.md Documentation Contract).
+# Pattern: deny everything, then re-include skills/ subtree.
+.grok/*
+!.grok/skills/
+!.grok/docs/
+
+*.html.bak
+
+# Pass-17: Noisy untracked directories and root-level master docs (added 2026-07-27)
+# These directories churn with generated/archive/helper content. If a file inside
+# should be committed, use `git add -f <path>` to force-add it.
+# Note: AI_AGENCY/ is a currently-untracked project subdir; force-add if it ever
+# graduates to tracked source-of-truth. AI_INFLUENCER_STUDIO/ graduated to tracked
+# source on 2026-08-19; its caches stay ignored via the Pass-18 deny-sublists below.
+_DOCS_ARCHIVE/
+TOOLS/
+REVENUE_GENERATORS/
+AI_AGENCY/
+BACKUPS/
+BROWSER_COMPUTER_USE_RESEARCH/
+COMPLETED_PROJECTS/mobile_backup/
+
+# Pass-18: AI_INFLUENCER_STUDIO cache deny-sublists (added 2026-08-19)
+# The studio graduated to tracked source. Keep only its generated caches ignored
+# (deny-sublists, not a top-level deny) so source files stay trackable. build/,
+# dist/, __pycache__/, and .pytest_cache/ are already covered by global patterns.
+AI_INFLUENCER_STUDIO/.mypy_cache/
+AI_INFLUENCER_STUDIO/.ruff_cache/
+
+# Root-level master docs / config fragments generated by indexing tools.
+# Pattern ignores keep git status quiet; force-add if a file is source-of-truth.
+*_INDEX.md
+*_MASTER.md
+*_SYSTEM_INDEX.md
+ALL_*.md
+*_INVENTORY.md
+
+# Local databases and runtime locks
+*.db
+*.sqlite
+*.sqlite3
+*.lock
+JARVIS/screenshots/
+
+# Sovereign Empire massive dashboard folders
+/dashback26/
+/auggdash26_consolidated/
+/COMPLETED_PROJECTS/
+
+# Ignore nested repos and corrupted X drive folder
+/.graphify/
+/EmpireOS/
+/X*/
+
+# Massive memory exports
+/MEMORY/agent_session_index/archive_*/
+
+# Augment checkpoints containing secrets
+/01_AI_DEVELOPMENT/AI_Agents/.augment/

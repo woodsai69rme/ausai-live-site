@@ -1,6 +1,7 @@
 # 🏆 GOLDEN RULES - QUICK REFERENCE
 
-**Version:** 1.0  
+**Version:** 1.1  
+**Amended:** 2026-07-13 — Rule #8 cause + operator directive  
 **Status:** MANDATORY FOR ALL AI SYSTEMS
 
 ---
@@ -47,24 +48,30 @@
 ```
 
 ### Rule 8️⃣ - PERSONAL FILES ARE SACRED ⭐ MOST CRITICAL
-**READ/REVIEW ONLY - NEVER MODIFY**
+**READ/REVIEW ONLY — NEVER MODIFY — NO EXCEPTIONS**
+
+**Cause:** Irreplaceable personal content. Low disk space **never** overrides this rule.
+
+**Operator directive (2026-07-13):** Do **not** touch Documents, Downloads, Music, Videos, Pictures, or Desktop.
 
 | Protected Location | Status |
 |-------------------|--------|
-| `Documents/` | ✅ READ ONLY |
-| `Downloads/` | ✅ READ ONLY (including ARCHIVE_OLD) |
-| `Pictures/` | ✅ READ ONLY |
-| `Videos/` | ✅ READ ONLY |
-| `Music/` | ✅ READ ONLY |
-| `Desktop/` | ✅ READ ONLY |
-| `OneDrive/` | ✅ READ ONLY |
+| `Documents/` | 🔒 READ ONLY |
+| `Downloads/` | 🔒 READ ONLY (including ARCHIVE_OLD) |
+| `Pictures/` | 🔒 READ ONLY |
+| `Videos/` | 🔒 READ ONLY |
+| `Music/` | 🔒 READ ONLY |
+| `Desktop/` | 🔒 READ ONLY |
+| `OneDrive/` | 🔒 READ ONLY |
 
 **FORBIDDEN ACTIONS:**
-- ❌ Delete any personal file
-- ❌ Move personal files to archive
-- ❌ "Clean up" personal folders
+- ❌ Delete, move, archive, or reorganize any personal file
+- ❌ "Clean up" or free-space actions on these folders
+- ❌ Space-audit recommendations targeting these paths
+- ❌ Run `downloads_organize.py` or staging flush on personal folders
 - ❌ Modify any personal file
-- ❌ Reorganize personal folders
+
+**Allowed:** Read/review only when operator explicitly asks.
 
 ### Rule 9️⃣ - ENHANCEMENT ACTIONS ONLY
 
@@ -113,11 +120,20 @@ These rules are:
 **For Every Interaction:**
 - [ ] Not suggesting deletions
 - [ ] Not labeling as outdated
-- [ ] Respecting READ-ONLY for personal files
+- [ ] Rule #8: Documents/Downloads/Music/Videos/Pictures/Desktop untouched (cause: operator directive 2026-07-13)
+- [ ] No space-audit MOVE/DELETE on personal folders — even if C: is critical
 - [ ] Suggesting enhancements only
 - [ ] Treating all files as valuable
 - [ ] Looking for integration opportunities
 - [ ] Adding, not subtracting
+
+**When User Asks to Document (MANDATORY):**
+- [ ] Wrote real `.md` files to disk (not chat-only summary)
+- [ ] Saved to `X:\SESSION_ARCHIVES\` + mirrored `_DOCS_ARCHIVE\`
+- [ ] Updated `ALL_PLANS_AND_PROJECTS_MASTER.md` (append row)
+- [ ] Verified files exist and reported full paths + sizes
+- [ ] Opened files if user said "show" / "open"
+- [ ] Skill: `.grok/skills/document-this/SKILL.md`
 
 ---
 

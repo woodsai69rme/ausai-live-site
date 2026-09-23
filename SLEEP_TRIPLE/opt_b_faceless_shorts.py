@@ -30,7 +30,7 @@ CONFIG_PATH = ROOT / "opt_b_config.json"
 OUTBOX = ROOT / "outbox" / "b_faceless_shorts"
 AUDIT_LOG = ROOT / "SLEEP_TRIPLE_AUDIT.jsonl"
 
-EXEC_STATUS = ("started", "ok", "skipped", "refused", "noop", "failed")
+EXEC_STATUS = ("started", "ok", "degraded", "skipped", "refused", "noop", "failed")
 SUB_TASKS = ("harvest_topics", "write_script", "generate_video", "upload_short", "inject_links")
 
 RULE_8_FOLDERS = frozenset(
@@ -44,7 +44,8 @@ def is_rule_8(p: Path) -> bool:
 
 
 def load_config() -> dict:
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    from env_bridge import load_config as _load
+    return _load(CONFIG_PATH)
 
 
 def load_master() -> dict:

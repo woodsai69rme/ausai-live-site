@@ -1,0 +1,1 @@
+import sys; sys.path.insert(0, 'AI_INFLUENCER_STUDIO/src'); sys.path.insert(0, 'AI_INFLUENCER_STUDIO/tests'); import unittest, importlib; m = importlib.import_module('test_beat_assembly'); r = unittest.TextTestRunner(verbosity=0).run(unittest.defaultTestLoader.loadTestsFromModule(m)); sys.exit(0 if r.wasSuccessful() else 1)

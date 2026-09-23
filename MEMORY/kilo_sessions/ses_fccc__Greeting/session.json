@@ -1,0 +1,189 @@
+{
+  "id": "ses_fcccfa87fffe9VU207ZO3iB4qA",
+  "project_id": "f73fe8ceb92ed09f1842e80c5fb29c46fe8d09fc",
+  "parent_id": null,
+  "slug": "calm-moon",
+  "directory": "C:/Users/karma",
+  "title": "Greeting",
+  "version": "7.4.23",
+  "share_url": null,
+  "summary_additions": 0,
+  "summary_deletions": 0,
+  "summary_files": 0,
+  "summary_diffs": null,
+  "revert": null,
+  "permission": "[{\"permission\":\"question\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"suggest\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"interactive_terminal\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"plan_enter\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"plan_exit\",\"pattern\":\"*\",\"action\":\"deny\"}]",
+  "time_created": 1787565201281,
+  "time_updated": 1787565326291,
+  "time_compacting": null,
+  "time_archived": null,
+  "workspace_id": null,
+  "path": "",
+  "agent": "code",
+  "model": "{\"id\":\"kilo-auto/free\",\"providerID\":\"kilo\",\"variant\":\"default\"}",
+  "cost": 0.0,
+  "tokens_input": 33703,
+  "tokens_output": 5,
+  "tokens_reasoning": 50,
+  "tokens_cache_read": 1920,
+  "tokens_cache_write": 0,
+  "metadata": null,
+  "created_iso": "2026-08-24T09:53:21.281000+00:00",
+  "updated_iso": "2026-08-24T09:55:26.291000+00:00",
+  "messages": [
+    {
+      "id": "msg_0333069c4001VjUO9u0741zGUE",
+      "time_created": "2026-08-24T09:53:25.956000+00:00",
+      "time_updated": "2026-08-24T09:55:26.310000+00:00",
+      "data": {
+        "role": "user",
+        "time": {
+          "created": 1787565205956
+        },
+        "tools": {},
+        "agent": "code",
+        "model": {
+          "providerID": "kilo",
+          "modelID": "kilo-auto/free"
+        },
+        "summary": {
+          "diffs": []
+        }
+      }
+    },
+    {
+      "id": "msg_033306a3f00112diym5Um9jtgM",
+      "time_created": "2026-08-24T09:53:26.079000+00:00",
+      "time_updated": "2026-08-24T09:55:33.910000+00:00",
+      "data": {
+        "parentID": "msg_0333069c4001VjUO9u0741zGUE",
+        "role": "assistant",
+        "mode": "code",
+        "agent": "code",
+        "path": {
+          "cwd": "C:\\Users\\karma",
+          "root": "C:\\Users\\karma"
+        },
+        "cost": 0,
+        "tokens": {
+          "total": 35678,
+          "input": 33703,
+          "output": 5,
+          "reasoning": 50,
+          "cache": {
+            "write": 0,
+            "read": 1920
+          }
+        },
+        "modelID": "kilo-auto/free",
+        "providerID": "kilo",
+        "time": {
+          "created": 1787565206079,
+          "completed": 1787565333908
+        },
+        "finish": "stop"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "id": "prt_033306a11001le748AXgC3JFzt",
+      "message_id": "msg_0333069c4001VjUO9u0741zGUE",
+      "time_created": "2026-08-24T09:53:26.037000+00:00",
+      "time_updated": "2026-08-24T09:53:26.038000+00:00",
+      "data": {
+        "type": "text",
+        "text": "hi"
+      }
+    },
+    {
+      "id": "prt_033325b9f001wcgINPHy94i7oi",
+      "message_id": "msg_033306a3f00112diym5Um9jtgM",
+      "time_created": "2026-08-24T09:55:33.407000+00:00",
+      "time_updated": "2026-08-24T09:55:33.408000+00:00",
+      "data": {
+        "type": "step-start",
+        "time": {
+          "start": 1787565333407
+        }
+      }
+    },
+    {
+      "id": "prt_033325ba20016C4x3wMQToujt0",
+      "message_id": "msg_033306a3f00112diym5Um9jtgM",
+      "time_created": "2026-08-24T09:55:33.410000+00:00",
+      "time_updated": "2026-08-24T09:55:33.783000+00:00",
+      "data": {
+        "type": "reasoning",
+        "text": "The user just said \"hi\". This is a simple greeting. I should respond directly and concisely without asking unnecessary questions or providing excessive preamble. I'll keep it to 1-2 sentences maximum.",
+        "time": {
+          "start": 1787565333410,
+          "end": 1787565333782
+        },
+        "metadata": {
+          "openrouter": {
+            "reasoning_details": [
+              {
+                "type": "reasoning.text",
+                "text": "The user just said \"hi\". This is a simple greeting. I should respond directly and concisely without asking unnecessary questions or providing excessive preamble. I'll keep it to 1-2 sentences maximum.",
+                "format": "unknown",
+                "index": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "prt_033325d19001YZ0Vm5O7tsT7dT",
+      "message_id": "msg_033306a3f00112diym5Um9jtgM",
+      "time_created": "2026-08-24T09:55:33.785000+00:00",
+      "time_updated": "2026-08-24T09:55:33.891000+00:00",
+      "data": {
+        "type": "text",
+        "text": "Hi. What do you want to do today?",
+        "time": {
+          "start": 1787565333785,
+          "end": 1787565333890
+        }
+      }
+    },
+    {
+      "id": "prt_033325d89001hdrq5XyMc2A0HQ",
+      "message_id": "msg_033306a3f00112diym5Um9jtgM",
+      "time_created": "2026-08-24T09:55:33.897000+00:00",
+      "time_updated": "2026-08-24T09:55:33.898000+00:00",
+      "data": {
+        "reason": "stop",
+        "type": "step-finish",
+        "time": {
+          "start": 1787565333407,
+          "end": 1787565333895,
+          "elapsed": 488
+        },
+        "model": {
+          "providerID": "kilo",
+          "modelID": "stepfun/step-3.7-flash"
+        },
+        "vercelID": "syd1:syd1:syd1::sfo1::777d9-1787565327233-a6eb2e630e1d",
+        "metrics": {
+          "generation": 112.70491803278688,
+          "source": "computed"
+        },
+        "tokens": {
+          "total": 35678,
+          "input": 33703,
+          "output": 5,
+          "reasoning": 50,
+          "cache": {
+            "write": 0,
+            "read": 1920
+          }
+        },
+        "cost": 0
+      }
+    }
+  ],
+  "todos": [],
+  "session_diff_path": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fcccfa87fffe9VU207ZO3iB4qA.json"
+}

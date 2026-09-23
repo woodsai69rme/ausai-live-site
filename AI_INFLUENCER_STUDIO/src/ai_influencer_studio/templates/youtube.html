@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Publish — AI Influencer Studio</title>
+  <style>
+    :root {
+      --primary: #ff0000;
+      --surface: #ffffff;
+      --text: #1f1f1f;
+      --muted: #5f6368;
+      --border: #dadce0;
+      --ok: #188038;
+      --warn: #b06000;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: var(--text);
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header h1 { font-size: 18px; margin: 0; }
+    header .badge {
+      margin-left: auto;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: #ffe9e9;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    main { padding: 24px; max-width: 900px; margin: 0 auto; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.secondary { background: #e8eaed; color: var(--text); }
+    input[type="text"] {
+      flex: 1;
+      min-width: 260px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .meta { font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .error { color: #d93025; font-size: 13px; margin-top: 8px; }
+    .ok { color: var(--ok); }
+    pre.preview {
+      font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+      font-size: 12px;
+      background: #f1f3f4;
+      border-radius: 6px;
+      padding: 12px;
+      max-height: 260px;
+      overflow-y: auto;
+      margin-top: 12px;
+      white-space: pre-wrap;
+    }
+    .log {
+      font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+      font-size: 12px;
+      background: #f1f3f4;
+      border-radius: 6px;
+      padding: 12px;
+      max-height: 220px;
+      overflow-y: auto;
+      margin-top: 12px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>YouTube Publish</h1>
+    <span class="badge" id="statusBadge">—</span>
+  </header>
+  <main>
+    <div class="card">
+      <strong>1. Generate metadata from a plan</strong>
+      <div class="meta">Point at a saved master plan JSON and a song index; title, description, and tags are generated from the plan (no network).</div>
+      <div class="row">
+        <input type="text" id="plan" placeholder="C:\Users\karma\.ai_influencer_studio\master_music_video_plan.json">
+        <input type="text" id="songIndex" value="0" style="min-width:60px; width:80px;" placeholder="idx">
+        <button onclick="generateMetadata()">Generate metadata</button>
+      </div>
+      <pre class="preview" id="metadataPreview">—</pre>
+    </div>
+
+    <div class="card">
+      <strong>2. Publish</strong>
+      <div class="meta">Uploads the finished video with the generated metadata via OAuth2 (one-time consent, then automatic). Thumbnails and a channel playlist are supported.</div>
+      <div class="row">
+        <input type="text" id="video" placeholder="Video path (default: next to the plan as .mp4)">
+      </div>
+      <div class="row">
+        <input type="text" id="thumbnail" placeholder="Thumbnail image path (optional)">
+        <input type="text" id="privacy" value="private" style="min-width:120px; width:140px;" placeholder="private">
+      </div>
+      <div class="row">
+        <input type="text" id="playlist" placeholder="Playlist title to create (optional)">
+      </div>
+      <div class="row">
+        <button id="startBtn" onclick="startPublish()">Start publish</button>
+      </div>
+      <div class="log" id="log">Waiting for status…</div>
+      <div class="error" id="error"></div>
+    </div>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    async function generateMetadata() {
+      $("error").textContent = "";
+      $("metadataPreview").textContent = "Generating…";
+      try {
+        const res = await fetch("/api/youtube/metadata", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "plan=" + encodeURIComponent($("plan").value) + "&song_index=" + encodeURIComponent($("songIndex").value || "0"),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.statusText);
+        $("metadataPreview").textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        $("metadataPreview").textContent = "—";
+        $("error").textContent = "Metadata generation failed: " + err;
+      }
+    }
+
+    async function refresh() {
+      try {
+        const res = await fetch("/api/youtube/status");
+        const data = await res.json();
+        $("statusBadge").textContent = data.running ? "RUNNING" : (data.result ? "DONE" : (data.last_error ? "ERROR" : "IDLE"));
+        $("startBtn").disabled = !!data.running;
+        const lines = [];
+        if (data.running) lines.push(`[${new Date().toLocaleTimeString()}] publishing…`);
+        if (data.started_at) lines.push(`started: ${data.started_at}`);
+        if (data.last_error) lines.push(`error: ${data.last_error}`);
+        if (data.result) {
+          lines.push(`uploaded: ${data.result.video_id} → ${data.result.url}`);
+          lines.push(`title: ${data.result.title}`);
+          lines.push(`thumbnail: ${data.result.thumbnail_uploaded ? "ok" : "skipped/failed"} · playlists: ${(data.result.playlists || []).length}`);
+          lines.push(`recorded at: ${data.result.uploaded_at}`);
+        }
+        $("log").textContent = lines.join("\n");
+      } catch (err) {
+        $("error").textContent = "Status fetch failed: " + err;
+      }
+    }
+
+    async function startPublish() {
+      $("error").textContent = "";
+      try {
+        const body = new URLSearchParams();
+        body.set("plan", $("plan").value);
+        body.set("song_index", $("songIndex").value || "0");
+        if ($("video").value) body.set("video", $("video").value);
+        if ($("thumbnail").value) body.set("thumbnail", $("thumbnail").value);
+        if ($("privacy").value) body.set("privacy", $("privacy").value);
+        if ($("playlist").value) body.set("create_playlist", $("playlist").value);
+        const res = await fetch("/api/youtube/upload/start", { method: "POST", body });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.statusText);
+        refresh();
+      } catch (err) {
+        $("error").textContent = "Start failed: " + err;
+      }
+    }
+
+    refresh();
+    setInterval(refresh, 5000);
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@ import secrets
 import logging
 from supabase import create_client, Client
 
-router = APIRouter()
+router = APIRouter(prefix="/api/auth", tags=["auth"])
 logger = logging.getLogger(__name__)
 
 # Lazy-initialize Supabase client

@@ -57,6 +57,39 @@ AVAILABLE_AGENTS = {
     "rag": RagAgent,
 }
 
+
+def _build_agent_deps(agent_type: str, context: dict[str, Any] | None) -> Any:
+    """Construct the appropriate *Dependencies object for the given agent type.
+
+    Shared by /agents/run and /agents/{type}/stream. Each PydanticAI
+    agent declares its own `deps_type=` (RagDependencies, DocumentDependencies,
+    or ArchonDependencies). Passing a plain `dict` works for naive call
+    sites but every tool inside the agent reaches into `ctx.deps.<attr>`,
+    so the wrong shape will AttributeError on the first tool invocation.
+
+    Kept in this module (not base_agent.py) so the dispatch table stays
+    next to the endpoints that use it.
+    """
+    ctx = context or {}
+    if agent_type == "rag":
+        from .rag_agent import RagDependencies
+
+        return RagDependencies(
+            source_filter=ctx.get("source_filter"),
+            match_count=ctx.get("match_count", 5),
+            project_id=ctx.get("project_id"),
+        )
+    if agent_type == "document":
+        from .document_agent import DocumentDependencies
+
+        return DocumentDependencies(
+            project_id=ctx.get("project_id") or "",
+            user_id=ctx.get("user_id"),
+        )
+    from .base_agent import ArchonDependencies
+
+    return ArchonDependencies()
+
 # Global credentials storage
 AGENT_CREDENTIALS = {}
 
@@ -77,7 +110,7 @@ async def fetch_credentials_from_server():
                         "Please set it in your .env file or environment."
                     )
                 response = await client.get(
-                    f"http://archon-server:{server_port}/internal/credentials/agents", timeout=10.0
+                    f"http://{os.getenv('ARCHON_SERVER_HOST', 'archon-server')}:{server_port}/internal/credentials/agents", timeout=10.0
                 )
                 response.raise_for_status()
                 credentials = response.json()
@@ -104,7 +137,7 @@ async def fetch_credentials_from_server():
                 await asyncio.sleep(retry_delay)
             else:
                 logger.error(f"Failed to fetch credentials after {max_retries} attempts")
-                raise Exception("Could not fetch credentials from server")
+                raise Exception("Could not fetch credentials from server") from e
 
 
 # Lifespan context manager
@@ -173,12 +206,10 @@ async def run_agent(request: AgentRequest):
 
         agent = app.state.agents[request.agent_type]
 
-        # Prepare dependencies for the agent
-        deps = {
-            "context": request.context or {},
-            "options": request.options or {},
-            "mcp_endpoint": os.getenv("MCP_SERVICE_URL", "http://archon-mcp:8051"),
-        }
+        # Prepare dependencies for the agent. Must be the right *Dependencies
+        # Pydantic model for the agent_type (not a plain dict) so the agent's
+        # `ctx.deps.<attr>` lookups succeed -- a dict would AttributeError.
+        deps = _build_agent_deps(request.agent_type, request.context)
 
         # Run the agent
         result = await agent.run(request.prompt, deps)
@@ -226,28 +257,8 @@ async def stream_agent(agent_type: str, request: AgentRequest):
 
     async def generate() -> AsyncGenerator[str, None]:
         try:
-            # Prepare dependencies based on agent type
-            # Import dependency classes
-            if agent_type == "rag":
-                from .rag_agent import RagDependencies
-
-                deps = RagDependencies(
-                    source_filter=request.context.get("source_filter") if request.context else None,
-                    match_count=request.context.get("match_count", 5) if request.context else 5,
-                    project_id=request.context.get("project_id") if request.context else None,
-                )
-            elif agent_type == "document":
-                from .document_agent import DocumentDependencies
-
-                deps = DocumentDependencies(
-                    project_id=request.context.get("project_id") if request.context else None,
-                    user_id=request.context.get("user_id") if request.context else None,
-                )
-            else:
-                # Default dependencies
-                from .base_agent import ArchonDependencies
-
-                deps = ArchonDependencies()
+            # Same dispatch as /agents/run via the shared helper.
+            deps = _build_agent_deps(agent_type, request.context)
 
             # Use PydanticAI's run_stream method
             # run_stream returns an async context manager directly

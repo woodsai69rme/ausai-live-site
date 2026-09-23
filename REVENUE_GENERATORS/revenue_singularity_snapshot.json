@@ -1,11 +1,17 @@
 {
-  "timestamp": "2026-06-29T02:41:59.951332",
+  "timestamp": "2026-07-17T02:27:30.749951",
   "sources_checked": [
+    "saas_launch_manifests.json",
     "content_plan.json"
   ],
   "total_estimated_monthly": 0.0,
   "currency": "AUD",
   "streams": [
+    {
+      "source": "saas",
+      "status": "active",
+      "records": 3
+    },
     {
       "source": "content",
       "status": "active",

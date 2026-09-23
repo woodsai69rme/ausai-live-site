@@ -1,0 +1,28 @@
+[
+  {
+    "tool": "emptyWindowChat",
+    "session_id": "77b87291-382e-4337-b09c-766c34e2e82c.json",
+    "title": "Empty window chat 77b87291",
+    "created": null,
+    "updated": null,
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\emptyWindowChatSessions\\77b87291-382e-4337-b09c-766c34e2e82c.json",
+    "format": "ewcs.json",
+    "bytes": 518,
+    "extra": {
+      "messages": 0
+    }
+  },
+  {
+    "tool": "emptyWindowChat",
+    "session_id": "84a86a09-3109-4e24-9914-0d40633e1e36.json",
+    "title": "Empty window chat 84a86a09",
+    "created": null,
+    "updated": null,
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\emptyWindowChatSessions\\84a86a09-3109-4e24-9914-0d40633e1e36.json",
+    "format": "ewcs.json",
+    "bytes": 518,
+    "extra": {
+      "messages": 0
+    }
+  }
+]

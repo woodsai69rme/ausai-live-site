@@ -298,7 +298,8 @@ print(f"  OK opt_c returncode={_oc.returncode}, opt_d returncode={_od.returncode
 
 
 # 13) Doc drift guard: DOCUMENTATION.md section 9 commit table must match
-# `git log --pretty=format:%h` over `SLEEP_TRIPLE/*` and `Append-Revenue*`.
+# `git log --pretty=format:%h` over `SLEEP_TRIPLE/*` and `Append-Revenue*`
+# after stripping LEADING doc-update commits symmetrically from both sides.
 # Catches dormant staleness before it becomes dormant trust. Uses bare
 # `assert` for consistency with Sections 4, 10, 11 (Python exits rc=1
 # naturally on AssertionError, matching the surrounding style).
@@ -309,8 +310,10 @@ assert _ddc_main_rc == 0, (
     f"_doc_drift_check.main() returned {_ddc_main_rc}; "
     f"section 9 in DOCUMENTATION.md is out of sync with git history. "
     f"Re-read DOCS_INDEX.md cold-start map and commit the section 9 update.")
-_top = _ddc._git_log_sleep_commits()[0] if _ddc._git_log_sleep_commits() else "unknown"
-print(f"  OK _doc_drift_check.main() returns 0 (top={_top} matches git HEAD)")
+_live_rows, _live_skipped = _ddc._git_log_sleep_commits_with_subjects()
+_top = _live_rows[0][0] if _live_rows else "unknown"
+print(f"  OK _doc_drift_check.main() returns 0 (top={_top}, {len(_live_rows)} live rows, "
+      f"{_live_skipped} leading doc-updates stripped)")
 
 
 print("\n=== ALL UNIT TESTS PASS ===")

@@ -1,0 +1,110 @@
+{
+  "id": "ses_fccd1b2e0ffe81oF45xRJ8csoE",
+  "project_id": "f73fe8ceb92ed09f1842e80c5fb29c46fe8d09fc",
+  "parent_id": null,
+  "slug": "shiny-pixel",
+  "directory": "C:/Users/karma",
+  "title": "Greeting",
+  "version": "7.4.23",
+  "share_url": null,
+  "summary_additions": null,
+  "summary_deletions": null,
+  "summary_files": null,
+  "summary_diffs": null,
+  "revert": null,
+  "permission": "[{\"permission\":\"question\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"suggest\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"interactive_terminal\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"plan_enter\",\"pattern\":\"*\",\"action\":\"deny\"},{\"permission\":\"plan_exit\",\"pattern\":\"*\",\"action\":\"deny\"}]",
+  "time_created": 1787565067552,
+  "time_updated": 1787565074189,
+  "time_compacting": null,
+  "time_archived": null,
+  "workspace_id": null,
+  "path": "",
+  "agent": "code",
+  "model": "{\"id\":\"kilo-auto/free\",\"providerID\":\"kilo\",\"variant\":\"default\"}",
+  "cost": 0.0,
+  "tokens_input": 0,
+  "tokens_output": 0,
+  "tokens_reasoning": 0,
+  "tokens_cache_read": 0,
+  "tokens_cache_write": 0,
+  "metadata": null,
+  "created_iso": "2026-08-24T09:51:07.552000+00:00",
+  "updated_iso": "2026-08-24T09:51:14.189000+00:00",
+  "messages": [
+    {
+      "id": "msg_0332e669b00180r31ytdWXL0SF",
+      "time_created": "2026-08-24T09:51:14.075000+00:00",
+      "time_updated": "2026-08-24T09:51:14.183000+00:00",
+      "data": {
+        "role": "user",
+        "time": {
+          "created": 1787565074075
+        },
+        "tools": {},
+        "agent": "code",
+        "model": {
+          "providerID": "kilo",
+          "modelID": "kilo-auto/free"
+        }
+      }
+    },
+    {
+      "id": "msg_0332e6752001xEH4UnO5feAKDk",
+      "time_created": "2026-08-24T09:51:14.258000+00:00",
+      "time_updated": "2026-08-24T09:51:14.260000+00:00",
+      "data": {
+        "parentID": "msg_0332e669b00180r31ytdWXL0SF",
+        "role": "assistant",
+        "mode": "code",
+        "agent": "code",
+        "path": {
+          "cwd": "C:\\Users\\karma",
+          "root": "C:\\Users\\karma"
+        },
+        "cost": 0,
+        "tokens": {
+          "input": 0,
+          "output": 0,
+          "reasoning": 0,
+          "cache": {
+            "read": 0,
+            "write": 0
+          }
+        },
+        "modelID": "kilo-auto/free",
+        "providerID": "kilo",
+        "time": {
+          "created": 1787565074258
+        }
+      }
+    }
+  ],
+  "parts": [
+    {
+      "id": "prt_0332e67040019V46MPHKfG0Mbq",
+      "message_id": "msg_0332e669b00180r31ytdWXL0SF",
+      "time_created": "2026-08-24T09:51:14.185000+00:00",
+      "time_updated": "2026-08-24T09:51:14.186000+00:00",
+      "data": {
+        "type": "text",
+        "text": "hi"
+      }
+    },
+    {
+      "id": "prt_0332e675700132AYIvuFNT9FGS",
+      "message_id": "msg_0332e6752001xEH4UnO5feAKDk",
+      "time_created": "2026-08-24T09:51:14.825000+00:00",
+      "time_updated": "2026-08-24T09:53:03.574000+00:00",
+      "data": {
+        "type": "text",
+        "text": "⠋ Initializing snapshot…",
+        "synthetic": true,
+        "metadata": {
+          "kilocode.lifecycle": "transient"
+        }
+      }
+    }
+  ],
+  "todos": [],
+  "session_diff_path": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fccd1b2e0ffe81oF45xRJ8csoE.json"
+}

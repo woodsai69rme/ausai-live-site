@@ -1,6 +1,6 @@
 # Australian Compliance Checklist — AusAI Tech
 
-> **Status:** ⏳ Not started — complete BEFORE sending your first invoice.
+> **Status:** In progress — ABN and Stripe account are confirmed by the operator; payment links, invoice details, and payout readiness still need verification.
 > **Time:** 2-3 hours total (mostly waiting for ABN confirmation).
 > **Cost:** $0 (ABN is free). Optional: $200-400 for accountant consultation.
 
@@ -32,7 +32,7 @@
   - Activity: `AI Automation & Security Consulting`
   - Start date: today's date
 - [ ] Receive ABN immediately (usually instant, sometimes up to 20 min)
-- [ ] **Record your ABN:** `_______________` (11 digits)
+- [x] **ABN registered:** record the 11-digit number in the private invoice/accounting records (never commit it to source control).
 - [ ] Save the ABN registration confirmation PDF
 - [ ] **Mark ABN as registered in your Ops Dashboard:** Open `AUSAI_OPS_DASHBOARD.html` in your browser, and the alert banner at the top will turn green automatically once you run `localStorage.setItem('ausai_abn_registered', 'true')` in the browser console (F12 → Console → paste → Enter). This is optional but satisfying.
 
@@ -196,7 +196,9 @@ The ATO requires you to keep business records for **5 years**.
 
 ## Quick-Reference: Before First Invoice Checklist
 
-- [ ] ABN registered and recorded
+- [x] ABN registered and recorded privately
+- [ ] Stripe Live Payment Links created and pasted into `CONFIG/payment_links.env`
+- [ ] Stripe payout bank details and verification confirmed
 - [ ] Business bank account opened
 - [ ] Invoice template updated with real ABN, business name, bank details
 - [ ] Invoice number sequence started (INV-001)

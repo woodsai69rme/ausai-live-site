@@ -1,0 +1,112 @@
+[
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_019f4938.jsonl",
+    "title": "grok_transcript_019f4938.jsonl",
+    "created": "2026-07-12T08:13:36.219874+00:00",
+    "updated": "2026-07-12T08:13:36.219874+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_019f4938.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 72954415,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_019f4938_2026-07-13.jsonl",
+    "title": "grok_transcript_019f4938_2026-07-13.jsonl",
+    "created": "2026-07-12T17:39:01.995503+00:00",
+    "updated": "2026-07-12T17:39:01.995503+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_019f4938_2026-07-13.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 83418416,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_019f4938_2026-07-14.jsonl",
+    "title": "grok_transcript_019f4938_2026-07-14.jsonl",
+    "created": "2026-07-13T19:48:39.037024+00:00",
+    "updated": "2026-07-13T19:48:39.037024+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_019f4938_2026-07-14.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 97692068,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_019f54a3_2026-07-14.jsonl",
+    "title": "grok_transcript_019f54a3_2026-07-14.jsonl",
+    "created": "2026-07-14T19:30:32.704598+00:00",
+    "updated": "2026-07-14T19:30:32.704598+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_019f54a3_2026-07-14.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 834474778,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_019f54a3_2026-07-15.jsonl",
+    "title": "grok_transcript_019f54a3_2026-07-15.jsonl",
+    "created": "2026-07-14T22:38:16.523577+00:00",
+    "updated": "2026-07-14T22:38:16.523577+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_019f54a3_2026-07-15.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 836190184,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_2026-07-15.jsonl",
+    "title": "grok_transcript_2026-07-15.jsonl",
+    "created": "2026-07-14T19:30:32.704598+00:00",
+    "updated": "2026-07-14T19:30:32.704598+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_2026-07-15.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 834474778,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_2026-07-16.jsonl",
+    "title": "grok_transcript_2026-07-16.jsonl",
+    "created": "2026-07-16T08:44:01.991604+00:00",
+    "updated": "2026-07-16T08:44:01.991604+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_2026-07-16.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 16641631,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_2026-07-17.jsonl",
+    "title": "grok_transcript_2026-07-17.jsonl",
+    "created": "2026-07-16T20:16:37.294568+00:00",
+    "updated": "2026-07-16T20:16:37.294568+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_2026-07-17.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 19425729,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_2026-07-17_e.jsonl",
+    "title": "grok_transcript_2026-07-17_e.jsonl",
+    "created": "2026-07-16T20:17:51.529022+00:00",
+    "updated": "2026-07-16T20:17:51.529022+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_2026-07-17_e.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 19491107,
+    "extra": {}
+  },
+  {
+    "tool": "grok",
+    "session_id": "grok_transcript_2026-07-17_g.jsonl",
+    "title": "grok_transcript_2026-07-17_g.jsonl",
+    "created": "2026-07-16T20:35:00.836186+00:00",
+    "updated": "2026-07-16T20:35:00.836186+00:00",
+    "path": "X:\\SESSION_ARCHIVES\\grok_transcript_2026-07-17_g.jsonl",
+    "format": "grok.jsonl",
+    "bytes": 135071619,
+    "extra": {}
+  }
+]

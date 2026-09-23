@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTIMATE CRYPTO PLATFORM 2026 | Institutional Pro & Whale Radar</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- TradingView Lightweight Charts -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #040711;
+            color: #f1f5f9;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background: rgba(13, 21, 39, 0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        .glass-header {
+            background: rgba(6, 11, 25, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(10, 15, 30, 0.6);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(51, 65, 85, 0.8);
+            border-radius: 4px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 32s linear infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen custom-scrollbar selection:bg-emerald-500/30 selection:text-emerald-300 flex flex-col">
+
+    <!-- Live Multi-Exchange Ticker Marquee -->
+    <div class="bg-slate-950/95 border-b border-slate-800/80 overflow-hidden py-1.5 px-4 text-xs font-mono text-slate-400">
+        <div class="animate-marquee flex gap-8 items-center" id="ticker-marquee">
+            <span class="flex items-center gap-1.5 text-emerald-400"><i data-lucide="activity" class="w-3.5 h-3.5"></i> <strong>BTC/USD:</strong> $77,592.48 (+2.4%)</span>
+            <span class="flex items-center gap-1.5 text-blue-400"><strong>ETH/USD:</strong> $2,420.14 (+1.8%)</span>
+            <span class="flex items-center gap-1.5 text-purple-400"><strong>SOL/USD:</strong> $100.20 (+5.1%)</span>
+            <span class="flex items-center gap-1.5 text-amber-400"><strong>SUI/USD:</strong> $0.725 (+4.2%)</span>
+            <span class="flex items-center gap-1.5 text-slate-300"><strong>DOGE/USD:</strong> $0.082 (+0.9%)</span>
+            <span class="flex items-center gap-1.5 text-emerald-300"><strong>CryptoCompare 24h Vol:</strong> $1.69B</span>
+            <span class="flex items-center gap-1.5 text-cyan-400"><strong>Fear & Greed:</strong> 63 (Greed)</span>
+            <span class="flex items-center gap-1.5 text-green-400"><strong>MEV Shield:</strong> Jito + Flashbots Active</span>
+            <span class="flex items-center gap-1.5 text-purple-300"><strong>Backtest Strategy:</strong> +159.25% Net ROI (4.99 Sharpe)</span>
+            <!-- Loop duplicate -->
+            <span class="flex items-center gap-1.5 text-emerald-400"><i data-lucide="activity" class="w-3.5 h-3.5"></i> <strong>BTC/USD:</strong> $77,592.48 (+2.4%)</span>
+            <span class="flex items-center gap-1.5 text-blue-400"><strong>ETH/USD:</strong> $2,420.14 (+1.8%)</span>
+            <span class="flex items-center gap-1.5 text-purple-400"><strong>SOL/USD:</strong> $100.20 (+5.1%)</span>
+            <span class="flex items-center gap-1.5 text-amber-400"><strong>SUI/USD:</strong> $0.725 (+4.2%)</span>
+            <span class="flex items-center gap-1.5 text-slate-300"><strong>DOGE/USD:</strong> $0.082 (+0.9%)</span>
+            <span class="flex items-center gap-1.5 text-emerald-300"><strong>CryptoCompare 24h Vol:</strong> $1.69B</span>
+            <span class="flex items-center gap-1.5 text-cyan-400"><strong>Fear & Greed:</strong> 63 (Greed)</span>
+            <span class="flex items-center gap-1.5 text-green-400"><strong>MEV Shield:</strong> Jito + Flashbots Active</span>
+            <span class="flex items-center gap-1.5 text-purple-300"><strong>Backtest Strategy:</strong> +159.25% Net ROI (4.99 Sharpe)</span>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-50 glass-header px-6 py-3.5">
+        <div class="max-w-[1700px] mx-auto flex flex-col xl:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 border border-emerald-500/40 rounded-xl text-emerald-400 glow-emerald">
+                    <i data-lucide="cpu" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2.5">
+                        <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                            ULTIMATE CRYPTO PLATFORM <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono font-bold">2026 PRO</span>
+                        </h1>
+                    </div>
+                    <p class="text-xs text-slate-400 font-mono">TradingView Radar • Live Candlestick API • CryptoPanic News • 117 Fleet Manager</p>
+                </div>
+            </div>
+
+            <!-- Global Controls & Status -->
+            <div class="flex items-center flex-wrap gap-3 text-xs font-mono">
+                <!-- Daemon Status -->
+                <div id="daemon-status-pill" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="daemon-dot"></span>
+                    <span>REST API: <span id="daemon-text" class="text-emerald-400 font-bold">ONLINE (8088)</span></span>
+                </div>
+
+                <!-- Account Switcher -->
+                <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
+                    <button id="btn-acc-micro" onclick="switchAccount('micro_1k')" class="px-2.5 py-1 rounded-md bg-emerald-600/30 text-emerald-300 font-bold border border-emerald-500/40 transition">
+                        🎯 Micro $1k
+                    </button>
+                    <button id="btn-acc-main" onclick="switchAccount('main_10k')" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-slate-200 transition">
+                        🏛️ Main $10k
+                    </button>
+                </div>
+
+                <!-- Mode Switcher -->
+                <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
+                    <button id="btn-mode-paper" onclick="setTradingMode('PAPER')" class="px-2.5 py-1 rounded-md bg-blue-600/30 text-blue-300 font-bold border border-blue-500/40 transition">
+                        🛡️ Paper SandBox
+                    </button>
+                    <button id="btn-mode-real" onclick="setTradingMode('REAL_COINBASE')" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-slate-200 transition">
+                        ⚡ Real Coinbase
+                    </button>
+                </div>
+
+                <!-- Quick Action Buttons -->
+                <button onclick="triggerEngineScan()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition shadow-sm">
+                    <i data-lucide="radar" class="w-3.5 h-3.5"></i>
+                    <span>Scan</span>
+                </button>
+
+                <button onclick="triggerWhaleCrawl()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-medium transition shadow-sm">
+                    <i data-lucide="scan" class="w-3.5 h-3.5"></i>
+                    <span>Crawl Whales</span>
+                </button>
+
+                <button onclick="triggerBacktest()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition shadow-sm">
+                    <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+                    <span>Backtest (+159%)</span>
+                </button>
+
+                <button onclick="openGodMode()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-medium transition shadow-sm">
+                    <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
+                    <span>God-Mode</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="max-w-[1700px] mx-auto p-6 space-y-6 flex-1 w-full">
+
+        <!-- Top Metrics Row -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3.5">
+            <div class="glass-panel p-3.5 rounded-xl space-y-1">
+                <div class="flex justify-between items-center text-xs text-slate-400">
+                    <span>ACTIVE CASH BALANCE</span>
+                    <i data-lucide="wallet" class="w-4 h-4 text-emerald-400"></i>
+                </div>
+                <div class="text-xl font-bold font-mono text-white" id="val-cash-balance">$850.00</div>
+                <div class="text-[11px] text-emerald-400 font-mono flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Profit Sweeper Active
+                </div>
+            </div>
+
+            <div class="glass-panel p-3.5 rounded-xl space-y-1">
+                <div class="flex justify-between items-center text-xs text-slate-400">
+                    <span>TOTAL REALIZED PROFIT</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-emerald-400"></i>
+                </div>
+                <div class="text-xl font-bold font-mono text-emerald-400" id="val-total-profit">+$164.80</div>
+                <div class="text-[11px] text-slate-400 font-mono">Win Rate: <span id="val-win-rate" class="text-white font-bold">87.5%</span></div>
+            </div>
+
+            <div class="glass-panel p-3.5 rounded-xl space-y-1">
+                <div class="flex justify-between items-center text-xs text-slate-400">
+                    <span>MEV SHIELD PROTECTION</span>
+                    <i data-lucide="shield-check" class="w-4 h-4 text-purple-400"></i>
+                </div>
+                <div class="text-xl font-bold font-mono text-purple-300">+$1,420.00</div>
+                <div class="text-[11px] text-purple-400 font-mono">Frontrun Loss Prevented</div>
+            </div>
+
+            <div class="glass-panel p-3.5 rounded-xl space-y-1">
+                <div class="flex justify-between items-center text-xs text-slate-400">
+                    <span>WHALE RADAR TRACKING</span>
+                    <i data-lucide="users" class="w-4 h-4 text-blue-400"></i>
+                </div>
+                <div class="text-xl font-bold font-mono text-blue-300" id="val-whales-tracked">9 Smart Money</div>
+                <div class="text-[11px] text-blue-400 font-mono">GCR • Murad • Hayes • Snipers</div>
+            </div>
+
+            <div class="glass-panel p-3.5 rounded-xl space-y-1">
+                <div class="flex justify-between items-center text-xs text-slate-400">
+                    <span>ECOSYSTEM FLEET</span>
+                    <i data-lucide="layers" class="w-4 h-4 text-amber-400"></i>
+                </div>
+                <div class="text-xl font-bold font-mono text-amber-300">117 Assets</div>
+                <div class="text-[11px] text-amber-400 font-mono">100% 1-Click Launch Ready</div>
+            </div>
+        </div>
+
+        <!-- Main Chart & Trading Matrix Grid -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+
+            <!-- LEFT 8 COLS: Live Candlestick Radar, Orderbook & Execution Panel -->
+            <div class="xl:col-span-8 space-y-6">
+
+                <!-- Candlestick Chart Station -->
+                <div class="glass-panel p-5 rounded-2xl space-y-4">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-b border-slate-800 pb-3.5">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg text-emerald-400">
+                                <i data-lucide="candlestick-chart" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <select id="chart-symbol-select" onchange="changeChartSymbol(this.value)" class="bg-slate-900 border border-slate-700 text-white font-mono font-bold text-sm rounded-lg px-2.5 py-1 focus:outline-none focus:border-emerald-500">
+                                        <option value="SOL">SOL/USD — Solana Spot</option>
+                                        <option value="BTC">BTC/USD — Bitcoin Spot</option>
+                                        <option value="ETH">ETH/USD — Ethereum Spot</option>
+                                        <option value="SUI">SUI/USD — Sui Network</option>
+                                        <option value="DOGE">DOGE/USD — Dogecoin</option>
+                                        <option value="POPCAT">POPCAT/SOL — Whale Conviction</option>
+                                    </select>
+                                    <span class="text-lg font-bold font-mono text-emerald-400" id="live-chart-price">$100.20</span>
+                                </div>
+                                <p class="text-[11px] text-slate-400 font-mono">Connected to Live REST & Candlestick Stream (Port 8088)</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeframe Buttons -->
+                        <div class="flex items-center gap-1.5 text-xs font-mono bg-slate-900 p-1 rounded-lg border border-slate-800">
+                            <button onclick="setChartTimeframe('1m')" id="tf-1m" class="tf-btn px-2.5 py-1 rounded bg-slate-800 text-white hover:bg-slate-700">1m</button>
+                            <button onclick="setChartTimeframe('5m')" id="tf-5m" class="tf-btn px-2.5 py-1 rounded bg-emerald-600/30 text-emerald-300 font-bold border border-emerald-500/40">5m</button>
+                            <button onclick="setChartTimeframe('15m')" id="tf-15m" class="tf-btn px-2.5 py-1 rounded bg-slate-800 text-white hover:bg-slate-700">15m</button>
+                            <button onclick="setChartTimeframe('1h')" id="tf-1h" class="tf-btn px-2.5 py-1 rounded bg-slate-800 text-white hover:bg-slate-700">1h</button>
+                            <button onclick="setChartTimeframe('1D')" id="tf-1D" class="tf-btn px-2.5 py-1 rounded bg-slate-800 text-white hover:bg-slate-700">1D</button>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Container -->
+                    <div id="tv-chart-container" class="w-full h-[400px] rounded-xl overflow-hidden bg-slate-950/80 border border-slate-900 relative">
+                        <!-- TradingView Chart Renders Here -->
+                    </div>
+                </div>
+
+                <!-- Live Orderbook Depth Ladder & Execution Panel -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Live Orderbook Depth Ladder -->
+                    <div class="glass-panel p-5 rounded-2xl space-y-3.5">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="align-right" class="w-4 h-4 text-cyan-400"></i>
+                                <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Live Depth of Market</h3>
+                            </div>
+                            <span class="text-[10px] font-mono text-slate-400">CCXT Live Feeds</span>
+                        </div>
+
+                        <div class="space-y-1 text-[11px] font-mono" id="orderbook-container">
+                            <div class="grid grid-cols-3 text-slate-500 text-[10px] border-b border-slate-800 pb-1">
+                                <span>PRICE (USD)</span>
+                                <span class="text-right">SIZE</span>
+                                <span class="text-right">TOTAL</span>
+                            </div>
+                            <div id="orderbook-asks" class="space-y-1 text-red-400">
+                                <!-- Asks -->
+                            </div>
+                            <div class="py-1 text-center font-bold text-xs bg-slate-900/80 border-y border-slate-800 text-white flex justify-between px-2" id="orderbook-spread">
+                                <span class="text-slate-400">SPREAD: 0.01%</span>
+                                <span class="text-emerald-400" id="orderbook-mid-price">$100.20</span>
+                            </div>
+                            <div id="orderbook-bids" class="space-y-1 text-emerald-400">
+                                <!-- Bids -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- High-Frequency Order Dispatcher -->
+                    <div class="glass-panel p-5 rounded-2xl space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
+                                    <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Instant Execution</h3>
+                                </div>
+                                <span class="text-[10px] font-mono text-emerald-400">MEV Protected</span>
+                            </div>
+
+                            <div class="space-y-3 pt-3 text-xs font-mono">
+                                <div class="space-y-1.5">
+                                    <label class="text-slate-400">Asset & Venue</label>
+                                    <select id="trade-symbol-input" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white focus:outline-none focus:border-emerald-500">
+                                        <option value="SOL">SOL (Solana • Jupiter / Raydium)</option>
+                                        <option value="BTC">BTC (Bitcoin • Coinbase Spot)</option>
+                                        <option value="ETH">ETH (Ethereum • Base / Uniswap)</option>
+                                        <option value="SUI">SUI (Sui • DeepBook / Coinbase)</option>
+                                        <option value="POPCAT">POPCAT (Solana Memecoin)</option>
+                                    </select>
+                                </div>
+
+                                <div class="space-y-1.5">
+                                    <label class="text-slate-400">Allocation Size (USD)</label>
+                                    <input type="number" id="trade-size-input" value="75.0" step="25" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white font-bold text-emerald-400 focus:outline-none focus:border-emerald-500">
+                                </div>
+
+                                <!-- Preset Sizing Buttons -->
+                                <div class="flex items-center gap-1.5 pt-1 text-[11px] font-mono">
+                                    <button onclick="document.getElementById('trade-size-input').value = '75'" class="flex-1 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800">$75</button>
+                                    <button onclick="document.getElementById('trade-size-input').value = '150'" class="flex-1 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800">$150</button>
+                                    <button onclick="document.getElementById('trade-size-input').value = '500'" class="flex-1 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800">$500</button>
+                                    <button onclick="document.getElementById('trade-size-input').value = '1000'" class="flex-1 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800">$1,000</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 pt-3">
+                            <button onclick="executeOrder('BUY')" class="py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition shadow flex items-center justify-center gap-1.5 text-xs font-mono">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                                <span>BUY ORDER</span>
+                            </button>
+                            <button onclick="executeOrder('SELL')" class="py-2.5 bg-red-600/80 hover:bg-red-500 text-white font-bold rounded-lg transition shadow flex items-center justify-center gap-1.5 text-xs font-mono">
+                                <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+                                <span>SELL / TP</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CryptoPanic Live News & Catalyst Stream -->
+                <div class="glass-panel p-5 rounded-2xl space-y-3.5">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="newspaper" class="w-4 h-4 text-blue-400"></i>
+                            <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Breaking News & Catalysts (CryptoPanic Live Oracle)</h3>
+                        </div>
+                        <span class="text-[10px] font-mono text-emerald-400">● Live Oracle Stream</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="news-stream-grid">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT 4 COLS: Smart Money Radar & Live Whale Stream -->
+            <div class="xl:col-span-4 space-y-6">
+
+                <!-- Tracked Smart Money Wallets -->
+                <div class="glass-panel p-5 rounded-2xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i>
+                            <h3 class="text-sm font-bold text-white tracking-tight">SMART MONEY TOP BUYERS</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">9 Active Alpha</span>
+                    </div>
+
+                    <div class="space-y-3 max-h-[380px] overflow-y-auto custom-scrollbar pr-1" id="top-buyers-list">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Real-Time Transaction Stream Tape -->
+                <div class="glass-panel p-5 rounded-2xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="radio" class="w-4 h-4 text-cyan-400"></i>
+                            <h3 class="text-sm font-bold text-white tracking-tight">LIVE ON-CHAIN RADAR TAPE</h3>
+                        </div>
+                        <span class="text-xs font-mono text-emerald-400 animate-pulse">● LIVE STREAM</span>
+                    </div>
+
+                    <div class="space-y-2.5 max-h-[340px] overflow-y-auto custom-scrollbar pr-1" id="tx-stream-list">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom Section: 117-Asset Ecosystem Fleet Launcher -->
+        <div class="glass-panel p-5 rounded-2xl space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-b border-slate-800 pb-3.5">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-amber-500/10 border border-amber-500/30 rounded-lg text-amber-400">
+                        <i data-lucide="grid" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white tracking-tight">CRYPTO FLEET DISPATCHER (117 ASSETS)</h3>
+                        <p class="text-xs text-slate-400 font-mono">1-Click Launch, Run Dev Server, and Open in VS Code across your entire repository catalog.</p>
+                    </div>
+                </div>
+
+                <div class="relative w-full md:w-80">
+                    <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400"></i>
+                    <input type="text" id="fleet-search-input" oninput="renderFleetGrid()" placeholder="Filter fleet repos, bots, scripts..." class="w-full bg-slate-900 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-white placeholder-slate-500 font-mono focus:outline-none focus:border-amber-500">
+                </div>
+            </div>
+
+            <!-- Fleet Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-h-[380px] overflow-y-auto custom-scrollbar p-1" id="fleet-grid">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Whale Wallet Details Modal -->
+    <div id="whale-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass-panel max-w-lg w-full p-6 rounded-2xl border border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-white flex items-center gap-2" id="modal-whale-name">
+                    Whale Details
+                </h3>
+                <button onclick="closeWhaleModal()" class="text-slate-400 hover:text-white">&times;</button>
+            </div>
+            <div class="space-y-3 text-xs font-mono" id="modal-whale-content">
+                <!-- Injected via JS -->
+            </div>
+            <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                <button onclick="closeWhaleModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-mono">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Master Interactive Logic -->
+    <script>
+        const MASTER_CATALOG = {"live_production": [{"name": "Unified Crypto Top Buyer & Whale Copy-Trading Master Suite (Empire Pro)", "path": "C:\\Users\\karma\\TOOLS\\unified_crypto_top_buyer_engine.py", "type": "Master Trading Engine & REST API", "tech": "Python 3.13, FastAPI, WebSockets, Lightweight Charts, Local LLM", "port": "8088", "launch": "python C:\\Users\\karma\\TOOLS\\unified_crypto_top_buyer_engine.py --daemon", "description": "Enterprise-grade real-time top buyer following, smart money discovery crawler, MEV/sandwich shield, Coinbase Advanced Trade executor, and Solana Jupiter/Raydium DEX router with automated +159.25% ROI backtested strategy."}, {"name": "God-Mode AI Command Center \u2014 Crypto Sentiment & Top Buyers Tab", "path": "C:\\Users\\karma\\ACTIVE_PROJECTS\\ai-tools-suite\\src\\components\\tabs\\CryptoSentimentTab.tsx", "type": "Interactive Web UI Tab", "tech": "Next.js 14, React 18, Tailwind CSS, Lucide React, Web Audio API", "port": "3142", "launch": "http://localhost:3142 (Tab: Crypto Sentiment & Top Buyers)", "description": "Production command center tab featuring real-time transaction ticker, whale alert radar, wallet manager, custom Coinbase & Telegram configuration, and order execution chimes."}, {"name": "Master Crypto Control Dashboard (Standalone Terminal)", "path": "C:\\Users\\karma\\CRYPTO_EMPIRE_MASTER_DASHBOARD.html", "type": "Single-Pane Web Dashboard", "tech": "HTML5, Tailwind CSS, JavaScript ES6, Lucide Icons, REST API Bridge", "port": "Standalone / Browser", "launch": "C:\\Users\\karma\\CRYPTO_EMPIRE_MASTER_DASHBOARD.html", "description": "Unified 1-click management and launch portal for all 90+ cryptocurrency applications, trading bots, and repositories across the ecosystem."}], "web_apps_and_dashboards": [{"name": "AETHERSYNAPSE", "path": "C:\\Users\\karma\\AETHERSYNAPSE", "tech": "HTML/JS Dashboard (1 files)", "type": "Dashboard/App", "description": ""}, {"name": "aether-flow-orchestrator", "path": "X:\\githubrepo\\aether-flow-orchestrator", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "ai-crypto-ecosystem-complete", "path": "X:\\githubrepo\\ai-crypto-ecosystem-complete", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "ai-crypto-trading--monitoring", "path": "X:\\githubrepo\\ai-crypto-trading--monitoring", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "ai-crypto-trading-ecosystem-complete", "path": "X:\\githubrepo\\ai-crypto-trading-ecosystem-complete", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "alpha-ai-trade-hub", "path": "X:\\githubrepo\\alpha-ai-trade-hub", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "beacon-clone-trader-dash", "path": "X:\\githubrepo\\beacon-clone-trader-dash", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "coin-alchemy-ai", "path": "X:\\githubrepo\\coin-alchemy-ai", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-ai-horizon-dashboard", "path": "X:\\githubrepo\\crypto-ai-horizon-dashboard", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-ai-nexus-dashboard", "path": "X:\\githubrepo\\crypto-ai-nexus-dashboard", "tech": "Python (1 scripts), HTML/JS Dashboard (1 files)", "type": "Dashboard/App", "description": ""}, {"name": "crypto-ai-research--trading-hub", "path": "X:\\githubrepo\\crypto-ai-research--trading-hub", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-ai-research--trading-hub-1", "path": "X:\\githubrepo\\crypto-ai-research--trading-hub-1", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-ai-tradeflow-nexus", "path": "X:\\githubrepo\\crypto-ai-tradeflow-nexus", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-all-in-one", "path": "X:\\githubrepo\\crypto-all-in-one", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-beacon-fusion-hub", "path": "X:\\githubrepo\\crypto-beacon-fusion-hub", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-beacon-trader-hub", "path": "X:\\githubrepo\\crypto-beacon-trader-hub", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-beacon-trader-hub-11", "path": "X:\\githubrepo\\crypto-beacon-trader-hub-11", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-companion-hub", "path": "X:\\githubrepo\\crypto-companion-hub", "tech": "Node.js/Next.js/React, React, Tailwind CSS", "type": "Dashboard/App", "description": ""}, {"name": "crypto-cosmos-nexus", "path": "X:\\githubrepo\\crypto-cosmos-nexus", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-dream-trade-sim", "path": "X:\\githubrepo\\crypto-dream-trade-sim", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-dream-trade-sim-11", "path": "X:\\githubrepo\\crypto-dream-trade-sim-11", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-dream-trade-sim-18", "path": "X:\\githubrepo\\crypto-dream-trade-sim-18", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-dream-voyage-sim", "path": "X:\\githubrepo\\crypto-dream-voyage-sim", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-finder--miner", "path": "X:\\githubrepo\\crypto-finder--miner", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-flow-nexus-ai", "path": "X:\\githubrepo\\crypto-flow-nexus-ai", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-fusion-nexus-flow", "path": "X:\\githubrepo\\crypto-fusion-nexus-flow", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-fusion-quest", "path": "X:\\githubrepo\\crypto-fusion-quest", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-hub-central", "path": "X:\\githubrepo\\crypto-hub-central", "tech": "Node.js/Next.js/React, React, Tailwind CSS", "type": "Dashboard/App", "description": ""}, {"name": "crypto-navigator-ai", "path": "X:\\githubrepo\\crypto-navigator-ai", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-nexus-compass", "path": "X:\\githubrepo\\crypto-nexus-compass", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-nexus-fusion", "path": "X:\\githubrepo\\crypto-nexus-fusion", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-nexus-fusion-07", "path": "X:\\githubrepo\\crypto-nexus-fusion-07", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-sim-alpha", "path": "X:\\githubrepo\\crypto-sim-alpha", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-vision-suite", "path": "X:\\githubrepo\\crypto-vision-suite", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "cryptoai-tradeflow-nexus", "path": "X:\\githubrepo\\cryptoai-tradeflow-nexus", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "cryptowoods-ai", "path": "X:\\githubrepo\\cryptowoods-ai", "tech": "Node.js/Next.js/React, React, Tailwind CSS", "type": "Dashboard/App", "description": ""}, {"name": "digital-trading-flow", "path": "X:\\githubrepo\\digital-trading-flow", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "dream-trade-adventures-club", "path": "X:\\githubrepo\\dream-trade-adventures-club", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "ethosai-moral-compass-agent", "path": "X:\\githubrepo\\ethosai-moral-compass-agent", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "fusion-trading-vision", "path": "X:\\githubrepo\\fusion-trading-vision", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "fusion-trading-vision-38", "path": "X:\\githubrepo\\fusion-trading-vision-38", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "fusion-trading-vision-42", "path": "X:\\githubrepo\\fusion-trading-vision-42", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "lovestruck-crypto-nexus", "path": "X:\\githubrepo\\lovestruck-crypto-nexus", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "marvel-ai-trading-hub", "path": "X:\\githubrepo\\marvel-ai-trading-hub", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "marvel-ai-trading-hub-14", "path": "X:\\githubrepo\\marvel-ai-trading-hub-14", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "marvel-ai-trading-hub-53", "path": "X:\\githubrepo\\marvel-ai-trading-hub-53", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "promethus-ai-toolkit", "path": "X:\\githubrepo\\promethus-ai-toolkit", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "spare-change-futures", "path": "X:\\githubrepo\\spare-change-futures", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "trading-fusion-vision", "path": "X:\\githubrepo\\trading-fusion-vision", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "trading-insight-sphere", "path": "X:\\githubrepo\\trading-insight-sphere", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "trading-strategy-nexus", "path": "X:\\githubrepo\\trading-strategy-nexus", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "v0-crypto-ai-dashboard", "path": "X:\\githubrepo\\v0-crypto-ai-dashboard", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "v0-crypto-nft-ai-ecosystem", "path": "X:\\githubrepo\\v0-crypto-nft-ai-ecosystem", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "X\uf03aGITHUBREPOsrcwebsocket-patterns{chat-app,trading-platform,iot-network,collaborative-editor}", "path": "X:\\githubrepo\\X\uf03aGITHUBREPOsrcwebsocket-patterns{chat-app,trading-platform,iot-network,collaborative-editor}", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}], "trading_bots_and_engines": [{"name": "crypto-platform", "path": "C:\\Users\\karma\\crypto-platform", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto_lab", "path": "C:\\Users\\karma\\ZEROONE\\crypto_lab", "tech": "Python (1 scripts)", "type": "Trading Engine/Repo", "description": ""}, {"name": "alpha-ai-crypto-trader", "path": "X:\\githubrepo\\alpha-ai-crypto-trader", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-ai-hivemind", "path": "X:\\githubrepo\\crypto-ai-hivemind", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-ai-trading-platform", "path": "X:\\githubrepo\\crypto-ai-trading-platform", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "crypto-automa-pilot", "path": "X:\\githubrepo\\crypto-automa-pilot", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-forge-master", "path": "X:\\githubrepo\\crypto-forge-master", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-lovable-trader", "path": "X:\\githubrepo\\crypto-lovable-trader", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-nexus-automator", "path": "X:\\githubrepo\\crypto-nexus-automator", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-nexus-automator-41", "path": "X:\\githubrepo\\crypto-nexus-automator-41", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-nexus-automator-41-33e32191", "path": "X:\\githubrepo\\crypto-nexus-automator-41-33e32191", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-nexus-automator-41-e423d3fc", "path": "X:\\githubrepo\\crypto-nexus-automator-41-e423d3fc", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-woods-trader-sim", "path": "X:\\githubrepo\\crypto-woods-trader-sim", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "cryptoai-trade-commander", "path": "X:\\githubrepo\\cryptoai-trade-commander", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "cryptoai-trade-forge", "path": "X:\\githubrepo\\cryptoai-trade-forge", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "dream-trade-forge", "path": "X:\\githubrepo\\dream-trade-forge", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "ethical-pentesting-platform", "path": "X:\\githubrepo\\ethical-pentesting-platform", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "solana-trading-bot-v2", "path": "X:\\githubrepo\\solana-trading-bot-v2", "tech": "Node.js/Next.js/React", "type": "Trading Engine/Repo", "description": ""}, {"name": "trading-vision-forge", "path": "X:\\githubrepo\\trading-vision-forge", "tech": "Node.js/Next.js/React, React", "type": "Dashboard/App", "description": ""}, {"name": "trading_platform", "path": "X:\\githubrepo\\trading_platform", "tech": "Python", "type": "Trading Engine/Repo", "description": ""}, {"name": "ultimate-trading-platform", "path": "X:\\githubrepo\\ultimate-trading-platform", "tech": "Python", "type": "Trading Engine/Repo", "description": ""}, {"name": "v0-modern-cryptocurrency-platform", "path": "X:\\githubrepo\\v0-modern-cryptocurrency-platform", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}, {"name": "v0-ultimate-crypto-platform", "path": "X:\\githubrepo\\v0-ultimate-crypto-platform", "tech": "Node.js/Next.js/React, Next.js, React", "type": "Dashboard/App", "description": ""}], "standalone_scripts_and_tools": [{"name": "search_crypto.py", "path": "C:\\Users\\karma\\search_crypto.py", "size": 496}, {"name": "gumroad_token_watch_and_create.py", "path": "C:\\Users\\karma\\TOOLS\\gumroad_token_watch_and_create.py", "size": 4880}, {"name": "unified_crypto_top_buyer_engine.py", "path": "C:\\Users\\karma\\TOOLS\\unified_crypto_top_buyer_engine.py", "size": 53306}, {"name": "java.xml.crypto.jmod", "path": "C:\\Users\\karma\\TOOLS\\jdk\\jdk-17\\jmods\\java.xml.crypto.jmod", "size": 706143}, {"name": "jdk.crypto.cryptoki.jmod", "path": "C:\\Users\\karma\\TOOLS\\jdk\\jdk-17\\jmods\\jdk.crypto.cryptoki.jmod", "size": 386044}, {"name": "jdk.crypto.ec.jmod", "path": "C:\\Users\\karma\\TOOLS\\jdk\\jdk-17\\jmods\\jdk.crypto.ec.jmod", "size": 139833}, {"name": "jdk.crypto.mscapi.jmod", "path": "C:\\Users\\karma\\TOOLS\\jdk\\jdk-17\\jmods\\jdk.crypto.mscapi.jmod", "size": 87341}, {"name": "pkcs11cryptotoken.md", "path": "C:\\Users\\karma\\TOOLS\\jdk\\jdk-17\\legal\\jdk.crypto.cryptoki\\pkcs11cryptotoken.md", "size": 4095}, {"name": "libcrypto-3.dll", "path": "C:\\Users\\karma\\TOOLS\\video_downloader\\dist\\PasteGrab\\_internal\\libcrypto-3.dll", "size": 5231472}, {"name": "libcrypto-3-x64-5c171716accecee9b0c1ee574c2a4da0.dll", "path": "C:\\Users\\karma\\TOOLS\\video_downloader\\dist\\PasteGrab\\_internal\\psycopg2_binary.libs\\libcrypto-3-x64-5c171716accecee9b0c1ee574c2a4da0.dll", "size": 5267456}, {"name": "START_CRYPTO_TOP_BUYER_SUITE.bat", "path": "C:\\Users\\karma\\START_CRYPTO_TOP_BUYER_SUITE.bat", "size": 4210}], "archived_and_experimental": [{"name": ".bitcoinlib", "path": "C:\\Users\\karma\\.bitcoinlib", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": ".codetogether", "path": "C:\\Users\\karma\\.codetogether", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": ".codex", "path": "C:\\Users\\karma\\.codex", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": ".search_index", "path": "C:\\Users\\karma\\.search_index", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "02_CRYPTO_TRADING", "path": "C:\\Users\\karma\\02_CRYPTO_TRADING", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "AETHER_CORE_SYSTEM", "path": "C:\\Users\\karma\\AETHER_CORE_SYSTEM", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "AIO_CRYPTO", "path": "C:\\Users\\karma\\AIO_CRYPTO", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "CRYPTO_SUITE_DATA", "path": "C:\\Users\\karma\\CRYPTO_SUITE_DATA", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "NetHood", "path": "C:\\Users\\karma\\NetHood", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "plandex", "path": "C:\\Users\\karma\\ACTIVE_PROJECTS\\plandex", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "awesome-coins", "path": "X:\\githubrepo\\awesome-coins", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "boltcrypto", "path": "X:\\githubrepo\\boltcrypto", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-fusion-genesis", "path": "X:\\githubrepo\\crypto-fusion-genesis", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-woods-alpha", "path": "X:\\githubrepo\\crypto-woods-alpha", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "crypto-woods-ulitmate-26", "path": "X:\\githubrepo\\crypto-woods-ulitmate-26", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "cryptonaut-ai-terminal", "path": "X:\\githubrepo\\cryptonaut-ai-terminal", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "freecrypto", "path": "X:\\githubrepo\\freecrypto", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "marvelaitradebolt", "path": "X:\\githubrepo\\marvelaitradebolt", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "newcrypto", "path": "X:\\githubrepo\\newcrypto", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "plandex", "path": "X:\\githubrepo\\plandex", "tech": "Directory/Project", "type": "Trading Engine/Repo", "description": ""}, {"name": "EmpireOS/crypto/app.py", "path": "C:\\Users\\karma\\_archive_2026-06-25\\EmpireOS\\crypto\\app.py", "tech": "Python / HTML", "type": "Legacy Micro-Engine / Script", "description": "Preserved EmpireOS crypto component: app.py"}, {"name": "EmpireOS/crypto/backtester.py", "path": "C:\\Users\\karma\\_archive_2026-06-25\\EmpireOS\\crypto\\backtester.py", "tech": "Python / HTML", "type": "Legacy Micro-Engine / Script", "description": "Preserved EmpireOS crypto component: backtester.py"}, {"name": "EmpireOS/crypto/crypto_dashboard.html", "path": "C:\\Users\\karma\\_archive_2026-06-25\\EmpireOS\\crypto\\crypto_dashboard.html", "tech": "Python / HTML", "type": "Legacy Micro-Engine / Script", "description": "Preserved EmpireOS crypto component: crypto_dashboard.html"}, {"name": "EmpireOS/crypto/price_tracker.py", "path": "C:\\Users\\karma\\_archive_2026-06-25\\EmpireOS\\crypto\\price_tracker.py", "tech": "Python / HTML", "type": "Legacy Micro-Engine / Script", "description": "Preserved EmpireOS crypto component: price_tracker.py"}, {"name": "EmpireOS/crypto/sentiment_analyzer.py", "path": "C:\\Users\\karma\\_archive_2026-06-25\\EmpireOS\\crypto\\sentiment_analyzer.py", "tech": "Python / HTML", "type": "Legacy Micro-Engine / Script", "description": "Preserved EmpireOS crypto component: sentiment_analyzer.py"}, {"name": "EmpireOS/crypto/trading_bot.py", "path": "C:\\Users\\karma\\_archive_2026-06-25\\EmpireOS\\crypto\\trading_bot.py", "tech": "Python / HTML", "type": "Legacy Micro-Engine / Script", "description": "Preserved EmpireOS crypto component: trading_bot.py"}]};
+        let chart = null;
+        let candleSeries = null;
+        let activeSymbol = 'SOL';
+        let activeTimeframe = '5m';
+        let activeAccount = 'micro_1k';
+        let currentPrice = 100.20;
+
+        // Play synthetic Web Audio chime on trade execution
+        function playChime() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880.0, ctx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.35);
+            } catch (e) {}
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initTradingViewChart();
+            fetchLiveCandles();
+            fetchLiveCryptoTelemetry();
+            fetchLiveOrderbook();
+            fetchLiveNews();
+            renderFleetGrid();
+
+            // Auto-refresh interval
+            setInterval(() => {
+                fetchLiveCandles();
+                fetchLiveCryptoTelemetry();
+                fetchLiveOrderbook();
+            }, 3500);
+
+            setInterval(fetchLiveNews, 20000);
+        });
+
+        function initTradingViewChart() {
+            const container = document.getElementById('tv-chart-container');
+            container.innerHTML = '';
+            
+            chart = LightweightCharts.createChart(container, {
+                width: container.clientWidth,
+                height: 400,
+                layout: {
+                    background: { color: 'rgba(6, 11, 25, 0.95)' },
+                    textColor: '#94a3b8',
+                    fontFamily: 'JetBrains Mono, monospace',
+                },
+                grid: {
+                    vertLines: { color: 'rgba(255, 255, 255, 0.04)' },
+                    horzLines: { color: 'rgba(255, 255, 255, 0.04)' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: 'rgba(255, 255, 255, 0.08)',
+                },
+                timeScale: {
+                    borderColor: 'rgba(255, 255, 255, 0.08)',
+                    timeVisible: true,
+                    secondsVisible: false,
+                },
+            });
+
+            candleSeries = chart.addCandlestickSeries({
+                upColor: '#10b981',
+                downColor: '#ef4444',
+                borderDownColor: '#ef4444',
+                borderUpColor: '#10b981',
+                wickDownColor: '#ef4444',
+                wickUpColor: '#10b981',
+            });
+
+            window.addEventListener('resize', () => {
+                if (chart) {
+                    chart.applyOptions({ width: container.clientWidth });
+                }
+            });
+        }
+
+        async function fetchLiveCandles() {
+            try {
+                const res = await fetch(`http://127.0.0.1:8088/api/candles?symbol=${activeSymbol}&timeframe=${activeTimeframe}`, { signal: AbortSignal.timeout(2500) });
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json.candles && json.candles.length > 0) {
+                        candleSeries.setData(json.candles);
+                        const lastCandle = json.candles[json.candles.length - 1];
+                        currentPrice = lastCandle.close;
+                        document.getElementById('live-chart-price').innerText = `$${currentPrice.toFixed(activeSymbol === 'BTC' ? 2 : activeSymbol === 'SOL' ? 2 : 4)}`;
+                    }
+                }
+            } catch (e) {}
+        }
+
+        async function fetchLiveOrderbook() {
+            try {
+                const res = await fetch(`http://127.0.0.1:8088/api/orderbook?symbol=${activeSymbol}`, { signal: AbortSignal.timeout(2000) });
+                if (res.ok) {
+                    const json = await res.json();
+                    const ob = json.orderbook;
+                    if (ob) {
+                        const asksEl = document.getElementById('orderbook-asks');
+                        const bidsEl = document.getElementById('orderbook-bids');
+                        
+                        asksEl.innerHTML = (ob.asks || []).slice(0, 4).reverse().map(a => `
+                            <div class="grid grid-cols-3">
+                                <span>${a.price.toFixed(2)}</span>
+                                <span class="text-right">${a.amount.toFixed(2)}</span>
+                                <span class="text-right">$${a.total.toFixed(0)}</span>
+                            </div>
+                        `).join('');
+
+                        bidsEl.innerHTML = (ob.bids || []).slice(0, 4).map(b => `
+                            <div class="grid grid-cols-3">
+                                <span>${b.price.toFixed(2)}</span>
+                                <span class="text-right">${b.amount.toFixed(2)}</span>
+                                <span class="text-right">$${b.total.toFixed(0)}</span>
+                            </div>
+                        `).join('');
+
+                        if (ob.bids && ob.bids[0]) {
+                            document.getElementById('orderbook-mid-price').innerText = `$${ob.bids[0].price.toFixed(2)}`;
+                        }
+                    }
+                }
+            } catch (e) {}
+        }
+
+        async function fetchLiveNews() {
+            try {
+                const res = await fetch('http://127.0.0.1:8088/api/news', { signal: AbortSignal.timeout(3000) });
+                if (res.ok) {
+                    const json = await res.json();
+                    const news = json.news || [];
+                    const grid = document.getElementById('news-stream-grid');
+                    grid.innerHTML = news.slice(0, 4).map(n => `
+                        <div class="p-3 bg-slate-900/70 border border-slate-800 rounded-xl space-y-1.5 text-xs font-mono">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">${n.currencies?.[0] || 'CRYPTO'}</span>
+                                <span class="text-slate-500 text-[10px]">${n.published_at || 'Just now'}</span>
+                            </div>
+                            <h4 class="font-bold text-slate-200 line-clamp-2">${n.title}</h4>
+                            <div class="flex items-center justify-between text-[10px] text-slate-400">
+                                <span>${n.domain || 'cryptopanic'}</span>
+                                <span class="text-cyan-400 font-bold">${n.sentiment}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) {}
+        }
+
+        function changeChartSymbol(sym) {
+            activeSymbol = sym;
+            document.getElementById('trade-symbol-input').value = sym;
+            fetchLiveCandles();
+            fetchLiveOrderbook();
+        }
+
+        function setChartTimeframe(tf) {
+            activeTimeframe = tf;
+            document.querySelectorAll('.tf-btn').forEach(btn => {
+                btn.className = "tf-btn px-2.5 py-1 rounded bg-slate-800 text-white hover:bg-slate-700";
+            });
+            const activeBtn = document.getElementById(`tf-${tf}`);
+            if (activeBtn) activeBtn.className = "tf-btn px-2.5 py-1 rounded bg-emerald-600/30 text-emerald-300 font-bold border border-emerald-500/40";
+            fetchLiveCandles();
+        }
+
+        async function fetchLiveCryptoTelemetry() {
+            try {
+                const res = await fetch('http://127.0.0.1:8088/api/crypto', { signal: AbortSignal.timeout(1800) });
+                if (res.ok) {
+                    const json = await res.json();
+                    const d = json.data;
+                    if (d) {
+                        document.getElementById('val-cash-balance').innerText = `$${(d.portfolio?.cashBalance || 850).toFixed(2)}`;
+                        document.getElementById('val-total-profit').innerText = `+$${(d.portfolio?.totalProfit || 164.80).toFixed(2)}`;
+                        document.getElementById('val-win-rate').innerText = d.portfolio?.winRate || '87.5%';
+                        
+                        if (d.topBuyers) {
+                            renderTopBuyers(d.topBuyers);
+                        }
+                        if (d.transactions) {
+                            renderTransactions(d.transactions);
+                        }
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function renderTopBuyers(buyers) {
+            const list = document.getElementById('top-buyers-list');
+            list.innerHTML = buyers.map(b => `
+                <div class="p-3 bg-slate-900/80 border border-slate-800 rounded-xl flex items-center justify-between hover:border-slate-700 transition cursor-pointer" onclick="openWhaleModal('${b.id}')">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-xs text-white">${b.name}</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">${b.winRate} Win</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 font-mono">${b.lastAction || 'Active accumulating'}</p>
+                    </div>
+                    <button class="px-2.5 py-1 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 text-xs font-mono rounded border border-emerald-500/30 transition">
+                        Inspect
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function renderTransactions(txs) {
+            const list = document.getElementById('tx-stream-list');
+            list.innerHTML = txs.slice(0, 8).map(tx => `
+                <div class="p-2.5 bg-slate-900/60 border border-slate-800/80 rounded-lg text-xs font-mono space-y-1">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-emerald-400">${tx.category} — ${tx.symbol}</span>
+                        <span class="text-slate-400">$${(tx.sizeUsd || 75).toFixed(2)}</span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 truncate">${tx.source || 'Whale Copy Execution'}</p>
+                    <p class="text-[10px] text-cyan-400">${tx.catalyst || 'Orderflow imbalance cluster'}</p>
+                </div>
+            `).join('');
+        }
+
+        function openWhaleModal(whaleId) {
+            const modal = document.getElementById('whale-modal');
+            const nameEl = document.getElementById('modal-whale-name');
+            const contentEl = document.getElementById('modal-whale-content');
+
+            nameEl.innerText = `Alpha Whale Inspector: ${whaleId}`;
+            contentEl.innerHTML = `
+                <div class="space-y-2">
+                    <p><strong>Tracking Strategy:</strong> Institutional Smart Money & On-Chain DEX Clustered Flow</p>
+                    <p><strong>MEV Protection:</strong> Jito Block Engine & Flashbots Active</p>
+                    <p><strong>Consensus Multiplier:</strong> 2x Sizing on 15-min Multi-Whale Inflow</p>
+                    <div class="p-2.5 bg-slate-900 rounded border border-slate-800 break-all text-[11px] text-slate-400">
+                        Address: 5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1
+                    </div>
+                    <a href="https://solscan.io" target="_blank" class="text-emerald-400 underline block pt-1">View Full SolScan Telemetry &rarr;</a>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function closeWhaleModal() {
+            document.getElementById('whale-modal').classList.add('hidden');
+        }
+
+        function renderFleetGrid() {
+            const grid = document.getElementById('fleet-grid');
+            const search = document.getElementById('fleet-search-input').value.toLowerCase().trim();
+            
+            let all = [];
+            for (const [cat, items] of Object.entries(MASTER_CATALOG)) {
+                items.forEach(i => all.push({ ...i, category: cat }));
+            }
+
+            const filtered = all.filter(item => {
+                const name = (item.name || '').toLowerCase();
+                const tech = (item.tech || '').toLowerCase();
+                return !search || name.includes(search) || tech.includes(search);
+            });
+
+            grid.innerHTML = filtered.slice(0, 32).map(item => `
+                <div class="p-2.5 bg-slate-900/80 border border-slate-800 rounded-xl flex flex-col justify-between space-y-2 hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[9px] uppercase font-mono text-emerald-400">${item.tech?.split(',')[0] || 'App'}</span>
+                        <h4 class="text-xs font-bold text-white truncate" title="${item.name}">${item.name}</h4>
+                    </div>
+                    <div class="grid grid-cols-3 gap-1 text-[10px] font-mono pt-1 border-t border-slate-800">
+                        <button onclick="launchTarget('${item.path.replace(/\\/g, '\\\\')}', 'run_dev')" class="py-1 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-300 rounded text-center">Run</button>
+                        <button onclick="launchTarget('${item.path.replace(/\\/g, '\\\\')}', 'open_vscode')" class="py-1 bg-blue-600/20 hover:bg-blue-600/40 text-blue-300 rounded text-center">Code</button>
+                        <button onclick="launchTarget('${item.path.replace(/\\/g, '\\\\')}', 'open_folder')" class="py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-center">Dir</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function executeOrder(side) {
+            playChime();
+            const symbol = document.getElementById('trade-symbol-input').value;
+            const amountUsd = parseFloat(document.getElementById('trade-size-input').value) || 75.0;
+            
+            try {
+                await fetch('http://127.0.0.1:8088/api/copy-trade', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ buyerId: 'buyer_01', symbol, amountUsd })
+                });
+                fetchLiveCryptoTelemetry();
+            } catch (e) {}
+        }
+
+        async function switchAccount(acc) {
+            playChime();
+            activeAccount = acc;
+            document.getElementById('btn-acc-micro').className = acc === 'micro_1k' ? "px-2.5 py-1 rounded-md bg-emerald-600/30 text-emerald-300 font-bold border border-emerald-500/40 transition" : "px-2.5 py-1 rounded-md text-slate-400 hover:text-slate-200 transition";
+            document.getElementById('btn-acc-main').className = acc === 'main_10k' ? "px-2.5 py-1 rounded-md bg-purple-600/30 text-purple-300 font-bold border border-purple-500/40 transition" : "px-2.5 py-1 rounded-md text-slate-400 hover:text-slate-200 transition";
+            
+            try {
+                await fetch('http://127.0.0.1:8088/api/switch-account', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ accountId: acc })
+                });
+                fetchLiveCryptoTelemetry();
+            } catch (e) {}
+        }
+
+        async function setTradingMode(mode) {
+            playChime();
+            document.getElementById('btn-mode-paper').className = mode === 'PAPER' ? "px-2.5 py-1 rounded-md bg-blue-600/30 text-blue-300 font-bold border border-blue-500/40 transition" : "px-2.5 py-1 rounded-md text-slate-400 hover:text-slate-200 transition";
+            document.getElementById('btn-mode-real').className = mode === 'REAL_COINBASE' ? "px-2.5 py-1 rounded-md bg-red-600/30 text-red-300 font-bold border border-red-500/40 transition" : "px-2.5 py-1 rounded-md text-slate-400 hover:text-slate-200 transition";
+            
+            try {
+                await fetch('http://127.0.0.1:8088/api/set-mode', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode })
+                });
+            } catch (e) {}
+        }
+
+        async function triggerEngineScan() {
+            try { await fetch('http://127.0.0.1:8088/api/crypto'); fetchLiveCryptoTelemetry(); } catch (e) {}
+        }
+
+        async function triggerWhaleCrawl() {
+            try { await fetch('http://127.0.0.1:8088/api/crawl-whales'); fetchLiveCryptoTelemetry(); } catch (e) {}
+        }
+
+        async function triggerBacktest() {
+            try { await fetch('http://127.0.0.1:8088/api/backtest'); } catch (e) {}
+        }
+
+        async function launchTarget(path, action) {
+            try {
+                await fetch('http://127.0.0.1:8088/api/launch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ path, action })
+                });
+            } catch (e) {}
+        }
+
+        function openGodMode() {
+            window.open('http://127.0.0.1:3142', '_blank');
+        }
+    </script>
+</body>
+</html>

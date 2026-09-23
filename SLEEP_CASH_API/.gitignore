@@ -1,0 +1,19 @@
+# Vercel build artifacts
+.vercel/
+
+# Python build/cache artifacts (regenerated on every test run)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local virtualenvs (per-test / per-developer)
+.venv/
+venv/
+env/
+
+# Local secrets / env overrides (never commit)
+.env
+.env.local
+.env.*.local

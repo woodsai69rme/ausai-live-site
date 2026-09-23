@@ -1,185 +1,148 @@
 @echo off
 REM ============================================
-REM QUICK ADB COMMANDS v2.0
+REM Quick-ADB-Commands.bat
+REM Sibling of Enhanced-Phone-Connection-Tester.bat and
+REM Enhanced-Advanced-Recovery-Suite.bat (Dr.Fone-Alt family).
+REM Fill-in for the missing sibling referenced from those menus.
 REM ============================================
-title Quick ADB Commands v2.0
-color 0E
+title Quick ADB Commands
+color 0A
 
-:menu
-cls
-echo ============================================
-echo QUICK ADB COMMANDS v2.0
-echo ============================================
-echo.
-echo 1. Type Text (Send text to phone)
-echo 2. Take Screenshot
-echo 3. Navigation (Home, Back, Recents)
-echo 4. Power / Reboot Menu
-echo 5. Enable Touch Indicators
-echo 6. Disable Touch Indicators
-echo 7. List 3rd Party Apps
-echo 8. PIN / Password Unlocker (Blind Unlock)
-echo 9. Pattern Lock Helper (Swipe Nodes)
-echo 10. Back to Main Menu
-echo.
-choice /c 1234567890 /m "Select: "
-
-if errorlevel 10 exit /b 0
-if errorlevel 9 goto pattern_unlock
-if errorlevel 8 goto pin_unlock
-if errorlevel 7 goto list_apps
-if errorlevel 6 goto no_touch
-if errorlevel 5 goto touch
-if errorlevel 4 goto key_menu
-if errorlevel 3 goto shell
-if errorlevel 2 goto info
-if errorlevel 1 goto reboot
-
-:pattern_unlock
-echo.
-echo ============================================
-echo PATTERN LOCK HELPER
-echo ============================================
-echo Pattern Node Map:
-echo [1] [2] [3]
-echo [4] [5] [6]
-echo [7] [8] [9]
-echo.
-echo Enter nodes in order (e.g., 1236):
-set /p nodes="Nodes: "
-echo Drawing pattern...
-adb shell input keyevent KEYCODE_WAKEUP
-adb shell input swipe 500 1500 500 500 200
-timeout /t 1 /nobreak >nul
-
-set prev_x=
-set prev_y=
-
-REM This is a simplified approach using individual swipes for each segment.
-REM For real patterns, a single continuous swipe command is better but complex for batch.
-REM We will use a sequence of swipes with very short duration.
-
-for /l %%i in (0,1,20) do (
-    set "node=!nodes:~%%i,1!"
-    if "!node!"=="" goto pattern_done
-    
-    set x=
-    set y=
-    if "!node!"=="1" (set x=250 & set y=800)
-    if "!node!"=="2" (set x=540 & set y=800)
-    if "!node!"=="3" (set x=830 & set y=800)
-    if "!node!"=="4" (set x=250 & set y=1090)
-    if "!node!"=="5" (set x=540 & set y=1090)
-    if "!node!"=="6" (set x=830 & set y=1090)
-    if "!node!"=="7" (set x=250 & set y=1380)
-    if "!node!"=="8" (set x=540 & set y=1380)
-    if "!node!"=="9" (set x=830 & set y=1380)
-
-    if defined prev_x (
-        adb shell input swipe !prev_x! !prev_y! !x! !y! 100
+:set_paths
+REM Locate ADB -- prefer system, then python adbutils, then current dir
+set "ADB=adb"
+where adb >nul 2>nul
+if %errorlevel% NEQ 0 (
+    if exist "adb.exe" (
+        set PATH=%PATH%;%CD%
+    ) else if exist "%AppData%\Roaming\Python\Python313\site-packages\adbutils\binaries\adb.exe" (
+        set PATH=%PATH%;%AppData%\Roaming\Python\Python313\site-packages\adbutils\binaries
     )
-    set prev_x=!x!
-    set prev_y=!y!
 )
 
-:pattern_done
-echo Pattern sent.
-pause
-goto menu
-
-
-:type_text
-echo.
-echo Enter text to send to phone (no special chars):
-set /p user_text="Text: "
-adb shell input text "%user_text%"
-echo Sent!
-pause
-goto menu
-
-:screenshot
-echo.
-REM Robust timestamp generation using WMIC
-for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value') do set datetime=%%I
-set filename=screenshot_%datetime:~0,14%.png
-echo Taking screenshot...
-adb shell screencap -p /sdcard/%filename%
-adb pull /sdcard/%filename% .
-adb shell rm /sdcard/%filename%
-echo Saved as %filename% in current folder.
-pause
-goto menu
-
-:nav_menu
+:start
 cls
-echo NAVIGATION
-echo ----------
-echo 1. Home
-echo 2. Back
-echo 3. Recent Apps
-echo 4. Menu
-choice /c 1234 /m "Select: "
-if errorlevel 4 adb shell input keyevent KEYCODE_MENU
-if errorlevel 3 adb shell input keyevent KEYCODE_APP_SWITCH
-if errorlevel 2 adb shell input keyevent KEYCODE_BACK
-if errorlevel 1 adb shell input keyevent KEYCODE_HOME
-goto menu
-
-:power_menu
-cls
-echo POWER MENU
-echo ----------
-echo 1. Toggle Screen On/Off
-echo 2. Reboot
-echo 3. Reboot Recovery
-echo 4. Reboot Bootloader
-choice /c 1234 /m "Select: "
-if errorlevel 4 adb reboot bootloader
-if errorlevel 3 adb reboot recovery
-if errorlevel 2 adb reboot
-if errorlevel 1 adb shell input keyevent KEYCODE_POWER
-goto menu
-
-:touch
-adb shell settings put system show_touches 1
-adb shell settings put system pointer_location 1
-echo Indicators Enabled.
-pause
-goto menu
-
-:no_touch
-adb shell settings put system show_touches 0
-adb shell settings put system pointer_location 0
-echo Indicators Disabled.
-pause
-goto menu
-
-:pin_unlock
-echo.
 echo ============================================
-echo BLIND PIN UNLOCKER
+echo QUICK ADB COMMANDS
 echo ============================================
-echo 1. Waking up screen...
-adb shell input keyevent KEYCODE_WAKEUP
-echo 2. Swiping up to show entry field...
-adb shell input swipe 500 1500 500 500 200
-timeout /t 1 /nobreak >nul
 echo.
-echo Enter your PIN/Password and press Enter:
-set /p user_pin="PIN: "
-echo Sending input...
-adb shell input text "%user_pin%"
-adb shell input keyevent KEYCODE_ENTER
+adb devices
 echo.
-echo Input sent. If the phone was on the lock screen, 
-echo it should now be unlocked.
-pause
-goto menu
+echo -------- common actions --------
+echo   1. Send TAP (x y)
+echo   2. Send SWIPE (x1 y1 x2 y2 ms)
+echo   3. Send KEYEVENT (code or name e.g. KEYCODE_HOME)
+echo   4. Send TEXT (will escape spaces as %%s)
+echo   5. Take SCREENSHOT (saved to /sdcard, pulled to here)
+echo   6. Pull /sdcard/DCIM  (photos) -> Recovered_Photos
+echo   7. Pull /sdcard/WhatsApp -> Recovered_WhatsApp
+echo   8. ADB shell raw (drop into device shell)
+echo   9. Reboot into recovery / bootloader / fastbootd
+echo  10. Refresh (kill-server + start-server + devices)
+echo   0. Back
+echo.
 
-:list_apps
-echo.
-echo Listing 3rd Party Apps...
-adb shell pm list packages -3
-echo.
+choice /c 1234567890 /m "Select: "
+if errorlevel 10 goto back
+if errorlevel 9  goto reboot
+if errorlevel 8  goto shell
+if errorlevel 7  goto pull_wa
+if errorlevel 6  goto pull_dcim
+if errorlevel 5  goto screen
+if errorlevel 4  goto text
+if errorlevel 3  goto key
+if errorlevel 2  goto swipe
+if errorlevel 1  goto tap
+goto start
+
+:tap
+set /p xy="x y (e.g. 540 1200): "
+adb shell input tap %xy%
 pause
-goto menu
+goto start
+
+:swipe
+set /p coords="x1 y1 x2 y2 duration_ms: "
+adb shell input swipe %coords%
+pause
+goto start
+
+:key
+set /p code="keyevent code (e.g. KEYCODE_HOME or 26): "
+adb shell input keyevent %code%
+pause
+goto start
+
+:text
+REM NOTE: input text does not accept spaces natively. Replace with %%s.
+set /p msg="text to send: "
+adb shell input text "%msg: =%%s%"
+echo (note: spaces were converted to %%s; tweak via shell escape if needed)
+pause
+goto start
+
+:screen
+set stamp=%date:~10,4%%date:~4,2%%date:~7,2%_%time:~0,2%%time:~3,2%%time:~6,2%
+set stamp=%stamp: =0%
+adb shell screencap -p /sdcard/screen_%stamp%.png
+adb pull /sdcard/screen_%stamp%.png .\
+echo Saved: screen_%stamp%.png
+pause
+goto start
+
+:pull_dcim
+mkdir "Recovered_Photos" 2>nul
+echo Pulling photos...
+adb pull /sdcard/DCIM ./Recovered_Photos
+echo Done.
+pause
+goto start
+
+:pull_wa
+mkdir "Recovered_WhatsApp" 2>nul
+echo Pulling WhatsApp media (best-effort, both layouts)...
+adb pull /sdcard/WhatsApp/Media ./Recovered_WhatsApp
+adb pull /sdcard/Android/media/com.whatsapp/WhatsApp/Media ./Recovered_WhatsApp
+echo Done.
+pause
+goto start
+
+:shell
+adb shell
+pause
+goto start
+
+:reboot
+echo.
+echo Reboot target:
+echo   R = recovery
+echo   B = bootloader (fastboot)
+echo   F = fastbootd
+echo   S = system (normal)
+choice /c RBFS /m "Pick: "
+if errorlevel 4 goto rb_system
+if errorlevel 3 goto rb_fbdt
+if errorlevel 2 goto rb_boot
+if errorlevel 1 goto rb_recovery
+goto reboot
+:rb_recovery
+adb reboot recovery
+goto reboot_done
+:rb_boot
+adb reboot bootloader
+goto reboot_done
+:rb_fbdt
+adb reboot fastboot
+goto reboot_done
+:rb_system
+adb reboot
+:reboot_done
+echo Done. Phone may take 30-60s to come back up.
+pause
+goto start
+
+:set_paths
+goto start
+
+:back
+exit /b 0

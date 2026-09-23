@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>🧰 AI + IT Toolkit — Operator Self-Use Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Comprehensive AI + IT tool inventory + OS-installed apps for operator self-use. Companion to AI_AND_IT_TOOLKIT.md and tool_kit.py." />
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px; line-height: 1.55;
+  color: #e6edf3; background: #0d1117;
+  margin: 0; padding: 0;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 1.5rem 2rem; }
+header {
+  border-bottom: 1px solid #30363d; padding-bottom: 1.5rem; margin-bottom: 2rem;
+}
+header h1 { font-size: 1.85rem; margin: 0 0 0.5rem; color: #58a6ff; }
+header .meta { color: #8b949e; font-size: 0.9rem; }
+header .companion { color: #8b949e; font-size: 0.85rem; margin-top: 0.5rem; }
+header .companion a { color: #58a6ff; text-decoration: none; }
+header .companion a:hover { text-decoration: underline; }
+
+/* Tier badge */
+.tier {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.t1 { background: #1f6f3a; color: #aff5c7; border: 1px solid #2ea043; }
+.t2 { background: #674e16; color: #ffd987; border: 1px solid #9e6a03; }
+.t3 { background: #6a3a0a; color: #f5b97e; border: 1px solid #bd561d; }
+.t4 { background: #2d333b; color: #8b949e; border: 1px solid #444c56; }
+
+/* Filter chips */
+.chips {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  padding: 1rem 0; position: sticky; top: 0; z-index: 10;
+  background: #0d1117ee; backdrop-filter: blur(8px);
+  border-bottom: 1px solid #30363d; margin-bottom: 1.5rem;
+}
+.chip {
+  padding: 0.4rem 0.85rem;
+  background: #21262d; border: 1px solid #30363d; border-radius: 18px;
+  color: #c9d1d9; cursor: pointer; user-select: none;
+  transition: all 0.15s ease-out;
+  font-size: 0.85rem;
+}
+.chip:hover { border-color: #58a6ff; }
+.chip.active { background: #1f6feb; color: #fff; border-color: #1f6feb; }
+.chip .count { color: #8b949e; margin-left: 0.25rem; font-size: 0.75rem; }
+.chip.active .count { color: #d1e7ff; }
+
+/* Search */
+.search-row { display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; }
+input.search {
+  flex: 1;
+  background: #161b22; border: 1px solid #30363d; color: #e6edf3;
+  padding: 0.5rem 0.75rem; border-radius: 6px;
+  font-size: 0.9rem;
+}
+input.search:focus { outline: none; border-color: #58a6ff; }
+
+/* Categories */
+.category {
+  margin-bottom: 2rem;
+  scroll-margin-top: 130px;
+}
+.category h2 {
+  font-size: 1.25rem; margin: 0 0 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #30363d;
+  color: #58a6ff;
+}
+.category .icon { margin-right: 0.5rem; }
+
+/* Tool card */
+.tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 0.85rem; }
+.card {
+  background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+  padding: 1rem 1.15rem;
+  transition: all 0.15s ease-out;
+  cursor: default;
+}
+.card:hover {
+  border-color: #58a6ff; transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.card.filtered-out { display: none; }
+.card h3 {
+  margin: 0 0 0.35rem; font-size: 1.05rem; color: #f0f6fc;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.card .summary { color: #8b949e; font-size: 0.85rem; margin-bottom: 0.65rem; }
+.card .meta {
+  display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 0.65rem;
+  font-size: 0.83rem;
+}
+.card .meta dt { color: #8b949e; font-weight: 600; }
+.card .meta dd { margin: 0; color: #c9d1d9; font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace; font-size: 0.78rem; }
+.card .meta dd code {
+  background: #0d1117; padding: 0.05rem 0.35rem; border-radius: 3px;
+  border: 1px solid #30363d;
+  cursor: pointer;
+}
+.card .meta dd code:hover { background: #1f2937; }
+.card .meta dd.invocation code { color: #aff5c7; }
+.card .notes {
+  margin-top: 0.65rem;
+  color: #8b949e; font-size: 0.83rem;
+  font-style: italic;
+}
+.card .copyable {
+  cursor: pointer;
+}
+.card .copyable:active { opacity: 0.7; }
+.card .toast {
+  position: absolute; right: 1rem; top: 1rem;
+  background: #1f6f3a; color: #aff5c7;
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+  font-size: 0.75rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease-out;
+}
+.card .toast.visible { opacity: 1; }
+
+/* Footer */
+footer {
+  margin-top: 3rem; padding-top: 1.5rem;
+  border-top: 1px solid #30363d;
+  color: #8b949e; font-size: 0.85rem;
+}
+footer a { color: #58a6ff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Empty state */
+.empty {
+  text-align: center; padding: 2rem;
+  color: #8b949e; font-style: italic;
+  display: none;
+}
+.empty.visible { display: block; }
+
+/* Stats banner */
+.stats {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+}
+.stat {
+  padding: 0.5rem 0.85rem; background: #161b22;
+  border: 1px solid #30363d; border-radius: 6px;
+}
+.stat .label { color: #8b949e; }
+.stat .value { color: #f0f6fc; font-weight: 600; margin-left: 0.4rem; }
+
+@media (max-width: 720px) {
+  .tools { grid-template-columns: 1fr; }
+  .wrap { padding: 1rem; }
+  header h1 { font-size: 1.4rem; }
+}
+
+@media print {
+  body { background: white; color: black; }
+  .chips, .search-row { display: none; }
+  .card { background: white; border: 1px solid #ccc; box-shadow: none; }
+  .card:hover { transform: none; box-shadow: none; }
+  header h1 { color: black; }
+  .category h2 { color: black; }
+  .tier { border: 1px solid black; }
+  footer { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🧰 AI + IT + OS Apps Toolkit</h1>
+  <div class="meta"><strong>Operator self-use dashboard.</strong> Karma &middot; 2026-07-10 &middot; 12 categories &middot; 100+ tools &middot; comprehensive inventory of every AI/IT tool <em>and</em> OS-installed app in <code>C:\Users\karma\</code></div>
+  <div class="companion">
+    Companion artifacts:
+    <a href="AI_AND_IT_TOOLKIT.md">canonical Markdown reference</a> ·
+    <a href="tool_kit.py">Python CLI dispatcher</a> ·
+    <a href="scan_pc_apps.ps1">PowerShell app-discovery script</a> ·
+    <a href="RAW_PC_APPS_INVENTORY.csv">raw scan output (453 rows)</a> ·
+    <a href="REFERENCE_DOCS_INDEX.md">reference docs nav</a> ·
+    <a href="WORKSPACE_INDEX.md">workspace master index</a>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><span class="label">Total tools:</span><span class="value" id="totalCount">0</span></div>
+  <div class="stat"><span class="label">Visible:</span><span class="value" id="visibleCount">0</span></div>    <div class="stat"><span class="label">Last updated:</span><span class="value">2026-07-10</span></div>
+  <div class="stat"><span class="label">Discovery:</span><span class="value">scan_pc_apps.ps1</span></div>
+</div>
+
+<div class="search-row">
+  <input type="text" class="search" id="searchBox" placeholder="🔍 Filter by name / path / invocation (e.g. 'chrome', 'comfyui', 'docker')" autocomplete="off" />
+</div>
+
+<div class="chips" id="chipBar">
+  <span class="chip active" data-filter="all">All <span class="count" id="allCount">0</span></span>
+  <span class="chip" data-filter="t1">T1 Daily<span class="count" id="t1Count">0</span></span>
+  <span class="chip" data-filter="t2">T2 Weekly<span class="count" id="t2Count">0</span></span>
+  <span class="chip" data-filter="t3">T3 Monthly<span class="count" id="t3Count">0</span></span>
+  <span class="chip" data-filter="t4">T4 Shelf<span class="count" id="t4Count">0</span></span>
+  <span class="chip" data-filter="cat-runtime">Runtimes</span>
+  <span class="chip" data-filter="cat-cloud">Cloud AI</span>
+  <span class="chip" data-filter="cat-agents">Agents</span>
+  <span class="chip" data-filter="cat-cli">CLI</span>
+  <span class="chip" data-filter="cat-factory">Factories</span>
+  <span class="chip" data-filter="cat-automation">Automate</span>
+  <span class="chip" data-filter="cat-dev">Dev Infra</span>
+  <span class="chip" data-filter="cat-mobile">Mobile/HW</span>
+  <span class="chip" data-filter="cat-dashboards">Dashboards</span>
+  <span class="chip" data-filter="cat-audit">Audit</span>
+  <span class="chip" data-filter="cat-os-apps">OS Apps</span>
+  <span class="chip" data-filter="cat-system">System</span>
+</div>
+
+<div class="empty" id="emptyState">No tools match the current filter.</div>
+
+<div id="toolContainer">
+
+<!-- Auto-populated by data below. Each card has data attrs for filter chips + search. -->
+<script>
+// Data
+const TOOLS = [
+  // 1. Runtimes
+  {cat:"cat-runtime",tier:"t1",name:"Ollama",invocation:"ollama pull <model> · ollama run <model> <prompt>",path:"C:\\Users\\karma\\.ollama\\ · :11434",notes:"v0.31.x · models: qwen2.5-coder:latest, deepseek-r1:8b, ornith:9b, llama3.2:3b, mistral:7b"},
+  {cat:"cat-runtime",tier:"t1",name:"ComfyUI",invocation:"ComfyUI\\launch_music_video_studio.bat",path:"C:\\Users\\karma\\ComfyUI\\ · :8188",notes:"Local image/video/audio generation · RTX 4060 8GB · 21-option launcher menu"},
+  {cat:"cat-runtime",tier:"t3",name:"LM Studio",invocation:"start LM Studio",path:"http://localhost:1234",notes:"Alt local LLM serving (OpenAI-compatible endpoint)"},
+  {cat:"cat-runtime",tier:"t4",name:"llama.cpp / vLLM",invocation:"n/a (not installed)",path:"-",notes:"Aspirational; use Ollama until proven better"},
+
+  // 2. Cloud AI
+  {cat:"cat-cloud",tier:"t1",name:"OpenRouter",invocation:'curl -H "Authorization: Bearer $OPENROUTER_API_KEY" https://openrouter.ai/api/v1/chat/completions',path:"OPENROUTER_API_KEY env var",notes:"Only AI provider per CLAUDE.md · routes to all models · free-model file at ComfyUI\\config\\openrouter_free_models.txt"},
+  {cat:"cat-cloud",tier:"t4",name:"Anthropic / OpenAI direct",invocation:"n/a — route via OpenRouter",path:"-",notes:"Direct keys not set per CLAUDE.md; OpenRouter is sole AI provider"},
+
+  // 3. Agent Frameworks
+  {cat:"cat-agents",tier:"t1",name:"AI Army / Foot Clan",invocation:"python AI_ARMY\\server.py",path:"AI_ARMY\\ · :8001",notes:"9 API routes · 6 agents · revenue-generating · all actions verified live"},
+  {cat:"cat-agents",tier:"t2",name:"Footclan Executor",invocation:'python FOOTCLAN_EXECUTOR.py --task "..." --dry-run',path:"FOOTCLAN_EXECUTOR.py",notes:"Squad-dispatch framework with audit log"},
+  {cat:"cat-agents",tier:"t3",name:"Voice PA ↔ Footclan bridge",invocation:"python voice_pa_bridge.py --dry-run",path:"voice_pa_bridge.py",notes:"Cross-system correlator by iso-minute prefix match"},
+  {cat:"cat-agents",tier:"t1",name:"Agent Registry",invocation:'grep -F "<id>" AGENT_REGISTRY.md',path:"AGENT_REGISTRY.md (read-only)",notes:"2,793 agents across 16 domains · append-only"},
+  {cat:"cat-agents",tier:"t2",name:"Archon V2",invocation:"START_ARCHON_STACK.bat",path:"python\\ · :3737/:8181/:8051/:8052",notes:"FastAPI + Socket.IO + MCP + Agents microservice stack · 4 services"},
+  {cat:"cat-agents",tier:"t2",name:"Project Brain 2.0",invocation:"python ingest.py --watch --audit-offset",path:"PROJECT_BRAIN_2_0\\",notes:"SHA256-cycle dedupe · Phase A-H design corridor closed"},
+  {cat:"cat-agents",tier:"t2",name:"AI Influencer Factory",invocation:"python ai_influencer_factory.py --run",path:"ai_influencer_factory.py",notes:"Ollama → Piper TTS → ComfyUI → n8n pipeline"},
+
+  // 4. AI Tools / CLI
+  {cat:"cat-cli",tier:"t1",name:"Music Video Studio",invocation:"python ComfyUI\\tools\\music_video_studio.py brainstorm --model ornith --lyrics poem.txt",path:"ComfyUI\\tools\\music_video_studio.py",notes:"10+ subcommands incl. transcribe / analyze-audio / wizard / list-free-models · hybrid Ollama/OpenRouter dispatcher"},
+  {cat:"cat-cli",tier:"t1",name:"Local AI Assistant",invocation:"python ComfyUI\\tools\\local_ai_assistant.py chat",path:"ComfyUI\\tools\\local_ai_assistant.py",notes:"Stdlib-only · chat / converse / browse / summarize / explain-error / plan / review / check · Ollama aliases via MODEL_ALIASES"},
+  {cat:"cat-cli",tier:"t2",name:"Benchmark Coders",invocation:"python benchmark_coders.py --sweep",path:"benchmark_coders.py",notes:"Per-model timing/wordcount/charcount · JSONL history at benchmark_coders_results.jsonl"},
+  {cat:"cat-cli",tier:"t2",name:"AI Voice PA",invocation:"python ai_voice_pa.py --run --stt cloud --i-have-credentials",path:"ai_voice_pa.py",notes:"5 intent enum · Rule #8 fence · append-only voice_pa.actions.jsonl"},
+  {cat:"cat-cli",tier:"t2",name:"YouTube Transcript Harvester",invocation:"python youtube_transcript_harvest.py --video URL --lang en --format srt --run",path:"youtube_transcript_harvest.py",notes:"Captions-only · Rule #8 fence rigid"},
+  {cat:"cat-cli",tier:"t1",name:"WAR_ROOM CLI dispatcher",invocation:"python war_room.py {status|list|info|launch|open|health|validate-mobile|validate-tools|doctor|archive-outbox|snapshot-doctor|diff-doctor|trend-doctor|trend-compare|launch-trend}",path:"war_room.py",notes:"15 CLI subcommands + 7 in-HTML-surfaces (status/action/recon/evidence/comms/reference/mobile) · doctor family: snapshot/diff/trend/launch-trend"},
+  {cat:"cat-cli",tier:"t3",name:"MCP Host Connector",invocation:"powershell MCP_HOST_CONNECTOR.ps1",path:"MCP_HOST_CONNECTOR.ps1",notes:"First concrete MCP adapter"},
+
+  // 5. Content Factories
+  {cat:"cat-factory",tier:"t2",name:"opt_a — Digital Products (Gumroad)",invocation:"python SLEEP_TRIPLE\\opt_a_digital_factory.py --run --publish published",path:"SLEEP_TRIPLE\\opt_a_digital_factory.py",notes:"Ollama(qwen2.5-coder) generators · requires user's Gumroad key"},
+  {cat:"cat-factory",tier:"t2",name:"opt_b — Faceless YouTube + Affiliate",invocation:"python SLEEP_TRIPLE\\opt_b_faceless_shorts.py --run --publish",path:"SLEEP_TRIPLE\\opt_b_faceless_shorts.py",notes:"TTS → ComfyUI → FFmpeg composites → YouTube Data API v3 upload"},
+  {cat:"cat-factory",tier:"t2",name:"opt_c — Crypto Yield",invocation:"python SLEEP_TRIPLE\\opt_c_crypto_yield.py --run --execute",path:"SLEEP_TRIPLE\\opt_c_crypto_yield.py",notes:"Coinspot/Kraken/IR public tickers · 50 bps threshold · capital-protection default"},
+  {cat:"cat-factory",tier:"t1",name:"opt_d — Alerts fanout",invocation:"python SLEEP_TRIPLE\\opt_d_alerts.py --trigger morning_digest --channel discord",path:"SLEEP_TRIPLE\\opt_d_alerts.py",notes:"8-hour audit window · 3-retry exponential backoff · morning digest"},
+  {cat:"cat-factory",tier:"t3",name:"opt_e — Print-on-Demand",invocation:"python SLEEP_TRIPLE\\opt_e_pod.py --run --publish mode",path:"SLEEP_TRIPLE\\opt_e_pod.py",notes:"ComfyUI design · Printful fulfillment · Shopify sync"},
+  {cat:"cat-factory",tier:"t3",name:"REVENUE_GENERATORS suite",invocation:"dispatched via AI Army :8001",path:"REVENUE_GENERATORS\\",notes:"6 actions · deploy_revenue / content_factory / saas_launcher / brain_crawler / singularity / self_healing"},
+
+  // 6. IT Automation
+  {cat:"cat-automation",tier:"t2",name:"n8n Automation",invocation:"docker-compose -f n8n-automation-stack\\docker-compose.yml up -d",path:"n8n-automation-stack\\ · :5678",notes:"91+ workflow templates · LUCA avatar generator · webhook rounds"},
+  {cat:"cat-automation",tier:"t3",name:"AI Self-Healing Daemon",invocation:"python SELF_HEALING_DAEMON.py",path:"REVENUE_GENERATORS\\SELF_HEALING_DAEMON.py",notes:"Service health checks · plan_heal (renamed from attempt_heal)"},
+  {cat:"cat-automation",tier:"t3",name:"MCP Federation merger",invocation:"powershell MCP_FEDERATION_MERGER.ps1 --run",path:"MCP_FEDERATION_MERGER.ps1",notes:"Phase 1: query rows · Phase 2: chunk rows · closed 5-element outcome enum"},
+  {cat:"cat-automation",tier:"t2",name:"SLEEP_TRIPLE orchestrator",invocation:"python SLEEP_TRIPLE\\sleep_orchestrator.py --force-window",path:"SLEEP_TRIPLE\\sleep_orchestrator.py",notes:"23:00-07:00 nightly + 07:00 morning digest + Sun weekly rollup · append-only audit log"},
+  {cat:"cat-automation",tier:"t2",name:"Task-scheduler installer",invocation:"install_monitor_scheduler.bat [--dry-run|--uninstall]",path:"install_monitor_scheduler.bat",notes:"Auto-elevates via PowerShell UAC · digit-validates MONITOR_INTERVAL · installs both SLEEP_CASH\\Monitor + ProbeAll"},
+
+  // 7. Dev Infrastructure
+  {cat:"cat-dev",tier:"t1",name:"Python venvs (uv-managed)",invocation:"uv sync",path:"python\\.venv\\ · SLEEP_CASH_API\\ · per-project",notes:"3.12 + 3.13 mixed"},
+  {cat:"cat-dev",tier:"t1",name:"uv (package manager)",invocation:"uv <cmd>",path:"~/.local\\bin\\uv",notes:"Fast resolver"},
+  {cat:"cat-dev",tier:"t2",name:"Node.js + Vite",invocation:"npm run dev | vite",path:"archon-ui-main\\ · Vite proxy :3737 → :8181",notes:"React + TypeScript + TailwindCSS frontend"},
+  {cat:"cat-dev",tier:"t2",name:"Docker / docker-compose",invocation:"docker compose -f <file> up -d",path:"n8n-automation-stack\\ · Archon stack",notes:"Compose orchestration under bare-Windows runners (archon_orchestrator.py)"},
+  {cat:"cat-dev",tier:"t1",name:"PowerShell",invocation:'powershell -NoProfile -Command "..."',path:"Windows-native",notes:"Required for UAC elevation of .bat installers"},
+  {cat:"cat-dev",tier:"t3",name:"pyenv",invocation:"pyenv shell 3.13",path:"~/.pyenv\\",notes:"Per-project Python version pick"},
+  {cat:"cat-dev",tier:"t3",name:"npm / pnpm / bun",invocation:"bun <cmd> (fastest)",path:"~/.bun\\ · various",notes:"Bun fastest for Karma's local scripts"},
+
+  // 8. Mobile / Hardware
+  {cat:"cat-mobile",tier:"t2",name:"Recovery Suite (12-position menu)",invocation:"recovery.bat (top-level shim)",path:"COMPLETED_PROJECTS\\mobile_backup\\RECOVERY_SUITE.bat",notes:"Android unlock GUI + iPhone suite + Oppo specialist + 4 Flask reference apps · 15/15 PASS tests"},
+  {cat:"cat-mobile",tier:"t2",name:"Sunshine + Moonlight",invocation:"see SUNSHINE_MOONLIGHT_SETUP.md",path:"C:\\Program Files\\Sunshine\\ (if installed)",notes:"GPU-accelerated remote-desktop · documented, NOT auto-installed"},
+  {cat:"cat-mobile",tier:"t4",name:"scrcpy",invocation:"choco install scrcpy adb",path:"tools/scrcpy\\ (currently empty)",notes:"Android screen-over-USB"},
+  {cat:"cat-mobile",tier:"t4",name:"libimobiledevice",invocation:"choco install libimobiledevice",path:"- (uninstalled)",notes:"iPhone plumbing for iphone_recovery.py"},
+  {cat:"cat-mobile",tier:"t1",name:"adb (Android Debug Bridge)",invocation:"adb devices · adb install <apk> · adb shell",path:"C:\Program Files\Google\Android\platform-tools\adb.exe",notes:"Core daily-driver for ALL Android ops · USB + wireless (adb pair IP:PORT)"},
+  {cat:"cat-mobile",tier:"t1",name:"fastboot",invocation:"fastboot devices · fastboot flash <partition> <img> · fastboot oem unlock",path:"C:\Program Files\Google\Android\platform-tools\fastboot.exe",notes:"Companion to adb · bootloader unlock / recovery flash / EDL"},
+  {cat:"cat-mobile",tier:"t2",name:"Android platform-tools (ZIP)",invocation:"winget install Google.PlatformTools",path:"C:\Program Files\Google\Android\platform-tools",notes:"Bundle: adb + fastboot + mDNS responder · ~7 MB"},
+  {cat:"cat-mobile",tier:"t2",name:"APKTool",invocation:"java -jar apktool.jar d -o out_dir foo.apk",path:"C:\Program Files\apktool\apktool.jar",notes:"Reverse-engineer suspicious APKs · FB-evidence use · smali + 9patch"},
+  {cat:"cat-mobile",tier:"t2",name:"jadx (DEX decompiler)",invocation:"jadx -d out_dir foo.apk · jadx-gui foo.apk",path:"C:\Program Files\jadx\bin\jadx.exe",notes:"Inspect classes/methods/strings · companion to APKTool"},
+  {cat:"cat-mobile",tier:"t3",name:"Frida",invocation:"pip install frida-tools · frida -U -l script.js com.target.app",path:"(pip-installed; AppData\Local\Programs\frida)",notes:"Runtime API-hook · cross-platform · trace suspicious apps at runtime"},
+  {cat:"cat-mobile",tier:"t3",name:"Magisk (root framework)",invocation:"adb push magisk.apk /data/local/tmp",path:"(phone-side install; F-Droid / GitHub)",notes:"Systemless root · MagiskHide + Zygisk; use /data/local/tmp NOT /sdcard (Android 11+ write-restricted)"},
+  {cat:"cat-mobile",tier:"t3",name:"Android Studio",invocation:'start "" "Android Studio"',path:"C:\Program Files\Android\Android Studio\bin\studio64.exe",notes:"Full APK dev environment · emulator · profiler · ~5 GB"},
+  {cat:"cat-mobile",tier:"t2",name:"libimobiledevice CLI",invocation:"idevice_id -l · idevicesyslog · idevicebackup2 backup <dir>",path:"C:\Program Files\libimobiledevice\bin",notes:"CLI surface for ALL iOS plumbing · pull logs / screenshots"},
+  {cat:"cat-mobile",tier:"t3",name:"iMazing",invocation:'start "" "iMazing.exe"',path:"C:\Program Files\iMazing",notes:"GUI iPhone backup/transfer · encrypted backups · iTunes replacement"},
+  {cat:"cat-mobile",tier:"t3",name:"WSA (Windows Subsystem for Android)",invocation:'start ms-windows-store://pdp/?ProductId=9p3395vx91nr',path:"Amazon Appstore (Microsoft Store; ProductId 9p3395vx91nr)",notes:"DEPRECATED Sept 2024 (Microsoft); Amazon Appstore install path remains valid · adb localhost:58526 still works"},
+  {cat:"cat-mobile",tier:"t4",name:"MTKClient (MediaTek flash)",invocation:"cd \"C:\Program Files\mtkclient\" && .venv\Scripts\python.exe mtk.py",path:"C:\Program Files\mtkclient\mtk.py",notes:"Niche: bypass-auth + flash MediaTek chips; install-on-demand (git clone + venv)"},
+
+  // 9. Dashboards & Knowledge
+  {cat:"cat-dashboards",tier:"t1",name:"AI Tools Dashboard",invocation:"open AI_TOOLS_DASHBOARD.html",path:"AI_TOOLS_DASHBOARD.html",notes:"All tools in one HTML page"},
+  {cat:"cat-dashboards",tier:"t1",name:"Ultimate Empire V2",invocation:"open ULTIMATE_AI_EMPIRE_ENHANCED_DASHBOARD_V2.html",path:"ULTIMATE_AI_EMPIRE_ENHANCED_DASHBOARD_V2.html",notes:"6 Quick Tools tiles (incl. Mobile Recovery)"},
+  {cat:"cat-dashboards",tier:"t1",name:"Revenue Dashboard (Live)",invocation:"http://localhost:3144",path:"SLEEP_TRIPLE\\dashboard_server.py",notes:"Real-time revenue tracking"},
+  {cat:"cat-dashboards",tier:"t1",name:"Master Command Center",invocation:"open UNIFIED_COMMAND_CENTER.html",path:"UNIFIED_COMMAND_CENTER.html + master_dashboard_hub.html",notes:"Top-level hub"},
+  {cat:"cat-dashboards",tier:"t2",name:"System Status Dashboard",invocation:"open system_status_dashboard.html",path:"dashback26\\system_status_dashboard.html",notes:"Service health summary"},
+  {cat:"cat-dashboards",tier:"t2",name:"Bookmark Manager Pro",invocation:"open enhanced_dashboard.html",path:"BOOKMARK_MANAGER_PRO_INDEX.md (16 stages)",notes:"7,685 bookmarks · 17 categories · 100% test coverage"},
+
+  // 10. Audit Family
+  {cat:"cat-audit",tier:"t2",name:"REALITY_VS_CLAIM_AUDIT",invocation:"python REALITY_VS_CLAIM_AUDIT.py --run --emit-summary",path:"REALITY_VS_CLAIM_AUDIT.py",notes:"Cross-checks master-index headlines vs on-disk reality"},
+  {cat:"cat-audit",tier:"t2",name:"INDEX_DELTA_SCANNER",invocation:"python INDEX_DELTA_SCANNER.py --run",path:"INDEX_DELTA_SCANNER.py",notes:"Top-level (1-deep) entry divergence"},
+  {cat:"cat-audit",tier:"t2",name:"INDEX_DELTA_RECURSIVE",invocation:"python INDEX_DELTA_RECURSIVE.py --run --max-depth 2",path:"INDEX_DELTA_RECURSIVE.py",notes:"Where-inside the disk tree the divergence happens"},
+  {cat:"cat-audit",tier:"t2",name:"MASTER_INDEX_RECONCILER",invocation:"python MASTER_INDEX_RECONCILER.py --run --emit-summary",path:"MASTER_INDEX_RECONCILER.py",notes:"Aggregates 3 source logs into MASTER_INDEX_RECONCILED.md"},
+  {cat:"cat-audit",tier:"t2",name:"GAL_INTEGRITY_VERIFY",invocation:"python GAL_INTEGRITY_VERIFY.py --run [--header-only]",path:"GAL_INTEGRITY_VERIFY.py",notes:"x:\\AETHER_CORE_SYSTEM archives · 7-element status enum"},
+  {cat:"cat-audit",tier:"t2",name:"CROSS_TOOL_AGGREGATOR",invocation:"python CROSS_TOOL_AGGREGATOR.py --run --emit-summary",path:"CROSS_TOOL_AGGREGATOR.py",notes:"Top-of-family digest for the 5-log audit family"},
+  {cat:"cat-audit",tier:"t2",name:"DOTDIR_CATALOG_RUN",invocation:"python DOTDIR_CATALOG_RUN.py --run --emit-summary",path:"DOTDIR_CATALOG_RUN.py",notes:"81+ workspace-hygiene names · emits DOTDIR_CATALOG.md"},
+  {cat:"cat-audit",tier:"t3",name:"append-only hygiene runner",invocation:"python append_only_hygiene_runner.py --run",path:"append_only_hygiene_runner.py",notes:"12-log closed list · size + ts monotonic check"},
+  {cat:"cat-audit",tier:"t3",name:"BACKUP_AUDIT_RUN (PowerShell)",invocation:"powershell BACKUP_AUDIT_RUN.ps1 -Run",path:"BACKUP_AUDIT_RUN.ps1",notes:"Reads BACKUP_MANIFEST.json · 6-element status enum"},
+  {cat:"cat-audit",tier:"t3",name:"ENV_AUDIT_RUN (PowerShell)",invocation:"powershell ENV_AUDIT_RUN.ps1 -Run",path:"ENV_AUDIT_RUN.ps1",notes:"5-element ENV_KEY_STATUS_ENUM · Rule #8 fence rigid"},
+
+  // 11. OS Apps (installed on this PC; sources: Registry + AppX + Store; from scan_pc_apps.ps1)
+  {cat:"cat-os-apps",tier:"t1",name:"Google Chrome",invocation:'start "" chrome',path:"C:\\Program Files\\Google\\Chrome\\Application",notes:"v149.0.7827.201 · primary browser"},
+  {cat:"cat-os-apps",tier:"t1",name:"Microsoft Edge",invocation:'start "" msedge',path:"C:\\Program Files (x86)\\Microsoft\\Edge\\Application",notes:"5 entries in scan (Edge + WebView + updater) · built-in Win 11"},
+  {cat:"cat-os-apps",tier:"t2",name:"Mozilla Firefox",invocation:'start "" firefox',path:"C:\\Program Files\\Mozilla Firefox",notes:"Alt browser · 1 hit in scan"},
+  {cat:"cat-os-apps",tier:"t1",name:"GitHub Desktop",invocation:'start "" "GitHub Desktop.exe"',path:"AppData\\Local\\GitHubDesktop",notes:"v3.5.3 · git GUI"},
+  {cat:"cat-os-apps",tier:"t1",name:"Docker Desktop",invocation:'start "" "Docker Desktop.exe"',path:"C:\\Program Files\\Docker\\Docker",notes:"v4.81.0 · WSL2 backend"},
+  {cat:"cat-os-apps",tier:"t2",name:"Slack",invocation:'start "" slack',path:"AppData\\Local\\slack (typical)",notes:"Daily team comms"},
+  {cat:"cat-os-apps",tier:"t2",name:"Discord",invocation:'start "" discord',path:"AppData\\Local\\Discord (typical)",notes:"Voice + community"},
+  {cat:"cat-os-apps",tier:"t2",name:"Telegram Desktop",invocation:'start "" "Telegram.exe"',path:"AppData\\Roaming\\Telegram Desktop",notes:"E2E DMs + channel reads"},
+  {cat:"cat-os-apps",tier:"t2",name:"Spotify",invocation:'start "" spotify',path:"AppData\\Roaming\\Spotify",notes:"Focus music · supports --minimized"},
+  {cat:"cat-os-apps",tier:"t2",name:"VLC media player",invocation:'start "" vlc <file>',path:"C:\\Program Files\\VideoLAN\\VLC",notes:"Universal codec playback"},
+  {cat:"cat-os-apps",tier:"t3",name:"HandBrake",invocation:'start "" "HandBrake.exe"',path:"C:\\Program Files\\HandBrake",notes:"FFmpeg UI for video compression"},
+  {cat:"cat-os-apps",tier:"t3",name:"OBS Studio",invocation:'start "" obs64.exe',path:"C:\\Program Files\\obs-studio\\bin\\64bit",notes:"Streaming + recording + virtual camera"},
+  {cat:"cat-os-apps",tier:"t3",name:"CapCut",invocation:'start "" "CapCut.exe"',path:"AppData\\Local\\CapCut",notes:"v8.8.0.3774 · short-form video editor"},
+  {cat:"cat-os-apps",tier:"t3",name:"DaVinci Resolve",invocation:'start "" Resolve.exe',path:"C:\\Program Files\\Blackmagic Design\\DaVinci Resolve",notes:"Color grading + NLE · free tier very capable"},
+  {cat:"cat-os-apps",tier:"t3",name:"Blackmagic RAW",invocation:"(codec pack; no UI)",path:"-",notes:"System-wide BRAW codec for DaVinci / Premiere"},
+  {cat:"cat-os-apps",tier:"t2",name:"Google Drive for desktop",invocation:'start "" "GoogleDriveFS.exe"',path:"C:\\Program Files\\Google\\Drive File Stream",notes:"v127.0.1.0 · Drive + Backup sync"},
+  {cat:"cat-os-apps",tier:"t2",name:"Dropbox",invocation:'start "" dropbox',path:"AppData\\Roaming\\Dropbox",notes:"Client-side sync"},
+  {cat:"cat-os-apps",tier:"t2",name:"Foxit PDF Reader",invocation:'start "" "Foxit PDF Reader.exe"',path:"C:\\Program Files (x86)\\Foxit Software\\Foxit PDF Reader",notes:"v2024.4.0.27683 · lighter than Adobe"},
+  {cat:"cat-os-apps",tier:"t3",name:"CutePDF Writer",invocation:'print-to "CutePDF Writer" printer',path:"C:\\Program Files (x86)\\CutePDF Writer",notes:"v4.0 · printer-as-PDF · lightweight"},
+  {cat:"cat-os-apps",tier:"t2",name:"Notepad++",invocation:'start "" notepad++',path:"C:\\Program Files\\Notepad++",notes:"3 Notepad hits in scan incl. plugins"},
+  {cat:"cat-os-apps",tier:"t2",name:"7-Zip",invocation:'7zFM  (or: 7z a archive.7z <files>)',path:"C:\\Program Files\\7-Zip",notes:"Multi-format archiver · CLI 7z extensive"},
+  {cat:"cat-os-apps",tier:"t2",name:"WinRAR",invocation:'start "" "WinRAR.exe"',path:"C:\\Program Files\\WinRAR",notes:"2 hits · x64 + x86"},
+  {cat:"cat-os-apps",tier:"t3",name:"CPU-Z",invocation:'start "" "cpuz.exe"',path:"C:\\Program Files\\CPUID\\CPU-Z",notes:"v2.15 · CPU + mobo + RAM SPD info"},
+  {cat:"cat-os-apps",tier:"t3",name:"AIDA64 Extreme",invocation:'start "" "aida64.exe"',path:"C:\\Program Files (x86)\\FinalWire\\AIDA64 Extreme",notes:"v7.50 · deeper HW + sensor logging"},
+  {cat:"cat-os-apps",tier:"t3",name:"Deskflow",invocation:'start "" deskflow',path:"C:\\Program Files\\Deskflow",notes:"v1.23.0.0 · cross-machine K/M sharing"},
+  {cat:"cat-os-apps",tier:"t4",name:"iCloud / Bonjour",invocation:"(background service)",path:"C:\\Program Files (x86)\\Bonjour",notes:"Apple networking helper"},
+
+  // 12. System (runtimes + utilities on this PC)
+  {cat:"cat-system",tier:"t1",name:"Windows Terminal",invocation:"wt",path:"Microsoft Store (AppX)",notes:"Primary CLI host · tabs + panes + Quake mode"},
+  {cat:"cat-system",tier:"t1",name:"Git",invocation:"git <cmd>",path:"C:\\Program Files\\Git",notes:"v2.48.1 · msys2 + POSIX utilities bundled"},
+  {cat:"cat-system",tier:"t1",name:"GitHub CLI (gh)",invocation:"gh <cmd>",path:"(scan: HKLM 64)",notes:"v2.75.0 · authenticated for github.com"},
+  {cat:"cat-system",tier:"t1",name:"Python (system install)",invocation:"python --version  # py launcher for version switching",path:"C:\\Python313 or C:\\Python312",notes:"Companion to uv-managed venvs"},
+  {cat:"cat-system",tier:"t1",name:"VS Code (system install)",invocation:"code .",path:"AppData\\Local\\Programs\\Microsoft VS Code",notes:"Companion to Antigravity · CLI `code` registered"},
+  {cat:"cat-system",tier:"t2",name:"Antigravity (Google IDE)",invocation:'start "" "Antigravity IDE.exe"',path:"AppData\\Local\\Programs\\Antigravity IDE",notes:"Google's 2026 anti-gravity IDE · v2.1.4 · Gemini integration"},
+  {cat:"cat-system",tier:"t2",name:"Visual Studio 2022",invocation:'start "" "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe"',path:"C:\\Program Files\\Microsoft Visual Studio\\2022",notes:"Enterprise .NET/C++ IDE"},
+  {cat:"cat-system",tier:"t2",name:"Node.js (system install)",invocation:"node --version; npm --version",path:"C:\\Program Files\\nodejs",notes:"Project-local preferred via package.json"},
+  {cat:"cat-system",tier:"t2",name:"AWS CLI v2",invocation:"aws <cmd>  # aws sso login first",path:"(scan: HKLM 64)",notes:"v2.27.50 · SSO + IAM Identity Center friendly"},
+  {cat:"cat-system",tier:"t2",name:"Google Cloud SDK",invocation:"gcloud <cmd>  # gcloud init for first auth",path:"C:\\Program Files (x86)\\Google\\Cloud SDK",notes:"Includes gsutil + bq + kubectl"},
+  {cat:"cat-system",tier:"t2",name:"Azure CLI",invocation:"az <cmd>  # az login first",path:"(winget install)",notes:"Cross-platform · MSI install available"},
+  {cat:"cat-system",tier:"t2",name:"Java JDK",invocation:"java -version  # check JAVA_HOME",path:"C:\\Program Files\\Eclipse Adoptium",notes:"Build tools rely on JAVA_HOME"},
+  {cat:"cat-system",tier:"t2",name:".NET Runtime",invocation:"dotnet --list-runtimes",path:"C:\\Program Files\\dotnet",notes:"10 entries in PC scan"},
+  {cat:"cat-system",tier:"t2",name:"PowerToys",invocation:'start "" "PowerToys.exe"',path:"Microsoft Store (AppX)",notes:"FancyZones + PowerRename + Keyboard Manager"},
+  {cat:"cat-system",tier:"t2",name:"Everything (voidtools)",invocation:"Everything.exe -search <query>",path:"C:\\Program Files\\Everything",notes:"Instant filename search across NTFS"},
+  {cat:"cat-system",tier:"t3",name:"Rust toolchain",invocation:"rustc --version; cargo --version",path:"C:\\Users\\karma\\.cargo\\bin",notes:"Install via rustup-init.exe"},
+  {cat:"cat-system",tier:"t3",name:"Go runtime",invocation:"go version",path:"C:\\Program Files\\Go\\bin",notes:"11 hits in scan · ~Go + embedded tools"},
+  {cat:"cat-system",tier:"t3",name:"Rufus (USB imager)",invocation:'start "" "Rufus.exe"',path:"C:\\Program Files\\Rufus",notes:"Bootable USB for Linux/Windows · portable"},
+];
+
+(function() {
+  const CATEGORIES = [
+    { key: "cat-runtime",   icon: "🧠", title: "Local AI Runtimes" },
+    { key: "cat-cloud",     icon: "☁️", title: "Cloud AI Providers" },
+    { key: "cat-agents",    icon: "🦾", title: "Agent Frameworks" },
+    { key: "cat-cli",       icon: "🧰", title: "AI Tools / CLI" },
+    { key: "cat-factory",   icon: "🏭", title: "Content Factories" },
+    { key: "cat-automation",icon: "⚙️", title: "IT Automation" },
+    { key: "cat-dev",       icon: "🛠️", title: "Dev Infrastructure" },
+    { key: "cat-mobile",    icon: "📱", title: "Mobile / Hardware" },
+    { key: "cat-dashboards",icon: "📊", title: "Dashboards & Knowledge" },
+    { key: "cat-audit",     icon: "🧾", title: "Audit Family" },
+    { key: "cat-os-apps",   icon: "🖥️", title: "OS Apps (installed on this PC)" },
+    { key: "cat-system",    icon: "⚙️", title: "System (runtimes + utilities)" },
+  ];
+  const TIER_LABEL = { t1: "T1", t2: "T2", t3: "T3", t4: "T4" };
+
+  // Build categories
+  const container = document.getElementById('toolContainer');
+  CATEGORIES.forEach(cat => {
+    const tools_in_cat = TOOLS.filter(t => t.cat === cat.key);
+    if (tools_in_cat.length === 0) return;
+    const section = document.createElement('section');
+    section.className = 'category';
+    section.id = cat.key;
+    section.innerHTML = `<h2><span class="icon">${cat.icon}</span>${cat.title} <span style="color:#8b949e;font-weight:400;font-size:0.85rem;">(${tools_in_cat.length})</span></h2>`;
+    const grid = document.createElement('div');
+    grid.className = 'tools';
+    tools_in_cat.forEach(tool => {
+      const card = document.createElement('article');
+      card.className = `card ${tool.tier}`;
+      card.dataset.cat = tool.cat;
+      card.dataset.tier = tool.tier;
+      card.dataset.search = `${tool.name} ${tool.path} ${tool.invocation} ${tool.notes}`.toLowerCase();
+      card.innerHTML = `
+        <h3>
+          ${escapeHtml(tool.name)}
+          <span class="tier ${tool.tier}">${TIER_LABEL[tool.tier]} ${tool.tier === 't1' ? 'Daily' : tool.tier === 't2' ? 'Weekly' : tool.tier === 't3' ? 'Monthly' : 'Shelf'}</span>
+        </h3>
+        <div class="summary">${escapeHtml(tool.notes)}</div>
+        <dl class="meta">
+          <dt>Path</dt><dd><code>${escapeHtml(tool.path)}</code></dd>
+          <dt>Invocation</dt><dd class="invocation"><code class="copyable" title="Click to copy">${escapeHtml(tool.invocation)}</code></dd>
+        </dl>
+        <div class="toast">Copied</div>
+      `;
+      grid.appendChild(card);
+    });
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+
+  // Wire up click-to-copy
+  document.querySelectorAll('.copyable').forEach(el => {
+    el.addEventListener('click', () => {
+      const text = el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = el.closest('.card').querySelector('.toast');
+        toast.classList.add('visible');
+        setTimeout(() => toast.classList.remove('visible'), 1100);
+      });
+    });
+  });
+
+  // Wire up tier counts
+  function updateTierCounts() {
+    document.getElementById('totalCount').textContent = TOOLS.length;
+    ['t1','t2','t3','t4'].forEach(t => {
+      document.getElementById(t + 'Count').textContent = TOOLS.filter(x => x.tier === t).length;
+    });
+    document.getElementById('allCount').textContent = TOOLS.length;
+  }
+  updateTierCounts();
+
+  // Filter logic
+  function applyFilters() {
+    const activeChip = document.querySelector('.chip.active');
+    const filter = activeChip ? activeChip.dataset.filter : 'all';
+    const searchTerm = document.getElementById('searchBox').value.trim().toLowerCase();
+    let visibleCount = 0;
+    document.querySelectorAll('.card').forEach(card => {
+      const matchesFilter = (filter === 'all' || card.dataset.cat === filter || card.dataset.tier === filter);
+      const matchesSearch = !searchTerm || card.dataset.search.includes(searchTerm);
+      if (matchesFilter && matchesSearch) {
+        card.classList.remove('filtered-out');
+        visibleCount++;
+      } else {
+        card.classList.add('filtered-out');
+      }
+    });
+    document.getElementById('visibleCount').textContent = visibleCount;
+    document.getElementById('emptyState').classList.toggle('visible', visibleCount === 0);
+  }
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      applyFilters();
+    });
+  });
+
+  const searchBox = document.getElementById('searchBox');
+  searchBox.addEventListener('input', applyFilters);
+
+  // Initial render
+  applyFilters();
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, ch => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    }[ch]));
+  }
+})();
+</script>
+
+</div><!-- /toolContainer -->
+
+<footer>
+  <p><strong>Source data:</strong> <a href="AI_AND_IT_TOOLKIT.md">AI_AND_IT_TOOLKIT.md</a> (canonical Markdown) · <strong>CLI dispatcher:</strong> <a href="tool_kit.py">tool_kit.py</a> · <strong>Discovery script:</strong> <a href="scan_pc_apps.ps1">scan_pc_apps.ps1</a> · <strong>Raw scan:</strong> <a href="RAW_PC_APPS_INVENTORY.csv">RAW_PC_APPS_INVENTORY.csv (454 rows)</a></p>
+  <p><strong>Generated:</strong> 2026-07-10 · <strong>Total entries:</strong> 114 (workspace AI/IT) + 44 (OS apps) = 158 across 12 categories</p>
+  <p><strong>Designed under Golden Rules:</strong> append, preserve, protect. Tier reassessments are updates; tool entries are append-only.</p>
+  <p>Tier legend: <span class="tier t1">T1 Daily</span> <span class="tier t2">T2 Weekly</span> <span class="tier t3">T3 Monthly</span> <span class="tier t4">T4 Shelf</span></p>
+  <p style="margin-top:1rem;opacity:.6;">Open in browser; works offline (no external CDN refs). Print-friendly via @media print.</p>
+</footer>
+
+</div><!-- /wrap -->
+</body>
+</html>

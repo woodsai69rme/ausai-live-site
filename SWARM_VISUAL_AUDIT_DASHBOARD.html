@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quad Browser Swarm — Visual Audit Gallery & Consensus Cockpit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090e;
+    --bg-surface: #0e131f;
+    --card: #131926;
+    --border: rgba(255,255,255,0.08);
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --emerald: #10b981;
+    --amber: #f59e0b;
+    --rose: #f43f5e;
+    --purple: #a855f7;
+    --text: #f8fafc;
+    --text-dim: #94a3b8;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background: radial-gradient(ellipse at 50% 0%, #171c38 0%, #07090e 70%, #030508 100%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1.5rem 4rem;
+  }
+  .container { max-width: 1320px; margin: 0 auto; }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .header-left h1 {
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #ffffff 10%, var(--accent) 50%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+  }
+  .header-left p { color: var(--text-dim); font-size: 0.95rem; margin-top: 4px; }
+  
+  .header-right { display: flex; gap: 10px; align-items: center; }
+  .btn {
+    padding: 9px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-accent { background: var(--accent); color: #000; border: none; }
+  .btn-accent:hover { background: #38bdf8; color: #000; }
+
+  /* Worker Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .worker-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .worker-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+  .worker-header {
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .worker-role {
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .status-badge {
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+  
+  .img-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: #000;
+    overflow: hidden;
+  }
+  .img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .img-wrapper:hover img { transform: scale(1.03); }
+  
+  .worker-body {
+    padding: 14px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .worker-title { font-size: 1.05rem; font-weight: 700; color: #fff; }
+  .worker-url { font-size: 0.82rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; word-break: break-all; }
+  .worker-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  /* Audit Summary Card */
+  .audit-summary {
+    background: rgba(19, 25, 38, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .summary-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+  .stat-item { display: flex; flex-direction: column; }
+  .stat-val { font-size: 1.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--accent); }
+  .stat-lbl { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="header-left">
+      <h1>🚀 Quad Browser Swarm Visual Audit Cockpit</h1>
+      <p>Autonomous 4-Worker Vision AI Web Verification Fleet (Gemma 4 / Nemotron / Free Vision Models)</p>
+    </div>
+    <div class="header-right">
+      <a href="file:///C:/Users/karma/EMPIRE_MASTER_PORTAL.html" class="btn">👑 Master Portal</a>
+      <a href="http://localhost:8686/unified" class="btn">⚡ Media Vault</a>
+      <button class="btn btn-accent" onclick="refreshGallery()">🔄 Refresh Visuals</button>
+    </div>
+  </header>
+
+  <!-- Live Audit Summary -->
+  <div class="audit-summary">
+    <div class="summary-stats">
+      <div class="stat-item">
+        <span class="stat-val" id="statWorkers">4</span>
+        <span class="stat-lbl">Concurrent Workers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" style="color:var(--emerald);" id="statHealthy">100%</span>
+        <span class="stat-lbl">Fleet Consensus</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" style="color:var(--purple);" id="statPreset">EMPIRE MASTER</span>
+        <span class="stat-lbl">Active Profile</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" style="color:var(--amber);" id="statTimestamp">Latest</span>
+        <span class="stat-lbl">Telemetry Sync</span>
+      </div>
+    </div>
+    <div>
+      <span style="font-size:0.85rem; color:var(--text-dim); font-family:'JetBrains Mono', monospace;">Output: C:\Users\karma\CUAI\data\swarm_audit_latest.json</span>
+    </div>
+  </div>
+
+  <!-- 4-Worker Live Screenshot Grid -->
+  <div class="grid">
+    <!-- Worker 1 -->
+    <div class="worker-card">
+      <div class="worker-header">
+        <span class="worker-role">Worker 1 • Lead Planner</span>
+        <span class="status-badge">ONLINE</span>
+      </div>
+      <div class="img-wrapper">
+        <img id="img-worker-1" src="file:///C:/Users/karma/TOOLS/screenshots/worker_1_latest.png" alt="Worker 1 Capture" onerror="this.src='https://via.placeholder.com/640x400/131926/38bdf8?text=Worker+1+Standby'">
+      </div>
+      <div class="worker-body">
+        <div class="worker-title">Media Vault Studio (:8686)</div>
+        <div class="worker-url">http://localhost:8686/unified</div>
+        <div class="worker-meta">
+          <span>Model: Gemma-4-26B</span>
+          <span>Viewport: 1280x800</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Worker 2 -->
+    <div class="worker-card">
+      <div class="worker-header">
+        <span class="worker-role">Worker 2 • UI Grounder</span>
+        <span class="status-badge">ONLINE</span>
+      </div>
+      <div class="img-wrapper">
+        <img id="img-worker-2" src="file:///C:/Users/karma/TOOLS/screenshots/worker_2_latest.png" alt="Worker 2 Capture" onerror="this.src='https://via.placeholder.com/640x400/131926/38bdf8?text=Worker+2+Standby'">
+      </div>
+      <div class="worker-body">
+        <div class="worker-title">Vision Sorter Studio (:8765)</div>
+        <div class="worker-url">http://localhost:8765</div>
+        <div class="worker-meta">
+          <span>Model: Nemotron-12B-VL</span>
+          <span>Viewport: 1280x800</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Worker 3 -->
+    <div class="worker-card">
+      <div class="worker-header">
+        <span class="worker-role">Worker 3 • Data Extractor</span>
+        <span class="status-badge">ONLINE</span>
+      </div>
+      <div class="img-wrapper">
+        <img id="img-worker-3" src="file:///C:/Users/karma/TOOLS/screenshots/worker_3_latest.png" alt="Worker 3 Capture" onerror="this.src='https://via.placeholder.com/640x400/131926/38bdf8?text=Worker+3+Standby'">
+      </div>
+      <div class="worker-body">
+        <div class="worker-title">JARVIS Holographic HUD (:6970)</div>
+        <div class="worker-url">http://localhost:6970</div>
+        <div class="worker-meta">
+          <span>Model: Nemotron-Omni-30B</span>
+          <span>Viewport: 1280x800</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Worker 4 -->
+    <div class="worker-card">
+      <div class="worker-header">
+        <span class="worker-role">Worker 4 • Safety Auditor</span>
+        <span class="status-badge">ONLINE</span>
+      </div>
+      <div class="img-wrapper">
+        <img id="img-worker-4" src="file:///C:/Users/karma/TOOLS/screenshots/worker_4_latest.png" alt="Worker 4 Capture" onerror="this.src='https://via.placeholder.com/640x400/131926/38bdf8?text=Worker+4+Standby'">
+      </div>
+      <div class="worker-body">
+        <div class="worker-title">God-Mode AI Cockpit (:3142)</div>
+        <div class="worker-url">http://localhost:3142</div>
+        <div class="worker-meta">
+          <span>Model: Gemma-4-31B</span>
+          <span>Viewport: 1280x800</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function refreshGallery() {
+    const t = new Date().getTime();
+    for (let i = 1; i <= 4; i++) {
+      const img = document.getElementById(`img-worker-${i}`);
+      if (img) {
+        const baseSrc = img.src.split('?')[0];
+        img.src = `${baseSrc}?_t=${t}`;
+      }
+    }
+  }
+
+  // Auto refresh every 45s
+  setInterval(refreshGallery, 45000);
+</script>
+</body>
+</html>

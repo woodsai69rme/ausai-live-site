@@ -1,0 +1,98 @@
+name: SLEEP_CASH Pre-flight Gate
+
+# Runs the per-Lane readiness checker before any push to main lands,
+# and on every pull request. A non-zero exit fails the workflow, so any
+# Lane that goes [NEEDS_CONFIG], [BLOCKED], or [OFFLINE] blocks the merge
+# instead of crashing downstream.
+#
+# Today this gate reports "1/5 publishable" by design (Lanes 1/2/5 are
+# waiting on real API keys). Use --json + jq in a follow-up build step
+# to surface a per-Lane red/green table in the GitHub Actions summary.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: per-Lane readiness
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.13"
+
+      - name: Run preflight (text, --strict)
+        # Text output is human-readable in the Actions log; --strict exits
+        # non-zero when any Lane is not [OK]. The final step enforces the
+        # recorded outcome after diagnostics have been rendered.
+        run: python SLEEP_TRIPLE/preflight.py --strict
+        continue-on-error: true
+        id: preflight-text
+
+      - name: Run preflight (json, --strict)
+        # Machine-readable JSON for the summary table below. Keep this step
+        # non-blocking only because the text run above is the enforcement gate.
+        run: python SLEEP_TRIPLE/preflight.py --strict --json > preflight.json 2> preflight.err
+        continue-on-error: true
+        id: preflight-json
+
+      - name: Render per-Lane status into $GITHUB_STEP_SUMMARY
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          data = pathlib.Path("preflight.json").read_text(encoding="utf-8") or "{}"
+          try:
+              d = json.loads(data)
+          except json.JSONDecodeError:
+              d = {}
+          lanes = d.get("lanes") or []
+          totals = d.get("totals") or {}
+          lines = [
+              "## SLEEP_CASH pre-flight",
+              "",
+              f"Publishable now: **{totals.get('publishable', '?')}/{totals.get('total', '?')}**",
+              f"Needs config: {totals.get('needs_config', '?')}",
+              f"Blocked by policy: {totals.get('blocked', '?')}",
+              f"Offline services: {totals.get('offline', '?')}",
+              "",
+              "| # | Lane | Status | Publishable | Summary |",
+              "|---|---|---|---|---|",
+          ]
+          for ln in lanes:
+              lines.append(
+                  f"| {ln.get('num', '?')} | {ln.get('name', '?')} "
+                  f"| [{ln.get('status', '?')}] | {ln.get('publishable', '?')} "
+                  f"| {ln.get('summary', '')} |"
+              )
+          pathlib.Path(os.environ["GITHUB_STEP_SUMMARY"]).write_text(
+              "\n".join(lines), encoding="utf-8"
+          )
+          PY
+
+      - name: Show strict-fail stderr (if any)
+        if: always()
+        run: |
+          if [ -s preflight.err ]; then
+            echo "::error::SLEEP_CASH pre-flight reported blocking lanes."
+            cat preflight.err
+          fi
+
+      - name: Fail the job if --strict was non-zero
+        if: steps.preflight-text.outcome == 'failure'
+        run: |
+          echo "preflight --strict returned non-zero. Fix Lane readiness before merge."
+          exit 1

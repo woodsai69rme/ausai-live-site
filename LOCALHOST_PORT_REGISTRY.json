@@ -1,0 +1,222 @@
+[
+  {
+    "id": "god-mode-3142",
+    "name": "God-Mode AI Command Center",
+    "port": 3142,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "Dashboards",
+    "description": "Next.js flagship command center with Project Brain, autonomous voice actions, Git manager, and live telemetry.",
+    "tags": [
+      "dashboard",
+      "nextjs",
+      "command-center",
+      "brain"
+    ],
+    "launch_cmd": "npm run dev",
+    "working_dir": "C:\\Users\\karma\\ACTIVE_PROJECTS\\ai-tools-suite",
+    "auto_restart": true,
+    "health_endpoint": "/"
+  },
+  {
+    "id": "lumen-yt-3456",
+    "name": "Lumen YouTube Automation Agent",
+    "port": 3456,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "Agency & Automation",
+    "description": "Autonomous video generation, audio mastering, metadata optimization, and scheduled YouTube publisher.",
+    "tags": [
+      "youtube",
+      "automation",
+      "video",
+      "lumen"
+    ],
+    "launch_cmd": "node index.js",
+    "working_dir": "C:\\Users\\karma\\github_repos\\youtube-automation-agent\\youtube-automation-agent-master",
+    "auto_restart": true,
+    "health_endpoint": "/health"
+  },
+  {
+    "id": "n8n-5678",
+    "name": "n8n Workflow Automation",
+    "port": 5678,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "Agency & Automation",
+    "description": "Fair-code workflow automation orchestrating API handshakes, webhooks, and notifications.",
+    "tags": [
+      "n8n",
+      "workflow",
+      "automation",
+      "webhooks"
+    ],
+    "launch_cmd": "n8n start",
+    "working_dir": "C:\\Users\\karma",
+    "auto_restart": true,
+    "health_endpoint": "/healthz"
+  },
+  {
+    "id": "jarvis-hud-6970",
+    "name": "JARVIS Holographic HUD & Copilot",
+    "port": 6970,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "Command & HUD",
+    "description": "Autonomous desktop copilot, voice commands, visual SoM screen marker, and War Room command console.",
+    "tags": [
+      "jarvis",
+      "hud",
+      "copilot",
+      "voice"
+    ],
+    "launch_cmd": "python web_hud/server.py",
+    "working_dir": "C:\\Users\\karma\\JARVIS",
+    "auto_restart": true,
+    "health_endpoint": "/"
+  },
+  {
+    "id": "research-os-8000",
+    "name": "ResearchOS Universal Suite",
+    "port": 8000,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "AI & LLM",
+    "description": "Deep reasoning engine, academic search, multi-model synthesis, and automated document generation.",
+    "tags": [
+      "research",
+      "ai",
+      "synthesis",
+      "fastapi"
+    ],
+    "launch_cmd": "python -m uvicorn server:app --port 8000",
+    "working_dir": "C:\\Users\\karma",
+    "auto_restart": true,
+    "health_endpoint": "/"
+  },
+  {
+    "id": "ai-agency-8010",
+    "name": "Brisbane AI Agency Virtual Team",
+    "port": 8010,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/dashboard",
+    "category": "Agency & Automation",
+    "description": "Autonomous client operations, lead management CRM, audit dispatch, and revenue ops.",
+    "tags": [
+      "agency",
+      "virtual-team",
+      "crm",
+      "brisbane"
+    ],
+    "launch_cmd": "python server.py",
+    "working_dir": "C:\\Users\\karma\\AI_AGENCY",
+    "auto_restart": true,
+    "health_endpoint": "/dashboard"
+  },
+  {
+    "id": "crypto-engine-8088",
+    "name": "Crypto Master Engine & Whale Sniper",
+    "port": 8088,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "Crypto & Trading",
+    "description": "Top Buyer radar, Coinbase advanced live API, multi-tier sniper, and on-chain whale activity tracker.",
+    "tags": [
+      "crypto",
+      "trading",
+      "whale",
+      "sniper"
+    ],
+    "launch_cmd": "python unified_crypto_top_buyer_engine.py --serve",
+    "working_dir": "C:\\Users\\karma\\TOOLS",
+    "auto_restart": true,
+    "health_endpoint": "/api/crypto"
+  },
+  {
+    "id": "media-vaults-8686",
+    "name": "Downloads/dll & X: Drive Media Vaults",
+    "port": 8686,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/unified",
+    "category": "Media & Studio",
+    "description": "High-throughput partial-content streaming server indexing 79k+ visual assets across C: and X: drives.",
+    "tags": [
+      "vault",
+      "streaming",
+      "video",
+      "gallery"
+    ],
+    "launch_cmd": "python media_vault_server.py",
+    "working_dir": "C:\\Users\\karma\\TOOLS",
+    "auto_restart": true,
+    "health_endpoint": "/api/stats"
+  },
+  {
+    "id": "vision-sorter-8765",
+    "name": "Vision Media Sorter Studio Pro",
+    "port": 8765,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "Media & Studio",
+    "description": "Multimodal visual media classifier, AI shot tagging, deduplication, and automotive taxonomy sorting.",
+    "tags": [
+      "sorter",
+      "vision",
+      "multimodal",
+      "studio"
+    ],
+    "launch_cmd": "python visual_sorter_web_app.py",
+    "working_dir": "C:\\Users\\karma\\TOOLS",
+    "auto_restart": true,
+    "health_endpoint": "/"
+  },
+  {
+    "id": "localhost-registry-8989",
+    "name": "Localhost & Port Registry Dashboard",
+    "port": 8989,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "Developer Tools",
+    "description": "Centralized port registry, automatic process discovery, CPU/RAM telemetry, and JARVIS voice commands.",
+    "tags": [
+      "registry",
+      "localhost",
+      "ports",
+      "monitor"
+    ],
+    "launch_cmd": "python localhost_port_registry_server.py",
+    "working_dir": "C:\\Users\\karma\\TOOLS",
+    "auto_restart": true,
+    "health_endpoint": "/"
+  },
+  {
+    "id": "ollama-swarm-11434",
+    "name": "Ollama Local Model Swarm",
+    "port": 11434,
+    "protocol": "http",
+    "host": "localhost",
+    "path": "/",
+    "category": "AI & LLM",
+    "description": "Local model serving stack hosting 9 models (Qwen 3.5, Moondream, MiniCPM-V, etc.) on RTX 4060.",
+    "tags": [
+      "ollama",
+      "llm",
+      "vision",
+      "local-ai"
+    ],
+    "launch_cmd": "ollama serve",
+    "working_dir": "C:\\Users\\karma",
+    "auto_restart": true,
+    "health_endpoint": "/api/tags"
+  }
+]

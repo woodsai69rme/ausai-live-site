@@ -1,0 +1,378 @@
+{
+  "name": "FREE_RESOURCES",
+  "version": "1.1.0",
+  "generated": "2026-07-16",
+  "purpose": "Machine-readable map of free AI models, APIs, tools, RAG, voice, research on this workspace",
+  "docs": "FREE_RESOURCES_MASTER.md",
+  "dashboard_tab": "free",
+  "dashboard": "WAR_ROOM_CONTROL_DASHBOARD.html",
+  "launcher": "OPEN_FREE_RESOURCES.bat",
+  "self_test": "python TOOLS/test_free_stack.py",
+  "self_test_drive": "python TOOLS/drive_backup_rag/drive_backup_rag.py self-test",
+  "pytest": "python -m pytest tests/unit/test_free_resources_stack.py -q",
+  "policy": {
+    "cloud_ai": "openrouter_only",
+    "prefer_local": "ollama",
+    "rule_8": "workspace_paths_only",
+    "dry_run_default": true,
+    "no_secrets_in_docs": true
+  },
+  "quick_start": [
+    "OPEN_WAR_ROOM_CONTROL.bat",
+    "TOOLS\\FREE_LOCAL_HUB.bat",
+    "ollama list",
+    "type ComfyUI\\config\\openrouter_free_models.txt",
+    "ComfyUI\\tools\\free_model_switch.bat list",
+    "python TOOLS\\free_local_registry.py"
+  ],
+  "ollama_installed": [
+    {
+      "id": "ornith-35b",
+      "name": "hf.co/deepreinforce-ai/Ornith-1.0-35B-GGUF:Q4_K_M",
+      "size": "21GB",
+      "use": "best_coding_moe"
+    },
+    {
+      "id": "ornith-9b",
+      "name": "ornith:9b",
+      "size": "5.6GB",
+      "use": "fast_coding"
+    },
+    {
+      "id": "qwythos",
+      "name": "richardyoung/qwythos-9b-abliterated:latest",
+      "size": "5.6GB",
+      "use": "long_context"
+    },
+    {
+      "id": "minicpm-v",
+      "name": "minicpm-v:latest",
+      "size": "5.5GB",
+      "use": "vision"
+    },
+    {
+      "id": "gemma4-26b",
+      "name": "gemma4:26b",
+      "size": "17GB",
+      "use": "agentic"
+    },
+    {
+      "id": "phi4-mini",
+      "name": "phi4-mini:latest",
+      "size": "2.5GB",
+      "use": "light_with_comfyui"
+    },
+    {
+      "id": "deepseek-r1-8b",
+      "name": "deepseek-r1:8b",
+      "size": "5.2GB",
+      "use": "reasoning"
+    },
+    {
+      "id": "qwen25-coder",
+      "name": "qwen2.5-coder:latest",
+      "size": "4.7GB",
+      "use": "coding_default"
+    },
+    {
+      "id": "nomic-embed",
+      "name": "nomic-embed-text:latest",
+      "size": "274MB",
+      "use": "rag_embeddings"
+    }
+  ],
+  "ollama_endpoint": "http://localhost:11434",
+  "openrouter": {
+    "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+    "key_env": "OPENROUTER_API_KEY",
+    "operator_list_file": "ComfyUI/config/openrouter_free_models.txt",
+    "all_free_list_file": "ComfyUI/config/OPENROUTER_ALL_FREE_MODELS.txt",
+    "api_access_doc": "ComfyUI/config/FREE_MODELS_API_ACCESS.md",
+    "operator_free_models": [
+      "cohere/north-mini-code:free",
+      "google/gemma-4-26b-a4b-it:free",
+      "google/gemma-4-31b-it:free",
+      "nvidia/nemotron-3.5-content-safety:free",
+      "nvidia/nemotron-3-nano-30b-a3b:free",
+      "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "nvidia/nemotron-3-super-120b-a12b:free",
+      "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "nvidia/nemotron-nano-12b-v2-vl:free",
+      "nvidia/nemotron-nano-9b-v2:free",
+      "openai/gpt-oss-20b:free",
+      "poolside/laguna-m.1:free",
+      "poolside/laguna-s-2.1:free",
+      "poolside/laguna-xs-2.1:free"
+    ],
+    "specialized_or_extra_free": [
+      "google/lyria-3-clip-preview",
+      "google/lyria-3-pro-preview",
+      "nvidia/nemotron-3-nano-30b-a3b:free",
+      "nvidia/nemotron-3.5-content-safety:free",
+      "nvidia/nemotron-nano-12b-v2-vl:free",
+      "poolside/laguna-m.1:free",
+      "poolside/laguna-xs-2.1:free",
+      "qwen/qwen3-coder-480b-a35b:free",
+      "openrouter/free",
+      "openrouter/fusion"
+    ],
+    "switch_keys": {
+      "creative": "google/gemma-4-26b-a4b-it:free",
+      "balanced": "google/gemma-4-31b-it:free",
+      "qwen3": "nvidia/nemotron-3-super-120b-a12b:free",
+      "fast": "openai/gpt-oss-20b:free",
+      "coding": "cohere/north-mini-code:free",
+      "reasoning": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "heavy": "nvidia/nemotron-3-ultra-550b-a55b:free"
+    },
+    "switch_cli": "ComfyUI/tools/free_model_switch.bat"
+  },
+  "optional_free_tier_providers": [
+    {
+      "id": "deepseek",
+      "models": [
+        "deepseek-chat",
+        "deepseek-coder",
+        "deepseek-reasoner"
+      ],
+      "key_env": "DEEPSEEK_API_KEY",
+      "prefer": "openrouter_first"
+    },
+    {
+      "id": "groq",
+      "models": [
+        "llama-3.1-8b-instant",
+        "llama-3.3-70b-versatile"
+      ],
+      "key_env": "GROQ_API_KEY",
+      "prefer": "openrouter_first"
+    },
+    {
+      "id": "google_ai",
+      "models": [
+        "gemini-flash",
+        "gemma"
+      ],
+      "key_env": "GEMINI_API_KEY",
+      "prefer": "openrouter_first"
+    },
+    {
+      "id": "huggingface",
+      "note": "inference free quota + GGUF pulls",
+      "key_env": "HF_TOKEN"
+    },
+    {
+      "id": "cerebras",
+      "note": "high free token weekly tier"
+    },
+    {
+      "id": "together",
+      "note": "limited free credits"
+    },
+    {
+      "id": "xai",
+      "key_env": "XAI_API_KEY",
+      "note": "free credits when available"
+    }
+  ],
+  "ports_free": {
+    "ollama": 11434,
+    "openclaw_gateway": 18789,
+    "comfyui": 8188,
+    "archon": 8181,
+    "archon_mcp": 8051,
+    "archon_agents": 8052,
+    "archon_ui": 3737,
+    "ai_army": 8001,
+    "ai_agency": 8010,
+    "n8n": 5678,
+    "portal_war_room": 3199,
+    "lm_studio": 1234
+  },
+  "voice_free": [
+    {
+      "id": "voice_ai",
+      "invoke": "python TOOLS/voice_ai_assistant.py --loop --mic"
+    },
+    {
+      "id": "omni",
+      "invoke": "python TOOLS/omni_voice_assistant.py --text \"check services\" --no-speak"
+    },
+    {
+      "id": "voice_pa",
+      "invoke": "python ai_voice_pa.py --source mic:10 --run"
+    },
+    {
+      "id": "edge_tts",
+      "invoke": "tts_engine=edge"
+    },
+    {
+      "id": "hermes_voice",
+      "invoke": "TOOLS\\HERMES_VOICE.bat"
+    },
+    {
+      "id": "whisper_studio",
+      "invoke": "ComfyUI\\launch_music_video_studio.bat"
+    }
+  ],
+  "browser_computer_free": [
+    {
+      "id": "local_browse",
+      "invoke": "python ComfyUI/tools/local_ai_assistant.py browse --url URL --prompt Q"
+    },
+    {
+      "id": "agency_browse",
+      "invoke": "python AI_AGENCY/tools/agency_cli.py browse --goal G --url U"
+    },
+    {
+      "id": "web_research",
+      "invoke": "python AI_AGENCY/tools/agency_cli.py skill web_research --url URL"
+    },
+    {
+      "id": "auto_poster",
+      "invoke": "cd ComfyUI && uv run python tools/auto_poster.py --platform PLATFORM --video PATH"
+    },
+    {
+      "id": "screenshot",
+      "invoke": "python TOOLS/voice_ai_assistant.py --text \"take a screenshot\""
+    },
+    {
+      "id": "open_apps",
+      "invoke": "python TOOLS/omni_voice_assistant.py --text \"open chrome\""
+    },
+    {
+      "id": "pi",
+      "invoke": "pi"
+    },
+    {
+      "id": "openclaw_browser",
+      "invoke": "openclaw agent --message \"...\""
+    }
+  ],
+  "rag_free": [
+    {
+      "id": "drive_rag",
+      "invoke": "LAUNCH_DRIVE_BACKUP_RAG.bat"
+    },
+    {
+      "id": "drive_query",
+      "invoke": "python TOOLS/drive_backup_rag/drive_backup_rag.py query \"...\" --answer"
+    },
+    {
+      "id": "archon_rag",
+      "invoke": "archon:perform_rag_query"
+    },
+    {
+      "id": "plans",
+      "invoke": "python TOOLS/free_local_registry.py"
+    }
+  ],
+  "research_free": {
+    "youtube": [
+      "yt-dlp",
+      "whisper",
+      "youtube_transcript_api",
+      "music_video_studio",
+      "opt_b_faceless_shorts"
+    ],
+    "github": [
+      "CLONE_ALL_GITHUB_REPOS.bat",
+      "public_api",
+      "plans_index"
+    ],
+    "awesome_lists": [
+      "AWESOME_YOUTUBE_REPOS_2026.md",
+      "https://github.com/steel-dev/awesome-web-agents",
+      "https://github.com/ARUNAGIRINATHAN-K/awesome-ai-agents-2026",
+      "https://github.com/trycua/acu",
+      "https://github.com/kyrolabs/awesome-agents",
+      "https://github.com/sitkevij/awesome-video",
+      "https://github.com/awesome-selfhosted/awesome-selfhosted",
+      "https://github.com/VoltAgent/awesome-openclaw-skills",
+      "https://clawhub.ai"
+    ]
+  },
+  "peers_free": [
+    "openclaw",
+    "pi",
+    "hermes",
+    "opencode",
+    "kilo",
+    "agent_zero",
+    "ai_agency",
+    "ai_army",
+    "footclan",
+    "pinokio",
+    "browser_use"
+  ],
+  "agency_skills_free": [
+    "web_research",
+    "deploy_check",
+    "code_audit",
+    "prospect_scan",
+    "content_draft",
+    "social_calendar",
+    "campaign_brief",
+    "competitor_marketing",
+    "seo_copy",
+    "email_sequence"
+  ],
+  "free_local_registry": {
+    "path": "TOOLS/free_local_registry.py",
+    "capability_count": 71,
+    "groups": [
+      "voice",
+      "browser",
+      "computer",
+      "revenue",
+      "local_ai",
+      "plans",
+      "knowledge",
+      "skills",
+      "drive_rag",
+      "openclaw_peers",
+      "agents",
+      "grok_skills"
+    ]
+  },
+  "mcp_free": [
+    "archon:perform_rag_query",
+    "archon:search_code_examples",
+    "archon:manage_project",
+    "archon:manage_task",
+    "archon:get_available_sources"
+  ],
+  "media_free": [
+    "comfyui",
+    "music_video_studio",
+    "edge_tts",
+    "whisper",
+    "blip",
+    "ffmpeg",
+    "workflow_recipes:ComfyUI/workflow_templates/workflow_recipes.md"
+  ],
+  "dashboards_free": [
+    "WAR_ROOM_CONTROL_DASHBOARD.html",
+    "PORTAL_WAR_ROOM.html",
+    "AI_TOOLS_DASHBOARD.html",
+    "AI_AND_IT_TOOLKIT.html",
+    "UNIFIED_MASTER_DASHBOARD.html",
+    "MASTER_ALL_DASHBOARD.html"
+  ],
+  "excluded_from_pure_free": [
+    "stripe",
+    "gumroad_paid_ops",
+    "direct_openai_keys",
+    "direct_anthropic_keys",
+    "paid_firecrawl_after_quota"
+  ],
+  "related_docs": [
+    "FREE_RESOURCES_MASTER.md",
+    "WAR_ROOM_CONTROL.md",
+    "TOOLS/FREE_LOCAL_SYSTEM_INDEX.md",
+    "HERMES_FREE_SETUP_DOCUMENTATION.md",
+    "DRIVE_BACKUP_RAG.md",
+    "OPENCLAW_PI_AND_PEERS.md",
+    "ComfyUI/config/openrouter_free_models.txt"
+  ]
+}

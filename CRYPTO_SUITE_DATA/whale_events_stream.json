@@ -1,0 +1,422 @@
+[
+  {
+    "timestamp": "2026-09-21T05:43:02.929203+00:00",
+    "event": "ORDER_EXECUTED",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] Executed PAPER Buy: $500.00 of SOL at $111.86 (1x Sizing \u2022 MEV Protected via JITO_BLOCK_ENGINE)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-21T01:01:05.085494+00:00",
+    "event": "ORDER_EXECUTED",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] Executed PAPER Buy: $500.00 of SOL at $112.33 (1x Sizing \u2022 MEV Protected via JITO_BLOCK_ENGINE)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-21T01:01:04.304576+00:00",
+    "event": "ACCOUNT_SWITCH",
+    "buyer": "System",
+    "details": "Switched active trading portfolio to $10,000 Main Institutional Portfolio",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-21T01:01:03.542818+00:00",
+    "event": "ORDER_EXECUTED",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$250 Degen Sandbox & Nano Sniper] Executed PAPER Buy: $25.00 of SOL at $112.33 (1x Sizing \u2022 MEV Protected via JITO_BLOCK_ENGINE)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-19T06:26:20.772610+00:00",
+    "event": "AUTO_COPY_SKIPPED",
+    "buyer": "Solana Sniper Alpha",
+    "details": "Insufficient cash (need $525 incl. reserve)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-17T20:44:37.745793+00:00",
+    "event": "AUTOTRADER_TOGGLE",
+    "buyer": "System",
+    "details": "Auto-Trader explicitly ARMED via dashboard",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-17T20:44:31.392076+00:00",
+    "event": "AUTOTRADER_TOGGLE",
+    "buyer": "System",
+    "details": "Auto-Trader explicitly DISARMED via dashboard",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-16T01:52:43.413721+00:00",
+    "event": "ORDER_EXECUTED",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$250 Degen Sandbox & Nano Sniper] Executed PAPER Buy: $25.00 of SOL at $96.53 (1x Sizing \u2022 MEV Protected via JITO_BLOCK_ENGINE)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-15T18:46:27.956255+00:00",
+    "event": "STOP_LOSS",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83d\udee1\ufe0f Capital Protected: Closed SOL at -3.12% ($-15.62)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T22:43:48.972770+00:00",
+    "event": "MANUAL_BUY_EXECUTED",
+    "buyer": "Manual Trader",
+    "details": "[$10,000 Main Institutional Portfolio] Manual Buy Executed: $1000.00 of BTC at $79,709.99 (SL: $77717.2403 / TP: $83296.9395)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-04T22:43:48.944618+00:00",
+    "event": "FLEET_MIRROR",
+    "buyer": "Lookonchain 100x Early Sniper",
+    "details": "\u26a1 Broadcasted SOL buy across 4 accounts ($650.00 total)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-04T22:43:48.922023+00:00",
+    "event": "FUNDING_HARVEST",
+    "buyer": "DeltaNeutralVault",
+    "details": "\ud83c\udf3e Harvested +$0.12 funding yield into cash reserves",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T22:41:57.639878+00:00",
+    "event": "FUNDING_HARVEST",
+    "buyer": "DeltaNeutralVault",
+    "details": "\ud83c\udf3e Harvested +$0.12 funding yield into cash reserves",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T13:33:21.548768+00:00",
+    "event": "ACCOUNT_SWITCH",
+    "buyer": "System",
+    "details": "Switched active trading portfolio to $250 Degen Sandbox & Nano Sniper",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T13:33:21.295591+00:00",
+    "event": "ACCOUNT_SWITCH",
+    "buyer": "System",
+    "details": "Switched active trading portfolio to $250 Degen Sandbox & Nano Sniper",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T13:33:16.182151+00:00",
+    "event": "ACCOUNT_SWITCH",
+    "buyer": "System",
+    "details": "Switched active trading portfolio to $10,000 Main Institutional Portfolio",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T13:33:07.687623+00:00",
+    "event": "ACCOUNT_SWITCH",
+    "buyer": "System",
+    "details": "Switched active trading portfolio to $1,000 Micro Growth Sniper Account",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T09:18:29.337896+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +4.5% (+$22.49)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T09:18:23.112043+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +4.55% (+$22.74)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T07:28:48.545239+00:00",
+    "event": "ACCOUNT_SWITCH",
+    "buyer": "System",
+    "details": "Switched active trading portfolio to $10,000 Main Institutional Portfolio",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T07:26:09.550150+00:00",
+    "event": "FUNDING_HARVEST",
+    "buyer": "DeltaNeutralVault",
+    "details": "\ud83c\udf3e Harvested +$0.31 funding yield into cash reserves",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:59:53.315151+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Euler Smart Money #4",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed ETH at +4.56% (+$22.78)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:54:43.274827+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +4.5% (+$22.50)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:54:43.272108+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +4.5% (+$22.50)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:54:43.269319+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +4.5% (+$22.50)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:54:43.266237+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +4.5% (+$22.50)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:53:25.390859+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +4.52% (+$22.59)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.102942+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Hyperliquid Perp Whale",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed BTC at +5.38% (+$4.03)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.099471+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Hyperliquid Perp Whale",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on BTC to Entry +0.5% ($76,949.80) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.098273+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed SOL at +4.95% (+$7.42)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.093796+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed SOL at +4.97% (+$3.73)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.089717+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed SOL at +4.9% (+$3.67)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.083422+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Euler Smart Money #4",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed ETH at +5.35% (+$4.01)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.079684+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Euler Smart Money #4",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on ETH to Entry +0.5% ($2,384.97) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.078531+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Manual Trader (Operator)",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed SOL at +5.74% (+$4.31)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.075570+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Manual Trader (Operator)",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on SOL to Entry +0.5% ($98.34) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.074547+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Manual Trader (Operator)",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed SOL at +5.7% (+$4.28)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.071570+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Manual Trader (Operator)",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on SOL to Entry +0.5% ($98.38) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.070397+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Euler Smart Money #4",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed ETH at +5.01% (+$3.76)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.067538+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Euler Smart Money #4",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on ETH to Entry +0.5% ($2,392.58) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.066532+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Manual Trader (Operator)",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed SOL at +5.74% (+$4.31)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.063516+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Manual Trader (Operator)",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on SOL to Entry +0.5% ($98.34) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.062320+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Euler Smart Money #4",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83c\udfaf Full TP Closed ETH at +5.03% (+$3.77)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.057576+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Euler Smart Money #4",
+    "details": "[$1,000 Micro Growth Sniper Account] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on ETH to Entry +0.5% ($2,392.14) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.056333+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +5.09% (+$25.44)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.053058+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on SOL to Entry +0.5% ($98.95) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.052033+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +5.7% (+$85.50)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.049643+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on SOL to Entry +0.5% ($98.38) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.047769+00:00",
+    "event": "TAKE_PROFIT",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83c\udfaf Full TP Closed SOL at +5.74% (+$86.15)",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:47:17.044949+00:00",
+    "event": "STOP_RATCHETED",
+    "buyer": "Apex Whale Alpha",
+    "details": "[$10,000 Main Institutional Portfolio] \ud83d\udee1\ufe0f Ratcheted Stop-Loss on SOL to Entry +0.5% ($98.34) \u2014 Guaranteed Risk-Free Trade!",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-04T02:13:33.152396+00:00",
+    "event": "FUNDING_HARVEST",
+    "buyer": "DeltaNeutralVault",
+    "details": "\ud83c\udf3e Harvested +$1.64 funding yield into cash reserves",
+    "copied": false
+  },
+  {
+    "timestamp": "2026-09-03T13:22:23.828276+00:00",
+    "event": "FLEET_MIRROR",
+    "buyer": "Lookonchain 100x Early Sniper",
+    "details": "\u26a1 Broadcasted SOL buy across 4 accounts ($403.86 total)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.176637+00:00",
+    "event": "FLEET_MIRROR",
+    "buyer": "Lookonchain 100x Early Sniper",
+    "details": "\u26a1 Broadcasted SOL buy across 4 accounts ($450.76 total)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.138459+00:00",
+    "event": "POSITION_CLOSED",
+    "buyer": "Manual Trader",
+    "details": "[$1,000 Micro Growth Sniper Account] Closed position on BTC for $76.95 (PnL: $+1.92 / +2.56%)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.130973+00:00",
+    "event": "POSITION_CLOSED",
+    "buyer": "Manual Trader",
+    "details": "[$1,000 Micro Growth Sniper Account] Closed position on SOL for $154.46 (PnL: $+4.46 / +2.97%)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.123488+00:00",
+    "event": "POSITION_CLOSED",
+    "buyer": "Manual Trader",
+    "details": "[$1,000 Micro Growth Sniper Account] Closed position on SOL for $77.24 (PnL: $+2.24 / +2.99%)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.115592+00:00",
+    "event": "POSITION_CLOSED",
+    "buyer": "Manual Trader",
+    "details": "[$1,000 Micro Growth Sniper Account] Closed position on SOL for $77.19 (PnL: $+2.19 / +2.92%)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.107240+00:00",
+    "event": "POSITION_CLOSED",
+    "buyer": "Manual Trader",
+    "details": "[$1,000 Micro Growth Sniper Account] Closed position on ETH for $76.45 (PnL: $+1.45 / +1.93%)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.098772+00:00",
+    "event": "POSITION_CLOSED",
+    "buyer": "Manual Trader",
+    "details": "[$1,000 Micro Growth Sniper Account] Closed position on SOL for $77.81 (PnL: $+2.81 / +3.75%)",
+    "copied": true
+  },
+  {
+    "timestamp": "2026-09-03T13:22:09.077779+00:00",
+    "event": "POSITION_CLOSED",
+    "buyer": "Manual Trader",
+    "details": "[$1,000 Micro Growth Sniper Account] Closed position on SOL for $77.78 (PnL: $+2.78 / +3.71%)",
+    "copied": true
+  }
+]

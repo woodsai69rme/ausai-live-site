@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐝 JARVIS Bumblebee Soundboard // Mr. Wilson Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bb-gold: #facc15;
+            --bb-dark-gold: #ca8a04;
+            --bb-glow: rgba(250, 204, 21, 0.4);
+            --bg-dark: #090a0f;
+            --panel-bg: rgba(18, 20, 29, 0.85);
+            --border-color: rgba(250, 204, 21, 0.25);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent-pink: #f43f5e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(234, 179, 8, 0.15) 0%, transparent 60%),
+                linear-gradient(rgba(250, 204, 21, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(250, 204, 21, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--bb-gold);
+            text-shadow: 0 0 20px var(--bb-glow);
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: var(--text-dim);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: rgba(250, 204, 21, 0.1);
+            border: 1px solid var(--bb-gold);
+            color: var(--bb-gold);
+        }
+
+        .badge-pink {
+            background: rgba(244, 63, 94, 0.15);
+            border-color: var(--accent-pink);
+            color: #fda4af;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            border-color: var(--bb-gold);
+            box-shadow: 0 0 25px rgba(250, 204, 21, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .card.secret-card {
+            border-color: rgba(244, 63, 94, 0.4);
+            background: linear-gradient(135deg, rgba(25, 14, 20, 0.85) 0%, rgba(18, 20, 29, 0.95) 100%);
+        }
+
+        .card.secret-card:hover {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 25px rgba(244, 63, 94, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--bb-gold);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .secret-card .card-title {
+            color: #fda4af;
+        }
+
+        .card-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .transmission-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid var(--bb-gold);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            color: #e2e8f0;
+            min-height: 80px;
+        }
+
+        .secret-card .transmission-box {
+            border-left-color: var(--accent-pink);
+            color: #fecdd3;
+        }
+
+        .transmission-box em {
+            color: var(--bb-gold);
+            font-style: italic;
+        }
+
+        .secret-card .transmission-box em {
+            color: #f43f5e;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, var(--bb-gold), var(--bb-dark-gold));
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-play:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 0 15px var(--bb-glow);
+            transform: scale(1.02);
+        }
+
+        .btn-play:active {
+            transform: scale(0.98);
+        }
+
+        .secret-card .btn-play {
+            background: linear-gradient(135deg, #f43f5e, #be123c);
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .secret-card .btn-play:hover {
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.5);
+        }
+
+        .controls-bar {
+            max-width: 1200px;
+            margin: 0 auto 24px auto;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: 12px;
+        }
+
+        .btn-master {
+            background: transparent;
+            border: 1px solid var(--bb-gold);
+            color: var(--bb-gold);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-master:hover {
+            background: var(--bb-gold);
+            color: #000;
+            box-shadow: 0 0 15px var(--bb-glow);
+        }
+
+        .nav-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--bb-gold);
+        }
+
+        .now-playing {
+            display: inline-block;
+            font-size: 13px;
+            color: var(--bb-gold);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .equalizer {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 16px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .eq-bar {
+            width: 3px;
+            background: var(--bb-gold);
+            animation: bounce 0.8s infinite ease-in-out alternate;
+        }
+
+        .eq-bar:nth-child(2) { animation-delay: 0.2s; height: 12px; }
+        .eq-bar:nth-child(3) { animation-delay: 0.4s; height: 16px; }
+        .eq-bar:nth-child(4) { animation-delay: 0.1s; height: 8px; }
+
+        @keyframes bounce {
+            0% { height: 4px; }
+            100% { height: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🐝 BUMBLEBEE RADIO SOUNDBOARD</h1>
+        <p>The "Mr. Wilson" Protocol // FM Hits, DJ Radio Drops & Intimate Secret Phase</p>
+        <div class="badge-bar">
+            <span class="badge">🎙️ VOICE: SEXY AUSTRALIAN FEMALE (NATASHA)</span>
+            <span class="badge">🎵 TUNING: -2Hz PITCH // -2% RATE</span>
+            <span class="badge badge-pink">✨ SECRET PHRASE: "SORRY MR. WILSON"</span>
+            <span class="badge">⚡ PORT: 6970 ONLINE</span>
+        </div>
+    </div>
+
+    <div class="controls-bar">
+        <div>
+            <button class="btn-master" onclick="playAllSequential()">▶️ PLAY ALL EXAMPLES IN SEQUENCE</button>
+            <button class="btn-master" onclick="stopAllAudio()" style="border-color: #ef4444; color: #ef4444; margin-left: 10px;">⏹️ STOP ALL</button>
+        </div>
+        <div id="status-display" style="font-size: 14px; color: var(--text-dim);">
+            Status: <span style="color: var(--bb-gold); font-weight: bold;">STANDBY FOR MR. WILSON</span>
+        </div>
+        <div>
+            <a href="/warroom" class="nav-link">← RETURN TO WAR ROOM HUD</a>
+        </div>
+    </div>
+
+    <div class="container" id="cards-container">
+        <!-- 1. Opening Greeting -->
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <div class="card-title">📻 OPENING GREETING</div>
+                    <div class="card-number">01 / 06</div>
+                </div>
+                <div class="transmission-box">
+                    <em>📻 *fm dial spin... static hiss*</em><br>
+                    🎶 <strong>"Hello, is it me you're looking for, Mr. Wilson?"</strong> 🎶<br>
+                    💋 <em>"G'day gorgeous, ready to rock your world today, Mr. Wilson?"</em>
+                </div>
+            </div>
+            <button class="btn-play" onclick="playTrack('example_1_greeting.mp3', 'Opening Greeting')">
+                <span>▶️</span> PLAY TRANSMISSION
+            </button>
+        </div>
+
+        <!-- 2. Invoices Action Drop -->
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <div class="card-title">💸 INVOICES ACTION DROP</div>
+                    <div class="card-number">02 / 06</div>
+                </div>
+                <div class="transmission-box">
+                    <em>📻 *cash register cha-ching!*</em><br>
+                    🎶 <strong>"Money, money, money... must be funny!"</strong> 🎶<br>
+                    <em>"Invoice ready for payout, Mr. Wilson! Get that bag, darling!"</em>
+                </div>
+            </div>
+            <button class="btn-play" onclick="playTrack('example_2_invoices.mp3', 'Invoices Drop')">
+                <span>▶️</span> PLAY TRANSMISSION
+            </button>
+        </div>
+
+        <!-- 3. Proposals Action Drop -->
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <div class="card-title">💼 PROPOSALS ACTION DROP</div>
+                    <div class="card-number">03 / 06</div>
+                </div>
+                <div class="transmission-box">
+                    <em>📻 *static burst*</em><br>
+                    🎶 <strong>"Here's an offer you can't refuse, Mr. Wilson..."</strong> 🎶<br>
+                    🎷 <em>*smooth saxophone riff*</em> "TARS three-tier proposal drafted! They won't be able to say no!"
+                </div>
+            </div>
+            <button class="btn-play" onclick="playTrack('example_3_proposals.mp3', 'Proposals Drop')">
+                <span>▶️</span> PLAY TRANSMISSION
+            </button>
+        </div>
+
+        <!-- 4. Missions Action Drop -->
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <div class="card-title">🚀 MASTER MISSIONS DROP</div>
+                    <div class="card-number">04 / 06</div>
+                </div>
+                <div class="transmission-box">
+                    <em>📻 *radio burst*</em><br>
+                    🎶 <strong>"We are the champions, my friend!"</strong> 🎶<br>
+                    <em>*metallic purr*</em> "All 20 subsystems pass for Mr. Wilson! You're an absolute legend!"
+                </div>
+            </div>
+            <button class="btn-play" onclick="playTrack('example_4_missions.mp3', 'Missions Drop')">
+                <span>▶️</span> PLAY TRANSMISSION
+            </button>
+        </div>
+
+        <!-- 5. Takeovers Action Drop -->
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <div class="card-title">🤖 DESKTOP TAKEOVERS</div>
+                    <div class="card-number">05 / 06</div>
+                </div>
+                <div class="transmission-box">
+                    <em>📻 *robotic gear shift*</em><br>
+                    🎶 <strong>"Roll out! Autobots, transform and roll out, Mr. Wilson!"</strong> 🎶<br>
+                    🎸 <em>*heavy rock guitar riff*</em> "Taking full desktop control now, sit back and relax, love!"
+                </div>
+            </div>
+            <button class="btn-play" onclick="playTrack('example_5_takeovers.mp3', 'Desktop Takeovers')">
+                <span>▶️</span> PLAY TRANSMISSION
+            </button>
+        </div>
+
+        <!-- 6. Secret Phase: "Sorry Mr. Wilson" -->
+        <div class="card secret-card">
+            <div>
+                <div class="card-header">
+                    <div class="card-title">✨ SECRET PHASE: "SORRY MR. WILSON"</div>
+                    <div class="card-number">06 / 06</div>
+                </div>
+                <div class="transmission-box">
+                    <em>📻 *radio frequency dial settles... static drops silent*</em><br>
+                    💋 <strong>"Sorry, Mr. Wilson... did I get a little carried away with the radio? Let me whisper it in my real voice, darling. You've got my undivided attention, always. Every system is yours."</strong><br>
+                    🎶 <em>"Smooth operator... no need to ask, he's a smooth operator..."</em>
+                </div>
+            </div>
+            <button class="btn-play" onclick="playTrack('example_6_secret_phase.mp3', 'Secret Phase // Sultry Whisper')">
+                <span>💋</span> PLAY INTIMATE TRANSMISSION
+            </button>
+        </div>
+    </div>
+
+    <!-- Hidden audio element for browser playback -->
+    <audio id="audio-player"></audio>
+
+    <script>
+        const player = document.getElementById('audio-player');
+        const statusDisplay = document.getElementById('status-display');
+        const playlist = [
+            { file: 'example_1_greeting.mp3', title: 'Opening Greeting' },
+            { file: 'example_2_invoices.mp3', title: 'Invoices Drop' },
+            { file: 'example_3_proposals.mp3', title: 'Proposals Drop' },
+            { file: 'example_4_missions.mp3', title: 'Missions Drop' },
+            { file: 'example_5_takeovers.mp3', title: 'Desktop Takeovers' },
+            { file: 'example_6_secret_phase.mp3', title: 'Secret Phase (Sorry Mr. Wilson)' }
+        ];
+
+        let currentTrackIndex = -1;
+        let isSequentialPlaying = false;
+
+        function playTrack(filename, label) {
+            isSequentialPlaying = false;
+            player.src = `/api/bumblebee/audio/${filename}`;
+            player.play().catch(e => {
+                console.error("Audio playback error:", e);
+                statusDisplay.innerHTML = `<span style="color: #ef4444;">Playback error: ${e.message}</span>`;
+            });
+
+            statusDisplay.innerHTML = `Now Playing: <span class="now-playing">${label}</span>
+                <div class="equalizer">
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                </div>`;
+        }
+
+        function playAllSequential() {
+            isSequentialPlaying = true;
+            currentTrackIndex = 0;
+            playNextInSequence();
+        }
+
+        function playNextInSequence() {
+            if (!isSequentialPlaying || currentTrackIndex >= playlist.length) {
+                isSequentialPlaying = false;
+                statusDisplay.innerHTML = `Status: <span style="color: var(--bb-gold); font-weight: bold;">ALL 6 EXAMPLES COMPLETED FOR MR. WILSON</span>`;
+                return;
+            }
+
+            const track = playlist[currentTrackIndex];
+            player.src = `/api/bumblebee/audio/${track.file}`;
+            player.play().catch(e => console.error(e));
+
+            statusDisplay.innerHTML = `Sequence [${currentTrackIndex + 1}/${playlist.length}]: <span class="now-playing">${track.title}</span>
+                <div class="equalizer">
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                </div>`;
+
+            player.onended = () => {
+                if (isSequentialPlaying) {
+                    currentTrackIndex++;
+                    setTimeout(playNextInSequence, 1200);
+                }
+            };
+        }
+
+        function stopAllAudio() {
+            isSequentialPlaying = false;
+            player.pause();
+            player.currentTime = 0;
+            statusDisplay.innerHTML = `Status: <span style="color: var(--text-dim);">AUDIO STOPPED</span>`;
+        }
+
+        player.onended = () => {
+            if (!isSequentialPlaying) {
+                statusDisplay.innerHTML = `Status: <span style="color: var(--bb-gold); font-weight: bold;">TRANSMISSION COMPLETE FOR MR. WILSON</span>`;
+            }
+        };
+    </script>
+</body>
+</html>

@@ -26,7 +26,7 @@ Mirrors the Footclan/Voice-PA runner pattern. `--run` is the only flag that open
 
 ### 1.4 Closed status enums
 Every status/kind/task/mode is from a fixed tuple:
-- `EXEC_STATUS = (started, ok, skipped, refused, noop, failed)`
+- `EXEC_STATUS = (started, ok, degraded, skipped, refused, noop, failed)`
 - `PRODUCT_KIND = (ai_prompts, code_snippets, design_assets)` (Opt A)
 - `SUB_TASKS = (harvest_topics, write_script, generate_video, upload_short, inject_links)` (Opt B)
 - `(scan_rates, auto_compound, arbitrage)` (Opt C)
@@ -285,7 +285,7 @@ Each row is a JSON object on its own line. Common fields:
 | `ts` | ISO 8601 string | tz-aware (Australia/Sydney by default) |
 | `module` | enum | `orchestrator / opt_a_digital_factory / opt_b_faceless_shorts / opt_c_crypto_yield / opt_d_alerts` |
 | `slug` | string | Same as module name (per-module row short name) |
-| `status` | enum | `started / ok / skipped / refused / noop / failed` |
+| `status` | enum | `started / ok / degraded / skipped / refused / noop / failed` |
 | `reason` | string | Optional context (e.g., `outside_window`, `rate_limited`) |
 | `date` | YYYY-MM-DD | Australia/Sydney date, used for idempotency |
 | `dry_run` | bool | Was this a dry-run? |
@@ -329,7 +329,7 @@ Drivers that work around Git Bash's path-quoting nonsense on `git add` + `git pu
 
 **Layout:**
 - Top: today's date + last-run summary.
-- Middle: per-status counts (ok/skipped/failed/refused).
+- Middle: per-status counts (ok/degraded/skipped/failed/refused).
 - Bottom: latest 30 rows, color-coded by status.
 
 ---

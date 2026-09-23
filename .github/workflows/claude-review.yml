@@ -24,17 +24,16 @@ jobs:
       pull-requests: write # Allow comments on PRs
       issues: write # Allow comments on issues
       actions: read # Read CI results
-      id-token: write # Required for OIDC authentication
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0 # Full history for better context
 
       - name: Run Claude Code Review
         id: claude
-        uses: anthropics/claude-code-action@beta
+        uses: anthropics/claude-code-action@c81e3bc69d1b18badbb63ba39581218f02421678 # v1.0.201
         timeout-minutes: 15
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -203,7 +202,7 @@ jobs:
 
     steps:
       - name: Post unauthorized message
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const comment = {

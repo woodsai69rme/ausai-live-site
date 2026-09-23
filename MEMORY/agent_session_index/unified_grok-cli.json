@@ -1,0 +1,296 @@
+[
+  {
+    "tool": "grok-cli",
+    "session_id": "019f488a-1c0c-7a00-9444-275e69f0ee2b",
+    "title": "019f488a-1c0c-7a00-9444-275e69f0ee2b",
+    "created": "2026-07-09T20:20:38.583938+00:00",
+    "updated": "2026-07-09T20:21:17.588193+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f488a-1c0c-7a00-9444-275e69f0ee2b\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 35931,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f488a-1c0c-7a00-9444-275e69f0ee2b",
+      "chat_lines": 8
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f488f-2d63-7b42-9e24-1171ea7e69f1",
+    "title": "019f488f-2d63-7b42-9e24-1171ea7e69f1",
+    "created": "2026-07-09T20:26:10.671535+00:00",
+    "updated": "2026-07-09T20:27:03.139059+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f488f-2d63-7b42-9e24-1171ea7e69f1\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 169549,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f488f-2d63-7b42-9e24-1171ea7e69f1",
+      "chat_lines": 45
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f4892-ed34-7562-804d-0ff3b1e96da2",
+    "title": "019f4892-ed34-7562-804d-0ff3b1e96da2",
+    "created": "2026-07-09T20:30:16.389216+00:00",
+    "updated": "2026-07-09T21:02:18.137004+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f4892-ed34-7562-804d-0ff3b1e96da2\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 634993,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f4892-ed34-7562-804d-0ff3b1e96da2",
+      "chat_lines": 260
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f4938-c15e-7ca0-9b04-9b48be2ddcc3",
+    "title": "019f4938-c15e-7ca0-9b04-9b48be2ddcc3",
+    "created": "2026-07-09T23:31:24.140719+00:00",
+    "updated": "2026-07-17T00:54:00.756219+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f4938-c15e-7ca0-9b04-9b48be2ddcc3\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 189660,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f4938-c15e-7ca0-9b04-9b48be2ddcc3",
+      "chat_lines": 103
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f54a3-079b-76c0-bbd7-c79aa7d2d581",
+    "title": "019f54a3-079b-76c0-bbd7-c79aa7d2d581",
+    "created": "2026-07-12T04:43:18.311919+00:00",
+    "updated": "2026-07-16T20:57:13.728487+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f54a3-079b-76c0-bbd7-c79aa7d2d581\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 283873,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f54a3-079b-76c0-bbd7-c79aa7d2d581",
+      "chat_lines": 198
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f551e-f7e8-7180-9fa5-86fd52729443",
+    "title": "019f551e-f7e8-7180-9fa5-86fd52729443",
+    "created": "2026-07-12T06:58:42.040347+00:00",
+    "updated": "2026-07-12T06:59:52.242401+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f551e-f7e8-7180-9fa5-86fd52729443\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 234626,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f551e-f7e8-7180-9fa5-86fd52729443",
+      "chat_lines": 85
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f564b-ec6e-73b2-a71e-f7d297fc4439",
+    "title": "019f564b-ec6e-73b2-a71e-f7d297fc4439",
+    "created": "2026-07-12T12:27:24.251300+00:00",
+    "updated": "2026-07-12T12:27:54.012119+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f564b-ec6e-73b2-a71e-f7d297fc4439\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 80445,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f564b-ec6e-73b2-a71e-f7d297fc4439",
+      "chat_lines": 34
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f564b-ec71-7fc3-ae29-1a97c32303b6",
+    "title": "019f564b-ec71-7fc3-ae29-1a97c32303b6",
+    "created": "2026-07-12T12:27:24.330049+00:00",
+    "updated": "2026-07-12T12:31:17.054128+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f564b-ec71-7fc3-ae29-1a97c32303b6\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 119063,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f564b-ec71-7fc3-ae29-1a97c32303b6",
+      "chat_lines": 80
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f5fc9-298a-7a53-a729-ac6e7943a61b",
+    "title": "019f5fc9-298a-7a53-a729-ac6e7943a61b",
+    "created": "2026-07-14T08:40:46.975591+00:00",
+    "updated": "2026-07-14T08:41:53.971442+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f5fc9-298a-7a53-a729-ac6e7943a61b\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 179532,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f5fc9-298a-7a53-a729-ac6e7943a61b",
+      "chat_lines": 76
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6219-1620-7b00-9ebd-687c26d10ea4",
+    "title": "019f6219-1620-7b00-9ebd-687c26d10ea4",
+    "created": "2026-07-14T19:27:19.097060+00:00",
+    "updated": "2026-07-16T23:18:15.435807+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6219-1620-7b00-9ebd-687c26d10ea4\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 285311,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6219-1620-7b00-9ebd-687c26d10ea4",
+      "chat_lines": 168
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f633b-9ac2-70c3-ad2d-def264b73e84",
+    "title": "019f633b-9ac2-70c3-ad2d-def264b73e84",
+    "created": "2026-07-15T00:44:38.479372+00:00",
+    "updated": "2026-07-17T01:22:09.792583+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f633b-9ac2-70c3-ad2d-def264b73e84\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 312983,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f633b-9ac2-70c3-ad2d-def264b73e84",
+      "chat_lines": 148
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6351-8c3a-78d0-afbc-259faf7ab394",
+    "title": "019f6351-8c3a-78d0-afbc-259faf7ab394",
+    "created": "2026-07-15T01:08:36.546407+00:00",
+    "updated": "2026-07-16T08:22:10.449195+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6351-8c3a-78d0-afbc-259faf7ab394\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 712051,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6351-8c3a-78d0-afbc-259faf7ab394",
+      "chat_lines": 285
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6509-51d4-73d3-8779-a0ec7711e2fe",
+    "title": "019f6509-51d4-73d3-8779-a0ec7711e2fe",
+    "created": "2026-07-15T09:08:57.502657+00:00",
+    "updated": "2026-07-15T09:12:50.262855+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6509-51d4-73d3-8779-a0ec7711e2fe\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 237931,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6509-51d4-73d3-8779-a0ec7711e2fe",
+      "chat_lines": 70
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6a11-ec77-7640-b8a9-f690547e7c23",
+    "title": "019f6a11-ec77-7640-b8a9-f690547e7c23",
+    "created": "2026-07-16T08:36:27.601883+00:00",
+    "updated": "2026-07-16T23:21:38.565798+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6a11-ec77-7640-b8a9-f690547e7c23\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 364047,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6a11-ec77-7640-b8a9-f690547e7c23",
+      "chat_lines": 166
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6a1e-23d2-7d92-941f-2da00c173a9c",
+    "title": "019f6a1e-23d2-7d92-941f-2da00c173a9c",
+    "created": "2026-07-16T08:49:48.018300+00:00",
+    "updated": "2026-07-16T23:22:50.456802+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6a1e-23d2-7d92-941f-2da00c173a9c\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 404000,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6a1e-23d2-7d92-941f-2da00c173a9c",
+      "chat_lines": 182
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6bbb-c372-7f72-bc75-f6e88042c86f",
+    "title": "019f6bbb-c372-7f72-bc75-f6e88042c86f",
+    "created": "2026-07-16T16:21:35.285942+00:00",
+    "updated": "2026-07-16T16:22:26.457329+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6bbb-c372-7f72-bc75-f6e88042c86f\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 202370,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6bbb-c372-7f72-bc75-f6e88042c86f",
+      "chat_lines": 52
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6bd1-6afd-7b31-a6ff-e9b5e56abdb7",
+    "title": "019f6bd1-6afd-7b31-a6ff-e9b5e56abdb7",
+    "created": "2026-07-16T16:45:14.376225+00:00",
+    "updated": "2026-07-17T06:16:30.963206+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6bd1-6afd-7b31-a6ff-e9b5e56abdb7\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 341604,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6bd1-6afd-7b31-a6ff-e9b5e56abdb7",
+      "chat_lines": 232
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f6dad-76e1-7d72-b868-70b14083bbaa",
+    "title": "019f6dad-76e1-7d72-b868-70b14083bbaa",
+    "created": "2026-07-17T01:25:12.551623+00:00",
+    "updated": "2026-07-17T03:03:37.136962+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6dad-76e1-7d72-b868-70b14083bbaa\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 416864,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f6dad-76e1-7d72-b868-70b14083bbaa",
+      "chat_lines": 115
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f71ca-2caf-7c02-9c61-ed020f9f47f0",
+    "title": "019f71ca-2caf-7c02-9c61-ed020f9f47f0",
+    "created": "2026-07-17T20:35:02.975463+00:00",
+    "updated": "2026-07-17T20:35:21.211521+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f71ca-2caf-7c02-9c61-ed020f9f47f0\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 43008,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma\\019f71ca-2caf-7c02-9c61-ed020f9f47f0",
+      "chat_lines": 6
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f631d-4fe5-78b3-a731-956d62612d72",
+    "title": "019f631d-4fe5-78b3-a731-956d62612d72",
+    "created": "2026-07-15T00:11:33.259045+00:00",
+    "updated": "2026-07-16T14:15:35.891429+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma%5C.grok%5Cworktrees%5Ckarma%5C2026-07-15-150d9861\\019f631d-4fe5-78b3-a731-956d62612d72\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 110730,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma%5C.grok%5Cworktrees%5Ckarma%5C2026-07-15-150d9861\\019f631d-4fe5-78b3-a731-956d62612d72",
+      "chat_lines": 48
+    }
+  },
+  {
+    "tool": "grok-cli",
+    "session_id": "019f695b-f0b8-7593-90c5-a5f8efbbf9f0",
+    "title": "019f695b-f0b8-7593-90c5-a5f8efbbf9f0",
+    "created": "2026-07-16T05:17:41.028344+00:00",
+    "updated": "2026-07-16T05:19:02.514300+00:00",
+    "path": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma%5C.grok%5Cworktrees%5Ckarma%5C2026-07-15-150d9861\\019f695b-f0b8-7593-90c5-a5f8efbbf9f0\\chat_history.jsonl",
+    "format": "grok.chat.jsonl",
+    "bytes": 228209,
+    "extra": {
+      "dir": "C:\\Users\\karma\\.grok\\sessions\\C%3A%5CUsers%5Ckarma%5C.grok%5Cworktrees%5Ckarma%5C2026-07-15-150d9861\\019f695b-f0b8-7593-90c5-a5f8efbbf9f0",
+      "chat_lines": 79
+    }
+  }
+]

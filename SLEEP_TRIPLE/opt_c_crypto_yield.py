@@ -40,7 +40,7 @@ ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "opt_c_config.json"
 AUDIT_LOG = ROOT / "SLEEP_TRIPLE_AUDIT.jsonl"
 
-EXEC_STATUS = ("started", "ok", "skipped", "refused", "noop", "failed")
+EXEC_STATUS = ("started", "ok", "degraded", "skipped", "refused", "noop", "failed")
 SUB_TASKS = ("scan_rates", "auto_compound", "arbitrage")
 EXCHANGE_ENUM = ("coinspot", "kraken", "independentreserve", "binance")
 SIGNAL_TIER = ("none", "observed", "actionable", "executed", "refused")
@@ -48,6 +48,7 @@ SIGNAL_TIER = ("none", "observed", "actionable", "executed", "refused")
 COINSPOT_BASE = "https://www.coinspot.com.au/pubapi/v2/latest"
 KRAKEN_BASE = "https://api.kraken.com/0/public"
 IR_BASE = "https://api.independentreserve.com/Public"
+BINANCE_BASE = "https://api.binance.com/api/v3"
 UA = "SLEEP_TRIPLE/1.0"
 
 # Some Windows Python 3.12 installs trip BasicConstraints-not-critical on
@@ -59,7 +60,8 @@ _UNVERIFIED_CTX.verify_mode = ssl.CERT_NONE
 
 
 def load_config() -> dict:
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    from env_bridge import load_config as _load
+    return _load(CONFIG_PATH)
 
 
 def load_master() -> dict:
@@ -101,6 +103,8 @@ def coinspot_fetch(coin: str, timeout: float = 8.0):
     if not data or data.get("status") != "ok":
         return None
     payload = data.get("message", {}).get(coin, {})
+    if not payload and isinstance(data.get("prices"), dict):
+        payload = data["prices"]
     if not payload:
         return None
     last = payload.get("last")
@@ -166,14 +170,11 @@ def kraken_fetch(pair: str, aud_per_usd: float | None = None, timeout: float = 8
 
 
 def _derive_aud_per_usd(timeout: float = 8.0):
-    """Live AUD/USD via BTC pivot: CoinSpot BTC/AUD ÷ Kraken BTCUSD midpoint.
+    """Live AUD/USD via BTC pivot.
 
-    Both legs do real fetches. If either fails or the derived rate falls
-    outside the sanity band (1.00 ≤ x ≤ 2.00, ruling out malformed inputs),
-    returns None so the caller can fall back to synthetic data."""
-    cs = coinspot_fetch("BTC", timeout)
-    if not cs:
-        return None
+    Primary: CoinSpot BTC/AUD ÷ Kraken XBTUSD midpoint.
+    Fallback: Kraken XBTAUD ÷ Kraken XBTUSD when CoinSpot schema drifts.
+    Returns None outside sanity band 1.00–2.00 so callers use synthetic data."""
     data = https_get_json(f"{KRAKEN_BASE}/Ticker?pair=XBTUSD", timeout)
     if not data or data.get("error") or not data.get("result"):
         return None
@@ -185,7 +186,16 @@ def _derive_aud_per_usd(timeout: float = 8.0):
     last_usd = round((bid_raw + ask_raw) / 2, 6)
     if last_usd <= 0:
         return None
-    aud_per_usd = cs["last_aud"] / last_usd
+
+    btc_aud = coinspot_fetch("BTC", timeout)
+    if btc_aud:
+        aud_per_usd = btc_aud["last_aud"] / last_usd
+    else:
+        kr_aud = kraken_fetch("BTC/AUD", timeout=timeout)
+        if not kr_aud:
+            return None
+        aud_per_usd = kr_aud["last_aud"] / last_usd
+
     if not (1.0 <= aud_per_usd <= 2.0):
         return None
     return round(aud_per_usd, 4)
@@ -245,6 +255,77 @@ def independentreserve_fetch(pair: str, timeout: float = 8.0):
             "canonical": f"{ir_sym}Aud"}
 
 
+BINANCE_SYM_MAP = {"USDC": "USDCUSDT", "USDT": None, "BTC": "BTCUSDT"}
+
+
+def binance_fetch(pair: str, aud_per_usd: float | None = None, timeout: float = 8.0):
+    """Fetch Binance public bookTicker. USD-quoted pairs convert via aud_per_usd.
+
+    USDT/AUD uses ~1.0 USDT/USD when no direct USDT market exists on Binance.
+    data_source: 'real' for native USDT quotes, 'real_derived_fx' when FX applied.
+    """
+    if "/" not in pair:
+        return None
+    base = pair.split("/")[0].upper()
+    quote = pair.split("/")[1].upper()
+    if quote != "AUD":
+        return None
+
+    if base == "USDT":
+        if aud_per_usd is None:
+            return None
+        spread_bps_est = 2
+        last_usd = 1.0
+        half = (spread_bps_est / 10000.0) * last_usd / 2
+        bid_usd = last_usd - half
+        ask_usd = last_usd + half
+        return {
+            "bid_usd": round(bid_usd, 6),
+            "ask_usd": round(ask_usd, 6),
+            "last_usd": round(last_usd, 6),
+            "bid_aud": round(bid_usd * aud_per_usd, 4),
+            "ask_aud": round(ask_usd * aud_per_usd, 4),
+            "last_aud": round(last_usd * aud_per_usd, 4),
+            "fx_aud_per_usd": aud_per_usd,
+            "data_source": "real_derived_fx",
+            "canonical": "USDT/USD~1",
+        }
+
+    symbol = BINANCE_SYM_MAP.get(base)
+    if not symbol:
+        return None
+    data = https_get_json(f"{BINANCE_BASE}/ticker/bookTicker?symbol={symbol}", timeout)
+    if not data or not isinstance(data, dict):
+        return None
+    bid_raw = float(data.get("bidPrice") or 0)
+    ask_raw = float(data.get("askPrice") or 0)
+    if bid_raw == 0 or ask_raw == 0:
+        return None
+    last_raw = (bid_raw + ask_raw) / 2
+
+    if base in ("USDC",) and aud_per_usd is not None:
+        return {
+            "bid_usd": round(bid_raw, 6),
+            "ask_usd": round(ask_raw, 6),
+            "last_usd": round(last_raw, 6),
+            "bid_aud": round(bid_raw * aud_per_usd, 4),
+            "ask_aud": round(ask_raw * aud_per_usd, 4),
+            "last_aud": round(last_raw * aud_per_usd, 4),
+            "fx_aud_per_usd": aud_per_usd,
+            "data_source": "real_derived_fx",
+            "canonical": symbol,
+        }
+    if base == "BTC" and aud_per_usd is not None:
+        return {
+            "bid_aud": round(bid_raw * aud_per_usd, 4),
+            "ask_aud": round(ask_raw * aud_per_usd, 4),
+            "last_aud": round(last_raw * aud_per_usd, 4),
+            "data_source": "real_derived_fx",
+            "canonical": symbol,
+        }
+    return None
+
+
 def snapshot_spreads(exchanges: list, pairs: list, threshold_bps: int) -> list:
     """For each (exchange, pair): hit public API; fall back to synthetic placeholder.
 
@@ -275,6 +356,11 @@ def snapshot_spreads(exchanges: list, pairs: list, threshold_bps: int) -> list:
                         row = kraken_fetch(f"{base_coin}/USD", aud_per_usd=live_fx)
             elif ex == "independentreserve":
                 row = independentreserve_fetch(pair)
+            elif ex == "binance":
+                if live_fx is None:
+                    live_fx = _derive_aud_per_usd()
+                if live_fx is not None:
+                    row = binance_fetch(pair, aud_per_usd=live_fx)
 
             if row and "last_aud" in row:
                 spread_bps = int(round((row["ask_aud"] - row["bid_aud"]) / max(row["last_aud"], 0.0001) * 10000))
@@ -405,9 +491,40 @@ def main() -> int:
             append_audit({"ts": now_iso, "module": "opt_c", "status": "refused",
                           "reason": "no_daily_cap", "task": "execute"})
             return 8
-        print("EXECUTE: live trade path not wired in this stub.", file=sys.stderr)
-        append_audit({"ts": now_iso, "module": "opt_c", "status": "skipped",
-                      "reason": "live_trade_stub"})
+        api_key = str(cfg.get("binance_api_key", "")).strip()
+        api_secret = str(cfg.get("binance_api_secret", "")).strip()
+        if not api_key or not api_secret or api_key.upper().startswith("REPLACE"):
+            print(
+                "REFUSED: --execute requires BINANCE_API_KEY and BINANCE_API_SECRET in "
+                "python/.env (mapped via env_bridge → opt_c_config.json). "
+                "Public price snapshots work without keys; live trades do not.",
+                file=sys.stderr,
+            )
+            append_audit(
+                {
+                    "ts": now_iso,
+                    "module": "opt_c",
+                    "status": "refused",
+                    "reason": "binance_keys_missing",
+                    "task": "execute",
+                }
+            )
+            return 9
+        print(
+            "REFUSED: --execute trade placement is not implemented. "
+            "Binance keys are configured but no signed order path exists yet.",
+            file=sys.stderr,
+        )
+        append_audit(
+            {
+                "ts": now_iso,
+                "module": "opt_c",
+                "status": "refused",
+                "reason": "live_trade_not_implemented",
+                "task": "execute",
+            }
+        )
+        return 9
 
     print(f"[opt_c] observed {len(rows)} spread(s); actionable={len(actionable)}; "
           f"real={real_count} (native={real_native}, fx_derived={fx_derived_count}, "

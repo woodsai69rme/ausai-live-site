@@ -1,7 +1,8 @@
 # 🏆 GOLDEN RULES - PERMANENT SYSTEM DIRECTIVES
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Effective:** March 4, 2026  
+**Amended:** July 13, 2026 — Rule #8 operator directive + cause (personal folders; disk-space audits)  
 **Status:** MANDATORY FOR ALL AI SYSTEMS
 
 ---
@@ -148,36 +149,57 @@ ALWAYS DOCUMENT NEVER OBSCURE
 ## ⭐ GOLDEN RULE #8: PERSONAL FILES ARE SACRED
 
 ```
-DOCUMENTS DOWNLOADS PICTURES VIDEOS MUSIC ARE READ/REVIEW ONLY
+DOCUMENTS DOWNLOADS PICTURES VIDEOS MUSIC DESKTOP ARE READ/REVIEW ONLY
 NEVER MODIFY DELETE MOVE OR ARCHIVE ANY PERSONAL FILES
-THESE FOLDERS ARE COMPLETELY PROTECTED
+THESE FOLDERS ARE COMPLETELY PROTECTED — NO EXCEPTIONS
 ```
 
+### Cause (why this rule exists)
+
+Personal folders hold **irreplaceable operator content** — documents, downloads, media libraries, and desktop work-in-progress. They are not cache, not tooling noise, and not fair game for disk-space recovery. Low free space on `C:` (or any drive) **does not override** this rule. Space audits, cleanup catalogs, and automation scripts must **never** target these paths. The only approved interaction is **read/review** when the operator explicitly asks.
+
+### Operator directive (2026-07-13)
+
+The operator explicitly commanded: **do not touch** `Documents`, `Downloads`, `Music`, `Videos`, `Pictures`, or `Desktop`. This directive is permanent until the operator revokes it in writing. AI systems must not suggest, plan, or execute any action on these folders — including "move to X: for space", "organize", "archive", or "flush to staging".
+
 ### Protected Locations (READ/REVIEW ONLY):
-- ✅ `C:\Users\karma\Documents\` - All documents
-- ✅ `C:\Users\karma\Downloads\` - All downloads (even archived)
-- ✅ `C:\Users\karma\Pictures\` - All photos/images
-- ✅ `C:\Users\karma\Videos\` - All videos
-- ✅ `C:\Users\karma\Music\` - All music/audio files
-- ✅ `C:\Users\karma\Desktop\` - Desktop files
-- ✅ `C:\Users\karma\OneDrive\` - OneDrive synced files
+
+| Folder | Path | Status |
+|--------|------|--------|
+| Documents | `C:\Users\karma\Documents\` | 🔒 READ ONLY |
+| Downloads | `C:\Users\karma\Downloads\` | 🔒 READ ONLY (including `ARCHIVE_OLD`) |
+| Pictures | `C:\Users\karma\Pictures\` | 🔒 READ ONLY |
+| Videos | `C:\Users\karma\Videos\` | 🔒 READ ONLY |
+| Music | `C:\Users\karma\Music\` | 🔒 READ ONLY |
+| Desktop | `C:\Users\karma\Desktop\` | 🔒 READ ONLY |
+| OneDrive | `C:\Users\karma\OneDrive\` | 🔒 READ ONLY |
 
 ### What This Means:
-- ❌ NEVER suggest deleting any personal file
-- ❌ NEVER suggest moving personal files to archive
-- ❌ NEVER suggest "cleaning up" personal folders
+
+- ❌ NEVER delete any personal file
+- ❌ NEVER move personal files (including to `X:\`, `D:\`, `E:\`, or `SORT_STAGING`)
+- ❌ NEVER archive personal files for "cleanup" or "space recovery"
+- ❌ NEVER reorganize, sort, or run organizers on personal folders
 - ❌ NEVER modify any personal file
-- ❌ NEVER reorganize personal folders
-- ✅ ONLY read/review personal files when specifically asked
-- ✅ ONLY analyze personal files for specific tasks
-- ✅ Treat all personal files as permanently valuable
+- ❌ NEVER include personal folders in space-audit DELETE/MOVE/PURGE recommendations
+- ✅ ONLY read/review when the operator specifically asks
+- ✅ ONLY analyze for a task the operator explicitly scoped to that folder
+- ✅ Treat every personal file as permanently valuable
+
+### Forbidden on personal paths (even if "safe" or "move-only"):
+
+- `ComfyUI\tools\downloads_organize.py` — **do not run** against `Downloads\`
+- `ComfyUI\tools\sort_staging.py` — **do not flush** personal media from protected folders
+- Windows Storage Sense / Disk Cleanup targeting user profile media folders
+- Any AI suggestion to "free space" by touching Documents, Downloads, Music, Videos, Pictures, or Desktop
 
 ### Special Note on Downloads:
-The `Downloads\ARCHIVE_OLD` folder created by cleanup scripts is also **PROTECTED**:
-- ✅ Files are archived there, not deleted
-- ✅ All files remain accessible
-- ✅ Nothing will be removed from archive
-- ✅ Archive is a safe storage location, not a deletion target
+
+The `Downloads\ARCHIVE_OLD` folder is also **PROTECTED**:
+
+- ✅ Files remain there; nothing is removed
+- ✅ Not a deletion target and not a move source for space recovery
+- ✅ Read/review only, same as parent `Downloads\`
 
 ---
 
@@ -216,6 +238,15 @@ The `Downloads\ARCHIVE_OLD` folder created by cleanup scripts is also **PROTECTE
 - [ ] Ensure all tools comply
 - [ ] Pass on to any new team members
 - [ ] Integrate into all workflows
+
+---
+
+## 📜 AMENDMENT LOG
+
+| Date | Version | Change |
+|------|---------|--------|
+| 2026-03-04 | 1.0 | Initial 9 Golden Rules |
+| 2026-07-13 | 1.1 | Rule #8: added **cause**, **operator directive** (Documents/Downloads/Music/Videos/Pictures/Desktop), space-audit exclusions, forbidden tooling list |
 
 ---
 

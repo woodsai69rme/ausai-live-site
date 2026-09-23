@@ -146,3 +146,11 @@ All scripts:
 ---
 
 *Part of the AI Army (Foot Clan) system. Dispatch via `http://localhost:8001`.*
+
+## n8n Small Business Pack (NEW 2026-07-15)
+
+- Path: `n8n_workflow_pack/`
+- ZIP: `n8n_workflow_pack/dist/n8n_small_business_workflows.zip`
+- Price: A$67 · permalink `n8n-small-business-workflows`
+- Build: `python REVENUE_GENERATORS\n8n_workflow_pack\build_package.py`
+- Go-live: `n8n_workflow_pack/GUMROAD_GO_LIVE.md`

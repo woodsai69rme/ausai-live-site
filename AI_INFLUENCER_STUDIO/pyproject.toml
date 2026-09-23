@@ -1,0 +1,94 @@
+# AI Influencer Studio — unified content creation & social media management
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-influencer-studio"
+version = "0.1.0"
+description = "CLI + web dashboard for AI influencer content creation and social media management"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "karma" }]
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "jinja2>=3.1.0",
+    "pydantic>=2.7.0",
+    "requests>=2.32.0",
+    "python-multipart>=0.0.9",
+    "schedule>=1.2.0",
+    "pillow>=10.3.0",
+    "openai>=1.35.0",
+    "librosa>=0.10.0",
+    "mutagen>=1.47.0",
+]
+
+[project.optional-dependencies]
+browser = [
+    "playwright>=1.44.0",
+]
+indexer = [
+    "pypdf>=4.0.0",
+    "python-docx>=1.1.0",
+]
+kokoro = [
+    "kokoro-onnx>=0.4.0",
+]
+windows = [
+    "uiautomation>=2.0.15; sys_platform == 'win32'",
+]
+mcp = [
+    "mcp>=1.0.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+]
+
+[project.scripts]
+aisocial = "ai_influencer_studio.cli:main"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--strict-markers -q"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "ui: marks tests as UI tests (require display; excluded by default)",
+]
+filterwarnings = [
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated",
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ai_influencer_studio = ["templates/*.html"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "RUF"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true

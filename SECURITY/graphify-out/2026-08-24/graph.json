@@ -1,0 +1,2938 @@
+{
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "nodes": [
+    {
+      "id": "secret_scan",
+      "label": "secret_scan.py",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_finding",
+      "label": "Finding",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L39",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_scanerror",
+      "label": "ScanError",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L46",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_repository_root",
+      "label": "repository_root()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L51",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_py_path",
+      "label": "Path",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_tracked_files",
+      "label": "tracked_files()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L67",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_without_template_markers",
+      "label": "_without_template_markers()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L79",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_scan_file",
+      "label": "scan_file()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L87",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_relative_path",
+      "label": "_relative_path()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L99",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_scan_paths",
+      "label": "scan_paths()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L113",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_paths_from_args",
+      "label": "_paths_from_args()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L142",
+      "_origin": "ast"
+    },
+    {
+      "id": "namespace",
+      "label": "Namespace",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_print_text",
+      "label": "_print_text()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L154",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L172",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_rationale_1",
+      "label": "Fail-closed scan for high-confidence credentials in repository files.  The scann",
+      "file_type": "rationale",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_rationale_52",
+      "label": "Return the Git worktree root, or the current directory outside Git.",
+      "file_type": "rationale",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L52",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_rationale_80",
+      "label": "Remove only explicit placeholders before testing credential patterns.",
+      "file_type": "rationale",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L80",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_rationale_88",
+      "label": "Scan one file incrementally so large archives cannot exhaust RAM.",
+      "file_type": "rationale",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L88",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_rationale_100",
+      "label": "Resolve a path and reject symlink/path traversal outside the worktree.",
+      "file_type": "rationale",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L100",
+      "_origin": "ast"
+    },
+    {
+      "id": "secret_scan_rationale_114",
+      "label": "Scan repository-relative paths and return findings plus fail-closed errors.",
+      "file_type": "rationale",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L114",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs",
+      "label": "validate_security_docs.py",
+      "file_type": "code",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_load_text",
+      "label": "_load_text()",
+      "file_type": "code",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L40",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_py_path",
+      "label": "Path",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_check_document_files",
+      "label": "check_document_files()",
+      "file_type": "code",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L44",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_check_workflows",
+      "label": "check_workflows()",
+      "file_type": "code",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L59",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_check_security_docs",
+      "label": "check_security_docs()",
+      "file_type": "code",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L76",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_validate",
+      "label": "validate()",
+      "file_type": "code",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L97",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L101",
+      "_origin": "ast"
+    },
+    {
+      "id": "validate_security_docs_rationale_1",
+      "label": "Validate the repository security documentation and workflow guardrails.  This co",
+      "file_type": "rationale",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23",
+      "label": "AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "label": "Repository Audit and Remediation Status",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_executive_summary",
+      "label": "Executive Summary",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_scope_and_repository_shape",
+      "label": "Scope and Repository Shape",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_original_findings",
+      "label": "Original Findings",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L39",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_critical_credential_shaped_material_in_tracked_history",
+      "label": "Critical: credential-shaped material in tracked history",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L41",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_high_unhealthy_repository_boundary",
+      "label": "High: unhealthy repository boundary",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L54",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_high_previously_non_blocking_ci_checks",
+      "label": "High: previously non-blocking CI checks",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L58",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_high_broad_automation_permissions",
+      "label": "High: broad automation permissions",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L62",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_medium_high_optimistic_runtime_status",
+      "label": "Medium/High: optimistic runtime status",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L66",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_medium_data_and_test_drift",
+      "label": "Medium: data and test drift",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L70",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "label": "Remediation Implemented",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L74",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_ci_and_workflow_hardening",
+      "label": "CI and workflow hardening",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L76",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_secret_scanning_guardrail",
+      "label": "Secret-scanning guardrail",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L103",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_security_runbooks",
+      "label": "Security runbooks",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L130",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_enhanced_security_validation",
+      "label": "Enhanced security validation",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L139",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_sleep_triple_status_semantics",
+      "label": "SLEEP_TRIPLE status semantics",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L156",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_full_stack_catalog_test_drift",
+      "label": "Full Stack catalog test drift",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L181",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_drive_rag_self_test_portability",
+      "label": "Drive/RAG self-test portability",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L196",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_graphify_restoration_and_scoped_graphs",
+      "label": "Graphify restoration and scoped graphs",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L200",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_verification_evidence",
+      "label": "Verification Evidence",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L219",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_git_and_archive_boundary",
+      "label": "Git and Archive Boundary",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L247",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_active_code_enhancements_reviewed",
+      "label": "Active-Code Enhancements Reviewed",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L266",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_external_actions_still_required",
+      "label": "External Actions Still Required",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L281",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_operating_rules_going_forward",
+      "label": "Operating Rules Going Forward",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L298",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_related_documents",
+      "label": "Related Documents",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L309",
+      "_origin": "ast"
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_change_record",
+      "label": "Change Record",
+      "file_type": "document",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L329",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24",
+      "label": "DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "label": "Security and Remediation Documentation Manifest — 2026-08-24",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_purpose",
+      "label": "Purpose",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_golden_rules_applied",
+      "label": "Golden Rules applied",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_documentation_map",
+      "label": "Documentation map",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_remediation_surfaces_documented",
+      "label": "Remediation surfaces documented",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L36",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_ci_and_workflows",
+      "label": "CI and workflows",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L38",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_sleep_triple_runtime",
+      "label": "SLEEP_TRIPLE runtime",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L50",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_active_ai_influencer_studio",
+      "label": "Active AI Influencer Studio",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L74",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_graphify_evidence",
+      "label": "Graphify evidence",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L86",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_validation_evidence",
+      "label": "Validation evidence",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L97",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_git_and_archive_boundary",
+      "label": "Git and archive boundary",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L127",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_approval_gated_actions",
+      "label": "Approval-gated actions",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L137",
+      "_origin": "ast"
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_documentation_maintenance_rule",
+      "label": "Documentation maintenance rule",
+      "file_type": "document",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L151",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24",
+      "label": "EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "label": "External Action Handoff — 2026-08-24",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_status",
+      "label": "Status",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_read_only_evidence",
+      "label": "Read-only evidence",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_required_approval_gates",
+      "label": "Required approval gates",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_provider_credential_work",
+      "label": "Provider credential work",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_history_scrubbing",
+      "label": "History scrubbing",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_local_verification_completed",
+      "label": "Local verification completed",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L43",
+      "_origin": "ast"
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_related_documents",
+      "label": "Related documents",
+      "file_type": "document",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L54",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24",
+      "label": "FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "label": "Forensic Archive and Worktree Export Plan — 2026-08-24",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_purpose_and_boundary",
+      "label": "Purpose and boundary",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_non_actions",
+      "label": "Non-actions",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_required_operator_inputs_and_prerequisites",
+      "label": "Required operator inputs and prerequisites",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_artifact_layout",
+      "label": "Artifact layout",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L46",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_1_freeze_and_capture_read_only_state",
+      "label": "Phase 1 — Freeze and capture read-only state",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L75",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_2_export_all_worktree_bytes_and_git_evidence",
+      "label": "Phase 2 — Export all worktree bytes and Git evidence",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L122",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_3_build_and_encrypt_the_payload",
+      "label": "Phase 3 — Build and encrypt the payload",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L149",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_4_restore_verification",
+      "label": "Phase 4 — Restore verification",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L185",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_5_prove_the_source_worktree_was_not_changed",
+      "label": "Phase 5 — Prove the source worktree was not changed",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L214",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_worktree_reconstruction_test_optional_fresh_clone_only",
+      "label": "Worktree reconstruction test (optional, fresh clone only)",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L230",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_acceptance_record",
+      "label": "Acceptance record",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L247",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_current_blockers_and_next_handoff",
+      "label": "Current blockers and next handoff",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L265",
+      "_origin": "ast"
+    },
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_related_documents",
+      "label": "Related documents",
+      "file_type": "document",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L271",
+      "_origin": "ast"
+    },
+    {
+      "id": "incident_response",
+      "label": "INCIDENT_RESPONSE.md",
+      "file_type": "document",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "incident_response_credential_incident_response",
+      "label": "Credential Incident Response",
+      "file_type": "document",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "incident_response_immediate_containment",
+      "label": "Immediate containment",
+      "file_type": "document",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "incident_response_preserve_without_re_exposing",
+      "label": "Preserve without re-exposing",
+      "file_type": "document",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "incident_response_history_scrubbing",
+      "label": "History scrubbing",
+      "file_type": "document",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "incident_response_local_checks",
+      "label": "Local checks",
+      "file_type": "document",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L37",
+      "_origin": "ast"
+    },
+    {
+      "id": "incident_response_ci_policy",
+      "label": "CI policy",
+      "file_type": "document",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L66",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_security_documentation",
+      "label": "Security Documentation",
+      "file_type": "document",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_start_here",
+      "label": "Start Here",
+      "file_type": "document",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_control_boundaries",
+      "label": "Control Boundaries",
+      "file_type": "document",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_validation_contract",
+      "label": "Validation Contract",
+      "file_type": "document",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L37",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_current_status",
+      "label": "Current Status",
+      "file_type": "document",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L50",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_related_operational_evidence",
+      "label": "Related Operational Evidence",
+      "file_type": "document",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L62",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24",
+      "label": "REWRITE_READINESS_2026-08-24.md",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "label": "History Rewrite Readiness — 2026-08-24",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_state",
+      "label": "State",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_current_read_only_inventory",
+      "label": "Current read-only inventory",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_approval_gates_before_execution",
+      "label": "Approval gates before execution",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_disposable_clone_procedure",
+      "label": "Disposable-clone procedure",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L38",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_post_rewrite_checks",
+      "label": "Post-rewrite checks",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L70",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_explicit_non_actions_in_this_session",
+      "label": "Explicit non-actions in this session",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L82",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_related_documents",
+      "label": "Related documents",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L89",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24",
+      "label": "REWRITE_REF_SCOPE_2026-08-24.md",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "label": "Disposable-Clone Rewrite Ref Scope — 2026-08-24",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_decision_status",
+      "label": "Decision status",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_current_read_only_inventory",
+      "label": "Current read-only inventory",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "label": "Recommended exact scrub scope",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_1_active_local_branch_to_publish",
+      "label": "1. Active local branch to publish",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_2_protected_local_evidence_branch",
+      "label": "2. Protected local evidence branch",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_3_tags",
+      "label": "3. Tags",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L47",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_4_remote_branches_on_origin",
+      "label": "4. Remote branches on `origin`",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L64",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_5_remote_tags_on_origin",
+      "label": "5. Remote tags on `origin`",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L90",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_ref_families_that_must_be_checked_and_not_silently_omitted",
+      "label": "Ref families that must be checked and not silently omitted",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L100",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_required_pre_rewrite_comparison_files",
+      "label": "Required pre-rewrite comparison files",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L125",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_post_rewrite_ref_acceptance_criteria",
+      "label": "Post-rewrite ref acceptance criteria",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L142",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_current_verification_and_blockers",
+      "label": "Current verification and blockers",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L158",
+      "_origin": "ast"
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_related_documents",
+      "label": "Related documents",
+      "file_type": "document",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L166",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist",
+      "label": "ROTATION_CHECKLIST.md",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_credential_rotation_checklist",
+      "label": "Credential Rotation Checklist",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_provider_workstreams",
+      "label": "Provider Workstreams",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_github",
+      "label": "GitHub",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_google",
+      "label": "Google",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_openai_compatible_providers",
+      "label": "OpenAI-Compatible Providers",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_ssh_and_git_credentials",
+      "label": "SSH and Git Credentials",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L36",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_webhooks_and_messaging",
+      "label": "Webhooks and Messaging",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L45",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_before_history_scrubbing",
+      "label": "Before History Scrubbing",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L53",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_validation_after_scrubbing",
+      "label": "Validation After Scrubbing",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L64",
+      "_origin": "ast"
+    },
+    {
+      "id": "rotation_checklist_current_local_boundary",
+      "label": "Current Local Boundary",
+      "file_type": "document",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L73",
+      "_origin": "ast"
+    }
+  ],
+  "links": [
+    {
+      "source": "secret_scan",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "subprocess",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "dataclasses",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_finding",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_scanerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_repository_root",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_repository_root",
+      "target": "secret_scan_py_path",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_tracked_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_without_template_markers",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_scan_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_file",
+      "target": "secret_scan_py_path",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_relative_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_relative_path",
+      "target": "secret_scan_py_path",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_scan_paths",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_py_path",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_finding",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_scanerror",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_paths_from_args",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_paths_from_args",
+      "target": "namespace",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_print_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_print_text",
+      "target": "secret_scan_finding",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_print_text",
+      "target": "secret_scan_scanerror",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan",
+      "target": "secret_scan_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L172",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_repository_root",
+      "target": "secret_scan_py_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_file",
+      "target": "secret_scan_without_template_markers",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_relative_path",
+      "target": "secret_scan_py_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_repository_root",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_relative_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_scanerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_scan_file",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_scan_paths",
+      "target": "secret_scan_finding",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L136",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_paths_from_args",
+      "target": "secret_scan_tracked_files",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L148",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_main",
+      "target": "secret_scan_paths_from_args",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L185",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_main",
+      "target": "secret_scan_scan_paths",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_main",
+      "target": "secret_scan_print_text",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L203",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_rationale_1",
+      "target": "secret_scan",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_rationale_52",
+      "target": "secret_scan_repository_root",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_rationale_80",
+      "target": "secret_scan_without_template_markers",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_rationale_88",
+      "target": "secret_scan_scan_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_rationale_100",
+      "target": "secret_scan_relative_path",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "secret_scan_rationale_114",
+      "target": "secret_scan_scan_paths",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/secret_scan.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "yaml",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "validate_security_docs_load_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_load_text",
+      "target": "validate_security_docs_py_path",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "validate_security_docs_check_document_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "validate_security_docs_check_workflows",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "validate_security_docs_check_security_docs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "validate_security_docs_validate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "validate_security_docs_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_check_document_files",
+      "target": "validate_security_docs_load_text",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_check_workflows",
+      "target": "validate_security_docs_load_text",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_validate",
+      "target": "validate_security_docs_check_document_files",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_validate",
+      "target": "validate_security_docs_check_workflows",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_validate",
+      "target": "validate_security_docs_check_security_docs",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_main",
+      "target": "validate_security_docs_validate",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_rationale_1",
+      "target": "validate_security_docs",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23",
+      "target": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_executive_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_scope_and_repository_shape",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_original_findings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_original_findings",
+      "target": "audit_remediation_status_2026_08_23_critical_credential_shaped_material_in_tracked_history",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_original_findings",
+      "target": "audit_remediation_status_2026_08_23_high_unhealthy_repository_boundary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_original_findings",
+      "target": "audit_remediation_status_2026_08_23_high_previously_non_blocking_ci_checks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_original_findings",
+      "target": "audit_remediation_status_2026_08_23_high_broad_automation_permissions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_original_findings",
+      "target": "audit_remediation_status_2026_08_23_medium_high_optimistic_runtime_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_original_findings",
+      "target": "audit_remediation_status_2026_08_23_medium_data_and_test_drift",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_ci_and_workflow_hardening",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_secret_scanning_guardrail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_security_runbooks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L130",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_enhanced_security_validation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_sleep_triple_status_semantics",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L156",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_full_stack_catalog_test_drift",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L181",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_drive_rag_self_test_portability",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L196",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "target": "audit_remediation_status_2026_08_23_graphify_restoration_and_scoped_graphs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L200",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_verification_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L219",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_git_and_archive_boundary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L247",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_active_code_enhancements_reviewed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L266",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_external_actions_still_required",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L281",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_operating_rules_going_forward",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L298",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_related_documents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L309",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "target": "audit_remediation_status_2026_08_23_change_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md",
+      "source_location": "L329",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_purpose",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_golden_rules_applied",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_documentation_map",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_remediation_surfaces_documented",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_remediation_surfaces_documented",
+      "target": "documentation_manifest_2026_08_24_ci_and_workflows",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_remediation_surfaces_documented",
+      "target": "documentation_manifest_2026_08_24_sleep_triple_runtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_remediation_surfaces_documented",
+      "target": "documentation_manifest_2026_08_24_active_ai_influencer_studio",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_remediation_surfaces_documented",
+      "target": "documentation_manifest_2026_08_24_graphify_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_validation_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_git_and_archive_boundary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L127",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_approval_gated_actions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "target": "documentation_manifest_2026_08_24_documentation_maintenance_rule",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24",
+      "target": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "target": "external_action_handoff_2026_08_24_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "target": "external_action_handoff_2026_08_24_read_only_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "target": "external_action_handoff_2026_08_24_required_approval_gates",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24_required_approval_gates",
+      "target": "external_action_handoff_2026_08_24_provider_credential_work",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24_required_approval_gates",
+      "target": "external_action_handoff_2026_08_24_history_scrubbing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "target": "external_action_handoff_2026_08_24_local_verification_completed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "target": "external_action_handoff_2026_08_24_related_documents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_purpose_and_boundary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_non_actions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_required_operator_inputs_and_prerequisites",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_artifact_layout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_1_freeze_and_capture_read_only_state",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_2_export_all_worktree_bytes_and_git_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_3_build_and_encrypt_the_payload",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_4_restore_verification",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L185",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_phase_5_prove_the_source_worktree_was_not_changed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L214",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_worktree_reconstruction_test_optional_fresh_clone_only",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L230",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_acceptance_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L247",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_current_blockers_and_next_handoff",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L265",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "target": "forensic_archive_and_worktree_export_plan_2026_08_24_related_documents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md",
+      "source_location": "L271",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "incident_response",
+      "target": "incident_response_credential_incident_response",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "incident_response_credential_incident_response",
+      "target": "incident_response_immediate_containment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "incident_response_credential_incident_response",
+      "target": "incident_response_preserve_without_re_exposing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "incident_response_credential_incident_response",
+      "target": "incident_response_history_scrubbing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "incident_response_credential_incident_response",
+      "target": "incident_response_local_checks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "incident_response_credential_incident_response",
+      "target": "incident_response_ci_policy",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/INCIDENT_RESPONSE.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "readme_security_documentation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_security_documentation",
+      "target": "readme_start_here",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_security_documentation",
+      "target": "readme_control_boundaries",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_security_documentation",
+      "target": "readme_validation_contract",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_security_documentation",
+      "target": "readme_current_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_security_documentation",
+      "target": "readme_related_operational_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/README.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_state",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_current_read_only_inventory",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_approval_gates_before_execution",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_disposable_clone_procedure",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_post_rewrite_checks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_explicit_non_actions_in_this_session",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "target": "rewrite_readiness_2026_08_24_related_documents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_READINESS_2026-08-24.md",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_decision_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_current_read_only_inventory",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "target": "rewrite_ref_scope_2026_08_24_1_active_local_branch_to_publish",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "target": "rewrite_ref_scope_2026_08_24_2_protected_local_evidence_branch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "target": "rewrite_ref_scope_2026_08_24_3_tags",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "target": "rewrite_ref_scope_2026_08_24_4_remote_branches_on_origin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "target": "rewrite_ref_scope_2026_08_24_5_remote_tags_on_origin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_ref_families_that_must_be_checked_and_not_silently_omitted",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_required_pre_rewrite_comparison_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_post_rewrite_ref_acceptance_criteria",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_current_verification_and_blockers",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L158",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "target": "rewrite_ref_scope_2026_08_24_related_documents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/REWRITE_REF_SCOPE_2026-08-24.md",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist",
+      "target": "rotation_checklist_credential_rotation_checklist",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_credential_rotation_checklist",
+      "target": "rotation_checklist_provider_workstreams",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_provider_workstreams",
+      "target": "rotation_checklist_github",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_provider_workstreams",
+      "target": "rotation_checklist_google",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_provider_workstreams",
+      "target": "rotation_checklist_openai_compatible_providers",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_provider_workstreams",
+      "target": "rotation_checklist_ssh_and_git_credentials",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_provider_workstreams",
+      "target": "rotation_checklist_webhooks_and_messaging",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_credential_rotation_checklist",
+      "target": "rotation_checklist_before_history_scrubbing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_credential_rotation_checklist",
+      "target": "rotation_checklist_validation_after_scrubbing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "rotation_checklist_credential_rotation_checklist",
+      "target": "rotation_checklist_current_local_boundary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/ROTATION_CHECKLIST.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs",
+      "target": "secret_scan_scan_paths",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "validate_security_docs_check_security_docs",
+      "target": "secret_scan_scan_paths",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "SECURITY/validate_security_docs.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ]
+}

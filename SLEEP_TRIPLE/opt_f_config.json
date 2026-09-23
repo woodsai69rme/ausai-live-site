@@ -1,0 +1,15 @@
+{
+  "label": "AI Money-Making App Discovery Engine",
+  "ollama_model_preference": "ornith:9b",
+  "openrouter_model_fallback": "qwen/qwen3-next-80b-a3b-instruct:free",
+  "openrouter_api_key": "REPLACE_WITH_OPENROUTER_API_KEY",
+  "sources": [
+    "github_awesome",
+    "reddit",
+    "producthunt"
+  ],
+  "discovery_frequency": "daily",
+  "max_per_source": 15,
+  "min_weighted_score": 50,
+  "generate_build_plans": true
+}

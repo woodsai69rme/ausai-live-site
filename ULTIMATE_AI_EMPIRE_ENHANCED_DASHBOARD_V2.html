@@ -740,6 +740,10 @@
                         <div class="stat-value" style="font-size: 1.5rem;"><i class="fas fa-book"></i> Knowledge Base</div>
                         <div class="stat-label" id="kb-path-label">Set ?folder= in URL</div>
                     </div>
+                    <div onclick="launchMobileRecovery()" class="stat-card" style="cursor: pointer;">
+                        <div class="stat-value" style="font-size: 1.5rem;"><i class="fas fa-mobile-screen"></i> Recovery Suite</div>
+                        <div class="stat-label">iPhone + Android + Oppo</div>
+                    </div>
                 </div>
             </div>
 
@@ -1464,6 +1468,23 @@
                 notification.classList.remove('show');
                 setTimeout(() => notification.remove(), 300);
             }, 5000);
+        }
+
+        // Mobile Recovery Suite shortcut.
+        // We do NOT auto-execute the .bat from the page -- browsers refuse
+        // file:// → .bat navigation from a served HTML context. The card
+        // tells the user where the master launcher lives, and the existing
+        // Start-ALL-AI-TOOLS.bat menu-option 21 entry is the documented path.
+        function launchMobileRecovery() {
+            showNotification(
+                'Run Recovery Suite from CMD: type `recovery` (uses C:\\Users\\karma\\recovery.bat), or START-ALL-AI-TOOLS.bat -> 21.',
+                'info'
+            );
+            try {
+                window.open('file:///C:/Users/karma/START-ALL-AI-TOOLS.bat', '_blank');
+            } catch (_) {
+                // ignore popup blocker / file:// restrictions -- the toast message is enough
+            }
         }
 
         // Action Functions

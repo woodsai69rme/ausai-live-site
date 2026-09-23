@@ -1,0 +1,242 @@
+{
+  "passed": 47,
+  "failed": 0,
+  "total": 47,
+  "checks": [
+    {
+      "name": "exists:SETUP_DASHBOARD.html",
+      "ok": true,
+      "detail": "44210 B"
+    },
+    {
+      "name": "exists:OPEN_SETUP_DASHBOARD.bat",
+      "ok": true,
+      "detail": "666 B"
+    },
+    {
+      "name": "exists:TOOLS/write_setup_status.py",
+      "ok": true,
+      "detail": "9497 B"
+    },
+    {
+      "name": "exists:TOOLS/all_accounts_browser_computer.py",
+      "ok": true,
+      "detail": "25579 B"
+    },
+    {
+      "name": "exists:TOOLS/proceed_all.py",
+      "ok": true,
+      "detail": "7105 B"
+    },
+    {
+      "name": "exists:TOOLS/apply_payment_links.py",
+      "ok": true,
+      "detail": "7227 B"
+    },
+    {
+      "name": "exists:REMOTE_ALWAYS_ON.md",
+      "ok": true,
+      "detail": "6914 B"
+    },
+    {
+      "name": "exists:REMOTE_ALWAYS_ON_CHECK.bat",
+      "ok": true,
+      "detail": "3620 B"
+    },
+    {
+      "name": "exists:REMOTE_IN_LAUNCHERS.bat",
+      "ok": true,
+      "detail": "3088 B"
+    },
+    {
+      "name": "exists:PROCEED_ALL.md",
+      "ok": true,
+      "detail": "5629 B"
+    },
+    {
+      "name": "exists:HUMAN_FINISH_LINE_CASH.md",
+      "ok": true,
+      "detail": "3487 B"
+    },
+    {
+      "name": "exists:FIVERR_PASTE_PACKAGE.md",
+      "ok": true,
+      "detail": "6350 B"
+    },
+    {
+      "name": "exists:CONFIG/payment_links.env",
+      "ok": true,
+      "detail": "1445 B"
+    },
+    {
+      "name": "exists:bin/gumroad.exe",
+      "ok": true,
+      "detail": "13597696 B"
+    },
+    {
+      "name": "write_setup_status exit",
+      "ok": true,
+      "detail": "Wrote C:\\Users\\karma\\SETUP_STATUS.json  score=11/22 (50%)  need=11\nWrote C:\\Users\\karma\\SETUP_STATUS_EMBED.js"
+    },
+    {
+      "name": "SETUP_STATUS.json exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "status.score",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "status.items",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "status.no_secrets",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "status.pct_range",
+      "ok": true,
+      "detail": "50"
+    },
+    {
+      "name": "status.item.openrouter",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "name": "status.item.chromoting",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "name": "status.item.zip_comfy",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "name": "status.item.gumroad_token_file",
+      "ok": true,
+      "detail": "need"
+    },
+    {
+      "name": "dashboard has script",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "dashboard aria icons",
+      "ok": true,
+      "detail": "39/39"
+    },
+    {
+      "name": "dashboard node --check",
+      "ok": true,
+      "detail": "OK"
+    },
+    {
+      "name": "verify_dashboard.py",
+      "ok": true,
+      "detail": "DASHBOARD VALID"
+    },
+    {
+      "name": "proceed_all --check exit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "proceed_all mentions Stripe",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "all_accounts --status exit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "all_accounts shows OPENROUTER",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "apply_payment_links --check runs",
+      "ok": true,
+      "detail": "exit=1"
+    },
+    {
+      "name": "apply_payment_links --check output",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "apply refuses placeholders",
+      "ok": true,
+      "detail": "exit=1"
+    },
+    {
+      "name": "chromoting service query",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "chromoting RUNNING",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "zip comfy",
+      "ok": true,
+      "detail": "4616"
+    },
+    {
+      "name": "zip n8n",
+      "ok": true,
+      "detail": "27295"
+    },
+    {
+      "name": "sleep dry_run_default True",
+      "ok": true,
+      "detail": "True"
+    },
+    {
+      "name": "sleep max_daily_aud_spend 0",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "devmonitor run_pytest exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "devmonitor fast tests",
+      "ok": true,
+      "detail": "ERROR:system_control:Error: Wallpaper file not found at C:\\nonexistent\\path\\imag"
+    },
+    {
+      "name": "remote bat exists",
+      "ok": true,
+      "detail": "3620 B"
+    },
+    {
+      "name": "remote bat has /q or /nopause",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "remote bat checks remoting_host",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "remote bat RESULT string",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

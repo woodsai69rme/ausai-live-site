@@ -1,0 +1,4 @@
+{
+  "builds": [{"src": "youtube_transcript_api_service.py", "use": "@vercel/python"}],
+  "rewrites": [{"source": "/(.*)", "destination": "/youtube_transcript_api_service.py"}]
+}

@@ -1,0 +1,162 @@
+# Dependabot Configuration for YouTube Enhancement Tools v3.2.0
+# Automated dependency updates with grouping and labeling
+
+version: 2
+registries:
+  pypi:
+    type: python-index
+    url: https://pypi.org/simple/
+
+updates:
+  # ============================================
+  # PYTHON DEPENDENCIES (requirements.txt)
+  # ============================================
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+    labels:
+      - "dependencies"
+      - "python"
+      - "automated"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    groups:
+      python-production:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "*dev*"
+          - "*test*"
+        update-types:
+          - "minor"
+          - "patch"
+      python-major:
+        patterns:
+          - "*"
+        update-types:
+          - "major"
+    reviewers:
+      - "code-owner"
+    assignees:
+      - "code-owner"
+
+  # ============================================
+  # DEVELOPMENT DEPENDENCIES
+  # ============================================
+  - package-ecosystem: "pip"
+    directory: "/"
+    target-branch: "develop"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "dev-dependencies"
+      - "automated"
+    commit-message:
+      prefix: "deps(dev)"
+    groups:
+      python-dev:
+        patterns:
+          - "*dev*"
+          - "*test*"
+          - "pytest*"
+          - "black"
+          - "flake8"
+          - "mypy"
+          - "isort"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+
+  # ============================================
+  # GITHUB ACTIONS
+  # ============================================
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "automated"
+    commit-message:
+      prefix: "ci"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    reviewers:
+      - "code-owner"
+
+  # ============================================
+  # DOCKER (if Dockerfile exists)
+  # ============================================
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+      - "automated"
+    commit-message:
+      prefix: "docker"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+
+  # ============================================
+  # DOCUMENTATION DEPENDENCIES (docs/)
+  # ============================================
+  - package-ecosystem: "pip"
+    directory: "/docs"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "documentation"
+      - "automated"
+    commit-message:
+      prefix: "docs"
+    groups:
+      docs-dependencies:
+        patterns:
+          - "*"
+
+# ============================================
+# GLOBAL CONFIGURATION
+# ============================================
+registries:
+  pypi:
+    type: python-index
+    url: https://pypi.org/simple/
+
+# Security updates configuration
+security-updates-only: false
+
+# Rebase strategy
+rebase-strategy: "auto"

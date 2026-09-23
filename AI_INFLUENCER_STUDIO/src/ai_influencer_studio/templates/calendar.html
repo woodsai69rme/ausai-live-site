@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Influencer Studio — Calendar</title>
+    <style>
+        :root {
+            --bg: #0f0f13;
+            --surface: #16161d;
+            --surface-2: #1e1e28;
+            --text: #f0f0f5;
+            --muted: #a0a0b0;
+            --accent: #8b5cf6;
+            --accent-2: #ec4899;
+            --radius: 12px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        nav {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: var(--surface);
+            border-bottom: 1px solid #2a2a35;
+        }
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        nav a:hover { opacity: 1; }
+        .container { padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { margin-bottom: 0.5rem; }
+        .subtitle { color: var(--muted); margin-bottom: 2rem; }
+        .card {
+            background: var(--surface);
+            border: 1px solid #2a2a35;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        label { display: block; margin-bottom: 0.5rem; color: var(--muted); font-weight: 600; }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background: var(--surface-2);
+            border: 1px solid #2a2a35;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        textarea { min-height: 80px; resize: vertical; }
+        button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { text-align: left; padding: 0.75rem; border-bottom: 1px solid #2a2a35; }
+        th { color: var(--muted); font-weight: 600; }
+        .status { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 999px; background: var(--surface-2); }
+        .status.pending { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; }
+        .status.posted { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/factory">Factory</a>
+        <a href="/calendar">Calendar</a>
+    </nav>
+    <div class="container">
+        <h1>Content Calendar</h1>
+        <p class="subtitle">Schedule and manage upcoming posts</p>
+
+        <div class="card">
+            <h2>Schedule New Post</h2>
+            <form id="scheduleForm">
+                <label for="platform">Platform</label>
+                <select id="platform" name="platform" required>
+                    <option value="instagram">Instagram</option>
+                    <option value="twitter">X / Twitter</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="youtube">YouTube</option>
+                </select>
+
+                <label for="content">Content</label>
+                <textarea id="content" name="content" placeholder="Write your post here..." required></textarea>
+
+                <label for="scheduled_at">Scheduled At (ISO datetime)</label>
+                <input type="datetime-local" id="scheduled_at" name="scheduled_at" required>
+
+                <label for="hashtags">Hashtags (comma-separated)</label>
+                <input type="text" id="hashtags" name="hashtags" placeholder="ai, automation, contentcreator">
+
+                <button type="submit">Schedule Post</button>
+            </form>
+            <p id="scheduleResult" style="color: var(--muted); margin-top: 1rem;"></p>
+        </div>
+
+        <div class="card">
+            <h2>Scheduled Posts</h2>
+            {% if posts %}
+            <table>
+                <thead>
+                    <tr><th>Platform</th><th>Scheduled</th><th>Content</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.platform }}</td>
+                        <td>{{ post.scheduled_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>{{ post.content[:80] }}{% if post.content|length > 80 %}...{% endif %}</td>
+                        <td><span class="status {{ post.status }}">{{ post.status }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No posts scheduled yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('scheduleForm');
+        const result = document.getElementById('scheduleResult');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            result.textContent = 'Scheduling...';
+
+            try {
+                const response = await fetch('/calendar/schedule', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+                result.textContent = `Scheduled post #${data.id} for ${data.scheduled_at}`;
+                form.reset();
+                setTimeout(() => window.location.reload(), 1000);
+            } catch (err) {
+                result.textContent = 'Error: ' + String(err);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-16" standalone="yes"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Author>war_room_operator</Author>
+    <Description>Daily WarRoom audit-runner pre-flight. Runs `bin\install_ALL_TASKS_AUDIT.bat` at 06:00 every day via `bin\dist\run_audit_subprocess.exe` (the fup-3 cross-platform deadlock-free wrapper, PACKAGED via PyInstaller --onefile in cont.16-fup-6 so Python is NOT required at runtime). Output redirected to `tmp\_wrap_out.txt` (auto-ISO-timestamped via --log-timestamp). Install with `bin\install_AUDIT_scheduler.bat` (elevated cmd.exe). Build the .exe ONCE via `bin\build_audit_exe.bat --rebuild` before first install. 1 minute before WarRoomNightlySnapshot (23:55) and WarRoomDailyTrendCompare (23:59) so audit failures surface during the day instead of breaking the overnight pipeline chronologically.</Description>
+  </RegistrationInfo>
+  <Triggers>
+    <CalendarTrigger>
+      <StartBoundary>2026-07-10T06:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+      <ScheduleByDay>
+        <DaysInterval>1</DaysInterval>
+      </ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>SYSTEM</UserId>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <StopOnIdleEnd>false</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT5M</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>bin\dist\run_audit_subprocess.exe</Command>
+      <Arguments>--cmd "bin\install_ALL_TASKS_AUDIT.bat" --log-timestamp --keep</Arguments>
+      <WorkingDirectory>C:\Users\karma</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>

@@ -121,6 +121,7 @@ python EMPIRE_COMMAND_CENTER.py
 | Aether Core | `AETHER_CORE_SYSTEM_INDEX.md` |
 | n8n Automation | `N8N_AUTOMATION_SYSTEM_INDEX.md` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

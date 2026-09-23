@@ -31,12 +31,14 @@
   th { opacity: 0.55; font-weight: 500; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; }
   tr:hover td { background: rgba(99,102,241,0.05); }
   .status-ok { color: #34d399; }
+  .status-degraded { color: #fbbf24; }
   .status-refused, .status-failed { color: #f87171; }
   .status-started { color: #60a5fa; }
   .status-skipped, .status-noop { color: #94a3b8; }
   .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px;
           font-weight: 500; background: rgba(148,163,184,0.12); }
   .pill.status-ok { background: rgba(52,211,153,0.15); color: #34d399; }
+  .pill.status-degraded { background: rgba(251,191,36,0.15); color: #fbbf24; }
   .pill.status-refused, .pill.status-failed { background: rgba(248,113,113,0.15); color: #f87171; }
   .pill.status-started { background: rgba(96,165,250,0.15); color: #60a5fa; }
   .pill.status-skipped, .pill.status-noop { background: rgba(148,163,184,0.15); color: #94a3b8; }
@@ -66,6 +68,15 @@
 <main>
   <section class="card">
     <div class="refresh-bar">
+      <h2>Autonomous Master Status</h2>
+      <span class="bar"></span>
+    </div>
+    <div id="autonomous-meta" class="meta"></div>
+    <div id="autonomous-status">Loading...</div>
+  </section>
+
+  <section class="card">
+    <div class="refresh-bar">
       <h2>SLEEP_TRIPLE Audit Log</h2>
       <span class="bar"></span>
     </div>
@@ -90,7 +101,7 @@ const REFRESH_MS = 10000;
 const AUDIT_FIELDS = ['ts','module','status','task','reason','data_source','product_path','script_path'];
 const LEDGER_FIELDS = ['ts','event','amount_aud','note'];
 const STATUS_CLASS = {
-  ok: 'status-ok', refused: 'status-refused', failed: 'status-failed',
+  ok: 'status-ok', degraded: 'status-degraded', refused: 'status-refused', failed: 'status-failed',
   started: 'status-started', skipped: 'status-skipped', noop: 'status-noop'
 };
 
@@ -147,7 +158,7 @@ async function refreshAudit() {
   document.getElementById('audit-meta').innerHTML = `
     <div><span class="k">Total rows</span><span class="v">${rows.length}</span></div>
     <div><span class="k">Latest</span><span class="v">${started_pretty}</span></div>
-    <div><span class="k">OK</span><span class="v">${byStatus.ok||0}</span></div>
+    <div><span class="k">OK</span><span class="v">${byStatus.ok||0}</span></div><div><span class="k">DEGRADED</span><span class="v">${byStatus.degraded||0}</span></div>
     <div><span class="k">Refused</span><span class="v">${byStatus.refused||0}</span></div>
   `;
   document.getElementById('audit-table').innerHTML = renderRows(rows, AUDIT_FIELDS);
@@ -166,9 +177,33 @@ async function refreshLedger() {
   document.getElementById('ledger-table').innerHTML = renderRows(rows, LEDGER_FIELDS);
 }
 
+async function refreshAutonomous() {
+  // NOTE: loads the full audit log; for large logs, add a server-side
+  // tail endpoint (e.g. /audit.jsonl?tail=200) and consume that instead.
+  const rows = await loadJsonl('/audit.jsonl');
+  const master = rows.reverse().find(r => r.module === 'autonomous_master');
+  const container = document.getElementById('autonomous-status');
+  if (!master) {
+    container.innerHTML = '<div class="empty">No autonomous master run recorded yet.</div>';
+    document.getElementById('autonomous-meta').innerHTML = '';
+    return;
+  }
+  const ts = master.ts ? new Date(master.ts).toLocaleString() : '—';
+  const statusClass = STATUS_CLASS[master.status] || '';
+  document.getElementById('autonomous-meta').innerHTML = `
+    <div><span class="k">Last Run</span><span class="v">${ts}</span></div>
+    <div><span class="k">Dry Run</span><span class="v">${master.dry_run === false ? 'No' : 'Yes'}</span></div>
+    <div><span class="k">Preflight</span><span class="v">rc=${master.preflight_rc ?? '—'}</span></div>
+    <div><span class="k">Orchestrator</span><span class="v">rc=${master.orchestrator_rc ?? '—'}</span></div>
+  `;
+  container.innerHTML = `<p>Status: ${statusPill(master.status)}</p>
+    <p>Preflight summary: ${fmtCell(master.preflight_summary)}</p>
+    <p>Orchestrator summary: ${fmtCell(master.orchestrator_summary)}</p>`;
+}
+
 async function refresh() {
   document.getElementById('last-refresh').textContent = 'refreshed ' + new Date().toLocaleTimeString();
-  await Promise.all([refreshAudit(), refreshLedger()]);
+  await Promise.all([refreshAutonomous(), refreshAudit(), refreshLedger()]);
 }
 
 refresh();

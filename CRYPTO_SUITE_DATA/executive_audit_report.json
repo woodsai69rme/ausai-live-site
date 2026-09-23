@@ -1,0 +1,28 @@
+{
+  "reportId": "AUDIT_1789952295",
+  "timestamp": "2026-09-21T00:58:15.581615+00:00",
+  "accountType": "Multi-Tier Whale Copy Fleet ($10K Main / $1K Micro)",
+  "portfolioSummary": {
+    "initialCapital": 250.0,
+    "currentCashBalance": 179.8,
+    "grossRealizedProfit": 89.3,
+    "exchangeFeesPaidUsd": 0,
+    "netProfitAfterFees": 89.3,
+    "winRate": "108.3%",
+    "totalCopiedTrades": 12,
+    "winningTrades": 13,
+    "losingTrades": -1,
+    "profitFactor": 89.3,
+    "sharpeRatio": 4.99
+  },
+  "mevProtectionStats": {
+    "jitoSolanaBundlesExecuted": 18,
+    "flashbotsProtectTxs": 12,
+    "estimatedFrontrunLossPrevented": "$1,420.00 USD"
+  },
+  "taxAccounting": {
+    "taxYear": 2026,
+    "taxableShortTermGainsUsd": 89.3,
+    "allowableFeeDeductionsUsd": 0
+  }
+}

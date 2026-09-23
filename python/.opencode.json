@@ -1,0 +1,68 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode-go/glm-5",
+  "description": "Archon - AI Knowledge Management System with MCP Integration",
+  "skills": [
+    "fastapi-templates",
+    "python-testing-patterns",
+    "python-async-patterns",
+    "python-type-safety",
+    "python-error-handling",
+    "supabase-db",
+    "webapp-testing",
+    "mcp-builder",
+    "rag-implementation",
+    "api-design-principles"
+  ],
+  "mcp": {
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
+    }
+  },
+  "context": {
+    "projectName": "Archon",
+    "description": "Microservices-based knowledge management system with MCP protocol integration",
+    "techStack": {
+      "frontend": ["React", "TypeScript", "Vite", "TailwindCSS"],
+      "backend": ["Python", "FastAPI", "Socket.IO", "PydanticAI"],
+      "database": ["Supabase", "PostgreSQL", "pgvector"],
+      "infrastructure": ["Docker", "Docker Compose"]
+    },
+    "ports": {
+      "frontend": 3737,
+      "main_server": 8181,
+      "mcp_server": 8051,
+      "agents_service": 8052
+    },
+    "conventions": {
+      "style": "PEP 8, strict typing",
+      "testing": "pytest withfixtures",
+      "error_handling": "Fail fast, detailed errors",
+      "services": "HTTP communication, no gRPC"
+    },
+    "alpha_principles": {
+      "backward_compatibility": false,
+      "error_handling": "Fail fast with detailed errors",
+      "data_validation": "Never accept corrupted data",
+      "dependencies": "Fail immediately on missing services"
+    }
+  },
+  "settings": {
+    "maxTokens": 8192,
+    "temperature": 0.3,
+    "streaming": true
+  }
+}

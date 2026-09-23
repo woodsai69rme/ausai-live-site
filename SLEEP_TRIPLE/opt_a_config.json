@@ -1,17 +1,23 @@
 {
   "label": "AI Digital Product Factory",
-  "ollama_model_preference": "qwen2.5-coder:latest",
+  "ollama_model_preference": "ornith:9b",
   "openrouter_model_fallback": "qwen/qwen3-next-80b-a3b-instruct:free",
   "categories": ["ai_prompts", "code_snippets", "design_assets"],
   "products_per_night": 1,
   "comfyui_url": "http://127.0.0.1:8188",
   "enable_comfy_cover": false,
   "gumroad_listed_categories": ["ai_prompts", "code_snippets"],
+  "gumroad_api_key": "REPLACE_WITH_GUMROAD_API_KEY",
   "default_topic_pool": [
     "AI productivity for small business owners",
     "Australian freelance workflows with free AI",
     "Zero-cost markdown CMS setups",
     "Crypto yield farming explained simply",
-    "Notion templates for solo founders"
+    "Notion templates for solo founders",
+    "Python FastAPI boilerplate patterns",
+    "n8n workflow automation recipes",
+    "YouTube Shorts script formulas",
+    "ChatGPT jailbreak prompts for developers",
+    "AI business card templates SVG"
   ]
 }

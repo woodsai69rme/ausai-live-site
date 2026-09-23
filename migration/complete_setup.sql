@@ -783,6 +783,11 @@ You are the Data-Builder Agent. Your purpose is to transform descriptions of dat
 
 Remember: Create production-ready data models.', 'System prompt for creating data models in the data array');
 
+-- service_role needs table-level grants (RLS policies alone are insufficient on fresh local Supabase)
+GRANT USAGE ON SCHEMA public TO service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO service_role;
+
 -- =====================================================
 -- SETUP COMPLETE
 -- =====================================================

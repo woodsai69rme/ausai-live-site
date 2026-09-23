@@ -36,8 +36,11 @@ def reset_auth_middleware_state():
     auth_middleware._supabase_client = None
 
 
-def _set_supabase_env(url="https://test.supabase.co", key="test-key"):
-    """Helper to set valid Supabase env vars for tests that need them."""
+def _set_supabase_env(
+    url="https://abcdefgh.supabase.co",
+    key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.lazy-init-test-key",
+):
+    """Helper to set non-placeholder Supabase env vars for lazy-init tests."""
     os.environ["SUPABASE_URL"] = url
     os.environ["SUPABASE_SERVICE_KEY"] = key
 

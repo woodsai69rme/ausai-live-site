@@ -20,7 +20,7 @@ Multi-channel fanout:
 
 Closed enums:
     EXEC_STATUS    = (started, ok, skipped, refused, noop, failed)
-    ALERT_CHANNEL  = (discord, telegram, slack, pushover)
+    ALERT_CHANNEL  = (discord, telegram, slack, pushover, ntfy)
     ALERT_TRIGGER  = (actionable_spread, audit_failure, morning_digest)
     ALERT_TIER     = (info, warning, critical)
 
@@ -34,6 +34,9 @@ Env vars:
   SLACK_WEBHOOK_URL        e.g. https://hooks.slack.com/services/T.../B.../...
   PUSHOVER_APP_TOKEN       app-level token from pushover.net
   PUSHOVER_USER_KEY        user-level key from pushover.net
+  NTFY_TOPIC               ntfy.sh topic; required for the ntfy channel
+  NTFY_SERVER              override URL (e.g. https://ntfy.example.com); default https://ntfy.sh
+  NTFY_USER + NTFY_PASSWORD optional Basic-Auth for private topics on self-hosted ntfy
 """
 from __future__ import annotations
 
@@ -58,18 +61,23 @@ CONFIG_PATH = ROOT / "opt_d_config.json"
 AUDIT_LOG = ROOT / "SLEEP_TRIPLE_AUDIT.jsonl"
 MASTER = ROOT / "sleep_config.json"
 
-EXEC_STATUS = ("started", "ok", "skipped", "refused", "noop", "failed")
-ALERT_CHANNEL = ("discord", "telegram", "slack", "pushover")
+EXEC_STATUS = ("started", "ok", "degraded", "skipped", "refused", "noop", "failed")
+ALERT_CHANNEL = ("discord", "telegram", "slack", "pushover", "ntfy")
 ALERT_TRIGGER = ("actionable_spread", "audit_failure", "morning_digest")
 ALERT_TIER = ("info", "warning", "critical")
 
 # Channel -> list of env var names that must ALL be present for the channel
 # to be considered "set". Used by _detect_set_channels() for fanout.
+# ntfy.sh: NTFY_TOPIC is the only required var; the public server at
+# https://ntfy.sh accepts anonymous POSTs. Override via NTFY_SERVER for a
+# self-hosted instance; set NTFY_USER + NTFY_PASSWORD to authenticate to a
+# private topic on a protected server.
 CHANNEL_ENV_REQUIREMENTS = {
     "discord":   ("DISCORD_WEBHOOK_URL",),
     "telegram":  ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"),
     "slack":     ("SLACK_WEBHOOK_URL",),
     "pushover":  ("PUSHOVER_APP_TOKEN", "PUSHOVER_USER_KEY"),
+    "ntfy":      ("NTFY_TOPIC",),
 }
 
 # Windows Python 3.12 ships an older CA store that trips BasicConstraints-not-
@@ -90,7 +98,8 @@ def is_rule_8(p: Path) -> bool:
 
 
 def load_config() -> dict:
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    from env_bridge import load_config as _load
+    return _load(CONFIG_PATH)
 
 
 def load_master() -> dict:
@@ -269,6 +278,28 @@ def build_pushover_payload(headline: str, lines: list) -> dict:
     return {"message": (headline + "\n" + "\n".join(lines))[:1024]}
 
 
+def build_ntfy_payload(tier: str, headline: str, lines: list, trigger: str) -> dict:
+    """ntfy.sh accepts the message body as the raw POST payload. Title,
+    Priority, and Tags metadata travel in HTTP headers -- we stash them as
+    payload keys here so send_alert's ntfy branch can read them via
+    payload[...] without re-referencing scope names that aren't in its
+    local scope (avoids NameError at runtime; cont.16-fup-11 retro fix).
+    Body is the headline prefix + lines; truncated at 4096 chars (ntfy.sh
+    public-server default message-body limit)."""
+    body_lines = [headline, ""] + lines
+    priority = {
+        "info": "default",
+        "warning": "high",
+        "critical": "urgent",
+    }.get(tier, "default")
+    return {
+        "message": "\n".join(body_lines)[:4096],
+        "title": headline[:64],
+        "priority": priority,
+        "tags": [trigger or "sleeptriple"],
+    }
+
+
 def build_payload(channel: str, tier: str, headline: str, lines: list, trigger: str) -> dict:
     if channel == "discord":
         return build_discord_payload(tier, headline, lines, trigger)
@@ -278,6 +309,8 @@ def build_payload(channel: str, tier: str, headline: str, lines: list, trigger: 
         return build_slack_payload(headline, lines)
     if channel == "pushover":
         return build_pushover_payload(headline, lines)
+    if channel == "ntfy":
+        return build_ntfy_payload(tier, headline, lines, trigger)
     raise ValueError(f"unknown channel {channel}")
 
 
@@ -328,6 +361,55 @@ def send_alert(channel: str, payload: dict, dry_run: bool) -> tuple:
             {"token": token, "user": user, **payload},
         )
         return (rc == 200), f"http={rc} body={body[:160]}", rc
+
+    if channel == "ntfy":
+        # ntfy.sh accepts POST to <server>/<topic> with the raw message body
+        # and metadata in headers. Title / Priority / Tags are the public-
+        # server knobs; we wire them via build_ntfy_payload -> payload[...]
+        # so this branch never references scope names (cont.16-fup-11 retro
+        # fix prevents NameError at runtime).
+        topic = os.environ.get("NTFY_TOPIC")
+        if not topic:
+            return False, "NTFY_TOPIC env var not set", _STATUS_PERMANENT_CONFIG_ERROR
+        server = os.environ.get("NTFY_SERVER", "https://ntfy.sh").rstrip("/")
+        url = f"{server}/{topic}"
+        headers = {
+            "Title": payload.get("title", "")[:64],
+            "Priority": payload.get("priority", "default"),
+            "Tags": payload.get("tags", ["sleeptriple"]),
+            "User-Agent": "SLEEP_TRIPLE/1.0",
+            "Content-Type": "text/plain; charset=utf-8",
+        }
+        auth_user = os.environ.get("NTFY_USER")
+        auth_pw = os.environ.get("NTFY_PASSWORD")
+        if auth_user and auth_pw:
+            import base64
+            token = base64.b64encode(
+                f"{auth_user}:{auth_pw}".encode("utf-8")
+            ).decode("ascii")
+            headers["Authorization"] = f"Basic {token}"
+        raw_body = payload["message"].encode("utf-8")
+        req = urllib.request.Request(url, data=raw_body, headers=headers, method="POST")
+        # Mirror https_post_json's verified-first / unverified-fallback TLS
+        # pattern so ntfy.sh's valid cert is honoured before we down-grade.
+        last_ssl = None
+        for label, ctx in (("verified", None), ("unverified", _UNVERIFIED_CTX)):
+            try:
+                with urllib.request.urlopen(req, timeout=10.0, context=ctx) as resp:
+                    body_bytes = resp.read()[:160]
+                    return (
+                        resp.status == 200,
+                        f"http={resp.status} body={body_bytes.decode('utf-8', errors='replace')}",
+                        resp.status,
+                    )
+            except urllib.error.URLError as exc:
+                if isinstance(exc.reason, ssl.SSLError) or "CERTIFICATE_VERIFY_FAILED" in str(exc):
+                    last_ssl = exc
+                    continue
+                return False, f"{exc.__class__.__name__}: {exc}", -1
+            except (OSError, TimeoutError) as exc:
+                return False, f"{exc.__class__.__name__}: {exc}", -1
+        return False, f"SSL fallback failed: {last_ssl}", -1
 
     return False, f"unknown channel {channel}", _STATUS_PERMANENT_CONFIG_ERROR
 

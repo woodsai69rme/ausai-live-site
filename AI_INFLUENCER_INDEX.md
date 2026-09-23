@@ -65,6 +65,7 @@ ai_influencer_factory.py
 | n8n Automation | `N8N_AUTOMATION_SYSTEM_INDEX.md` |
 | Voice PA | `VOICE_PA_SYSTEM_INDEX.md` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
+| 🔧 Reference Docs (NEW 2026-07-09) | [`REFERENCE_DOCS_INDEX.md`](REFERENCE_DOCS_INDEX.md) |
 
 ---
 

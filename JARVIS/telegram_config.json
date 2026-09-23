@@ -1,0 +1,5 @@
+{
+  "bot_token": "",
+  "chat_id": "",
+  "instructions": "To receive real mobile push notifications: 1. Create a bot with @BotFather on Telegram. 2. Paste token in bot_token. 3. Message @userinfobot to get your numeric ID and paste into chat_id."
+}

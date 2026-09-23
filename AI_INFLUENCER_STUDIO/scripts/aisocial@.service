@@ -1,0 +1,18 @@
+[Unit]
+Description=AI Influencer Studio scheduler daemon for %I
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%I
+WorkingDirectory=/home/%I/AI_INFLUENCER_STUDIO
+Environment="PYTHONUNBUFFERED=1"
+# Create /etc/default/aisocial and set AISTUDIO_API_KEY there.
+EnvironmentFile=-/etc/default/aisocial
+ExecStart=/home/%I/.local/bin/aisocial daemon --interval 60
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -196,6 +196,7 @@ First 3 customers get lifetime Pilot rate. Product: AI code review as a service 
 | Voice PA | `VOICE_PA_SYSTEM_INDEX.md` |
 | AI Tools Dashboard | `AI_TOOLS_DASHBOARD.html` |
 | All systems | `CHANGELOG.md` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

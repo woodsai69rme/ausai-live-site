@@ -246,6 +246,7 @@ def update_source_info(
     tags: list[str] | None = None,
     update_frequency: int = 7,
     original_url: str | None = None,
+    filename: str | None = None,
 ):
     """
     Update or insert source information in the sources table.
@@ -280,6 +281,8 @@ def update_source_info(
             }
             if original_url:
                 metadata["original_url"] = original_url
+            if filename:
+                metadata["filename"] = filename
 
             # Update existing source (preserving title)
             result = (
@@ -307,6 +310,8 @@ def update_source_info(
             metadata["update_frequency"] = update_frequency
             if original_url:
                 metadata["original_url"] = original_url
+            if filename:
+                metadata["filename"] = filename
 
             # Insert new source
             client.table("archon_sources").insert({

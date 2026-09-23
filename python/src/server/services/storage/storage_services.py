@@ -133,6 +133,12 @@ class DocumentStorageService(BaseStorageService):
                     source_id,
                     source_summary,
                     total_word_count,
+                    file_content[:5000],
+                    knowledge_type,
+                    tags,
+                    7,
+                    None,
+                    filename,
                 )
 
                 await report_progress("Storing document chunks...", 70)

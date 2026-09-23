@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Production Pipeline — AI Influencer Studio</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --surface: #ffffff;
+      --text: #1f1f1f;
+      --muted: #5f6368;
+      --border: #dadce0;
+      --ok: #188038;
+      --warn: #b06000;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: var(--text);
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header h1 { font-size: 18px; margin: 0; }
+    header .badge {
+      margin-left: auto;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: #f1e9fd;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    main { padding: 24px; max-width: 960px; margin: 0 auto; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .card h2 { font-size: 14px; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); }
+    .stat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f1f3f4; font-size: 13px; }
+    .stat:last-child { border-bottom: 0; }
+    .stat .label { color: var(--muted); }
+    .stat .value { font-weight: 600; }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .empty { color: var(--muted); font-size: 13px; padding: 6px 0; }
+    .log {
+      font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+      font-size: 12px;
+      background: #f1f3f4;
+      border-radius: 6px;
+      padding: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 8px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Production Pipeline</h1>
+    <span class="badge" id="statusBadge">—</span>
+  </header>
+  <main>
+    <div class="grid">
+      <div class="card">
+        <h2>🎬 Plans</h2>
+        <div id="plans"><div class="empty">Loading…</div></div>
+      </div>
+      <div class="card">
+        <h2>📤 Drive upload</h2>
+        <div id="gdrive"><div class="empty">Loading…</div></div>
+      </div>
+      <div class="card">
+        <h2>▶️ YouTube publish</h2>
+        <div id="youtube"><div class="empty">Loading…</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h2>Flow status</h2>
+      <div class="log" id="log">Waiting for status…</div>
+    </div>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function planHtml(plans) {
+      if (!plans.length) return '<div class="empty">No master plans saved yet.</div>';
+      return plans.map((p) => `
+        <div class="stat">
+          <span class="label" title="${p.path}">${p.name}</span>
+          <span class="value">${p.songs} songs${p.continuity_warnings.length ? ' <span class="warn">⚠ ' + p.continuity_warnings.length + '</span>' : ''}</span>
+        </div>`).join('');
+    }
+
+    function gdriveHtml(g) {
+      if (g.error) return '<div class="empty">' + g.error + '</div>';
+      const uploaded = g.progress?.uploaded ?? 0;
+      return `
+        <div class="stat"><span class="label">Pending</span><span class="value">${g.pending ?? 0}</span></div>
+        <div class="stat"><span class="label">Done</span><span class="value">${g.done ?? 0}</span></div>
+        <div class="stat"><span class="label">Uploaded this run</span><span class="value">${uploaded}</span></div>
+        <div class="stat"><span class="label">State</span><span class="value ${g.running ? 'ok' : ''}">${g.running ? 'RUNNING' : 'idle'}</span></div>`;
+    }
+
+    function youtubeHtml(y) {
+      if (!y.records.length) return '<div class="empty">No publishes yet.</div>';
+      return y.records.map((r) => `
+        <div class="stat">
+          <span class="label" title="${r.uploaded_at}">${r.title || r.video_id}</span>
+          <span class="value"><a href="${r.url}" target="_blank" rel="noopener">${r.video_id}</a></span>
+        </div>`).join('') + (y.running ? '<div class="stat"><span class="label">State</span><span class="value ok">RUNNING</span></div>' : '');
+    }
+
+    async function refresh() {
+      try {
+        const res = await fetch("/api/pipeline/status");
+        const data = await res.json();
+        $("plans").innerHTML = planHtml(data.plans || []);
+        $("gdrive").innerHTML = gdriveHtml(data.gdrive || {});
+        $("youtube").innerHTML = youtubeHtml(data.youtube || {});
+        const active = [];
+        if (data.gdrive?.running) active.push("Drive upload");
+        if (data.youtube?.running) active.push("YouTube publish");
+        if (data.youtube?.last_error) active.push("publish error");
+        $("statusBadge").textContent = active.length ? active.join(" · ") : "IDLE";
+        const lines = [];
+        lines.push(`plans: ${(data.plans || []).length} · songs: ${(data.plans || []).reduce((n, p) => n + p.songs, 0)}`);
+        lines.push(`drive: ${data.gdrive?.pending ?? 0} pending / ${data.gdrive?.done ?? 0} done`);
+        lines.push(`publish records: ${(data.youtube?.records || []).length} recent`);
+        if (data.youtube?.last_error) lines.push(`last publish error: ${data.youtube.last_error}`);
+        $("log").textContent = lines.join("\n");
+      } catch (err) {
+        $("log").textContent = "Status fetch failed: " + err;
+      }
+    }
+
+    refresh();
+    setInterval(refresh, 5000);
+  </script>
+</body>
+</html>

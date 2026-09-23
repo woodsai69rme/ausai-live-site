@@ -61,12 +61,22 @@ class MCPServerManager:
         self._operation_lock = asyncio.Lock()  # Prevent concurrent start/stop operations
         self._last_operation_time = 0
         self._min_operation_interval = 2.0  # Minimum 2 seconds between operations
+        self._docker_init_attempted = False
+
+    def _ensure_docker_client(self) -> bool:
+        """Lazy Docker init — avoids blocking server import when Docker is slow."""
+        if self.docker_client is not None:
+            return True
+        if self._docker_init_attempted:
+            return False
+        self._docker_init_attempted = True
         self._initialize_docker_client()
+        return self.docker_client is not None
 
     def _initialize_docker_client(self):
         """Initialize Docker client and get container reference."""
         try:
-            self.docker_client = docker.from_env()
+            self.docker_client = docker.from_env(timeout=5)
             try:
                 self.container = self.docker_client.containers.get(self.container_name)
                 mcp_logger.info(f"Found Docker container: {self.container_name}")
@@ -79,7 +89,7 @@ class MCPServerManager:
 
     def _get_container_status(self) -> str:
         """Get the current status of the MCP container."""
-        if not self.docker_client:
+        if not self._ensure_docker_client():
             return "docker_unavailable"
 
         try:
@@ -136,7 +146,7 @@ class MCPServerManager:
         with safe_span("mcp_server_start") as span:
             safe_set_attribute(span, "action", "start_server")
 
-            if not self.docker_client:
+            if not self._ensure_docker_client():
                 mcp_logger.error("Docker client not available")
                 return {
                     "success": False,
@@ -257,7 +267,7 @@ class MCPServerManager:
         with safe_span("mcp_server_stop") as span:
             safe_set_attribute(span, "action", "stop_server")
 
-            if not self.docker_client:
+            if not self._ensure_docker_client():
                 mcp_logger.error("Docker client not available")
                 return {
                     "success": False,

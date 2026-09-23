@@ -1,37 +1,66 @@
 {
-  "scan_time": "2026-06-29T02:55:43.414473",
+  "scan_time": "2026-06-30T04:25:41.233624",
   "services_checked": 4,
-  "healthy": 4,
-  "down": 0,
+  "healthy": 0,
+  "down": 4,
   "health_results": [
     {
       "name": "AI Army",
       "url": "http://localhost:8001/",
-      "checked_at": "2026-06-29T02:55:35.747515",
-      "status": "healthy",
-      "response_time_ms": 3079.77
+      "checked_at": "2026-06-30T04:25:41.087784",
+      "status": "down",
+      "response_time_ms": null,
+      "error": "Version mismatch: this is the 'cffi' package version 2.0.0, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Local\\\\hermes\\\\hermes-agent\\\\venv\\\\Lib\\\\site-packages\\\\cffi\\\\api.py'.  When we import the top-level '_cffi_backend' extension module, we get version 1.17.1, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages\\\\_cffi_backend.cp313-win_amd64.pyd'.  The two versions should be equal; check your installation."
     },
     {
       "name": "n8n",
       "url": "http://localhost:5678/",
-      "checked_at": "2026-06-29T02:55:38.830040",
-      "status": "healthy",
-      "response_time_ms": 774.49
+      "checked_at": "2026-06-30T04:25:41.201859",
+      "status": "down",
+      "response_time_ms": null,
+      "error": "Version mismatch: this is the 'cffi' package version 2.0.0, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Local\\\\hermes\\\\hermes-agent\\\\venv\\\\Lib\\\\site-packages\\\\cffi\\\\api.py'.  When we import the top-level '_cffi_backend' extension module, we get version 1.17.1, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages\\\\_cffi_backend.cp313-win_amd64.pyd'.  The two versions should be equal; check your installation."
     },
     {
       "name": "ComfyUI",
       "url": "http://localhost:8188/",
-      "checked_at": "2026-06-29T02:55:39.607571",
-      "status": "healthy",
-      "response_time_ms": 2765.94
+      "checked_at": "2026-06-30T04:25:41.212528",
+      "status": "down",
+      "response_time_ms": null,
+      "error": "Version mismatch: this is the 'cffi' package version 2.0.0, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Local\\\\hermes\\\\hermes-agent\\\\venv\\\\Lib\\\\site-packages\\\\cffi\\\\api.py'.  When we import the top-level '_cffi_backend' extension module, we get version 1.17.1, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages\\\\_cffi_backend.cp313-win_amd64.pyd'.  The two versions should be equal; check your installation."
     },
     {
       "name": "Ollama",
       "url": "http://localhost:11434/api/tags",
-      "checked_at": "2026-06-29T02:55:42.375856",
-      "status": "healthy",
-      "response_time_ms": 1034.5
+      "checked_at": "2026-06-30T04:25:41.224477",
+      "status": "down",
+      "response_time_ms": null,
+      "error": "Version mismatch: this is the 'cffi' package version 2.0.0, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Local\\\\hermes\\\\hermes-agent\\\\venv\\\\Lib\\\\site-packages\\\\cffi\\\\api.py'.  When we import the top-level '_cffi_backend' extension module, we get version 1.17.1, located in 'C:\\\\Users\\\\karma\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages\\\\_cffi_backend.cp313-win_amd64.pyd'.  The two versions should be equal; check your installation."
     }
   ],
-  "heal_actions": []
+  "heal_actions": [
+    {
+      "service": "AI Army",
+      "planned_at": "2026-06-30T04:25:41.201813",
+      "action": "restart python server.py",
+      "result": "plan_created"
+    },
+    {
+      "service": "n8n",
+      "planned_at": "2026-06-30T04:25:41.212493",
+      "action": "docker-compose restart",
+      "result": "plan_created"
+    },
+    {
+      "service": "ComfyUI",
+      "planned_at": "2026-06-30T04:25:41.224427",
+      "action": "restart ComfyUI server",
+      "result": "plan_created"
+    },
+    {
+      "service": "Ollama",
+      "planned_at": "2026-06-30T04:25:41.233590",
+      "action": "restart Ollama service",
+      "result": "plan_created"
+    }
+  ]
 }

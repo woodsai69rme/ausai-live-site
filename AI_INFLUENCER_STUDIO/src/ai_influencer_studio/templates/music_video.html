@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Influencer Studio — Music Video Lab</title>
+    <style>
+        :root {
+            --bg: #0f0f13;
+            --surface: #16161d;
+            --surface-2: #1e1e28;
+            --text: #f0f0f5;
+            --muted: #a0a0b0;
+            --accent: #8b5cf6;
+            --accent-2: #ec4899;
+            --radius: 12px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        nav {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: var(--surface);
+            border-bottom: 1px solid #2a2a35;
+        }
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        nav a:hover { opacity: 1; }
+        .container { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+        h1 { margin-bottom: 0.5rem; }
+        .subtitle { color: var(--muted); margin-bottom: 2rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid #2a2a35;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+        .card h2 { margin-top: 0; font-size: 1.2rem; }
+        label { display: block; margin-bottom: 0.5rem; color: var(--muted); font-weight: 600; }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background: var(--surface-2);
+            border: 1px solid #2a2a35;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        textarea { min-height: 120px; resize: vertical; }
+        button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: 1px solid transparent;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button.secondary {
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        button.secondary:hover { background: rgba(139, 92, 246, 0.1); }
+        button.danger {
+            background: transparent;
+            color: #ef4444;
+            border-color: #ef4444;
+        }
+        button.danger:hover { background: rgba(239, 68, 68, 0.1); }
+        .result {
+            display: none;
+            margin-top: 1rem;
+            background: var(--surface-2);
+            border: 1px solid #2a2a35;
+            border-radius: var(--radius);
+            padding: 1rem;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow: auto;
+        }
+        .loading { opacity: 0.6; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/factory">Factory</a>
+        <a href="/calendar">Calendar</a>
+        <a href="/music-video">Music Video</a>
+    </nav>
+    <div class="container">
+        <h1>Music Video Lab</h1>
+        <p class="subtitle">Research trends, plan songs, and run the ComfyUI pipeline</p>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Research</h2>
+                <form id="researchForm">
+                    <label for="vram">VRAM (GB)</label>
+                    <input type="number" id="vram" name="vram" value="8" min="4" max="64">
+
+                    <label for="max_results">Max Trend Results</label>
+                    <input type="number" id="max_results" name="max_results" value="10" min="1" max="50">
+
+                    <button type="submit">Research Generators & Trends</button>
+                </form>
+                <pre id="researchResult" class="result"></pre>
+            </div>
+
+            <div class="card">
+                <h2>Plan a Song</h2>
+                <form id="planForm">
+                    <label for="song_name">Song Name</label>
+                    <input type="text" id="song_name" name="song_name" required>
+
+                    <label for="audio_path">Audio Path</label>
+                    <input type="text" id="audio_path" name="audio_path" required>
+                    <button type="button" id="analyzeAudioBtn" class="secondary">Analyze Audio</button>
+
+                    <label for="genre">Genre</label>
+                    <input type="text" id="genre" name="genre">
+
+                    <label for="mood">Mood</label>
+                    <input type="text" id="mood" name="mood">
+
+                    <label for="duration">Duration (seconds)</label>
+                    <input type="number" id="duration" name="duration" value="180" min="30" max="600">
+
+                    <label for="bpm">BPM</label>
+                    <input type="number" id="bpm" name="bpm" value="120" min="1" max="300" step="0.1">
+
+                    <label for="character_ref">Character Reference Image (path)</label>
+                    <input type="text" id="character_ref" name="character_ref" placeholder="path/to/character.png">
+
+                    <label for="generation_mode">Generation Mode</label>
+                    <select id="generation_mode" name="generation_mode">
+                        <option value="full">Full pipeline</option>
+                        <option value="clip_only">Generate clips only</option>
+                        <option value="assembly_only">Assemble existing clips</option>
+                    </select>
+
+                    <button type="submit">Create Master Plan</button>
+                </form>
+                <pre id="planResult" class="result"></pre>
+            </div>
+
+            <div class="card">
+                <h2>Execute Plan</h2>
+                <form id="executeForm">
+                    <label for="plan">Saved Plan</label>
+                    <select id="plan" name="plan" required>
+                        <option value="">Select a plan...</option>
+                    </select>
+                    <button type="button" id="refreshPlansBtn" class="secondary">Refresh Plans</button>
+
+                    <label for="song_index">Song Index</label>
+                    <input type="number" id="song_index" name="song_index" value="0" min="0">
+
+                    <label for="execute_generation_mode">Generation Mode (override)</label>
+                    <select id="execute_generation_mode" name="execute_generation_mode">
+                        <option value="">Use plan default</option>
+                        <option value="full">Full pipeline</option>
+                        <option value="clip_only">Generate clips only</option>
+                        <option value="assembly_only">Assemble existing clips</option>
+                    </select>
+
+                    <label for="ws_api_key">API Key (optional)</label>
+                    <input type="password" id="ws_api_key" name="ws_api_key" placeholder="Only needed if AISTUDIO_API_KEY is set">
+
+                    <button type="submit" disabled>Run ComfyUI Pipeline</button>
+                </form>
+                <pre id="executeResult" class="result"></pre>
+            </div>
+
+            <div class="card">
+                <h2>Repurpose Video</h2>
+                <form id="repurposeForm">
+                    <label for="repurpose_input_path">Input Video Path</label>
+                    <input type="text" id="repurpose_input_path" name="input_path" required>
+
+                    <label for="repurpose_platform">Platform</label>
+                    <select id="repurpose_platform" name="platform">
+                        <option value="tiktok">TikTok</option>
+                        <option value="instagram">Instagram Reels</option>
+                        <option value="youtube">YouTube Shorts</option>
+                    </select>
+
+                    <label for="repurpose_start">Start (seconds)</label>
+                    <input type="number" id="repurpose_start" name="start" value="0" min="0" step="0.1">
+
+                    <label for="repurpose_duration">Duration (seconds, 0 = full)</label>
+                    <input type="number" id="repurpose_duration" name="duration" value="0" min="0" step="0.1">
+
+                    <label for="repurpose_caption">Caption</label>
+                    <input type="text" id="repurpose_caption" name="caption">
+
+                    <button type="submit">Create Vertical Clip</button>
+                </form>
+                <pre id="repurposeResult" class="result"></pre>
+            </div>
+
+            <div class="card">
+                <h2>Batch Repurpose</h2>
+                <form id="batchRepurposeForm">
+                    <label for="batch_input_path">Input Video Path</label>
+                    <input type="text" id="batch_input_path" name="input_path" required>
+
+                    <label for="batch_platforms">Platforms (comma-separated)</label>
+                    <input type="text" id="batch_platforms" name="platforms" value="tiktok,instagram,youtube">
+
+                    <label for="batch_clip_duration">Clip Duration (seconds)</label>
+                    <input type="number" id="batch_clip_duration" name="clip_duration" value="15" min="1" step="0.1">
+
+                    <button type="submit">Generate Multi-Platform Clips</button>
+                </form>
+                <pre id="batchRepurposeResult" class="result"></pre>
+            </div>
+
+            <div class="card">
+                <h2>Manage Plans</h2>
+                <form id="manageForm">
+                    <label for="manage_plan">Saved Plan</label>
+                    <select id="manage_plan" name="manage_plan" required>
+                        <option value="">Select a plan...</option>
+                    </select>
+
+                    <label for="new_name">New Name</label>
+                    <input type="text" id="new_name" name="new_name">
+
+                    <button type="button" id="renamePlanBtn" class="secondary">Rename</button>
+                    <button type="button" id="deletePlanBtn" class="danger" style="margin-left: 0.5rem;">Delete</button>
+                </form>
+                <pre id="manageResult" class="result"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function postForm(url, formId, resultId) {
+            const form = document.getElementById(formId);
+            const resultBox = document.getElementById(resultId);
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                resultBox.style.display = 'block';
+                resultBox.textContent = 'Working...';
+                form.classList.add('loading');
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        body: new FormData(form),
+                    });
+                    const data = await response.json();
+                    resultBox.textContent = JSON.stringify(data, null, 2);
+                } catch (err) {
+                    resultBox.textContent = 'Error: ' + String(err);
+                } finally {
+                    form.classList.remove('loading');
+                }
+            });
+        }
+
+        postForm('/api/music-video/research', 'researchForm', 'researchResult');
+        postForm('/api/music-video/plan', 'planForm', 'planResult');
+
+        // Audio analysis: auto-fill duration and BPM
+        document.getElementById('analyzeAudioBtn').addEventListener('click', async () => {
+            const audioPath = document.getElementById('audio_path').value.trim();
+            const resultBox = document.getElementById('planResult');
+            resultBox.style.display = 'block';
+            if (!audioPath) {
+                resultBox.textContent = 'Error: Please enter an audio path first.';
+                return;
+            }
+            resultBox.textContent = 'Analyzing audio...';
+            try {
+                const response = await fetch('/api/music-video/analyze-audio', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: new URLSearchParams({audio_path: audioPath}),
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    if (data.duration) document.getElementById('duration').value = Math.round(data.duration);
+                    if (data.bpm) document.getElementById('bpm').value = data.bpm;
+                    resultBox.textContent = `Analyzed: duration=${data.duration}s, bpm=${data.bpm} (source: ${data.source})`;
+                } else {
+                    resultBox.textContent = 'Error: ' + (data.error || 'Unknown error');
+                }
+            } catch (err) {
+                resultBox.textContent = 'Error: ' + String(err);
+            }
+        });
+
+        async function loadPlansIntoSelect() {
+            const select = document.getElementById('plan');
+            const manageSelect = document.getElementById('manage_plan');
+            select.innerHTML = '<option value="">Loading...</option>';
+            manageSelect.innerHTML = '<option value="">Loading...</option>';
+            try {
+                const response = await fetch('/api/music-video/plans');
+                const data = await response.json();
+                if (data.plans.length === 0) {
+                    select.innerHTML = '<option value="" disabled>No saved plans</option>';
+                    manageSelect.innerHTML = '<option value="" disabled>No saved plans</option>';
+                    return;
+                }
+                select.innerHTML = '<option value="">Select a plan...</option>';
+                manageSelect.innerHTML = '<option value="">Select a plan...</option>';
+                data.plans.forEach(plan => {
+                    const option = document.createElement('option');
+                    option.value = plan.name;
+                    option.textContent = `${plan.name} (${plan.songs} songs)`;
+                    select.appendChild(option);
+
+                    const manageOption = document.createElement('option');
+                    manageOption.value = plan.name;
+                    manageOption.textContent = `${plan.name} (${plan.songs} songs)`;
+                    manageSelect.appendChild(manageOption);
+                });
+            } catch (err) {
+                select.innerHTML = '<option value="" disabled>Error loading plans</option>';
+                manageSelect.innerHTML = '<option value="" disabled>Error loading plans</option>';
+            }
+        }
+
+        const planSelect = document.getElementById('plan');
+        const executeSubmit = document.querySelector('#executeForm button[type="submit"]');
+
+        function updateExecuteSubmitState() {
+            executeSubmit.disabled = !planSelect.value;
+        }
+
+        planSelect.addEventListener('change', updateExecuteSubmitState);
+        document.getElementById('refreshPlansBtn').addEventListener('click', () => loadPlansIntoSelect());
+        loadPlansIntoSelect().then(updateExecuteSubmitState);
+
+        // WebSocket execution with progress streaming
+        const executeForm = document.getElementById('executeForm');
+        const executeResult = document.getElementById('executeResult');
+        executeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            executeResult.style.display = 'block';
+            executeResult.textContent = 'Connecting...';
+            const plan = document.getElementById('plan').value;
+            const songIndex = document.getElementById('song_index').value;
+            const generationMode = document.getElementById('execute_generation_mode').value;
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const apiKey = document.getElementById('ws_api_key').value.trim();
+            const wsUrl = new URL(`${protocol}//${window.location.host}/ws/music-video/execute`);
+            if (apiKey) {
+                wsUrl.searchParams.set('api_key', apiKey);
+            }
+            const ws = new WebSocket(wsUrl.toString());
+            ws.onopen = () => {
+                executeResult.textContent = 'Connected. Starting render...\n';
+                const payload = {plan, song_index: songIndex};
+                if (generationMode) payload.generation_mode = generationMode;
+                ws.send(JSON.stringify(payload));
+            };
+            ws.onmessage = (event) => {
+                try {
+                    const msg = JSON.parse(event.data);
+                    if (msg.type === 'status') {
+                        executeResult.textContent += `[status] ${msg.message}\n`;
+                    } else if (msg.type === 'stdout' || msg.type === 'stderr') {
+                        executeResult.textContent += `[${msg.type}] ${msg.line}\n`;
+                    } else if (msg.type === 'done') {
+                        executeResult.textContent += `[done] returncode=${msg.returncode}\n`;
+                    } else if (msg.type === 'error') {
+                        executeResult.textContent += `[error] ${msg.message}\n`;
+                    } else {
+                        executeResult.textContent += JSON.stringify(msg) + '\n';
+                    }
+                } catch (err) {
+                    executeResult.textContent += event.data + '\n';
+                }
+            };
+            ws.onerror = (err) => {
+                executeResult.textContent += 'WebSocket error\n';
+            };
+            ws.onclose = () => {
+                executeResult.textContent += 'Connection closed\n';
+            };
+        });
+
+        // Plan management: rename and delete
+        const manageResult = document.getElementById('manageResult');
+        document.getElementById('renamePlanBtn').addEventListener('click', async () => {
+            const planName = document.getElementById('manage_plan').value;
+            const newName = document.getElementById('new_name').value.trim();
+            manageResult.style.display = 'block';
+            if (!planName || !newName) {
+                manageResult.textContent = 'Error: Select a plan and enter a new name.';
+                return;
+            }
+            try {
+                const response = await fetch(`/api/music-video/plans/${encodeURIComponent(planName)}/rename`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: new URLSearchParams({new_name: newName}),
+                });
+                const data = await response.json();
+                manageResult.textContent = JSON.stringify(data, null, 2);
+                loadPlansIntoSelect();
+            } catch (err) {
+                manageResult.textContent = 'Error: ' + String(err);
+            }
+        });
+        document.getElementById('deletePlanBtn').addEventListener('click', async () => {
+            const planName = document.getElementById('manage_plan').value;
+            manageResult.style.display = 'block';
+            if (!planName) {
+                manageResult.textContent = 'Error: Select a plan to delete.';
+                return;
+            }
+            if (!confirm(`Delete ${planName}?`)) return;
+            try {
+                const response = await fetch(`/api/music-video/plans/${encodeURIComponent(planName)}`, {
+                    method: 'DELETE',
+                });
+                const data = await response.json();
+                manageResult.textContent = JSON.stringify(data, null, 2);
+                loadPlansIntoSelect();
+            } catch (err) {
+                manageResult.textContent = 'Error: ' + String(err);
+            }
+        });
+
+        // Repurpose video form
+        postForm('/api/video/repurpose', 'repurposeForm', 'repurposeResult');
+        postForm('/api/video/repurpose/multi', 'batchRepurposeForm', 'batchRepurposeResult');
+    </script>
+</body>
+</html>

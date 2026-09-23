@@ -310,4 +310,60 @@ PERSONAL FILES ARE SACRED (READ/REVIEW ONLY)
 
 **ALL LOCATIONS IDENTIFIED - ALL PROTECTED - ALL PRESERVED**
 
+---
+
+## 📅 REFRESH APPEND — 2026-07-12
+
+> Append-only update. Original March 4, 2026 counts preserved above; this section reflects current inventory.
+
+### Updated Counts
+
+| Location | Mar 2026 | Jul 2026 | Notes |
+|---|---|---|---|
+| `Documents\` `.txt` files | (subset scanned) | **616** | Full list: `_scan_documents_txt_list.txt` |
+| `Downloads\` top-level dirs | 127 files cited | **123 directories** | Dir list: `_scan_downloads_dirs_list.txt` |
+| ChatGPT full exports | not indexed | **4** | See `CHATGPT_EXPORTS_CATALOG.md` |
+| ChatGPT partial (`chats\`) | not indexed | **3 JSON + 3 HTML** | ~889 conversations |
+| Total ChatGPT conversations | — | **~4,100+** | ~3.4 GB in Downloads |
+
+### New Catalog Files (workspace copies — not in personal folders)
+
+| Catalog | Path |
+|---|---|
+| Master plans + project status | `ALL_PLANS_AND_PROJECTS_MASTER.md` |
+| ChatGPT exports index | `_DOCS_ARCHIVE/CHATGPT_EXPORTS_CATALOG.md` |
+| Documents AI sessions | `_DOCS_ARCHIVE/DOCUMENTS_AI_SESSIONS_INDEX.md` |
+| Documents category refresh | `_DOCS_ARCHIVE/_scan_documents_categories.txt` |
+| Refresh script | `_DOCS_ARCHIVE/_refresh_doc_scan.py` |
+
+### Documents `.txt` Categories (616 total)
+
+| Category | Count |
+|---|---|
+| ✳ Sparkle sessions | 89 |
+| AI tools (Claude/Qwen/Gemini/Auggie) | 125 |
+| Empire | 6 |
+| Planning | 8 |
+| Revenue/crypto | 7 |
+| x-prefixed audits | 4 |
+| Other | 377 |
+
+### ChatGPT Export Locations (Downloads — read-only)
+
+| Directory | Conversations | Size |
+|---|---|---|
+| `tellem210326\` | ~1,535 | 1.6 GB |
+| `leah2026-03-20\` | ~811 | 470 MB |
+| `woodsgithub0426\` | ~560 | 582 MB |
+| `ASHCHATGPT\` | ~306 | 395 MB |
+| `chats\` | ~889 | 331 MB |
+
+### Cross-Links
+
+- Start here for all plans: `ALL_PLANS_AND_PROJECTS_MASTER.md`
+- Revenue priority: `OUTSTANDING_WORK_PLAN.md`
+- Task backlog: `TODO_TRACKER.md` (131 items, 102 pending)
+
+---
+
 **END OF DOCUMENTS & DOWNLOADS CATALOG**

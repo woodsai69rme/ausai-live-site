@@ -1,0 +1,57 @@
+[
+  {
+    "tool": "claude-code",
+    "session_id": "8dd4b924-bf24-45ad-9eac-e9de6c65a25d",
+    "title": "8dd4b924-bf24-45ad-9eac-e9de6c65a25d.jsonl",
+    "created": "2026-08-24T07:11:20.888534+00:00",
+    "updated": "2026-08-24T07:11:20.888534+00:00",
+    "path": "C:\\Users\\karma\\.claude\\projects\\C--Users-karma-AppData-Local-Temp\\8dd4b924-bf24-45ad-9eac-e9de6c65a25d.jsonl",
+    "format": "claude.transcript.jsonl",
+    "bytes": 62998,
+    "extra": {}
+  },
+  {
+    "tool": "claude-code",
+    "session_id": "9fd4eacd-3c19-4bd3-a401-c9f828b3af45",
+    "title": "9fd4eacd-3c19-4bd3-a401-c9f828b3af45.jsonl",
+    "created": "2026-08-26T06:17:08.001181+00:00",
+    "updated": "2026-08-26T06:17:08.001181+00:00",
+    "path": "C:\\Users\\karma\\.claude\\projects\\C--Users-karma-AppData-Local-Temp\\9fd4eacd-3c19-4bd3-a401-c9f828b3af45.jsonl",
+    "format": "claude.transcript.jsonl",
+    "bytes": 62749,
+    "extra": {}
+  },
+  {
+    "tool": "claude-code",
+    "session_id": "af7d05c4-d64d-41e4-9e9f-db0e181daa74",
+    "title": "af7d05c4-d64d-41e4-9e9f-db0e181daa74.jsonl",
+    "created": "2026-08-24T07:10:11.223073+00:00",
+    "updated": "2026-08-24T07:10:11.223073+00:00",
+    "path": "C:\\Users\\karma\\.claude\\projects\\C--Users-karma-AppData-Local-Temp\\af7d05c4-d64d-41e4-9e9f-db0e181daa74.jsonl",
+    "format": "claude.transcript.jsonl",
+    "bytes": 62704,
+    "extra": {}
+  },
+  {
+    "tool": "claude-code",
+    "session_id": "e4ad36f9-0f61-4d99-8900-f98a0c680dae",
+    "title": "e4ad36f9-0f61-4d99-8900-f98a0c680dae.jsonl",
+    "created": "2026-08-24T07:14:37.386949+00:00",
+    "updated": "2026-08-24T07:14:37.386949+00:00",
+    "path": "C:\\Users\\karma\\.claude\\projects\\C--Users-karma-AppData-Local-Temp\\e4ad36f9-0f61-4d99-8900-f98a0c680dae.jsonl",
+    "format": "claude.transcript.jsonl",
+    "bytes": 62886,
+    "extra": {}
+  },
+  {
+    "tool": "claude-code",
+    "session_id": "f18de066-3e61-417e-bf56-19f996fc7b15",
+    "title": "f18de066-3e61-417e-bf56-19f996fc7b15.jsonl",
+    "created": "2026-08-26T06:17:57.218443+00:00",
+    "updated": "2026-08-26T06:17:57.218443+00:00",
+    "path": "C:\\Users\\karma\\.claude\\projects\\C--Users-karma-AppData-Local-Temp\\f18de066-3e61-417e-bf56-19f996fc7b15.jsonl",
+    "format": "claude.transcript.jsonl",
+    "bytes": 62717,
+    "extra": {}
+  }
+]

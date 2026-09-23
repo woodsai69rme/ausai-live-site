@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empire Master Command Portal — Production 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090e;
+    --bg-surface: #0e131f;
+    --card: #131926;
+    --card-hover: #1a2336;
+    --border: rgba(255,255,255,0.08);
+    --border-bright: rgba(56, 189, 248, 0.35);
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --emerald: #10b981;
+    --amber: #f59e0b;
+    --rose: #f43f5e;
+    --purple: #a855f7;
+    --cyan: #00f3ff;
+    --text: #f8fafc;
+    --text-dim: #94a3b8;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background: radial-gradient(ellipse at 50% 0%, #171c38 0%, #07090e 70%, #030508 100%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1.5rem 4rem;
+  }
+  .container { max-width: 1320px; margin: 0 auto; }
+  
+  header { text-align: center; margin-bottom: 2rem; position: relative; }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--accent);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-size: 3rem;
+    background: linear-gradient(135deg, #ffffff 10%, var(--accent) 50%, var(--accent-2) 80%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  header p { color: var(--text-dim); font-size: 1.12rem; max-width: 780px; margin: 0 auto; line-height: 1.6; }
+
+  /* Live Telemetry Status Strip */
+  .telemetry-strip {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    flex-wrap: wrap;
+  }
+  .telem-pill {
+    background: rgba(14, 19, 31, 0.8);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: border-color 0.2s;
+  }
+  .telem-pill:hover { border-color: var(--border-bright); }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #64748b;
+    display: inline-block;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  .dot.online { background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+  .dot.checking { background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 1s infinite; }
+  .dot.offline { background: var(--rose); box-shadow: 0 0 8px var(--rose); }
+  @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+  /* Control Hub & Search Bar */
+  .hub-controls {
+    background: rgba(19, 25, 38, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: var(--shadow);
+  }
+  .search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .search-box-wrapper {
+    flex: 1;
+    position: relative;
+    min-width: 280px;
+  }
+  .search-box-wrapper input {
+    width: 100%;
+    background: #0b0f19;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 46px 12px 16px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-box-wrapper input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  }
+  .kbd-hint {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    pointer-events: none;
+  }
+  .action-btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .act-btn {
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    text-decoration: none;
+  }
+  .act-btn:hover { transform: translateY(-2px); opacity: 0.95; }
+  .btn-launch-all {
+    background: linear-gradient(135deg, var(--emerald), var(--cyan));
+    color: #03101c;
+    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+  }
+  .btn-refresh-ports {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-refresh-ports:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Category Filter Pills */
+  .category-bar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .cat-pill {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .cat-pill:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+  .cat-pill.active {
+    background: var(--accent);
+    color: #03101c;
+    border-color: var(--accent);
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4);
+  }
+
+  /* Grid & Cards */
+  .section-title {
+    font-size: 1.35rem;
+    margin: 2.2rem 0 1rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 28px -8px rgba(0,0,0,0.7);
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.6rem;
+    gap: 8px;
+  }
+  .card .tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text-dim);
+  }
+  .card h2 { font-size: 1.22rem; margin-bottom: 0.5rem; color: #fff; font-weight: 700; }
+  .card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 1.25rem; flex: 1; }
+  
+  .card-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #03101c;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: opacity 0.2s, transform 0.2s;
+    gap: 6px;
+  }
+  .card-btn:hover { opacity: 0.95; transform: scale(0.99); }
+  .card-btn.emerald { background: linear-gradient(135deg, #10b981, #06b6d4); color: #000; }
+  .card-btn.purple { background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff; }
+  .card-btn.rose { background: linear-gradient(135deg, #f43f5e, #fb7185); color: #fff; }
+  .card-btn.cyan { background: linear-gradient(135deg, #00f3ff, #38bdf8); color: #000; }
+  .card-btn.amber { background: linear-gradient(135deg, #f59e0b, #eab308); color: #000; }
+
+  /* Toast message */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(14, 19, 31, 0.95);
+    border: 1px solid var(--accent);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+  #toast.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="header-badge">⚡ Empire Master Fleet Engine • 2026 Pro</div>
+    <h1>🇦🇺 Empire Master Command Portal</h1>
+    <p>Unified Cockpit for Autonomous Virtual Employees, AI IT Agency, Media Studios & Institutional Crypto Platforms</p>
+    
+    <!-- Real-time Live Port Telemetry Bar -->
+    <div class="telemetry-strip" id="telemetryStrip">
+      <div class="telem-pill" data-port="8686">
+        <span class="dot checking" id="dot-8686"></span> Media Vault (8686)
+        <span id="ms-8686" style="color:var(--text-dim);font-size:0.75rem;">--ms</span>
+      </div>
+      <div class="telem-pill" data-port="8765">
+        <span class="dot checking" id="dot-8765"></span> Vision Sorter (8765)
+        <span id="ms-8765" style="color:var(--text-dim);font-size:0.75rem;">--ms</span>
+      </div>
+      <div class="telem-pill" data-port="6970">
+        <span class="dot checking" id="dot-6970"></span> JARVIS HUD (6970)
+        <span id="ms-6970" style="color:var(--text-dim);font-size:0.75rem;">--ms</span>
+      </div>
+      <div class="telem-pill" data-port="3142">
+        <span class="dot checking" id="dot-3142"></span> God-Mode (3142)
+        <span id="ms-3142" style="color:var(--text-dim);font-size:0.75rem;">--ms</span>
+      </div>
+      <div class="telem-pill" data-port="8010">
+        <span class="dot checking" id="dot-8010"></span> Agency API (8010)
+        <span id="ms-8010" style="color:var(--text-dim);font-size:0.75rem;">--ms</span>
+      </div>
+      <div class="telem-pill" data-port="8088">
+        <span class="dot checking" id="dot-8088"></span> Crypto Engine (8088)
+        <span id="ms-8088" style="color:var(--text-dim);font-size:0.75rem;">--ms</span>
+      </div>
+      <div class="telem-pill" data-port="8000">
+        <span class="dot checking" id="dot-8000"></span> ResearchOS (8000)
+        <span id="ms-8000" style="color:var(--text-dim);font-size:0.75rem;">--ms</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Controls, Search & Filter -->
+  <div class="hub-controls">
+    <div class="search-row">
+      <div class="search-box-wrapper">
+        <input type="text" id="searchInput" placeholder="Search 25+ cockpits, tools, media pools, or ports... (e.g. 8686, JDM, Whale, Sorter)" oninput="filterCards()">
+        <span class="kbd-hint">Ctrl + K</span>
+      </div>
+      <div class="action-btn-group">
+        <button class="act-btn btn-launch-all" onclick="launchAllPortals()">
+          🚀 Launch Master Fleet (10 Cockpits)
+        </button>
+        <button class="act-btn btn-refresh-ports" onclick="probeAllPorts()">
+          🔄 Probe Port Latencies
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Filter Bar -->
+    <div class="category-bar">
+      <button class="cat-pill active" onclick="setCategory('all', this)">All Portals</button>
+      <button class="cat-pill" onclick="setCategory('media', this)">🎬 Media Vault & Studios</button>
+      <button class="cat-pill" onclick="setCategory('ai', this)">👑 Master AI & Copilots</button>
+      <button class="cat-pill" onclick="setCategory('crypto', this)">🪙 Crypto & Smart Money</button>
+      <button class="cat-pill" onclick="setCategory('agency', this)">🤖 Virtual Team & Agency</button>
+      <button class="cat-pill" onclick="setCategory('client', this)">🇦🇺 AusAI Tech Client Suite</button>
+      <button class="cat-pill" onclick="setCategory('archive', this)">📜 Local Archives & Docs</button>
+    </div>
+  </div>
+
+  <!-- SECTION 1: MASTER AI & COPILOTS -->
+  <div class="section-group" data-group="ai">
+    <h2 class="section-title">👑 Master AI Command Centers & Copilots</h2>
+    <div class="grid">
+      <div class="card" data-category="ai" data-port="3142">
+        <div>
+          <div class="card-top">
+            <div class="tag">Port 3142 • Master Cockpit</div>
+            <div class="live-badge" id="badge-3142">Checking...</div>
+          </div>
+          <h2>👑 God-Mode AI Command Center</h2>
+          <p>Next.js unified cockpit with autonomous voice actions, local codebase indexing (Project Brain), Git management, and swarm control.</p>
+        </div>
+        <a href="http://localhost:3142" target="_blank" class="card-btn">Open God-Mode (3142) →</a>
+      </div>
+
+      <div class="card" data-category="ai" data-port="6970">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--purple);">Port 6970 • Executive Copilot</div>
+            <div class="live-badge" id="badge-6970">Checking...</div>
+          </div>
+          <h2>🤖 JARVIS Holographic HUD</h2>
+          <p>Executive desktop copilot with on-screen AI Arrow guidance, Telegram voice notes, and autonomous computer takeover.</p>
+        </div>
+        <a href="http://localhost:6970" target="_blank" class="card-btn purple">Open JARVIS HUD (6970) →</a>
+      </div>
+
+      <div class="card" data-category="ai" data-port="8000">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--amber);">Port 8000 • Autonomous Intel</div>
+            <div class="live-badge" id="badge-8000">Checking...</div>
+          </div>
+          <h2>🔬 ResearchOS Universal Suite</h2>
+          <p>Autonomous research agent with real-time web crawlers, dynamic multi-query expansion, and PDF synthesis.</p>
+        </div>
+        <a href="http://localhost:8000" target="_blank" class="card-btn amber">Open ResearchOS (8000) →</a>
+      </div>
+
+      <div class="card" data-category="ai" data-port="8989">
+        <div>
+          <div class="card-top">
+            <div class="tag">Port 8989 • Fleet Command</div>
+            <div class="live-badge" id="badge-8989">Local Port</div>
+          </div>
+          <h2>🌐 Localhost & Port Registry</h2>
+          <p>Centralized live registry, port scanner, service runner, process CPU/RAM meters, and voice-command router.</p>
+        </div>
+        <a href="http://localhost:8989" target="_blank" class="card-btn">Open Registry (8989) →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: MEDIA VAULTS & STUDIOS -->
+  <div class="section-group" data-group="media">
+    <h2 class="section-title">🎬 Media Vault & Production Studios (Downloads/dll & X: Drive)</h2>
+    <div class="grid">
+      <div class="card" data-category="media" data-port="8686">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--rose);">Port 8686 • Master Production Hub</div>
+            <div class="live-badge" id="badge-8686">Checking...</div>
+          </div>
+          <h2>⚡ Unified Media Studio</h2>
+          <p>Unified dual-source studio with 1-click toggling between Downloads/dll and X: Drive, cross-pool searching, and side-by-side comparison.</p>
+        </div>
+        <a href="http://localhost:8686/unified" target="_blank" class="card-btn rose">Open Unified Studio →</a>
+      </div>
+
+      <div class="card" data-category="media" data-port="8765">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--emerald);">Port 8765 • Multimodal Vision AI</div>
+            <div class="live-badge" id="badge-8765">Checking...</div>
+          </div>
+          <h2>👁️ Vision Media Sorter Studio</h2>
+          <p>AI-powered image & video viewing and auto-sorting. 4-frame contact sheets with Moondream & MiniCPM-V vision models.</p>
+        </div>
+        <a href="http://localhost:8765" target="_blank" class="card-btn emerald">Open Vision Sorter (8765) →</a>
+      </div>
+
+      <div class="card" data-category="media" data-port="8686">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--cyan);">Port 8686 • 26,606 Assets (32.5 GB)</div>
+            <div class="live-badge">DLL Pool</div>
+          </div>
+          <h2>🎬 Downloads / dll Media Vault</h2>
+          <p>Ultra-fast video & image review with hover playback, frame stepping, and JDM/ICB auto-categorization (RX-7, RX-3, VL Turbo).</p>
+        </div>
+        <a href="http://localhost:8686/dll" target="_blank" class="card-btn cyan">Open DLL Vault (8686) →</a>
+      </div>
+
+      <div class="card" data-category="media" data-port="8686">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--purple);">Port 8686 • Drive-Wide Media</div>
+            <div class="live-badge">X: Drive Pool</div>
+          </div>
+          <h2>💾 X: Drive Media Vault</h2>
+          <p>Interactive folder tree browser across 06_MEDIA, 05_DOWNLOADS, output, tellref, and !ARCHIVE with full scrubbing.</p>
+        </div>
+        <a href="http://localhost:8686/x_drive" target="_blank" class="card-btn purple">Open X: Drive Vault →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: CRYPTO PLATFORM & WHALE SMART MONEY -->
+  <div class="section-group" data-group="crypto">
+    <h2 class="section-title">🪙 Crypto Top Buyer & Whale Copy-Trading Fleet</h2>
+    <div class="grid">
+      <div class="card" data-category="crypto" data-port="8088">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--emerald);">Port 8088 • Institutional Station</div>
+            <div class="live-badge" id="badge-8088">Checking...</div>
+          </div>
+          <h2>🪙 Ultimate Crypto Platform & Whales</h2>
+          <p>CCXT 5-exchange aggregator, $10k institutional & $1k micro sniper accounts, GPU candlestick radar, and Jito MEV protection.</p>
+        </div>
+        <a href="file:///C:/Users/karma/ULTIMATE_CRYPTO_PLATFORM.html" target="_blank" class="card-btn emerald">Open Crypto Platform →</a>
+      </div>
+
+      <div class="card" data-category="crypto" data-port="8088">
+        <div>
+          <div class="card-top">
+            <div class="tag">Port 8088 / 3142 UI</div>
+            <div class="live-badge">Radar UI</div>
+          </div>
+          <h2>📊 Top Buyer Candlestick Radar</h2>
+          <p>Live smart money tracking across Solana, Ethereum, & BTC. Automated paper & live copy-trading with trailing stop-loss protection.</p>
+        </div>
+        <a href="file:///C:/Users/karma/CRYPTO_TOP_BUYER_DASHBOARD.html" target="_blank" class="card-btn">Open Candlestick Radar →</a>
+      </div>
+
+      <div class="card" data-category="crypto" data-port="8088">
+        <div>
+          <div class="card-top">
+            <div class="tag">Local REST API</div>
+            <div class="live-badge">API Daemon</div>
+          </div>
+          <h2>⚡ Whale Stream REST API (8088)</h2>
+          <p>Direct REST endpoints for live order flow, top buyer discovery, and webhook signal execution.</p>
+        </div>
+        <a href="http://localhost:8088/api/crypto/catalog" target="_blank" class="card-btn">Open Crypto API Endpoint →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: VIRTUAL EMPLOYEES & AGENCY -->
+  <div class="section-group" data-group="agency">
+    <h2 class="section-title">🤖 Virtual Employee & Agency Portals</h2>
+    <div class="grid">
+      <div class="card" data-category="agency" data-port="8010">
+        <div>
+          <div class="card-top">
+            <div class="tag">Port 8010 • Team Console</div>
+            <div class="live-badge" id="badge-8010">Checking...</div>
+          </div>
+          <h2>🤖 Virtual Team Console</h2>
+          <p>Control 9 AI virtual employees, monitor real-time execution outputs, and dispatch B2B workflows.</p>
+        </div>
+        <a href="http://localhost:8010/dashboard" target="_blank" class="card-btn">Open Dashboard (8010) →</a>
+      </div>
+
+      <div class="card" data-category="agency" data-port="8010">
+        <div>
+          <div class="card-top">
+            <div class="tag">Automation Tools</div>
+            <div class="live-badge">Playwright</div>
+          </div>
+          <h2>🛠️ Automation Workbench</h2>
+          <p>Interactive playground for Playwright browser agents, web scrapers, and desktop GUI operators.</p>
+        </div>
+        <a href="http://localhost:8010/workbench" target="_blank" class="card-btn">Open Workbench →</a>
+      </div>
+
+      <div class="card" data-category="agency" style="border-color: var(--cyan);">
+        <div>
+          <div class="card-top">
+            <div class="tag" style="color:var(--cyan);">Vision Swarm Fleet</div>
+            <div class="live-badge" style="color:var(--cyan); border-color:rgba(0,243,255,0.3);">4 Workers</div>
+          </div>
+          <h2>🚀 Visual Audit Swarm Gallery</h2>
+          <p>Real-time visual capture gallery, latency comparisons, and consensus audits powered by Gemma 4 & Nemotron models.</p>
+        </div>
+        <a href="file:///C:/Users/karma/SWARM_VISUAL_AUDIT_DASHBOARD.html" target="_blank" class="card-btn cyan">Open Swarm Cockpit →</a>
+      </div>
+
+      <div class="card" data-category="agency" data-port="8010">
+        <div>
+          <div class="card-top">
+            <div class="tag">Marketing Studio</div>
+            <div class="live-badge">Content AI</div>
+          </div>
+          <h2>📈 AI Copy & Content Engine</h2>
+          <p>Generate social calendars, SEO briefs, LinkedIn posts, and email sequences on demand.</p>
+        </div>
+        <a href="http://localhost:8010/marketing" target="_blank" class="card-btn">Open Marketing →</a>
+      </div>
+
+      <div class="card" data-category="agency" data-port="8010">
+        <div>
+          <div class="card-top">
+            <div class="tag">Client Vault</div>
+            <div class="live-badge">Auth & Sync</div>
+          </div>
+          <h2>👤 Client Account Onboarding</h2>
+          <p>Manage isolated client credentials for LinkedIn, WordPress, Gmail, and Xero.</p>
+        </div>
+        <a href="http://localhost:8010/clients" target="_blank" class="card-btn">Open Client Vault →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: AUSAi TECH CLIENT SUITE -->
+  <div class="section-group" data-group="client">
+    <h2 class="section-title">🇦🇺 Live AusAI Tech Client Suite</h2>
+    <div class="grid">
+      <div class="card" data-category="client">
+        <div>
+          <div class="card-top">
+            <div class="tag">Public Agency Site</div>
+            <div class="live-badge">Landing</div>
+          </div>
+          <h2>🇦🇺 AusAI Tech Landing Page</h2>
+          <p>Official website for Brisbane & Australian businesses seeking AI IT solutions.</p>
+        </div>
+        <a href="file:///C:/Users/karma/ausai_live/index.html" target="_blank" class="card-btn cyan">Open Landing Site →</a>
+      </div>
+
+      <div class="card" data-category="client">
+        <div>
+          <div class="card-top">
+            <div class="tag">Client Self-Service</div>
+            <div class="live-badge">Portal</div>
+          </div>
+          <h2>💼 Client AI Support Portal</h2>
+          <p>Client portal to submit IT tickets, run automated diagnostics, and request instant AI audits.</p>
+        </div>
+        <a href="file:///C:/Users/karma/ausai_live/portal.html" target="_blank" class="card-btn">Open Client Portal →</a>
+      </div>
+
+      <div class="card" data-category="client">
+        <div>
+          <div class="card-top">
+            <div class="tag">Instant AI Audit</div>
+            <div class="live-badge">Intake</div>
+          </div>
+          <h2>📍 Consultation & Audit Intake</h2>
+          <p>Instant consultation intake form connected directly to AI sales & strategy agents.</p>
+        </div>
+        <a href="file:///C:/Users/karma/ausai_live/book.html" target="_blank" class="card-btn">Open Audit Intake →</a>
+      </div>
+
+      <div class="card" data-category="client">
+        <div>
+          <div class="card-top">
+            <div class="tag">Service Packages</div>
+            <div class="live-badge">Pricing</div>
+          </div>
+          <h2>💳 Retainers & Pricing Tiers</h2>
+          <p>Brisbane AUD pricing packages for AI Audit (A$497), AI Build (A$1,497), and AI Partner (A$2,497/mo).</p>
+        </div>
+        <a href="file:///C:/Users/karma/ausai_live/tiers.html" target="_blank" class="card-btn">Open Pricing Tiers →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: LOCAL ARCHIVES & CHAT HISTORIES -->
+  <div class="section-group" data-group="archive">
+    <h2 class="section-title">📜 Local Archives & Conversation Intelligence</h2>
+    <div class="grid">
+      <div class="card" style="grid-column: 1 / -1; border-color: var(--accent);" data-category="archive">
+        <div>
+          <div class="card-top">
+            <div class="tag">100% Offline Local Datasets</div>
+            <div class="live-badge">80 Sessions</div>
+          </div>
+          <h2>📜 All Saved Antigravity Chat Transcripts & Prompts</h2>
+          <p>Full, untruncated conversation histories across all projects, code reviews, and deep builds. Easily browse in Markdown or open via Windows Explorer.</p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="file:///C:/Users/karma/ALL_SAVED_CHATS/index.md" target="_blank" class="card-btn" style="flex:1;">Open Master Index (Markdown) →</a>
+          <a href="file:///C:/Users/karma/ALL_SAVED_CHATS" target="_blank" class="card-btn" style="flex:1; background: rgba(255,255,255,0.06); color: var(--text); border:1px solid var(--border);">Browse Folder in Explorer →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast">✨ Message</div>
+
+<script>
+  const PORTS_TO_PROBE = [
+    { port: 8686, url: 'http://localhost:8686/api/stats' },
+    { port: 8765, url: 'http://localhost:8765/api/stats' },
+    { port: 6970, url: 'http://localhost:6970' },
+    { port: 3142, url: 'http://localhost:3142' },
+    { port: 8010, url: 'http://localhost:8010/health' },
+    { port: 8088, url: 'http://localhost:8088/api/crypto/catalog' },
+    { port: 8000, url: 'http://localhost:8000' }
+  ];
+
+  async function probePort(item) {
+    const dot = document.getElementById(`dot-${item.port}`);
+    const msSpan = document.getElementById(`ms-${item.port}`);
+    const badge = document.getElementById(`badge-${item.port}`);
+
+    if (dot) dot.className = 'dot checking';
+    if (badge) badge.textContent = 'Probing...';
+
+    const t0 = performance.now();
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 1800);
+      await fetch(item.url, { mode: 'no-cors', cache: 'no-store', signal: controller.signal });
+      clearTimeout(timeoutId);
+      const elapsed = Math.round(performance.now() - t0);
+
+      if (dot) dot.className = 'dot online';
+      if (msSpan) {
+        msSpan.textContent = `${elapsed}ms`;
+        msSpan.style.color = 'var(--emerald)';
+      }
+      if (badge) {
+        badge.textContent = `Online • ${elapsed}ms`;
+        badge.style.color = 'var(--emerald)';
+        badge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+      }
+    } catch (err) {
+      if (dot) dot.className = 'dot offline';
+      if (msSpan) {
+        msSpan.textContent = 'offline';
+        msSpan.style.color = 'var(--rose)';
+      }
+      if (badge) {
+        badge.textContent = 'Offline';
+        badge.style.color = 'var(--rose)';
+        badge.style.borderColor = 'rgba(244, 63, 94, 0.3)';
+      }
+    }
+  }
+
+  function probeAllPorts() {
+    showToast('Probing all local service ports & latencies...');
+    PORTS_TO_PROBE.forEach(item => probePort(item));
+  }
+
+  function filterCards() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.card');
+    let matches = 0;
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      const isMatch = text.includes(query);
+      card.style.display = isMatch ? 'flex' : 'none';
+      if (isMatch) matches++;
+    });
+
+    // Hide/show entire section if empty
+    document.querySelectorAll('.section-group').forEach(group => {
+      const visibleCards = group.querySelectorAll('.card[style*="display: flex"], .card:not([style*="display: none"])');
+      group.style.display = (visibleCards.length > 0) ? 'block' : 'none';
+    });
+  }
+
+  function setCategory(cat, btn) {
+    document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const groups = document.querySelectorAll('.section-group');
+    if (cat === 'all') {
+      groups.forEach(g => g.style.display = 'block');
+      document.querySelectorAll('.card').forEach(c => c.style.display = 'flex');
+    } else {
+      groups.forEach(g => {
+        if (g.getAttribute('data-group') === cat) {
+          g.style.display = 'block';
+          g.querySelectorAll('.card').forEach(c => c.style.display = 'flex');
+        } else {
+          g.style.display = 'none';
+        }
+      });
+    }
+  }
+
+  function launchAllPortals() {
+    const urls = [
+      'http://localhost:3142',
+      'http://localhost:6970',
+      'http://localhost:8686/unified',
+      'http://localhost:8765',
+      'file:///C:/Users/karma/ULTIMATE_CRYPTO_PLATFORM.html',
+      'http://localhost:8000',
+      'http://localhost:8010/dashboard'
+    ];
+    urls.forEach(url => window.open(url, '_blank'));
+    showToast('🚀 Launching 7 Core Cockpits in Browser...');
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  // Keyboard shortcut Ctrl+K to search
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      document.getElementById('searchInput').focus();
+    }
+  });
+
+  // Initial port probe on load
+  probeAllPorts();
+</script>
+</body>
+</html>

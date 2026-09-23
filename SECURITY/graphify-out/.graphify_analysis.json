@@ -1,0 +1,287 @@
+{
+  "communities": {
+    "0": [
+      "namespace",
+      "secret_scan",
+      "secret_scan_finding",
+      "secret_scan_main",
+      "secret_scan_paths_from_args",
+      "secret_scan_print_text",
+      "secret_scan_py_path",
+      "secret_scan_rationale_1",
+      "secret_scan_rationale_100",
+      "secret_scan_rationale_114",
+      "secret_scan_rationale_52",
+      "secret_scan_rationale_80",
+      "secret_scan_rationale_88",
+      "secret_scan_relative_path",
+      "secret_scan_repository_root",
+      "secret_scan_scan_file",
+      "secret_scan_scan_paths",
+      "secret_scan_scanerror",
+      "secret_scan_tracked_files",
+      "secret_scan_without_template_markers"
+    ],
+    "1": [
+      "audit_remediation_status_2026_08_23",
+      "audit_remediation_status_2026_08_23_active_code_enhancements_reviewed",
+      "audit_remediation_status_2026_08_23_change_record",
+      "audit_remediation_status_2026_08_23_critical_credential_shaped_material_in_tracked_history",
+      "audit_remediation_status_2026_08_23_executive_summary",
+      "audit_remediation_status_2026_08_23_external_actions_still_required",
+      "audit_remediation_status_2026_08_23_git_and_archive_boundary",
+      "audit_remediation_status_2026_08_23_high_broad_automation_permissions",
+      "audit_remediation_status_2026_08_23_high_previously_non_blocking_ci_checks",
+      "audit_remediation_status_2026_08_23_high_unhealthy_repository_boundary",
+      "audit_remediation_status_2026_08_23_medium_data_and_test_drift",
+      "audit_remediation_status_2026_08_23_medium_high_optimistic_runtime_status",
+      "audit_remediation_status_2026_08_23_operating_rules_going_forward",
+      "audit_remediation_status_2026_08_23_original_findings",
+      "audit_remediation_status_2026_08_23_related_documents",
+      "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "audit_remediation_status_2026_08_23_scope_and_repository_shape",
+      "audit_remediation_status_2026_08_23_verification_evidence"
+    ],
+    "2": [
+      "forensic_archive_and_worktree_export_plan_2026_08_24",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_acceptance_record",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_artifact_layout",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_current_blockers_and_next_handoff",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_non_actions",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_phase_1_freeze_and_capture_read_only_state",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_phase_2_export_all_worktree_bytes_and_git_evidence",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_phase_3_build_and_encrypt_the_payload",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_phase_4_restore_verification",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_phase_5_prove_the_source_worktree_was_not_changed",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_purpose_and_boundary",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_related_documents",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_required_operator_inputs_and_prerequisites",
+      "forensic_archive_and_worktree_export_plan_2026_08_24_worktree_reconstruction_test_optional_fresh_clone_only"
+    ],
+    "3": [
+      "rewrite_ref_scope_2026_08_24",
+      "rewrite_ref_scope_2026_08_24_1_active_local_branch_to_publish",
+      "rewrite_ref_scope_2026_08_24_2_protected_local_evidence_branch",
+      "rewrite_ref_scope_2026_08_24_3_tags",
+      "rewrite_ref_scope_2026_08_24_4_remote_branches_on_origin",
+      "rewrite_ref_scope_2026_08_24_5_remote_tags_on_origin",
+      "rewrite_ref_scope_2026_08_24_current_read_only_inventory",
+      "rewrite_ref_scope_2026_08_24_current_verification_and_blockers",
+      "rewrite_ref_scope_2026_08_24_decision_status",
+      "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "rewrite_ref_scope_2026_08_24_post_rewrite_ref_acceptance_criteria",
+      "rewrite_ref_scope_2026_08_24_recommended_exact_scrub_scope",
+      "rewrite_ref_scope_2026_08_24_ref_families_that_must_be_checked_and_not_silently_omitted",
+      "rewrite_ref_scope_2026_08_24_related_documents",
+      "rewrite_ref_scope_2026_08_24_required_pre_rewrite_comparison_files"
+    ],
+    "4": [
+      "documentation_manifest_2026_08_24",
+      "documentation_manifest_2026_08_24_active_ai_influencer_studio",
+      "documentation_manifest_2026_08_24_approval_gated_actions",
+      "documentation_manifest_2026_08_24_ci_and_workflows",
+      "documentation_manifest_2026_08_24_documentation_maintenance_rule",
+      "documentation_manifest_2026_08_24_documentation_map",
+      "documentation_manifest_2026_08_24_git_and_archive_boundary",
+      "documentation_manifest_2026_08_24_golden_rules_applied",
+      "documentation_manifest_2026_08_24_graphify_evidence",
+      "documentation_manifest_2026_08_24_purpose",
+      "documentation_manifest_2026_08_24_remediation_surfaces_documented",
+      "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "documentation_manifest_2026_08_24_sleep_triple_runtime",
+      "documentation_manifest_2026_08_24_validation_evidence"
+    ],
+    "5": [
+      "rotation_checklist",
+      "rotation_checklist_before_history_scrubbing",
+      "rotation_checklist_credential_rotation_checklist",
+      "rotation_checklist_current_local_boundary",
+      "rotation_checklist_github",
+      "rotation_checklist_google",
+      "rotation_checklist_openai_compatible_providers",
+      "rotation_checklist_provider_workstreams",
+      "rotation_checklist_ssh_and_git_credentials",
+      "rotation_checklist_validation_after_scrubbing",
+      "rotation_checklist_webhooks_and_messaging"
+    ],
+    "6": [
+      "audit_remediation_status_2026_08_23_ci_and_workflow_hardening",
+      "audit_remediation_status_2026_08_23_drive_rag_self_test_portability",
+      "audit_remediation_status_2026_08_23_enhanced_security_validation",
+      "audit_remediation_status_2026_08_23_full_stack_catalog_test_drift",
+      "audit_remediation_status_2026_08_23_graphify_restoration_and_scoped_graphs",
+      "audit_remediation_status_2026_08_23_remediation_implemented",
+      "audit_remediation_status_2026_08_23_secret_scanning_guardrail",
+      "audit_remediation_status_2026_08_23_security_runbooks",
+      "audit_remediation_status_2026_08_23_sleep_triple_status_semantics"
+    ],
+    "7": [
+      "external_action_handoff_2026_08_24",
+      "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "external_action_handoff_2026_08_24_history_scrubbing",
+      "external_action_handoff_2026_08_24_local_verification_completed",
+      "external_action_handoff_2026_08_24_provider_credential_work",
+      "external_action_handoff_2026_08_24_read_only_evidence",
+      "external_action_handoff_2026_08_24_related_documents",
+      "external_action_handoff_2026_08_24_required_approval_gates",
+      "external_action_handoff_2026_08_24_status"
+    ],
+    "8": [
+      "rewrite_readiness_2026_08_24",
+      "rewrite_readiness_2026_08_24_approval_gates_before_execution",
+      "rewrite_readiness_2026_08_24_current_read_only_inventory",
+      "rewrite_readiness_2026_08_24_disposable_clone_procedure",
+      "rewrite_readiness_2026_08_24_explicit_non_actions_in_this_session",
+      "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "rewrite_readiness_2026_08_24_post_rewrite_checks",
+      "rewrite_readiness_2026_08_24_related_documents",
+      "rewrite_readiness_2026_08_24_state"
+    ],
+    "9": [
+      "validate_security_docs",
+      "validate_security_docs_check_document_files",
+      "validate_security_docs_check_security_docs",
+      "validate_security_docs_check_workflows",
+      "validate_security_docs_load_text",
+      "validate_security_docs_main",
+      "validate_security_docs_py_path",
+      "validate_security_docs_rationale_1",
+      "validate_security_docs_validate"
+    ],
+    "10": [
+      "incident_response",
+      "incident_response_ci_policy",
+      "incident_response_credential_incident_response",
+      "incident_response_history_scrubbing",
+      "incident_response_immediate_containment",
+      "incident_response_local_checks",
+      "incident_response_preserve_without_re_exposing"
+    ],
+    "11": [
+      "readme",
+      "readme_control_boundaries",
+      "readme_current_status",
+      "readme_related_operational_evidence",
+      "readme_security_documentation",
+      "readme_start_here",
+      "readme_validation_contract"
+    ]
+  },
+  "cohesion": {
+    "0": 0.17894736842105263,
+    "1": 0.1111111111111111,
+    "2": 0.13333333333333333,
+    "3": 0.13333333333333333,
+    "4": 0.14285714285714285,
+    "5": 0.18181818181818182,
+    "6": 0.2222222222222222,
+    "7": 0.2222222222222222,
+    "8": 0.2222222222222222,
+    "9": 0.3888888888888889,
+    "10": 0.2857142857142857,
+    "11": 0.2857142857142857
+  },
+  "gods": [
+    {
+      "id": "forensic_archive_and_worktree_export_plan_2026_08_24_forensic_archive_and_worktree_export_plan_2026_08_24",
+      "label": "Forensic Archive and Worktree Export Plan — 2026-08-24",
+      "degree": 14
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_repository_audit_and_remediation_status",
+      "label": "Repository Audit and Remediation Status",
+      "degree": 12
+    },
+    {
+      "id": "secret_scan_scan_paths",
+      "label": "scan_paths()",
+      "degree": 11
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_remediation_implemented",
+      "label": "Remediation Implemented",
+      "degree": 9
+    },
+    {
+      "id": "documentation_manifest_2026_08_24_security_and_remediation_documentation_manifest_2026_08_24",
+      "label": "Security and Remediation Documentation Manifest — 2026-08-24",
+      "degree": 9
+    },
+    {
+      "id": "rewrite_ref_scope_2026_08_24_disposable_clone_rewrite_ref_scope_2026_08_24",
+      "label": "Disposable-Clone Rewrite Ref Scope — 2026-08-24",
+      "degree": 9
+    },
+    {
+      "id": "rewrite_readiness_2026_08_24_history_rewrite_readiness_2026_08_24",
+      "label": "History Rewrite Readiness — 2026-08-24",
+      "degree": 8
+    },
+    {
+      "id": "audit_remediation_status_2026_08_23_original_findings",
+      "label": "Original Findings",
+      "degree": 7
+    },
+    {
+      "id": "external_action_handoff_2026_08_24_external_action_handoff_2026_08_24",
+      "label": "External Action Handoff — 2026-08-24",
+      "degree": 6
+    },
+    {
+      "id": "incident_response_credential_incident_response",
+      "label": "Credential Incident Response",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "check_security_docs()",
+      "target": "scan_paths()",
+      "source_files": [
+        "SECURITY/validate_security_docs.py",
+        "SECURITY/secret_scan.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Repository Audit and Remediation Status` connect `Repository Audit and Remediation Status` to `Remediation Implemented`?",
+      "why": "High betweenness centrality (0.027) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `scan_paths()` connect `Credential Incident Response` to `validate_security_docs.py`?",
+      "why": "High betweenness centrality (0.021) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Remediation Implemented` connect `Remediation Implemented` to `Repository Audit and Remediation Status`?",
+      "why": "High betweenness centrality (0.017) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Executive Summary`, `Scope and Repository Shape`, `Critical: credential-shaped material in tracked history` to the rest of the system?",
+      "why": "90 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Repository Audit and Remediation Status` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Forensic Archive and Worktree Export Plan — 2026-08-24` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Disposable-Clone Rewrite Ref Scope — 2026-08-24` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

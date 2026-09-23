@@ -173,6 +173,7 @@ Two runs = 8 rows, never overlapping.
 | Footclan Executor | `FOOTCLAN_EXECUTOR.py` |
 | AI Army | `AI_ARMY/` |
 | Aether Core System | `AETHER_CORE_SYSTEM/`, `AETHER_SYNC_BRIDGE.py` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

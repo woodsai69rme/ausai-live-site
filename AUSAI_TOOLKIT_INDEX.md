@@ -88,3 +88,17 @@
 > **AusAI Tech — AI Automation Consulting**  
 > `github.com/woodsai69rme`  
 > *66 files built across 14 rounds. 2026-06-28. Ready to use.*
+
+---
+
+## 🧰 Operator Self-Use Toolkit *(separate audience — internal Karma use only)*
+
+> **Note:** This section is for the OPERATOR (Karma) — NOT for client-facing delivery. The AusAI Tech client starter pack above (5 core files) is what gets sent to clients. The operator toolkit below covers Karma's private daily-use tools and stays off client desks.
+
+| Path | Shape | Use |
+|---|---|---|
+| [`AI_AND_IT_TOOLKIT.md`](../AI_AND_IT_TOOLKIT.md) | canonical Markdown reference | ~30+ tools across 10 categories; Tier 1-4 ranking |
+| [`AI_AND_IT_TOOLKIT.html`](../AI_AND_IT_TOOLKIT.html) | interactive dashboard | filter chips + hover cards + dark theme |
+| [`tool_kit.py`](../tool_kit.py) | Python CLI dispatcher | `list / info / search / categories / tiers / health` |
+
+Distinct from the 5-core client starter pack above because it serves a different audience: this one is Karma's private operator surface, full of internal file paths and lowest-tier details not appropriate for client deliverables.

@@ -1,12 +1,21 @@
 {
   "name": "SLEEP_TRIPLE",
-  "version": "1.0.0",
-  "purpose": "Three independent systems that run while user sleeps and earn AUD with ZERO approvals (no ABN, no LLC, no partner-program applications).",
+  "version": "2.0.0",
+  "purpose": "Five autonomous revenue lanes running 23:00-07:00 AEST. Zero approvals, real AUD, local-first AI.",
   "tz": "Australia/Sydney",
-  "sleep_window": ["23:00", "07:00"],
+  "sleep_window": [
+    "23:00",
+    "07:00"
+  ],
   "dry_run_default": true,
   "max_daily_aud_spend": 0.0,
   "max_daily_aud_risk": 0.0,
+  "autonomous_master": {
+    "dry_run_default": false,
+    "service_recovery_timeout": 180,
+    "preflight_timeout": 60,
+    "orchestrator_timeout": 600
+  },
   "ledger_path": "C:/Users/karma/REVENUE_LEDGER.jsonl",
   "audit_log_path": "C:/Users/karma/SLEEP_TRIPLE/SLEEP_TRIPLE_AUDIT.jsonl",
   "append_revenue_event_script": "C:/Users/karma/Append-RevenueEvent.ps1",
@@ -22,11 +31,15 @@
   ],
   "options": {
     "a": {
-      "label": "AI Digital Product Factory",
+      "label": "AI Digital Product Factory (Gumroad)",
       "enabled": true,
-      "categories": ["ai_prompts", "code_snippets", "design_assets"],
+      "categories": [
+        "ai_prompts",
+        "code_snippets",
+        "design_assets"
+      ],
       "products_per_night": 1,
-      "ollama_model_preference": "qwen2.5-coder:latest",
+      "ollama_model_preference": "ornith:9b",
       "openrouter_model_fallback": "qwen/qwen3-next-80b-a3b-instruct:free",
       "comfyui_url": "http://127.0.0.1:8188",
       "gumroad_dry_run": true
@@ -37,32 +50,97 @@
       "shorts_per_night": 1,
       "target_duration_seconds": 30,
       "transcript_seed_top_n": 5,
-      "ollama_model_preference": "qwen2.5-coder:latest",
+      "ollama_model_preference": "ornith:9b",
       "comfyui_url": "http://127.0.0.1:8188",
       "youtube_upload_dry_run": true,
+      "voiceover_provider": "edge",
+      "tts_config": {
+        "provider": "edge",
+        "voice": "en-AU-NatashaNeural",
+        "edge_installed": true
+      },
       "instant_approval_affiliate_programs": [
-        "https://affiliateprogram.withpersona.com/affiliates",
+        "https://affiliates.kraken.com",
+        "https://www.binance.com/en/activity/referral",
         "https://www.hostinger.com/affiliates",
         "https://crypto.com/affiliates",
-        "https://www.binance.com/en/activity/referral",
-        "https://affiliates.kraken.com"
+        "https://affiliateprogram.withpersona.com/affiliates",
+        "https://www.ledger.com/affiliate"
       ]
     },
     "c": {
-      "label": "Crypto Yield Automation",
+      "label": "Crypto Yield + Arbitrage (Freqtrade)",
       "enabled": true,
       "snapshot_only": true,
-      "exchanges_observed": ["coinspot", "kraken", "independentreserve"],
-      "stablecoin_pairs": ["USDC/AUD", "USDT/AUD"],
+      "exchanges_observed": [
+        "coinspot",
+        "kraken",
+        "independentreserve"
+      ],
+      "stablecoin_pairs": [
+        "USDC/AUD",
+        "USDT/AUD"
+      ],
       "max_capital_aud": 0,
-      "stablecoin_threshold_bps": 50
-    }
-  },
+      "stablecoin_threshold_bps": 50,
+      "freqtrade_config": {
+        "enabled": false,
+        "dry_run": true,
+        "exchange": "kraken",
+        "stake_currency": "USDC",
+        "stake_amount": 500,
+        "max_open_trades": 3
+      }
+    },
+    "d": {
+      "label": "API-as-a-Service Micro-SaaS (Vercel/Cloudflare)",
+      "enabled": false,
+      "products_per_week": 1,
+      "apis_planned": [
+        "youtube_transcript_extractor",
+        "comfyui_workflow_validator",
+        "n8n_workflow_generator"
+      ],
+      "deployment": "vercel_free_tier",
+      "billing": "stripe_subscriptions"
+    },
+    "e": {
+          "label": "Print-on-Demand AI Design Factory (Shopify/Printful)",
+          "enabled": false,
+          "products_per_night": 1,
+          "default_product_kind": "tshirt",
+          "default_niche": "ai_humor",
+          "ollama_model_preference": "ornith:9b",
+          "comfyui_url": "http://127.0.0.1:8188",
+          "shopify_dry_run": true,
+          "printful_dry_run": true,
+          "shopify_store_url": "",
+          "printful_api_key": ""
+        },
+        "f": {
+          "label": "AI Money-Making App Discovery Engine",
+          "enabled": true,
+          "discovery_frequency": "daily",
+          "sources": ["github_awesome", "reddit", "producthunt"],
+          "max_per_source": 15,
+          "min_weighted_score": 50,
+          "generate_build_plans": true,
+          "ollama_model_preference": "ornith:9b",
+          "openrouter_model_fallback": "qwen/qwen3-next-80b-a3b-instruct:free",
+          "analysis_model": "analysis",
+          "coding_model": "coding",
+          "creative_model": "creative",
+          "fast_model": "fast"
+        }
+      },
   "notes": [
-    "Sleep Triple ships with AUD=$0 risk ceiling by default. --run --with-risk flag allows live operations.",
+    "Sleep Triple v2 ships with AUD=$0 risk ceiling by default. --run --with-risk flag allows live operations.",
     "Auto-listing to Gumroad stays in --dry-run until --publish flag is set on opt_a_digital_factory.py.",
     "Crypto yield is OBSERVATION-ONLY by default. --execute flag is required for any live trade.",
+    "Freqtrade integration available for Lane C - install via pip, configure Kraken API, backtest 90 days, dry-run 2 weeks.",
     "All outputs append to existing REVENUE_LEDGER.jsonl via Append-RevenueEvent.ps1.",
-    "Each module is independently skippable: --skip-a, --skip-b, --skip-c."
+    "Each module is independently skippable: --skip-a, --skip-b, --skip-c, --skip-d, --skip-e.",
+    "Lane D (API SaaS) and Lane E (POD) require build-out before enabling.",
+    "Models: Primary = Ornith-9B (local Ollama, 69.4% SWE-Bench), Fallback = OpenRouter free models."
   ]
 }

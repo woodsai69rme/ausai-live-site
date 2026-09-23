@@ -158,6 +158,19 @@ append-only semantics. Every tool opens with `✅ COMPLIANCE — ADDITIVE ONLY`
 in its companion doc and closes with the 8-item `PERSONAL_FOLDERS` Rule
 #8 footer. `MASTER_AUDIT_FAMILY.md` (this doc) follows the same convention.
 
+## 🔗 Reference Docs (NEW 2026-07-09)
+
+| Topic | Doc |
+|---|---|
+| YouTube + transcript + ComfyUI video ecosystem | `YOUTUBE_GITHUB_DEEP_RESEARCH_2026.md` |
+| Laptop → display + peripherals (14 categories, 3-tier recommendation) | `HARDWARE_SHOPPING_LIST_2026.md` |
+| GPU-accelerated remote desktop install | `SUNSHINE_MOONLIGHT_SETUP.md` |
+| Curated GitHub `awesome-*` lists for YouTube | `AWESOME_YOUTUBE_REPOS_2026.md` |
+| Single-page start-here index for the above | `REFERENCE_DOCS_INDEX.md` |
+| One-page daily digest | `DAILY_REFERENCE_DIGEST_2026-07-09.md` |
+
+---
+
 🚨 **Rule #8 — Closed PersonalFolders (8 items, must end with `ARCHIVE_OLD`):**
 
 - Documents

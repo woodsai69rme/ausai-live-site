@@ -4,6 +4,8 @@ import { KnowledgeBasePage } from './pages/KnowledgeBasePage';
 import { SettingsPage } from './pages/SettingsPage';
 import { MCPPage } from './pages/MCPPage';
 import { OnboardingPage } from './pages/OnboardingPage';
+import { ResearchPage } from './pages/ResearchPage';
+import { AccountsBrowserPage } from './pages/AccountsBrowserPage';
 import { MainLayout } from './components/layouts/MainLayout';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
@@ -13,7 +15,7 @@ import { DisconnectScreenOverlay } from './components/DisconnectScreenOverlay';
 import { ErrorBoundaryWithBugReport } from './components/bug-report/ErrorBoundaryWithBugReport';
 import { serverHealthService } from './services/serverHealthService';
 
-// 🚀 Archon is running! All systems operational - Feb 17, 2026
+// 🚀 Archon AI Knowledge OS - Research Intelligence integrated
 const AppRoutes = () => {
   const { projectsEnabled } = useSettings();
   
@@ -23,6 +25,8 @@ const AppRoutes = () => {
       <Route path="/onboarding" element={<OnboardingPage />} />
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="/mcp" element={<MCPPage />} />
+      <Route path="/research" element={<ResearchPage />} />
+      <Route path="/accounts" element={<AccountsBrowserPage />} />
       {projectsEnabled ? (
         <Route path="/projects" element={<ProjectPage />} />
       ) : (
@@ -41,16 +45,12 @@ const AppContent = () => {
   });
 
   useEffect(() => {
-    // Load initial settings
     const settings = serverHealthService.getSettings();
     setDisconnectScreenSettings(settings);
-
-    // Stop any existing monitoring before starting new one to prevent multiple intervals
     serverHealthService.stopMonitoring();
 
-    // Skip health monitoring in offline mode - commented out to prevent backend dependency
-    // Start health monitoring
-    /* serverHealthService.startMonitoring({
+    /* Monitoring disabled in offline mode
+    serverHealthService.startMonitoring({
       onDisconnected: () => {
         if (!disconnectScreenDismissed) {
           setDisconnectScreenActive(true);
@@ -59,10 +59,10 @@ const AppContent = () => {
       onReconnected: () => {
         setDisconnectScreenActive(false);
         setDisconnectScreenDismissed(false);
-        // Refresh the page to ensure all data is fresh
         window.location.reload();
       }
-    }); */
+    });
+    */
 
     return () => {
       serverHealthService.stopMonitoring();

@@ -1,6 +1,6 @@
 # All AI Tools — Quick Reference
 
-One-page index for `START-ALL-AI-TOOLS.bat` (menu 0-16).
+One-page index for `START-ALL-AI-TOOLS.bat` (menu 0-21).
 
 ## Menu Map
 
@@ -25,11 +25,23 @@ One-page index for `START-ALL-AI-TOOLS.bat` (menu 0-16).
 11. Tadpole Studio (Music)
 12. ComfyUI (Video/Image)
 
+=== MOBILE RECOVERY (added 2026-07-09) ===
+21. Mobile Recovery Suite (iPhone + Android + Oppo)
+
 === DASHBOARD ===
 13. Launch God-Mode Dashboard (Port 3142)
 14. List all models
 15. List all skills
 16. Open documentation
+
+=== ARCHON STACK ===
+17. Start Archon Stack
+18. Stop Archon Stack
+
+=== ORNITH / BENCH ===
+19. Pull & test Ornith-1 9B
+20. Benchmark all installed coders
+
  0. Exit
 ```
 
@@ -53,6 +65,11 @@ One-page index for `START-ALL-AI-TOOLS.bat` (menu 0-16).
 | 14 | **List models** | ✅ Ready | `ollama list` | Shows all downloaded Ollama models |
 | 15 | **List skills** | ✅ Ready | `npx skills list` | Shows installed npx skills |
 | 16 | **Docs** | ✅ Ready | Opens `ALL-TOOLS-CONFIGURED.md` | Notepad launch of master documentation |
+| 17 | **Archon Start** | ✅ Ready | `START_ARCHON_STACK.bat` | Brings up :8181 / :8051 / :8052 |
+| 18 | **Archon Stop** | ✅ Ready | `STOP_ARCHON_STACK.bat` | Kills the three Archon services |
+| 19 | **Ornith install** | ✅ Ready | `ollama pull ornith:9b` | Agentic-coding LLM with 256K context |
+| 20 | **Benchmark coders** | ✅ Ready | `benchmark_coders.py --sweep` | Wall-clock comparison of local models |
+| 21 | **Mobile Recovery Suite** | ✅ Ready | `RECOVERY_SUITE.bat` | iPhone (pymobiledevice3/libimobiledevice) + Android GUI + Oppo broken-screen + Dr.Fone-Alt batch menus + 4 Flask reference UIs. Headline use case: data recovery on a phone with broken screen. Index: `COMPLETED_PROJECTS\mobile_backup\MOBILE_TOOLS_INDEX.md` |
 | 0 | **Exit** | — | — | Closes the launcher |
 
 ## Model IDs (OpenRouter Free Tier)

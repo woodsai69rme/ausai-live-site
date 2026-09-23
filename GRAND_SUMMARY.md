@@ -1,8 +1,8 @@
 # 📋 GRAND_SUMMARY.md — Complete Workspace Reference
 
-> **One-page condensed reference for the entire workspace.** 17 systems, 19 indexes, 420+ files organized, 12 ports. 🟢 AI Army LIVE on port 8001. Print this.
+> **One-page condensed reference for the entire workspace.** 18 systems, 20 indexes, 437+ files organized, 12 ports. 🟢 AI Army LIVE on port 8001. Print this.
 
-**Generated:** 2026-06-29 | **Systems:** 17 | **Ports:** 12 | **Commits:** 23 this session | **GitHub:** ✅ All commits pushed
+**Generated:** 2026-07-09 | **Systems:** 18 | **Ports:** 12 | **Files:** 437+ organized | **Mobile Recovery Suite:** ✅ 16 new files, 15/15 tests, 12-position menu
 
 ---
 
@@ -26,7 +26,8 @@
 | 14 | Dashboard System Scripts | 61 | Terminal automation layer |
 | 15 | Bookmark Manager Pro | 20+ | 7,685 bookmarks, 17 categories, 100% coverage |
 | 16 | AI Influencer Factory | 4 | Ollama→Piper→ComfyUI→n8n pipeline |
-| 17 | Workspace Meta | 19 | All indexes, org plan, changelog |
+| 17 | Mobile Recovery Suite | 16 | 12-position menu, 15/15 tests, scrcpy/ADB/libimobiledevice |
+| 18 | Workspace Meta | 20 | All indexes, org plan, changelog |
 
 ---
 
@@ -107,11 +108,15 @@
 
 | Need | Open |
 |---|---|
-| Everything at a glance | `WORKSPACE_INDEX.md` (17 systems) |
+| Everything at a glance | `WORKSPACE_INDEX.md` (18 systems) |
 | Day 1 action plan | `DAY1_EXECUTION_PACK.md` |
 | All AI tools | `AI_TOOLS_DASHBOARD.html` |
 | AI Army live dashboard | `http://localhost:8001` 🟢 |
-| Push to GitHub | ✅ All 23 session commits pushed to GitHub |
+| **Recover a bricked phone (Oppo/Android/iPhone)** | `COMPLETED_PROJECTS/mobile_backup/RECOVERY_QUICKSTART.md` |
+| **Laptop → display + peripherals (USB-C / TB / hub tiers)** | `HARDWARE_SHOPPING_LIST_2026.md` |
+| **Cable-free remote-desktop via Sunshine + Moonlight** | `SUNSHINE_MOONLIGHT_SETUP.md` |
+| **YouTube toolkit: build / discover research catalogue** | `REFERENCE_DOCS_INDEX.md` (→ 4 docs) |
+| Push to GitHub | ⏸ Local-only (Mobile Recovery Suite + master fleet additions not yet pushed) |
 | Deploy site | `DEPLOYMENT_QUICK_START.md` |
 | Full history | `CHANGELOG.md` |
 

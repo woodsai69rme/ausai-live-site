@@ -1,0 +1,15 @@
+[
+  {
+    "tool": "lmstudio",
+    "session_id": "lmstudio",
+    "title": "lmstudio app data",
+    "created": "2026-09-17T13:09:30.567490+00:00",
+    "updated": "2026-09-17T13:09:30.567490+00:00",
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\LM Studio",
+    "format": "appdir",
+    "bytes": null,
+    "extra": {
+      "files_approx": 78
+    }
+  }
+]

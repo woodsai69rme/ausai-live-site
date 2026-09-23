@@ -1,0 +1,19 @@
+[
+  {
+    "tool": "cursor",
+    "session_id": "cursor.ai-tracking",
+    "title": "Cursor AI tracking DB",
+    "created": "2025-12-12T13:32:28.121060+00:00",
+    "updated": "2025-12-12T13:32:28.121060+00:00",
+    "path": "C:\\Users\\karma\\.cursor\\ai-tracking\\ai-code-tracking.db",
+    "format": "cursor.db",
+    "bytes": 32768,
+    "extra": {
+      "tables": [
+        "ai_code_hashes",
+        "scored_commits",
+        "tracking_state"
+      ]
+    }
+  }
+]

@@ -1,0 +1,3390 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-08-20T13:20:27Z",
+  "source_catalog": "full_stackyt_tool_catalog.json",
+  "source_policy": "Channel titles are discovery evidence only. A verified URL means a plausible primary source was corroborated; it does not approve adoption. License verification is counted only for explicitly confirmed license findings.",
+  "safety_invariants": {
+    "auto_install": false,
+    "auto_execute": false,
+    "credential_changes": false,
+    "external_account_actions": false,
+    "production_changes": false,
+    "media_downloads": false
+  },
+  "counts": {
+    "source_tools": 99,
+    "execution_records": 99,
+    "official_sources_verified": 21,
+    "license_verified": 4,
+    "official_urls_included": 21,
+    "backlog": 99
+  },
+  "records": [
+    {
+      "tool_name": "code-review-graph",
+      "category": "code intelligence",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Channel catalog only; no confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Low",
+        "tier": "T1-quick-win"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Pin an official source and version.",
+          "Run only on a copy or fixture dataset.",
+          "Capture baseline, output, runtime, license, and rollback evidence."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Codegraph",
+      "category": "code intelligence",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Channel catalog only; no confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Low",
+        "tier": "T1-quick-win"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Pin an official source and version.",
+          "Run only on a copy or fixture dataset.",
+          "Capture baseline, output, runtime, license, and rollback evidence."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Graphify",
+      "category": "knowledge management",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Workspace AGENTS.md references graphify-out and graphify query/update workflows."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Low",
+        "tier": "T1-quick-win"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Pin an official source and version.",
+          "Run only on a copy or fixture dataset.",
+          "Capture baseline, output, runtime, license, and rollback evidence."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Headroom",
+      "category": "AI efficiency",
+      "source_evidence": {
+        "channel_video_count": 2,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Channel catalog and agent-registry references; no confirmed executable integration found."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Low",
+        "tier": "T1-quick-win"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Pin an official source and version.",
+          "Run only on a copy or fixture dataset.",
+          "Capture baseline, output, runtime, license, and rollback evidence."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "MarkItDown",
+      "category": "document processing",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/microsoft/markitdown",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Channel catalog only; no confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Low",
+        "tier": "T1-quick-win"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Pin an official source and version.",
+          "Run only on a copy or fixture dataset.",
+          "Capture baseline, output, runtime, license, and rollback evidence."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Claude Code",
+      "category": "AI coding",
+      "source_evidence": {
+        "channel_video_count": 9,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://docs.anthropic.com/en/docs/claude-code/overview",
+        "source_type": "official Anthropic documentation",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "commercial/proprietary terms",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Workspace contains Claude configuration, skills, and session tooling references."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Codebase Memory MCP",
+      "category": "MCP and code intelligence",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Open Notebook",
+      "category": "research and knowledge",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "OpenCut",
+      "category": "video editing",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Channel catalog only; no confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "OpenMontage",
+      "category": "video editing",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Channel catalog only; related ComfyUI/media workspace exists but no confirmed integration."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Palmier Pro",
+      "category": "video editing",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Skills.sh",
+      "category": "agent skills",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Wigolo",
+      "category": "web research",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/KnockOutEZ/wigolo",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "public beta/active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Workspace has Wigolo skills, client, and local engine references."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T2-high-fit-controlled"
+      },
+      "bounded_next_action": {
+        "action_type": "bounded-local-evaluation",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and permissions first.",
+          "Use a disposable workspace with no production credentials.",
+          "Capture a rollback path and evidence before any integration decision."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "AI Website Cloner",
+      "category": "web development",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Anthropic Cybersecurity Skills",
+      "category": "security",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "CubeSandbox",
+      "category": "agent security",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/tencentcloud/CubeSandbox",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Desktop Commander MCP",
+      "category": "MCP and desktop automation",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/wonderwhy-er/desktopcommandermcp",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Destructive Command Guard",
+      "category": "agent security",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/Dicklesworthstone/destructive_command_guard",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT with OpenAI/Anthropic Rider",
+        "license": "MIT with OpenAI/Anthropic Rider",
+        "license_verified": true,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "ego lite",
+      "category": "agent browsers",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/citrolabs/ego-lite",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "ElevenLabs",
+      "category": "voice and speech",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "iptv-org/iptv",
+      "category": "media infrastructure",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Open-LLM-VTuber",
+      "category": "voice and multimodal AI",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "OpenMed",
+      "category": "healthcare AI",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/maziyarpanahi/openmed",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Page Agent",
+      "category": "agent browsers",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/alibaba/page-agent",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT",
+        "license": "MIT",
+        "license_verified": true,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "PentAGI",
+      "category": "security",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/vxcontrol/pentagi",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT",
+        "license": "MIT",
+        "license_verified": true,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Sandbox Claude Code",
+      "category": "agent security",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "SkillSpector",
+      "category": "agent security",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/NVIDIA/skillspector",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Strix",
+      "category": "security",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/usestrix/strix",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Vibe-Trading",
+      "category": "finance automation",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/HKUDS/Vibe-Trading",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Voicebox",
+      "category": "voice and speech",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/jamiepine/voicebox",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT",
+        "license": "MIT",
+        "license_verified": true,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "VoxCPM2",
+      "category": "voice and speech",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/OpenBMB/VoxCPM",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "Apache-2.0",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "WisprFlow",
+      "category": "voice and speech",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "High",
+        "tier": "T3-high-risk-review"
+      },
+      "bounded_next_action": {
+        "action_type": "read-only-threat-model",
+        "requires_threat_model": true,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Do not install or execute.",
+          "Review official documentation, source, permissions, network access, and data handling.",
+          "Write a threat model and define a disposable sandbox before requesting a test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Awesome LLM Apps",
+      "category": "AI applications",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Low",
+        "risk": "Low",
+        "tier": "T4-verify-only"
+      },
+      "bounded_next_action": {
+        "action_type": "verify-official-source",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Locate the canonical project website/repository from the video or a trusted primary source.",
+          "Confirm the name is a real project rather than a topic, collection, or marketing label.",
+          "Record license, maintenance, dependencies, and source URL before any test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "GitHub repository ecosystem",
+      "category": "reference",
+      "source_evidence": {
+        "channel_video_count": 12,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Low",
+        "risk": "Low",
+        "tier": "T4-verify-only"
+      },
+      "bounded_next_action": {
+        "action_type": "verify-official-source",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Locate the canonical project website/repository from the video or a trusted primary source.",
+          "Confirm the name is a real project rather than a topic, collection, or marketing label.",
+          "Record license, maintenance, dependencies, and source URL before any test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Google Stitch Skills",
+      "category": "reference",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Low",
+        "risk": "Medium",
+        "tier": "T4-verify-only"
+      },
+      "bounded_next_action": {
+        "action_type": "verify-official-source",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Locate the canonical project website/repository from the video or a trusted primary source.",
+          "Confirm the name is a real project rather than a topic, collection, or marketing label.",
+          "Record license, maintenance, dependencies, and source URL before any test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Microsoft AI curriculum",
+      "category": "reference",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Low",
+        "risk": "Low",
+        "tier": "T4-verify-only"
+      },
+      "bounded_next_action": {
+        "action_type": "verify-official-source",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Locate the canonical project website/repository from the video or a trusted primary source.",
+          "Confirm the name is a real project rather than a topic, collection, or marketing label.",
+          "Record license, maintenance, dependencies, and source URL before any test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "System Prompts Leaks Repo",
+      "category": "AI research",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Low",
+        "risk": "Medium",
+        "tier": "T4-verify-only"
+      },
+      "bounded_next_action": {
+        "action_type": "verify-official-source",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Locate the canonical project website/repository from the video or a trusted primary source.",
+          "Confirm the name is a real project rather than a topic, collection, or marketing label.",
+          "Record license, maintenance, dependencies, and source URL before any test."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Agency Agents",
+      "category": "multi-agent systems",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "AI Berkshire",
+      "category": "finance automation",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "AirLLM",
+      "category": "local AI",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Apple Container",
+      "category": "containers",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Astryx",
+      "category": "design systems",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "BitChat",
+      "category": "private communications",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Book-to-Skill",
+      "category": "agent skills",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Bun",
+      "category": "JavaScript tooling",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/oven-sh/bun",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Buzz",
+      "category": "AI workspace",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Caveman",
+      "category": "AI efficiency",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Chatwoot",
+      "category": "customer support",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/chatwoot/chatwoot",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Claude Video",
+      "category": "video understanding",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Cloudflare Computer",
+      "category": "agent infrastructure",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "CMUX",
+      "category": "agent operations",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Code-Graph-RAG",
+      "category": "code intelligence",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Compound Engineering",
+      "category": "AI development",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "DGX Spark",
+      "category": "AI hardware",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Fable Brain Protocol",
+      "category": "prompting and AI memory",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "FreeDomain",
+      "category": "domains",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Google Skills",
+      "category": "agent skills",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Hallmark",
+      "category": "agent skills",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Harness",
+      "category": "multi-agent systems",
+      "source_evidence": {
+        "channel_video_count": 2,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Harper",
+      "category": "privacy",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Hermes Agent",
+      "category": "AI agents",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Workspace contains Hermes agent/orchestration documentation and source references."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "HTMX",
+      "category": "web development",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/bigskysoftware/htmx",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "BSD-2-Clause",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "HuggingFace",
+      "category": "AI models",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "i-have-adhd",
+      "category": "AI coding",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "jcode",
+      "category": "AI coding",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Kaneo",
+      "category": "project management",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Knowledge Work Plugins",
+      "category": "agent skills",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "last30days-skill",
+      "category": "web research",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "LingBot-Map",
+      "category": "computer vision",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "LobeHub",
+      "category": "AI agents",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Meetily",
+      "category": "meeting AI",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Money Printer Turbo",
+      "category": "content automation",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Multical",
+      "category": "agent operations",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Nanobot",
+      "category": "AI agents",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Odysseus",
+      "category": "AI workspace",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "OfficeCLI",
+      "category": "productivity automation",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Offline AI Knowledge Server",
+      "category": "local AI",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "oMLX",
+      "category": "local AI",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "OmniRoute",
+      "category": "AI infrastructure",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "Workspace contains ZEROONE OmniRoute bootstrap/configuration references."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Open Interpreter",
+      "category": "AI coding",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Open Knowledge Format",
+      "category": "AI memory",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "OpenSEO",
+      "category": "SEO",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "OpenWork",
+      "category": "MCP and agents",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Ornith-1.0-9B",
+      "category": "local AI",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Paperclip",
+      "category": "agent operations",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "PDF-inspector",
+      "category": "document processing",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "PM Skills Marketplace",
+      "category": "product management",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Prime Agent",
+      "category": "AI agents",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "High",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "React",
+      "category": "web development",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/react/react",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "MIT",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "reverse-skill",
+      "category": "agent skills",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Semantica",
+      "category": "knowledge management",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "SimpleX Chat",
+      "category": "private communications",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/simplex-chat/simplex-chat",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "AGPL-3.0",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Stitch Skills",
+      "category": "design and agents",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Supermemory",
+      "category": "AI memory",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Low",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Taste Skill",
+      "category": "agent skills",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Twenty CRM",
+      "category": "CRM",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": true,
+        "official_source_url": "https://github.com/twentyhq/twenty",
+        "source_type": "primary GitHub repository",
+        "verification_confidence": "high",
+        "status_observed": "active",
+        "license_claim": "AGPL-3.0",
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Understand Anything",
+      "category": "research and video analysis",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Video-Use",
+      "category": "video editing",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    },
+    {
+      "tool_name": "Watermarks Remover",
+      "category": "content authenticity",
+      "source_evidence": {
+        "channel_video_count": 1,
+        "evidence_status": "title-only",
+        "official_source_verified": false,
+        "official_source_url": null,
+        "source_type": null,
+        "verification_confidence": null,
+        "status_observed": null,
+        "license_claim": null,
+        "license": null,
+        "license_verified": false,
+        "local_workspace_evidence": "No confirmed local implementation found in the bounded search."
+      },
+      "context": {
+        "workspace_fit": "Medium",
+        "risk": "Medium",
+        "tier": "T5-exploratory"
+      },
+      "bounded_next_action": {
+        "action_type": "documentation-license-review",
+        "requires_threat_model": false,
+        "allow_auto_install": false,
+        "allow_auto_execute": false,
+        "manual_steps": [
+          "Verify the official source and current documentation.",
+          "Check license, maintenance, dependencies, permissions, and data flow.",
+          "Defer execution until a bounded test case is approved."
+        ]
+      },
+      "status": "Backlog"
+    }
+  ]
+}

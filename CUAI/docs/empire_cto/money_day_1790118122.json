@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-09-23T09:02:02.249142",
+  "ceo_decision": "1. DECISION: Sell premium ComfyUI pack via Gumroad  \n2. WHY: Direct monetization of high-demand digital asset yields immediate revenue with zero ad spend.  \n3. FIRST_STEP: Create a Gumroad store page for the top ComfyUI pack, set pricing, and share the link in relevant Reddit communities.",
+  "shippable_count": 60,
+  "revenue_package": "C:\\Users\\karma\\CUAI\\docs\\marketing_reports\\social_broadcast_1790118122.md",
+  "gumroad_status": "no_gumroad_cli",
+  "gumroad_note": "missing C:\\Users\\karma\\bin\\gumroad.exe",
+  "next_action": "Drop Gumroad token in CONFIG/gumroad_token.txt to auto-list packs.",
+  "cost_usd": 0.0
+}

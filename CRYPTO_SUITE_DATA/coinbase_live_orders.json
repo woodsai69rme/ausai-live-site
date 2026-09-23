@@ -1,0 +1,50 @@
+[
+  {
+    "orderId": "cb_paper_9675e6b378",
+    "txHash": "0x9675e6b37835b803",
+    "productId": "SOL-USD",
+    "symbol": "SOL",
+    "side": "BUY",
+    "mode": "PAPER",
+    "amountUsd": 500.0,
+    "coinSize": 4.469873,
+    "fillPrice": 111.86,
+    "feeUsd": 3.0,
+    "slippagePct": 0.08,
+    "explorerUrl": "https://solscan.io/tx/9675e6b37835b803",
+    "status": "FILLED",
+    "timestamp": "2026-09-21T05:43:02.921678+00:00"
+  },
+  {
+    "orderId": "cb_paper_5f5eda5a4e",
+    "txHash": "0x5f5eda5a4e616d32",
+    "productId": "SOL-USD",
+    "symbol": "SOL",
+    "side": "BUY",
+    "mode": "PAPER",
+    "amountUsd": 500.0,
+    "coinSize": 4.451171,
+    "fillPrice": 112.33,
+    "feeUsd": 3.0,
+    "slippagePct": 0.08,
+    "explorerUrl": "https://solscan.io/tx/5f5eda5a4e616d32",
+    "status": "FILLED",
+    "timestamp": "2026-09-21T01:01:05.081006+00:00"
+  },
+  {
+    "orderId": "cb_paper_8502f343a4",
+    "txHash": "0x8502f343a4e98a79",
+    "productId": "SOL-USD",
+    "symbol": "SOL",
+    "side": "BUY",
+    "mode": "PAPER",
+    "amountUsd": 25.0,
+    "coinSize": 0.222559,
+    "fillPrice": 112.33,
+    "feeUsd": 0.15,
+    "slippagePct": 0.08,
+    "explorerUrl": "https://solscan.io/tx/8502f343a4e98a79",
+    "status": "FILLED",
+    "timestamp": "2026-09-21T01:01:03.519548+00:00"
+  }
+]

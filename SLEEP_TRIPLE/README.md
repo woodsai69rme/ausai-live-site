@@ -38,7 +38,7 @@ python sleep_orchestrator.py --list
 | **Monetization** | Gumroad instant shop (no approval). PayPal pays you in AUD. Free tier pays no fees. |
 | **Capital** | $0 |
 | **Defaults** | `--dry-run` writes into `./outbox/a_digital_factory/` but does NOT upload. |
-| **Closed enums** | `EXEC_STATUS = (started, ok, skipped, refused, noop, failed)` · `PRODUCT_KIND = (ai_prompts, code_snippets, design_assets)` · `PUBLISH_MODE = (draft_only, staged, published)` |
+| **Closed enums** | `EXEC_STATUS = (started, ok, degraded, skipped, refused, noop, failed)` · `PRODUCT_KIND = (ai_prompts, code_snippets, design_assets)` · `PUBLISH_MODE = (draft_only, staged, published)` |
 | **Ledger event** | `deploy_published` (via `Append-RevenueEvent.ps1`) |
 
 ### Option B — Faceless YouTube Shorts + Affiliate Funnel (`opt_b_faceless_shorts.py`)
@@ -68,7 +68,7 @@ python sleep_orchestrator.py --list
 ## Design Decisions
 
 1. **Sequential execution** — not parallel. Parallel risks GPU OOM (Ollama + ComfyUI concurrent), file-lock collisions on `REVENUE_LEDGER.jsonl`, and complicates idempotency state tracking.
-2. **Idempotent by date** — orchestrator checks `SLEEP_TRIPLE_AUDIT.jsonl` for today's `(date, slug, status=ok)`. If found, emits `noop` and skips.
+2. **Idempotent by date** — orchestrator checks `SLEEP_TRIPLE_AUDIT.jsonl` for today's `(date, slug, status=ok)`. A `degraded` result remains rerunnable and is not treated as complete.
 3. **`--dry-run` default everywhere** — mirrors the Footclan/Voice-PA runner pattern. Nothing is live until you explicitly pass `--run` (and per-option flags).
 4. **Rule #8 fence rigid** — refuses with exit 2 if any path component matches `Documents, Downloads, Pictures, Videos, Music, Desktop, OneDrive, ARCHIVE_OLD`.
 5. **Time-window gate** — orchestrator refuses (exit 3) outside `sleep_window` unless `--force-window`.

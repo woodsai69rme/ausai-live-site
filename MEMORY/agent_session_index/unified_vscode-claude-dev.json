@@ -1,0 +1,80 @@
+[
+  {
+    "tool": "vscode-claude-dev",
+    "session_id": "1748174123462",
+    "title": "1748174123462",
+    "created": "2025-05-25T11:55:25.020738+00:00",
+    "updated": "2025-05-25T11:55:25.020738+00:00",
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1748174123462",
+    "format": "vscode.task",
+    "bytes": null,
+    "extra": {
+      "metadata": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1748174123462\\metadata.json"
+    }
+  },
+  {
+    "tool": "vscode-claude-dev",
+    "session_id": "1748174572011",
+    "title": "1748174572011",
+    "created": "2025-05-25T12:02:52.885353+00:00",
+    "updated": "2025-05-25T12:02:52.885353+00:00",
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1748174572011",
+    "format": "vscode.task",
+    "bytes": null,
+    "extra": {
+      "metadata": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1748174572011\\metadata.json"
+    }
+  },
+  {
+    "tool": "vscode-claude-dev",
+    "session_id": "1752170463809",
+    "title": "1752170463809",
+    "created": "2025-07-10T18:01:06.549488+00:00",
+    "updated": "2025-07-10T18:01:06.549488+00:00",
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1752170463809",
+    "format": "vscode.task",
+    "bytes": null,
+    "extra": {
+      "metadata": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1752170463809\\metadata.json"
+    }
+  },
+  {
+    "tool": "vscode-claude-dev",
+    "session_id": "1752240102095",
+    "title": "1752240102095",
+    "created": "2025-08-16T07:28:20.286412+00:00",
+    "updated": "2025-08-16T07:28:20.286412+00:00",
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1752240102095",
+    "format": "vscode.task",
+    "bytes": null,
+    "extra": {
+      "metadata": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1752240102095\\metadata.json"
+    }
+  },
+  {
+    "tool": "vscode-claude-dev",
+    "session_id": "1753088564060",
+    "title": "1753088564060",
+    "created": "2025-07-21T09:02:46.631219+00:00",
+    "updated": "2025-07-21T09:02:46.631219+00:00",
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1753088564060",
+    "format": "vscode.task",
+    "bytes": null,
+    "extra": {
+      "metadata": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1753088564060\\metadata.json"
+    }
+  },
+  {
+    "tool": "vscode-claude-dev",
+    "session_id": "1754746145784",
+    "title": "1754746145784",
+    "created": "2025-08-09T13:29:09.055561+00:00",
+    "updated": "2025-08-09T13:29:09.055561+00:00",
+    "path": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1754746145784",
+    "format": "vscode.task",
+    "bytes": null,
+    "extra": {
+      "metadata": "C:\\Users\\karma\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\tasks\\1754746145784\\metadata.json"
+    }
+  }
+]

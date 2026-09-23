@@ -1,109 +1,31 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
+__pycache__
+*.pyc
+*.pyo
+*.pyd
 .Python
-.venv/
 env/
 venv/
-ENV/
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-.tox/
-.nox/
-*.egg-info/
-*.egg
-dist/
-build/
+.venv
 pip-log.txt
 pip-delete-this-directory.txt
-
-# Development
-.git/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
 .gitignore
-.github/
-docs/
-# tests/  # Keep tests for now as Dockerfile needs them
-*.md
-.env
-.env.*
-.editorconfig
-.pre-commit-config.yaml
-pytest.ini
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.project
-.pydevproject
-
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Docker
+.dockerignore
 Dockerfile*
 docker-compose*.yml
-.dockerignore
-
-# Logs and databases
-*.log
-logs/
-*.db
-*.sqlite
-*.sqlite3
-
-# Temporary files
-*.tmp
-*.temp
-*.bak
-*.swp
-*.swo
-*~
-
-# Archives
-*.zip
-*.tar.gz
-*.tgz
-*.rar
-
-# Old or backup files
-old_rag/
-backup/
-*.old
-*.backup
-
-# Local development
-.local/
-.cache/
-uploads/
-downloads/
-
-# Documentation build artifacts
-_build/
-site/
-
-# MyPy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# UV/pip
-uv.lock.bak
+.pytest_cache
+.mypy_cache
+.DS_Store
+*.egg-info/
+dist/
+build/
+.idea/
+.vscode/

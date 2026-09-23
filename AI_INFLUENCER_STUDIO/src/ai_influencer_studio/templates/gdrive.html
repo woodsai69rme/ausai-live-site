@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Drive Upload — AI Influencer Studio</title>
+  <style>
+    :root {
+      --primary: #4285f4;
+      --surface: #ffffff;
+      --text: #1f1f1f;
+      --muted: #5f6368;
+      --border: #dadce0;
+      --ok: #188038;
+      --warn: #b06000;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: var(--text);
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header h1 { font-size: 18px; margin: 0; }
+    header .badge {
+      margin-left: auto;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: #e8f0fe;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    main { padding: 24px; max-width: 900px; margin: 0 auto; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .stat { text-align: center; }
+    .stat .value { font-size: 32px; font-weight: 700; }
+    .stat .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .bar {
+      height: 10px;
+      background: #e8eaed;
+      border-radius: 6px;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+    .bar > div {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.secondary { background: #e8eaed; color: var(--text); }
+    input[type="text"] {
+      flex: 1;
+      min-width: 260px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .meta { font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .error { color: #d93025; font-size: 13px; margin-top: 8px; }
+    .log {
+      font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+      font-size: 12px;
+      background: #f1f3f4;
+      border-radius: 6px;
+      padding: 12px;
+      max-height: 220px;
+      overflow-y: auto;
+      margin-top: 12px;
+      white-space: pre-wrap;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Google Drive Upload</h1>
+    <span class="badge" id="statusBadge">—</span>
+  </header>
+  <main>
+    <div class="card">
+      <strong>1. Collect</strong>
+      <div class="meta">Scan source folders, filter (15 MB / 250 KB / no svg-bmp-gif / no stale screenshots), dedupe by content, and add to the pending list.</div>
+      <div class="row">
+        <input type="text" id="sources" value="C:\Users\karma\gdrive_upload_staging"
+               placeholder="Comma or newline separated directories">
+        <button id="collectBtn" onclick="collect()">Collect</button>
+      </div>
+      <div class="meta" id="collectResult"></div>
+    </div>
+
+    <div class="card">
+      <strong>2. Upload</strong>
+      <div class="meta">Upload the pending list in small paced batches via Playwright. You can watch progress here and stop gracefully at any batch boundary.</div>
+      <div class="row">
+        <button id="startBtn" onclick="startUpload()">Start upload</button>
+        <button id="stopBtn" class="secondary" onclick="stopUpload()" disabled>Stop (after batch)</button>
+      </div>
+      <div class="grid">
+        <div class="stat"><div class="value" id="statPending">—</div><div class="label">Pending</div></div>
+        <div class="stat"><div class="value" id="statDone">—</div><div class="label">Done</div></div>
+        <div class="stat"><div class="value" id="statUploaded">0</div><div class="label">Uploaded</div></div>
+        <div class="stat"><div class="value" id="statBatches">0</div><div class="label">Batches</div></div>
+      </div>
+      <div class="bar"><div id="progressBar"></div></div>
+      <div class="log" id="log">Waiting for status…</div>
+      <div class="error" id="error"></div>
+    </div>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let lastBatches = 0;
+    let lastUploaded = 0;
+
+    function statusLine(status, progress) {
+      if (!status) return "waiting…";
+      const parts = [];
+      if (status.running) parts.push("RUNNING");
+      else if (progress) {
+        parts.push(progress.status === "stopped" ? "STOPPED" : progress.status.toUpperCase());
+      } else {
+        parts.push("IDLE");
+      }
+      return parts.join(" — ");
+    }
+
+    async function refresh() {
+      try {
+        const res = await fetch("/api/gdrive/status");
+        const data = await res.json();
+        $("statusBadge").textContent = statusLine(data, data.progress);
+        $("statPending").textContent = data.pending ?? "—";
+        $("statDone").textContent = data.done ?? "—";
+        const uploaded = data.progress?.uploaded ?? 0;
+        const batches = data.progress?.batch_count ?? 0;
+        $("statUploaded").textContent = uploaded;
+        $("statBatches").textContent = batches;
+        const total = (data.pending ?? 0) + (data.done ?? 0);
+        if (total > 0) {
+          const pct = Math.round(((data.done ?? 0) / total) * 100);
+          $("progressBar").style.width = pct + "%";
+        }
+        $("startBtn").disabled = !!data.running;
+        $("stopBtn").disabled = !data.running;
+        const logLines = [];
+        if (data.running) logLines.push(`[${new Date().toLocaleTimeString()}] uploading…`);
+        if (data.started_at) logLines.push(`started: ${data.started_at}`);
+        if (data.last_error) logLines.push(`error: ${data.last_error}`);
+        if (data.progress) {
+          logLines.push(`batches: ${data.progress.batch_count} · uploaded: ${data.progress.uploaded}/${data.progress.total} · remaining: ${data.progress.remaining_pending} · done: ${data.progress.done}`);
+          if (data.progress.status) logLines.push(`status: ${data.progress.status}`);
+        }
+        $("log").textContent = logLines.join("\n");
+        if (uploaded > lastUploaded || batches > lastBatches) {
+          lastUploaded = uploaded;
+          lastBatches = batches;
+        }
+      } catch (err) {
+        $("error").textContent = "Status fetch failed: " + err;
+      }
+    }
+
+    async function collect() {
+      $("collectResult").textContent = "Collecting…";
+      $("error").textContent = "";
+      try {
+        const res = await fetch("/api/gdrive/collect", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "sources=" + encodeURIComponent($("sources").value),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.statusText);
+        $("collectResult").textContent =
+          `scanned ${data.scanned} · pending ${data.pending} · already done ${data.already_done} · total done ${data.done}`;
+        refresh();
+      } catch (err) {
+        $("collectResult").textContent = "";
+        $("error").textContent = "Collect failed: " + err;
+      }
+    }
+
+    async function startUpload() {
+      $("error").textContent = "";
+      try {
+        const res = await fetch("/api/gdrive/upload/start", { method: "POST" });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.statusText);
+        refresh();
+      } catch (err) {
+        $("error").textContent = "Start failed: " + err;
+      }
+    }
+
+    async function stopUpload() {
+      $("error").textContent = "";
+      try {
+        const res = await fetch("/api/gdrive/upload/stop", { method: "POST" });
+        const data = await res.json();
+        $("error").textContent = data.message || "";
+        refresh();
+      } catch (err) {
+        $("error").textContent = "Stop failed: " + err;
+      }
+    }
+
+    refresh();
+    setInterval(refresh, 5000);
+  </script>
+</body>
+</html>

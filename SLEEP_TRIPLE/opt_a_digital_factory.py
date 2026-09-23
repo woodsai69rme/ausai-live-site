@@ -34,7 +34,7 @@ OUTBOX = ROOT / "outbox" / "a_digital_factory"
 AUDIT_LOG = ROOT / "SLEEP_TRIPLE_AUDIT.jsonl"
 MASTER_CONFIG_PATH = ROOT / "sleep_config.json"
 
-EXEC_STATUS = ("started", "ok", "skipped", "refused", "noop", "failed")
+EXEC_STATUS = ("started", "ok", "degraded", "skipped", "refused", "noop", "failed")
 PRODUCT_KIND = ("ai_prompts", "code_snippets", "design_assets")
 PUBLISH_MODE = ("draft_only", "staged", "published")
 
@@ -56,7 +56,8 @@ def assert_rule_8_path(p: Path, label: str) -> int:
 
 
 def load_config() -> dict:
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    from env_bridge import load_config as _load
+    return _load(CONFIG_PATH)
 
 
 def load_orchestrator_config() -> dict:
@@ -212,9 +213,13 @@ def main() -> int:
 
     comfy_alive = ping_comfyui(cfg["comfyui_url"])
     if not comfy_alive and cfg.get("enable_comfy_cover", False):
-        append_audit({"ts": now_iso, "module": "opt_a", "status": "refused",
-                      "reason": "comfyui_down", "url": cfg["comfyui_url"]})
-        return 6
+        if dry_run:
+            append_audit({"ts": now_iso, "module": "opt_a", "status": "skipped",
+                          "reason": "comfyui_down_cover_skipped", "url": cfg["comfyui_url"]})
+        else:
+            append_audit({"ts": now_iso, "module": "opt_a", "status": "refused",
+                          "reason": "comfyui_down", "url": cfg["comfyui_url"]})
+            return 6
 
     body, data_source = generate_prompts(cfg["ollama_model_preference"], args.topic, dry_run)
     product_path = save_product(args.kind, args.topic, body, data_source, dry_run)

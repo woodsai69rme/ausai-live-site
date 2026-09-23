@@ -1,0 +1,2322 @@
+[
+  {
+    "tool": "opencode",
+    "session_id": "ses_41e57dd0effedxR59gWDQCs61L",
+    "title": "Full review and audit request",
+    "created": "2026-01-21T17:44:11.249000+00:00",
+    "updated": "2026-01-21T22:46:06.606000+00:00",
+    "path": "X:/03_PROJECTS",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.1.28",
+      "agent": null,
+      "messages": 18
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_41e5519dcffe1OXmvEtl4c5pPI",
+    "title": "Explore project structure (@explore subagent)",
+    "created": "2026-01-21T17:47:12.291000+00:00",
+    "updated": "2026-01-21T19:25:42.383000+00:00",
+    "path": "X:/03_PROJECTS",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_41e57dd0effedxR59gWDQCs61L",
+      "version": "1.1.28",
+      "agent": null,
+      "messages": 22
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_39677702fffe7j3l53kHraGVMq",
+    "title": "Own OpenClaw setup guidance",
+    "created": "2026-02-17T02:58:03.344000+00:00",
+    "updated": "2026-03-20T19:38:46.028000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 181
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_395fcd00affe7DVBQi2TcyHnLp",
+    "title": "Full audit and review: comprehensive report requested",
+    "created": "2026-02-17T05:11:59.733000+00:00",
+    "updated": "2026-04-27T03:56:48.021000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_395fc9a48ffeUhEFkVrwnVUx5p",
+    "title": "Full codebase audit exploration (@explore subagent)",
+    "created": "2026-02-17T05:12:13.495000+00:00",
+    "updated": "2026-04-17T22:41:20.615000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_395fcd00affe7DVBQi2TcyHnLp",
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_395cd4c60ffeo5NCbmnibChhT1",
+    "title": "Comprehensive project audit: all files and folders",
+    "created": "2026-02-17T06:03:53.631000+00:00",
+    "updated": "2026-03-08T02:21:18.317000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 285
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_39558c59fffe3q3UG7537jGlj4",
+    "title": "Full audit and review all files and folders",
+    "created": "2026-02-17T08:11:10.305000+00:00",
+    "updated": "2026-02-18T15:08:11.394000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 23
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_395589df2ffed7UCP5zeEHXK1T",
+    "title": "Full repository audit (@explore subagent)",
+    "created": "2026-02-17T08:11:20.461000+00:00",
+    "updated": "2026-02-17T08:11:20.479000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_39558c59fffe3q3UG7537jGlj4",
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_38eca5b03ffeKGIF7o4alRcJ8m",
+    "title": "Devmonitorwidget desktop full review audit and enhancements",
+    "created": "2026-02-18T14:44:27.005000+00:00",
+    "updated": "2026-09-04T12:26:29.107000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": "build",
+      "messages": 76
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_38cae4347ffe5QURC2Pxug4RR2",
+    "title": "Full audit: last 3 months files/folders on C: & X:, three iterations + checklist and actions",
+    "created": "2026-02-19T00:34:22.521000+00:00",
+    "updated": "2026-03-08T08:18:06.159000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 233
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_389000514ffe7I8cmYvHqguNSm",
+    "title": "Exhaustive project/docs audit request prompt",
+    "created": "2026-02-19T17:43:33.355000+00:00",
+    "updated": "2026-06-28T16:26:56.214000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": "build",
+      "messages": 103
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_37ef2d720ffeGvpeBvrUjZ0pzb",
+    "title": "New session - 2026-02-21T16:34:09.247Z",
+    "created": "2026-02-21T16:34:09.247000+00:00",
+    "updated": "2026-03-08T08:16:59.857000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 17
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_348bfa457ffe8Up6Oo7qD45YBe",
+    "title": "Full system review: C: & Z: audit, processes, and OpenCode CLI enhancement",
+    "created": "2026-03-04T05:09:34.248000+00:00",
+    "updated": "2026-03-08T02:17:07.600000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 247
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_34724ddc7ffes6Co0r7HF7P4wx",
+    "title": "Deep audit X: repos (@explore subagent)",
+    "created": "2026-03-04T12:38:14.840000+00:00",
+    "updated": "2026-03-04T12:42:54.305000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_348bfa457ffe8Up6Oo7qD45YBe",
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 14
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_347206bebffeOSLyjYqll5qgRE",
+    "title": "Deep audit ACTIVE_PROJECTS (@explore subagent)",
+    "created": "2026-03-04T12:43:06.132000+00:00",
+    "updated": "2026-03-04T12:46:29.246000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_348bfa457ffe8Up6Oo7qD45YBe",
+      "version": "1.2.6",
+      "agent": null,
+      "messages": 9
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_334df36bbffe0aUi63H15L0W9F",
+    "title": "Audit, fix, and enhance all links and navigation in aggdash26_consolidated project",
+    "created": "2026-03-08T01:47:29.476000+00:00",
+    "updated": "2026-03-08T22:08:44.532000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.21",
+      "agent": null,
+      "messages": 750
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_33149b895ffegKHSMC0FF5kHdH",
+    "title": "Concurrent browser agent to automate opening and finishing lovable.dev projects across 6–12 tabs",
+    "created": "2026-03-08T18:29:38.282000+00:00",
+    "updated": "2026-09-21T16:15:43.492000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.21",
+      "agent": "build",
+      "messages": 1094
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f56ca1b1ffegf13kSXM7esWnM",
+    "title": "OpenCode CLI setup and optimization",
+    "created": "2026-03-20T09:28:43.342000+00:00",
+    "updated": "2026-03-20T16:23:04.460000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 83
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f3dd68adffeT387OGNGtJPkxQ",
+    "title": "Troubleshooting browser loading after restart and DNS cache flush",
+    "created": "2026-03-20T16:44:46.802000+00:00",
+    "updated": "2026-03-21T04:38:09.907000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 158
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f383ba62ffeP0QHdXz4wTXfC3",
+    "title": "## Session Audit & Review",
+    "created": "2026-03-20T18:22:44.125000+00:00",
+    "updated": "2026-03-20T18:55:58.314000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 74
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f3384f1dffe9oYGRri94gP7ml",
+    "title": "SYSTEM_CORE gal files audit",
+    "created": "2026-03-20T19:45:06.786000+00:00",
+    "updated": "2026-04-18T22:59:15.475000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 120
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f3155c01ffe40kJst1UeRwXe2",
+    "title": "Full code audit (@explore subagent)",
+    "created": "2026-03-20T20:23:17.247000+00:00",
+    "updated": "2026-03-20T20:25:00.256000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f2ff99d5ffeN4ou7eN0ExIZ9p",
+    "title": "Create complete audit doc (@explore subagent)",
+    "created": "2026-03-20T20:47:03.210000+00:00",
+    "updated": "2026-03-20T20:53:44.606000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 19
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+    "title": "Create fnjews.bat to kill dev processes",
+    "created": "2026-03-20T22:18:31.241000+00:00",
+    "updated": "2026-03-21T13:37:01.951000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 231
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f13c26d5ffepO4KJinqHGN4vv",
+    "title": "Full code review (@explore subagent)",
+    "created": "2026-03-21T05:00:09.387000+00:00",
+    "updated": "2026-03-21T05:03:45.487000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 8
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a63978ffevAcJKQkeWNBMAk",
+    "title": "Create size-cache service (@general subagent)",
+    "created": "2026-03-21T07:43:55.015000+00:00",
+    "updated": "2026-03-21T07:44:17.595000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a62605ffeeGgI3PrcUV2p8U",
+    "title": "Create project-detector service (@general subagent)",
+    "created": "2026-03-21T07:43:59.994000+00:00",
+    "updated": "2026-03-21T07:44:31.226000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a60a11ffeG06EYX4Gl7Z5oa",
+    "title": "Create Tauri scaffold (@general subagent)",
+    "created": "2026-03-21T07:44:07.150000+00:00",
+    "updated": "2026-03-21T07:44:33.384000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 5
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a53300ffen7UG0fW6VqyaBL",
+    "title": "Add IPC handlers for size-cache (@general subagent)",
+    "created": "2026-03-21T07:45:02.207000+00:00",
+    "updated": "2026-03-21T07:45:30.834000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a46c8effeO303l3uzp1ZycM",
+    "title": "Add Quick Size tab to UI (@general subagent)",
+    "created": "2026-03-21T07:45:53.009000+00:00",
+    "updated": "2026-03-21T07:46:53.585000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a34079ffeGWUhcromwrbkHV",
+    "title": "Add Explorer right-click + tray (@general subagent)",
+    "created": "2026-03-21T07:47:09.830000+00:00",
+    "updated": "2026-03-21T07:48:07.708000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a31ce1fferEm9uDbNngvSKA",
+    "title": "Add project detection + grouping (@general subagent)",
+    "created": "2026-03-21T07:47:18.942000+00:00",
+    "updated": "2026-03-21T07:49:12.149000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 14
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a2ed7affeGO8gDGsc1bogqo",
+    "title": "Add memory alerts + auto-restart (@general subagent)",
+    "created": "2026-03-21T07:47:31.078000+00:00",
+    "updated": "2026-03-21T07:48:40.533000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 10
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2f0a13a42ffe5W88mDRr6nqu9J",
+    "title": "Add web server mode (@general subagent)",
+    "created": "2026-03-21T07:49:22.493000+00:00",
+    "updated": "2026-03-21T07:49:59.394000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_265eb9872ffesxF7MuH3sbmreJ",
+    "title": "New session - 2026-04-17T06:15:21.741Z",
+    "created": "2026-04-17T06:15:21.741000+00:00",
+    "updated": "2026-04-17T14:16:02.003000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 13
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_265eadd70ffepVI4GB3aIL7dpo",
+    "title": "Comprehensive codebase audit (@explore subagent)",
+    "created": "2026-04-17T06:16:09.615000+00:00",
+    "updated": "2026-04-17T06:22:05.871000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_265eb9872ffesxF7MuH3sbmreJ",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 11
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_25f9b448affeQFD2WuDzV6PfNw",
+    "title": "New session - 2026-04-18T11:40:49.397Z",
+    "created": "2026-04-18T11:40:49.397000+00:00",
+    "updated": "2026-04-18T11:43:18.695000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_25f9b3951ffeIM2Pl6J9UglhH8",
+    "title": "Research memory monitoring solutions for multi-CLI Node.js/Bun environment (@general subagent)",
+    "created": "2026-04-18T11:40:52.270000+00:00",
+    "updated": "2026-04-18T11:43:15.933000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_25f9b448affeQFD2WuDzV6PfNw",
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 19
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_2410892d7ffeAWoYhlm4LzSiOe",
+    "title": "New session - 2026-04-24T10:09:39.624Z",
+    "created": "2026-04-24T10:09:39.624000+00:00",
+    "updated": "2026-04-24T11:30:46.819000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": null,
+      "messages": 42
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_240593e98ffeLHu4ha31cjImSK",
+    "title": "OpenCode CLI setup, agents, skills, and Windows exe load issues",
+    "created": "2026-04-24T13:21:09.991000+00:00",
+    "updated": "2026-07-12T17:12:22.073000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.2.27",
+      "agent": "build",
+      "messages": 60
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_23f18da5dffey0BRdpztzCmyMO",
+    "title": "Full audit of all projects repos on C: and X:\\githubrepo with status and summary",
+    "created": "2026-04-24T19:11:07.170000+00:00",
+    "updated": "2026-08-24T23:29:17.373000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.14.23",
+      "agent": "build",
+      "messages": 459
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_230a1c1a0ffeAM4vty5qtPcq5A",
+    "title": "Find DevMonitorWidget files (@explore subagent)",
+    "created": "2026-04-27T14:35:53.311000+00:00",
+    "updated": "2026-04-27T23:08:00.894000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_38eca5b03ffeKGIF7o4alRcJ8m",
+      "version": "1.14.28",
+      "agent": null,
+      "messages": 3
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_21cc7c082ffegi2fPpJ0X2oc12",
+    "title": "Comprehensive AI coding tools and agents overview",
+    "created": "2026-05-01T11:06:47.550000+00:00",
+    "updated": "2026-09-02T13:36:42.142000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.14.31",
+      "agent": "build",
+      "messages": 1977
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_21cb03939ffeR741C2gm4HkeGN",
+    "title": "Tool to unfreeze cmd, auto-save chat history, and run install commands",
+    "created": "2026-05-01T11:32:29.511000+00:00",
+    "updated": "2026-05-04T18:44:31.324000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.14.31",
+      "agent": null,
+      "messages": 15
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_130d56bfeffeq7nvIkNLHisk4h",
+    "title": "New session - 2026-06-16T06:42:14.658Z",
+    "created": "2026-06-16T06:42:14.658000+00:00",
+    "updated": "2026-06-16T07:00:56.976000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.17.7",
+      "agent": "build",
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_1308c5cd8ffeuoZPxHiS6NXkHF",
+    "title": "New session - 2026-06-16T08:02:02.663Z",
+    "created": "2026-06-16T08:02:02.663000+00:00",
+    "updated": "2026-06-16T08:05:32.197000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.17.7",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_1307695a5ffeaWY5EymC0plGjw",
+    "title": "RTX 4060 8GB AI image video generation free setup",
+    "created": "2026-06-16T08:25:49.914000+00:00",
+    "updated": "2026-09-18T09:53:42.678000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.17.7",
+      "agent": "build",
+      "messages": 2839
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_12ef14077ffeFK4XNTOZ6vdg6l",
+    "title": "Review entire codebase (@explore subagent)",
+    "created": "2026-06-16T15:31:05.225000+00:00",
+    "updated": "2026-06-16T15:31:05.247000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
+      "version": "local",
+      "agent": "explore",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_12ccd129bffel0gdRkQ5PLMDaa",
+    "title": "New session - 2026-06-17T01:29:50.692Z",
+    "created": "2026-06-17T01:29:50.692000+00:00",
+    "updated": "2026-06-17T11:30:40.967000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.17.7",
+      "agent": "build",
+      "messages": 10
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_107770e79ffeQtIIYEjY4AsbGk",
+    "title": "Find ACE-Step 1.5 ComfyUI node (@general subagent)",
+    "created": "2026-06-24T07:29:44.838000+00:00",
+    "updated": "2026-06-24T07:40:16.251000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.8",
+      "agent": "general",
+      "messages": 3
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_102a1af7affepy4htCfX4JY8Dz",
+    "title": "Find audio files in Downloads (@general subagent)",
+    "created": "2026-06-25T06:01:17.189000+00:00",
+    "updated": "2026-06-25T06:04:44.953000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.10",
+      "agent": "general",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0f454488effekya8o0u7YM16x2",
+    "title": "Research Wan 2.2 models (@general subagent)",
+    "created": "2026-06-28T00:40:30.833000+00:00",
+    "updated": "2026-06-28T01:01:47.467000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.11",
+      "agent": "general",
+      "messages": 5
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0f258e63fffexk7JvMwAeJ2OPV",
+    "title": "Research Ollama coding models 2026 (@general subagent)",
+    "created": "2026-06-28T09:54:42.752000+00:00",
+    "updated": "2026-06-28T11:07:49.684000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.11",
+      "agent": "general",
+      "messages": 5
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0f258d4eeffenCi0j3HyR8XRGV",
+    "title": "Test Wan 2.1 via API (@general subagent)",
+    "created": "2026-06-28T09:54:47.185000+00:00",
+    "updated": "2026-06-28T13:13:43.557000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.11",
+      "agent": "general",
+      "messages": 17
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0f05932e0ffesh7BYk4XUm3i8R",
+    "title": "Download Wan 2.2 AIO model (@general subagent)",
+    "created": "2026-06-28T19:13:37.567000+00:00",
+    "updated": "2026-06-28T20:12:03.067000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.11",
+      "agent": "general",
+      "messages": 7
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0ebcc218bffeNO9bDEnVjnYlbe",
+    "title": "Research Ornith AI model (@general subagent)",
+    "created": "2026-06-29T16:26:11.444000+00:00",
+    "updated": "2026-06-29T16:35:57.801000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "local",
+      "agent": "general",
+      "messages": 3
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0eb6b1c12ffez4FBOCYa9cMQMo",
+    "title": "Research latest models 2026 (@general subagent)",
+    "created": "2026-06-29T18:12:09.837000+00:00",
+    "updated": "2026-06-29T18:30:55.009000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "local",
+      "agent": "general",
+      "messages": 5
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0eb3ff258ffedcFfzONzoIM9EN",
+    "title": "Find FLUX.2 and LTX 2.3 GGUF URLs (@general subagent)",
+    "created": "2026-06-29T18:59:18.567000+00:00",
+    "updated": "2026-06-29T19:15:24.677000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "local",
+      "agent": "general",
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0e174ddfdffe3b9QgmCpHeRxd0",
+    "title": "Research Wan2.2, Holo3.1, Browser-Use (@general subagent)",
+    "created": "2026-07-01T16:37:42.530000+00:00",
+    "updated": "2026-07-01T16:44:00.947000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.11",
+      "agent": "general",
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0bf0ab9adffe28AMInBGoNw82P",
+    "title": "Find pipeline outputs (@explore subagent)",
+    "created": "2026-07-08T09:00:43.986000+00:00",
+    "updated": "2026-07-08T09:01:57.539000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.15",
+      "agent": "explore",
+      "messages": 8
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0baaf3f8cffeD0rFt7KDs4ziZ6",
+    "title": "Research latest local AI coding models Jul 2026 (@general subagent)",
+    "created": "2026-07-09T05:19:07.891000+00:00",
+    "updated": "2026-07-09T05:19:51.702000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.15",
+      "agent": "general",
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_0b0503a45ffejUhWTRk7N1jDwm",
+    "title": "Summarize project state (@explore subagent)",
+    "created": "2026-07-11T05:39:07.323000+00:00",
+    "updated": "2026-07-11T05:40:17.546000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
+      "version": "1.17.18",
+      "agent": "explore",
+      "messages": 5
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9523a3ffe2Uz212Hmh7YHJP",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.669000+00:00",
+    "updated": "2026-07-15T07:29:58.083000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 23
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b952389ffezkBq0XRqfGlSlB",
+    "title": "Review opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.695000+00:00",
+    "updated": "2026-07-15T07:05:56.472000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 7
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b952378ffePB203w7eIgbHX8",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.711000+00:00",
+    "updated": "2026-07-15T07:28:57.946000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 21
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b952374ffeRxdKvJ7tWOqWHC",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.715000+00:00",
+    "updated": "2026-07-15T07:12:35.117000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 9
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b952365ffevcrr3GdND5UHfD",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.731000+00:00",
+    "updated": "2026-07-15T07:06:28.398000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 7
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b952357ffecbuvZAn7JLxVIG",
+    "title": "Review opencode sessions and provide advice",
+    "created": "2026-07-15T06:15:52.744000+00:00",
+    "updated": "2026-07-15T07:03:53.823000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b95234cffen4tia4g9uY7roU",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.755000+00:00",
+    "updated": "2026-07-15T07:06:36.707000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 7
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b95233cffe9lcuH7CE2RTnnD",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.771000+00:00",
+    "updated": "2026-07-15T07:04:12.131000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b95232bffeHrlanoaDj27d6J",
+    "title": "Review opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.788000+00:00",
+    "updated": "2026-08-17T12:41:02.958000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 61
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b952319ffelFVwfVNLc7jKva",
+    "title": "Review opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.806000+00:00",
+    "updated": "2026-07-15T07:24:01.939000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 15
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b952308ffeivNO7gaXplduXZ",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.823000+00:00",
+    "updated": "2026-07-15T07:02:41.251000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 5
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522faffekbYA496vdL6VYV",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.837000+00:00",
+    "updated": "2026-07-15T07:23:44.391000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 15
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522f6ffebM57qr72MpcNaN",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.841000+00:00",
+    "updated": "2026-07-15T07:21:55.559000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 14
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522e8ffeDfA5dpTI2BdsYM",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.855000+00:00",
+    "updated": "2026-07-15T07:25:06.617000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 15
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522daffe29ZFWHq8dTa9Qv",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.869000+00:00",
+    "updated": "2026-07-15T07:05:14.888000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 6
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522caffeb2hWuktoTXpftU",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.885000+00:00",
+    "updated": "2026-07-15T07:26:23.695000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 16
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522bbfferxutlMM23I6HX7",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.900000+00:00",
+    "updated": "2026-07-15T07:36:18.027000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 48
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522b7ffeEsyyXNUtisWx07",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.904000+00:00",
+    "updated": "2026-07-15T06:54:40.737000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 3
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_09b9522abffeW8SztPSmqWeOB9",
+    "title": "Reviewing opencode sessions and summaries",
+    "created": "2026-07-15T06:15:52.916000+00:00",
+    "updated": "2026-07-15T07:25:25.849000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "local",
+      "agent": "build",
+      "messages": 15
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_069f108a8ffeLi9r7dUqbCe0j1",
+    "title": "Wild Turkey platform architecture and MVP",
+    "created": "2026-07-24T21:36:31.063000+00:00",
+    "updated": "2026-09-20T08:45:30.455000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.4",
+      "agent": "build",
+      "messages": 43
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+    "title": "Faceless AI business blueprint",
+    "created": "2026-08-09T02:40:51.217000+00:00",
+    "updated": "2026-08-19T16:34:39.876000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.14",
+      "agent": "build",
+      "messages": 512
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fef089c9effeWE3H7NmhR5uvb7",
+    "title": "Extract YouTube search results (@explore subagent)",
+    "created": "2026-08-17T18:24:03.425000+00:00",
+    "updated": "2026-08-17T18:27:42.014000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 9
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fef04fc4cffeYnFR5R84GwuhxS",
+    "title": "Extract footse YouTube results (@explore subagent)",
+    "created": "2026-08-17T18:28:01.075000+00:00",
+    "updated": "2026-08-17T18:35:39.303000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 18
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fef04e6e2ffeIR82m00u6eBhQp",
+    "title": "Extract YT Music search results (@explore subagent)",
+    "created": "2026-08-17T18:28:06.558000+00:00",
+    "updated": "2026-08-17T18:38:49.985000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 33
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_feefaa0eeffeuw48he02Ny8VjJ",
+    "title": "Extract tellemthatsme YT Music results (@explore subagent)",
+    "created": "2026-08-17T18:39:19.825000+00:00",
+    "updated": "2026-08-17T18:44:22.847000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 18
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_feefa9571ffeYGEkv1aa0cVHha",
+    "title": "Extract footse topic search results (@explore subagent)",
+    "created": "2026-08-17T18:39:22.766000+00:00",
+    "updated": "2026-08-17T18:43:54.770000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 19
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_feca34f07ffeRn9TqixxD1vi00",
+    "title": "Extract tellemthatsme Topic videos (@explore subagent)",
+    "created": "2026-08-18T05:33:56.856000+00:00",
+    "updated": "2026-08-18T05:33:59.193000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_feca3495affeXECfpE9NrQSRXv",
+    "title": "Extract FootsE Topic videos (@explore subagent)",
+    "created": "2026-08-18T05:33:58.309000+00:00",
+    "updated": "2026-08-18T05:34:01.455000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec864251ffePpWF2YMcQFDYXt",
+    "title": "Extract tellemthatsme Topic videos (@explore subagent)",
+    "created": "2026-08-18T06:05:40.654000+00:00",
+    "updated": "2026-08-18T06:12:20.607000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 36
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec7fe9f3ffeModPzP78gOzvRv",
+    "title": "Extract FootsE Topic videos (@explore subagent)",
+    "created": "2026-08-18T06:12:36.492000+00:00",
+    "updated": "2026-08-18T06:16:13.693000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 16
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec7bffccffeeywcTcPqK9LG6u",
+    "title": "Extract No Receipts tracklist (@explore subagent)",
+    "created": "2026-08-18T06:16:53.043000+00:00",
+    "updated": "2026-08-18T06:22:12.793000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 28
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec7bf9e4ffeSqOgpM4J0055zS",
+    "title": "Extract Burning You tracklist (@explore subagent)",
+    "created": "2026-08-18T06:16:54.555000+00:00",
+    "updated": "2026-08-18T06:22:26.150000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 16
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec760c46ffeqXHN6GcBtwE48y",
+    "title": "Extract Digital Menace tracklist (@explore subagent)",
+    "created": "2026-08-18T06:23:23.065000+00:00",
+    "updated": "2026-08-18T06:31:13.677000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 22
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec76059bffeao52zhGqDiU378",
+    "title": "Extract The Vault tracklist (@explore subagent)",
+    "created": "2026-08-18T06:23:24.772000+00:00",
+    "updated": "2026-08-18T06:30:59.487000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 17
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec75ff3effeqJe2jXZQ1dPGJ0",
+    "title": "Extract Unapologetically Me tracklist (@explore subagent)",
+    "created": "2026-08-18T06:23:26.401000+00:00",
+    "updated": "2026-08-18T06:30:12.257000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 20
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6e8371ffeevQ2VOpb52cr0l",
+    "title": "Extract Blessed Thugs tracklist (@explore subagent)",
+    "created": "2026-08-18T06:31:36.846000+00:00",
+    "updated": "2026-08-18T06:35:58.562000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 16
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6e7d8fffesKTyY1qOxM0MUS",
+    "title": "Extract One way or another tracklist (@explore subagent)",
+    "created": "2026-08-18T06:31:38.352000+00:00",
+    "updated": "2026-08-18T06:35:26.792000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 10
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6e77c7ffe818JQnCbkQ60RB",
+    "title": "Extract Woods single tracklist (@explore subagent)",
+    "created": "2026-08-18T06:31:39.832000+00:00",
+    "updated": "2026-08-18T06:35:16.132000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 10
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6a5debffewAN2AAMJSM5pO7",
+    "title": "Extract Blessed Thugs tracklist (@explore subagent)",
+    "created": "2026-08-18T06:36:08.596000+00:00",
+    "updated": "2026-08-18T06:43:07.964000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 21
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6a577dffe1V5ZzgQpQZJRBh",
+    "title": "Extract Concrete & Gasoline tracklist (@explore subagent)",
+    "created": "2026-08-18T06:36:10.242000+00:00",
+    "updated": "2026-08-18T06:45:02.179000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 21
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6a51c3ffeleUlH5HfavwPVQ",
+    "title": "Extract Im Just Me tracklist (@explore subagent)",
+    "created": "2026-08-18T06:36:11.708000+00:00",
+    "updated": "2026-08-18T06:43:20.793000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 13
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6a4bacffeUtUSqoyDx36kvZ",
+    "title": "Extract No One's Plan B tracklist (@explore subagent)",
+    "created": "2026-08-18T06:36:13.267000+00:00",
+    "updated": "2026-08-18T06:42:00.240000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 14
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec620eadffeslNzn4UIDPf3V2",
+    "title": "Extract Im Just Me tracklist (@explore subagent)",
+    "created": "2026-08-18T06:45:13.170000+00:00",
+    "updated": "2026-08-18T06:50:43.467000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 14
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec6208bbffe6uUdvPhqT1KgcW",
+    "title": "Extract Monster Drill Floor Off (@explore subagent)",
+    "created": "2026-08-18T06:45:14.692000+00:00",
+    "updated": "2026-08-18T06:50:49.521000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 15
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec62039bffeo3C5d316S06NxS",
+    "title": "Extract Knife Falls single (@explore subagent)",
+    "created": "2026-08-18T06:45:16.004000+00:00",
+    "updated": "2026-08-18T06:49:02.239000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 8
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec61fe7dffe1ZTjUkiKWysMrj",
+    "title": "Extract My Children single (@explore subagent)",
+    "created": "2026-08-18T06:45:17.314000+00:00",
+    "updated": "2026-08-18T06:50:16.823000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 10
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fec61f905ffe7ncURwBxk1bnr1",
+    "title": "Extract I Live for you single (@explore subagent)",
+    "created": "2026-08-18T06:45:18.714000+00:00",
+    "updated": "2026-08-18T06:49:20.040000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
+      "version": "1.18.18",
+      "agent": "explore",
+      "messages": 8
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe981d7f7ffe1saFr1YJo2o22z",
+    "title": "Fixing opencode windows desktop",
+    "created": "2026-08-18T20:09:21.672000+00:00",
+    "updated": "2026-08-18T20:39:31.781000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 62
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe97a0566ffeRr3nvA5D9R60Ub",
+    "title": "Greeting",
+    "created": "2026-08-18T20:17:54.329000+00:00",
+    "updated": "2026-08-18T20:18:52.736000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe9776478ffejbNp1J7UE4nuzm",
+    "title": "Testing opencode on Windows",
+    "created": "2026-08-18T20:20:46.600000+00:00",
+    "updated": "2026-08-18T20:22:24.652000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 7
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe963322fffeW6kbbjho2EiemU",
+    "title": "Gemini 10-sec clips processing plan",
+    "created": "2026-08-18T20:42:50.193000+00:00",
+    "updated": "2026-09-02T13:28:29.612000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 178
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe96331e8ffe667Yy9G0uo2W02",
+    "title": "Guide for processing 10s clips with Gemini",
+    "created": "2026-08-18T20:42:50.263000+00:00",
+    "updated": "2026-08-27T00:42:40.194000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 94
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe52d8343ffeJa4p25ypMnbHxK",
+    "title": "Fixing opencode Windows desktop connection issues",
+    "created": "2026-08-19T16:19:57.244000+00:00",
+    "updated": "2026-08-20T08:40:58.060000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 41
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe524be82ffeU66Ig0gKUKBRyj",
+    "title": "New session - 2026-08-19T16:29:31.901Z",
+    "created": "2026-08-19T16:29:31.901000+00:00",
+    "updated": "2026-08-19T16:30:14.729000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe5233403ffes17jqO7rbGEADM",
+    "title": "New session - 2026-08-19T16:31:12.892Z",
+    "created": "2026-08-19T16:31:12.892000+00:00",
+    "updated": "2026-08-19T16:31:49.926000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe52210c8ffe6J7DF23CJQiUZQ",
+    "title": "New session - 2026-08-19T16:32:27.447Z",
+    "created": "2026-08-19T16:32:27.447000+00:00",
+    "updated": "2026-08-19T16:32:28.320000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 1
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe520c5dbffey7NyEQb57nbPEr",
+    "title": "New session - 2026-08-19T16:33:52.164Z",
+    "created": "2026-08-19T16:33:52.164000+00:00",
+    "updated": "2026-08-19T16:34:31.949000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe51c3520ffeZG1yXWanCEg8pc",
+    "title": "Greeting and help request",
+    "created": "2026-08-19T16:38:51.359000+00:00",
+    "updated": "2026-08-19T16:38:51.943000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe4677c03ffeHxEGRP8P0OKI4w",
+    "title": "Math test: 2+2",
+    "created": "2026-08-19T19:56:15.228000+00:00",
+    "updated": "2026-08-19T19:56:15.912000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe462d5beffekd1vpQwNR4SCi6",
+    "title": "Basic addition question",
+    "created": "2026-08-19T20:01:19.937000+00:00",
+    "updated": "2026-08-19T20:02:26.479000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe1acc5daffeAHBDOvkdM8Rbte",
+    "title": "Status check",
+    "created": "2026-08-20T08:39:25.989000+00:00",
+    "updated": "2026-08-20T08:40:00.684000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.18",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe0d8d74bffe574nkCKjX4n0Qx",
+    "title": "TellemThatsMe Studio OS specification",
+    "created": "2026-08-20T12:30:55.156000+00:00",
+    "updated": "2026-09-02T13:27:23.004000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.19",
+      "agent": "build",
+      "messages": 428
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe0bc8b32ffeeFbOYzjPyD9oJV",
+    "title": "YouTube playlist summary, guide, and dashboard",
+    "created": "2026-08-20T13:01:49.645000+00:00",
+    "updated": "2026-08-20T13:12:44.303000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.19",
+      "agent": "build",
+      "messages": 26
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe0bc8b2dffeKjzaJPqj1lmzhF",
+    "title": "Review YouTube playlist and create dashboard",
+    "created": "2026-08-20T13:01:49.650000+00:00",
+    "updated": "2026-08-20T13:07:56.168000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.19",
+      "agent": "build",
+      "messages": 11
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fe0bc8adeffe3QMqcuUA4p2BcD",
+    "title": "YouTube playlist review for dashboard",
+    "created": "2026-08-20T13:01:49.730000+00:00",
+    "updated": "2026-08-21T13:25:41.374000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.19",
+      "agent": "build",
+      "messages": 58
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fd8bdeb9dffewkAyZqnGHkTTCX",
+    "title": "pastegrab download button request",
+    "created": "2026-08-22T02:17:17.154000+00:00",
+    "updated": "2026-08-22T02:20:45.290000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.21",
+      "agent": "build",
+      "messages": 12
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fd46ee7e9ffec881mK4nByooJ4",
+    "title": "Fixing CLI tools not opening: freebuff, kilo code, charm crush",
+    "created": "2026-08-22T22:22:04.310000+00:00",
+    "updated": "2026-08-24T10:14:24.498000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.19",
+      "agent": "build",
+      "messages": 77
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fcf4b4ea7ffebpZkYdwBBKJjqN",
+    "title": "Review all AI coding sessions and create dashboard report",
+    "created": "2026-08-23T22:19:03.384000+00:00",
+    "updated": "2026-08-24T07:36:00.705000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.19",
+      "agent": "build",
+      "messages": 26
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc9fb08fbffexnqaIdAfoXZCtI",
+    "title": "Hermes Desktop session restore fix",
+    "created": "2026-08-24T23:04:50.180000+00:00",
+    "updated": "2026-08-25T16:16:26.315000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.22",
+      "agent": "build",
+      "messages": 8
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc6cb8b29ffe5hxB7FofZQdnI0",
+    "title": "Completing all videos in YouTube playlist",
+    "created": "2026-08-25T13:55:34.230000+00:00",
+    "updated": "2026-08-25T17:17:49.531000+00:00",
+    "path": "X:/GITHUBREPO",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 4
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc64af413ffe03eIdX8S9WX7Cx",
+    "title": "Opencode sessions not visible in dashboard",
+    "created": "2026-08-25T16:16:01.516000+00:00",
+    "updated": "2026-08-25T16:33:55.406000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 18
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc64af1faffeep6hK7k5Ekh7Hm",
+    "title": "OpenCode sessions dashboard not visible",
+    "created": "2026-08-25T16:16:02.053000+00:00",
+    "updated": "2026-08-25T16:33:47.266000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 17
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc64af1f3ffeJPvYQy4O6CbjeJ",
+    "title": "Opencode sessions list/dashboard not visible",
+    "created": "2026-08-25T16:16:02.060000+00:00",
+    "updated": "2026-08-25T16:42:49.705000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 29
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc64af1f1ffec9rpo6W2P5dZ1p",
+    "title": "OpenCode sessions not visible in dashboard",
+    "created": "2026-08-25T16:16:02.062000+00:00",
+    "updated": "2026-08-25T16:41:00.983000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 25
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc64af1ebffea0psdR7XDelBPA",
+    "title": "Opencode sessions dashboard visibility issue",
+    "created": "2026-08-25T16:16:02.068000+00:00",
+    "updated": "2026-08-25T16:36:53.103000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 17
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc64af1e9ffeRxw4MpOHPJuu8u",
+    "title": "Opencode sessions dashboard not visible",
+    "created": "2026-08-25T16:16:02.070000+00:00",
+    "updated": "2026-08-25T16:39:47.131000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 20
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fc64af1e6ffe8q0XNRob4URCD3",
+    "title": "Opencode sessions dashboard not visible",
+    "created": "2026-08-25T16:16:02.073000+00:00",
+    "updated": "2026-09-03T13:36:24.013000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 90
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fbf5d9b21ffe28A2ZdfVkQzIU7",
+    "title": "Image and video sorting tools",
+    "created": "2026-08-27T00:32:59.614000+00:00",
+    "updated": "2026-09-09T11:05:49.423000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.23",
+      "agent": "build",
+      "messages": 81
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_fb74a3c7affeoMsn7hsVu89VsB",
+    "title": "Unlazy GitHub repo install setup",
+    "created": "2026-08-28T14:11:06.758000+00:00",
+    "updated": "2026-08-28T14:15:51.875000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.25",
+      "agent": "build",
+      "messages": 14
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_f55ce25faffeSPSEttbPAiUnqx",
+    "title": "Best free OpenCode OpenRouter Kilo models",
+    "created": "2026-09-16T12:29:48.933000+00:00",
+    "updated": "2026-09-16T23:10:56.697000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.31",
+      "agent": "build",
+      "messages": 20
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_f52913d5cffew10E10IdKOPKi6",
+    "title": "The total angular momentum of a system of particles about a fixed point is conserved if the net e...",
+    "created": "2026-09-17T03:35:12.291000+00:00",
+    "updated": "2026-09-17T03:35:20.305000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.31",
+      "agent": "build",
+      "messages": 2
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_f5290c231ffebhDf2q5NJUqzDT",
+    "title": "Find mr wilson review footclan ai army",
+    "created": "2026-09-17T03:35:43.822000+00:00",
+    "updated": "2026-09-21T17:23:35.736000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.31",
+      "agent": "build",
+      "messages": 102
+    }
+  },
+  {
+    "tool": "opencode",
+    "session_id": "ses_f3b74ef50ffeMR04pjRODHvyqf",
+    "title": "Opencode sessions summary & status review",
+    "created": "2026-09-21T15:17:23.247000+00:00",
+    "updated": "2026-09-21T17:23:32.452000+00:00",
+    "path": "C:/Users/karma",
+    "format": "opencode.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "1.18.31",
+      "agent": "build",
+      "messages": 28
+    }
+  }
+]

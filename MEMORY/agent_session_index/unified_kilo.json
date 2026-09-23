@@ -1,0 +1,182 @@
+[
+  {
+    "tool": "kilo",
+    "session_id": "ses_fd1eb675dffeVbrTRmgLAiqIPC",
+    "title": "Antigravity 2.0 auth and RTX 4060 crash fix",
+    "created": "2026-08-23T10:04:56.866000+00:00",
+    "updated": "2026-08-23T10:19:41.266000+00:00",
+    "path": "C:/Users/karma/AppData/Local/Programs/Antigravity IDE",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.3.46",
+      "agent": "code",
+      "messages": 25,
+      "parts": 111,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fd1eb675dffeVbrTRmgLAiqIPC.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fd1d85734ffeB5aF05a0qD13hW",
+    "title": "Fix Antigravity 2.0 Windows sign-in issues",
+    "created": "2026-08-23T10:25:46.187000+00:00",
+    "updated": "2026-08-24T13:13:08.989000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.4.23",
+      "agent": "code",
+      "messages": 34,
+      "parts": 169,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fd1d85734ffeB5aF05a0qD13hW.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fcf4b114bfferVsiXVjDp0wnK4",
+    "title": "Multi-session chat report and dashboard creation",
+    "created": "2026-08-23T22:19:19.093000+00:00",
+    "updated": "2026-09-17T23:45:44.152000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.3.46",
+      "agent": "code",
+      "messages": 173,
+      "parts": 653,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fcf4b114bfferVsiXVjDp0wnK4.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fcf4ab9daffe3FJd3g4qW8g3tW",
+    "title": "Explore session archives (@explore subagent)",
+    "created": "2026-08-23T22:19:41.477000+00:00",
+    "updated": "2026-08-23T22:22:06.997000+00:00",
+    "path": "C:\\Users\\karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_fcf4b114bfferVsiXVjDp0wnK4",
+      "version": "7.3.46",
+      "agent": "explore",
+      "messages": 3,
+      "parts": 18,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fcf4ab9daffe3FJd3g4qW8g3tW.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fccd1b2e0ffe81oF45xRJ8csoE",
+    "title": "Greeting",
+    "created": "2026-08-24T09:51:07.552000+00:00",
+    "updated": "2026-08-24T09:51:14.189000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.4.23",
+      "agent": "code",
+      "messages": 2,
+      "parts": 2,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fccd1b2e0ffe81oF45xRJ8csoE.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fcccfa87fffe9VU207ZO3iB4qA",
+    "title": "Greeting",
+    "created": "2026-08-24T09:53:21.281000+00:00",
+    "updated": "2026-08-24T09:55:26.291000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.4.23",
+      "agent": "code",
+      "messages": 2,
+      "parts": 5,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fcccfa87fffe9VU207ZO3iB4qA.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fca1dcfd2ffeAtR0omXjOT10fv",
+    "title": "Audit all AI coding sessions (@general subagent)",
+    "created": "2026-08-24T22:26:51.053000+00:00",
+    "updated": "2026-08-25T16:18:41.499000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_fcf4b114bfferVsiXVjDp0wnK4",
+      "version": "7.4.23",
+      "agent": "general",
+      "messages": 7,
+      "parts": 43,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fca1dcfd2ffeAtR0omXjOT10fv.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fc9e76747ffed9kVCSV3npDQsM",
+    "title": "Antigravity 2.0 login fix",
+    "created": "2026-08-24T23:26:16.761000+00:00",
+    "updated": "2026-08-28T10:03:37.499000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.3.46",
+      "agent": "code",
+      "messages": 19,
+      "parts": 92,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fc9e76747ffed9kVCSV3npDQsM.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fc9e5e9d9ffeiUdUPxtubOlG3o",
+    "title": "Comprehensive session audit & dashboard (@general subagent)",
+    "created": "2026-08-24T23:27:54.407000+00:00",
+    "updated": "2026-08-25T06:10:12.770000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": "ses_fcf4b114bfferVsiXVjDp0wnK4",
+      "version": "7.4.23",
+      "agent": "general",
+      "messages": 10,
+      "parts": 61,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fc9e5e9d9ffeiUdUPxtubOlG3o.json"
+    }
+  },
+  {
+    "tool": "kilo",
+    "session_id": "ses_fb82c4fbaffeiy7DCN3XBhvfEN",
+    "title": "Finding missing Kilo sessions",
+    "created": "2026-08-28T10:04:10.693000+00:00",
+    "updated": "2026-09-20T14:16:08.493000+00:00",
+    "path": "C:/Users/karma",
+    "format": "kilo.db",
+    "bytes": null,
+    "extra": {
+      "parent": null,
+      "version": "7.5.5",
+      "agent": "code",
+      "messages": 56,
+      "parts": 188,
+      "diff_file": "C:\\Users\\karma\\.local\\share\\kilo\\session_diff\\ses_fb82c4fbaffeiy7DCN3XBhvfEN.json"
+    }
+  }
+]

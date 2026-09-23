@@ -11,6 +11,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **No backwards compatibility** - remove deprecated code immediately
 - **Detailed errors over graceful failures** - we want to identify and fix issues fast
 - **Break things to improve them** - alpha is for rapid iteration
+- **Test-driven invariant discovery** - every multi-file refresh commit lands a pytest invariance test alongside it (cont.17-fup-4 precedent: the OpenRouter lockstep test caught a real routing bug in `OPENROUTER_NAMESPACE_PREFIXES` on its first run, before any user saw it). Invariant tests create a chain of "if it ever drifts, you'll know immediately" + act as machine-verified spec of the cross-file invariants.
+- **Cascade-conscious .gitignore** - never blanket-DENY a top-level directory (e.g., `/ComfyUI/`) and expect per-file re-include to recover its descendants; gitignore skips excluded dirs wholesale for performance, so the only safe pattern is deny-sublists followed by per-file/per-subdir re-include (`!` negation, "last matching pattern wins") with leading `/` anchoring for predictability. The cont.17-fup-6 + cont.17-fup-7 sweeps (92 → 0 working-tree noise on `ComfyUI/`, 7 → 0 on `ComfyUI/config/`) demonstrate the canonical pattern; whenever you deviate, leave a 2-3 line inline comment explaining the cascade reasoning so future operators don't accidentally break the chain.
 
 ### Error Handling
 
@@ -288,6 +290,55 @@ When connected to Cursor/Windsurf:
 ADDITIONAL CONTEXT FOR SPECIFICALLY HOW TO USE ARCHON ITSELF:
 @CLAUDE-ARCHON.md
 
+## Phone Recovery / Mobile Tools (NEW 2026-07-12)
+
+Single-page dashboard **`UNIFIED_MASTER_DASHBOARD.html`** (project root) brings together:
+- **Empire** — 12 AI-empire links + live search filter
+- **Recovery Suite** — all 18 `RECOVERY_SUITE.bat` options as cards, category filter (All / Android / iPhone / Oppo / Utilities / Diagnostics)
+- **Diagnostics** — ADB status + 4 diagnostic buttons that display formatted ADB commands for the user's PC (carrier lock / SIM state / APN / full)
+- **Carrier Unlock** — complete Australian guide: Telstra (TEL), Optus (OPP/OPS), Vodafone (VAU/VA) + 6 MVNOs (Boost, TPG/iiNet/Internode, Felix, Woolworths, ALDI, Belong) + Samsung-specific tips
+
+Two new tools live in **`COMPLETED_PROJECTS/mobile_backup/`**:
+- **`phone_diagnostics.py`** — auto SIM/network diagnosis via ADB. 10 checks with per-failure exit codes. Run on the user's PC (no ADB on this server).
+- **`iphone_pro_drfone_alt.py`** — modern Dr. Fone alternative at `http://localhost:8455`, run with `python -X utf8`.
+
+Documentation: `C:\Users\karma\Downloads\PHONE_FIXING_SKILLS.md` (master, 21 KB) + `PHONE_HELP.md` (synced copy).
+
+Master menu: `COMPLETED_PROJECTS\mobile_backup\RECOVERY_SUITE.bat` (19 options: L D 1–9 P G W T M I U X).
+
+Pre-edit guard for the dashboard: `COMPLETED_PROJECTS\mobile_backup\verify_dashboard.py` — runs `node --check` on the extracted inline JS before any future edits.
+
+---
+
+## Dashboard Architecture (NEW 2026-07-12)
+
+Two self-contained HTML dashboards at project root share a glassmorphic dark-theme design pattern, modal system, and accessibility standards. Full reference: **`DASHBOARD_ARCHITECTURE.md`** at project root.
+
+| Dashboard | Tabs | Card count |
+|---|---|---|
+| `UNIFIED_MASTER_DASHBOARD.html` (~1013 lines) | Empire / Recovery Suite / Diagnostics / Carrier Unlock | 12 + 18 + 4 + 6 MVNOs |
+| `AI_TOOLS_DASHBOARD.html` v2.2 polished (~700 lines) | Coding Assistants / Local Models / Quick Links / Active Projects | 14 + 6 + 6 + 3 |
+
+**Shared pattern:** CSS variables (`--primary`, `--secondary`, `--surface`, etc.), radial-gradient backgrounds, glassmorphic cards, `.tabs > .tab` switching, modal system.
+
+**Modal safety:** use DOM-based `showCardDetail(card)` (creates elements + sets `textContent`) for user-derived content. The legacy `openModal(title, content)` uses `innerHTML` and is XSS-prone — it's kept only for callers passing hardcoded literal HTML (e.g., the Recovery Suite modal descriptions built from a fixed string map).
+
+**Verification:** `python COMPLETED_PROJECTS\mobile_backup\verify_dashboard.py [path]` validates any dashboard. Exit 0 = OK, 1 = missing file/arg, 2 = JS syntax error. Run before every dashboard edit. Pre-commit hook at `.git/hooks/pre-commit` (chmod 0o755) runs it automatically on every commit.
+
+**Accessibility standards in both:**
+- Decorative `<i class="fas fa-...">` icons all have `aria-hidden="true"`
+- Modal: `role="dialog" aria-modal="true" aria-labelledby="modalTitle"` + close button `aria-label="Close dialog"`
+- Tab focus trap inside modal, focus restoration on close, Escape closes, background-click closes
+
+**Validate dashboards from the project root:**
+```bash
+node --check <(python -c "import re; s=open('UNIFIED_MASTER_DASHBOARD.html').read(); m=re.search(r'<script>([\s\S]*?)</script>', s); print(m.group(1))")
+node --check <(python -c "import re; s=open('AI_TOOLS_DASHBOARD.html').read(); m=re.search(r'<script>([\s\S]*?)</script>', s); print(m.group(1))")
+```
+Or use the dedicated guard: `python COMPLETED_PROJECTS\mobile_backup\verify_dashboard.py`.
+
+---
+
 ## Local ComfyUI Music Video Studio
 
 The local ComfyUI media studio is installed under:
@@ -362,5 +413,46 @@ Local Ollama is available for coding/debugging/browser assistance.
 
 ### Full Reference
 - `C:\Users\karma\ComfyUI\README.md` — complete system guide
-- `C:\Users\karma\ComfyUI\AGENTS.md` — session memory / quick-reference
+- `C:\Users\karma\ComfyUI\AGENTS.md` — session memory / quick-reference`
+
+## Reference Documentation (NEW 2026-07-09)
+
+Workspace-level engineering docs catalogued at repo root for cross-discovery from any future session. Engineering context only — sales/launch/money/client-mgmt docs deliberately excluded from this index.
+
+| Topic | Doc |
+|---|---|
+| YouTube + transcript + ComfyUI video ecosystem | `YOUTUBE_GITHUB_DEEP_RESEARCH_2026.md` |
+| Laptop → display + peripherals (14 categories, 3-tier recommendation) | `HARDWARE_SHOPPING_LIST_2026.md` |
+| GPU-accelerated remote desktop install (Sunshine + Moonlight) | `SUNSHINE_MOONLIGHT_SETUP.md` |
+| Curated GitHub `awesome-*` lists for YouTube tooling | `AWESOME_YOUTUBE_REPOS_2026.md` |
+| Single-page start-here index for the above | `REFERENCE_DOCS_INDEX.md` |
+| One-page daily digest | `DAILY_REFERENCE_DIGEST_2026-07-09.md` |
+
+`HARDWARE_SHOPPING_LIST_2026.md` is the recommended first read for any session that touches the laptop→display/peripheral stack. `SUNSHINE_MOONLIGHT_SETUP.md` documents a 6-step install for cable-free remote-desktop; the file is intentionally advisory (not auto-installed). For deeper YouTube tooling context start with `YOUTUBE_GITHUB_DEEP_RESEARCH_2026.md` then go to `AWESOME_YOUTUBE_REPOS_2026.md` for the catalog-of-catalogs view.
+
+## Documentation Contract (MANDATORY)
+
+When the user asks to **document**, **save**, **archive**, or **record** anything, the task is **not complete** until real files exist on disk. A chat reply alone does not count.
+
+**Load skill:** `.grok/skills/document-this/SKILL.md` — follow its 10-step checklist every time.
+
+| Trigger | Required action |
+|---|---|
+| "document this" / "make sure it's documented" | Write `.md` files + verify on disk |
+| "save a copy" / "save to x:" | Write to `X:\SESSION_ARCHIVES\` **and** mirror `_DOCS_ARCHIVE\` |
+| "open/show me" | `notepad` + `explorer` on saved files |
+| Session or chat scope | `SESSION_DOCUMENTATION_YYYY-MM-DD.md` + `SESSION_FULL_HISTORY_YYYY-MM-DD.md` |
+| Raw transcript available | Copy `updates.jsonl` to `X:\SESSION_ARCHIVES\` |
+
+**Save locations (always both):**
+- `X:\SESSION_ARCHIVES\` — user backup drive
+- `C:\Users\karma\_DOCS_ARCHIVE\` — workspace mirror
+
+**Index updates (append-only):**
+- `ALL_PLANS_AND_PROJECTS_MASTER.md` → Session Work Completed table
+- `X:\SESSION_ARCHIVES\README.md` → new session row
+
+**Helper:** `DOCUMENT_SESSION.bat` (opens archive folder) · `python .grok/skills/document-this/scripts/save_session_docs.py`
+
+**Fail loud** if X: is unavailable — write to `_DOCS_ARCHIVE\` and report the error. Never claim documentation is done without verified file paths.
 

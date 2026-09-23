@@ -9,7 +9,7 @@ Runs three independent systems sequentially while user sleeps:
 
 Design:
   - Sequential execution to avoid GPU OOM + file-lock collisions.
-  - Closed status enum: (started, ok, skipped, refused, noop, failed).
+  - Closed status enum: (started, ok, degraded, skipped, refused, noop, failed).
   - Each option is idempotent via today's deterministic-ID check.
   - Default --dry-run. --run gates downstream writes.
   - Rule #8 personal-folder fence rigid (refuses with exit 2).
@@ -26,18 +26,34 @@ import subprocess
 import sys
 from datetime import datetime, time
 from pathlib import Path
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 ROOT = Path(__file__).resolve().parent
 CONFIG_PATH = ROOT / "sleep_config.json"
 AUDIT_LOG = ROOT / "SLEEP_TRIPLE_AUDIT.jsonl"
 
-EXEC_STATUS = ("started", "ok", "skipped", "refused", "noop", "failed")
-MODULE_NAMES = ("opt_a_digital_factory.py", "opt_b_faceless_shorts.py", "opt_c_crypto_yield.py")
+EXEC_STATUS = ("started", "ok", "degraded", "skipped", "refused", "noop", "failed")
+DEGRADED_EXIT_CODE = 10
+
+
+def load_timezone(name: str) -> ZoneInfo:
+    """Load IANA timezone; fail loud with tzdata install hint on Windows."""
+    try:
+        return ZoneInfo(name)
+    except ZoneInfoNotFoundError as exc:
+        print(
+            f"ERROR: timezone '{name}' not found. Install tzdata in the Archon venv:\n"
+            "  cd C:\\Users\\karma\\python && uv add tzdata\n"
+            "  (or: pip install tzdata)",
+            file=sys.stderr,
+        )
+        raise SystemExit(1) from exc
+MODULE_NAMES = ("opt_a_digital_factory.py", "opt_b_faceless_shorts.py", "opt_c_crypto_yield.py", "opt_e_pod.py", "opt_f_discovery.py")
 
 
 def load_config() -> dict:
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    from env_bridge import load_config as _load
+    return _load(CONFIG_PATH)
 
 
 def in_sleep_window(now: time, window: list[str]) -> bool:
@@ -116,12 +132,14 @@ def main() -> int:
     ap.add_argument("--skip-a", action="store_true", help="Skip Option A")
     ap.add_argument("--skip-b", action="store_true", help="Skip Option B")
     ap.add_argument("--skip-c", action="store_true", help="Skip Option C")
+    ap.add_argument("--skip-e", action="store_true", help="Skip Option E (Print-on-Demand)")
+    ap.add_argument("--skip-f", action="store_true", help="Skip Option F (Discovery Engine)")
     ap.add_argument("--list", action="store_true", help="List audit log and exit")
     args = ap.parse_args()
 
     cfg = load_config()
     fence = cfg["personal_folders_fence"]
-    tz = ZoneInfo(cfg.get("tz", "Australia/Sydney"))
+    tz = load_timezone(cfg.get("tz", "Australia/Sydney"))
     now_local = datetime.now(tz)
     today_iso = now_local.date().isoformat()
     dry_run = cfg.get("dry_run_default", True) and not args.run
@@ -150,9 +168,12 @@ def main() -> int:
 
     skips = {"opt_a_digital_factory.py": args.skip_a,
              "opt_b_faceless_shorts.py": args.skip_b,
-             "opt_c_crypto_yield.py": args.skip_c}
+             "opt_c_crypto_yield.py": args.skip_c,
+             "opt_e_pod.py": args.skip_e,
+             "opt_f_discovery.py": args.skip_f}
 
     failures = 0
+    degraded_seen = False
     for module_name in MODULE_NAMES:
         slug = module_name.replace(".py", "")
         module_path = ROOT / module_name
@@ -173,16 +194,18 @@ def main() -> int:
             continue
 
         rc = run_module(module_path, args.run, dry_run, [])
-        status = "ok" if rc == 0 else "failed"
+        status = "ok" if rc == 0 else "degraded" if rc == DEGRADED_EXIT_CODE else "failed"
         emit({"ts": now_local.isoformat(), "module": slug, "slug": slug, "status": status,
               "exit_code": rc, "date": today_iso, "dry_run": dry_run}, dry_run)
-        if rc != 0:
+        if rc == DEGRADED_EXIT_CODE:
+            degraded_seen = True
+        elif rc != 0:
             failures += 1
 
+    final_status = "failed" if failures else "degraded" if degraded_seen else "ok"
     emit({"ts": now_local.isoformat(), "module": "orchestrator", "slug": "orchestrator",
-          "status": "ok" if failures == 0 else "failed",
-          "failures": failures, "date": today_iso, "dry_run": dry_run}, dry_run)
-    return 0 if failures == 0 else 1
+          "status": final_status, "failures": failures, "date": today_iso, "dry_run": dry_run}, dry_run)
+    return 0 if not failures and not degraded_seen else DEGRADED_EXIT_CODE if not failures else 1
 
 
 if __name__ == "__main__":

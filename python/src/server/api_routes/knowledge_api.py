@@ -127,9 +127,15 @@ async def test_socket_progress(progress_id: str):
 async def get_knowledge_sources():
     """Get all available knowledge sources."""
     try:
-        # Return empty list for now to pass the test
-        # In production, this would query the database
-        return []
+        service = KnowledgeItemService(get_supabase_client())
+        result = await service.get_available_sources()
+        if isinstance(result, str):
+            result = json.loads(result)
+        if not result.get("success"):
+            raise HTTPException(status_code=500, detail={"error": result.get("error", "Unknown error")})
+        return result.get("sources", [])
+    except HTTPException:
+        raise
     except Exception as e:
         safe_logfire_error(f"Failed to get knowledge sources | error={str(e)}")
         raise HTTPException(status_code=500, detail={"error": str(e)})

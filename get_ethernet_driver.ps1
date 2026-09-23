@@ -1,0 +1,1 @@
+Get-PnpDevice -Class 'Net' -Status 'OK' | Where-Object { $_.FriendlyName -like '*Realtek*' -or $_.FriendlyName -like '*Ethernet*' } | Select-Object FriendlyName, Status, Manufacturer

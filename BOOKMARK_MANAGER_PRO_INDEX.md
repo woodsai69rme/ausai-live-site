@@ -45,6 +45,7 @@
 |---|---|
 | AI Tools Dashboard | `AI_TOOLS_DASHBOARD.html` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
+| 🔧 Reference Docs (NEW 2026-07-09) | [`REFERENCE_DOCS_INDEX.md`](REFERENCE_DOCS_INDEX.md) |
 
 ---
 

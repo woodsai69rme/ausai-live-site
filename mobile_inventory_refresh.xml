@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<!--
+  mobile_inventory_refresh.xml
+  Weekly Task Scheduler definition for refresh_mobile_inventory.bat.
+
+  How to install:
+    schtasks /create /tn "Karma\MobileInventoryRefresh" ^
+            /xml "C:\Users\karma\mobile_inventory_refresh.xml"
+  Or: open in Task Scheduler UI and import.
+
+  How to uninstall:
+    schtasks /delete /tn "Karma\MobileInventoryRefresh" /f
+
+  Default schedule: every Sunday at 03:00 (operator off-screen time).
+  Output of each run: timestamped RAW_PC_APPS_INVENTORY__<TS>.csv in %USERPROFILE% +
+  rewritten MOBILE_FILTERED.csv at workspace root (war_room.py auto-extends TILE_REGISTRY
+  from this on next import). refresh_status.json mirrors the run summary for the
+  SLEEP_TRIPLE opt_d morning digest.
+
+  Run-as identity: KARMA-PC\Karma. If your machine name differs, replace KARMA-PC
+  with the output of `echo %COMPUTERNAME%`. LogonType=InteractiveToken requires
+  the user to be logged in (StartWhenAvailable=true catches wake-from-sleep).
+-->
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Author>Karma</Author>
+    <Description>Weekly MOBILE_FILTERED.csv refresh. Re-runs scan_pc_apps.ps1 + filters against adb/apktool/jadx/frida/etc keywords. Required for war_room.py TILE_REGISTRY dynamic-extension (operator-installed mobile tools surface as lookup-only tiles). Schedule: every Sunday 03:00.</Description>
+    <URI>\Karma\MobileInventoryRefresh</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <CalendarTrigger>
+      <StartBoundary>2026-07-12T03:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+      <ScheduleByWeek>
+        <DaysOfWeek>
+          <Sunday />
+        </DaysOfWeek>
+        <WeeksInterval>1</WeeksInterval>
+      </ScheduleByWeek>
+    </CalendarTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>KARMA-PC\Karma</UserId>
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>LeastPrivilege</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <ExecutionTimeLimit>PT15M</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions>
+    <Exec>
+      <Command>cmd.exe</Command>
+      <Arguments>/c "C:\Users\karma\refresh_mobile_inventory.bat"</Arguments>
+      <WorkingDirectory>C:\Users\karma</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>

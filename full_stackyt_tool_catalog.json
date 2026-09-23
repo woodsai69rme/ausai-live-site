@@ -1,0 +1,4051 @@
+{
+  "schema_version": "1.0",
+  "report_date": "2026-08-20",
+  "channel": {
+    "id": "UC_GBIzXUzVTV9r7GKpu6IWw",
+    "title": "Full Stack - Videos",
+    "channel": "Full Stack",
+    "channel_id": "UC_GBIzXUzVTV9r7GKpu6IWw",
+    "channel_url": "https://www.youtube.com/channel/UC_GBIzXUzVTV9r7GKpu6IWw",
+    "uploader": "Full Stack",
+    "uploader_id": "@full_stackYT",
+    "description": "Welcome to full stack. We break down complex engineering into actionable tutorials. From AI updates and automation pipelines to frontier tech and deep-dive development, get the modern stack knowledge you need to build the future. New videos daily.\n\n",
+    "channel_follower_count": 4970,
+    "playlist_count": 115
+  },
+  "source_url": "https://www.youtube.com/@full_stackYT",
+  "videos_url": "https://www.youtube.com/@full_stackYT/videos",
+  "coverage": {
+    "verified_metadata_entries": 115,
+    "public_page_estimate": 125,
+    "coverage_gap": 10,
+    "note": "Public page estimate refreshed from a 2026-08-20 flat fetch of @full_stackYT/videos (125 entries). The 8 additions come from the aug26 playlist cross-reference with full public descriptions."
+  },
+  "evidence_policy": "Descriptions are conservative summaries of public titles/flat metadata. Confirm implementation details in the linked video or its official repository before installing or relying on a tool. No item is marked adopted; all start in Backlog.",
+  "refresh": {
+    "last_flat_metadata_refresh": "2026-08-20",
+    "refreshed_at_utc": "2026-08-20T13:18:59Z",
+    "refresh_result": "115 entries; +8 videos added from aug26 playlist cross-reference (description-level evidence)",
+    "public_header_observation": "125 videos"
+  },
+  "tools": [
+    {
+      "name": "Cloudflare Computer",
+      "category": "agent infrastructure",
+      "what_it_does": "Provides a computer environment for an AI agent.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        1
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "PDF-inspector",
+      "category": "document processing",
+      "what_it_does": "Classifies PDFs and converts them to Markdown, implemented in Rust.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        2
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "GitHub repository ecosystem",
+      "category": "reference",
+      "what_it_does": "Named in a public video title; verify from the video or project repository before adoption.",
+      "evidence_basis": "title + description",
+      "video_count": 12,
+      "video_positions": [
+        3,
+        12,
+        17,
+        25,
+        34,
+        45,
+        51,
+        59,
+        61,
+        66,
+        72,
+        111
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "Low",
+      "risk": "Low",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "name": "AirLLM",
+      "category": "local AI",
+      "what_it_does": "Runs large language models such as 70B models with constrained GPU memory.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        4
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Sandbox Claude Code",
+      "category": "agent security",
+      "what_it_does": "Sandboxes Claude Code or its agent runtime to isolate AI work.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        5
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Claude Code",
+      "category": "AI coding",
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation.",
+      "evidence_basis": "title",
+      "video_count": 9,
+      "video_positions": [
+        5,
+        9,
+        48,
+        69,
+        81,
+        91,
+        101,
+        102,
+        106
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Kaneo",
+      "category": "project management",
+      "what_it_does": "Self-hosted project management positioned as a Linear/Jira alternative.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        6
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "HuggingFace",
+      "category": "AI models",
+      "what_it_does": "Provides open-source speech/AI models used for a voice assistant workflow.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        7
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Microsoft AI curriculum",
+      "category": "reference",
+      "what_it_does": "Named in a public video title; verify from the video or project repository before adoption.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        8
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Low",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "name": "reverse-skill",
+      "category": "agent skills",
+      "what_it_does": "Adds reverse-engineering capabilities for AI agents; the title references binaries, APKs, or compiled packages only indirectly.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        10
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "OpenWork",
+      "category": "MCP and agents",
+      "what_it_does": "Acts as a self-hosted MCP hub for connecting AI agents to tools and workflows.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        11
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Book-to-Skill",
+      "category": "agent skills",
+      "what_it_does": "Converts book content into reusable AI-agent skills.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        13
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "jcode",
+      "category": "AI coding",
+      "what_it_does": "Rust-based AI coding harness marketed around lower memory use.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        14
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Harness",
+      "category": "multi-agent systems",
+      "what_it_does": "Builds an AI agent team around Claude Code.",
+      "evidence_basis": "title",
+      "video_count": 2,
+      "video_positions": [
+        14,
+        81
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Nanobot",
+      "category": "AI agents",
+      "what_it_does": "A self-hosted AI agent that users can build and run themselves.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        16
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "BitChat",
+      "category": "private communications",
+      "what_it_does": "Decentralized peer-to-peer messaging without a conventional centralized service claim in the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        18
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Harper",
+      "category": "privacy",
+      "what_it_does": "Offline grammar-checking alternative to cloud grammar tools.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        19
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "ego lite",
+      "category": "agent browsers",
+      "what_it_does": "A browser designed for AI-agent use.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        20
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "OmniRoute",
+      "category": "AI infrastructure",
+      "what_it_does": "AI gateway for routing requests across many providers and routing strategies.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        21
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Buzz",
+      "category": "AI workspace",
+      "what_it_does": "Open-source workspace intended for humans and AI to build together.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        22
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "i-have-adhd",
+      "category": "AI coding",
+      "what_it_does": "Makes a coding agent workflow more ADHD-friendly through an installable customization.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        23
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "OpenSEO",
+      "category": "SEO",
+      "what_it_does": "Self-hosted, open-source alternative to Semrush-style SEO tooling.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        24
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "code-review-graph",
+      "category": "code intelligence",
+      "what_it_does": "Uses a code graph to reduce context or token costs during AI code review.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        26
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Wigolo",
+      "category": "web research",
+      "what_it_does": "Local-first web intelligence for AI agents without API keys, according to the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        27
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "LingBot-Map",
+      "category": "computer vision",
+      "what_it_does": "Performs streaming 3D reconstruction at a claimed 20 FPS.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        28
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "LobeHub",
+      "category": "AI agents",
+      "what_it_does": "A workspace or team interface for autonomous AI agents.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        29
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Open Interpreter",
+      "category": "AI coding",
+      "what_it_does": "Low-cost coding agent for executing computer or coding tasks through natural language.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        30
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Awesome LLM Apps",
+      "category": "AI applications",
+      "what_it_does": "A curated collection or guide to runnable LLM applications and agents.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        31
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Low",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "name": "Graphify",
+      "category": "knowledge management",
+      "what_it_does": "Turns folders into queryable knowledge graphs.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        32
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "OpenCut",
+      "category": "video editing",
+      "what_it_does": "Free, open-source video editor positioned as a CapCut alternative.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        33
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Hallmark",
+      "category": "agent skills",
+      "what_it_does": "Design skill intended to reduce generic or AI-slop interfaces in AI coding assistants.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        35
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "HTMX",
+      "category": "web development",
+      "what_it_does": "Lightweight HTML-driven web interaction approach compared with React in the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        36
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "React",
+      "category": "web development",
+      "what_it_does": "JavaScript UI library/framework compared with HTMX in the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        36
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "PentAGI",
+      "category": "security",
+      "what_it_does": "AI-powered penetration-testing tooling.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        37
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Destructive Command Guard",
+      "category": "agent security",
+      "what_it_does": "Guards AI-agent commands so destructive operations are not trusted blindly.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        38
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Stitch Skills",
+      "category": "design and agents",
+      "what_it_does": "Google skills that enable AI agents to perform design-related work.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        39
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Google Stitch Skills",
+      "category": "reference",
+      "what_it_does": "Named in a public video title; verify from the video or project repository before adoption.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        39
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Medium",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "name": "Bun",
+      "category": "JavaScript tooling",
+      "what_it_does": "All-in-one JavaScript runtime/toolkit.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        40
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Desktop Commander MCP",
+      "category": "MCP and desktop automation",
+      "what_it_does": "MCP-based control of a desktop computer for AI workflows.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        41
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "System Prompts Leaks Repo",
+      "category": "AI research",
+      "what_it_does": "Repository collecting or analyzing system-prompt examples, as indicated by the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        42
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Medium",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "name": "CubeSandbox",
+      "category": "agent security",
+      "what_it_does": "Hardware-isolated sandboxing for AI agents.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        43
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "OfficeCLI",
+      "category": "productivity automation",
+      "what_it_does": "CLI for AI agents to edit Word, Excel, and PowerPoint files.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        44
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Claude Video",
+      "category": "video understanding",
+      "what_it_does": "Gives AI agents the ability to watch or analyze video.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        47
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Agency Agents",
+      "category": "multi-agent systems",
+      "what_it_does": "Turns a coding assistant into a team of specialist agents.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        49
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Astryx",
+      "category": "design systems",
+      "what_it_does": "Meta's open-source design system with reusable components and themes.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        50
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Meetily",
+      "category": "meeting AI",
+      "what_it_does": "Privacy-first, local AI meeting assistant.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        52
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Page Agent",
+      "category": "agent browsers",
+      "what_it_does": "AI agent that operates inside a webpage without Python or a headless browser, per title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        53
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Caveman",
+      "category": "AI efficiency",
+      "what_it_does": "Token-reduction approach for AI coding while aiming to preserve accuracy.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        55
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Strix",
+      "category": "security",
+      "what_it_does": "Open-source AI penetration-testing agents intended to find exploits.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        56
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Open Knowledge Format",
+      "category": "AI memory",
+      "what_it_does": "Folder-oriented/open knowledge format for storing AI memory or context.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        57
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Video-Use",
+      "category": "video editing",
+      "what_it_does": "Uses AI agents to edit videos.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        58
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Vibe-Trading",
+      "category": "finance automation",
+      "what_it_does": "Multi-agent AI trading system with many tools.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        60
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "SimpleX Chat",
+      "category": "private communications",
+      "what_it_does": "Private messaging designed not to require a single user ID.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        62
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Ornith-1.0-9B",
+      "category": "local AI",
+      "what_it_does": "A local 9B language model presented as competitive with larger models.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        63
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "AI Berkshire",
+      "category": "finance automation",
+      "what_it_does": "Open-source framework for portfolio or stock analysis, according to the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        64
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "AI Website Cloner",
+      "category": "web development",
+      "what_it_does": "Clones a website from a single command, as described by the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        65
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Voicebox",
+      "category": "voice and speech",
+      "what_it_does": "Free voice application positioned as an alternative to ElevenLabs and WisprFlow.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        68
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "ElevenLabs",
+      "category": "voice and speech",
+      "what_it_does": "Commercial voice generation service named as a comparison target.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        68
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "WisprFlow",
+      "category": "voice and speech",
+      "what_it_does": "Voice or speech productivity service named as a comparison target.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        68
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "OpenMontage",
+      "category": "video editing",
+      "what_it_does": "AI video pipeline that runs inside Claude Code.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        69
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Headroom",
+      "category": "AI efficiency",
+      "what_it_does": "Context-compression layer intended to reduce noise or context cost for AI agents.",
+      "evidence_basis": "title",
+      "video_count": 2,
+      "video_positions": [
+        70,
+        88
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Palmier Pro",
+      "category": "video editing",
+      "what_it_does": "Free GitHub AI video editor positioned as an alternative to paid tools.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        71
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Fable Brain Protocol",
+      "category": "prompting and AI memory",
+      "what_it_does": "Protocol intended to make free AI systems reason more like a named Claude/Fable setup.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        73
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Codebase Memory MCP",
+      "category": "MCP and code intelligence",
+      "what_it_does": "Provides repository-wide memory to AI agents through MCP.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        74
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "iptv-org/iptv",
+      "category": "media infrastructure",
+      "what_it_does": "Organizes public IPTV channel information and streams; the title references 30,000+ channels.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        75
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Chatwoot",
+      "category": "customer support",
+      "what_it_does": "Open-source customer-support platform positioned as an Intercom alternative.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        76
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "SkillSpector",
+      "category": "agent security",
+      "what_it_does": "NVIDIA tool for inspecting or addressing dangerous AI-agent skills, according to the title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        77
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "OpenMed",
+      "category": "healthcare AI",
+      "what_it_does": "Runs healthcare AI locally to avoid sending patient data to the cloud.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        78
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "PM Skills Marketplace",
+      "category": "product management",
+      "what_it_does": "Marketplace of AI workflows or skills for product teams.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        79
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Apple Container",
+      "category": "containers",
+      "what_it_does": "Runs Linux containers on macOS.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        80
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Odysseus",
+      "category": "AI workspace",
+      "what_it_does": "Self-hosted AI workspace.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        82
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "last30days-skill",
+      "category": "web research",
+      "what_it_does": "Researches a topic across 15+ platforms and is positioned as a Perplexity alternative.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        83
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Open Notebook",
+      "category": "research and knowledge",
+      "what_it_does": "Self-hosted AI research assistant positioned as a NotebookLM alternative.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        84
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Open-LLM-VTuber",
+      "category": "voice and multimodal AI",
+      "what_it_does": "Open-source AI character that sees, hears, and talks back.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        85
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Hermes Agent",
+      "category": "AI agents",
+      "what_it_does": "Self-improving AI agent.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        87
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Supermemory",
+      "category": "AI memory",
+      "what_it_does": "AI memory API.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        90
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Compound Engineering",
+      "category": "AI development",
+      "what_it_does": "Engineering approach or workflow for compounding AI-assisted development gains.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        92
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Offline AI Knowledge Server",
+      "category": "local AI",
+      "what_it_does": "Knowledge server designed to work without an internet connection.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        93
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "DGX Spark",
+      "category": "AI hardware",
+      "what_it_does": "Hardware platform used to run frontier AI models locally, per title.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        94
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "VoxCPM2",
+      "category": "voice and speech",
+      "what_it_does": "Open-source text-to-speech model.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        95
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Twenty CRM",
+      "category": "CRM",
+      "what_it_does": "Open-source CRM positioned as a Salesforce alternative.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        96
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Skills.sh",
+      "category": "agent skills",
+      "what_it_does": "Skills distribution or workflow layer for AI coding agents.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        97
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "FreeDomain",
+      "category": "domains",
+      "what_it_does": "Service or project for obtaining free domain names.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        98
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "MarkItDown",
+      "category": "document processing",
+      "what_it_does": "Microsoft tool for converting files into Markdown for AI workflows.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        99
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Money Printer Turbo",
+      "category": "content automation",
+      "what_it_does": "Automation workflow for creating videos on autopilot.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        100
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Taste Skill",
+      "category": "agent skills",
+      "what_it_does": "Claude Code skill intended to improve design taste and reduce generic output.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        101
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Knowledge Work Plugins",
+      "category": "agent skills",
+      "what_it_does": "Plugins that add knowledge-work capabilities to Claude Code.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        102
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Anthropic Cybersecurity Skills",
+      "category": "security",
+      "what_it_does": "Cybersecurity skills for AI agents from Anthropic.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        103
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "name": "CMUX",
+      "category": "agent operations",
+      "what_it_does": "Terminal interface for running or managing multiple AI agents.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        104
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Understand Anything",
+      "category": "research and video analysis",
+      "what_it_does": "AI-powered deep-research and video-analysis tool.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        105
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Codegraph",
+      "category": "code intelligence",
+      "what_it_does": "Code graph used to reduce Claude Code token usage.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        106
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Multical",
+      "category": "agent operations",
+      "what_it_does": "Tool for managing multiple AI agents.",
+      "evidence_basis": "title",
+      "video_count": 1,
+      "video_positions": [
+        107
+      ],
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Watermarks Remover",
+      "category": "content authenticity",
+      "what_it_does": "Deep dive into AI watermarking (C2PA, SynthID, Unicode) and how watermarks on text and files can be removed.",
+      "evidence_basis": "title + description",
+      "video_count": 1,
+      "video_positions": [
+        108
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Paperclip",
+      "category": "agent operations",
+      "what_it_does": "Open-source control plane for managing AI agents at work: agent registry, permissions, and audit.",
+      "evidence_basis": "title + description",
+      "video_count": 1,
+      "video_positions": [
+        109
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "oMLX",
+      "category": "local AI",
+      "what_it_does": "Managed local inference service for Apple Silicon with continuous batching and persistent tiered KV cache.",
+      "evidence_basis": "title + description",
+      "video_count": 1,
+      "video_positions": [
+        110
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Code-Graph-RAG",
+      "category": "code intelligence",
+      "what_it_does": "Parses multi-language codebases with Tree-sitter and builds a knowledge graph for AI querying, editing, and optimization of monorepos.",
+      "evidence_basis": "title + description",
+      "video_count": 1,
+      "video_positions": [
+        112
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "name": "Google Skills",
+      "category": "agent skills",
+      "what_it_does": "Official open-source library of 104 Agent Skills for Google Cloud that teach coding agents tool use.",
+      "evidence_basis": "title + description",
+      "video_count": 1,
+      "video_positions": [
+        113
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Semantica",
+      "category": "knowledge management",
+      "what_it_does": "Graph-native infrastructure for AI-agent memory that stores meaning instead of embeddings.",
+      "evidence_basis": "title + description",
+      "video_count": 1,
+      "video_positions": [
+        114
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "name": "Prime Agent",
+      "category": "AI agents",
+      "what_it_does": "Self-improving agent that uses one persistent IPython kernel as its only model tool, with recursive self-improvement.",
+      "evidence_basis": "title + description",
+      "video_count": 1,
+      "video_positions": [
+        115
+      ],
+      "evidence_level": "title+description",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    }
+  ],
+  "adoption_matrix": [
+    {
+      "item": "Cloudflare Computer",
+      "category": "agent infrastructure",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "PDF-inspector",
+      "category": "document processing",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "GitHub repository ecosystem",
+      "category": "reference",
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Low",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "item": "AirLLM",
+      "category": "local AI",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Sandbox Claude Code",
+      "category": "agent security",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Claude Code",
+      "category": "AI coding",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Kaneo",
+      "category": "project management",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "HuggingFace",
+      "category": "AI models",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Microsoft AI curriculum",
+      "category": "reference",
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Low",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "item": "reverse-skill",
+      "category": "agent skills",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "OpenWork",
+      "category": "MCP and agents",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Book-to-Skill",
+      "category": "agent skills",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "jcode",
+      "category": "AI coding",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Harness",
+      "category": "multi-agent systems",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Nanobot",
+      "category": "AI agents",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "BitChat",
+      "category": "private communications",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Harper",
+      "category": "privacy",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "ego lite",
+      "category": "agent browsers",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "OmniRoute",
+      "category": "AI infrastructure",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Buzz",
+      "category": "AI workspace",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "i-have-adhd",
+      "category": "AI coding",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "OpenSEO",
+      "category": "SEO",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "code-review-graph",
+      "category": "code intelligence",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Wigolo",
+      "category": "web research",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "LingBot-Map",
+      "category": "computer vision",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "LobeHub",
+      "category": "AI agents",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Open Interpreter",
+      "category": "AI coding",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Awesome LLM Apps",
+      "category": "AI applications",
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Low",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "item": "Graphify",
+      "category": "knowledge management",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "OpenCut",
+      "category": "video editing",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Hallmark",
+      "category": "agent skills",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "HTMX",
+      "category": "web development",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "React",
+      "category": "web development",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "PentAGI",
+      "category": "security",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Destructive Command Guard",
+      "category": "agent security",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Stitch Skills",
+      "category": "design and agents",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Google Stitch Skills",
+      "category": "reference",
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Medium",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "item": "Bun",
+      "category": "JavaScript tooling",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Desktop Commander MCP",
+      "category": "MCP and desktop automation",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "System Prompts Leaks Repo",
+      "category": "AI research",
+      "evidence_level": "title-only",
+      "workspace_fit": "Low",
+      "risk": "Medium",
+      "evaluation_action": "Verify the official project/repository and documentation",
+      "status": "Backlog"
+    },
+    {
+      "item": "CubeSandbox",
+      "category": "agent security",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "OfficeCLI",
+      "category": "productivity automation",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Claude Video",
+      "category": "video understanding",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Agency Agents",
+      "category": "multi-agent systems",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Astryx",
+      "category": "design systems",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Meetily",
+      "category": "meeting AI",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Page Agent",
+      "category": "agent browsers",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Caveman",
+      "category": "AI efficiency",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Strix",
+      "category": "security",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Open Knowledge Format",
+      "category": "AI memory",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Video-Use",
+      "category": "video editing",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Vibe-Trading",
+      "category": "finance automation",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "SimpleX Chat",
+      "category": "private communications",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Ornith-1.0-9B",
+      "category": "local AI",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "AI Berkshire",
+      "category": "finance automation",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "AI Website Cloner",
+      "category": "web development",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Voicebox",
+      "category": "voice and speech",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "ElevenLabs",
+      "category": "voice and speech",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "WisprFlow",
+      "category": "voice and speech",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "OpenMontage",
+      "category": "video editing",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Headroom",
+      "category": "AI efficiency",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Palmier Pro",
+      "category": "video editing",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Fable Brain Protocol",
+      "category": "prompting and AI memory",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Codebase Memory MCP",
+      "category": "MCP and code intelligence",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "iptv-org/iptv",
+      "category": "media infrastructure",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Chatwoot",
+      "category": "customer support",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "SkillSpector",
+      "category": "agent security",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "OpenMed",
+      "category": "healthcare AI",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "PM Skills Marketplace",
+      "category": "product management",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Apple Container",
+      "category": "containers",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Odysseus",
+      "category": "AI workspace",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "last30days-skill",
+      "category": "web research",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Open Notebook",
+      "category": "research and knowledge",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Open-LLM-VTuber",
+      "category": "voice and multimodal AI",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Hermes Agent",
+      "category": "AI agents",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Supermemory",
+      "category": "AI memory",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Compound Engineering",
+      "category": "AI development",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Offline AI Knowledge Server",
+      "category": "local AI",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "DGX Spark",
+      "category": "AI hardware",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "VoxCPM2",
+      "category": "voice and speech",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Twenty CRM",
+      "category": "CRM",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Skills.sh",
+      "category": "agent skills",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "FreeDomain",
+      "category": "domains",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "MarkItDown",
+      "category": "document processing",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Money Printer Turbo",
+      "category": "content automation",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Taste Skill",
+      "category": "agent skills",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Knowledge Work Plugins",
+      "category": "agent skills",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Anthropic Cybersecurity Skills",
+      "category": "security",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "High",
+      "evaluation_action": "Read-only review, threat model, then isolated sandbox test",
+      "status": "Backlog"
+    },
+    {
+      "item": "CMUX",
+      "category": "agent operations",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Understand Anything",
+      "category": "research and video analysis",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Codegraph",
+      "category": "code intelligence",
+      "evidence_level": "title-only",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Multical",
+      "category": "agent operations",
+      "evidence_level": "title-only",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Watermarks Remover",
+      "category": "content authenticity",
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Paperclip",
+      "category": "agent operations",
+      "evidence_level": "title+description",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "oMLX",
+      "category": "local AI",
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Code-Graph-RAG",
+      "category": "code intelligence",
+      "evidence_level": "title+description",
+      "workspace_fit": "High",
+      "risk": "Low",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    },
+    {
+      "item": "Google Skills",
+      "category": "agent skills",
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Medium",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Semantica",
+      "category": "knowledge management",
+      "evidence_level": "title+description",
+      "workspace_fit": "Medium",
+      "risk": "Low",
+      "evaluation_action": "Documentation/license review before a disposable local test",
+      "status": "Backlog"
+    },
+    {
+      "item": "Prime Agent",
+      "category": "AI agents",
+      "evidence_level": "title+description",
+      "workspace_fit": "High",
+      "risk": "Medium",
+      "evaluation_action": "Bounded local evaluation with rollback and evidence record",
+      "status": "Backlog"
+    }
+  ],
+  "videos": [
+    {
+      "position": 1,
+      "video_id": "nG6MXUNsfbU",
+      "title": "Cloudflare Computer - Give Your Agent a Computer (Deep Dive Tutorial)",
+      "url": "https://www.youtube.com/watch?v=nG6MXUNsfbU",
+      "duration_seconds": 781,
+      "duration": "13:01",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Cloudflare Computer"
+      ],
+      "what_it_does": "Provides a computer environment for an AI agent.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 2,
+      "video_id": "1Yo14h92q_g",
+      "title": "PDF-inspector : Fast PDF Classification & Markdown in Rust (Full Deep Dive)",
+      "url": "https://www.youtube.com/watch?v=1Yo14h92q_g",
+      "duration_seconds": 738,
+      "duration": "12:18",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "PDF-inspector"
+      ],
+      "what_it_does": "Classifies PDFs and converts them to Markdown, implemented in Rust.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 3,
+      "video_id": "QyoHrPj2Ccc",
+      "title": "Top 10 GitHub Repos This Week | July 29 – August 4 | AI Agents, Code Review & Browser Automation",
+      "url": "https://www.youtube.com/watch?v=QyoHrPj2Ccc",
+      "duration_seconds": 1614,
+      "duration": "26:54",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 4,
+      "video_id": "qdh8RFyknNY",
+      "title": "AirLLM : Run 70B LLMs on a 4GB GPU (Full Deep Dive Tutorial)",
+      "url": "https://www.youtube.com/watch?v=qdh8RFyknNY",
+      "duration_seconds": 744,
+      "duration": "12:24",
+      "category": "developer infrastructure",
+      "tool_mentions": [
+        "AirLLM"
+      ],
+      "what_it_does": "Runs large language models such as 70B models with constrained GPU memory.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 5,
+      "video_id": "V2wR6FJDjio",
+      "title": "Sandbox Claude Code : The Agent OS That Sandboxes AI",
+      "url": "https://www.youtube.com/watch?v=V2wR6FJDjio",
+      "duration_seconds": 791,
+      "duration": "13:11",
+      "category": "security and isolation",
+      "tool_mentions": [
+        "Sandbox Claude Code",
+        "Claude Code"
+      ],
+      "what_it_does": "Sandboxes Claude Code or its agent runtime to isolate AI work. Anthropic's coding agent used for repository work, skills, plugins, and automation.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 6,
+      "video_id": "JzpMbkNItJc",
+      "title": "Kaneo : Open Source Project Management | Self-Hosted  | Linear/Jira Alternative",
+      "url": "https://www.youtube.com/watch?v=JzpMbkNItJc",
+      "duration_seconds": 811,
+      "duration": "13:31",
+      "category": "collaboration and productivity",
+      "tool_mentions": [
+        "Kaneo"
+      ],
+      "what_it_does": "Self-hosted project management positioned as a Linear/Jira alternative.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 7,
+      "video_id": "rb9008uVuGo",
+      "title": "Build a Voice AI Assistant with Open-Source Models | HuggingFace Speech-to-Speech Tutorial",
+      "url": "https://www.youtube.com/watch?v=rb9008uVuGo",
+      "duration_seconds": 675,
+      "duration": "11:15",
+      "category": "voice and multimodal AI",
+      "tool_mentions": [
+        "HuggingFace"
+      ],
+      "what_it_does": "Provides open-source speech/AI models used for a voice assistant workflow.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 8,
+      "video_id": "e7oay08hveU",
+      "title": "Learn AI For Free — Microsoft's 24-Lesson Curriculum (58.7K Github Stars)",
+      "url": "https://www.youtube.com/watch?v=e7oay08hveU",
+      "duration_seconds": 756,
+      "duration": "12:36",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Microsoft AI curriculum"
+      ],
+      "what_it_does": "Educational curriculum or learning resource for studying AI; the title attributes it to Microsoft.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 9,
+      "video_id": "mstu_2_gI_U",
+      "title": "Delete Your CLAUDE.md: The 6 Laws of AI Development — From Claude Code's Creator",
+      "url": "https://www.youtube.com/watch?v=mstu_2_gI_U",
+      "duration_seconds": 1382,
+      "duration": "23:02",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Claude Code"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 10,
+      "video_id": "9pkn4yurjNM",
+      "title": "Reverse Engineering for AI Agents: reverse-skill Deep Dive (12K Stars, MIT Open Core)",
+      "url": "https://www.youtube.com/watch?v=9pkn4yurjNM",
+      "duration_seconds": 745,
+      "duration": "12:25",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "reverse-skill"
+      ],
+      "what_it_does": "Adds reverse-engineering capabilities for AI agents; the title references binaries, APKs, or compiled packages only indirectly.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 11,
+      "video_id": "Ex-eGzpS53s",
+      "title": "OpenWork: One MCP Hub for Every AI Agent — Install, Self-Host & Supercharge Your Workflow",
+      "url": "https://www.youtube.com/watch?v=Ex-eGzpS53s",
+      "duration_seconds": 711,
+      "duration": "11:51",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "OpenWork"
+      ],
+      "what_it_does": "Acts as a self-hosted MCP hub for connecting AI agents to tools and workflows.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 12,
+      "video_id": "adv1yC52HOs",
+      "title": "Top 10 GitHub Repos in July 2026 | AI Agents, Privacy & Security",
+      "url": "https://www.youtube.com/watch?v=adv1yC52HOs",
+      "duration_seconds": 1769,
+      "duration": "29:29",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 13,
+      "video_id": "GoTpAlA8FL4",
+      "title": "Book-to-Skill — Convert Books Into AI Agent Skills | 13K+ Github Stars",
+      "url": "https://www.youtube.com/watch?v=GoTpAlA8FL4",
+      "duration_seconds": 560,
+      "duration": "9:20",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Book-to-Skill"
+      ],
+      "what_it_does": "Converts book content into reusable AI-agent skills.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 14,
+      "video_id": "iqqCFRjY66Q",
+      "title": "jcode: Rust AI Coding Harness with 24× Lower Memory Use | 14K+ Github Stars",
+      "url": "https://www.youtube.com/watch?v=iqqCFRjY66Q",
+      "duration_seconds": 767,
+      "duration": "12:47",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "jcode",
+        "Harness"
+      ],
+      "what_it_does": "Rust-based AI coding harness marketed around lower memory use. Builds an AI agent team around Claude Code.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 15,
+      "video_id": "TTsTKyD8yGo",
+      "title": "Awesome Systematic Trading — The Complete Quant Finance Resource Guide (2026)",
+      "url": "https://www.youtube.com/watch?v=TTsTKyD8yGo",
+      "duration_seconds": 761,
+      "duration": "12:41",
+      "category": "finance and trading",
+      "tool_mentions": [],
+      "what_it_does": "Curated resource guide for systematic or quantitative trading.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 16,
+      "video_id": "nd01MRFPOzc",
+      "title": "Nanobot - Build Your Own Self-Hosted AI Agent (Complete Tutorial 2026)",
+      "url": "https://www.youtube.com/watch?v=nd01MRFPOzc",
+      "duration_seconds": 822,
+      "duration": "13:42",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Nanobot"
+      ],
+      "what_it_does": "A self-hosted AI agent that users can build and run themselves.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 17,
+      "video_id": "N8hJ7buRTMY",
+      "title": "Top 10 GitHub Repos This Week | July 21 – July 28 | AI Agents Take Over",
+      "url": "https://www.youtube.com/watch?v=N8hJ7buRTMY",
+      "duration_seconds": 1558,
+      "duration": "25:58",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 18,
+      "video_id": "L1TlYz4WRNI",
+      "title": "BitChat: Decentralized P2P Messenger (Full Deep Dive)",
+      "url": "https://www.youtube.com/watch?v=L1TlYz4WRNI",
+      "duration_seconds": 473,
+      "duration": "7:53",
+      "category": "collaboration and productivity",
+      "tool_mentions": [
+        "BitChat"
+      ],
+      "what_it_does": "Decentralized peer-to-peer messaging without a conventional centralized service claim in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 19,
+      "video_id": "h6ixZMU1hTE",
+      "title": "Your Grammar Checker is Spying on You — Meet Harper, the Offline Alternative",
+      "url": "https://www.youtube.com/watch?v=h6ixZMU1hTE",
+      "duration_seconds": 469,
+      "duration": "7:49",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Harper"
+      ],
+      "what_it_does": "Offline grammar-checking alternative to cloud grammar tools.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 20,
+      "video_id": "ZCZI06RGfig",
+      "title": "ego lite — The Browser Built for AI Agents",
+      "url": "https://www.youtube.com/watch?v=ZCZI06RGfig",
+      "duration_seconds": 845,
+      "duration": "14:05",
+      "category": "web and browser automation",
+      "tool_mentions": [
+        "ego lite"
+      ],
+      "what_it_does": "A browser designed for AI-agent use.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 21,
+      "video_id": "04NEo7PiOFg",
+      "title": "OmniRoute: The FREE AI Gateway with 268 Providers & 18 Routing Strategies",
+      "url": "https://www.youtube.com/watch?v=04NEo7PiOFg",
+      "duration_seconds": 522,
+      "duration": "8:42",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "OmniRoute"
+      ],
+      "what_it_does": "AI gateway for routing requests across many providers and routing strategies.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 22,
+      "video_id": "t32GYvK4gek",
+      "title": "Buzz: The Open Source Workspace Where Humans & AI Build Together",
+      "url": "https://www.youtube.com/watch?v=t32GYvK4gek",
+      "duration_seconds": 596,
+      "duration": "9:56",
+      "category": "collaboration and productivity",
+      "tool_mentions": [
+        "Buzz"
+      ],
+      "what_it_does": "Open-source workspace intended for humans and AI to build together.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 23,
+      "video_id": "ka_WJvPEuDk",
+      "title": "i-have-adhd: Make Your Coding Agent ADHD-Friendly in One Install Command 🧠",
+      "url": "https://www.youtube.com/watch?v=ka_WJvPEuDk",
+      "duration_seconds": 476,
+      "duration": "7:56",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "i-have-adhd"
+      ],
+      "what_it_does": "Makes a coding agent workflow more ADHD-friendly through an installable customization.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 24,
+      "video_id": "bYCNNJGCnl8",
+      "title": "OpenSEO - Open Source Semrush Alternative You Can Self-Host",
+      "url": "https://www.youtube.com/watch?v=bYCNNJGCnl8",
+      "duration_seconds": 605,
+      "duration": "10:05",
+      "category": "web and browser automation",
+      "tool_mentions": [
+        "OpenSEO"
+      ],
+      "what_it_does": "Self-hosted, open-source alternative to Semrush-style SEO tooling.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 25,
+      "video_id": "7hLuIkVZoEw",
+      "title": "Top 10 GitHub Repos This Week | June 14–21 | AI Agents, Dev Tools & Open Source",
+      "url": "https://www.youtube.com/watch?v=7hLuIkVZoEw",
+      "duration_seconds": 1475,
+      "duration": "24:35",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 26,
+      "video_id": "qtKkyxPXAAc",
+      "title": "Stop Burning Tokens: code-review-graph Cuts AI Review Costs by 82X",
+      "url": "https://www.youtube.com/watch?v=qtKkyxPXAAc",
+      "duration_seconds": 570,
+      "duration": "9:30",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "code-review-graph"
+      ],
+      "what_it_does": "Uses a code graph to reduce context or token costs during AI code review.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 27,
+      "video_id": "uI8uFjArhBI",
+      "title": "Wigolo: Free Local-First Web Intelligence for AI Agents (No API Keys)",
+      "url": "https://www.youtube.com/watch?v=uI8uFjArhBI",
+      "duration_seconds": 575,
+      "duration": "9:35",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Wigolo"
+      ],
+      "what_it_does": "Local-first web intelligence for AI agents without API keys, according to the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 28,
+      "video_id": "pXkmfHrO8pU",
+      "title": "LingBot-Map Tutorial: Streaming 3D Reconstruction at 20 FPS — Full Walkthrough",
+      "url": "https://www.youtube.com/watch?v=pXkmfHrO8pU",
+      "duration_seconds": 573,
+      "duration": "9:33",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "LingBot-Map"
+      ],
+      "what_it_does": "Performs streaming 3D reconstruction at a claimed 20 FPS.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 29,
+      "video_id": "qpnZcSJSoWo",
+      "title": "LobeHub — Your AI Team, Autonomous & 24/7 | 80K+ Github Stars",
+      "url": "https://www.youtube.com/watch?v=qpnZcSJSoWo",
+      "duration_seconds": 539,
+      "duration": "8:59",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "LobeHub"
+      ],
+      "what_it_does": "A workspace or team interface for autonomous AI agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 30,
+      "video_id": "NJ5J2L65Kgc",
+      "title": "Open Interpreter — The Ultimate Low-Cost Coding Agent (Full Tutorial)",
+      "url": "https://www.youtube.com/watch?v=NJ5J2L65Kgc",
+      "duration_seconds": 518,
+      "duration": "8:38",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Open Interpreter"
+      ],
+      "what_it_does": "Low-cost coding agent for executing computer or coding tasks through natural language.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 31,
+      "video_id": "Ry5IOvbkQTA",
+      "title": "100+ AI Agents You Can Actually Run — Awesome LLM Apps Complete Guide",
+      "url": "https://www.youtube.com/watch?v=Ry5IOvbkQTA",
+      "duration_seconds": 526,
+      "duration": "8:46",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Awesome LLM Apps"
+      ],
+      "what_it_does": "A curated collection or guide to runnable LLM applications and agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 32,
+      "video_id": "y4sHAGnIVMU",
+      "title": "Graphify | Turn Any Folder Into a Queryable Knowledge Graph | 86K Github Stars",
+      "url": "https://www.youtube.com/watch?v=y4sHAGnIVMU",
+      "duration_seconds": 539,
+      "duration": "8:59",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "Graphify"
+      ],
+      "what_it_does": "Turns folders into queryable knowledge graphs.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 33,
+      "video_id": "dMdAmLaY0sk",
+      "title": "OpenCut: The Free Open-Source Video Editor That Runs Everywhere | The Open-source CapCut Alternative",
+      "url": "https://www.youtube.com/watch?v=dMdAmLaY0sk",
+      "duration_seconds": 509,
+      "duration": "8:29",
+      "category": "video and media",
+      "tool_mentions": [
+        "OpenCut"
+      ],
+      "what_it_does": "Free, open-source video editor positioned as a CapCut alternative.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 34,
+      "video_id": "83Lr2n3XGJ0",
+      "title": "Top 10 GitHub Repositories This Week — AI Agents, MCP, Local AI & Developer Tools | June 7 - June 14",
+      "url": "https://www.youtube.com/watch?v=83Lr2n3XGJ0",
+      "duration_seconds": 669,
+      "duration": "11:09",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 35,
+      "video_id": "rgsAJrpqpPA",
+      "title": "Hallmark: The Anti-AI-Slop Design Skill for AI Coding Assistants",
+      "url": "https://www.youtube.com/watch?v=rgsAJrpqpPA",
+      "duration_seconds": 493,
+      "duration": "8:13",
+      "category": "developer infrastructure",
+      "tool_mentions": [
+        "Hallmark"
+      ],
+      "what_it_does": "Design skill intended to reduce generic or AI-slop interfaces in AI coding assistants.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 36,
+      "video_id": "mg01GC2vY6k",
+      "title": "HTMX vs React: The 16KB Idea Challenging Modern Frontend Development",
+      "url": "https://www.youtube.com/watch?v=mg01GC2vY6k",
+      "duration_seconds": 824,
+      "duration": "13:44",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "HTMX",
+        "React"
+      ],
+      "what_it_does": "Lightweight HTML-driven web interaction approach compared with React in the title. JavaScript UI library/framework compared with HTMX in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 37,
+      "video_id": "eNc3vUAQf0g",
+      "title": "PentAGI: AI-Powered Penetration Testing",
+      "url": "https://www.youtube.com/watch?v=eNc3vUAQf0g",
+      "duration_seconds": 515,
+      "duration": "8:35",
+      "category": "security and isolation",
+      "tool_mentions": [
+        "PentAGI"
+      ],
+      "what_it_does": "AI-powered penetration-testing tooling.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 38,
+      "video_id": "lZlB1v2BUpM",
+      "title": "Destructive Command Guard: Never Trust Your AI Agent Blindly",
+      "url": "https://www.youtube.com/watch?v=lZlB1v2BUpM",
+      "duration_seconds": 576,
+      "duration": "9:36",
+      "category": "security and isolation",
+      "tool_mentions": [
+        "Destructive Command Guard"
+      ],
+      "what_it_does": "Guards AI-agent commands so destructive operations are not trusted blindly.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 39,
+      "video_id": "qHWAk-EnUu8",
+      "title": "AI Agents Can FINALLY Design | Stitch Skills by Google",
+      "url": "https://www.youtube.com/watch?v=qHWAk-EnUu8",
+      "duration_seconds": 619,
+      "duration": "10:19",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Stitch Skills",
+        "Google Stitch Skills"
+      ],
+      "what_it_does": "Google skills that enable AI agents to perform design-related work.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 40,
+      "video_id": "EEbKhiG3z7g",
+      "title": "Bun: The All-in-One JavaScript Toolkit — Complete Guide 2026",
+      "url": "https://www.youtube.com/watch?v=EEbKhiG3z7g",
+      "duration_seconds": 516,
+      "duration": "8:36",
+      "category": "developer infrastructure",
+      "tool_mentions": [
+        "Bun"
+      ],
+      "what_it_does": "All-in-one JavaScript runtime/toolkit.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 41,
+      "video_id": "bGIMQqABDzg",
+      "title": "Desktop Commander MCP — Free AI Desktop Control",
+      "url": "https://www.youtube.com/watch?v=bGIMQqABDzg",
+      "duration_seconds": 495,
+      "duration": "8:15",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Desktop Commander MCP"
+      ],
+      "what_it_does": "MCP-based control of a desktop computer for AI workflows.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 42,
+      "video_id": "lbn0sF312CA",
+      "title": "The Hidden Rules Behind AI: Inside the System Prompts Leaks Repo",
+      "url": "https://www.youtube.com/watch?v=lbn0sF312CA",
+      "duration_seconds": 536,
+      "duration": "8:56",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "System Prompts Leaks Repo"
+      ],
+      "what_it_does": "Repository collecting or analyzing system-prompt examples, as indicated by the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 43,
+      "video_id": "XRrj2cx4oM8",
+      "title": "CubeSandbox: Hardware-Isolated Sandboxes for AI Agents",
+      "url": "https://www.youtube.com/watch?v=XRrj2cx4oM8",
+      "duration_seconds": 650,
+      "duration": "10:50",
+      "category": "security and isolation",
+      "tool_mentions": [
+        "CubeSandbox"
+      ],
+      "what_it_does": "Hardware-isolated sandboxing for AI agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 44,
+      "video_id": "SB0MRh1WSV0",
+      "title": "AI Agents Can FINALLY Edit Word, Excel & PowerPoint | Meet OfficeCLI",
+      "url": "https://www.youtube.com/watch?v=SB0MRh1WSV0",
+      "duration_seconds": 422,
+      "duration": "7:02",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "OfficeCLI"
+      ],
+      "what_it_does": "CLI for AI agents to edit Word, Excel, and PowerPoint files.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 45,
+      "video_id": "3YDfFW3N4LY",
+      "title": "Top 10 GitHub Repositories This Week: AI Agents, Dev Tools & Open Source Trends | June 1 - June 7",
+      "url": "https://www.youtube.com/watch?v=3YDfFW3N4LY",
+      "duration_seconds": 835,
+      "duration": "13:55",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 46,
+      "video_id": "hot4J4-rGgI",
+      "title": "This Rust Tool Replaced My Entire Agent Management Workflow",
+      "url": "https://www.youtube.com/watch?v=hot4J4-rGgI",
+      "duration_seconds": 477,
+      "duration": "7:57",
+      "category": "AI agents and coding",
+      "tool_mentions": [],
+      "what_it_does": "Technical tool, workflow, or engineering topic identified by the public video title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 47,
+      "video_id": "oASH17RXoV4",
+      "title": "Claude Video: Give AI Agents the Ability to Watch Any Video",
+      "url": "https://www.youtube.com/watch?v=oASH17RXoV4",
+      "duration_seconds": 545,
+      "duration": "9:05",
+      "category": "video and media",
+      "tool_mentions": [
+        "Claude Video"
+      ],
+      "what_it_does": "Gives AI agents the ability to watch or analyze video.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 48,
+      "video_id": "ZeFM7nljwtM",
+      "title": "AI Job Search: Generate Tailored CVs & Cover Letters with Claude Code 🚀",
+      "url": "https://www.youtube.com/watch?v=ZeFM7nljwtM",
+      "duration_seconds": 337,
+      "duration": "5:37",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Claude Code"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 49,
+      "video_id": "RTznEbCIgNM",
+      "title": "Agency Agents: Turn Your AI Coding Assistant Into a Full Specialist Team",
+      "url": "https://www.youtube.com/watch?v=RTznEbCIgNM",
+      "duration_seconds": 493,
+      "duration": "8:13",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Agency Agents"
+      ],
+      "what_it_does": "Turns a coding assistant into a team of specialist agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 50,
+      "video_id": "S0pKpjIJboQ",
+      "title": "Astryx: Meta's Open Source Design System | 150+ Components, 7 Themes, AI-Ready",
+      "url": "https://www.youtube.com/watch?v=S0pKpjIJboQ",
+      "duration_seconds": 516,
+      "duration": "8:36",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Astryx"
+      ],
+      "what_it_does": "Meta's open-source design system with reusable components and themes.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 51,
+      "video_id": "3Lmi5JEKOwI",
+      "title": "Top 10 GitHub Repos So Good They Shouldn't Be Free | And the SaaS Tools They Kill | Part 3",
+      "url": "https://www.youtube.com/watch?v=3Lmi5JEKOwI",
+      "duration_seconds": 980,
+      "duration": "16:20",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 52,
+      "video_id": "8dHv2EQSkFA",
+      "title": "Meetily : Privacy-First AI Meeting Assistant (Open Source, 100% Local)",
+      "url": "https://www.youtube.com/watch?v=8dHv2EQSkFA",
+      "duration_seconds": 499,
+      "duration": "8:19",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Meetily"
+      ],
+      "what_it_does": "Privacy-first, local AI meeting assistant.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 53,
+      "video_id": "0_zA2FahghM",
+      "title": "Page Agent : The AI That Lives Inside Your Webpage (No Python, No Headless Browser)",
+      "url": "https://www.youtube.com/watch?v=0_zA2FahghM",
+      "duration_seconds": 500,
+      "duration": "8:20",
+      "category": "web and browser automation",
+      "tool_mentions": [
+        "Page Agent"
+      ],
+      "what_it_does": "AI agent that operates inside a webpage without Python or a headless browser, per title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 54,
+      "video_id": "EDsv-MTDC8s",
+      "title": "AI Loop Engineering: The New AI prompting Method Everyone Is Talking About",
+      "url": "https://www.youtube.com/watch?v=EDsv-MTDC8s",
+      "duration_seconds": 789,
+      "duration": "13:09",
+      "category": "engineering and AI",
+      "tool_mentions": [],
+      "what_it_does": "Explains an AI-development or prompting method rather than one single software package.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 55,
+      "video_id": "DYa4P_yhing",
+      "title": "Caveman: Cut AI Coding Tokens by 65% Without Losing Accuracy",
+      "url": "https://www.youtube.com/watch?v=DYa4P_yhing",
+      "duration_seconds": 534,
+      "duration": "8:54",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Caveman"
+      ],
+      "what_it_does": "Token-reduction approach for AI coding while aiming to preserve accuracy.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 56,
+      "video_id": "cizqgS8l71o",
+      "title": "Strix: Open-Source AI Pentesting Agents That Find Real Exploits",
+      "url": "https://www.youtube.com/watch?v=cizqgS8l71o",
+      "duration_seconds": 525,
+      "duration": "8:45",
+      "category": "security and isolation",
+      "tool_mentions": [
+        "Strix"
+      ],
+      "what_it_does": "Open-source AI penetration-testing agents intended to find exploits.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 57,
+      "video_id": "8ump4sIOrcY",
+      "title": "Google Just Turned AI Memory Into a Folder — Open Knowledge Format Explained",
+      "url": "https://www.youtube.com/watch?v=8ump4sIOrcY",
+      "duration_seconds": 567,
+      "duration": "9:27",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "Open Knowledge Format"
+      ],
+      "what_it_does": "Folder-oriented/open knowledge format for storing AI memory or context.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 58,
+      "video_id": "51kmqWE9TGY",
+      "title": "Video-Use: Edit Videos with AI Agents | Open Source From Github",
+      "url": "https://www.youtube.com/watch?v=51kmqWE9TGY",
+      "duration_seconds": 472,
+      "duration": "7:52",
+      "category": "video and media",
+      "tool_mentions": [
+        "Video-Use"
+      ],
+      "what_it_does": "Uses AI agents to edit videos.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 59,
+      "video_id": "f5OWBYcJc9o",
+      "title": "Top 10 GitHub Repositories in June 2026 | AI Tools, Containers & Dev Workflows",
+      "url": "https://www.youtube.com/watch?v=f5OWBYcJc9o",
+      "duration_seconds": 839,
+      "duration": "13:59",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 60,
+      "video_id": "hh8G8_6v0Sg",
+      "title": "Vibe-Trading: Build a Multi-Agent AI Trading System with 68+ Tools | 16K Stars on Github",
+      "url": "https://www.youtube.com/watch?v=hh8G8_6v0Sg",
+      "duration_seconds": 616,
+      "duration": "10:16",
+      "category": "finance and trading",
+      "tool_mentions": [
+        "Vibe-Trading"
+      ],
+      "what_it_does": "Multi-agent AI trading system with many tools.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 61,
+      "video_id": "s9ezds4rf9Q",
+      "title": "This AI Dashboard Watches The Entire World (Open Source | Github)",
+      "url": "https://www.youtube.com/watch?v=s9ezds4rf9Q",
+      "duration_seconds": 480,
+      "duration": "8:00",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Open-source AI dashboard for monitoring or aggregating information, based on the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 62,
+      "video_id": "O6UK4KfiXjs",
+      "title": "SimpleX Chat: Private Messaging Without a Single User ID | Open Source Github With 14k Stars",
+      "url": "https://www.youtube.com/watch?v=O6UK4KfiXjs",
+      "duration_seconds": 543,
+      "duration": "9:03",
+      "category": "collaboration and productivity",
+      "tool_mentions": [
+        "SimpleX Chat"
+      ],
+      "what_it_does": "Private messaging designed not to require a single user ID.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 63,
+      "video_id": "mG30v-QYN2o",
+      "title": "Ornith-1.0-9B: The Local 9B Model That BEATS 31B Giants",
+      "url": "https://www.youtube.com/watch?v=mG30v-QYN2o",
+      "duration_seconds": 516,
+      "duration": "8:36",
+      "category": "developer infrastructure",
+      "tool_mentions": [
+        "Ornith-1.0-9B"
+      ],
+      "what_it_does": "A local 9B language model presented as competitive with larger models.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 64,
+      "video_id": "2fTlpn5PJbk",
+      "title": "AI Berkshire: This Open-Source Framework Beats Wall Street (Real Portfolio, Real Results)",
+      "url": "https://www.youtube.com/watch?v=2fTlpn5PJbk",
+      "duration_seconds": 469,
+      "duration": "7:49",
+      "category": "finance and trading",
+      "tool_mentions": [
+        "AI Berkshire"
+      ],
+      "what_it_does": "Open-source framework for portfolio or stock analysis, according to the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 65,
+      "video_id": "tPzsqHUj_Qg",
+      "title": "Clone ANY Website for Free with ONE Command (AI Website Cloner)",
+      "url": "https://www.youtube.com/watch?v=tPzsqHUj_Qg",
+      "duration_seconds": 479,
+      "duration": "7:59",
+      "category": "web and browser automation",
+      "tool_mentions": [
+        "AI Website Cloner"
+      ],
+      "what_it_does": "Clones a website from a single command, as described by the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 66,
+      "video_id": "i73Ex2Ll_vw",
+      "title": "Top 10 GitHub Repositories So Good They Shouldn't Be Free  | Save $50k/Yr of Business SaaS | Part 2",
+      "url": "https://www.youtube.com/watch?v=i73Ex2Ll_vw",
+      "duration_seconds": 957,
+      "duration": "15:57",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 67,
+      "video_id": "OT1IK_0OpOY",
+      "title": "I Built an AI Stock Analyzer for $0 | 47K Stars & 100% Open Source",
+      "url": "https://www.youtube.com/watch?v=OT1IK_0OpOY",
+      "duration_seconds": 500,
+      "duration": "8:20",
+      "category": "finance and trading",
+      "tool_mentions": [],
+      "what_it_does": "Technical tool, workflow, or engineering topic identified by the public video title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 68,
+      "video_id": "bOArzu4EiYg",
+      "title": "Voicebox: Replace ElevenLabs & WisprFlow with One Free App",
+      "url": "https://www.youtube.com/watch?v=bOArzu4EiYg",
+      "duration_seconds": 502,
+      "duration": "8:22",
+      "category": "voice and multimodal AI",
+      "tool_mentions": [
+        "Voicebox",
+        "ElevenLabs",
+        "WisprFlow"
+      ],
+      "what_it_does": "Free voice application positioned as an alternative to ElevenLabs and WisprFlow. Commercial voice generation service named as a comparison target. Voice or speech productivity service named as a comparison target.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 69,
+      "video_id": "9zppZY0w7PY",
+      "title": "OpenMontage: The Free AI Video Pipeline That Runs Inside Claude Code | Replaces Paid Alternatives",
+      "url": "https://www.youtube.com/watch?v=9zppZY0w7PY",
+      "duration_seconds": 525,
+      "duration": "8:45",
+      "category": "video and media",
+      "tool_mentions": [
+        "Claude Code",
+        "OpenMontage"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation. AI video pipeline that runs inside Claude Code.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 70,
+      "video_id": "uplU5p-J8AU",
+      "title": "Headroom: The Open Source Context Compression Layer from Github",
+      "url": "https://www.youtube.com/watch?v=uplU5p-J8AU",
+      "duration_seconds": 460,
+      "duration": "7:40",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Headroom"
+      ],
+      "what_it_does": "Context-compression layer intended to reduce noise or context cost for AI agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 71,
+      "video_id": "eRB78nPGXVg",
+      "title": "Palmier Pro: The Free Github AI Video Editor That Replaces Paid Alternatives",
+      "url": "https://www.youtube.com/watch?v=eRB78nPGXVg",
+      "duration_seconds": 480,
+      "duration": "8:00",
+      "category": "video and media",
+      "tool_mentions": [
+        "Palmier Pro"
+      ],
+      "what_it_does": "Free GitHub AI video editor positioned as an alternative to paid tools.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 72,
+      "video_id": "G6FFmgz48Ho",
+      "title": "Top 10 GitHub Repositories So Good They Shouldn't Be Free | And the Paid AI Tools They Kill | Part 1",
+      "url": "https://www.youtube.com/watch?v=G6FFmgz48Ho",
+      "duration_seconds": 833,
+      "duration": "13:53",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Curated overview of open-source repositories and the AI, developer, security, or automation use cases named in the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 73,
+      "video_id": "YqURyL8KYqU",
+      "title": "The Fable Brain Protocol: Make Any Free AI Think Like Claude Fable 5",
+      "url": "https://www.youtube.com/watch?v=YqURyL8KYqU",
+      "duration_seconds": 652,
+      "duration": "10:52",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Fable Brain Protocol"
+      ],
+      "what_it_does": "Protocol intended to make free AI systems reason more like a named Claude/Fable setup.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 74,
+      "video_id": "YEvdQVl_QUk",
+      "title": "Stop Wasting Tokens: Codebase Memory MCP Gives AI Agents Repo-Wide Memory",
+      "url": "https://www.youtube.com/watch?v=YEvdQVl_QUk",
+      "duration_seconds": 552,
+      "duration": "9:12",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Codebase Memory MCP"
+      ],
+      "what_it_does": "Provides repository-wide memory to AI agents through MCP.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 75,
+      "video_id": "sqIbAFBYUFA",
+      "title": "How iptv-org/iptv Actually Works | The Engineering Behind 30,000+ Public IPTV Channels",
+      "url": "https://www.youtube.com/watch?v=sqIbAFBYUFA",
+      "duration_seconds": 520,
+      "duration": "8:40",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "iptv-org/iptv"
+      ],
+      "what_it_does": "Organizes public IPTV channel information and streams; the title references 30,000+ channels.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 76,
+      "video_id": "sRcwhGnH-Zw",
+      "title": "Chatwoot Tutorial: The Best Open Source Intercom Alternative?",
+      "url": "https://www.youtube.com/watch?v=sRcwhGnH-Zw",
+      "duration_seconds": 389,
+      "duration": "6:29",
+      "category": "collaboration and productivity",
+      "tool_mentions": [
+        "Chatwoot"
+      ],
+      "what_it_does": "Open-source customer-support platform positioned as an Intercom alternative.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 77,
+      "video_id": "-k_RWkAyKy0",
+      "title": "26% of AI Agent Skills Are Dangerous | SkillSpector by NVIDIA is the Fix",
+      "url": "https://www.youtube.com/watch?v=-k_RWkAyKy0",
+      "duration_seconds": 606,
+      "duration": "10:06",
+      "category": "security and isolation",
+      "tool_mentions": [
+        "SkillSpector"
+      ],
+      "what_it_does": "NVIDIA tool for inspecting or addressing dangerous AI-agent skills, according to the title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 78,
+      "video_id": "ZDU4h18Wc7E",
+      "title": "OpenMed Tutorial: Run Healthcare AI Locally Without Sending Patient Data to the Cloud",
+      "url": "https://www.youtube.com/watch?v=ZDU4h18Wc7E",
+      "duration_seconds": 563,
+      "duration": "9:23",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "OpenMed"
+      ],
+      "what_it_does": "Runs healthcare AI locally to avoid sending patient data to the cloud.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 79,
+      "video_id": "lfY7E9bRjNw",
+      "title": "PM Skills Marketplace: AI Workflows For Product Teams",
+      "url": "https://www.youtube.com/watch?v=lfY7E9bRjNw",
+      "duration_seconds": 550,
+      "duration": "9:10",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "PM Skills Marketplace"
+      ],
+      "what_it_does": "Marketplace of AI workflows or skills for product teams.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 80,
+      "video_id": "mo-umzNPSe8",
+      "title": "Apple Container: Linux Containers On Your Mac",
+      "url": "https://www.youtube.com/watch?v=mo-umzNPSe8",
+      "duration_seconds": 532,
+      "duration": "8:52",
+      "category": "developer infrastructure",
+      "tool_mentions": [
+        "Apple Container"
+      ],
+      "what_it_does": "Runs Linux containers on macOS.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 81,
+      "video_id": "xFemCQdqy3Y",
+      "title": "Harness: Build an Entire AI Agent Team With Claude Code",
+      "url": "https://www.youtube.com/watch?v=xFemCQdqy3Y",
+      "duration_seconds": 529,
+      "duration": "8:49",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Claude Code",
+        "Harness"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation. Builds an AI agent team around Claude Code.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 82,
+      "video_id": "ycbrFSeH2Hw",
+      "title": "Odysseus: Self-Hosted AI Workspace by Pewdiepie",
+      "url": "https://www.youtube.com/watch?v=ycbrFSeH2Hw",
+      "duration_seconds": 555,
+      "duration": "9:15",
+      "category": "collaboration and productivity",
+      "tool_mentions": [
+        "Odysseus"
+      ],
+      "what_it_does": "Self-hosted AI workspace.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 83,
+      "video_id": "4nSs4Ic1qcg",
+      "title": "last30days-skill: Research Any Topic Across 15+ Platforms (Perplexity Alternative)",
+      "url": "https://www.youtube.com/watch?v=4nSs4Ic1qcg",
+      "duration_seconds": 563,
+      "duration": "9:23",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "last30days-skill"
+      ],
+      "what_it_does": "Researches a topic across 15+ platforms and is positioned as a Perplexity alternative.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 84,
+      "video_id": "F5WhKMLFnC0",
+      "title": "Open Notebook: Self-Hosted AI Research Assistant (Notebook LM Alternative)",
+      "url": "https://www.youtube.com/watch?v=F5WhKMLFnC0",
+      "duration_seconds": 541,
+      "duration": "9:01",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "Open Notebook"
+      ],
+      "what_it_does": "Self-hosted AI research assistant positioned as a NotebookLM alternative.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 85,
+      "video_id": "-om2AS8VhHg",
+      "title": "Open-LLM-VTuber: The Open-Source AI That Sees, Hears & Talks Back",
+      "url": "https://www.youtube.com/watch?v=-om2AS8VhHg",
+      "duration_seconds": 560,
+      "duration": "9:20",
+      "category": "voice and multimodal AI",
+      "tool_mentions": [
+        "Open-LLM-VTuber"
+      ],
+      "what_it_does": "Open-source AI character that sees, hears, and talks back.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 86,
+      "video_id": "siM5cbmCH5U",
+      "title": "Every AI Website Looks the Same | Here's the Fix",
+      "url": "https://www.youtube.com/watch?v=siM5cbmCH5U",
+      "duration_seconds": 486,
+      "duration": "8:06",
+      "category": "web and browser automation",
+      "tool_mentions": [],
+      "what_it_does": "Technical tool, workflow, or engineering topic identified by the public video title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 87,
+      "video_id": "u-ksY-pfN80",
+      "title": "Hermes Agent: The Self-Improving AI Agent",
+      "url": "https://www.youtube.com/watch?v=u-ksY-pfN80",
+      "duration_seconds": 494,
+      "duration": "8:14",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Hermes Agent"
+      ],
+      "what_it_does": "Self-improving AI agent.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 88,
+      "video_id": "asfQk-iSXc8",
+      "title": "Your AI Agent Is Drowning in Noise | Headroom Is the Lifeline",
+      "url": "https://www.youtube.com/watch?v=asfQk-iSXc8",
+      "duration_seconds": 538,
+      "duration": "8:58",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Headroom"
+      ],
+      "what_it_does": "Context-compression layer intended to reduce noise or context cost for AI agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 89,
+      "video_id": "an0Sa9EsBoI",
+      "title": "Your AI is Designing Terrible Interfaces — Here's Why",
+      "url": "https://www.youtube.com/watch?v=an0Sa9EsBoI",
+      "duration_seconds": 130,
+      "duration": "2:10",
+      "category": "engineering and AI",
+      "tool_mentions": [],
+      "what_it_does": "Design guidance or a design-system discussion for improving AI-generated interfaces.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 90,
+      "video_id": "vRrUTvHW7Ww",
+      "title": "This AI Memory API Just Hit #1 on Every Benchmark | Supermemory",
+      "url": "https://www.youtube.com/watch?v=vRrUTvHW7Ww",
+      "duration_seconds": 556,
+      "duration": "9:16",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "Supermemory"
+      ],
+      "what_it_does": "AI memory API.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 91,
+      "video_id": "qVrqUTY8i-M",
+      "title": "This Repo Gives Claude Code a Nervous System. 57k Github Stars",
+      "url": "https://www.youtube.com/watch?v=qVrqUTY8i-M",
+      "duration_seconds": 455,
+      "duration": "7:35",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Claude Code"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 92,
+      "video_id": "vNOBbvpd1Zw",
+      "title": "Compound Engineering: The Complete 8 Minute Deep Dive",
+      "url": "https://www.youtube.com/watch?v=vNOBbvpd1Zw",
+      "duration_seconds": 517,
+      "duration": "8:37",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Compound Engineering"
+      ],
+      "what_it_does": "Engineering approach or workflow for compounding AI-assisted development gains.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 93,
+      "video_id": "uDkxYJe6-PA",
+      "title": "Build an Offline AI Knowledge Server That Works Without Internet",
+      "url": "https://www.youtube.com/watch?v=uDkxYJe6-PA",
+      "duration_seconds": 537,
+      "duration": "8:57",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "Offline AI Knowledge Server"
+      ],
+      "what_it_does": "Knowledge server designed to work without an internet connection.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 94,
+      "video_id": "Sb1bVGi8lKw",
+      "title": "This Chinese Developer Runs Frontier AI Models Locally at Home on Dual DGX Sparks",
+      "url": "https://www.youtube.com/watch?v=Sb1bVGi8lKw",
+      "duration_seconds": 476,
+      "duration": "7:56",
+      "category": "developer infrastructure",
+      "tool_mentions": [
+        "DGX Spark"
+      ],
+      "what_it_does": "Hardware platform used to run frontier AI models locally, per title.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 95,
+      "video_id": "TOMrEs7cvYs",
+      "title": "VoxCPM2: The Open-Source TTS That Beats Closed Models?",
+      "url": "https://www.youtube.com/watch?v=TOMrEs7cvYs",
+      "duration_seconds": 531,
+      "duration": "8:51",
+      "category": "voice and multimodal AI",
+      "tool_mentions": [
+        "VoxCPM2"
+      ],
+      "what_it_does": "Open-source text-to-speech model.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 96,
+      "video_id": "h2qJ7rndGWE",
+      "title": "Twenty CRM: The #1 Open-Source Salesforce Alternative",
+      "url": "https://www.youtube.com/watch?v=h2qJ7rndGWE",
+      "duration_seconds": 539,
+      "duration": "8:59",
+      "category": "collaboration and productivity",
+      "tool_mentions": [
+        "Twenty CRM"
+      ],
+      "what_it_does": "Open-source CRM positioned as a Salesforce alternative.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 97,
+      "video_id": "TJstnjCMEUM",
+      "title": "Supercharge Your AI Coding Agents with Skills.sh",
+      "url": "https://www.youtube.com/watch?v=TJstnjCMEUM",
+      "duration_seconds": 486,
+      "duration": "8:06",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Skills.sh"
+      ],
+      "what_it_does": "Skills distribution or workflow layer for AI coding agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 98,
+      "video_id": "yOooFUKVH4A",
+      "title": "Free Domain Names Forever: FreeDomain Complete Setup Guide",
+      "url": "https://www.youtube.com/watch?v=yOooFUKVH4A",
+      "duration_seconds": 424,
+      "duration": "7:04",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "FreeDomain"
+      ],
+      "what_it_does": "Service or project for obtaining free domain names.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 99,
+      "video_id": "1c6rnloSuWI",
+      "title": "MarkItDown: Convert ANY File to Markdown for AI by Microsoft",
+      "url": "https://www.youtube.com/watch?v=1c6rnloSuWI",
+      "duration_seconds": 540,
+      "duration": "9:00",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "MarkItDown"
+      ],
+      "what_it_does": "Microsoft tool for converting files into Markdown for AI workflows.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 100,
+      "video_id": "lxKyMUYNobE",
+      "title": "Money Printer Turbo: Create Videos on Autopilot",
+      "url": "https://www.youtube.com/watch?v=lxKyMUYNobE",
+      "duration_seconds": 485,
+      "duration": "8:05",
+      "category": "video and media",
+      "tool_mentions": [
+        "Money Printer Turbo"
+      ],
+      "what_it_does": "Automation workflow for creating videos on autopilot.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 101,
+      "video_id": "VdfhAOE5aSc",
+      "title": "Taste Skill in Claude Code | Stop AI-Generated Slop",
+      "url": "https://www.youtube.com/watch?v=VdfhAOE5aSc",
+      "duration_seconds": 541,
+      "duration": "9:01",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Claude Code",
+        "Taste Skill"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation. Claude Code skill intended to improve design taste and reduce generic output.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 102,
+      "video_id": "XbIrVJjLt90",
+      "title": "Claude Code Gets Superpowers: Knowledge Work Plugins",
+      "url": "https://www.youtube.com/watch?v=XbIrVJjLt90",
+      "duration_seconds": 504,
+      "duration": "8:24",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Claude Code",
+        "Knowledge Work Plugins"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation. Plugins that add knowledge-work capabilities to Claude Code.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 103,
+      "video_id": "X0qMtIsPWEg",
+      "title": "AI Agents Can't Handle Security Alone | Anthropic Cybersecurity Skills",
+      "url": "https://www.youtube.com/watch?v=X0qMtIsPWEg",
+      "duration_seconds": 537,
+      "duration": "8:57",
+      "category": "security and isolation",
+      "tool_mentions": [
+        "Anthropic Cybersecurity Skills"
+      ],
+      "what_it_does": "Cybersecurity skills for AI agents from Anthropic.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 104,
+      "video_id": "hEpvAkUYK4g",
+      "title": "One Terminal for Multiple AI Agents: CMUX Deep Dive",
+      "url": "https://www.youtube.com/watch?v=hEpvAkUYK4g",
+      "duration_seconds": 519,
+      "duration": "8:39",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "CMUX"
+      ],
+      "what_it_does": "Terminal interface for running or managing multiple AI agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 105,
+      "video_id": "qGMld__QPP0",
+      "title": "Understand Anything: AI-Powered Deep Research & Video Analysis Tool",
+      "url": "https://www.youtube.com/watch?v=qGMld__QPP0",
+      "duration_seconds": 511,
+      "duration": "8:31",
+      "category": "video and media",
+      "tool_mentions": [
+        "Understand Anything"
+      ],
+      "what_it_does": "AI-powered deep-research and video-analysis tool.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 106,
+      "video_id": "G5XpvetsJig",
+      "title": "Stop Burning Claude Code Tokens | Use Codegraph",
+      "url": "https://www.youtube.com/watch?v=G5XpvetsJig",
+      "duration_seconds": 554,
+      "duration": "9:14",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Claude Code",
+        "Codegraph"
+      ],
+      "what_it_does": "Anthropic's coding agent used for repository work, skills, plugins, and automation. Code graph used to reduce Claude Code token usage.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 107,
+      "video_id": "vL47b2UyoNk",
+      "title": "Stop Managing AI Agents Manually | Multical Changes Everything",
+      "url": "https://www.youtube.com/watch?v=vL47b2UyoNk",
+      "duration_seconds": 487,
+      "duration": "8:07",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Multical"
+      ],
+      "what_it_does": "Tool for managing multiple AI agents.",
+      "evidence": "public title and flat metadata; no transcript claim"
+    },
+    {
+      "position": 108,
+      "channel_position_2026_08_20": 7,
+      "video_id": "rSPE21LXc5c",
+      "title": "Watermarks Remover : Remove AI Watermarks from Text & Files (C2PA, SynthID, Unicode Deep Dive)",
+      "url": "https://www.youtube.com/watch?v=rSPE21LXc5c",
+      "duration_seconds": 753,
+      "duration": "12:33",
+      "category": "knowledge and document workflows",
+      "tool_mentions": [
+        "Watermarks Remover"
+      ],
+      "what_it_does": "Deep dive into AI watermarking (C2PA, SynthID, Unicode) and how watermarks on text and files can be removed.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    },
+    {
+      "position": 109,
+      "channel_position_2026_08_20": 5,
+      "video_id": "9o16uyJB0os",
+      "title": "Paperclip — Manage AI Agents Like a Company (Full Deep Dive)",
+      "url": "https://www.youtube.com/watch?v=9o16uyJB0os",
+      "duration_seconds": 746,
+      "duration": "12:26",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Paperclip"
+      ],
+      "what_it_does": "Open-source control plane for managing AI agents at work: agent registry, permissions, and audit.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    },
+    {
+      "position": 110,
+      "channel_position_2026_08_20": 2,
+      "video_id": "ieMm-Psp5Sw",
+      "title": "oMLX : Run Local AI Models on Apple Silicon with Persistent KV Cache",
+      "url": "https://www.youtube.com/watch?v=ieMm-Psp5Sw",
+      "duration_seconds": 894,
+      "duration": "14:54",
+      "category": "developer infrastructure",
+      "tool_mentions": [
+        "oMLX"
+      ],
+      "what_it_does": "Managed local inference service for Apple Silicon with continuous batching and persistent tiered KV cache.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    },
+    {
+      "position": 111,
+      "channel_position_2026_08_20": 13,
+      "video_id": "_HGriqGfF6o",
+      "title": "Top 10 GitHub Repos This Week | August 5 – August 11 | Agent Memory, Security Skills & Local AI",
+      "url": "https://www.youtube.com/watch?v=_HGriqGfF6o",
+      "duration_seconds": 1597,
+      "duration": "26:37",
+      "category": "curated repositories",
+      "tool_mentions": [
+        "GitHub repository ecosystem"
+      ],
+      "what_it_does": "Weekly roundup of GitHub trending repositories focused on agent memory, security skills, and local AI.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    },
+    {
+      "position": 112,
+      "channel_position_2026_08_20": 15,
+      "video_id": "54td1cCCkT0",
+      "title": "Code-Graph-RAG : Query, Edit & Optimize Any Monorepo with AI + Knowledge Graphs",
+      "url": "https://www.youtube.com/watch?v=54td1cCCkT0",
+      "duration_seconds": 720,
+      "duration": "12:00",
+      "category": "engineering and AI",
+      "tool_mentions": [
+        "Code-Graph-RAG"
+      ],
+      "what_it_does": "Parses multi-language codebases with Tree-sitter and builds a knowledge graph for AI querying, editing, and optimization of monorepos.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    },
+    {
+      "position": 113,
+      "channel_position_2026_08_20": 16,
+      "video_id": "vvhc6UfZgF0",
+      "title": "Google Skills : The Official Agent Skills Library for Google Cloud (Full Guide)",
+      "url": "https://www.youtube.com/watch?v=vvhc6UfZgF0",
+      "duration_seconds": 762,
+      "duration": "12:42",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Google Skills"
+      ],
+      "what_it_does": "Official open-source library of 104 Agent Skills for Google Cloud that teach coding agents tool use.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    },
+    {
+      "position": 114,
+      "channel_position_2026_08_20": 18,
+      "video_id": "CZlwflcNIvI",
+      "title": "Semantica : The Open Source \"Palantir\" for AI Agents",
+      "url": "https://www.youtube.com/watch?v=CZlwflcNIvI",
+      "duration_seconds": 822,
+      "duration": "13:42",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Semantica"
+      ],
+      "what_it_does": "Graph-native infrastructure for AI-agent memory that stores meaning instead of embeddings.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    },
+    {
+      "position": 115,
+      "channel_position_2026_08_20": 19,
+      "video_id": "LaCixrMZqns",
+      "title": "Prime Agent : The Self-Improving RLM Agent",
+      "url": "https://www.youtube.com/watch?v=LaCixrMZqns",
+      "duration_seconds": 715,
+      "duration": "11:55",
+      "category": "AI agents and coding",
+      "tool_mentions": [
+        "Prime Agent"
+      ],
+      "what_it_does": "Self-improving agent that uses one persistent IPython kernel as its only model tool, with recursive self-improvement.",
+      "evidence": "public title and full public description (aug26 playlist cross-reference); no transcript claim"
+    }
+  ]
+}

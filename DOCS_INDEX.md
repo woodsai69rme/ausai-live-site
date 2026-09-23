@@ -26,11 +26,42 @@
 | See scheduled tasks | `schtasks /query /tn SLEEP_TRIPLE\\Nightly /tn SLEEP_TRIPLE\\MorningDigest /tn SLEEP_TRIPLE\\WeeklyRollup` |
 | Run the smoke | `python SLEEP_TRIPLE/_smoke_retry.py` |
 | Verify docs haven't drifted | `python SLEEP_TRIPLE/_doc_drift_check.py` |
+| Read the complete audit/remediation status | `SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md` |
+| Handle exposed credentials safely | `SECURITY/INCIDENT_RESPONSE.md` + `SECURITY/ROTATION_CHECKLIST.md` |
+| Review approval-gated external actions | `SECURITY/EXTERNAL_ACTION_HANDOFF_2026-08-24.md` |
+| Review the complete remediation documentation map | `SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md` |
+| Review clean-clone rewrite readiness | `SECURITY/REWRITE_READINESS_2026-08-24.md` |
+| Prepare encrypted forensic archive/export | `SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md` |
+| Define exact rewrite ref scope | `SECURITY/REWRITE_REF_SCOPE_2026-08-24.md` |
+| Run the changed-file secret scan | `python SECURITY/secret_scan.py --paths-file changed-files.txt` |
+| Review security documentation | `SECURITY/README.md` |
+| Review scoped Graphify security evidence | `SECURITY/graphify-out/GRAPH_REPORT.md` |
+| Review SLEEP runtime Graphify evidence | `SLEEP_TRIPLE/graphify-out/GRAPH_REPORT.md` |
+| Review active AI Influencer Studio enhancements | `SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md` — "Active-Code Enhancements Reviewed" |
 | Push to origin (if you have a PAT) | `git push origin master` |
 
 ---
 
-## 2. Module → doc section mapping
+## 2. Security and remediation map
+
+| Area | Canonical record | Status |
+|---|---|---|
+| Complete audit and remediation | `SECURITY/AUDIT_REMEDIATION_STATUS_2026-08-23.md` | Repository-side work documented; external rotation pending |
+| Complete documentation manifest | `SECURITY/DOCUMENTATION_MANIFEST_2026-08-24.md` | Current artifact/evidence map |
+| Rewrite readiness | `SECURITY/REWRITE_READINESS_2026-08-24.md` | Disposable-clone procedure; approval-gated |
+| Forensic archive/export | `SECURITY/FORENSIC_ARCHIVE_AND_WORKTREE_EXPORT_PLAN_2026-08-24.md` | Encrypted preservation and dirty-worktree export plan; not yet executed |
+| Rewrite ref scope | `SECURITY/REWRITE_REF_SCOPE_2026-08-24.md` | Exact scrub selectors and current ref inventory; approval-gated |
+| Incident response | `SECURITY/INCIDENT_RESPONSE.md` | Maintained |
+| Rotation and rewrite prerequisites | `SECURITY/ROTATION_CHECKLIST.md` | Preparation checklist |
+| Changed-file secret guardrail | `SECURITY/secret_scan.py` | CI-integrated, fail-closed |
+| Security docs/workflow validator | `SECURITY/validate_security_docs.py` | CI-integrated |
+| Security graph | `SECURITY/graphify-out/GRAPH_REPORT.md` | 143-node scoped graph; 155 edges, 12 communities |
+| SLEEP runtime graph | `SLEEP_TRIPLE/graphify-out/GRAPH_REPORT.md` | 710-node scoped graph |
+| Test graph | `tests/graphify-out/GRAPH_REPORT.md` | 713-node scoped graph |
+
+The workspace remains an archive-shaped Git root. Do not rewrite history, prune objects, rotate credentials, or force-update a remote without following the security runbooks and coordinating the complete ref/clone boundary.
+
+## 3. Module → doc section mapping
 
 | Module | README.md section | DOCUMENTATION.md section |
 |---|---|---|
@@ -74,6 +105,9 @@ python SLEEP_TRIPLE/_smoke_retry.py
 
 # Verify docs are in sync with the commit log.
 python SLEEP_TRIPLE/_doc_drift_check.py
+
+# Validate security docs, workflow YAML, and immutable action pins.
+python SECURITY/validate_security_docs.py
 
 # Dry-run the orchestrator.
 python SLEEP_TRIPLE/sleep_orchestrator.py --force-window
@@ -124,3 +158,16 @@ Run `git log --oneline -- 'SLEEP_TRIPLE/*' 'Append-Revenue*' 'DOCS_INDEX.md'` to
 ---
 
 *If you find yourself hunting through README.md and DOCUMENTATION.md for a single answer, please update this file — that's its purpose.*
+
+---
+
+## 🔗 Reference Docs (NEW 2026-07-09)
+
+| Topic | Doc |
+|---|---|
+| YouTube + transcript + ComfyUI video ecosystem | `YOUTUBE_GITHUB_DEEP_RESEARCH_2026.md` |
+| Laptop → display + peripherals (14 categories, 3-tier recommendation) | `HARDWARE_SHOPPING_LIST_2026.md` |
+| GPU-accelerated remote desktop install | `SUNSHINE_MOONLIGHT_SETUP.md` |
+| Curated GitHub `awesome-*` lists for YouTube | `AWESOME_YOUTUBE_REPOS_2026.md` |
+| Single-page start-here index for the above | `REFERENCE_DOCS_INDEX.md` |
+| One-page daily digest | `DAILY_REFERENCE_DIGEST_2026-07-09.md` |

@@ -2,8 +2,9 @@
 
 > **Single-page master index covering ALL systems in the workspace.** Start here. Click through to each system's detailed index for deep reference.
 
-**Generated:** 2026-06-29
-**Systems documented:** 17 | **System indexes:** 19 | **Total files tracked:** 423+ organized
+**Generated:** 2026-07-09 · **Plans catalog refresh:** 2026-07-12
+**Systems documented:** 18 | **System indexes:** 20 | **Total files tracked:** 437+ organized
+**Reference docs (single-page nav): `REFERENCE_DOCS_INDEX.md`** — leaf for `YOUTUBE_GITHUB_DEEP_RESEARCH_2026.md` + `AWESOME_YOUTUBE_REPOS_2026.md` + `HARDWARE_SHOPPING_LIST_2026.md` + `SUNSHINE_MOONLIGHT_SETUP.md`.
 
 ---
 
@@ -27,9 +28,24 @@
 | Browse the ecosystem catalog | `MASTER_ECOSYSTEM_INDEX.md` |
 | Run dashboard automation | `DASHBOARD_SYSTEM_INDEX.md` |
 | Manage your bookmarks | `BOOKMARK_MANAGER_PRO_INDEX.md` |
+| Browse AI CLI session archive | `SESSION_DASHBOARD_SYSTEM.md` · `X:\sesh\dashboard.html` |
 | Generate AI influencer content | `AI_INFLUENCER_INDEX.md` |
 | See what AI tools are installed | `AI_TOOLS_INVENTORY_INDEX.md` |
+| **Recover a bricked phone (Oppo/Android/iPhone)** | `COMPLETED_PROJECTS/mobile_backup/RECOVERY_QUICKSTART.md` &rarr; `MOBILE_TOOLS_INDEX.md` |
+| **Browse all root documentation files** | `ROOT_DOCS_MASTER_INDEX.md` (120+ files, 18 categories) |
+| **30-day workspace activity review** | `WORKSPACE_30DAY_REVIEW_2026-07-13.md` (Golden Rules compliant) |
+| **Dot-directory integration audit** | `DOTDIR_INTEGRATION_AUDIT_2026-07-13.md` (124+ dirs, integration map) |
+| **OpenCode DB investigation** | `OPENCODE_DB_INVESTIGATION_2026-07-13.md` (15GB DB report) |
 | Organize top-level clutter | `WORKSPACE_ORGANIZATION_PLAN.md` |
+| **All plans, projects, notes, ChatGPT exports** | `ALL_PLANS_AND_PROJECTS_MASTER.md` |
+| **Live port status (auto-refreshed)** | `LIVE_SYSTEM_STATUS.html` · `TOOLS/regenerate_live_status.py` |
+| **Execute all options (one-click)** | `EXECUTE_ALL_OPTIONS.bat` · `_DOCS_ARCHIVE/EXECUTE_ALL_STATUS_2026-07-16.md` |
+| **Hermes desktop (24 sessions)** | `_DOCS_ARCHIVE/hermes_desktop_backup_2026-07-15_*` · `SESSION_TITLES_RESOLVED.md` |
+| **Agent canonical map** | `_DOCS_ARCHIVE/AGENT_CANONICAL_MAP.md` |
+| **PYTHONPATH isolation** | `TOOLS/hermes_isolated_launch.bat` · `TOOLS/python_clean_env.ps1` |
+| Documents AI session notes (616 `.txt`) | `_DOCS_ARCHIVE/DOCUMENTS_AI_SESSIONS_INDEX.md` |
+| ChatGPT exports catalog (Downloads) | `_DOCS_ARCHIVE/CHATGPT_EXPORTS_CATALOG.md` |
+| AI Agency virtual team | `AI_AGENCY/README.md` |
 
 ---
 
@@ -53,7 +69,8 @@
 | 14 | **AI Tools Inventory** | 10+ | `AI_TOOLS_INVENTORY_INDEX.md` | ✅ 5 AI platforms, 4 runtimes |
 | 15 | **n8n Automation** | 95+ | `N8N_AUTOMATION_SYSTEM_INDEX.md` | 🟢 LIVE :5678 |
 | 16 | **YouTube Tools** | 5 | `YOUTUBE_TOOLS_SYSTEM_INDEX.md` | ✅ Transcript harvester |
-| 17 | **Workspace Meta** | 19 | (this file) | ✅ All 19 system indexes |
+| 17 | **Mobile Recovery Suite** | 16 | `COMPLETED_PROJECTS/mobile_backup/MOBILE_TOOLS_INDEX.md` | ✅ 12-position menu, 15/15 tests, scrcpy/ADB/libimobiledevice |
+| 18 | **Workspace Meta** | 20 | (this file) | ✅ All 20 system indexes |
 
 ### Supporting Documents
 
@@ -67,6 +84,9 @@
 | `AGENCY_MISSION_CONTROL.md` | 3-division command center: Dev, Content, Influencer |
 | `GOLDEN_RULES.md` | Universal rules: append, preserve, protect, enhance |
 | `AI_AGENT_INVENTORY.md` | 10 capability clusters + 6×6 similarity matrix |
+| `ALL_PLANS_AND_PROJECTS_MASTER.md` | Unified plans status matrix + project catalog (2026-07-12) |
+| `_DOCS_ARCHIVE/CHATGPT_EXPORTS_CATALOG.md` | ~4,100 ChatGPT conversations in Downloads (read-only index) |
+| `_DOCS_ARCHIVE/DOCUMENTS_AI_SESSIONS_INDEX.md` | 616 Documents `.txt` notes by category |
 
 ---
 
@@ -114,7 +134,11 @@ EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) 
 | 8051 | MCP Server | Archon V2 | — |
 | 8052 | Agents Service | Archon V2 | — |
 | 8181 | Archon Main Server | Archon V2 | 🟢 LIVE |
-| 8188 | ComfyUI | ComfyUI | — |
+| 8188 | ComfyUI | ComfyUI | 🟢 |
+| 8010 | AI Agency | AI Agency | 🟢 |
+| 3144 | SLEEP_TRIPLE | SLEEP_TRIPLE | 🟢 |
+| 8400 | Footclan Review | FOOTCLAN_REVIEW | 🟢 |
+| 17890 | PasteGrab | TOOLS/video_downloader | 🟢 |
 | 8888 | Empire HUD | Empire | — |
 
 ---

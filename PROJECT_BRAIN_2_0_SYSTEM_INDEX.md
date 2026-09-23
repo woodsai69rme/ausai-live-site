@@ -89,6 +89,7 @@ Documents, Downloads, Desktop, Pictures, Videos, Music, OneDrive, Downloads\ARCH
 | Archon V2 | `ARCHON_V2_SYSTEM_INDEX.md` |
 | Agent Registry | `AGENT_REGISTRY_SYSTEM_INDEX.md` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
+| Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---
 

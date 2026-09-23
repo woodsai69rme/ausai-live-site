@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master All Dashboard — DevMonitor + PasteGrab + Guides</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1; --primary-soft: rgba(99,102,241,0.18); --primary-glow: rgba(99,102,241,0.45);
+            --secondary: #8b5cf6; --success: #10b981; --success-soft: rgba(16,185,129,0.18);
+            --warning: #f59e0b; --danger: #ef4444; --light: #f9fafb; --gray: #6b7280;
+            --darkest: #0b0f1a; --surface: rgba(31,41,55,0.65); --surface-strong: rgba(31,41,55,0.85);
+            --surface-border: rgba(148,163,184,0.18); --shadow-soft: 0 12px 36px rgba(0,0,0,0.35);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(ellipse 1100px 700px at 12% -10%, rgba(99,102,241,0.22), transparent 60%),
+                radial-gradient(ellipse 900px 600px at 110% 20%, rgba(139,92,246,0.18), transparent 65%),
+                linear-gradient(135deg, var(--darkest), #1e1b4b 60%, #0b0f1a);
+            background-attachment: fixed; color: var(--light); min-height: 100vh; padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container { max-width: 1600px; margin: 0 auto; }
+        header {
+            text-align: center; margin-bottom: 24px; padding: 28px;
+            background: var(--surface-strong); border-radius: 18px; border: 1px solid var(--surface-border);
+            backdrop-filter: blur(14px); box-shadow: var(--shadow-soft);
+        }
+        h1 { font-size: 2.2rem; background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+        .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px;
+            font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+        .badge-primary { background: var(--primary-soft); color: var(--primary); border: 1px solid rgba(99,102,241,0.3); }
+        .badge-success { background: var(--success-soft); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+        .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; justify-content: center; }
+        .tab {
+            padding: 10px 18px; border-radius: 10px; border: 1px solid var(--surface-border);
+            background: var(--surface); color: var(--gray); cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .tab.active, .tab:hover { color: var(--light); border-color: var(--primary-glow); background: var(--primary-soft); }
+        .tab[aria-selected="true"] { color: var(--light); border-color: var(--primary); }
+        .section-title { font-size: 1.4rem; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--surface-border);
+            display: flex; align-items: center; gap: 10px; }
+        .section-title i { color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 24px; }
+        .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+        .card {
+            background: var(--surface); border-radius: 14px; padding: 18px; border: 1px solid var(--surface-border);
+            backdrop-filter: blur(10px); box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+            transition: transform 0.2s ease, border-color 0.2s ease; cursor: pointer;
+        }
+        .card:hover { transform: translateY(-3px); border-color: var(--primary-glow); }
+        .card a { color: var(--light); text-decoration: none; display: block; }
+        .card-icon { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem; margin-bottom: 10px; }
+        .card h3 { font-size: 0.92rem; margin-bottom: 4px; }
+        .card p { font-size: 0.76rem; color: var(--gray); margin: 0; }
+        .card .meta { font-size: 0.7rem; color: var(--gray); margin-top: 8px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .stat-card { background: var(--surface); border-radius: 14px; padding: 18px; border: 1px solid var(--surface-border); text-align: center; }
+        .stat-card .num { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+        .stat-card .lbl { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; }
+        .search-wrap { position: relative; margin-bottom: 16px; max-width: 480px; }
+        .search-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); }
+        .search-box {
+            width: 100%; padding: 10px 14px 10px 40px; border-radius: 10px; border: 1px solid var(--surface-border);
+            background: rgba(15,23,42,0.6); color: var(--light); font-size: 0.88rem;
+        }
+        .port-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .port-table th, .port-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--surface-border); }
+        .port-table th { color: var(--gray); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; }
+        .port-table code { color: var(--primary); }
+        footer { text-align: center; padding: 24px; color: var(--gray); font-size: 0.78rem; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px; }
+        .hero-btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px;
+            background: var(--primary-soft); border: 1px solid rgba(99,102,241,0.4); color: var(--light);
+            text-decoration: none; font-size: 0.85rem; font-weight: 600;
+        }
+        .hero-btn:hover { background: rgba(99,102,241,0.35); }
+        .hero-btn.success { background: var(--success-soft); border-color: rgba(16,185,129,0.4); }
+        .port-status { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; }
+        .port-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray); flex-shrink: 0; }
+        .port-dot.online { background: var(--success); box-shadow: 0 0 8px rgba(16,185,129,0.6); }
+        .port-dot.offline { background: var(--danger); opacity: 0.85; }
+        .port-dot.checking { background: var(--warning); animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .port-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+        .port-toolbar button, .port-toolbar a.hero-btn { cursor: pointer; border: none; font-family: inherit; }
+        .port-summary { font-size: 0.82rem; color: var(--gray); }
+        .health-banner {
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+            margin-bottom: 20px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--surface-border);
+            background: var(--surface-strong); font-size: 0.84rem;
+        }
+        .health-banner.healthy { border-color: rgba(16,185,129,0.35); }
+        .health-banner.partial { border-color: rgba(245,158,11,0.35); }
+        .health-banner.critical { border-color: rgba(239,68,68,0.35); }
+        .health-banner strong { color: var(--light); }
+        .theme-picker { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 14px; }
+        .theme-chip {
+            padding: 6px 12px; border-radius: 999px; border: 1px solid var(--surface-border);
+            background: var(--surface); color: var(--gray); font-size: 0.72rem; font-weight: 600; cursor: pointer;
+        }
+        .theme-chip.active, .theme-chip:hover { color: var(--light); border-color: var(--primary-glow); background: var(--primary-soft); }
+        body[data-hub-theme="emerald"] {
+            --primary: #10b981; --primary-soft: rgba(16,185,129,0.18); --primary-glow: rgba(16,185,129,0.45);
+            --secondary: #06b6d4;
+        }
+        body[data-hub-theme="rose"] {
+            --primary: #f43f5e; --primary-soft: rgba(244,63,94,0.18); --primary-glow: rgba(244,63,94,0.45);
+            --secondary: #fb7185;
+        }
+        body[data-hub-theme="amber"] {
+            --primary: #f59e0b; --primary-soft: rgba(245,158,11,0.18); --primary-glow: rgba(245,158,11,0.45);
+            --secondary: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge badge-primary"><i class="fas fa-layer-group" aria-hidden="true"></i> Complete Package</span>
+            <h1>Master All Dashboard</h1>
+            <p style="color:var(--gray);margin-top:6px;">DevMonitor Pro · PasteGrab · HTML dashboards · install guides — one command centre</p>
+            <div class="hero-actions">
+                <a class="hero-btn" href="../launchers/LAUNCH_DEVMONITOR.bat"><i class="fas fa-gauge-high" aria-hidden="true"></i> DevMonitor</a>
+                <a class="hero-btn success" href="../pastegrab/INSTALL_PASTEGRAB.bat"><i class="fas fa-download" aria-hidden="true"></i> Install PasteGrab</a>
+                <a class="hero-btn" href="../launchers/START_GOD_MODE.bat"><i class="fas fa-bolt" aria-hidden="true"></i> God Mode</a>
+                <a class="hero-btn" href="../pastegrab/Start PasteGrab.bat"><i class="fas fa-play" aria-hidden="true"></i> PasteGrab Portable</a>
+            </div>
+            <div class="theme-picker" role="group" aria-label="Hub colour theme">
+                <button type="button" class="theme-chip active" data-hub-theme="aurora" onclick="setHubTheme('aurora', this)">Aurora</button>
+                <button type="button" class="theme-chip" data-hub-theme="emerald" onclick="setHubTheme('emerald', this)">Emerald</button>
+                <button type="button" class="theme-chip" data-hub-theme="rose" onclick="setHubTheme('rose', this)">Rose</button>
+                <button type="button" class="theme-chip" data-hub-theme="amber" onclick="setHubTheme('amber', this)">Amber</button>
+            </div>
+        </header>
+
+        <div class="health-banner healthy" id="healthBanner" role="status" aria-live="polite">
+            <span><strong>Service health:</strong> <span id="healthBannerText">Probing local stack…</span></span>
+            <span class="port-summary" id="healthBannerMeta">—</span>
+        </div>
+
+        <div class="grid-stats" id="statsBar">
+            <div class="stat-card"><div class="num" id="statApps">0</div><div class="lbl">Apps</div></div>
+            <div class="stat-card"><div class="num" id="statDash">0</div><div class="lbl">Dashboards</div></div>
+            <div class="stat-card"><div class="num" id="statGuides">0</div><div class="lbl">Guides</div></div>
+            <div class="stat-card"><div class="num" id="statPorts">9</div><div class="lbl">Services</div></div>
+            <div class="stat-card"><div class="num" id="statOnline">—</div><div class="lbl">Online Now</div></div>
+        </div>
+
+        <nav class="tabs" role="tablist" aria-label="Master dashboard sections">
+            <button class="tab active" role="tab" data-tab="apps" aria-selected="true" tabindex="0" onclick="switchTab('apps')">Apps</button>
+            <button class="tab" role="tab" data-tab="dashboards" aria-selected="false" tabindex="-1" onclick="switchTab('dashboards')">Dashboards</button>
+            <button class="tab" role="tab" data-tab="guides" aria-selected="false" tabindex="-1" onclick="switchTab('guides')">Guides</button>
+            <button class="tab" role="tab" data-tab="pastegrab" aria-selected="false" tabindex="-1" onclick="switchTab('pastegrab')">PasteGrab</button>
+            <button class="tab" role="tab" data-tab="ports" aria-selected="false" tabindex="-1" onclick="switchTab('ports')">Ports</button>
+        </nav>
+
+        <div class="tab-content" id="tab-apps" role="tabpanel">
+            <h2 class="section-title"><i class="fas fa-rocket" aria-hidden="true"></i> Desktop Apps &amp; Launchers</h2>
+            <div class="search-wrap"><i class="fas fa-search" aria-hidden="true"></i>
+                <input class="search-box" id="appSearch" placeholder="Search apps..." oninput="filterGrid('appGrid','appSearch')"></div>
+            <div class="grid" id="appGrid">
+                <div class="card" data-tag="devmonitor telemetry pyqt god mode" onclick="showCardDetail(this)">
+                    <a href="../launchers/LAUNCH_DEVMONITOR.bat">
+                        <div class="card-icon" style="background:rgba(34,211,238,0.2);color:#22d3ee;"><i class="fas fa-gauge-high" aria-hidden="true"></i></div>
+                        <h3>DevMonitor Pro v18.6</h3>
+                        <p>Racing gauges, AI feeds, RGB sync, WebSocket telemetry.</p>
+                        <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> :8765</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="pastegrab video downloader yt-dlp install" onclick="showCardDetail(this)">
+                    <a href="../pastegrab/INSTALL_PASTEGRAB.bat">
+                        <div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-film" aria-hidden="true"></i></div>
+                        <h3>Install PasteGrab</h3>
+                        <p>Windows installer — Desktop shortcut + Start Menu.</p>
+                        <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> :17890</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="pastegrab portable video" onclick="showCardDetail(this)">
+                    <a href="../pastegrab/Start PasteGrab.bat">
+                        <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-box-open" aria-hidden="true"></i></div>
+                        <h3>PasteGrab Portable</h3>
+                        <p>No install — run from USB or any folder.</p>
+                        <div class="meta"><span>Portable edition</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="god mode nextjs swarm omninexus" onclick="showCardDetail(this)">
+                    <a href="../launchers/START_GOD_MODE.bat">
+                        <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                        <h3>God Mode Stack</h3>
+                        <p>Next.js :3142 + DevMonitor + Swarm + Project Brain.</p>
+                    </a>
+                </div>
+                <div class="card" data-tag="comfyui media video music" onclick="showCardDetail(this)">
+                    <a href="http://localhost:8188" target="_blank" rel="noopener">
+                        <div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-clapperboard" aria-hidden="true"></i></div>
+                        <h3>ComfyUI Studio</h3>
+                        <p>Local media generation — open when ComfyUI is running.</p>
+                        <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> :8188</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="ollama local llm" onclick="showCardDetail(this)">
+                    <a href="http://localhost:11434" target="_blank" rel="noopener">
+                        <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-brain" aria-hidden="true"></i></div>
+                        <h3>Ollama</h3>
+                        <p>Local LLM runtime.</p>
+                        <div class="meta"><span><i class="fas fa-network-wired" aria-hidden="true"></i> :11434</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="pytest tests fast ci dev" onclick="showCardDetail(this)">
+                    <a href="../launchers/run_tests_fast.bat">
+                        <div class="card-icon" style="background:rgba(6,182,212,0.2);color:#06b6d4;"><i class="fas fa-vial" aria-hidden="true"></i></div>
+                        <h3>Fast Test Suite</h3>
+                        <p>49 tests in ~3s — skips UI, integration, and slow.</p>
+                        <div class="meta"><span>run_tests_fast.bat</span></div>
+                    </a>
+                </div>
+                <div class="card" data-tag="ports network status check" onclick="showCardDetail(this)">
+                    <a href="../launchers/CHECK_PORTS.bat">
+                        <div class="card-icon" style="background:rgba(239,68,68,0.2);color:#ef4444;"><i class="fas fa-plug" aria-hidden="true"></i></div>
+                        <h3>Check Ports (CLI)</h3>
+                        <p>TCP probe all 9 services from terminal.</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab-dashboards" role="tabpanel" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-th-large" aria-hidden="true"></i> HTML Dashboards</h2>
+            <div class="search-wrap"><i class="fas fa-search" aria-hidden="true"></i>
+                <input class="search-box" id="dashSearch" placeholder="Search dashboards..." oninput="filterGrid('dashGrid','dashSearch')"></div>
+            <div class="grid" id="dashGrid">
+                <div class="card" data-tag="master all hub complete" onclick="showCardDetail(this)">
+                    <a href="MASTER_ALL_DASHBOARD.html"><div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
+                        <h3>Master All (this page)</h3><p>Apps, dashboards, guides, ports — complete hub.</p></a>
+                </div>
+                <div class="card" data-tag="ai tools coding assistants" onclick="showCardDetail(this)">
+                    <a href="AI_TOOLS_DASHBOARD.html"><div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                        <h3>AI Tools Dashboard</h3><p>14 coding assistants, local models, quick links.</p></a>
+                </div>
+                <div class="card" data-tag="unified empire recovery phone" onclick="showCardDetail(this)">
+                    <a href="UNIFIED_MASTER_DASHBOARD.html"><div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-crown" aria-hidden="true"></i></div>
+                        <h3>Unified Master</h3><p>Empire, recovery suite, diagnostics, carrier unlock.</p></a>
+                </div>
+                <div class="card" data-tag="devmonitor 3d telemetry websocket" onclick="showCardDetail(this)">
+                    <a href="../app/dashboard_3d.html"><div class="card-icon" style="background:rgba(34,211,238,0.2);color:#22d3ee;"><i class="fas fa-cube" aria-hidden="true"></i></div>
+                        <h3>DevMonitor 3D Telemetry</h3><p>Live CPU/RAM via ws://localhost:8765</p></a>
+                </div>
+                <div class="card" data-tag="open all dashboards launcher" onclick="showCardDetail(this)">
+                    <a href="../launchers/OPEN_DASHBOARDS.bat"><div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-external-link-alt" aria-hidden="true"></i></div>
+                        <h3>Open All Dashboards</h3><p>Launches AI Tools + Unified Master in browser.</p></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab-guides" role="tabpanel" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-book" aria-hidden="true"></i> Documentation Guides</h2>
+            <div class="search-wrap"><i class="fas fa-search" aria-hidden="true"></i>
+                <input class="search-box" id="guideSearch" placeholder="Search guides..." oninput="filterGrid('guideGrid','guideSearch')"></div>
+            <div class="grid" id="guideGrid">
+                <div class="card" data-tag="windows install devmonitor pc" onclick="showCardDetail(this)">
+                    <a href="../docs/INSTALL_WINDOWS.md"><div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fab fa-windows" aria-hidden="true"></i></div>
+                        <h3>DevMonitor — Windows Install</h3><p>PC setup, God Mode, troubleshooting.</p></a>
+                </div>
+                <div class="card" data-tag="mac install devmonitor" onclick="showCardDetail(this)">
+                    <a href="../docs/INSTALL_MAC.md"><div class="card-icon" style="background:rgba(148,163,184,0.2);color:#94a3b8;"><i class="fab fa-apple" aria-hidden="true"></i></div>
+                        <h3>DevMonitor — Mac Install</h3><p>macOS setup and platform notes.</p></a>
+                </div>
+                <div class="card" data-tag="dashboard guide html browser" onclick="showCardDetail(this)">
+                    <a href="../docs/DASHBOARD_GUIDE.md"><div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-map" aria-hidden="true"></i></div>
+                        <h3>Dashboard Guide</h3><p>PC &amp; Mac walkthrough for all HTML dashboards.</p></a>
+                </div>
+                <div class="card" data-tag="pastegrab install windows video" onclick="showCardDetail(this)">
+                    <a href="../docs/PASTEGRAB_INSTALL_WINDOWS.md"><div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-download" aria-hidden="true"></i></div>
+                        <h3>PasteGrab — Windows Install</h3><p>Installer, portable, extensions, ffmpeg.</p></a>
+                </div>
+                <div class="card" data-tag="pastegrab guide features api" onclick="showCardDetail(this)">
+                    <a href="../docs/PASTEGRAB_GUIDE.md"><div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-book-open" aria-hidden="true"></i></div>
+                        <h3>PasteGrab Guide</h3><p>Features, CLI, ComfyUI presets, integration.</p></a>
+                </div>
+                <div class="card" data-tag="architecture audio developer" onclick="showCardDetail(this)">
+                    <a href="../docs/ARCHITECTURE.md"><div class="card-icon" style="background:rgba(139,92,246,0.2);color:#8b5cf6;"><i class="fas fa-sitemap" aria-hidden="true"></i></div>
+                        <h3>DevMonitor Architecture</h3><p>Threading, modules, telemetry design.</p></a>
+                </div>
+                <div class="card" data-tag="package readme quick start" onclick="showCardDetail(this)">
+                    <a href="../PACKAGE_README.md"><div class="card-icon" style="background:rgba(6,182,212,0.2);color:#06b6d4;"><i class="fas fa-box" aria-hidden="true"></i></div>
+                        <h3>Package README</h3><p>Zip contents and quick start.</p></a>
+                </div>
+                <div class="card" data-tag="github devmonitor widget repo" onclick="showCardDetail(this)">
+                    <a href="https://github.com/woodsai69rme/DevMonitor-Widget" target="_blank" rel="noopener"><div class="card-icon" style="background:rgba(31,41,55,0.5);color:#f9fafb;"><i class="fab fa-github" aria-hidden="true"></i></div>
+                        <h3>DevMonitor GitHub</h3><p>Source, releases, issues.</p></a>
+                </div>
+                <div class="card" data-tag="github pastegrab repo" onclick="showCardDetail(this)">
+                    <a href="https://github.com/woodsai69rme/PasteGrab" target="_blank" rel="noopener"><div class="card-icon" style="background:rgba(31,41,55,0.5);color:#f9fafb;"><i class="fab fa-github" aria-hidden="true"></i></div>
+                        <h3>PasteGrab GitHub</h3><p>Video downloader source + extensions.</p></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab-pastegrab" role="tabpanel" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-film" aria-hidden="true"></i> PasteGrab v2.0</h2>
+            <p style="color:var(--gray);margin-bottom:16px;font-size:0.85rem;">Video downloader with FIFO queue, browser extensions, ComfyUI presets. API on port <code>17890</code>.</p>
+            <div class="grid" id="pgGrid">
+                <div class="card" onclick="showCardDetail(this)"><a href="../pastegrab/INSTALL_PASTEGRAB.bat">
+                    <div class="card-icon" style="background:rgba(16,185,129,0.2);color:#10b981;"><i class="fas fa-download" aria-hidden="true"></i></div>
+                    <h3>Run Windows Installer</h3><p>Installs to %LOCALAPPDATA%\Programs\PasteGrab</p></a></div>
+                <div class="card" onclick="showCardDetail(this)"><a href="../pastegrab/Start PasteGrab.bat">
+                    <div class="card-icon" style="background:rgba(245,158,11,0.2);color:#f59e0b;"><i class="fas fa-play" aria-hidden="true"></i></div>
+                    <h3>Portable Launch</h3><p>Start without installing.</p></a></div>
+                <div class="card" onclick="showCardDetail(this)"><a href="http://127.0.0.1:17890/status" target="_blank" rel="noopener">
+                    <div class="card-icon" style="background:rgba(99,102,241,0.2);color:#6366f1;"><i class="fas fa-heartbeat" aria-hidden="true"></i></div>
+                    <h3>API Status</h3><p>Check if PasteGrab is running.</p></a></div>
+                <div class="card" onclick="showCardDetail(this)"><a href="../docs/PASTEGRAB_INSTALL_WINDOWS.md">
+                    <div class="card-icon" style="background:rgba(236,72,153,0.2);color:#ec4899;"><i class="fas fa-book" aria-hidden="true"></i></div>
+                    <h3>Install Guide</h3><p>Installer, portable, extensions, ffmpeg.</p></a></div>
+                <div class="card" onclick="showCardDetail(this)"><a href="../pastegrab/extensions/chrome" target="_blank">
+                    <div class="card-icon" style="background:rgba(66,133,244,0.2);color:#4285f4;"><i class="fab fa-chrome" aria-hidden="true"></i></div>
+                    <h3>Chrome Extension</h3><p>Load unpacked from extensions/chrome</p></a></div>
+                <div class="card" onclick="showCardDetail(this)"><a href="../pastegrab/extensions/firefox" target="_blank">
+                    <div class="card-icon" style="background:rgba(255,105,0,0.2);color:#ff6900;"><i class="fab fa-firefox" aria-hidden="true"></i></div>
+                    <h3>Firefox Extension</h3><p>Load from extensions/firefox</p></a></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tab-ports" role="tabpanel" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-network-wired" aria-hidden="true"></i> Service Port Map</h2>
+            <div class="port-toolbar">
+                <button type="button" class="hero-btn" id="refreshPortsBtn" onclick="refreshPortStatus()"><i class="fas fa-sync-alt" aria-hidden="true"></i> Refresh Status</button>
+                <a class="hero-btn" href="../launchers/CHECK_PORTS.bat"><i class="fas fa-terminal" aria-hidden="true"></i> CLI Check</a>
+                <span class="port-summary" id="portSummary">Probing local services…</span>
+            </div>
+            <div class="card" style="cursor:default;overflow-x:auto;">
+                <table class="port-table" id="portTable">
+                    <thead><tr><th>Status</th><th>Service</th><th>Port</th><th>URL / Notes</th></tr></thead>
+                    <tbody>
+                        <tr data-port="8765" data-probe="ws"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>DevMonitor telemetry</td><td><code>8765</code></td><td><code>ws://localhost:8765?token=devmon_auth_2026</code></td></tr>
+                        <tr data-port="17890" data-probe="http" data-url="http://127.0.0.1:17890/status"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>PasteGrab API</td><td><code>17890</code></td><td><code>http://127.0.0.1:17890/status</code></td></tr>
+                        <tr data-port="3142" data-probe="http" data-url="http://127.0.0.1:3142/"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>God Mode Next.js</td><td><code>3142</code></td><td><code>http://localhost:3142</code></td></tr>
+                        <tr data-port="8000" data-probe="http" data-url="http://127.0.0.1:8000/"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>Swarm orchestrator</td><td><code>8000</code></td><td>God Mode stack</td></tr>
+                        <tr data-port="8010" data-probe="http" data-url="http://127.0.0.1:8010/dashboard"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>AI Agency</td><td><code>8010</code></td><td><code>http://localhost:8010/dashboard</code></td></tr>
+                        <tr data-port="8188" data-probe="http" data-url="http://127.0.0.1:8188/"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>ComfyUI</td><td><code>8188</code></td><td>Local media generation</td></tr>
+                        <tr data-port="11434" data-probe="http" data-url="http://127.0.0.1:11434/"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>Ollama</td><td><code>11434</code></td><td>Local LLM</td></tr>
+                        <tr data-port="1234" data-probe="http" data-url="http://127.0.0.1:1234/"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>LM Studio</td><td><code>1234</code></td><td>GGUF models</td></tr>
+                        <tr data-port="5678" data-probe="http" data-url="http://127.0.0.1:5678/"><td><span class="port-status"><span class="port-dot checking" aria-hidden="true"></span><span class="port-label">…</span></span></td><td>n8n</td><td><code>5678</code></td><td>Workflow automation</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>Master All Dashboard v1.2 · DevMonitor 18.6 + PasteGrab 2.0 · Built 2026-07-16</footer>
+    </div>
+
+    <script type="module" src="dashboards.mjs"></script>
+    <script>
+        function packagePaths() {
+            const p = location.pathname.replace(/\\/g, '/');
+            const inDash = p.includes('/dashboards/');
+            const root = inDash ? '..' : '.';
+            return {
+                launcher: root + '/launchers/',
+                pastegrabInstall: inDash ? root + '/pastegrab/INSTALL_PASTEGRAB.bat' : 'TOOLS/video_downloader/INSTALL_PASTEGRAB.bat',
+                pastegrabPortable: inDash ? root + '/pastegrab/Start PasteGrab.bat' : 'TOOLS/video_downloader/dist/PasteGrab-Windows-Portable/Start PasteGrab.bat',
+                pastegrabExtChrome: inDash ? root + '/pastegrab/extensions/chrome' : 'TOOLS/video_downloader/extensions/chrome',
+                pastegrabExtFirefox: inDash ? root + '/pastegrab/extensions/firefox' : 'TOOLS/video_downloader/extensions/firefox',
+                docs: inDash ? root + '/docs/' : 'Desktop/DevMonitorWidget/docs/',
+                app: inDash ? root + '/app/' : 'Desktop/DevMonitorWidget/',
+                pkgReadme: inDash ? root + '/PACKAGE_README.md' : 'Desktop/DevMonitorWidget/PACKAGE_README.md'
+            };
+        }
+        function fixPackagePaths() {
+            const paths = packagePaths();
+            document.querySelectorAll('a[href^="../launchers/"]').forEach(a => {
+                a.href = paths.launcher + a.getAttribute('href').replace('../launchers/', '');
+            });
+            document.querySelectorAll('a[href="../pastegrab/INSTALL_PASTEGRAB.bat"]').forEach(a => { a.href = paths.pastegrabInstall; });
+            document.querySelectorAll('a[href="../pastegrab/Start PasteGrab.bat"]').forEach(a => { a.href = paths.pastegrabPortable; });
+            document.querySelectorAll('a[href="../pastegrab/extensions/chrome"]').forEach(a => { a.href = paths.pastegrabExtChrome; });
+            document.querySelectorAll('a[href="../pastegrab/extensions/firefox"]').forEach(a => { a.href = paths.pastegrabExtFirefox; });
+            document.querySelectorAll('a[href^="../docs/"]').forEach(a => {
+                a.href = paths.docs + a.getAttribute('href').replace('../docs/', '');
+            });
+            document.querySelectorAll('a[href="../app/dashboard_3d.html"]').forEach(a => { a.href = paths.app + 'dashboard_3d.html'; });
+            document.querySelectorAll('a[href="../PACKAGE_README.md"]').forEach(a => { a.href = paths.pkgReadme; });
+        }
+        function switchTab(name) {
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.getElementById('tab-' + name).style.display = 'block';
+            document.querySelectorAll('.tab').forEach(el => {
+                el.classList.remove('active');
+                el.setAttribute('aria-selected', 'false');
+                el.setAttribute('tabindex', '-1');
+            });
+            const active = document.querySelector('.tab[data-tab="' + name + '"]');
+            if (active) {
+                active.classList.add('active');
+                active.setAttribute('aria-selected', 'true');
+                active.setAttribute('tabindex', '0');
+            }
+            if (window.syncTabARIA) window.syncTabARIA(name);
+            if (name === 'ports') refreshPortStatus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function filterGrid(gridId, searchId) {
+            const q = document.getElementById(searchId).value.toLowerCase();
+            document.querySelectorAll('#' + gridId + ' .card').forEach(card => {
+                const tag = (card.dataset.tag || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+                card.style.display = (tag.includes(q) || text.includes(q)) ? '' : 'none';
+            });
+        }
+        function setHubTheme(name, btn) {
+            if (name === 'aurora') {
+                document.body.removeAttribute('data-hub-theme');
+            } else {
+                document.body.setAttribute('data-hub-theme', name);
+            }
+            document.querySelectorAll('.theme-chip').forEach(chip => chip.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            try { localStorage.setItem('masterHubTheme', name); } catch (_) {}
+        }
+        function loadHubTheme() {
+            let saved = 'aurora';
+            try { saved = localStorage.getItem('masterHubTheme') || 'aurora'; } catch (_) {}
+            const chip = document.querySelector('.theme-chip[data-hub-theme="' + saved + '"]');
+            setHubTheme(saved, chip);
+        }
+        function updateHealthBanner(online, total) {
+            const banner = document.getElementById('healthBanner');
+            const text = document.getElementById('healthBannerText');
+            const meta = document.getElementById('healthBannerMeta');
+            if (!banner || !text) return;
+            banner.classList.remove('healthy', 'partial', 'critical');
+            if (online === total) {
+                banner.classList.add('healthy');
+                text.textContent = 'All ' + total + ' tracked services are online.';
+            } else if (online >= Math.ceil(total / 2)) {
+                banner.classList.add('partial');
+                text.textContent = online + ' of ' + total + ' services online — some stacks are stopped.';
+            } else {
+                banner.classList.add('critical');
+                text.textContent = 'Only ' + online + ' of ' + total + ' services responding — start DevMonitor or God Mode?';
+            }
+            if (meta) meta.textContent = 'Updated ' + new Date().toLocaleTimeString();
+        }
+        function setPortRowState(row, online) {
+            const dot = row.querySelector('.port-dot');
+            const label = row.querySelector('.port-label');
+            dot.classList.remove('checking', 'online', 'offline');
+            dot.classList.add(online ? 'online' : 'offline');
+            label.textContent = online ? 'Online' : 'Offline';
+        }
+        function probeHttp(url, timeoutMs) {
+            return new Promise(resolve => {
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => { ctrl.abort(); resolve(false); }, timeoutMs);
+                fetch(url, { signal: ctrl.signal, mode: 'no-cors', cache: 'no-store' })
+                    .then(() => { clearTimeout(timer); resolve(true); })
+                    .catch(() => {
+                        const img = new Image();
+                        const imgTimer = setTimeout(() => resolve(false), timeoutMs);
+                        img.onload = img.onerror = () => { clearTimeout(imgTimer); resolve(true); };
+                        img.src = url.replace(/\/[^/]*$/, '/') + '?_=' + Date.now();
+                    });
+            });
+        }
+        function probeWs(port, timeoutMs) {
+            return new Promise(resolve => {
+                let settled = false;
+                const finish = v => { if (!settled) { settled = true; resolve(v); } };
+                const timer = setTimeout(() => finish(false), timeoutMs);
+                try {
+                    const ws = new WebSocket('ws://127.0.0.1:' + port);
+                    ws.onopen = () => { clearTimeout(timer); ws.close(); finish(true); };
+                    ws.onerror = () => { clearTimeout(timer); finish(false); };
+                } catch (_) { clearTimeout(timer); finish(false); }
+            });
+        }
+        async function refreshPortStatus() {
+            const rows = document.querySelectorAll('#portTable tbody tr[data-port]');
+            const summary = document.getElementById('portSummary');
+            const btn = document.getElementById('refreshPortsBtn');
+            if (btn) btn.disabled = true;
+            if (summary) summary.textContent = 'Probing local services…';
+            rows.forEach(row => {
+                const dot = row.querySelector('.port-dot');
+                const label = row.querySelector('.port-label');
+                dot.classList.remove('online', 'offline');
+                dot.classList.add('checking');
+                label.textContent = '…';
+            });
+            let online = 0;
+            await Promise.all(Array.from(rows).map(async row => {
+                const port = parseInt(row.dataset.port, 10);
+                const probe = row.dataset.probe || 'http';
+                const url = row.dataset.url || ('http://127.0.0.1:' + port + '/');
+                const up = probe === 'ws' ? await probeWs(port, 1800) : await probeHttp(url, 1800);
+                setPortRowState(row, up);
+                if (up) online += 1;
+            }));
+            document.getElementById('statOnline').textContent = online;
+            updateHealthBanner(online, rows.length);
+            if (summary) summary.textContent = online + ' of ' + rows.length + ' services responding · auto-refresh on Ports tab';
+            if (btn) btn.disabled = false;
+        }
+        fixPackagePaths();
+        loadHubTheme();
+        document.getElementById('statApps').textContent = document.querySelectorAll('#appGrid .card').length;
+        document.getElementById('statDash').textContent = document.querySelectorAll('#dashGrid .card').length;
+        document.getElementById('statGuides').textContent = document.querySelectorAll('#guideGrid .card').length;
+        refreshPortStatus();
+        setInterval(() => {
+            const portsTab = document.getElementById('tab-ports');
+            if (portsTab && portsTab.style.display !== 'none') refreshPortStatus();
+        }, 30000);
+        setInterval(refreshPortStatus, 120000);
+    </script>
+</body>
+</html>

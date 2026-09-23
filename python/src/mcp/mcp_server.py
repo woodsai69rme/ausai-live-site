@@ -54,14 +54,14 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Import Logfire configuration
-from src.server.config.logfire_config import mcp_logger, setup_logfire
+# Import Logfire configuration (must follow sys.path.insert above)
+from src.server.config.logfire_config import mcp_logger, setup_logfire  # noqa: E402
 
 # Import service client for HTTP calls
-from src.server.services.mcp_service_client import get_mcp_service_client
+from src.server.services.mcp_service_client import get_mcp_service_client  # noqa: E402
 
 # Import session management
-from src.server.services.mcp_session_manager import get_session_manager
+from src.server.services.mcp_session_manager import get_session_manager  # noqa: E402
 
 # Global initialization lock and flag
 _initialization_lock = threading.Lock()
@@ -154,9 +154,9 @@ async def lifespan(server: FastMCP) -> AsyncIterator[ArchonContext]:
         logger.info("Starting MCP server...")
 
         try:
-            # Initialize session manager
+            # Initialize session manager eagerly (side-effect: registers session backend)
             logger.info("[SECURE] Initializing session manager...")
-            session_manager = get_session_manager()
+            get_session_manager()  # noqa: F841 - intentional eager-init call
             logger.info("Session manager initialized")
 
             # Initialize service client for HTTP calls
@@ -197,6 +197,8 @@ try:
     mcp = FastMCP(
         "archon-mcp-server",
         lifespan=lifespan,
+        host=server_host,
+        port=server_port,
     )
     logger.info("FastMCP server instance created successfully")
 
@@ -300,6 +302,19 @@ def register_modules():
 
     modules_registered = 0
 
+    # Import and register Phone Dumper module (HTTP-based)
+    try:
+        from src.mcp.modules.phone_dumper_module import register_phone_dumper_tools
+
+        register_phone_dumper_tools(mcp)
+        modules_registered += 1
+        logger.info("Phone Dumper module registered (HTTP-based)")
+    except ImportError as e:
+        logger.warning(f"[WARN] Phone Dumper module not available: {e}")
+    except Exception as e:
+        logger.error(f"[FAIL] Error registering Phone Dumper module: {e}")
+        logger.error(traceback.format_exc())
+
      # Import and register RAG module (HTTP-based version)
     try:
         from src.mcp.modules.rag_module import register_rag_tools
@@ -311,6 +326,32 @@ def register_modules():
         logger.warning(f"[WARN] RAG module not available: {e}")
     except Exception as e:
         logger.error(f"[FAIL] Error registering RAG module: {e}")
+        logger.error(traceback.format_exc())
+
+    # Import and register YouTube transcript module (workspace harvest chain)
+    try:
+        from src.mcp.modules.youtube_module import register_youtube_tools
+
+        register_youtube_tools(mcp)
+        modules_registered += 1
+        logger.info("YouTube module registered (harvest fallback chain)")
+    except ImportError as e:
+        logger.warning(f"[WARN] YouTube module not available: {e}")
+    except Exception as e:
+        logger.error(f"[FAIL] Error registering YouTube module: {e}")
+        logger.error(traceback.format_exc())
+
+    # Import and register Supabase diagnostics module
+    try:
+        from src.mcp.modules.supabase_module import register_supabase_tools
+
+        register_supabase_tools(mcp)
+        modules_registered += 1
+        logger.info("Supabase module registered (native health + sources)")
+    except ImportError as e:
+        logger.warning(f"[WARN] Supabase module not available: {e}")
+    except Exception as e:
+        logger.error(f"[FAIL] Error registering Supabase module: {e}")
         logger.error(traceback.format_exc())
 
     # Import and register Project module - only if Projects are enabled
@@ -359,7 +400,10 @@ def main():
         mcp_logger.info("Logfire initialized for MCP server")
         mcp_logger.info(f"Starting MCP server - host={server_host}, port={server_port}")
 
-        # Run the MCP server with SSE transport for HTTP-like access
+        # Run the MCP server with SSE transport. host/port are configured
+        # at FastMCP construction time — FastMCP's run() ignores host/port
+        # kwargs (only takes transport); the actual uvicorn binding reads
+        # mcp.settings.host and mcp.settings.port.
         mcp.run(transport="sse")
 
     except Exception as e:

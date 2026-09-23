@@ -1,0 +1,19 @@
+[
+  {
+    "signal_id": "ALPHA-1790011379",
+    "timestamp": "2026-09-22T03:22:59.075628",
+    "token": "SOL",
+    "chain": "Solana",
+    "whale_size_usd": "$284,000.00",
+    "consensus_multiplier": "3.0x Multi-Whale Consensus",
+    "entry_price": "$139.20",
+    "stop_loss": "$134.02",
+    "tp1": "$144.38",
+    "tp2": "$149.55",
+    "tp3": "$159.90",
+    "risk_reward": "1 : 2.5 minimum",
+    "mev_shield": "Jito Bundle (Protected)",
+    "catalyst": "GCR & Mechanism Capital confluence buy cluster detected on Raydium/Jup.",
+    "broadcast_status": "STAGED_LOCAL"
+  }
+]
