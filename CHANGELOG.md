@@ -3,6 +3,32 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-09-30 (b) — Guard test suite repaired: 2 stale tests now green, suite proven non-vacuous
+
+### What was wrong (both were TEST defects, not guard regressions)
+- **T3** built its "pure LF->CRLF flip" with `tr '\n' '\r' < in > out`. Under MSYS that
+  produces a file of BARE CR bytes (0 CRLF, 0 LF), which the classifier calls `none`, not
+  a flip -- so no NOTE was ever emitted and the assertion failed. Fixed by building the flip
+  with a byte-exact python helper (`BACKUPS/make_crlf.py`), the same approach the byte-exact
+  suite already used. This was the guard README's own MSYS trap biting the test harness.
+- **T6** compared HEAD against a hardcoded SHA (`5b55c6524`), so it failed on every
+  legitimate commit afterwards. Fixed to capture HEAD before the commit attempt and assert
+  it is UNCHANGED after -- the actual invariant ("the blocked commit did not land").
+
+### Verification
+- Shell suite: 12/12 PASS. Byte-exact suite: all PASS. Both green together.
+- **Non-vacuity proven:** sabotaged the guard (disabled the EOL-integrity block) and
+  re-ran -- 5 tests correctly FAILED (T2 x2, T5 x2, T6). The suite has real teeth; a green
+  board now means something. Guard restored byte-clean afterward.
+- T3 emits a real `(lf -> crlf)` flip NOTE; T6 shows the guard actually refusing the commit.
+- No test residue; `README.md` still uniform LF, `CHANGELOG.md` uniform CRLF.
+
+### Note
+- These test harnesses live under gitignored `BACKUPS/`, so the fix is uncommitted by
+  convention; this entry documents it. Run with:
+  `bash BACKUPS/test_eol_guard_2026-09-29.sh` and
+  `python BACKUPS/test_eol_guard_bytes_2026-09-29.py`.
+
 ## 2026-09-30 — EOL program follow-ons: 11 shadowed docs recovered, CLAUDE.md gotchas, read-only EOL audit
 
 ### Session summary
