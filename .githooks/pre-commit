@@ -46,6 +46,9 @@ bat_path="$script_dir/pre-commit.bat"
 #     Index-only untracks (git rm --cached) are allowed and logged.
 #   - Blocks commits touching Documents/Downloads/Pictures/Videos/Music/
 #     Desktop/OneDrive (Rule #8, operator directive 2026-07-13).
+#   - Blocks MIXED line endings being introduced into files that are
+#     uniform (pure LF or pure CRLF) in HEAD; pure whole-file conversions
+#     pass with a note (added 2026-09-29, MD_EOL_AUDIT_2026-09-29.md).
 #   - Neither block has a bypass env var (intentional). Fail closed.
 # See .githooks/golden_rules_guard.sh and .githooks/README.md for details.
 sh "$script_dir/golden_rules_guard.sh" || exit $?

@@ -150,3 +150,35 @@ hatches, so it runs on every shell path and cannot be skipped by
 Exit codes: 0 pass / 1 hard block / 2 guard failure. Both blocks are
 intentionally bypass-free; the only remedy is to not stage the change.
 
+---
+
+## v3.5 (2026-09-29) -- EOL-integrity check (additive)
+
+Section 3 of `golden_rules_guard.sh` now also enforces the line-ending
+policy documented in `MD_EOL_AUDIT_2026-09-29.md`:
+
+1. **Mixed-EOL block (NO bypass):** any staged A/C/M/R/T file that is
+   uniform in HEAD (pure LF, pure CRLF, or zero line endings) is refused
+   if its staged blob is MIXED (contains both LF and CRLF endings).
+2. **Pure conversions pass with a note:** whole-file LF<->CRLF flips are
+   logged via `[golden-rules] NOTE:` but not blocked.
+3. **Out of scope:** files already mixed in HEAD, brand-new files, and
+   binary files (NUL sniff on the first 8 KB).
+4. **Fail closed:** classification runs through `.githooks/eol_classify.py`
+   (byte-capturing python subprocess -- MSYS text-mode redirection strips
+   \r from scratch files, so pure-sh CR counting is unreliable here).
+   A missing python degrades to a logged SKIP; classifier failure exits 2.
+
+Exit codes unchanged: 0 pass / 1 hard block / 2 guard failure.
+
+**Implementation note (2026-09-29, same day):** the first pure-sh classifier
+passed syntax but failed every live block test: MSYS text-mode redirection
+silently strips `\r` bytes from blob contents written to scratch files, so
+the shell CR count was always 0. Classification now runs through
+`.githooks/eol_classify.py`, which captures `git cat-file blob` output as
+exact bytes via python subprocess (no text translation). The guard calls it
+in batch and applies verdicts: `__MIXED__` = block, `__FLIP__` = note,
+`__EOLERR__` = fail closed. Byte-exact evidence:
+`BACKUPS/test_eol_guard_bytes_2026-09-29.py` (all cases pass, including a
+real `git commit` refusal through the full hook chain).
+
