@@ -661,4 +661,26 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > Non-md extension: 21 non-markdown `i/mixed` audited — 17 stable files now
 > `-text` frozen (+25/−0), 3 in-flight edits unpinned, zero phantom-prone
 > (report §7).
+> Enforcement added later same day: Stage 0 §3 now hard-blocks commits introducing
+> MIXED endings into uniform files (`.githooks/eol_classify.py`; byte-exact live tests).
 > config pins; no content file changed; append-only logs byte-clean.
+
+## 📋 Session note — 2026-09-29 (Stage 0 EOL-integrity block, eol_classify.py)
+
+> Append-only note — no tracker rows re-keyed or removed. Third Stage 0 block:
+> commits introducing MIXED endings into HEAD-uniform files are refused (no
+> bypass); pure flips logged+allowed; new/binary/already-mixed out of scope.
+> Classification via `.githooks/eol_classify.py` — byte-exact after proving an
+> MSYS text-mode `\r`-stripping trap defeats pure-sh CR counting (documented
+> in guard + README v3.5). Verified live incl. a real commit refusal. Status:
+> 🟦 SCRIPT-LANDED; hook files LF-pure; backups + evidence in `BACKUPS/`.
+
+## 📋 Session note — 2026-09-29 (settlement plan for 5 mixed-in-index md files)
+
+> Append-only note — no tracker rows re-keyed or removed. Deep-profiled the five
+> `i/mixed` markdown files (ending maps): minority endings = one contiguous editor
+> block each. Plan in audit report §9: #1/#2 harmonize→LF (one stray `\r` each),
+> #3/#4 harmonize→CRLF (26/15-line LF islands) at next natural edits; #5
+> `FULL_REPO_AUDIT.md` (BOM + escaped-CR archive artifact) FREEZE forever, `-text`
+> pin recommended. Planning only — all five files md5-verified untouched. Status:
+> 🟦 DOC-ONLY; report §9; no conversion executed.

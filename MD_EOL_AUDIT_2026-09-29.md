@@ -126,3 +126,62 @@ byte-pure append, LF preserved); backup
 `BACKUPS/pre_nonmd_pins_gitattributes_2026-09-29` (3541 bytes, md5
 `63daf48c92b8b110453d28ba574c32e8`); generator
 `BACKUPS/extend_nonmd_pins_2026-09-29.py`.
+
+## 8. Enforcement (added 2026-09-29, later same session)
+
+This policy is now enforced, not just documented: `golden_rules_guard.sh`
+Stage 0 section 3 **hard-blocks any commit that introduces MIXED line
+endings into a file uniform in HEAD** (pure LF, pure CRLF, or zero line
+endings). Pure whole-file LF<->CRLF conversions pass with a logged note;
+already-mixed files, brand-new files, and binary files are out of scope;
+fail-closed on classification errors; no bypass env var. Classification
+delegates to `.githooks/eol_classify.py`, a byte-exact python helper --
+MSYS text-mode redirection strips `\r` from scratch-file writes, so
+pure-shell CR counting was empirically unreliable (documented in the
+guard). Verified live: 7-scenario suite plus byte-exact mixed-LF and
+mixed-CRLF blocks and full-chain commit refusal (`BACKUPS/test_eol_guard_*`);
+guard files backed up to `BACKUPS/pre_eolguard_*_2026-09-29*`.
+## 9. Settlement plan — the 5 mixed-in-index markdown files (2026-09-29, later)
+
+**Status: PLANNING ONLY — zero content bytes changed by this section.** All five
+files are clean in git, byte-stable for weeks/months (mtimes June–July; last
+touched by `bb9e96a09` v3.0 release, except the archive file, last commit
+`3e36c4498` 2026-06-28). Each file's minority endings form one contiguous
+block from a different editor — accumulated-editor-drift, not corruption.
+
+Per-file ending maps (verified byte-level, lines 1-indexed):
+
+| # | File | Profile | Settlement decision |
+|---|---|---|---|
+| 1 | `REVENUE_GENERATORS/README.md` | 155 LF / **1 CRLF** (final line 156) | **HARMONIZE→LF** at the next natural content edit; conversion = deletion of one stray `\r` (file is 5110 bytes). Ultra-low risk. |
+| 2 | `monetize-ai-engine/DOCUMENTATION_AUTOMONETIZE_AI.md` | 99 LF / **1 CRLF** (final line 100) | **HARMONIZE→LF** at the next natural content edit; one stray `\r` (file is 6234 bytes). Repo has live `monetize-ai-engine` edits in flight — bundle with that work. |
+| 3 | `CLAUDE.md` | 432 CRLF / **26 LF** (contiguous 431–456; final section) | **HARMONIZE→CRLF** at the next natural content edit: convert the 26-line LF island (431–456) to CRLF (26 byte-pairs added). Active agent-instructions file loaded per session; consistency protects future append-only edits. Lines 1–430 untouched. |
+| 4 | `DASHBOARD_ARCHITECTURE.md` | 617 CRLF / **15 LF** (contiguous 60–74) | **HARMONIZE→CRLF** at the next natural content edit: convert the 15-line LF island (60–74) to CRLF (15 byte-pairs added). |
+| 5 | `_DOCS_ARCHIVE/master_docs/FULL_REPO_AUDIT.md` | 319 CRLF / 6 LF at lines 1, 2, 4, 324 + **UTF-8 BOM** + literal `\r` pairs inside html-escaped entities (Windows-decode artifacts) | **FREEZE — no harmonization, ever.** Archive/forensic artifact (generated 2026-04-25). Any byte change is a falsification of a historical artifact — the exact class of harm the Golden Rules exist to prevent. `-text` freeze pin recommended below. |
+
+**Priority:** #3 first (active file, highest rewrite exposure), #1/#2 whenever their
+next content edit happens anyway, #4 whenever next edited, #5 never.
+
+**Conversion procedure (applies to #1–#4; one file per solo commit, nothing else
+in the commit):** backup to `BACKUPS/pre_harmonize_<file>_<date>`; run the
+byte-only conversion from a dedicated python script (python bytes `.replace()` /
+line-targeted insertion — **never** sed/awk/tr or MSYS text-mode redirects, per
+the `\r`-stripping trap documented in §8 and the guard); verify by md5-diff that
+only the intended lines changed; commit (guard §3 mixed-EOL block verifies
+uniformity at commit time); re-run the byte-exact guard suite
+(`BACKUPS/test_eol_guard_bytes_2026-09-29.py`) plus `git status` clean.
+
+**Rules that carry through every settlement:**
+1. Conversion scripts are byte-only, backup-first, md5-diff-verified, logged to `BACKUPS/`.
+2. No text-mode shell pipelines against these files — the MSYS trap applies.
+3. Conversions ride on natural content edits, never standalone byte-surgery commits.
+4. After any conversion: guard suite + `git status` clean.
+5. After #1–#4 land, the repo has zero mixed markdown; #5 stays mixed **by decision**,
+   under a `-text` freeze pin. The mixed-EOL block scopes to *newly introduced*
+   mixedness — already-mixed files are out of scope — so the pin and the file are
+   permanent-compatible.
+6. The §4/§7 pins already protect everything else; this plan covers only the last five.
+
+---
+
+*End of §9 (planning only). No file in this section was modified.*

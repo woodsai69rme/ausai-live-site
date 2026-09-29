@@ -3,6 +3,51 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-09-29 (later) — Settlement plan for the 5 mixed-in-index markdown files (planning only, zero bytes changed)
+
+### Session summary
+- Deep-profiled the five `i/mixed` markdown files (audit §3): byte-level ending maps
+  show every minority-ending set is ONE contiguous editor-drift block. Two files are a
+  single stray `\r` away from pure LF; two carry small LF islands (26 and 15 lines)
+  inside CRLF majorities; one is a BOM-carrying 2026-04-25 archive artifact with
+  html-escaped CR pairs.
+- Plan written as audit report §9 (`MD_EOL_AUDIT_2026-09-29.md`): #1/#2 HARMONIZE→LF,
+  #3/#4 HARMONIZE→CRLF at their next natural content edit (byte-only python ops,
+  backup-first, md5-diff-verified, one file per solo commit; guard §3 verifies
+  uniformity); #5 `FULL_REPO_AUDIT.md` FREEZE — no harmonization ever, `-text` pin
+  recommended; converting it would falsify a historical artifact.
+- No file in the plan was modified. Verified: all five md5s byte-identical after the
+  plan was written; planning-only diffs (report + logs).
+
+### Compliance
+- Zero content changes; additive planning docs only; MSYS text-mode trap documented
+  as a hard rule for future conversions.
+
+---
+
+## 2026-09-29 (later) -- Golden Rules Stage 0: EOL-integrity block (additive)
+
+### Session summary
+- Third Stage 0 check: any commit introducing MIXED line endings into a file
+  uniform in HEAD is hard-blocked (exit 1, no bypass). Pure LF<->CRLF flips
+  pass with a logged note; already-mixed, brand-new, and binary files are out
+  of scope. Policy: `MD_EOL_AUDIT_2026-09-29.md` §8.
+- Implementation: section 3 in `.githooks/golden_rules_guard.sh` + new
+  `.githooks/eol_classify.py` (byte-exact classifier; python subprocess
+  captures blob bytes -- MSYS text-mode redirection strips `\r` from scratch
+  files, which is why the first pure-sh version failed its own live tests).
+- Live-verified: byte-exact suite all-pass including a real `git commit`
+  refusal through the full hook chain; HEAD unchanged; worktrees restored
+  byte-identically. Evidence: `BACKUPS/test_eol_guard_bytes_2026-09-29.py`,
+  `BACKUPS/test_eol_guard_2026-09-29.sh` (kept, shows the MSYS failure mode).
+- Backups: `BACKUPS/pre_eolguard_{guard.sh,precommit,readme}_2026-09-29*`.
+
+### Compliance
+- Additive only: guard §3 added, pre-commit comment +1, README v3.5 section,
+  new classifier file; nothing removed; all hook files remain LF-pure.
+
+---
+
 ## 2026-09-29 — Markdown EOL audit: 511 tracked `*.md` swept, 30 phantom-prone files pinned (additive)
 
 ### Session summary
@@ -10,6 +55,7 @@
 - **Findings:** 0 files carry the incident signature (mixed worktree with clean index) — the repo-wide CRLF repair held. 69 uniform-CRLF-in-index files (incl. both append-only logs) deliberately left **unpinned** so log writes never pass through a conversion filter. 5 mixed-in-index files documented and untouched (pinning cannot harmonize committed mixed bytes). 30 files with LF index bytes but CRLF worktree bytes whose **cached index stat exactly matches disk** (Feb-2026 mtimes) — git never re-hashes them, so a single resave would erupt into a full-file phantom diff.
 - **Fix:** 30 surgical `text eol=lf` pins in `.gitattributes` (+44/−0, exact paths generated from live `git ls-files --eol` data, never hand-typed). The pins install a clean filter so the CRLF worktrees hash equal to the LF index — clean today, phantom-proof forever, no worktree byte touched. The nested `original_archon/.gitattributes` `text=auto` overlays as designed (verified `eol: lf` on all 9 nested paths); the nested file itself untouched.
 - **Same-session extension:** the 21 non-markdown `i/mixed` files audited too: 18 stable (worktree byte-identical to HEAD, honestly clean) got `-text` byte-freeze pins (+25/−0; `START_MONETIZE_AI.bat` was already pinned), 3 in-flight content edits (`vision_fleet.py`, `database.py`, `server.py`) deliberately unpinned, and **no phantom-prone file in this class** — report §7.
+- **Enforcement (later same day):** Golden Rules Stage 0 gained a third block — commits that introduce MIXED line endings into files uniform in HEAD are refused (guard §3 + new `.githooks/eol_classify.py` byte classifier; pure LF↔CRLF flips logged and allowed; new, binary, and already-mixed files out of scope; missing python = logged SKIP; classifier failure = fail closed). Live-tested byte-exact after root-causing an MSYS text-mode \r-stripping trap in the first pure-sh implementation; evidence: `BACKUPS/test_eol_guard_*`, audit report §8.
 - **Verification:** all 30 clean before and after pinning (`git status --porcelain` rc=0); repo modified-file list unchanged; attribute read-back via `git check-attr`; backup, append script, and a first-run-failed-safe script iteration preserved under `BACKUPS/`.
 - **Also this session:** `TODO_TRACKER.md` gained the 📊 Progress tracker (12 P1 production items from the court annexure, dated status cells) — see the tracker note of the same date.
 
