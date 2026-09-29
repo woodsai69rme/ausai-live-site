@@ -1219,3 +1219,25 @@ EMPIRE_HEALTH_SNAPSHOT.json
 /CRYPTO_SUITE_DATA/copy_trade_portfolio.json
 /CRYPTO_SUITE_DATA/vip_telegram_signals_history.json
 /CRYPTO_SUITE_DATA/writer_heartbeats.json
+
+# ============================================================
+# Re-admitted source-of-truth docs -- added 2026-09-30 (additive).
+# The blanket patterns above were hiding 11 hand-authored master/index docs.
+# Tracked files link to several of them (ROOT_DOCS_MASTER_INDEX.md is
+# referenced by 4 tracked .md, ALL_PLANS_AND_PROJECTS_MASTER.md by 7), so those
+# links were broken for anyone cloning. The blanket patterns STAY for genuinely
+# generated output; these exact-path negations re-admit only the authored docs.
+# Golden Rules v1.1: nothing deleted, everything documented.
+# Do NOT convert these to wildcards -- name exact paths only.
+# ============================================================
+!/AI_AGENT_INVENTORY.md
+!/AI_KNOWLEDGE_OS_INDEX.md
+!/ALL_PLANS_AND_PROJECTS_MASTER.md
+!/AUG26_FILE_INVENTORY.md
+!/CRYPTO_EMPIRE_MASTER_INDEX.md
+!/FOOTCLAN_OS_SYSTEM_INDEX.md
+!/FREE_RESOURCES_MASTER.md
+!/HERMES_SEO_OS_SYSTEM_INDEX.md
+!/REFERENCE_DOCS_INDEX.md
+!/ROOT_DOCS_MASTER_INDEX.md
+!/WHATS_LEFT_MASTER.md
