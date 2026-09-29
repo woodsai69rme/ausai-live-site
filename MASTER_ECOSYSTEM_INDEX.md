@@ -73,6 +73,7 @@ MASTER_ECOSYSTEM/ (hub)
 | Archon V2 | `ARCHON_V2_SYSTEM_INDEX.md` |
 | Workspace Master | `WORKSPACE_INDEX.md` |
 | Grand Summary | `GRAND_SUMMARY.md` |
+| Godseye 1.0 (NEW 2026-09-24) | `godseye-app/README.md` · launcher `START_GODSEYE_DASHBOARD.bat` |
 | Reference Docs (NEW 2026-07-09) | `REFERENCE_DOCS_INDEX.md` |
 
 ---

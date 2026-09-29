@@ -1202,3 +1202,20 @@ JARVIS/screenshots/
 
 # Augment checkpoints containing secrets
 /01_AI_DEVELOPMENT/AI_Agents/.augment/
+
+# ============================================================
+# Machine-regenerated runtime state files (added 2026-09-24).
+# Git-tracking relaxed ONLY. Files stay on disk permanently and
+# keep being rewritten by their daemons. Full registry, writers,
+# cadence, and the re-track escape hatch (git add -f <file>):
+#   see RUNTIME_STATE_MANIFEST.md  (Golden Rules: append,
+#   preserve, protect - nothing deleted, nothing obsolete).
+# ============================================================
+EMPIRE_HEALTH_SNAPSHOT.json
+/CRYPTO_SUITE_DATA/crypto_master_state.json
+/CRYPTO_SUITE_DATA/realtime_transactions_stream.json
+/CRYPTO_SUITE_DATA/whale_events_stream.json
+/CRYPTO_SUITE_DATA/coinbase_live_orders.json
+/CRYPTO_SUITE_DATA/copy_trade_portfolio.json
+/CRYPTO_SUITE_DATA/vip_telegram_signals_history.json
+/CRYPTO_SUITE_DATA/writer_heartbeats.json

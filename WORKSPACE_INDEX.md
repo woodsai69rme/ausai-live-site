@@ -36,6 +36,7 @@
 | **30-day workspace activity review** | `WORKSPACE_30DAY_REVIEW_2026-07-13.md` (Golden Rules compliant) |
 | **Dot-directory integration audit** | `DOTDIR_INTEGRATION_AUDIT_2026-07-13.md` (124+ dirs, integration map) |
 | **OpenCode DB investigation** | `OPENCODE_DB_INVESTIGATION_2026-07-13.md` (15GB DB report) |
+| 🌍 **Launch Godseye geospatial dashboard** | `START_GODSEYE_DASHBOARD.bat` → `godseye-app/` (dev :5173 · prod :3001) |
 | Organize top-level clutter | `WORKSPACE_ORGANIZATION_PLAN.md` |
 | **All plans, projects, notes, ChatGPT exports** | `ALL_PLANS_AND_PROJECTS_MASTER.md` |
 | **Live port status (auto-refreshed)** | `LIVE_SYSTEM_STATUS.html` · `TOOLS/regenerate_live_status.py` |
@@ -71,6 +72,7 @@
 | 16 | **YouTube Tools** | 5 | `YOUTUBE_TOOLS_SYSTEM_INDEX.md` | ✅ Transcript harvester |
 | 17 | **Mobile Recovery Suite** | 16 | `COMPLETED_PROJECTS/mobile_backup/MOBILE_TOOLS_INDEX.md` | ✅ 12-position menu, 15/15 tests, scrcpy/ADB/libimobiledevice |
 | 18 | **Workspace Meta** | 20 | (this file) | ✅ All 20 system indexes |
+| 19 | **Godseye 1.0 — Geospatial OSINT Globe** | 100+ | `godseye-app/README.md` | 🟦 NEW 2026-09-24 — cataloged read-only; project files untouched |
 
 ### Supporting Documents
 
@@ -140,6 +142,8 @@ EMPIRE_JARVIS_LAUNCHER.bat → Dashboard (3142) + HUD (8888) + Media API (5000) 
 | 8400 | Footclan Review | FOOTCLAN_REVIEW | 🟢 |
 | 17890 | PasteGrab | TOOLS/video_downloader | 🟢 |
 | 8888 | Empire HUD | Empire | — |
+| 5173 | Godseye 1.0 (Vite dev) | Godseye | 🟦 on demand |
+| 3001 | Godseye 1.0 (prod serve) | Godseye | 🟦 on demand |
 
 ---
 

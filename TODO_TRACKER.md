@@ -573,3 +573,51 @@ Update logged (this turn):
 ✦ Does NOT delete, archive-as-cleanup, or relabel anything.
 ✦ Does NOT touch Documents, Downloads, Pictures, Videos, Music, Desktop, OneDrive, Downloads\ARCHIVE_OLD.
 ```
+---
+
+## 📋 Session note — 2026-09-24 (Godseye 1.0 cataloging)
+
+> Append-only note — no tracker rows re-keyed or removed. New system **#19** cataloged: `godseye-app/` (Godseye 1.0 geospatial OSINT dashboard — React 19 + Vite 7 + CesiumJS; dev :5173 / prod :3001; launcher `START_GODSEYE_DASHBOARD.bat`). Status: 🟦 DOC-ONLY (index/catalog landed; runtime launch available on demand). Project files untouched — cataloged read-only. Full log: `CHANGELOG.md` (2026-09-24).
+
+## 📋 Session note — 2026-09-24 (pre-commit Golden Rules Stage 0 guard)
+
+> Append-only note — no tracker rows re-keyed or removed. New additive hook
+artifact: `.githooks/golden_rules_guard.sh`, wired at the top of
+`.githooks/pre-commit` (runs before the Windows shim and bypass hatches;
+cannot be skipped). Status: 🟦 SCRIPT-LANDED — blocks working-tree deletions
+(Rules #1/#2/#5; `git rm --cached` untracks allowed+logged) and any staged
+change under Documents/Downloads/Pictures/Videos/Music/Desktop/OneDrive
+(Rule #8). Both blocks bypass-free by design; fail closed. Docs:
+`.githooks/README.md` v3.4 section. Verified 2026-09-24: deletion blocked,
+untrack allowed, protected path blocked, normal commit unaffected.
+
+
+## 📋 Session note — 2026-09-24 (Gemini telemetry hook stall fix + watchdog)
+
+> Append-only note — no tracker rows re-keyed or removed. Root-caused the
+~30s-per-tool-call stall in Gemini CLI / Antigravity: the datacloud_telemetry
+PreToolUse hook bundle blocks on empty stdin (plugin configs were never
+broken; the earlier "stray quotes" diagnosis was disproven). Fix is additive:
+`telemetry_hook_wrapper.js` (2s hard deadline, allow-and-exit, forwards real
+payloads to the unmodified bundle in background mode); `hooks.json` re-enabled
+through the wrapper. New `TOOLS/telemetry_stall_watchdog.py` guards against
+regression (3s stall probe with held-open stdin, config-routing check,
+append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
+`STALL REPRODUCED`, exit 1). Status: 🟦 SCRIPT-LANDED. Full log:
+`CHANGELOG.md` (2026-09-24) and
+`BACKUPS/gemini_telemetry_disable_2026-09-24_074621/FIX_NOTES.md`.
+## 📋 Session note — 2026-09-26 (court corpus analysis + transcription, BRC7982/2014)
+
+> Append-only note — no tracker rows re-keyed or removed. Two sessions (24/9 +
+> 25–26/9) against `C:\courtnewBFFAMILY` (526 files; outside the repo): read-only
+> analysis → `_analysis_2026-09-24/` deliverables (`DISCREPANCY_REPORT.md`
+> register D01–D39, `TIMELINE.md` 9 eras, `dashboard.html`,
+> `ANNEXURE_PRODUCTION_CHECKLIST.md` custodian-grouped production schedule,
+> `AUDIO_TRANSCRIPT_INDEX.md` + `transcripts/`). Audio/video: 11 files hashed
+> (`AUDIO_MANIFEST.md5` 11/11 OK) and transcribed 100% locally (faster-whisper
+> medium on GPU; rerunnable tool `TOOLS/transcribe_court_av.py`). Media findings
+> D37–D39 are draft-ASR `[?]` pending the human-listening checklist. Source
+> integrity: original `SOURCE_MANIFEST.md5` preserved; additive
+> `SOURCE_MANIFEST_v2_2026-09-26.md5` re-hash 386/386 OK. Status: 🟦 DOC-ONLY +
+> analysis artifacts; no runtime system added; corpus sources untouched.
+> Full log: `CHANGELOG.md` (2026-09-26).

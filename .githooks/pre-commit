@@ -38,7 +38,25 @@ bat_path="$script_dir/pre-commit.bat"
 # This catches ALL real-world Windows shells (MSYS1 / MSYS2 / Git-for-Win /
 # Cygwin / MinGW / WSL-bridged) regardless of whether MSYSTEM / OSTYPE
 # is set, because cmd.exe is always on Windows PATH.
+
+# --- 0. Golden Rules Stage 0 guard (added 2026-09-24, additive) -------------
+# Hard enforcement of .claude/GOLDEN_RULES.md -- MUST run before the Windows
+# shim and before any bypass hatch, so it cannot be skipped by PRECOMMIT_BYPASS:
+#   - Blocks commits that DELETE files from the working tree (Rules #1/#2/#5).
+#     Index-only untracks (git rm --cached) are allowed and logged.
+#   - Blocks commits touching Documents/Downloads/Pictures/Videos/Music/
+#     Desktop/OneDrive (Rule #8, operator directive 2026-07-13).
+#   - Neither block has a bypass env var (intentional). Fail closed.
+# See .githooks/golden_rules_guard.sh and .githooks/README.md for details.
+sh "$script_dir/golden_rules_guard.sh" || exit $?
 if [ -f "$bat_path" ] && command -v cmd.exe >/dev/null 2>&1; then
+    # MSYS arg-conversion guard (fix 2026-09-24, additive): without it, MSYS
+    # rewrites the literal flag into a drive path, cmd.exe ignores the script
+    # argument, prints its banner and waits on stdin (manual runs appeared to
+    # hang; worst case a silent no-op hook). Excluding args from conversion
+    # keeps the flag literal and passes the cygpath-converted path verbatim.
+    MSYS2_ARG_CONV_EXCL='*'
+    export MSYS2_ARG_CONV_EXCL
     if command -v cygpath >/dev/null 2>&1; then
         win_bat="$(cygpath -w "$bat_path")"
     elif case "$bat_path" in *' '*) false;; *) true;; esac; then

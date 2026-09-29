@@ -126,3 +126,27 @@ var to their workflow. See `bin\install_precommit_hook.bat` DONE block
 for copy-paste-able `set` commands.
 
 Full rationale lives in `CHANGELOG.md` → `## 2026-07-13 (post-cont.5-fup-13)`.
+
+---
+
+## v3.4 (2026-09-24) -- Golden Rules Stage 0 guard (additive)
+
+New file: `golden_rules_guard.sh` -- called at the TOP of `pre-commit`,
+**before** the Windows `.bat` shim and **before** the paired-ack bypass
+hatches, so it runs on every shell path and cannot be skipped by
+`PRECOMMIT_BYPASS`. Implements .claude/GOLDEN_RULES.md as hard git law:
+
+1. **Deletion block (Rules #1/#2/#5, NO bypass):** any staged change that
+   removes a file from the working tree is refused. Detection is by disk
+   presence: staged `D` + file absent on disk = commit deletes it = block.
+   Index-only untracks (`git rm --cached`) are ALLOWED and logged --
+   nothing is deleted from disk, so they are Rule-compliant.
+2. **Personal-folder block (Rule #8, NO bypass):** any staged change under
+   `Documents/`, `Downloads/` (incl. `ARCHIVE_OLD`), `Pictures/`,
+   `Videos/`, `Music/`, `Desktop/`, `OneDrive/` is refused. Read/review
+   only, per the permanent operator directive of 2026-07-13.
+3. **Fail closed:** unexpected guard errors exit 2 and refuse the commit.
+
+Exit codes: 0 pass / 1 hard block / 2 guard failure. Both blocks are
+intentionally bypass-free; the only remedy is to not stage the change.
+

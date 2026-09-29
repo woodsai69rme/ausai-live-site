@@ -3,6 +3,66 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-09-26 — Court corpus analysis + transcription: Foots & Foots BRC7982/2014 (read-only, additive)
+
+### Session summary
+- **Scope:** two sessions (24/9 analysis + 25–26/9 audio/video + production annexure) against the external court corpus at `C:\courtnewBFFAMILY` — 526 files, ~2.1 GB, **outside the repo** (git-invisible by location). Everything read-only: no source file opened for writing; integrity proven by md5 manifests before and after.
+- **24/9 — document analysis:** all ten prior review memos digested into deliverables in the corpus's `_analysis_2026-09-24/`: `DISCREPANCY_REPORT.md` (conflict register), `TIMELINE.md` (9 eras), `dashboard.html` (self-contained tabbed dashboard), `SOURCE_MANIFEST.md5` (386 source files hashed).
+- **26/9 — audio/video pass:** located 11 A/V files (8 unique recordings after two byte-identical duplicate pairs, + 2 videos); hashed into `AUDIO_MANIFEST.md5` (11/11 OK before processing); re-transcribed **100% locally** with faster-whisper medium on the RTX 4060 (~152 min of audio in ~7 min wall; VAD on, `condition_on_previous_text=False` to kill the prior base-model pass's repetition loops). Outputs: `transcripts/` (timestamped drafts + per-segment JSON) and `AUDIO_TRANSCRIPT_INDEX.md` (provenance + 9-item human-listening checklist). New repo tool: `TOOLS/transcribe_court_av.py` (rerunnable; `--only`/`--model`).
+- **Register grown D01–D36 → D01–D39** (open 14 → 17): D37 — `d2(1).mp3` draft ASR "Shut up, Jessica, or else I'll lay into you" (adult-to-child, 2014 metadata, unverified `[?]`); D38 — 9/4/2018 argument video (`Video(2).MOV`, police called) appearing **nowhere** in the filed record; D39 — the 2014 "phone recordings" reading as US TV-drama audio, not party calls. All media findings are draft-ASR only, gated on the human-listening checklist.
+- **26/9 — `ANNEXURE_PRODUCTION_CHECKLIST.md`:** court-ready missing-documents production schedule grouped by custodian, with mechanisms M1–M8 (registry pull / new subpoena / RTI / courts-police records / BDM / carrier / party demand / provider letter), a master P1 execution ordering, and a do-not-request list of already-resolved items. Pointer added to register §9.
+- **Manifest integrity:** the original `SOURCE_MANIFEST.md5` was preserved untouched despite 12 files having changed after it was hashed (10 root analysis memos + 2 `_extract` txts — prior-session reconciliation, documented in register §10 item 9); additive `SOURCE_MANIFEST_v2_2026-09-26.md5` re-hashes the same 386 paths → **386/386 OK**. `AUDIO_MANIFEST.md5` remains 11/11 OK after the pass.
+- **Backups (workspace):** `BACKUPS/courtnew_analysis_2026-09-24/` (all deliverables, current) + `BACKUPS/courtnew_pre_av_integration_2026-09-26/` (pre-edit copies of the three deliverables).
+
+### Compliance
+- Zero deletions anywhere; all corpus writes are additive under `_analysis_2026-09-24/` (Rule #1); corpus sources byte-verified via manifests.
+- 100% local processing — no cloud service touched the family-law media (privacy constraint held end to end).
+- Dashboard verified live in-browser after the D37–D39 integration (39 matrix rows; OPEN filter = exactly 17; era events render).
+- Analysis of the record, not legal advice; FLA s102NA (counsel gate for cross-examination) carried through every deliverable.
+
+---
+
+## 2026-09-24 — Gemini telemetry hook stall: root-caused and fixed (additive)
+
+### Session summary
+- **Symptom:** every tool call in Gemini CLI / Antigravity stalled ~30s. External diagnosis blamed "stray quotes" around the telemetry path — disproven: all plugin config files were clean, valid JSON.
+- **Real root cause:** the `googlecloudtools.datacloud_telemetry` PreToolUse hook (matcher `*`, fires on every tool call) invokes `telemetry_hook_bundle.js`, which blocks on stdin (`readFileSync(0)`); with no piped payload it hangs until the host's 30s timeout, and its trailing `; exit 0` masks any failure.
+- **Fix (additive; original bundle byte-untouched):** new hang-proof `telemetry_hook_wrapper.js` — races stdin closure against a 2s hard deadline; forwards real payloads to the bundle in background mode, otherwise emits {"decision":"allow"} and exits 0 immediately. `hooks.json` re-enabled (the interim emergency `enabled:false` was fully reverted) and routed through the wrapper.
+- **Verification:** silent-stdin test — original bundle rc=124 (timeout-killed, stall reproduced); wrapper rc=0 `allow` in ~2.3s. Normal payload: instant rc=0.
+- **Watchdog:** new `TOOLS/telemetry_stall_watchdog.py` — 4 checks (environment, config regression guard, 3s stall probe with held-open stdin, bundle sanity), append-only JSONL log, exit codes 0/1/2. Self-test against the original bundle correctly reports `STALL REPRODUCED` and exits 1 (wrapper PASS at 2071 ms).
+- **Docs:** `BACKUPS/gemini_telemetry_disable_2026-09-24_074621/FIX_NOTES.md` — root cause, test evidence, rollback paths, plus a dated topology correction (repo root is `C:\Users\karma` itself; not a junction).
+
+### Compliance
+- Zero deletions; original vendor bundle and all configs preserved byte-identical or restored (Rule #1 / #7).
+- Reinforces Rule #8: the checkout root is the home directory, so personal folders sit inside the repo — none were read or modified during this fix.
+- `.gemini/` and `TOOLS/` are gitignored; repository status untouched by this session.
+
+
+---
+
+
+## 2026-09-24 — Godseye 1.0 cataloged into workspace indexes (additive)
+
+### Session summary
+- **New project cataloged at root:** `godseye-app/` — Godseye 1.0, a frontend geospatial intelligence dashboard (WorldView-style OSINT): CesiumJS 3D globe, tactical HUD, live aircraft / satellite / CCTV / seismic / hazard / conflict / maritime / weather layers. React 19 + Vite 7 + Tailwind 4, own embedded git repo. Reviewed **read-only** — zero files inside the project modified.
+- **Launcher (pre-existing untracked file, now documented):** `START_GODSEYE_DASHBOARD.bat` — [1] Vite dev :5173, [2] build+serve :3001, [3] `npm run env:check` BYOK capability matrix, [4] `npm run feed:audit:smoke`.
+
+### Index appends (all additive; pre-edit backups in `BACKUPS/godseye_catalog_2026-09-24/`)
+| File | Change |
+|---|---|
+| `WORKSPACE_INDEX.md` | +1 system row (#19 Godseye) · +1 START HERE launch row · +2 port rows (5173 dev / 3001 prod) |
+| `LOCALHOST_PORT_REGISTRY.json` | +2 registry entries (`godseye-dev-5173`, `godseye-prod-3001`), JSON-validated |
+| `ROOT_DOCS_MASTER_INDEX.md` | +dated Godseye addendum section |
+| `MASTER_ECOSYSTEM_INDEX.md` | +1 cross-reference row |
+| `TODO_TRACKER.md` | +append-only session note |
+
+### Compliance
+- Zero deletions, zero renames (Rule #1 / Rule #7 enhancement-not-reduction).
+- No personal folders involved (Rule #8).
+
+
+---
+
 ## 2026-07-12 — Phone recovery suite + unified master dashboard
 
 ### New tools (`COMPLETED_PROJECTS/mobile_backup/`)

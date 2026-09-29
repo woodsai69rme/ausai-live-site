@@ -1,0 +1,22 @@
+# Line-ending policy -- added 2026-09-24 (surgical & additive).
+# Pinned per-file after a full `git ls-files --eol` audit so every rule below
+# MATCHES the bytes already committed: index bytes never change, no mass
+# phantom "modifications" are triggered. Do NOT add wildcard rules here
+# (e.g. *.bat text) -- 75 tracked .bat files are LF-in-repo and only these
+# specific ones need pinning. Extend by listing exact new paths, nothing else.
+#
+# Phantoms fixed (index LF / worktree CRLF; normalize worktree to LF):
+LICENSE text eol=lf
+START_MR_WILSON_ALL_SYSTEMS.bat text eol=lf
+#
+# Already CRLF in the index -- pin as-is so tooling never flips them:
+START_GODSEYE_DASHBOARD.bat text eol=crlf
+bin/install_BOTH_TASKS.bat text eol=crlf
+bin/install_daily_trend_compare.bat text eol=crlf
+install_monitor_scheduler.bat text eol=crlf
+refresh_mobile_inventory.bat text eol=crlf
+run_fastapi.bat text eol=crlf
+run_http.bat text eol=crlf
+#
+# Mixed-EOL file: leave bytes entirely alone (no conversions either way):
+START_MONETIZE_AI.bat -text
