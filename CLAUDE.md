@@ -456,3 +456,67 @@ When the user asks to **document**, **save**, **archive**, or **record** anythin
 
 **Fail loud** if X: is unavailable — write to `_DOCS_ARCHIVE\` and report the error. Never claim documentation is done without verified file paths.
 
+
+## Toolchain gotchas (verified 2026-09-30)
+
+Hard-won environment facts. Each one cost real time; follow them and you avoid the
+same traps. Verified on this machine, not copied from generic advice.
+
+### Line endings -- the big one
+
+- **MSYS / Git Bash text-mode redirection strips `\r`.** A pure-shell CR count over
+  `git cat-file blob` output therefore *always returns 0*. A shell implementation of
+  the EOL classifier passed `sh -n` and still failed every live test, for this reason.
+- **Never use `sed`, `awk`, `tr`, or MSYS text-mode redirects on repo files.** Use
+  Python byte operations (`open(p,'rb')` / `open(p,'wb')`). The committed classifier
+  `.githooks/eol_classify.py` is a native Python helper for exactly this reason.
+- `.gitattributes` carries surgical per-file pins and its header **forbids wildcard
+  rules**. A single `*.bat text` would mass-flip 75 LF `.bat` files. Extend by exact
+  path only.
+- **Never `git add -A` in this repo.** The operator and other agents keep uncommitted
+  work in flight (`monetize-ai-engine/*`, `START_MR_WILSON_ALL_SYSTEMS.bat`).
+  Stage only your own paths.
+- `git ls-files --eol` reports the **index** (`i/`), which keeps the old blob until you
+  stage. A freshly converted file reads `i/mixed w/lf` until `git add`; the clean
+  state only appears afterwards.
+- Uniform-CRLF files (`CHANGELOG.md`, `TODO_TRACKER.md`, `CLAUDE.md`, most of `MEMORY/`,
+  69 tracked `.md`) are deliberately **unpinned** so no filter pass can damage an
+  append-only log. When splicing into one, the anchor must match the text *without*
+  the trailing newline, then find the following `\r\n`.
+
+### `git add` and ignore rules
+
+- A `.gitignore` **directory** rule can make plain `git add <file>` refuse an already-
+  tracked file. Use `git add -u <path>` (tracked-only update; no `-f` needed).
+- Blanket name patterns (`*_INDEX.md`, `*_MASTER.md`, `ALL_*.md`, `*_INVENTORY.md`) can
+  silently hide hand-authored docs. If a tracked doc links to a file that git will not
+  track, the link is broken for every clone -- check with `git check-ignore -v`.
+- A stale `.git/index.lock` (0 bytes, no `git` writer process) blocks all writes. Check
+  for a live holder with `tasklist`/`Get-CimInstance` before removing it; the long-lived
+  `git fsmonitor--daemon` processes are background helpers, not index writers.
+
+### Tool-call quirks in this environment
+
+- `write_file`: pass fields in the order **`path` -> `instructions` -> `content`**. With
+  `content` first it intermittently fails with *"Invalid parameters... instructions:
+  undefined"*. Retrying with the correct order succeeds.
+- `str_replace` fails on some paths that `write_file` accepts. Do a full rewrite instead.
+- `read_files` returns `[BLOCKED]` for anything under `BACKUPS/`. Read those with shell
+  or Python. (`BACKUPS/` and `TOOLS/` are gitignored by design -- transcripts, test
+  harnesses and backups stay uncommitted by convention.)
+- Heredocs risk backslash mangling through the shell. Stage text with `write_file`, then
+  convert it inside a Python script.
+
+### Golden Rules discipline (`.claude/GOLDEN_RULES.md` v1.1)
+
+- Nothing is deleted; all files are permanent. Changes are additive only.
+- **Back up before every edit**, and verify the backup by hash.
+- Personal folders (Documents, Downloads, Pictures, Videos, Music, Desktop, OneDrive)
+  are read-only. The Stage 0 pre-commit guard hard-blocks violations with no bypass.
+- Document what you did in `CHANGELOG.md` and `TODO_TRACKER.md` (both CRLF).
+- Prefer assertion-first scripts: validate the whole post-image *before* writing, so a
+  failure cannot leave a half-applied edit.
+
+Full EOL-program history and the complete artifact map:
+`MD_EOL_AUDIT_2026-09-29.md` and `MEMORY/EOL_PROGRAM_HANDOFF_2026-09-30.md`.
+
