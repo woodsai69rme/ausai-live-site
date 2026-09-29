@@ -16,6 +16,9 @@
   backup-first, md5-diff-verified, one file per solo commit; guard §3 verifies
   uniformity); #5 `FULL_REPO_AUDIT.md` FREEZE — no harmonization ever, `-text` pin
   recommended; converting it would falsify a historical artifact.
+  **Follow-through (same day):** the recommended `-text` freeze pin is now in
+  `.gitattributes` (+6/−0 block, config-only); target file md5-verified
+  byte-identical (`0d7122d6…`), pin active (`attr/-text`), zero phantoms.
 - No file in the plan was modified. Verified: all five md5s byte-identical after the
   plan was written; planning-only diffs (report + logs).
 

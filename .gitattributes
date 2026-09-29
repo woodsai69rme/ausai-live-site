@@ -91,3 +91,10 @@ python/src/server/api_routes/knowledge_api.py -text
 python/src/server/api_routes/mcp_api.py -text
 python/src/server/services/source_management_service.py -text
 python/src/server/services/storage/storage_services.py -text
+
+# Archive forensic artifact freeze -- added 2026-09-29 (audit section 9, #5).
+# _DOCS_ARCHIVE/master_docs/FULL_REPO_AUDIT.md is a BOM-carrying 2026-04-25
+# generated artifact, mixed endings by decision: any byte change would
+# falsify a historical artifact. -text = byte-freeze (no filter, no
+# conversion, ever). See MD_EOL_AUDIT_2026-09-29.md section 9.
+_DOCS_ARCHIVE/master_docs/FULL_REPO_AUDIT.md -text

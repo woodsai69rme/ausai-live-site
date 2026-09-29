@@ -683,4 +683,5 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > #3/#4 harmonize→CRLF (26/15-line LF islands) at next natural edits; #5
 > `FULL_REPO_AUDIT.md` (BOM + escaped-CR archive artifact) FREEZE forever, `-text`
 > pin recommended. Planning only — all five files md5-verified untouched. Status:
-> 🟦 DOC-ONLY; report §9; no conversion executed.
+> 🟦 DOC-ONLY; report §9; no conversion executed. Follow-through: `-text` freeze pin
+> for FULL_REPO_AUDIT.md added to `.gitattributes` (config-only; target byte-identical).> 🟦 DOC-ONLY; report §9; no conversion executed.
