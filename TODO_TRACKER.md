@@ -621,3 +621,44 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > `SOURCE_MANIFEST_v2_2026-09-26.md5` re-hash 386/386 OK. Status: 🟦 DOC-ONLY +
 > analysis artifacts; no runtime system added; corpus sources untouched.
 > Full log: `CHANGELOG.md` (2026-09-26).
+---
+
+## 📊 Progress tracker — 12 P1 production items (annexure master audit table, 2026-09-29)
+
+> **Source:** `C:\courtnewBFFAMILY\_analysis_2026-09-24\ANNEXURE_PRODUCTION_CHECKLIST.md` — "Master audit table" (12 P1 items, the annexure's execution order). **Read-only tracking view** — no annexure row was re-keyed or removed; the annexure remains the source of truth for drafting. **Not legal advice; FLA s102NA counsel gate applies** — issue and any consequent examination are for counsel or the Commonwealth Scheme (annexure caveat 3).
+>
+> **Status legend:** `☐ Not started` · `◔ In progress` · `☑ Requested (awaiting response)` · `✅ Complete (received)` · `— N/A (closed elsewhere)` · **Date format: DD/MM/YYYY**. Update the Status and Last-updated cells as items move; do not delete rows — superseded rows get a `—` with a note.
+>
+> ✱ = the annexure's most time-critical single action — carrier **retention clock is running** (order 1 of 12).
+
+| # | P1 item (annexure order) | Mechanism | Register | Status | Last-updated | Notes |
+|---|--------------------------|-----------|----------|--------|--------------|-------|
+| 1 | Telco records (own line, 22/9/2019 + 2021) ✱ | M6 (own) / M1–M2 (other side) | D23 | ☐ Not started | — | B1 — retention clock running; annexure order 1 |
+| 2 | Grandmother's GBH result | M4 | D10 | ☐ Not started | — | B4 — order 2 |
+| 3 | Birth certificates ×3 | M5 | D01–D03 | ☐ Not started | — | B2 — order 3 |
+| 4 | Home surveillance footage | M7 → M2 | D09, D10, D19 | ☐ Not started | — | C1 — order 4 |
+| 5 | Registry pull: productions /145 /143 /185 /153 /229 /42 /198 /20 /73 /15+ /32 | M1 | many | ☐ Not started | — | A1 — order 5, clears ~15 P1 items |
+| 6 | Registry pull: orders + transcripts (A3-1…A3-8) | M1 | D21, D22, D20, D29 | ☐ Not started | — | A3 — order 6 |
+| 7 | QPS welfare-check record 15/6/2018 | M3 | D07 | ☐ Not started | — | B3 — order 7 |
+| 8 | Qld Education returns (if registry partial) | M3 | D26 | ☐ Not started | — | B6 — order 8 |
+| 9 | Anger-management certificate | M7 → M8 | D21 | ☐ Not started | — | C2 — order 9 |
+| 10 | Court outcomes package | M4 | D35, D09 | ☐ Not started | — | B5 — order 10 |
+| 11 | Screenshot foundation (5 × call-log set) | M7 | D16 | ☐ Not started | — | C6 — order 11 |
+| 12 | School letter + teacher reports originals | M8/M2 | D26, D02 | ☐ Not started | — | D-1 — order 12 |
+
+**Standing notes:** Day-1 parallel: #5 (registry, ~15 P1 items in one request) + #1 (carrier, clock) + #3 (BDM). Week 1: #7, #8 (RTI/courts) and #4, #11 (party demands). Week 2+: #12 (provider letters, consents); escalate any refused party-held item to subpoena (M2). On registry response, verify every production cover sheet's holder attribution `[?]` before any identifier enters a filing. Superseded rows get `—` + note, never deleted (Golden Rules #1/#2).
+
+## 📋 Session note — 2026-09-29 (markdown EOL audit + 30 .gitattributes pins; P1 progress tracker)
+
+> Append-only note — no tracker rows re-keyed or removed. Swept all 511 tracked
+> `*.md` (`git ls-files --eol`): zero incident-signature files; 69 CRLF-index files
+> (incl. both append-only logs) left unpinned; 5 mixed-in-index documented untouched;
+> 30 phantom-prone files (LF index / CRLF disk, shadowed by matching cached index
+> stat) pinned `text eol=lf` in `.gitattributes` (+44/−0, exact paths generated from
+> live git data). Same session: 📊 Progress tracker (12 P1 production items with
+> dated status cells) appended above from the court annexure. Report:
+> `MD_EOL_AUDIT_2026-09-29.md`; artifacts in `BACKUPS/`. Status: 🟦 DOC-ONLY +
+> Non-md extension: 21 non-markdown `i/mixed` audited — 17 stable files now
+> `-text` frozen (+25/−0), 3 in-flight edits unpinned, zero phantom-prone
+> (report §7).
+> config pins; no content file changed; append-only logs byte-clean.

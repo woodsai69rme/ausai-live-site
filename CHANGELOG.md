@@ -3,6 +3,21 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-09-29 — Markdown EOL audit: 511 tracked `*.md` swept, 30 phantom-prone files pinned (additive)
+
+### Session summary
+- **Trigger:** the 2026-09-26 CHANGELOG EOL incident — sweep all 511 tracked `*.md` via `git ls-files --eol` for mixed or phantom-prone line endings. Full report: `MD_EOL_AUDIT_2026-09-29.md`.
+- **Findings:** 0 files carry the incident signature (mixed worktree with clean index) — the repo-wide CRLF repair held. 69 uniform-CRLF-in-index files (incl. both append-only logs) deliberately left **unpinned** so log writes never pass through a conversion filter. 5 mixed-in-index files documented and untouched (pinning cannot harmonize committed mixed bytes). 30 files with LF index bytes but CRLF worktree bytes whose **cached index stat exactly matches disk** (Feb-2026 mtimes) — git never re-hashes them, so a single resave would erupt into a full-file phantom diff.
+- **Fix:** 30 surgical `text eol=lf` pins in `.gitattributes` (+44/−0, exact paths generated from live `git ls-files --eol` data, never hand-typed). The pins install a clean filter so the CRLF worktrees hash equal to the LF index — clean today, phantom-proof forever, no worktree byte touched. The nested `original_archon/.gitattributes` `text=auto` overlays as designed (verified `eol: lf` on all 9 nested paths); the nested file itself untouched.
+- **Same-session extension:** the 21 non-markdown `i/mixed` files audited too: 18 stable (worktree byte-identical to HEAD, honestly clean) got `-text` byte-freeze pins (+25/−0; `START_MONETIZE_AI.bat` was already pinned), 3 in-flight content edits (`vision_fleet.py`, `database.py`, `server.py`) deliberately unpinned, and **no phantom-prone file in this class** — report §7.
+- **Verification:** all 30 clean before and after pinning (`git status --porcelain` rc=0); repo modified-file list unchanged; attribute read-back via `git check-attr`; backup, append script, and a first-run-failed-safe script iteration preserved under `BACKUPS/`.
+- **Also this session:** `TODO_TRACKER.md` gained the 📊 Progress tracker (12 P1 production items from the court annexure, dated status cells) — see the tracker note of the same date.
+
+### Compliance
+- Zero deletions; `.gitattributes` changed by byte-pure append only; no tracked content file's bytes altered; append-only logs remain attribute-free (direct lesson of the 2026-09-26 incident).
+
+---
+
 ## 2026-09-26 — Court corpus analysis + transcription: Foots & Foots BRC7982/2014 (read-only, additive)
 
 ### Session summary

@@ -20,3 +20,74 @@ run_http.bat text eol=crlf
 #
 # Mixed-EOL file: leave bytes entirely alone (no conversions either way):
 START_MONETIZE_AI.bat -text
+
+# ============================================================
+# Markdown EOL pins -- added 2026-09-29 (surgical & additive).
+# Audit: 511 tracked *.md via `git ls-files --eol`: 69 uniform-CRLF index
+# (CHANGELOG.md, TODO_TRACKER.md, README.md, _DOCS_ARCHIVE/*, MEMORY/*)
+# left unpinned to protect append-only logs from any filter pass; 30 files
+# with LF index bytes but CRLF worktree bytes whose cached index stat
+# exactly matches disk (Feb-2026 mtimes) -- git never re-hashes them, so
+# the CRLF state is invisible until a resave triggers a full-file phantom
+# diff. Pinning eol=lf makes the CRLF worktree clean under the LF index
+# (clean filter converts on the fly), neutralizing the phantom bomb.
+# All 30 verified clean (porcelain rc=0) before pinning.
+# Do NOT extend to wildcards; extend by exact paths only.
+# ============================================================
+.claude/commands/archon/archon-alpha-review.md text eol=lf
+.claude/commands/archon/archon-onboarding.md text eol=lf
+.claude/commands/archon/archon-prime-simple.md text eol=lf
+.claude/commands/archon/archon-prime.md text eol=lf
+.claude/commands/archon/archon-rca.md text eol=lf
+.claude/commands/prp-commands/prp-any-cli-create.md text eol=lf
+.claude/commands/prp-commands/prp-any-cli-execute.md text eol=lf
+.claude/commands/prp-commands/prp-claude-code-create.md text eol=lf
+.claude/commands/prp-commands/prp-claude-code-execute.md text eol=lf
+CLAUDE-ARCHON.md text eol=lf
+CONTRIBUTING.md text eol=lf
+DEVELOPMENT_ENVIRONMENT_IMPROVEMENT_PLAN.md text eol=lf
+DOTDIR_CATALOG_RUN.md text eol=lf
+PRODUCTION_DEPLOYMENT_CONFIG.md text eol=lf
+PRPs/templates/prp-base.md text eol=lf
+archon-ui-main/README.md text eol=lf
+archon-ui-main/docs/socket-memoization-patterns.md text eol=lf
+docs/README.md text eol=lf
+docs/docs/README.md text eol=lf
+docs/src/pages/markdown-page.md text eol=lf
+original_archon/.github/ISSUE_TEMPLATE/bug_report.md text eol=lf
+original_archon/.github/ISSUE_TEMPLATE/feature_request.md text eol=lf
+original_archon/README.md text eol=lf
+original_archon/iterations/v1-single-agent/README.md text eol=lf
+original_archon/iterations/v2-agentic-workflow/README.md text eol=lf
+original_archon/iterations/v3-mcp-support/README.md text eol=lf
+original_archon/iterations/v4-streamlit-ui-overhaul/README.md text eol=lf
+original_archon/iterations/v5-parallel-specialized-agents/README.md text eol=lf
+original_archon/iterations/v6-tool-library-integration/README.md text eol=lf
+python/src/server/testing/README.md text eol=lf
+
+# ---------------------------------------------------------------
+# Non-markdown mixed-in-index freeze pins -- added 2026-09-29.
+# Of 21 non-md i/mixed files: 18 are clean with worktree bytes
+# byte-identical to HEAD (committed mixed, stable); 17 get new
+# -text pins below (START_MONETIZE_AI.bat was already pinned),
+# 3 with in-flight content edits are deliberately unpinned.
+# -text = byte-freeze: no clean/smudge filter, no conversion ever.
+# See MD_EOL_AUDIT_2026-09-29.md section 7. Exact paths only.
+# ---------------------------------------------------------------
+.gitignore -text
+AI_TOOLS_DASHBOARD.html -text
+JARVIS/core/mr_wilson_crypto_radio.py -text
+JARVIS/play_bumblebee_examples.py -text
+JARVIS/play_mr_wilson_crypto_showcase.py -text
+JARVIS/voice_for_woods.py -text
+JARVIS/web_hud/static/bumblebee_soundboard.html -text
+UNIFIED_MASTER_DASHBOARD.html -text
+archon-ui-main/src/components/layouts/SideNavigation.tsx -text
+migration/complete_setup.sql -text
+monetize-ai-engine/test_new_enhancements.py -text
+python/pyproject.toml -text
+python/src/mcp/mcp_server.py -text
+python/src/server/api_routes/knowledge_api.py -text
+python/src/server/api_routes/mcp_api.py -text
+python/src/server/services/source_management_service.py -text
+python/src/server/services/storage/storage_services.py -text
