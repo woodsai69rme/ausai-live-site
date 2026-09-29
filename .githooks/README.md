@@ -182,3 +182,63 @@ in batch and applies verdicts: `__MIXED__` = block, `__FLIP__` = note,
 `BACKUPS/test_eol_guard_bytes_2026-09-29.py` (all cases pass, including a
 real `git commit` refusal through the full hook chain).
 
+## v3.6 (2026-09-30) -- read-only repo-wide EOL audit (`eol_audit.py`, additive)
+
+`.githooks/eol_audit.py` is a **read-only census tool**. It is not part of the
+commit path and is never invoked by the guard; run it by hand whenever you want
+to know the current line-ending state of the repository.
+
+It exists because the v3.5 guard is commit-time and staged-only: it can only see
+files someone is about to commit. EOL drift that accumulates in the working tree
+between commits is invisible until it is staged. This tool closes that gap.
+
+It **never writes**, never stages, never touches the index or the working tree,
+and creates no lock file. Safe to run at any time, including mid-edit.
+
+### Usage
+
+```
+python .githooks/eol_audit.py              # census of the INDEX (default)
+python .githooks/eol_audit.py --worktree   # census of WORKING-TREE bytes
+python .githooks/eol_audit.py --mixed      # only the mixed files, with pin status
+python .githooks/eol_audit.py --unpinned   # only mixed files with NO .gitattributes pin
+python .githooks/eol_audit.py --md         # restrict to *.md
+python .githooks/eol_audit.py --json       # machine-readable
+python .githooks/eol_audit.py --check      # exit 2 if any mixed file exists
+```
+
+Exit codes: `0` = census produced, `1` = usage error, `2` = git failure or
+`--check` found mixed files (fail closed).
+
+### Interpreting the output
+
+Each mixed file is annotated with its `.gitattributes` pin. A mixed file **with**
+a pin is frozen by decision and is expected -- that is the settled state. The
+files listed under "no pin" are the ones still awaiting a decision, and are the
+short list to work through.
+
+Categories: `lf`, `crlf`, `mixed`, `none` (empty), `binary` (NUL in first 8 KB),
+and `gitlink` (submodule, mode 160000 -- no blob to read; not a defect).
+
+### Performance note
+
+The first implementation shelled out to `git cat-file` once per file, which cost
+~3000 process spawns and took **over 48 seconds for a 524-file `--md` scan**.
+It now reads every blob through a single `git cat-file --batch` pipe, and a full
+3073-file census completes in **about one second**.
+
+The revs must be written to that pipe *concurrently* with reading. Writing all
+revs before reading any deadlocks, because this repo holds blobs of hundreds of
+KB and the 64 KB pipe buffer fills before git can drain its output. The tool
+uses a writer thread for exactly this reason -- do not "simplify" it back into a
+sequential write-then-read loop.
+
+### Current census (2026-09-30, verified)
+
+| Source | mixed |
+|---|---|
+| index | 22 -- 19 pinned and frozen, 3 unpinned (in-flight user work) |
+| worktree | 28 -- the extra 7 are unstaged in-progress edits, invisible to the commit-time guard |
+
+Markdown-only: 1 mixed, `_DOCS_ARCHIVE/master_docs/FULL_REPO_AUDIT.md`, frozen
+by an explicit `-text` pin. This matches `MD_EOL_AUDIT_2026-09-29.md` §9.
