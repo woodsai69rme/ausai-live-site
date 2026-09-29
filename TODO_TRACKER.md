@@ -685,3 +685,18 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > pin recommended. Planning only — all five files md5-verified untouched. Status:
 > 🟦 DOC-ONLY; report §9; no conversion executed. Follow-through: `-text` freeze pin
 > for FULL_REPO_AUDIT.md added to `.gitattributes` (config-only; target byte-identical).> 🟦 DOC-ONLY; report §9; no conversion executed.
+
+## 📋 Session note — 2026-09-29 (settlement #1 executed: REVENUE_GENERATORS README → LF)
+
+> Append-only note — no tracker rows re-keyed or removed. §9 procedure end to end:
+> 1 stray CR removed (5110 → 5109 bytes; diff = 1 line), backup kept, guard suite
+> all-pass, solo commit `f12ea0b67`. Mixed-markdown count 5 → 4. Status: 🟦 EXECUTED
+> (§9 #1); remaining #2/#3/#4 pending natural edits; #5 frozen by pin.
+
+## 📋 Session note — 2026-09-29 (settlement #3 executed: CLAUDE.md → CRLF)
+
+> Append-only note — no tracker rows re-keyed or removed. §9 procedure end to end:
+> 26-line LF island (431–456) converted (+26 CR; line-diff = exactly those lines),
+> backup kept, guard suite all-pass, solo commit `f6ed68031`. Mixed-markdown census
+> 4 → 3. Status: 🟦 EXECUTED (§9 #3); remaining #2/#4 pending natural edits; #5
+> frozen by pin.

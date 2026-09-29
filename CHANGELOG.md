@@ -3,6 +3,47 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-09-29 (later) — Settlement #3 executed: CLAUDE.md harmonized to CRLF
+
+### Session summary
+- §9 procedure end to end: preconditions (md5 match to planning capture, clean
+  status, LF island exactly 431–456 contiguous) → backup
+  `BACKUPS/pre_harmonize_CLAUDE_2026-09-29.md` → byte-only python conversion
+  (+26 CR bytes; lines 1–430 byte-identical) → line-diff verification (only the
+  26 island lines differ, each by exactly one trailing CR; 458 CRLF lines; pure
+  CRLF confirmed staged as `i/crlf w/crlf`) → solo commit `f6ed68031` (hook chain
+  green; guard §3 verified uniformity live) → guard suite all-pass + status clean.
+- Mixed-markdown census: 4 → 3. Remaining: #2 (monetize doc — bundle with the
+  in-flight monetize-ai-engine work), #4 (DASHBOARD island 60–74); #5 frozen by pin.
+- Note: `git ls-files --eol` reports `i/mixed` until staging, since the index still
+  holds the old blob; `i/crlf w/crlf` confirmed after staging.
+
+### Compliance
+- Byte-surgery exactly per §9: backup preserved, line-diff limited to the intended
+  26 lines; append-only logs updated; guard chain green.
+
+---
+
+## 2026-09-29 (later) — Settlement #1 executed: REVENUE_GENERATORS/README.md harmonized to LF
+
+### Session summary
+- §9 procedure run end to end: preconditions (md5 match to planning state, clean
+  status, exactly 1 CR byte in the file) → backup
+  `BACKUPS/pre_harmonize_REVENUE_GENERATORS_README_2026-09-29.md` → byte-only python
+  conversion (delete the final line's stray CR; 5110 → 5109 bytes; every other byte
+  identical) → verification (md5 `28224867…` → `87b2c15f…`; git `i/lf w/lf`; diff =
+  exactly 1 line) → solo commit `f12ea0b67` → guard suite all-pass + status clean.
+- Note: plain `git add` refused the path (`.gitignore` dir rule line 1162) despite
+  the file being tracked; staged via `git add -u` (tracked-only update) — no force.
+- Repo-wide mixed-markdown count: 5 → 4. Remaining: #2 (monetize doc, bundle with
+  in-flight work), #3 (CLAUDE.md island), #4 (DASHBOARD island); #5 frozen by pin.
+
+### Compliance
+- Byte-surgery exactly per §9: additive procedure, backup preserved, md5-diff shows
+  the single intended byte; append-only logs updated; guard chain green.
+
+---
+
 ## 2026-09-29 (later) — Settlement plan for the 5 mixed-in-index markdown files (planning only, zero bytes changed)
 
 ### Session summary
