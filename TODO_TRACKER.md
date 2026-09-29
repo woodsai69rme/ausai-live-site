@@ -700,3 +700,11 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > backup kept, guard suite all-pass, solo commit `f6ed68031`. Mixed-markdown census
 > 4 → 3. Status: 🟦 EXECUTED (§9 #3); remaining #2/#4 pending natural edits; #5
 > frozen by pin.
+
+## 📋 Session note — 2026-09-29 (settlement #4 executed: DASHBOARD_ARCHITECTURE.md → CRLF)
+
+> Append-only note — no tracker rows re-keyed or removed. §9 procedure end to end:
+> 15-line LF island (60–74) converted (+15 CR; line-diff = exactly those lines),
+> backup kept, guard suite all-pass, solo commit `9a2b5f403`. Mixed-markdown census
+> 3 → 2. Status: 🟦 EXECUTED (§9 #4); program: #1/#3/#4 done, #2 bundled with
+> in-flight monetize work, #5 frozen by pin.

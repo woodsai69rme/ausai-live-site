@@ -3,6 +3,26 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-09-29 (later) — Settlement #4 executed: DASHBOARD_ARCHITECTURE.md harmonized to CRLF
+
+### Session summary
+- §9 procedure end to end: preconditions (md5 match to planning capture, clean
+  status, LF island exactly 60–74 contiguous) → backup
+  `BACKUPS/pre_harmonize_DASHBOARD_2026-09-29.md` → byte-only python conversion
+  (+15 CR bytes) → line-diff verification (only the 15 island lines differ, each
+  by exactly one trailing CR; 632 CRLF lines; staged as `i/crlf w/crlf`) → solo
+  commit `9a2b5f403` (hook chain green; guard §3 verified uniformity live) →
+  guard suite all-pass + status clean.
+- Mixed-markdown census: 3 → 2. §9 program state: #1 ✅ #3 ✅ #4 ✅ executed;
+  #2 (monetize doc) deliberately bundled with the in-flight monetize-ai-engine
+  work; #5 (archive artifact) frozen by `-text` pin, stays mixed by decision.
+
+### Compliance
+- Byte-surgery exactly per §9: backup preserved, line-diff limited to the intended
+  15 lines; append-only logs updated; guard chain green.
+
+---
+
 ## 2026-09-29 (later) — Settlement #3 executed: CLAUDE.md harmonized to CRLF
 
 ### Session summary
