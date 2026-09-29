@@ -716,3 +716,16 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > all-pass, solo commit `c6af20fbd`. **§9 program complete:** markdown mixedness
 > 5 → 1; sole remainder = FULL_REPO_AUDIT.md, frozen by pin (#5, by decision).
 > Status: 🟦 EXECUTED (§9 #2); user's in-flight monetize work untouched.
+## Session note — 2026-09-30 (EOL follow-ons: docs recovered, gotchas, audit tool)
+
+> Append-only note — no tracker rows re-keyed or removed. Three additive commits:
+> `8983c0a7b` (11 shadowed docs re-admitted via exact-path `.gitignore` negations;
+> blanket patterns retained, 4 linked docs' broken references now resolve),
+> `ea42f3346` (CLAUDE.md toolchain-gotchas section, +64/-0 CRLF),
+> `8e12b1869` (`.githooks/eol_audit.py` read-only census + README v3.6).
+> Backups hash-verified, all splices pure. Census unchanged where it matters:
+> markdown still 1 mixed (frozen by pin), index 22 mixed (19 pinned, 3 in-flight).
+> New capability: `--worktree` census surfaces 28 mixed — 7 unstaged edits the
+> commit-time guard structurally cannot see.
+> Status: DONE. Unpinned remainder is the 3 in-flight user files; operator's
+> and other agents' work untouched.

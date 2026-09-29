@@ -3,6 +3,45 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-09-30 — EOL program follow-ons: 11 shadowed docs recovered, CLAUDE.md gotchas, read-only EOL audit
+
+### Session summary
+- **Recovered 11 hand-authored docs (~115 KB) that `.gitignore` was silently hiding.**
+  The blanket patterns `*_INDEX.md`, `*_MASTER.md`, `*_SYSTEM_INDEX.md`, `ALL_*.md`
+  and `*_INVENTORY.md` matched them, and tracked files link to several — so those
+  references were broken for anyone cloning. `ROOT_DOCS_MASTER_INDEX.md` is cited by
+  4 tracked `.md`, `ALL_PLANS_AND_PROJECTS_MASTER.md` by 7. Added 11 exact-path
+  negations; the blanket patterns stay for genuinely generated output (verified: a
+  new `*_MASTER.md` is still ignored). Commit `8983c0a7b`.
+- **CLAUDE.md gotchas section** (+64/-0, CRLF to match the file). The MSYS ``-stripping
+  trap, the `write_file` field-order requirement, `str_replace`/`BACKUPS/` read limits,
+  `git add -u` for ignore-shadowed tracked files, pre-stage `i/` staleness, and the
+  never-`git add -A` rule now load with every agent session. Commit `ea42f3346`.
+- **`.githooks/eol_audit.py`** — read-only repo-wide EOL census, closing the gap left by
+  the staged-only commit-time guard. Full 3073-file census in ~1s via a single batched
+  `git cat-file --batch` pipe (the naive per-file version took 48s+ for 524 files).
+  README v3.6 documents usage and the pipe-deadlock constraint. Commit `8e12b1869`.
+
+### Census at close
+- Index: 22 mixed — 19 pinned and frozen by decision, 3 unpinned (`vision_fleet.py`,
+  `monetize-ai-engine/{database,server}.py`, all in-flight user work).
+- Worktree: 28 mixed — the extra 7 are unstaged in-progress edits, precisely the drift
+  the commit-time guard cannot see. This is what the new tool was built to expose.
+- Markdown: still 1 mixed (`FULL_REPO_AUDIT.md`, frozen by pin). Unchanged this session.
+- The 11 recovered docs entered with bytes untouched: 7 uniform-LF, 4 uniform-CRLF.
+  `core.autocrlf` is `false`, so the 4 are stable and left unpinned per audit section 2.
+
+### Compliance
+- Every edit backed up first and hash-verified; every splice assertion-first with a
+  byte-identical prefix proven before and after the write.
+- Additive only. Nothing deleted, no existing directive or line altered.
+- A stale 0-byte `.git/index.lock` blocked staging; confirmed no `git` writer process
+  (only long-lived `fsmonitor--daemon` helpers), snapshotted the index, then cleared it.
+  Index verified byte-identical afterward.
+- `read_files`/`str_replace` client-side failures worked around by shell + `write_file`,
+  per the documented quirk.
+
+
 ## 2026-09-29 (later) — Settlement #2 executed: DOCUMENTATION_AUTOMONETIZE_AI.md harmonized to LF — §9 program complete
 
 ### Session summary
