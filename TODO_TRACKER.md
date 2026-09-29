@@ -708,3 +708,11 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > backup kept, guard suite all-pass, solo commit `9a2b5f403`. Mixed-markdown census
 > 3 → 2. Status: 🟦 EXECUTED (§9 #4); program: #1/#3/#4 done, #2 bundled with
 > in-flight monetize work, #5 frozen by pin.
+
+## 📋 Session note — 2026-09-29 (settlement #2 executed — §9 program complete)
+
+> Append-only note — no tracker rows re-keyed or removed. §9 procedure end to end:
+> 1 stray CR removed (6234 → 6233 bytes; diff = 1 line), backup kept, guard suite
+> all-pass, solo commit `c6af20fbd`. **§9 program complete:** markdown mixedness
+> 5 → 1; sole remainder = FULL_REPO_AUDIT.md, frozen by pin (#5, by decision).
+> Status: 🟦 EXECUTED (§9 #2); user's in-flight monetize work untouched.
