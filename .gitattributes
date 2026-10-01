@@ -98,3 +98,4 @@ python/src/server/services/storage/storage_services.py -text
 # falsify a historical artifact. -text = byte-freeze (no filter, no
 # conversion, ever). See MD_EOL_AUDIT_2026-09-29.md section 9.
 _DOCS_ARCHIVE/master_docs/FULL_REPO_AUDIT.md -text
+START_EOL_WATCHDOG.bat text eol=crlf
