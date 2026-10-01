@@ -729,3 +729,12 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > commit-time guard structurally cannot see.
 > Status: DONE. Unpinned remainder is the 3 in-flight user files; operator's
 > and other agents' work untouched.
+
+> [2026-10-01] EOL program round 2: scheduled **EolWatchdog** (daily 07:30,
+> advisory) via `.githooks/eol_watchdog.py` + committed baseline
+> (3095 files, mixed=22, unpinned=3); drift exit 2 proven by doctored-baseline
+> tests; append-only CRLF `.githooks/eol_watchdog.log`; launcher
+> `.githooks/START_EOL_WATCHDOG.bat` pinned in `.gitattributes` (59 pins).
+> `.gitignore` sweep round 2: NO further negations needed (report:
+> `GITIGNORE_SWEEP_ROUND2_2026-10-01.md`); per-file ignore block categorized,
+> credentials stay ignored. Status: DONE.

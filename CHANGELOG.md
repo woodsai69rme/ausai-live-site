@@ -3,6 +3,39 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-10-01 — EOL watchdog scheduled + .gitignore sweep round 2 (no changes needed)
+
+### .gitignore sweep, round 2 (read-only; report committed)
+
+- Verified every non-negation wildcard in `.gitignore` that can match authored
+  file types. Round 1 (`8983c0a7b`) already re-admitted all 11 shadowed docs;
+  the 2 remaining `ALL_*.md` hits are generated vault dumps (correctly ignored),
+  `/X*/` matches only the `X:` drive mount, `tmp_v*.py` matches one-shot amend
+  scripts. **No further negations warranted; zero `.gitignore` edits this round.**
+- New: the explicit per-file ignore block (~lines 837-952, ~100 root files)
+  is categorized in `GITIGNORE_SWEEP_ROUND2_2026-10-01.md`: ~30 authored
+  docs/scripts (future re-admission candidates -- operator decision required),
+  credentials that must STAY ignored (`api_key_vault.json`, `vault.key`,
+  `MASTER_CONFIG.env`), and runtime/OS noise (correctly ignored).
+
+### EOL watchdog (advisory, scheduled)
+
+- `.githooks/eol_watchdog.py`: index census reusing `eol_audit.py` helpers
+  (single source of truth for classify), compared to committed baseline
+  `.githooks/eol_watchdog_baseline.json` (3095 files, mixed=22, unpinned=3),
+  appends one CRLF line to append-only `.githooks/eol_watchdog.log`
+  (gitignored `*.log`). Exit 0 = OK/improved, 1 = error, 2 = REGRESSION
+  (mixed count grew, or a NEW unpinned mixed file appeared). Advisory only:
+  commit-time enforcement stays with `eol_classify.py` + the Stage 0 guard.
+- Verified non-vacuous: doctored-baseline tests fire exit 2 both ways
+  (count regression; new unpinned mixed path), restore -> exit 0; log verified
+  CRLF-only. After any settlement lowers the mixed count: re-run `--init` and
+  commit the new baseline in the same commit.
+- Launcher `.githooks/START_EOL_WATCHDOG.bat` (CRLF, pinned
+  `text eol=crlf` in `.gitattributes` -- 59 pins now). Windows Task Scheduler
+  task **EolWatchdog** runs it daily 07:30 in log-only mode.
+- `.githooks/README.md` -> v3.7 documents the watchdog; census table
+  unchanged (index 22 mixed / worktree 28 / markdown 1).
 ## 2026-09-30 (b) — Guard test suite repaired: 2 stale tests now green, suite proven non-vacuous
 
 ### What was wrong (both were TEST defects, not guard regressions)
