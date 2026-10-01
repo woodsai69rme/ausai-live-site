@@ -1,0 +1,17 @@
+{
+  "primary": "n8n consultant Australia",
+  "long_tails": [
+    "n8n automation for small business Australia",
+    "hire n8n workflow consultant",
+    "n8n integration services Australia",
+    "AI automation with n8n",
+    "n8n consultant for business process automation"
+  ],
+  "intent": "buyer",
+  "cluster": "workflow automation services",
+  "related_questions": [
+    "What is n8n and how can it help my business?",
+    "How much does an n8n consultant cost in Australia?",
+    "Can n8n automate customer service workflows?"
+  ]
+}

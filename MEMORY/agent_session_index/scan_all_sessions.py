@@ -91,12 +91,13 @@ except Exception as e:
 oc_db = r"C:\Users\karma\.local\share\opencode\opencode.db"
 try:
     c = sqlite3.connect(oc_db)
-    rows = c.execute("SELECT id,title,time_created,time_updated,parent_id,directory,version,agent FROM session ORDER BY time_created").fetchall()
+    rows = c.execute("SELECT id,title,time_created,time_updated,parent_id,directory,version,agent,time_archived FROM session ORDER BY time_created").fetchall()
     for r in rows:
-        sid, title, tc, tu, parent, directory, ver, agent = r
+        sid, title, tc, tu, parent, directory, ver, agent, tarch = r
         nm = c.execute("SELECT COUNT(*) FROM message WHERE session_id=?", (sid,)).fetchone()[0]
         add("opencode", sid, title, tc, tu, directory, "opencode.db",
-            extra={"parent": parent, "version": ver, "agent": agent, "messages": nm},
+            extra={"parent": parent, "version": ver, "agent": agent, "messages": nm,
+                   "archived": bool(tarch)},
             bsize=None)  # per-session size unknown; DB-total size is not per-session
     c.close()
 except Exception as e:

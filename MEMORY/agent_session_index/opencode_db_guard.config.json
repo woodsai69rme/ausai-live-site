@@ -1,0 +1,5 @@
+{
+  "idle_days": 60,
+  "grace_days": 7,
+  "schedule_note": "schedule lives in schtasks task 'OpencodeDBGuard'; recreate with: schtasks /Create /TN OpencodeDBGuard /SC WEEKLY /D SUN /ST 04:00 /TR C:\\Users\\karma\\MEMORY\\agent_session_index\\run_opencode_db_guard.bat /F"
+}

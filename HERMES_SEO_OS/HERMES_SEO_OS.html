@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hermes SEO OS · Julian Goldie style</title>
+<style>
+:root {
+  --bg:#06080f; --panel:#0e1420; --border:#243049; --text:#e2e8f0;
+  --muted:#8b9cb3; --gold:#f5c542; --cyan:#22d3ee; --green:#22c55e; --purple:#a78bfa;
+  --mono: ui-monospace, Consolas, monospace; --sans: "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--sans); color: var(--text); min-height: 100vh;
+  background:
+    radial-gradient(ellipse 800px 400px at 15% 0%, rgba(245,197,66,.12), transparent 50%),
+    radial-gradient(ellipse 600px 400px at 90% 10%, rgba(167,139,250,.12), transparent 50%),
+    var(--bg);
+  padding: 20px;
+}
+.wrap { max-width: 1200px; margin: 0 auto; }
+header {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  align-items: center; margin-bottom: 20px;
+  border-bottom: 1px solid var(--border); padding-bottom: 14px;
+}
+h1 { font-family: var(--mono); font-size: 1.15rem; color: var(--gold); letter-spacing: .04em; }
+.sub { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn {
+  font-family: var(--mono); font-size: .75rem; padding: 8px 12px;
+  background: var(--panel); border: 1px solid var(--border); color: var(--text);
+  text-decoration: none; cursor: pointer;
+}
+.btn:hover { border-color: var(--gold); color: var(--gold); }
+.btn.primary { background: linear-gradient(135deg,#b45309,#a16207); border: none; color: #fff; }
+.grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+@media (max-width:900px){ .grid { grid-template-columns: 1fr; } }
+.card {
+  background: linear-gradient(180deg,#121a2a,var(--panel));
+  border: 1px solid var(--border); padding: 14px 16px;
+}
+.card h3 { font-family: var(--mono); font-size: .8rem; color: var(--cyan); text-transform: uppercase; margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: .88rem; margin-bottom: 10px; }
+.agent {
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 6px 0; border-bottom: 1px solid rgba(36,48,73,.6); font-size: .82rem;
+}
+.agent b { font-family: var(--mono); color: var(--gold); min-width: 1.5rem; }
+.cmd {
+  font-family: var(--mono); font-size: .75rem; background: #05070c;
+  border: 1px solid var(--border); padding: 8px 10px; color: #9fe8c2; margin: 6px 0;
+  display: flex; justify-content: space-between; gap: 8px; align-items: center;
+}
+.cmd button {
+  font-family: var(--mono); font-size: .68rem; background: #1a2333;
+  border: 1px solid var(--border); color: var(--cyan); padding: 4px 8px; cursor: pointer;
+}
+.flow {
+  font-family: var(--mono); font-size: .78rem; color: var(--muted);
+  line-height: 1.7; background: #05070c; border: 1px solid var(--border); padding: 12px; margin-top: 8px;
+}
+.tag { display: inline-block; font-family: var(--mono); font-size: .65rem; border: 1px solid var(--border);
+  padding: 2px 6px; color: var(--muted); margin: 0 4px 4px 0; }
+.tag.ok { color: var(--green); border-color: rgba(34,197,94,.4); }
+footer { margin-top: 24px; font-family: var(--mono); font-size: .7rem; color: var(--muted); }
+.toast {
+  position: fixed; bottom: 16px; right: 16px; background: #0f172a; border: 1px solid var(--gold);
+  padding: 10px 14px; font-family: var(--mono); font-size: .78rem; opacity: 0; transition: .2s;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>⚡ Hermes SEO OS</h1>
+      <div class="sub">Julian Goldie–style multi-agent SEO · local Hermes + OpenClaw + Ollama/OpenRouter free</div>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="../LAUNCH_HERMES_SEO_OS.bat">Launcher (run .bat)</a>
+      <a class="btn" href="../PORTAL_WAR_ROOM.html">Portal War Room</a>
+      <a class="btn" href="../SEO_CONTENT_CALENDAR.md">90-day calendar</a>
+      <a class="btn" href="https://ausailive.vercel.app/" target="_blank" rel="noopener">AusAI site</a>
+      <a class="btn" href="https://www.youtube.com/results?search_query=Julian+Goldie+Hermes+Agent+OS+SEO" target="_blank" rel="noopener">Goldie videos</a>
+    </div>
+  </header>
+
+  <div class="grid" style="margin-bottom:14px">
+    <div class="card">
+      <h3>What this is</h3>
+      <p>Mission control for SEO agents: keyword → ranked-ready draft → social → YouTube → outreach → publish checklist. Same idea as Goldie’s Hermes OS, adapted to your free local stack.</p>
+      <span class="tag ok">Hermes</span>
+      <span class="tag ok">OpenClaw</span>
+      <span class="tag ok">12 agents</span>
+      <span class="tag ok">Outbox drafts</span>
+    </div>
+    <div class="card">
+      <h3>Stack map</h3>
+      <p><b style="color:var(--text)">Brain:</b> Ollama + OpenRouter free<br>
+         <b style="color:var(--text)">Hands:</b> Hermes agent CLI<br>
+         <b style="color:var(--text)">Gateway:</b> OpenClaw :18789<br>
+         <b style="color:var(--text)">Memory:</b> memory/BRAND_VOICE.md<br>
+         <b style="color:var(--text)">Money:</b> AusAI offers + Fiverr/Gumroad CTAs</p>
+    </div>
+    <div class="card">
+      <h3>Run pipeline</h3>
+      <div class="cmd"><span>LAUNCH_HERMES_SEO_OS.bat</span><button type="button" data-c="HERMES_SEO_OS\LAUNCH_HERMES_SEO_OS.bat">Copy</button></div>
+      <div class="cmd"><span>python HERMES_SEO_OS\pipeline\seo_pipeline.py -k "n8n consultant Australia"</span><button type="button" data-c="python HERMES_SEO_OS\pipeline\seo_pipeline.py --keyword &quot;n8n consultant Australia&quot;">Copy</button></div>
+      <div class="cmd"><span>python ... --from-bank 0</span><button type="button" data-c="python HERMES_SEO_OS\pipeline\seo_pipeline.py --from-bank 0">Copy</button></div>
+      <div class="cmd"><span>python ... --list-outbox</span><button type="button" data-c="python HERMES_SEO_OS\pipeline\seo_pipeline.py --list-outbox">Copy</button></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card" style="grid-column: span 2;">
+      <h3>12-agent swarm</h3>
+      <div class="agent"><b>01</b><span><b>Keyword scout</b> — long-tails + intent JSON</span></div>
+      <div class="agent"><b>02</b><span><b>SERP strategist</b> — outline that can rank</span></div>
+      <div class="agent"><b>03</b><span><b>Brand memory</b> — AusAI offers / CTAs / proof bank</span></div>
+      <div class="agent"><b>04</b><span><b>Content writer</b> — 1200+ word draft</span></div>
+      <div class="agent"><b>05</b><span><b>SEO editor</b> — title, meta, FAQ, schema hints</span></div>
+      <div class="agent"><b>06</b><span><b>Internal linker</b> — site + cluster links</span></div>
+      <div class="agent"><b>07</b><span><b>Social clipper</b> — LinkedIn / Reddit / X</span></div>
+      <div class="agent"><b>08</b><span><b>YouTube scripter</b> — Shorts + long-form (Goldie energy, truthful)</span></div>
+      <div class="agent"><b>09</b><span><b>Backlink scout</b> — outreach targets + DM</span></div>
+      <div class="agent"><b>10</b><span><b>Publisher</b> — human publish checklist</span></div>
+      <div class="agent"><b>11</b><span><b>Indexer</b> — GSC / sitemap steps</span></div>
+      <div class="agent"><b>12</b><span><b>QA auditor</b> — E-E-A-T + spam risk</span></div>
+    </div>
+    <div class="card">
+      <h3>Goldie loop</h3>
+      <div class="flow">
+keyword<br>
+→ research / outline<br>
+→ write article<br>
+→ SEO pack + social<br>
+→ YouTube + outreach<br>
+→ <b style="color:var(--gold)">human edit</b><br>
+→ publish + index<br>
+→ repeat 3× / week
+      </div>
+      <p style="margin-top:12px">No auto live-publish by default (spam-safe). Outbox only until you approve.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Seed keywords (AusAI bank)</h3>
+    <p>Use <code>--from-bank N</code> or pick from calendar.</p>
+    <span class="tag">AI automation consultant Australia</span>
+    <span class="tag">n8n consultant</span>
+    <span class="tag">Zapier vs n8n</span>
+    <span class="tag">AI chatbot for small business</span>
+    <span class="tag">ComfyUI workflow RTX 4060</span>
+    <span class="tag">AI music video generator</span>
+    <span class="tag">business automation Australia</span>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Files</h3>
+    <div class="cmd"><span>HERMES_SEO_OS\README.md</span><button type="button" data-c="HERMES_SEO_OS\README.md">Copy path</button></div>
+    <div class="cmd"><span>HERMES_SEO_OS\agents\SWARM.md</span><button type="button" data-c="HERMES_SEO_OS\agents\SWARM.md">Copy path</button></div>
+    <div class="cmd"><span>HERMES_SEO_OS\memory\BRAND_VOICE.md</span><button type="button" data-c="HERMES_SEO_OS\memory\BRAND_VOICE.md">Copy path</button></div>
+    <div class="cmd"><span>HERMES_SEO_OS\outbox\</span><button type="button" data-c="HERMES_SEO_OS\outbox">Copy path</button></div>
+  </div>
+
+  <footer>
+    Inspired by Julian Goldie SEO (Hermes Agent OS / OpenClaw) · Implemented local-first for AusAI Tech · Golden Rules enforced
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},1600); }
+  document.addEventListener('click', function(e){
+    var b=e.target; if(!b.getAttribute || !b.getAttribute('data-c')) return;
+    var txt=b.getAttribute('data-c');
+    if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){toast('Copied');});
+    else toast(txt);
+  });
+})();
+</script>
+</body>
+</html>

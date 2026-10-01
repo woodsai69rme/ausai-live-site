@@ -1,0 +1,77 @@
+{
+  "keyword": "n8n consultant",
+  "started": "2026-07-15T11:12:32",
+  "brand": "AusAI Tech",
+  "site_url": "https://ausailive.vercel.app",
+  "dry_run": false,
+  "stages": [
+    {
+      "name": "keyword_scout",
+      "ok": true,
+      "note": "",
+      "ts": 1784078276.1849475
+    },
+    {
+      "name": "serp_strategist",
+      "ok": true,
+      "note": "",
+      "ts": 1784078301.5232584
+    },
+    {
+      "name": "content_writer",
+      "ok": true,
+      "note": "708 words approx",
+      "ts": 1784078320.9530416
+    },
+    {
+      "name": "seo_editor",
+      "ok": true,
+      "note": "",
+      "ts": 1784078331.9902482
+    },
+    {
+      "name": "internal_linker",
+      "ok": true,
+      "note": "",
+      "ts": 1784078331.990688
+    },
+    {
+      "name": "social_clipper",
+      "ok": true,
+      "note": "",
+      "ts": 1784078354.793632
+    },
+    {
+      "name": "youtube_scripter",
+      "ok": true,
+      "note": "",
+      "ts": 1784078374.0727506
+    },
+    {
+      "name": "backlink_scout",
+      "ok": true,
+      "note": "",
+      "ts": 1784078374.0731213
+    },
+    {
+      "name": "publisher",
+      "ok": true,
+      "note": "",
+      "ts": 1784078374.073492
+    },
+    {
+      "name": "indexer",
+      "ok": true,
+      "note": "",
+      "ts": 1784078374.073875
+    },
+    {
+      "name": "qa_auditor",
+      "ok": true,
+      "note": "",
+      "ts": 1784078386.2711067
+    }
+  ],
+  "finished": "2026-07-15T11:19:46",
+  "outbox": "C:\\Users\\karma\\HERMES_SEO_OS\\outbox\\20260715_111232__n8n-consultant"
+}

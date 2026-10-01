@@ -1,0 +1,20 @@
+{
+  "updated": "2026-07-15",
+  "seed_keywords": [
+    {"kw": "AI automation consultant Australia", "intent": "buyer", "cluster": "pillar"},
+    {"kw": "n8n consultant", "intent": "buyer", "cluster": "tools"},
+    {"kw": "Zapier vs n8n", "intent": "comparison", "cluster": "tools"},
+    {"kw": "business automation Australia", "intent": "buyer", "cluster": "pillar"},
+    {"kw": "AI chatbot for small business", "intent": "buyer", "cluster": "chatbot"},
+    {"kw": "automate invoice processing", "intent": "how-to", "cluster": "process"},
+    {"kw": "AI automation for real estate agents", "intent": "industry", "cluster": "industry"},
+    {"kw": "ComfyUI workflow RTX 4060", "intent": "product", "cluster": "product"},
+    {"kw": "AI music video generator", "intent": "product", "cluster": "product"},
+    {"kw": "local SEO automation consultant", "intent": "local", "cluster": "local"}
+  ],
+  "negative_keywords": [
+    "free cracked",
+    "download full movie",
+    "hack"
+  ]
+}

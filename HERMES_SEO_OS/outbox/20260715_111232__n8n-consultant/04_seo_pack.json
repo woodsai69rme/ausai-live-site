@@ -1,0 +1,35 @@
+```json
+{
+  "title_tag": "Unlock Business Growth with n8n Automation",
+  "meta_description": "Learn how AusAI Tech can help you streamline operations, reduce costs, and increase efficiency with n8n automation. Book a free 30-minute AI audit today!",
+  "slug": "unlock-business-growth-with-n8n-automation",
+  "h1": "Harness the Power of n8n for Seamless Business Automation",
+  "primary_keyword": "n8n consultant",
+  "secondary_keywords": ["business automation", "AusAI Tech", "local expertise", "custom solutions"],
+  "faq": [
+    {
+      "q": "What is n8n and how does it work?",
+      "a": "n8n is a powerful automation tool that allows users to create workflows using a simple drag-and-drop interface. With n8n, you can automate repetitive tasks, integrate different applications, and streamline your business processes."
+    },
+    {
+      "q": "How can AusAI Tech help me with my business automation needs?",
+      "a": "Our team of experts will assess your current processes, identify areas for improvement, and design custom solutions tailored to your specific requirements. We'll work closely with you to ensure that our solutions are not only effective but also easy to use."
+    },
+    {
+      "q": "What services does AusAI Tech offer in addition to n8n?",
+      "a": "We provide a range of services including AI chatbot setup, portfolio website development, and strategy hours focused on architecture and ROI optimization. Our goal is to support your business from end-to-end."
+    },
+    {
+      "q": "How much does it cost to work with AusAI Tech?",
+      "a": "Our pricing is competitive and includes various packages such as AI audits, AI chatbot setups, n8n automation bundles, and more. Contact us for a detailed quote tailored to your needs."
+    },
+    {
+      "q": "What sets AusAI Tech apart from other n8n consultants?",
+      "a": "We focus on local expertise and offer services that are specifically designed to meet the unique challenges faced by Australian businesses. Our team has extensive experience in AI automation and is committed to delivering practical, no-hype solutions."
+    }
+  ],
+  "schema_types": ["Article", "FAQPage"],
+  "og_title": "Unlock Business Growth with n8n Automation",
+  "og_description": "Learn how AusAI Tech can help you streamline operations, reduce costs, and increase efficiency with n8n automation. Book a free 30-minute AI audit today!"
+}
+```

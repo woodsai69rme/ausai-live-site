@@ -729,6 +729,20 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > commit-time guard structurally cannot see.
 > Status: DONE. Unpinned remainder is the 3 in-flight user files; operator's
 > and other agents' work untouched.
+## Session note — 2026-09-30 (OpenCode session audit + DB cleanup program)
+
+> Append-only note — no tracker rows re-keyed or removed. Reviewed all 144 opencode
+> sessions (12k msgs), then executed full cleanup: 18.3GB stale pre_clean deleted,
+> 73 sessions soft-archived (36 dupes/trivial + 21 stale + 16 orphans), 2 mega-sessions
+> exported (210MB JSON) and archived, hard purge removed 8,025 msgs / 29,236 parts /
+> 3,444 events after identifying the real bloat whale (event journal = 340MB, RTX
+> session 240MB); VACUUM took DB 597MB -> 215MB, integrity ok. Scanner patched to
+> record `archived` flag; re-index 2,067 records (opencode 145 = 88 archived/57 active).
+> New weekly scheduled task **OpencodeDBGuard** (Sun 04:00) archives >60d-idle sessions,
+> purges archived >7d with gzip backup, vacuums offline, prunes stale backups; dry-run
+> verified. Backups hash-verified in `MEMORY/agent_session_index/archive_2026-09-22/`
+> and `archive_2026-09-30/`. Status: DONE. User in-flight work untouched; all archive
+> ops reversible via `time_archived=NULL` or `opencode import`.
 
 > [2026-10-01] EOL program round 2: scheduled **EolWatchdog** (daily 07:30,
 > advisory) via `.githooks/eol_watchdog.py` + committed baseline
@@ -738,3 +752,11 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > `.gitignore` sweep round 2: NO further negations needed (report:
 > `GITIGNORE_SWEEP_ROUND2_2026-10-01.md`); per-file ignore block categorized,
 > credentials stay ignored. Status: DONE.
+> [2026-10-01] OpenCode program follow-on: event-journal keep-latest dedup
+> (-82.4MB wilson + -30MB global, 7 sessions, 5 skipped conservative, gzip
+> backups first, integrity ok after each pass); event table 340MB -> 13.6MB;
+> VACUUM #2 236MB -> 125MB (program total 597 -> 125MB). RTX mega got 8 NEW
+> messages overnight post-archive -- un-archived to protect them (active 28 /
+> archived 87). No other opencode installs on C:/X: (guard = single machine,
+> ships via repo). Guard thresholds moved to opencode_db_guard.config.json
+> (60d idle / 7d grace; schedule = schtasks OpencodeDBGuard). Status: DONE.

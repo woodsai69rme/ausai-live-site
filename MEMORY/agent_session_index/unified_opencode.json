@@ -12,7 +12,8 @@
       "parent": null,
       "version": "1.1.28",
       "agent": null,
-      "messages": 18
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -28,7 +29,8 @@
       "parent": "ses_41e57dd0effedxR59gWDQCs61L",
       "version": "1.1.28",
       "agent": null,
-      "messages": 22
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -44,7 +46,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": null,
-      "messages": 181
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -60,7 +63,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": null,
-      "messages": 4
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -76,7 +80,8 @@
       "parent": "ses_395fcd00affe7DVBQi2TcyHnLp",
       "version": "1.2.6",
       "agent": null,
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -92,7 +97,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": null,
-      "messages": 285
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -108,7 +114,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": null,
-      "messages": 23
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -124,7 +131,8 @@
       "parent": "ses_39558c59fffe3q3UG7537jGlj4",
       "version": "1.2.6",
       "agent": null,
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -140,7 +148,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": "build",
-      "messages": 76
+      "messages": 76,
+      "archived": false
     }
   },
   {
@@ -156,7 +165,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": null,
-      "messages": 233
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -172,7 +182,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": "build",
-      "messages": 103
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -188,7 +199,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": null,
-      "messages": 17
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -204,7 +216,8 @@
       "parent": null,
       "version": "1.2.6",
       "agent": null,
-      "messages": 247
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -220,7 +233,8 @@
       "parent": "ses_348bfa457ffe8Up6Oo7qD45YBe",
       "version": "1.2.6",
       "agent": null,
-      "messages": 14
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -236,7 +250,8 @@
       "parent": "ses_348bfa457ffe8Up6Oo7qD45YBe",
       "version": "1.2.6",
       "agent": null,
-      "messages": 9
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -252,7 +267,8 @@
       "parent": null,
       "version": "1.2.21",
       "agent": null,
-      "messages": 750
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -268,7 +284,8 @@
       "parent": null,
       "version": "1.2.21",
       "agent": "build",
-      "messages": 1100
+      "messages": 1100,
+      "archived": false
     }
   },
   {
@@ -284,7 +301,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 83
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -300,7 +318,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 158
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -316,7 +335,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 74
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -332,7 +352,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 120
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -348,7 +369,8 @@
       "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
       "version": "1.2.27",
       "agent": null,
-      "messages": 6
+      "messages": 6,
+      "archived": false
     }
   },
   {
@@ -364,7 +386,8 @@
       "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
       "version": "1.2.27",
       "agent": null,
-      "messages": 19
+      "messages": 19,
+      "archived": false
     }
   },
   {
@@ -380,7 +403,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 231
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -396,7 +420,8 @@
       "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
       "version": "1.2.27",
       "agent": null,
-      "messages": 8
+      "messages": 8,
+      "archived": false
     }
   },
   {
@@ -412,7 +437,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 4
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -428,7 +454,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 6
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -444,7 +471,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 5
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -460,7 +488,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 4
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -476,7 +505,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 6
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -492,7 +522,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 6
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -508,7 +539,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 14
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -524,7 +556,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 10
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -540,7 +573,8 @@
       "parent": "ses_2f2abdc37ffe2KdtFo7G4ADUuu",
       "version": "1.2.27",
       "agent": null,
-      "messages": 6
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -556,7 +590,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 13
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -572,7 +607,8 @@
       "parent": "ses_265eb9872ffesxF7MuH3sbmreJ",
       "version": "1.2.27",
       "agent": null,
-      "messages": 11
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -588,7 +624,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 4
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -604,7 +641,8 @@
       "parent": "ses_25f9b448affeQFD2WuDzV6PfNw",
       "version": "1.2.27",
       "agent": null,
-      "messages": 19
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -620,7 +658,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": null,
-      "messages": 42
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -636,7 +675,8 @@
       "parent": null,
       "version": "1.2.27",
       "agent": "build",
-      "messages": 60
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -652,7 +692,8 @@
       "parent": null,
       "version": "1.14.23",
       "agent": "build",
-      "messages": 459
+      "messages": 459,
+      "archived": false
     }
   },
   {
@@ -668,7 +709,8 @@
       "parent": "ses_38eca5b03ffeKGIF7o4alRcJ8m",
       "version": "1.14.28",
       "agent": null,
-      "messages": 3
+      "messages": 3,
+      "archived": false
     }
   },
   {
@@ -684,7 +726,8 @@
       "parent": null,
       "version": "1.14.31",
       "agent": "build",
-      "messages": 1977
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -700,7 +743,8 @@
       "parent": null,
       "version": "1.14.31",
       "agent": null,
-      "messages": 15
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -716,7 +760,8 @@
       "parent": null,
       "version": "1.17.7",
       "agent": "build",
-      "messages": 4
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -732,7 +777,8 @@
       "parent": null,
       "version": "1.17.7",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -748,7 +794,8 @@
       "parent": null,
       "version": "1.17.7",
       "agent": "build",
-      "messages": 2842
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -764,7 +811,8 @@
       "parent": "ses_33149b895ffegKHSMC0FF5kHdH",
       "version": "local",
       "agent": "explore",
-      "messages": 2
+      "messages": 2,
+      "archived": false
     }
   },
   {
@@ -780,7 +828,8 @@
       "parent": null,
       "version": "1.17.7",
       "agent": "build",
-      "messages": 10
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -796,7 +845,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.8",
       "agent": "general",
-      "messages": 3
+      "messages": 3,
+      "archived": true
     }
   },
   {
@@ -812,7 +862,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.10",
       "agent": "general",
-      "messages": 2
+      "messages": 2,
+      "archived": true
     }
   },
   {
@@ -828,7 +879,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.11",
       "agent": "general",
-      "messages": 5
+      "messages": 5,
+      "archived": true
     }
   },
   {
@@ -844,7 +896,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.11",
       "agent": "general",
-      "messages": 5
+      "messages": 5,
+      "archived": true
     }
   },
   {
@@ -860,7 +913,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.11",
       "agent": "general",
-      "messages": 17
+      "messages": 17,
+      "archived": true
     }
   },
   {
@@ -876,7 +930,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.11",
       "agent": "general",
-      "messages": 7
+      "messages": 7,
+      "archived": true
     }
   },
   {
@@ -892,7 +947,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "local",
       "agent": "general",
-      "messages": 3
+      "messages": 3,
+      "archived": true
     }
   },
   {
@@ -908,7 +964,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "local",
       "agent": "general",
-      "messages": 5
+      "messages": 5,
+      "archived": true
     }
   },
   {
@@ -924,7 +981,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "local",
       "agent": "general",
-      "messages": 4
+      "messages": 4,
+      "archived": true
     }
   },
   {
@@ -940,7 +998,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.11",
       "agent": "general",
-      "messages": 6
+      "messages": 6,
+      "archived": true
     }
   },
   {
@@ -956,7 +1015,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.15",
       "agent": "explore",
-      "messages": 8
+      "messages": 8,
+      "archived": true
     }
   },
   {
@@ -972,7 +1032,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.15",
       "agent": "general",
-      "messages": 4
+      "messages": 4,
+      "archived": true
     }
   },
   {
@@ -988,7 +1049,8 @@
       "parent": "ses_1307695a5ffeaWY5EymC0plGjw",
       "version": "1.17.18",
       "agent": "explore",
-      "messages": 5
+      "messages": 5,
+      "archived": true
     }
   },
   {
@@ -1004,7 +1066,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 23
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1020,7 +1083,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 7
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1036,7 +1100,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 21
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1052,7 +1117,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 9
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1068,7 +1134,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 7
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1084,7 +1151,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 6
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1100,7 +1168,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 7
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1116,7 +1185,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 6
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1132,7 +1202,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 61
+      "messages": 61,
+      "archived": false
     }
   },
   {
@@ -1148,7 +1219,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 15
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1164,7 +1236,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 5
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1180,7 +1253,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 15
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1196,7 +1270,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 14
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1212,7 +1287,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 15
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1228,7 +1304,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 6
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1244,7 +1321,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 16
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1260,7 +1338,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 48
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1276,7 +1355,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 3
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1292,7 +1372,8 @@
       "parent": null,
       "version": "local",
       "agent": "build",
-      "messages": 15
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1300,7 +1381,7 @@
     "session_id": "ses_069f108a8ffeLi9r7dUqbCe0j1",
     "title": "Wild Turkey platform architecture and MVP",
     "created": "2026-07-24T21:36:31.063000+00:00",
-    "updated": "2026-09-22T10:01:21.605000+00:00",
+    "updated": "2026-09-29T19:03:48.452000+00:00",
     "path": "X:/GITHUBREPO",
     "format": "opencode.db",
     "bytes": null,
@@ -1308,7 +1389,8 @@
       "parent": null,
       "version": "1.18.4",
       "agent": "build",
-      "messages": 45
+      "messages": 47,
+      "archived": false
     }
   },
   {
@@ -1324,7 +1406,8 @@
       "parent": null,
       "version": "1.18.14",
       "agent": "build",
-      "messages": 512
+      "messages": 512,
+      "archived": false
     }
   },
   {
@@ -1340,7 +1423,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 9
+      "messages": 9,
+      "archived": false
     }
   },
   {
@@ -1356,7 +1440,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 18
+      "messages": 18,
+      "archived": false
     }
   },
   {
@@ -1372,7 +1457,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 33
+      "messages": 33,
+      "archived": false
     }
   },
   {
@@ -1388,7 +1474,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 18
+      "messages": 18,
+      "archived": false
     }
   },
   {
@@ -1404,7 +1491,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 19
+      "messages": 19,
+      "archived": false
     }
   },
   {
@@ -1420,7 +1508,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 2
+      "messages": 2,
+      "archived": false
     }
   },
   {
@@ -1436,7 +1525,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 2
+      "messages": 2,
+      "archived": false
     }
   },
   {
@@ -1452,7 +1542,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 36
+      "messages": 36,
+      "archived": false
     }
   },
   {
@@ -1468,7 +1559,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 16
+      "messages": 16,
+      "archived": false
     }
   },
   {
@@ -1484,7 +1576,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 28
+      "messages": 28,
+      "archived": false
     }
   },
   {
@@ -1500,7 +1593,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 16
+      "messages": 16,
+      "archived": false
     }
   },
   {
@@ -1516,7 +1610,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 22
+      "messages": 22,
+      "archived": false
     }
   },
   {
@@ -1532,7 +1627,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 17
+      "messages": 17,
+      "archived": false
     }
   },
   {
@@ -1548,7 +1644,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 20
+      "messages": 20,
+      "archived": false
     }
   },
   {
@@ -1564,7 +1661,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 16
+      "messages": 16,
+      "archived": false
     }
   },
   {
@@ -1580,7 +1678,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 10
+      "messages": 10,
+      "archived": false
     }
   },
   {
@@ -1596,7 +1695,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 10
+      "messages": 10,
+      "archived": false
     }
   },
   {
@@ -1612,7 +1712,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 21
+      "messages": 21,
+      "archived": false
     }
   },
   {
@@ -1628,7 +1729,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 21
+      "messages": 21,
+      "archived": false
     }
   },
   {
@@ -1644,7 +1746,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 13
+      "messages": 13,
+      "archived": false
     }
   },
   {
@@ -1660,7 +1763,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 14
+      "messages": 14,
+      "archived": false
     }
   },
   {
@@ -1676,7 +1780,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 14
+      "messages": 14,
+      "archived": false
     }
   },
   {
@@ -1692,7 +1797,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 15
+      "messages": 15,
+      "archived": false
     }
   },
   {
@@ -1708,7 +1814,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 8
+      "messages": 8,
+      "archived": false
     }
   },
   {
@@ -1724,7 +1831,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 10
+      "messages": 10,
+      "archived": false
     }
   },
   {
@@ -1740,7 +1848,8 @@
       "parent": "ses_01b9b03eeffegjHwX8qFR3i6fx",
       "version": "1.18.18",
       "agent": "explore",
-      "messages": 8
+      "messages": 8,
+      "archived": false
     }
   },
   {
@@ -1756,7 +1865,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 62
+      "messages": 62,
+      "archived": false
     }
   },
   {
@@ -1772,7 +1882,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1788,7 +1899,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 7
+      "messages": 7,
+      "archived": false
     }
   },
   {
@@ -1804,7 +1916,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 178
+      "messages": 178,
+      "archived": false
     }
   },
   {
@@ -1820,7 +1933,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 94
+      "messages": 94,
+      "archived": false
     }
   },
   {
@@ -1836,7 +1950,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 41
+      "messages": 41,
+      "archived": false
     }
   },
   {
@@ -1852,7 +1967,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1868,7 +1984,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1884,7 +2001,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 1
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1900,7 +2018,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1916,7 +2035,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1932,7 +2052,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1948,7 +2069,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1964,7 +2086,8 @@
       "parent": null,
       "version": "1.18.18",
       "agent": "build",
-      "messages": 2
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -1972,7 +2095,7 @@
     "session_id": "ses_fe0d8d74bffe574nkCKjX4n0Qx",
     "title": "TellemThatsMe Studio OS specification",
     "created": "2026-08-20T12:30:55.156000+00:00",
-    "updated": "2026-09-22T10:00:01.936000+00:00",
+    "updated": "2026-09-30T10:58:34.546000+00:00",
     "path": "C:/Users/karma",
     "format": "opencode.db",
     "bytes": null,
@@ -1980,7 +2103,8 @@
       "parent": null,
       "version": "1.18.19",
       "agent": "build",
-      "messages": 430
+      "messages": 448,
+      "archived": false
     }
   },
   {
@@ -1996,7 +2120,8 @@
       "parent": null,
       "version": "1.18.19",
       "agent": "build",
-      "messages": 26
+      "messages": 26,
+      "archived": false
     }
   },
   {
@@ -2012,7 +2137,8 @@
       "parent": null,
       "version": "1.18.19",
       "agent": "build",
-      "messages": 11
+      "messages": 11,
+      "archived": false
     }
   },
   {
@@ -2028,7 +2154,8 @@
       "parent": null,
       "version": "1.18.19",
       "agent": "build",
-      "messages": 58
+      "messages": 58,
+      "archived": false
     }
   },
   {
@@ -2044,7 +2171,8 @@
       "parent": null,
       "version": "1.18.21",
       "agent": "build",
-      "messages": 12
+      "messages": 12,
+      "archived": false
     }
   },
   {
@@ -2060,7 +2188,8 @@
       "parent": null,
       "version": "1.18.19",
       "agent": "build",
-      "messages": 77
+      "messages": 77,
+      "archived": false
     }
   },
   {
@@ -2076,7 +2205,8 @@
       "parent": null,
       "version": "1.18.19",
       "agent": "build",
-      "messages": 26
+      "messages": 26,
+      "archived": false
     }
   },
   {
@@ -2092,7 +2222,8 @@
       "parent": null,
       "version": "1.18.22",
       "agent": "build",
-      "messages": 8
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -2108,7 +2239,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 4
+      "messages": 4,
+      "archived": false
     }
   },
   {
@@ -2124,7 +2256,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 18
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -2140,7 +2273,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 17
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -2156,7 +2290,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 29
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -2172,7 +2307,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 25
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -2188,7 +2324,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 17
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -2204,7 +2341,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 20
+      "messages": 0,
+      "archived": true
     }
   },
   {
@@ -2220,7 +2358,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 90
+      "messages": 90,
+      "archived": false
     }
   },
   {
@@ -2236,7 +2375,8 @@
       "parent": null,
       "version": "1.18.23",
       "agent": "build",
-      "messages": 81
+      "messages": 81,
+      "archived": false
     }
   },
   {
@@ -2252,7 +2392,8 @@
       "parent": null,
       "version": "1.18.25",
       "agent": "build",
-      "messages": 14
+      "messages": 14,
+      "archived": false
     }
   },
   {
@@ -2268,7 +2409,8 @@
       "parent": null,
       "version": "1.18.31",
       "agent": "build",
-      "messages": 20
+      "messages": 20,
+      "archived": false
     }
   },
   {
@@ -2284,7 +2426,8 @@
       "parent": null,
       "version": "1.18.31",
       "agent": "build",
-      "messages": 2
+      "messages": 2,
+      "archived": false
     }
   },
   {
@@ -2300,7 +2443,8 @@
       "parent": null,
       "version": "1.18.31",
       "agent": "build",
-      "messages": 130
+      "messages": 130,
+      "archived": false
     }
   },
   {
@@ -2308,7 +2452,7 @@
     "session_id": "ses_f3b74ef50ffeMR04pjRODHvyqf",
     "title": "Opencode sessions summary & status review",
     "created": "2026-09-21T15:17:23.247000+00:00",
-    "updated": "2026-09-21T17:26:02.786000+00:00",
+    "updated": "2026-09-30T11:14:58.668000+00:00",
     "path": "C:/Users/karma",
     "format": "opencode.db",
     "bytes": null,
@@ -2316,7 +2460,8 @@
       "parent": null,
       "version": "1.18.31",
       "agent": "build",
-      "messages": 30
+      "messages": 60,
+      "archived": false
     }
   }
 ]
