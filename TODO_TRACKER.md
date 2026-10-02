@@ -760,3 +760,18 @@ append-only JSONL log; verified: wrapper PASS 2071 ms, original bundle FAIL
 > archived 87). No other opencode installs on C:/X: (guard = single machine,
 > ships via repo). Guard thresholds moved to opencode_db_guard.config.json
 > (60d idle / 7d grace; schedule = schtasks OpencodeDBGuard). Status: DONE.
+
+> [2026-10-02] EOL restitution: commit e739ae137 (opencode db-guard)
+> was committed from the stale shared index and silently dropped the six
+> round-2 EOL artifacts from the TREE (watchdog trio, round-2 report,
+> .gitattributes pin, .githooks/README.md v3.7 section). All six verified
+> intact in the worktree (hash-object == committed blob); re-admitted
+> additively as 6fd680a12 via temp-index plumbing (249 insertions, 0
+> deletions). Shared index then refreshed to HEAD (git reset -- <six
+> paths, index-only, worktree untouched) so no future commit from any
+> agent can re-delete them; standing rule: refresh the shared index after
+> any temp-index commit. Watchdog ran OK 2026-10-02 07:30:18 (mixed=22,
+> unpinned=3, files=3098). Open advisory: NEW unpinned mixed
+> monetize-ai-engine/server.py (REGRESSION 2026-10-01 23:38, advisory
+> only; settlement deferred -- another agent's active work area).
+> Status: DONE (restitution); ADVISORY OPEN (server.py).

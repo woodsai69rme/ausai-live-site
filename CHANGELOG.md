@@ -3,6 +3,49 @@
 > Human-readable history of the local AI fleet at `C:\Users\karma\`.
 > For the raw append-only tracker, see `TODO_TRACKER.md`.
 
+## 2026-10-02 — Restitution: e739ae137 dropped the round-2 EOL artifacts; re-admitted as 6fd680a12
+
+### Incident (tree-only deletion; nothing lost)
+
+- `e739ae137` (opencode db-guard work) was committed from the shared
+  index, which still lacked the round-2 EOL artifacts (they had
+  landed via temp-index plumbing, so the shared index never saw
+  them). Its tree silently dropped all six:
+  `.githooks/eol_watchdog.py`, `.githooks/START_EOL_WATCHDOG.bat`,
+  `.githooks/eol_watchdog_baseline.json`,
+  `GITIGNORE_SWEEP_ROUND2_2026-10-01.md`, the
+  `START_EOL_WATCHDOG.bat text eol=crlf` pin in `.gitattributes`,
+  and the v3.7 watchdog section of `.githooks/README.md`.
+- All six survived untouched in the worktree: `git hash-object` ==
+  the committed blob for each (watchdog.py `90c64b70`, launcher
+  `cd3df14a`, baseline `2adbf1b5`, report `81a25608`, README
+  `42fa3d26`); `.gitattributes` byte-identical to `34533a852`'s
+  version. Golden Rules upheld: nothing deleted, all files permanent.
+
+### Restitution — 6fd680a12 (additive: 249 insertions, 0 deletions)
+
+- Re-admitted all six via temp-index plumbing (`GIT_INDEX_FILE`), so
+  the stale shared index could not clobber them again; worktree blobs
+  re-verified identical before and after.
+- Root cause is structural: a commit from a stale shared index reverts
+  whatever the index never saw. Fix applied this session: refreshed the
+  shared index to HEAD (`git reset -- <six paths>`, index-only,
+  worktree untouched) — the next commit from any agent cannot
+  re-delete the artifacts. Standing rule: after any temp-index commit,
+  refresh the shared index before another agent commits.
+
+### Watchdog health + open advisory
+
+- Scheduled task **EolWatchdog** ran 2026-10-02 07:30:18: OK
+  (mixed=22, unpinned=3, files=3098, sha=136f33caa035); log remains
+  append-only CRLF, gitignored via `*.log`.
+- Open advisory (REGRESSION 2026-10-01 23:38, self-cleared to OK):
+  `monetize-ai-engine/server.py` is a NEW unpinned mixed file (CRLF+LF,
+  mtime 2026-10-01 23:09, plus unstaged worktree edits). Advisory only
+  per design; settlement (normalize to LF + watchdog `--init` re-baseline
+  in the same commit) deferred — file sits in another agent's active
+  work area; operator decision required.
+
 ## 2026-10-01 — EOL watchdog scheduled + .gitignore sweep round 2 (no changes needed)
 
 ### .gitignore sweep, round 2 (read-only; report committed)
