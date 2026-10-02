@@ -242,3 +242,23 @@ sequential write-then-read loop.
 
 Markdown-only: 1 mixed, `_DOCS_ARCHIVE/master_docs/FULL_REPO_AUDIT.md`, frozen
 by an explicit `-text` pin. This matches `MD_EOL_AUDIT_2026-09-29.md` §9.
+
+## v3.7 (2026-10-01) -- eol_watchdog.py (scheduled advisory drift check)
+
+`eol_watchdog.py` answers "did the EOL state get WORSE since we last looked?"
+without blocking anyone. It reuses this toolset's census helpers
+(`tracked_paths` / `gitattributes_pins` / `index_kinds`), compares against a
+committed baseline (`.githooks/eol_watchdog_baseline.json`), and appends one
+CRLF line to the append-only `.githooks/eol_watchdog.log` (gitignored,
+`*.log`).
+
+*   Exit 0 = clean or improved, 1 = error (e.g. no baseline), 2 = REGRESSION
+    (mixed count grew, or a NEW unpinned mixed file appeared). Advisory only:
+    commit-time enforcement remains `eol_classify.py` + `golden_rules_guard.sh`.
+*   `--init` re-snapshots the baseline. After a settlement lowers the mixed
+    count, re-run `--init` and commit the new baseline in the same commit.
+*   Launcher: `START_EOL_WATCHDOG.bat` (CRLF, pinned `text eol=crlf` in
+    `.gitattributes`), which `cd`s to the repo root first. Windows Task
+    Scheduler task **EolWatchdog** runs it daily 07:30 in `--quiet` mode.
+*   Verified 2026-10-01: baseline matches the census (3095 files, mixed=22,
+    unpinned=3); doctored-baseline tests fire exit 2 both ways; log is CRLF.
