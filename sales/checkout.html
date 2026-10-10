@@ -3,113 +3,119 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AUSAI Tech — Services & Checkout</title>
+<title>Checkout — AusAI Tech</title>
+
+<!-- SEO & Social Meta Tags -->
+<meta name="description" content="Secure checkout for AusAI Tech services." />
+<meta name="robots" content="noindex" /> <!-- Do not index checkout page -->
+
+<link rel="stylesheet" href="../css/global.css">
 <style>
-  :root{
-    --bg:#0a0e27; --bg2:#141e46; --accent:#3cc8e6; --accent2:#78e682;
-    --warn:#fab646; --text:#f5f5fa; --muted:#a0a5b4;
-    --card:rgba(255,255,255,0.04);
-  }
-  *{box-sizing:border-box;}
-  body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
-  header{padding:60px 40px 40px;text-align:center;background:linear-gradient(180deg,#141e46,#0a0e27);}
-  h1{font-size:44px;margin:0 0 8px;background:linear-gradient(90deg,#3cc8e6,#78e682);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-  .sub{opacity:.7;font-size:18px;}
-  .container{max-width:1100px;margin:0 auto;padding:40px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
-  .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;transition:transform .2s,border-color .2s;}
-  .card:hover{transform:translateY(-4px);border-color:var(--accent);}
-  .price{font-size:36px;font-weight:700;color:var(--accent);margin:8px 0 4px;}
-  .price small{font-size:14px;color:var(--muted);font-weight:400;}
-  .feat{list-style:none;padding:0;margin:20px 0;}
-  .feat li{padding:6px 0;color:var(--muted);position:relative;padding-left:22px;}
-  .feat li::before{content:"✓";color:var(--accent2);position:absolute;left:0;}
-  .btn{display:block;text-align:center;background:var(--accent);color:var(--bg);font-weight:600;padding:14px;border-radius:10px;text-decoration:none;transition:background .2s;}
-  .btn:hover{background:var(--accent2);}
-  .btn.alt{background:transparent;color:var(--accent);border:2px solid var(--accent);}
-  .setup{padding:60px 40px;background:var(--bg2);}
-  .setup h2{font-size:32px;margin:0 0 12px;}
-  pre{background:#000;color:#3cc8e6;padding:18px;border-radius:10px;overflow-x:auto;font-family:Consolas,monospace;font-size:14px;}
-  .pill{display:inline-block;background:rgba(60,200,230,.15);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:12px;font-family:monospace;margin-right:6px;}
-  footer{text-align:center;padding:30px;color:var(--muted);font-size:14px;}
+  .co-header { padding: 120px 40px 40px; text-align: center; background: linear-gradient(180deg, #12121a, var(--bg)); }
+  .co-header h1 { font-size: 44px; margin: 0 0 8px; background: linear-gradient(90deg, var(--accent), var(--green)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .co-header .sub { color: var(--text-dim); font-size: 18px; }
+  .co-container { max-width: 1100px; margin: 0 auto; padding: 40px; }
+  .co-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .co-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: transform .2s, border-color .2s; }
+  .co-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .co-card h3 { color: var(--text-bright); margin-top: 12px; }
+  .co-card p { color: var(--text-dim); font-size: 0.95rem; }
+  .co-price { font-size: 36px; font-weight: 700; color: var(--accent); margin: 8px 0 4px; }
+  .co-price small { font-size: 14px; color: var(--text-dim); font-weight: 400; }
+  .co-feat { list-style: none; padding: 0; margin: 20px 0; }
+  .co-feat li { padding: 6px 0; color: var(--text-dim); position: relative; padding-left: 22px; font-size: 0.9rem; }
+  .co-feat li::before { content: "✓"; color: var(--green); position: absolute; left: 0; font-weight: 700; }
+  .co-btn { display: block; text-align: center; background: var(--accent); color: #fff; font-weight: 600; padding: 14px; border-radius: 10px; text-decoration: none; transition: background .2s; }
+  .co-btn:hover { background: #2563eb; }
+  .co-btn.alt { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+  .co-btn.alt:hover { background: var(--accent-glow); }
+  .co-setup { padding: 60px 40px; background: var(--bg-card); margin-top: 60px; border-top: 1px solid var(--border); }
+  .co-setup h2 { font-size: 32px; margin: 0 0 12px; color: var(--text-bright); }
+  .co-setup p { color: var(--text-dim); }
+  .co-setup pre { background: #000; color: var(--accent); padding: 18px; border-radius: 10px; overflow-x: auto; font-family: var(--mono); font-size: 14px; margin: 16px 0; }
+  .co-pill { display: inline-block; background: var(--accent-glow); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-family: var(--mono); margin-right: 6px; font-weight: 600; }
+  .co-pill.green { background: var(--green-dim); color: var(--green); }
 </style>
 </head>
 <body>
-<header>
+
+<site-header root=".."></site-header>
+
+<div class="co-header reveal">
   <h1>AUSAI Tech — Pay & Book Services</h1>
   <p class="sub">Stripe-powered checkout  |  Instant delivery  |  30-day guarantee</p>
-</header>
+</div>
 
-<div style="max-width:1100px;margin:0 auto;padding:16px 40px 0;">
+<div style="max-width:1100px;margin:0 auto;padding:16px 40px 0;" class="reveal">
   <div style="background:rgba(250,182,70,.14);border:1px solid rgba(250,182,70,.4);border-radius:10px;padding:14px 18px;color:#fab646;font-size:14px;">
-    ⚠️ <strong>Before publishing:</strong> replace the 4 <code style="background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px;">REPLACE_WITH_YOUR_LINK_*</code> placeholders in the <code>&lt;a class="btn"&gt;</code> tags below with your Stripe Payment Link URLs. Without this step, all "Pay" buttons 404.
+    ⚠️ <strong>Before publishing:</strong> replace the 4 <code style="background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px;">REPLACE_WITH_YOUR_LINK_*</code> placeholders in the <code>&lt;a class="co-btn"&gt;</code> tags below with your Stripe Payment Link URLs. Without this step, all "Pay" buttons 404.
   </div>
 </div>
 
-<div class="container">
-  <div class="grid">
+<div class="co-container reveal">
+  <div class="co-grid">
 
-    <div class="card">
-      <span class="pill">$500</span> <span class="pill">ONE-TIME</span>
+    <div class="co-card">
+      <span class="co-pill">$500</span> <span class="co-pill green">ONE-TIME</span>
       <h3>AI Chatbot Setup</h3>
-      <div class="price">$500 <small>+ $50/mo hosting</small></div>
+      <div class="co-price">$500 <small>+ $50/mo hosting</small></div>
       <p>Custom-trained chatbot on YOUR data, deployed to YOUR domain.</p>
-      <ul class="feat">
+      <ul class="co-feat">
         <li>RAG over your docs/notion/website</li>
         <li>Branded UI + widget embed</li>
         <li>OpenRouter + Ollama fallback</li>
         <li>Delivered in 5 business days</li>
       </ul>
-      <a class="btn" href="https://buy.stripe.com/REPLACE_WITH_YOUR_LINK_chatbot">Pay $500 →</a>
+      <a class="co-btn" href="#" onclick="alert('Please configure your Stripe Payment Links in checkout.html'); return false;">Pay $500 →</a>
     </div>
 
-    <div class="card">
-      <span class="pill">$1,200</span> <span class="pill">ONE-TIME</span>
+    <div class="co-card">
+      <span class="co-pill">$1,200</span> <span class="co-pill green">ONE-TIME</span>
       <h3>n8n Automation Bundle</h3>
-      <div class="price">$1,200 <small>+ $150/mo hosting</small></div>
+      <div class="co-price">$1,200 <small>+ $150/mo hosting</small></div>
       <p>3 production-ready n8n workflows + 90 days support.</p>
-      <ul class="feat">
+      <ul class="co-feat">
         <li>Self-hosted or managed</li>
         <li>Custom AI agent included</li>
         <li>Postgres + vector storage</li>
         <li>Live monitoring dashboard</li>
       </ul>
-      <a class="btn" href="https://buy.stripe.com/REPLACE_WITH_YOUR_LINK_n8n">Pay $1,200 →</a>
+      <a class="co-btn" href="#" onclick="alert('Please configure your Stripe Payment Links in checkout.html'); return false;">Pay $1,200 →</a>
     </div>
 
-    <div class="card">
-      <span class="pill">$250</span> <span class="pill">ONE-TIME</span>
+    <div class="co-card">
+      <span class="co-pill">$250</span> <span class="co-pill green">ONE-TIME</span>
       <h3>Portfolio Website</h3>
-      <div class="price">$250 <small>in 3 days</small></div>
+      <div class="co-price">$250 <small>in 3 days</small></div>
       <p>5-page responsive site with AI art, animations, lead capture.</p>
-      <ul class="feat">
+      <ul class="co-feat">
         <li>Hostinger or Vercel deployment</li>
         <li>Stripe + Calendly integrated</li>
         <li>5 hero images included</li>
         <li>Lighthouse score 95+</li>
       </ul>
-      <a class="btn" href="https://buy.stripe.com/REPLACE_WITH_YOUR_LINK_site">Pay $250 →</a>
+      <a class="co-btn" href="#" onclick="alert('Please configure your Stripe Payment Links in checkout.html'); return false;">Pay $250 →</a>
     </div>
 
-    <div class="card">
-      <span class="pill">$80/hr</span> <span class="pill">CONSULTING</span>
+    <div class="co-card">
+      <span class="co-pill">$80/hr</span> <span class="co-pill">CONSULTING</span>
       <h3>AI Strategy Hours</h3>
-      <div class="price">$80 <small>/hour</small></div>
+      <div class="co-price">$80 <small>/hour</small></div>
       <p>Book a 30-minute screen-share, get a written action plan.</p>
-      <ul class="feat">
+      <ul class="co-feat">
         <li>Stack recommendation</li>
         <li>Cost / ROI analysis</li>
         <li>Delivery in 2 days</li>
         <li>Follow-up email support</li>
       </ul>
-      <a class="btn alt" href="https://calendly.com/REPLACE_WITH_YOUR_LINK_consult">Book a Call →</a>
+      <a class="co-btn alt" href="#" onclick="alert('Please configure your Calendly link in checkout.html'); return false;">Book a Call →</a>
     </div>
 
   </div>
 </div>
 
-<section class="setup">
-  <div class="container">
+<section class="co-setup reveal">
+  <div class="co-container">
     <h2>🛠️ Setup in 12 minutes</h2>
     <p><strong>Step 1:</strong> Create your Stripe account → <code>dashboard.stripe.com/register</code></p>
     <p><strong>Step 2:</strong> Create 4 Payment Links (one per tier above)</p>
@@ -122,17 +128,9 @@ Product 4: "AI Strategy Hour" — $80 — Recurring optional</pre>
   </div>
 </section>
 
-<footer style="text-align:center;padding:30px 20px 20px;color:var(--muted);font-size:14px;background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.08);margin-top:40px;">
-  <p>© 2026 AUSAI Tech  |  Built locally with Ollama + PIL  |  <a href="https://github.com/woodsai69rme" style="color:#3cc8e6;">GitHub</a></p>
-  <p style="margin-top:8px;font-size:12px;color:var(--muted);">
-    <strong>30-day refund policy:</strong> if delivery has not started, full refund. After kickoff, scope-locked deliverables are non-refundable.
-    &nbsp;|&nbsp;
-    <strong>Terms:</strong> Stripe handles all payments; we never store card data. By purchasing you agree to the listed scope, timeline, and deliverables.
-    &nbsp;|&nbsp;
-    <strong>Privacy:</strong> your contact details go only to AUSAI Tech and the booking/payment provider; never sold or shared.
-  </p>
-  <p style="margin-top:6px;font-size:11px;opacity:0.55;">For the full legal text, paste your own <code>/legal/refunds.html</code>, <code>/legal/terms.html</code>, <code>/legal/privacy.html</code> pages once your site is live.</p>
-</footer>
+<site-footer root=".."></site-footer>
 
+<script src="../js/components.js"></script>
+<script src="../js/animations.js"></script>
 </body>
 </html>

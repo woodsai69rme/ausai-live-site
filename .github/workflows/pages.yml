@@ -1,3 +1,7 @@
+# GitHub Actions workflow — auto-deploys static HTML to GitHub Pages on every push to main.
+# ⚠️ ONE-TIME MANUAL SETUP REQUIRED before first deploy succeeds:
+#   Repo → Settings → Pages → Source: switch from "Deploy from a branch" (default) to "GitHub Actions" → Save.
+#   After that toggle, every push to `main` triggers this workflow and goes live automatically.
 name: Deploy GitHub Pages
 
 on:

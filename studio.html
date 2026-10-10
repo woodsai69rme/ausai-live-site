@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AusAI Music Studio — Tracks + Music Videos Brisbane</title>
+<meta name="description" content="Brisbane AI music studio. Original tracks, mixing, lyric videos, full music videos. From A$80. You own 100%." />
+<link rel="canonical" href="https://ausai-tech.com/studio.html" />
+<link rel="stylesheet" href="./css/global.css" />
+<style>
+.studio-hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:130px 24px 70px;position:relative;overflow:hidden}
+.studio-hero::before{content:'';position:absolute;inset:-40%;background:radial-gradient(ellipse at 30% 30%,#a855f740 0%,transparent 55%),radial-gradient(ellipse at 70% 60%,#3b82f640 0%,transparent 55%);animation:pulse 9s ease-in-out infinite}
+.studio-hero-inner{position:relative;z-index:1;max-width:860px}
+.genre-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0}
+.genre-pills button{background:var(--bg-card);border:1px solid var(--border);color:var(--text);border-radius:999px;padding:9px 18px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit}
+.genre-pills button.active{border-color:var(--purple);color:#fff;box-shadow:0 0 18px #a855f750}
+.player{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:22px;margin:28px auto 0;max-width:560px;text-align:left}
+.player-top{display:flex;align-items:center;gap:16px}
+.play-btn{width:58px;height:58px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--purple),var(--accent));color:#fff;font-size:1.4rem;cursor:pointer;flex-shrink:0}
+.track-meta{flex:1}.track-meta strong{display:block;color:var(--text-bright)}.track-meta span{font-size:.8rem;color:var(--text-dim)}
+.progress{height:6px;background:#000;border-radius:99px;margin-top:14px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--accent-2))}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
+.pkg{background:var(--bg-card);border:2px solid var(--border);border-radius:20px;padding:1.6rem;display:flex;flex-direction:column;position:relative}
+.pkg.featured{border-color:var(--purple)}
+.pkg-badge{position:absolute;top:-12px;right:1rem;background:var(--purple);color:#fff;font-size:.65rem;font-weight:700;padding:.25rem .7rem;border-radius:999px;text-transform:uppercase}
+.pkg h3{color:var(--text-bright);font-size:1.25rem}
+.pkg .price{font-size:1.9rem;font-weight:800;color:var(--text-bright)}
+.pkg ul{list-style:none;flex:1;margin:1rem 0}
+.pkg ul li{padding:.4rem 0 .4rem 1.4rem;position:relative;font-size:.88rem;border-bottom:1px solid var(--border)}
+.pkg ul li::before{content:'+';position:absolute;left:0;color:var(--green);font-weight:700}
+.pkg .cta{display:block;text-align:center;margin-top:1rem;padding:.8rem;border-radius:.5rem;font-weight:700;text-decoration:none;font-size:.9rem;background:var(--purple);color:#fff}
+.pkg .cta.ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-top:2rem}
+.step{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.4rem}
+.step .n{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--accent));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:12px}
+.step h4{color:var(--text-bright);margin-bottom:6px}
+.step p{font-size:.87rem;color:var(--text-dim)}
+.reel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:2rem}
+.reel{border:1px solid var(--border);border-radius:20px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;text-decoration:none}
+.faq details{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.3rem;margin-bottom:.7rem}
+.faq summary{cursor:pointer;font-weight:600;color:var(--text-bright)}
+.faq p{margin-top:.6rem;font-size:.9rem;color:var(--text-dim)}
+</style>
+</head>
+<body>
+<site-header root="."></site-header>
+<header class="studio-hero reveal"><div class="studio-hero-inner">
+<div class="hero-badge">tellemthatsme — 220 Tracks - 226 Videos Built - Now Booking</div>
+<h1 style="font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800;line-height:1.1;color:var(--text-bright)">Tracks + Music Videos Artists Are Proud Of</h1>
+<p style="color:var(--text-dim);font-size:1.1rem;max-width:620px;margin:20px auto 0">Brisbane car-culture catalog: drill, phonk, trap, rnb, hip-hop across 4 albums. 226 videos already built 1080p. You bring the idea — we deliver release-ready masters and visuals. You own 100%. <a href="./catalog.html">Browse the 220-track catalog</a>.</p>
+<div class="genre-pills" id="genre-pills"><button class="active">Dark Ambient</button><button>Synthwave</button><button>Lo-Fi Hip Hop</button><button>Industrial Techno</button><button>Dream Pop</button><button>Hip Hop / Rap</button></div>
+<div class="player"><div class="player-top"><button class="play-btn" id="demo-play">Play</button><div class="track-meta"><strong id="demo-title">Dark Ambient - Neon Rain (concept)</strong><span>ACE-Step - produced in-studio</span></div></div><div class="progress"><i id="demo-bar"></i></div></div>
+<div style="margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><a href="./book.html" style="background:linear-gradient(135deg,var(--purple),var(--accent));padding:14px 32px;border-radius:10px;color:#fff;font-weight:700;text-decoration:none">Start Your Project</a><a href="#packages" style="padding:14px 32px;border-radius:10px;border:1px solid var(--border);color:var(--text);text-decoration:none">View Packages</a></div>
+</div></header>
+<section id="services" style="padding:70px 0"><div class="container">
+<div class="section-header reveal"><div class="section-label">// Studio Services</div><h2 class="section-title">Music + Video, End to End</h2></div>
+<div class="services-grid">
+<div class="service-card reveal"><div class="service-icon purple">M</div><h3>Original Track Production</h3><p>Custom beat + arrangement in your genre. Stems included.</p><div class="service-price">From A$250 / track</div></div>
+<div class="service-card reveal"><div class="service-icon blue">M</div><h3>Mixing + Mastering</h3><p>Streaming-ready master for Spotify + YouTube. 2 revisions.</p><div class="service-price">From A$120 / track</div></div>
+<div class="service-card reveal"><div class="service-icon cyan">V</div><h3>Full Music Video</h3><p>Cinematic AI visuals cut to your track + teaser + art.</p><div class="service-price">From A$150 / video</div></div>
+<div class="service-card reveal"><div class="service-icon green">L</div><h3>Lyric / Visualiser</h3><p>48hr turnaround. Perfect for singles + Shorts.</p><div class="service-price">From A$80 / video</div></div>
+<div class="service-card reveal"><div class="service-icon blue">B</div><h3>Artist Branding Pack</h3><p>Cover art, Spotify canvas, thumbnails + cutdowns.</p><div class="service-price">From A$99 / pack</div></div>
+<div class="service-card reveal"><div class="service-icon purple">R</div><h3>Release Package</h3><p>Master, YouTube metadata, tags + upload checklist.</p><div class="service-price">From A$60 add-on</div></div>
+</div></div></section>
+<section id="packages" style="background:#0d0d14;padding:70px 0"><div class="container">
+<div class="section-header reveal"><div class="section-label">// Packages</div><h2 class="section-title">Fixed-Price Packages</h2><p class="section-subtitle">You own 100% of masters + video on final payment.</p></div>
+<div class="pkg-grid reveal">
+<div class="pkg"><h3>Single</h3><div class="price">A$250</div><ul><li>Original track OR mix+master</li><li>WAV + MP3 masters</li><li>Cover art</li><li>Lyric visualiser</li><li>2 revisions - 7 day delivery</li></ul><a class="cta ghost" href="./sales/studio-checkout.html">Buy Single</a></div>
+<div class="pkg featured"><div class="pkg-badge">Most Popular</div><h3>Single + Video</h3><div class="price">A$399</div><ul><li>Everything in Single</li><li>Full music video up to 4 min</li><li>Teaser cut for TikTok/Reels</li><li>YouTube title + tags + desc</li><li>3 revisions - 14 day delivery</li></ul><a class="cta" href="./sales/studio-checkout.html">Buy Single + Video</a></div>
+<div class="pkg"><h3>EP Launch</h3><div class="price">A$999</div><ul><li>3 tracks mixed + mastered</li><li>1 full video + 2 visualisers</li><li>Full branding pack</li><li>Release + distro checklist</li><li>Priority - 30 day delivery</li></ul><a class="cta ghost" href="./sales/studio-checkout.html">Buy EP Launch</a></div>
+</div>
+<p style="text-align:center;color:var(--text-dim);font-size:.85rem;margin-top:1.5rem">50% deposit to start, 50% on delivery. <a href="./book.html">Book a free call</a>.</p>
+</div></section>
+<section style="padding:70px 0"><div class="container">
+<div class="section-header reveal"><div class="section-label">// How It Works</div><h2 class="section-title">Idea to Release in 4 Steps</h2></div>
+<div class="steps reveal">
+<div class="step"><div class="n">1</div><h4>Send your idea</h4><p>Book free call, send MP3/lyrics/voice memo + 2 references. Fixed quote in 48hrs.</p></div>
+<div class="step"><div class="n">2</div><h4>We produce</h4><p>Track + mix or visuals — first draft with regular updates.</p></div>
+<div class="step"><div class="n">3</div><h4>You revise</h4><p>2-3 rounds included until you love it.</p></div>
+<div class="step"><div class="n">4</div><h4>You release</h4><p>Masters, stems, video + YouTube pack. You own 100%.</p></div>
+</div></div></section>
+<section style="background:#0d0d14;padding:70px 0"><div class="container">
+<div class="section-header reveal"><div class="section-label">// Showreel</div><h2 class="section-title">Studio Concepts</h2><p class="section-subtitle">Swap these with finished client work.</p></div>
+<div class="reel-grid reveal">
+<a class="reel" href="./book.html" style="background:linear-gradient(135deg,#1a1033,#0b3b4a);color:#fff"><div class="big">S</div><strong>Neon Rain - Dark Ambient</strong><small>Track + video concept</small></a>
+<a class="reel" href="./book.html" style="background:linear-gradient(135deg,#2b0f2e,#4a1030);color:#fff"><div class="big">M</div><strong>Midnight Drive - Synthwave</strong><small>Track + lyric video</small></a>
+<a class="reel" href="./book.html" style="background:linear-gradient(135deg,#0f2b1d,#123a5c);color:#fff"><div class="big">L</div><strong>Slow Mornings - Lo-Fi</strong><small>EP visualiser pack</small></a>
+</div></div></section>
+<section class="faq" style="padding:70px 0"><div class="container" style="max-width:760px">
+<div class="section-header reveal"><div class="section-label">// FAQ</div><h2 class="section-title">Studio Questions</h2></div>
+<div class="reveal">
+<details open><summary>Do I own the music + video?</summary><p>Yes — 100% on final payment. Masters, stems, video + art are yours.</p></details>
+<details><summary>What do I send you?</summary><p>MP3 demo, voice memo, lyrics, or 2 reference tracks + vibe notes. Video-only: finished MP3/WAV + lyrics.</p></details>
+<details><summary>How long?</summary><p>Visualisers 48hrs. Singles 7 days. Single+video 14 days. EP 30 days. Rush available.</p></details>
+<details><summary>Payment?</summary><p>50% deposit, 50% on delivery via Stripe. AUD. 2-3 revisions included.</p></details>
+</div>
+<div style="text-align:center;margin-top:2.5rem"><h2 style="color:var(--text-bright)">Ready to Release Something Great?</h2><p style="color:var(--text-dim);margin:12px 0 24px">Free 15-min call — fixed quote in 48hrs.</p><a href="./book.html" style="background:linear-gradient(135deg,var(--purple),var(--accent));padding:14px 36px;border-radius:10px;color:#fff;font-weight:700;text-decoration:none">Book Free Studio Call</a></div>
+</div></section>
+<site-footer root="."></site-footer>
+<script src="./js/components.js"></script>
+<script src="./js/animations.js"></script>
+<script>
+var titles={'Dark Ambient':'Dark Ambient - Neon Rain (concept)','Synthwave':'Synthwave - Midnight Drive (concept)','Lo-Fi Hip Hop':'Lo-Fi - Slow Mornings (concept)','Industrial Techno':'Techno - Steel Pulse (concept)','Dream Pop':'Dream Pop - Glass Sky (concept)','Hip Hop / Rap':'Hip Hop - Tell Em (concept)'};
+document.querySelectorAll('#genre-pills button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('#genre-pills button').forEach(function(x){x.classList.remove('active')});b.classList.add('active');document.getElementById('demo-title').textContent=titles[b.textContent]||b.textContent;document.getElementById('demo-bar').style.width='0';});});
+var playing=false,timer=null;
+document.getElementById('demo-play').addEventListener('click',function(){playing=!playing;this.textContent=playing?'Pause':'Play';var bar=document.getElementById('demo-bar');if(playing){var w=parseFloat(bar.style.width)||0;timer=setInterval(function(){w+=4;if(w>=100){w=0;}bar.style.width=w+'%';},200);}else{clearInterval(timer);}});
+</script>
+</body>
+</html>

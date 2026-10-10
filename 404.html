@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — AusAI Tech</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="stylesheet" href="./css/global.css">
+<style>
+  body {
+    display: grid; place-items: center; min-height: 100vh;
+    text-align: center;
+  }
+  .box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 36px;
+    max-width: 480px; width: 100%;
+    margin-top: 80px;
+  }
+  .code {
+    font-size: 64px; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  h1 { font-size: 22px; margin-bottom: 8px; color: var(--text-bright); }
+  p { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+  .nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .nav a {
+    display: inline-block; padding: 10px 18px; border-radius: 8px;
+    background: transparent; color: var(--text); text-decoration: none;
+    border: 1px solid var(--border); font-size: 13px; font-weight: 500;
+    transition: border-color .2s, background .2s;
+  }
+  .nav a:hover { border-color: var(--accent); background: var(--accent-glow); }
+  .nav a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .nav a.primary:hover { opacity: .9; }
+  .status { margin-top: 20px; font-size: 12px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<site-header root="."></site-header>
+
+<div class="box reveal">
+  <div class="code">404</div>
+  <h1>Page not found</h1>
+  <p id="msg">This page doesn't exist or may have moved.<br>If you followed a link, it might be outdated.</p>
+
+  <div class="nav">
+    <a href="./index.html" class="primary">🏠 Home</a>
+    <a href="./sales/checkout.html">💳 Services</a>
+    <a href="./book.html">📅 Book a Call</a>
+    <a href="./portfolio/index.html">🖼️ Portfolio</a>
+  </div>
+
+  <div class="status" id="status"></div>
+</div>
+
+<site-footer root="."></site-footer>
+
+<script src="./js/components.js"></script>
+<script>
+  // Graceful fallback for GitHub Pages
+  const knownPaths = [
+    '/sales/checkout.html',
+    '/book.html',
+    '/portfolio/',
+    '/portfolio/index.html',
+    '/portfolio/gallery.html'
+  ];
+
+  const path = window.location.pathname;
+  const repoBase = '/ausai-live-site'; // For local or GitHub Pages
+  const relativePath = path.replace(repoBase, '') || '/';
+
+  const isKnown = knownPaths.some(kp => relativePath === kp || relativePath.startsWith(kp));
+
+  if (isKnown) {
+    document.getElementById('msg').innerHTML =
+      'Redirecting you...<br><span style="font-size:12px;color:var(--text-dim)">' +
+      relativePath + '</span>';
+    document.querySelector('.nav').style.display = 'none';
+    const target = window.location.origin + repoBase + '/';
+    setTimeout(() => { window.location.replace(target); }, 1200);
+  } else {
+    document.getElementById('status').textContent =
+      'Requested: ' + window.location.pathname + window.location.search;
+  }
+</script>
+
+</body>
+</html>

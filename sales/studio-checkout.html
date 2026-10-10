@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Checkout — AusAI Music Studio</title>
+<meta name="description" content="Pay for a single, single+video, or EP launch. Stripe checkout, you own 100%." />
+<meta name="robots" content="noindex" />
+<link rel="stylesheet" href="../css/global.css">
+<style>
+  .co-header{padding:120px 40px 40px;text-align:center;background:linear-gradient(180deg,#12121a,var(--bg))}
+  .co-header h1{font-size:42px;margin:0 0 8px;background:linear-gradient(90deg,var(--accent),var(--green));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .co-header .sub{color:var(--text-dim);font-size:17px}
+  .co-container{max-width:1100px;margin:0 auto;padding:40px}
+  .co-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+  .co-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;transition:transform .2s,border-color .2s}
+  .co-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .co-card.featured{border-color:var(--accent);box-shadow:0 0 30px rgba(59,130,246,.12)}
+  .co-card h3{color:var(--text-bright);margin-top:8px}
+  .co-card p{color:var(--text-dim);font-size:.95rem}
+  .co-price{font-size:36px;font-weight:700;color:var(--accent);margin:8px 0 4px}
+  .co-feat{list-style:none;padding:0;margin:20px 0}
+  .co-feat li{padding:6px 0 6px 22px;color:var(--text-dim);position:relative;font-size:.9rem}
+  .co-feat li::before{content:"✓";color:var(--green);position:absolute;left:0;font-weight:700}
+  .co-btn{display:block;text-align:center;background:var(--accent);color:#fff;font-weight:600;padding:14px;border-radius:10px;text-decoration:none}
+  .co-btn:hover{background:#2563eb}
+  .co-btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+  .co-badge{position:absolute;top:16px;right:16px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:999px;text-transform:uppercase}
+  .co-setup{padding:60px 40px;background:var(--bg-card);margin-top:60px;border-top:1px solid var(--border)}
+  .co-setup h2{font-size:30px;margin:0 0 12px;color:var(--text-bright)}
+  .co-setup pre{background:#000;color:var(--accent);padding:18px;border-radius:10px;overflow-x:auto;font-family:var(--mono);font-size:14px;margin:16px 0}
+  .warn{background:rgba(250,182,70,.14);border:1px solid rgba(250,182,70,.4);border-radius:10px;padding:14px 18px;color:#fab646;font-size:14px;margin-bottom:24px}
+  .co-addons{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+  .addon{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px}
+  .addon strong{color:var(--text-bright)}
+  .addon .p{color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+<site-header root=".."></site-header>
+<div class="co-header reveal">
+  <h1>AusAI Music Studio — Checkout</h1>
+  <p class="sub">Fixed-price packages · Stripe · You own 100% of masters + video</p>
+</div>
+<div class="co-container reveal">
+  <div class="warn">⚠️ <strong>Setup:</strong> replace each <code>href="#"</code> below with your Stripe Payment Link URL (one product per package). Until then the buttons are disabled. See setup steps at the bottom.</div>
+  <div class="co-grid">
+    <div class="co-card"><h3>Single</h3><div class="co-price">A$250</div><p>One track, release-ready.</p>
+      <ul class="co-feat"><li>Original track OR mix + master</li><li>WAV + MP3 masters</li><li>Cover art</li><li>Lyric visualiser</li><li>2 revisions · 7 day delivery</li></ul>
+      <a class="co-btn ghost" href="#" data-plan="Single A$250">Pay A$250 →</a></div>
+    <div class="co-card featured"><div class="co-badge">Most Popular</div><h3>Single + Video</h3><div class="co-price">A$399</div><p>Track plus a full music video.</p>
+      <ul class="co-feat"><li>Everything in Single</li><li>Full music video up to 4 min</li><li>Teaser cut for TikTok / Reels</li><li>YouTube title + tags + description</li><li>3 revisions · 14 day delivery</li></ul>
+      <a class="co-btn" href="#" data-plan="Single+Video A$399">Pay A$399 →</a></div>
+    <div class="co-card"><h3>EP Launch</h3><div class="co-price">A$999</div><p>Three tracks, full rollout.</p>
+      <ul class="co-feat"><li>3 tracks mixed + mastered</li><li>1 full video + 2 visualisers</li><li>Full branding pack</li><li>Release + distro checklist</li><li>Priority · 30 day delivery</li></ul>
+      <a class="co-btn ghost" href="#" data-plan="EP Launch A$999">Pay A$999 →</a></div>
+  </div>
+  <p style="text-align:center;color:var(--text-dim);font-size:.85rem;margin-top:1.5rem">50% deposit to start, 50% on delivery. Questions first? <a href="../book.html" style="color:var(--accent)">Book a free call</a>.</p>
+</div>
+
+<section class="co-setup reveal"><div class="co-container">
+  <div class="co-addons">
+    <div class="addon"><strong>Mixing + Mastering</strong><br><span class="p">A$120</span> / track<br><span style="color:var(--text-dim);font-size:.85rem">Streaming-ready master, 2 revisions.</span></div>
+    <div class="addon"><strong>Full Music Video</strong><br><span class="p">A$150</span> / video<br><span style="color:var(--text-dim);font-size:.85rem">Cinematic AI visuals + teaser.</span></div>
+    <div class="addon"><strong>Lyric / Visualiser</strong><br><span class="p">A$80</span> / video<br><span style="color:var(--text-dim);font-size:.85rem">48hr turnaround.</span></div>
+    <div class="addon"><strong>Branding Pack</strong><br><span class="p">A$99</span> / pack<br><span style="color:var(--text-dim);font-size:.85rem">Cover, canvas, thumbnails, cutdowns.</span></div>
+    <div class="addon"><strong>Release Package</strong><br><span class="p">A$60</span> add-on<br><span style="color:var(--text-dim);font-size:.85rem">YouTube metadata + upload checklist.</span></div>
+    <div class="addon"><strong>Catalog Licensing</strong><br><span class="p">From A$99</span> / track<br><span style="color:var(--text-dim);font-size:.85rem">Lease/exclusive stems from the 220-track catalog. <a href="../catalog.html" style="color:var(--accent)">Browse</a></span></div>
+  </div>
+
+  <h2 style="margin-top:48px">🛠️ Stripe Setup (10 minutes)</h2>
+  <p><strong>Step 1:</strong> Create a Stripe account → <code>dashboard.stripe.com/register</code> (use AUD currency).</p>
+  <p><strong>Step 2:</strong> Create a Payment Link per package:</p>
+  <pre>Product: "Studio Single"        — A$250  — One-time
+Product: "Studio Single + Video" — A$399  — One-time
+Product: "Studio EP Launch"      — A$999  — One-time
+(Optional) add-ons as separate one-time links</pre>
+  <p><strong>Step 3:</strong> Copy each Stripe URL and replace the <code>href="#"</code> on the matching button (they carry <code>data-plan</code> labels to find them).</p>
+  <p><strong>Step 4:</strong> Remove the yellow setup banner once your links are live. Done.</p>
+  <p style="color:var(--text-dim);font-size:.85rem;margin-top:12px">Tip: enable Stripe "collect customer address" so you have client details for delivery.</p>
+</div></section>
+
+<site-footer root=".."></site-footer>
+<script src="../js/components.js"></script>
+<script src="../js/animations.js"></script>
+<script>
+  document.querySelectorAll('.co-btn[href="#"]').forEach(function(b){
+    b.addEventListener('click', function(e){
+      e.preventDefault();
+      alert('Stripe link not configured yet for: ' + (b.dataset.plan || 'this plan') + '.\n\nPaste your Stripe Payment Link URL into this button\'s href in studio-checkout.html.');
+    });
+  });
+</script>
+</body>
+</html>
+

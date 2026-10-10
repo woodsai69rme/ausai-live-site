@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brisbane Client Self-Service Portal — AusAI Tech</title>
+<link rel="stylesheet" href="./css/global.css">
+<style>
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 120px 24px 60px; }
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 { font-size: 36px; color: var(--text-bright); margin-bottom: 8px; }
+  .header h1 span { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { color: var(--text-dim); font-size: 16px; }
+  
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+  @media(max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+  
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+  .card h2 { font-size: 20px; color: var(--text-bright); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  
+  .form-group { margin-bottom: 14px; text-align: left; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-dim); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; color: #fff; font-family: inherit; font-size: 14px;
+  }
+  
+  .btn {
+    display: block; width: 100%; padding: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border: none; border-radius: 8px; color: #000; font-weight: 700; font-size: 15px; cursor: pointer; transition: transform 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  
+  .out-box {
+    margin-top: 16px; background: #000; border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px; font-family: monospace; font-size: 13px; color: var(--accent); white-space: pre-wrap;
+    max-height: 250px; overflow-y: auto; display: none;
+  }
+</style>
+</head>
+<body>
+
+<site-header root="."></site-header>
+
+<div class="wrap reveal">
+  <div class="header">
+    <h1>Brisbane Client <span>Self-Service AI Portal</span></h1>
+    <p>Logged in as: <strong>Brisbane Enterprise Account</strong> | Powered by 24/7 AI Virtual Employees</p>
+  </div>
+
+  <div class="grid-2">
+    <!-- Ticket & IT Support Panel -->
+    <div class="card">
+      <h2>🛠️ Submit Automated IT Ticket</h2>
+      <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 16px;">Our AI Support Engineer (<code>support-001</code>) will perform instant automated triage.</p>
+      
+      <form id="ticketForm">
+        <div class="form-group">
+          <label>Issue Title</label>
+          <input type="text" id="tTitle" placeholder="e.g. Printer network offline in Brisbane CBD office" required />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="tCategory">
+            <option value="it_helpdesk">IT Support & Network Triage</option>
+            <option value="desktop_automation">Computer & Desktop GUI Issue</option>
+            <option value="browser_automation">Browser / Web Scraping Workflow</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description & Error Logs</label>
+          <textarea id="tDesc" rows="3" placeholder="Provide error message or symptoms..." required></textarea>
+        </div>
+        <button type="submit" class="btn">Dispatch to Virtual IT Tech →</button>
+      </form>
+      <div id="ticketOut" class="out-box"></div>
+    </div>
+
+    <!-- Instant AI Audit Generator Panel -->
+    <div class="card">
+      <h2>📊 Generate Instant IT & AI Audit</h2>
+      <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 16px;">Calculate weekly time savings and payroll ROI for your Brisbane business.</p>
+      
+      <form id="auditForm">
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" id="aCompany" placeholder="e.g. Brisbane Logistics Group" required />
+        </div>
+        <div class="form-group">
+          <label>Industry</label>
+          <select id="aIndustry">
+            <option value="Legal & Professional">Legal & Professional Services</option>
+            <option value="Logistics & Trade">Logistics & Trade</option>
+            <option value="Finance & Accounting">Finance & Accounting</option>
+            <option value="Healthcare & Medical">Healthcare & Medical</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Team Size (Staff Count)</label>
+          <input type="number" id="aTeamSize" value="20" required />
+        </div>
+        <div class="form-group">
+          <label>Monthly Tech Spend ($AUD)</label>
+          <input type="number" id="aSpend" value="3500" required />
+        </div>
+        <button type="submit" class="btn">Generate Custom Audit Report →</button>
+      </form>
+      <div id="auditOut" class="out-box"></div>
+    </div>
+  </div>
+</div>
+
+<site-footer root="."></site-footer>
+
+<script src="./js/components.js"></script>
+<script src="./js/animations.js"></script>
+<script>
+  // Ticket Handler
+  document.getElementById('ticketForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const out = document.getElementById('ticketOut');
+    out.style.display = 'block';
+    out.innerText = 'Dispatching ticket to AI Virtual Team...';
+
+    const title = document.getElementById('tTitle').value;
+    const type = document.getElementById('tCategory').value;
+    const prompt = document.getElementById('tDesc').value;
+
+    try {
+      const res = await fetch('http://localhost:8010/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, type, prompt })
+      });
+      const data = await res.json();
+      const r = data.results || {};
+      out.innerText = 'Assigned Agent: ' + (data.agent_title || data.agent_id) + '\n\n' + (r.response || r.summary || JSON.stringify(r, null, 2));
+    } catch(err) {
+      out.innerText = 'Error: ' + err.message;
+    }
+  });
+
+  // Audit Handler
+  document.getElementById('auditForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const out = document.getElementById('auditOut');
+    out.style.display = 'block';
+    out.innerText = 'Generating Brisbane IT & AI Audit Report...';
+
+    const company_name = document.getElementById('aCompany').value;
+    const industry = document.getElementById('aIndustry').value;
+    const team_size = parseInt(document.getElementById('aTeamSize').value, 10);
+    const monthly_tech_spend_aud = parseFloat(document.getElementById('aSpend').value);
+
+    try {
+      const res = await fetch('http://localhost:8010/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company_name, industry, team_size, monthly_tech_spend_aud })
+      });
+      const data = await res.json();
+      out.innerText = '✅ Audit Generated Report ID: ' + data.report_id +
+                      '\n\nEst. Weekly Hours Saved: ' + data.est_hours_saved_weekly + ' hrs/wk' +
+                      '\nEst. Annual Payroll Savings: A$' + data.est_annual_payroll_savings_aud.toLocaleString() +
+                      '\nProjected Investment ROI: ' + data.target_roi_pct + '%';
+    } catch(err) {
+      out.innerText = 'Error: ' + err.message;
+    }
+  });
+</script>
+</body>
+</html>

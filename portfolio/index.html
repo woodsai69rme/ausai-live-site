@@ -1,14 +1,52 @@
-<!doctype html><html><head><meta charset="utf-8"><title>AUSAI Tech Portfolio</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio — AusAI Tech</title>
+
+<!-- SEO & Social Meta Tags -->
+<meta name="description" content="Production-grade AI assets built by AusAI Tech." />
+<link rel="canonical" href="https://ausai-tech.com/portfolio/index.html" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://ausai-tech.com/portfolio/index.html" />
+<meta property="og:title" content="Portfolio — AusAI Tech" />
+<meta property="og:description" content="Production-grade AI assets built by AusAI Tech." />
+
+<link rel="stylesheet" href="../css/global.css">
 <style>
-body {font-family:system-ui,sans-serif;background:#0a0e27;color:#f5f5fa;margin:0;padding:40px;}
-h1 {font-size:42px;margin:0 0 10px;}
-.sub {opacity:.7;margin-bottom:40px;}
-.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:24px;}
-figure {margin:0;background:rgba(255,255,255,.04);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
-figure img {width:100%;display:block;}
-figcaption {padding:14px 18px;font-family:monospace;color:#3cc8e6;}
-</style></head><body>
-<h1>AUSAI Tech Portfolio Gallery</h1>
-<p class="sub">5 production-grade assets for Fiverr, LinkedIn, landing page, and outreach.</p>
-<div class="grid"><figure><img src="01-ai-services-hero.png" alt="01-ai-services-hero"/><figcaption>01-ai-services-hero</figcaption></figure><figure><img src="02-n8n-automation.png" alt="02-n8n-automation"/><figcaption>02-n8n-automation</figcaption></figure><figure><img src="03-analytics-dashboard.png" alt="03-analytics-dashboard"/><figcaption>03-analytics-dashboard</figcaption></figure><figure><img src="04-ai-chatbot.png" alt="04-ai-chatbot"/><figcaption>04-ai-chatbot</figcaption></figure><figure><img src="05-ai-engineering.png" alt="05-ai-engineering"/><figcaption>05-ai-engineering</figcaption></figure></div>
-</body></html>
+  .port-wrap { max-width: 1200px; margin: 0 auto; padding: 120px 40px 60px; }
+  .port-wrap h1 { font-size: 42px; margin: 0 0 10px; color: var(--text-bright); }
+  .port-wrap .sub { opacity: .7; margin-bottom: 40px; color: var(--text-dim); }
+  .port-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; }
+  .port-grid figure { 
+    margin: 0; background: var(--bg-card); border-radius: var(--radius-lg); 
+    overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s;
+  }
+  .port-grid figure:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .port-grid figure img { width: 100%; display: block; }
+  .port-grid figcaption { padding: 14px 18px; font-family: var(--mono); color: var(--accent); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<site-header root=".."></site-header>
+
+<div class="port-wrap reveal">
+  <h1>AUSAI Tech Portfolio Gallery</h1>
+  <p class="sub">5 production-grade assets for Fiverr, LinkedIn, landing page, and outreach.</p>
+  <div class="port-grid">
+    <figure><img src="01-ai-services-hero.png" alt="01-ai-services-hero"/><figcaption>01-ai-services-hero.png</figcaption></figure>
+    <figure><img src="02-n8n-automation.png" alt="02-n8n-automation"/><figcaption>02-n8n-automation.png</figcaption></figure>
+    <figure><img src="03-analytics-dashboard.png" alt="03-analytics-dashboard"/><figcaption>03-analytics-dashboard.png</figcaption></figure>
+    <figure><img src="04-ai-chatbot.png" alt="04-ai-chatbot"/><figcaption>04-ai-chatbot.png</figcaption></figure>
+    <figure><img src="05-ai-engineering.png" alt="05-ai-engineering"/><figcaption>05-ai-engineering.png</figcaption></figure>
+  </div>
+</div>
+
+<site-footer root=".."></site-footer>
+
+<script src="../js/components.js"></script>
+<script src="../js/animations.js"></script>
+</body>
+</html>

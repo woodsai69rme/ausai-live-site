@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Catalog — tellemthatsme | 220 Tracks, 226 Videos</title>
+<meta name="description" content="Full tellemthatsme catalog: 220 tracks, 4 albums, 226 videos. Drill, phonk, trap, rnb, hip-hop." />
+<link rel="canonical" href="https://ausai-tech.com/catalog.html" />
+<link rel="stylesheet" href="./css/global.css" />
+<style>
+.cat-head{max-width:1100px;margin:0 auto;padding:130px 24px 20px;text-align:center}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:22px 0}
+.stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 26px}
+.stat .n{font-size:1.8rem;font-weight:800;color:var(--text-bright)}
+.stat .l{font-size:.78rem;color:var(--text-dim)}
+.filters{max-width:1100px;margin:10px auto;padding:0 24px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.filters button{background:var(--bg-card);border:1px solid var(--border);color:var(--text);border-radius:999px;padding:8px 18px;font-size:.83rem;font-weight:600;cursor:pointer;font-family:inherit}
+.filters button.active{border-color:var(--purple);color:#fff}
+.search{max-width:560px;margin:18px auto 0;padding:0 24px}
+.search input{width:100%;background:var(--bg-card);border:1px solid var(--border);color:var(--text-bright);padding:12px 18px;border-radius:10px;font-family:inherit}
+.grid{max-width:1100px;margin:26px auto 60px;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.1rem}
+.card h4{color:var(--text-bright);font-size:1rem}
+.card .meta{font-size:.76rem;color:var(--text-dim)}
+.card .tag{font-size:.68rem;background:#000;padding:3px 10px;border-radius:99px;border:1px solid var(--border);color:var(--text-dim)}
+.card .st{font-size:.68rem;padding:3px 10px;border-radius:99px;font-weight:700}
+.st.complete{background:#22c55e22;color:#22c55e}.st.in_progress{background:#3b82f622;color:#3b82f6}.st.pending{background:#71717a22;color:#a1a1aa}.st.blocked{background:#ef444422;color:#ef4444}.st.needs_review{background:#f9731622;color:#f97316}
+.sect{max-width:1100px;margin:30px auto 0;padding:0 24px}
+.sect h2{color:var(--text-bright);font-size:1.4rem}.sect p{color:var(--text-dim);font-size:.9rem}
+</style></head><body>
+<site-header root="."></site-header>
+<div class="cat-head reveal">
+<div class="hero-badge">tellemthatsme — Full Catalog</div>
+<h1 style="font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:var(--text-bright)">220 Tracks. 4 Albums. 226 Videos.</h1>
+<p style="color:var(--text-dim);max-width:640px;margin:14px auto 0">Brisbane car-culture: drill, phonk, trap, rnb, hip-hop. Rotary + turbo sound, RHD RX-7/VL visuals, 1080p30 YouTube-ready.</p>
+<div class="stats"><div class="stat"><div class="n">220</div><div class="l">Tracks</div></div><div class="stat"><div class="n">4</div><div class="l">Albums</div></div><div class="stat"><div class="n">226</div><div class="l">Videos built</div></div><div class="stat"><div class="n">53</div><div class="l">Complete</div></div></div>
+</div>
+<div class="search"><input id="q" placeholder="Search title, album, genre..." /></div>
+<div class="filters" id="albums"></div>
+<div class="filters" id="genres"></div>
+<div class="sect"><h2 id="count"></h2><p>Videos live in output/final/ — link each card to YouTube as you release per schedule.</p></div>
+<div class="grid" id="grid"></div>
+<div class="sect" style="margin-bottom:60px"><h2>Release plan</h2><p>76 weeks, 3 videos/week, flagship first: <a href="./release-plan.html">release-plan.html</a> + <a href="./release-schedule.csv">release-schedule.csv</a>.</p><p style="margin-top:12px"><a href="./studio.html">Back to Studio</a> · <a href="./book.html">License / book</a></p></div>
+<site-footer root="."></site-footer>
+<script src="./js/components.js"></script>
+<script src="./js/animations.js"></script>
+<script>
+var DATA=null,fAlbum='All',fGenre='All',q='';
+function render(){
+var g=document.getElementById('grid');g.innerHTML='';
+var songs=DATA.songs.filter(function(x){if(fAlbum!=='All'&&x.album!==fAlbum)return false;if(fGenre!=='All'&&x.genre!==fGenre)return false;if(q&&(x.title+' '+x.album+' '+x.genre).toLowerCase().indexOf(q)<0)return false;return true;});
+document.getElementById('count').textContent=songs.length+' tracks';
+songs.slice(0,400).forEach(function(x){var d=document.createElement('div');d.className='card';d.innerHTML='<h4>'+x.title+'</h4><div class="meta">'+x.album+' · '+x.genre+' · '+x.bpm+'bpm · '+x.musical_key+'</div><div style="margin-top:8px;display:flex;gap:6px;"><span class="st '+x.status+'">'+x.status+'</span><span class="tag">'+x.song_id+'</span></div>';g.appendChild(d);});
+var h=document.createElement('div');h.className='card';h.style.borderColor='var(--purple)';
+var vids=DATA.videos.filter(function(v){return !q||v.title.toLowerCase().indexOf(q)>=0;}).slice(0,40);
+h.innerHTML='<h4>226 finished videos</h4><div class="meta">output/final/ · 1080p</div><div class="meta" style="margin-top:8px;">'+vids.map(function(v){return '🎬 '+v.title;}).join('<br>')+'</div>';
+g.appendChild(h);
+}
+fetch('./catalog-data.json').then(function(r){return r.json();}).then(function(d){DATA=d;
+var albums=['All'];d.songs.forEach(function(x){if(albums.indexOf(x.album)<0)albums.push(x.album);});
+var genres=['All'];d.songs.forEach(function(x){if(genres.indexOf(x.genre)<0)genres.push(x.genre);});
+var a=document.getElementById('albums');
+albums.forEach(function(x){var b=document.createElement('button');b.textContent=x;if(x==='All')b.className='active';b.onclick=function(){fAlbum=x;a.querySelectorAll('button').forEach(function(y){y.classList.remove('active');});b.classList.add('active');render();};a.appendChild(b);});
+var gr=document.getElementById('genres');
+genres.forEach(function(x){var b=document.createElement('button');b.textContent=x;if(x==='All')b.className='active';b.onclick=function(){fGenre=x;gr.querySelectorAll('button').forEach(function(y){y.classList.remove('active');});b.classList.add('active');render();};gr.appendChild(b);});
+document.getElementById('q').addEventListener('input',function(e){q=e.target.value.toLowerCase();render();});
+render();});
+</script>
+</body>
+</html>
