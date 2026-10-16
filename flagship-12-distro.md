@@ -37,5 +37,20 @@ Artwork: 3000×3000px JPG, no URLs/text-heavy blurbs, match thumbnail QC brand
 - [ ] Release date Friday 12am local (playlist convention) — unlisted YT teaser Mon before
 - [ ] Pre-save link live ≥2 weeks out, linked from studio.html + catalog.html
 
+## Audio master status (post-converter run, `scripts/extract_flagship_audio.py`)
+
+✅ **WAV distro-ready (7/12)** — in `ai-music-video-studio/output/masters_wav/`:
+- Break_The_Ritual.wav (95.6s) · Built_This_Way.wav (175.2s) · Grandmas_Fury.wav (153.3s)
+- My_Children.wav (200.8s) · Dont_Rush_Me.wav (116.9s) · Dont_Listen.wav (140.3s)
+- My_Own_Lane.wav (134.2s)
+
+All verified: 44.1kHz stereo PCM16, ≥30s, distro-compliant.
+
+❌ **Needs production first (5/12)** — no finished video/audio asset exists:
+- Brisbane Nights · Rotary Prayer · Turbo Hymn · Street Royalty · Two Faces
+
+These can't be pitched or released until audio is produced (re-run the MiniMax/comfy pipeline, then `extract_flagship_audio.py` again to convert).
+
 ## Release strategy
 Singles first (1→12 weekly or bi-weekly), then bundle into EP/Album once traction shows — albums get one UPC, singles keep chart eligibility. APRA AMCOS registration before FIRST release or royalties are lost.
+
